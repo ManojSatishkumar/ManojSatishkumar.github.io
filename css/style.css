@@ -250,6 +250,7 @@ nav ul li a {
     cover;
   height: 80vh;
   width: 100%;
+  background-position-x: right;
 }
 
 #header .header-content {
