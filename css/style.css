@@ -248,7 +248,7 @@ nav ul li a {
 #header {
   background: url("../images/My_portfolio_pic.jpg") repeat scroll center center /
     cover;
-  height: 80vh;
+  height: 65vh;
   width: 100%;
   background-position-x: right;
 }
