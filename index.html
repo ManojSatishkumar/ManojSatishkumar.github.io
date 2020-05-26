@@ -35,9 +35,9 @@
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
 
-<body style="color: black;">
+<body style="user-select: none; color: black;">
   <!-- start section header -->
-  <div id="header" class="home">
+  <div style="user-select: none;" id="header" class="home">
     <div class="container">
       <div style="color: white;" class="header-content">
         <h1 style="text-shadow: 2px 2px #575757; color: white;">MANOJ S</h1>
@@ -75,7 +75,7 @@
   </div>
   <!-- End section header -->
   <!-- start section services -->
-  <div id="about-me" class="text-left ">
+  <div style="user-select: none;" id="about-me" class="text-left ">
     <br />
     <br />
     <div class="container">
@@ -1026,6 +1026,10 @@
   <script src="contactform/contactform.js"></script>
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+  </script>
 </body>
 
 </html>
