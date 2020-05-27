@@ -25,9 +25,48 @@
   <link href="css/responsive.css" rel="stylesheet" />
   <!-- Favicon -->
   <link rel="shortcut icon" href="images/favicon.png" />
+  <style>
+    @media only screen and (max-width: 1024px) {
+      .nav-bar-fixed {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <body style="user-select: none; color: black;">
+  <div class="nav-bar-fixed" style=" 
+  position: fixed;
+  width: 100%;
+  color: black; 
+  backdrop-filter: saturate(180%) blur(80px);
+  /* box-shadow: -2px 10px 50px -1px rgba(0,0,0,0.71); */
+  border-bottom: 1px solid #919191;
+  z-index: 10000;
+  ">
+    <div style="font-weight: 400; color: black; padding-top: 10px;
+    padding-left: 5px; padding-bottom: 6px; display: inline-block;">
+      <img style="margin-top: -7px; border-radius: 50%; width: 40px; height: 40px;" src="images/favicon.png" />
+      <div style=" cursor: pointer; display: inline-block; font-size: large;  margin-left: 5px; margin-right: 10px; font-weight: 600;  
+ " onclick="animateScroll('header')">MANOJ</div>
+      <div style="cursor: pointer; display: inline-block;  margin-left: 20px;
+ " onclick="animateScroll('intro')">INTRO</div>
+      <div style="cursor: pointer; display: inline-block;  margin-left: 20px;
+ " onclick="animateScroll('experience')">EXPERIENCE</div>
+      <div style="cursor: pointer; display: inline-block;  margin-left: 20px;
+ " onclick="animateScroll('projects')">PROJECTS</div>
+      <div style="cursor: pointer; display: inline-block;   margin-left: 20px;
+ " onclick="animateScroll('skill-set')">SKILL SET</div>
+      <div style="cursor: pointer; display: inline-block;  margin-left: 20px;
+ " onclick="animateScroll('achievements')">ACHIEVEMENTS</div>
+      <div style="cursor: pointer; display: inline-block;  margin-left: 20px;
+ " onclick="animateScroll('education')">EDUCATION</div>
+      <div style="cursor: pointer; display: inline-block; margin-left: 20px;
+ " onclick="animateScroll('hobbies')">HOBBIES</div>
+      <div style="cursor: pointer; display: inline-block; margin-left: 20px;
+ " onclick="animateScroll('about')">CONTACT</div>
+    </div>
+  </div>
   <!-- start section header -->
   <div id="header" class="home">
     <div class="container">
@@ -67,12 +106,12 @@
   </div>
   <!-- End section header -->
   <!-- start section services -->
-  <div style="user-select: none;" id="about-me" class="text-left ">
+  <div style="user-select: none;" id="intro" class="text-left ">
     <br />
     <br />
     <div class="container">
       <div class=" text-center">
-        <h2>👨‍💻 ABOUT ME</h2>
+        <h2>🙋🏻‍♂️ INTRODUCTION</h2>
       </div>
       <br>
       <br>
@@ -437,8 +476,7 @@
       <hr />
     </div>
   </div>
- 
-  <div style="background-color:antiquewhite " id="skills" class="text-left ">
+  <div style="background-color:antiquewhite " id="skill-set" class="text-left ">
     <br />
     <br />
     <div class="container">
@@ -897,7 +935,7 @@
     <br>
   </div>
   <br />
-  <div id="hobbyProjects" class="text-left ">
+  <div id="hobbies" class="text-left ">
     <br />
     <br />
     <div class="container">
@@ -919,7 +957,7 @@
                   Night Watch
                 </div>
                 <br />
-                <p style=" color: black; font-size: medium;">A beautiful clock   with night mode and
+                <p style=" color: black; font-size: medium;">A beautiful clock with night mode and
                   theme support for using in dark rooms</p>
                 <br />
                 <a target="_blank" href="https://manojsatishkumar.github.io/night-watch-web/">
@@ -1122,7 +1160,13 @@
   <script src="js/main.js"></script>
   <script>
     document.addEventListener('contextmenu', event => event.preventDefault());
-
+  </script>
+  <script>
+    function animateScroll(id) {
+      $('html, body').animate({
+        scrollTop: ($(`#${id}`).offset().top - 50)
+      }, 1000);
+    }
   </script>
 </body>
 
