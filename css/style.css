@@ -253,6 +253,14 @@ nav ul li a {
   background-position-x: right;
 }
 
+#podcast-header {
+  background: url("../images/msk-tech-show-cover.png") repeat scroll center
+    center / cover;
+  height: 65vh;
+  width: 100%;
+  background-position-x: right;
+}
+
 #header .header-content {
   height: 100vh;
   text-align: left;
