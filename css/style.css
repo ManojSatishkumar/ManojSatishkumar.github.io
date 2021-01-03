@@ -246,7 +246,7 @@ nav ul li a {
 /*-----------------------------------------------------------------------------------*/
 
 #header {
-  background: url("../images/My_portfolio_pic.jpg") repeat scroll center center /
+  background: url("/images/My_portfolio_pic.jpg") repeat scroll center center /
     cover;
   height: 65vh;
   width: 100%;
@@ -254,24 +254,22 @@ nav ul li a {
 }
 
 #podcast-header {
-  background: url("../images/msk-tech-show-cover.png") repeat scroll center
-    center / cover;
+  background: url("/images/msk-tech-show-cover.png") repeat scroll center center /
+    cover;
   height: 40vh;
   width: 100%;
   background-position-x: right;
 }
 
 #qna-header {
-  background: url("../images/blur_screen.png") repeat scroll center center /
-    cover;
+  background: url("/images/blur_screen.png") repeat scroll center center / cover;
   height: 40vh;
   width: 100%;
   background-position-x: right;
 }
 
 #blog-header {
-  background: url("../images/blog-cover.png") repeat scroll center center /
-    cover;
+  background: url("/images/blog-cover.png") repeat scroll center center / cover;
   height: 40vh;
   width: 100%;
   background-position-x: right;

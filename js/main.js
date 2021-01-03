@@ -29,7 +29,7 @@ $(document).ready(function () {
       .stop()
       .animate(
         {
-          scrollTop: target.offset().top - 80
+          scrollTop: target.offset().top - 80,
         },
         500,
         "swing",
@@ -82,9 +82,18 @@ $(document).ready(function () {
 
   $(function () {
     typed.typed({
-      strings: [" am Manoj ", " have 7 years of experience in IT ", " am a frontend developer ", " work on Javascript ", " love to create websites ", " am a technology enthusiast ", " would love to connect with you ", " "],
+      strings: [
+        " am Manoj ",
+        " have 7 years of experience in IT ",
+        " am a frontend developer ",
+        " work on Javascript ",
+        " love to create websites ",
+        " am a technology enthusiast ",
+        " would love to connect with you ",
+        " ",
+      ],
       typeSpeed: 30,
-      loop: true
+      loop: true,
     });
   });
 
@@ -99,7 +108,7 @@ $(document).ready(function () {
     dots: true,
     nav: false,
     responsiveClass: true,
-    responsive: { 0: { items: 1 }, 768: { items: 2 }, 900: { items: 4 } }
+    responsive: { 0: { items: 1 }, 768: { items: 2 }, 900: { items: 4 } },
   });
 
   // ========================================================================= //
@@ -108,7 +117,7 @@ $(document).ready(function () {
 
   var portfolioIsotope = $(".portfolio-container").isotope({
     itemSelector: ".portfolio-thumbnail",
-    layoutMode: "fitRows"
+    layoutMode: "fitRows",
   });
 
   $("#portfolio-flters li").on("click", function () {
@@ -128,7 +137,7 @@ $(document).ready(function () {
       removalDelay: 300,
       mainClass: "mfp-with-zoom",
       gallery: {
-        enabled: true
+        enabled: true,
       },
       zoom: {
         enabled: true, // By default it's false, so don't forget to enable it
@@ -145,11 +154,16 @@ $(document).ready(function () {
           return openerElement.is("img")
             ? openerElement
             : openerElement.find("img");
-        }
-      }
+        },
+      },
     });
   };
 
   // Call the functions
   magnifPopup();
+  $(function () {
+    $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
+    $("#mobile-nav-bar").load("/components/mobile-nav-bar.html");
+    $("#footer").load("/components/footer.html");
+  });
 });
