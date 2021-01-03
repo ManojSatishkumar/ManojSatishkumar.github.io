@@ -102,6 +102,8 @@ $(document).ready(function () {
         "to land on that dream job ",
         "to become a successful web developer ",
         "to master web technologies ",
+        "to a much better future ",
+        "to build the world wide web ",
       ],
       typeSpeed: 40,
       loop: true,
