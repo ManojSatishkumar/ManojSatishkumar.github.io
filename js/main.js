@@ -79,6 +79,7 @@ $(document).ready(function () {
   // ========================================================================= //
 
   var typed = $(".typed");
+  var typedBanner1 = $(".typed-banner-text-1");
 
   $(function () {
     typed.typed({
@@ -93,6 +94,16 @@ $(document).ready(function () {
         " ",
       ],
       typeSpeed: 30,
+      loop: true,
+    });
+
+    typedBanner1.typed({
+      strings: [
+        "to land on that dream job ",
+        "to become a successful web developer ",
+        "to master web technologies ",
+      ],
+      typeSpeed: 40,
       loop: true,
     });
   });
