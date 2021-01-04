@@ -114,5 +114,6 @@ $(document).ready(function () {
     $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
     $("#mobile-nav-bar").load("/components/mobile-nav-bar.html");
     $("#footer").load("/components/footer.html");
+    $("#article-suggestions").load("/blog/index.html");
   });
 });
