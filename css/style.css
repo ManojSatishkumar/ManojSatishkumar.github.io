@@ -253,28 +253,6 @@ nav ul li a {
   background-position-x: right;
 }
 
-#podcast-header {
-  background: url("/images/msk-tech-show-cover.png") repeat scroll center center /
-    cover;
-  height: 40vh;
-  width: 100%;
-  background-position-x: right;
-}
-
-#qna-header {
-  background: url("/images/blur_screen.png") repeat scroll center center / cover;
-  height: 40vh;
-  width: 100%;
-  background-position-x: right;
-}
-
-#blog-header {
-  background: url("/images/blog-cover.png") repeat scroll center center / cover;
-  height: 40vh;
-  width: 100%;
-  background-position-x: right;
-}
-
 #header .header-content {
   height: 100vh;
   text-align: left;
