@@ -659,3 +659,7 @@ nav ul li a {
 .credits {
   font-size: 13px;
 }
+
+.nav-drop-item:hover {
+  background-color: antiquewhite;
+}
