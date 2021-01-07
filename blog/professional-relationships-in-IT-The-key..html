@@ -222,6 +222,10 @@
     <br />
     <br />
     <br />
+    <hr />
+    <h2 class="container text-center">More articles</h2>
+    <br />
+    <div id="all-articles-list"></div>
     <div style="margin: 0px; padding: 0px;" id="footer">
     </div>
     <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -232,6 +236,11 @@
     <script src="/js/main.js"></script>
     <script>
       document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
+    <script>
+      $(function () {
+        $("#all-articles-list").load("/blog/all-articles.html");
+      });
     </script>
 </body>
 
