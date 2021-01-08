@@ -5,6 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> </title>
+  <meta content="" name="keywords" />
+  <meta content="" name="description" />
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="/images/blogs/" />
+  <meta property='article:author' content='https://manojsatishkumar.com/profile/index.html' />
+  <meta property='article:publisher' content='https://manojsatishkumar.com/' />
+  <meta property='og:site_name' content='manojsatishkumar.com' />
+  <meta property='og:type' content='article' />
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128563001-5"></script>
   <link href="/css/style.css" rel="stylesheet" />
   <link href="/css/responsive.css" rel="stylesheet" />
@@ -25,11 +34,14 @@
     </div>
     <div class="container ">
       <div class="journal-block">
-        <div style="padding: 0px;" class="col-lg-8">
-          <h2 style=" color: black">
-            YOUR TITLE
+        <div style="padding: 0px;" class="col-lg-8 col-md-8">
+          <h2>
+            My Javascript interview experiences & lessons
           </h2>
-          <hr />
+          <div style="margin-top: 10px;">Written by <a href="https://manojsatishkumar.com/profile/index.html">Manoj
+              Satish Kumar</a> | 1st Nov, 2020</div>
+          <img style="width: 100%; margin-top: 20px; border: 1px solid gray; margin-bottom: 30px; "
+            src="/images/blogs/my-Javascript-interview-experiences-and-lessons-cover.jpg" />
           <div class="row ">
             <div class="container">
               <pem class=" " style="font-size: large; color: black">
@@ -43,6 +55,11 @@
       </div>
     </div>
   </div>
+  <br />
+  <hr />
+  <h2 class="container text-center">More articles</h2>
+  <br />
+  <div id="all-articles-list"></div>
   <div style="margin: 0px; padding: 0px;" id="footer">
   </div>
   <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -53,6 +70,11 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('contextmenu', event => event.preventDefault());
+  </script>
+  <script>
+    $(function () {
+      $("#all-articles-list").load("/blog/all-articles.html");
+    });
   </script>
 </body>
 
