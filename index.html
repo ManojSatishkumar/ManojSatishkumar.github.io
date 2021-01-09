@@ -193,100 +193,7 @@
     </div>
   </div>
   <hr />
-  <div class="container">
-    <h1 class=" text-center container">
-      Testimony
-    </h1>
-    <br />
-    <div class=row>
-      <div class="col-lg-3 col-md-4 text-center">
-        <div>
-          <div>
-            <img style="border-radius: 50%; border: 1px solid gray" width="120" src="/images/people/raja-sir.jpeg" />
-          </div>
-          <br />
-          <h3> <a target="blank" href="https://www.linkedin.com/in/rajaramanv/">Rajaraman V</a>
-            <h5>Executive Vice President</h5>
-            <h6>Granite River Labs</h6>
-          </h3>
-          <br />
-        </div>
-        <p style=" font-size: large; color: black;">
-          Manoj is a very interesting personality, from the day one he started in GRL to till today, he keeps surprising
-          me with his enthusiasm and interest to acquire new skill/knowledge. I let him go from our team to support his
-          aspiration. He is always a part of my dream team. Keep it up Manoj!
-        </p>
-        <br />
-        <br />
-        <br />
-      </div>
-      <div class="col-lg-3 col-md-4 text-center">
-        <div>
-          <div>
-            <img style="border-radius: 50%; border: 1px solid gray" width="120" src="/images/people/satyajeet.jpeg" />
-          </div>
-          <br />
-          <h3> <a target="blank" href="https://www.linkedin.com/in/satyajeetdesale/">Satyajeet Desale</a>
-            <h5>Sr. Engineering Manager</h5>
-            <h6>Cerner</h6>
-          </h3>
-          <br />
-        </div>
-        <p style=" font-size: large; color: black;">
-          I have worked with Manoj at Cerner to advance our web framework/platform stack. Manoj is an excellent frontend
-          engineer to work with. He has shown immense passion and dedication towards his work. He never hesitates to
-          help people out.
-        </p>
-        <br />
-        <br />
-        <br />
-      </div>
-      <div class="col-lg-3 col-md-4 text-center">
-        <div>
-          <div>
-            <img style="border-radius: 50%; border: 1px solid gray" width="120" src="/images/people/sushanth.jpeg" />
-          </div>
-          <br />
-          <h3> <a target="blank" href="https://www.linkedin.com/in/mys/">Sushanth J
-            </a>
-            <h5>Senior Engineer</h5>
-            <h6>Siemens</h6>
-          </h3>
-          <br />
-        </div>
-        <p style=" font-size: large; color: black;">
-          Manoj had constantly amazed me with his industry insights and brilliant approaches to solving problems. He is
-          very thorough in everything he does and can be depended upon to get the job done. Excellent and result driven
-          and works towards maximal customer satisfaction.
-        </p>
-        <br />
-        <br />
-        <br />
-      </div>
-      <div class="col-lg-3 col-md-4 text-center">
-        <div>
-          <div>
-            <img style="border-radius: 50%; border: 1px solid gray" width="120" src="/images/people/bala.jpeg" />
-          </div>
-          <br />
-          <h3> <a target="blank" href="https://www.linkedin.com/in/balamurugan-natarajan-59678388/">Balamurugan N
-            </a>
-            <h5>Software Engineer</h5>
-            <h6>Walmart</h6>
-          </h3>
-          <br />
-        </div>
-        <p style=" font-size: large; color: black;">
-          Manoj's great collaboration with product team and UX team helped to bring lots of ideas to the product. After
-          he joined, demo's are no longer boring PPTs and plain walkthrough. Watching his demo is like watching an
-          interesting short film. He broke lots of such old conventions in team.
-        </p>
-        <br />
-        <br />
-        <br />
-      </div>
-    </div>
-  </div>
+  <div id="msk-testimony"></div>
   </div>
   </div>
   </div>
@@ -302,6 +209,11 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('contextmenu', event => event.preventDefault());
+  </script>
+  <script>
+    $(function () {
+      $("#msk-testimony").load("/components/testimony.html");
+    });
   </script>
 </body>
 

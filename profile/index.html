@@ -1007,6 +1007,9 @@
     </div>
     <br>
   </div>
+  <hr/>
+  <div id="msk-testimony"></div>
+  </div>
   <!-- start section contact -->
   <div style="background-color:#474747;" id="about" class="paddsection">
     <div class="container">
@@ -1070,6 +1073,11 @@
         scrollTop: ($(`#${id}`).offset().top - 50)
       }, 1000);
     }
+  </script>
+   <script>
+    $(function () {
+      $("#msk-testimony").load("/components/testimony.html");
+    });
   </script>
 </body>
 
