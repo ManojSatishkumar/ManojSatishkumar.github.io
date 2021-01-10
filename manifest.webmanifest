@@ -3,7 +3,7 @@
     "short_name": "MSK",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#17a2b8",
+    "background_color": "#ffffff",
     "theme_color": "#17a2b8",
     "description": "Your journey to become a successful web developer and land on that dream job begins here.",
     "icons": [
