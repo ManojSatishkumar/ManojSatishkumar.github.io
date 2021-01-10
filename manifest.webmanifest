@@ -5,10 +5,10 @@
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#17a2b8",
-    "description": "Learn Web development tutorials, Full-courses, Podcasts, LIVE streams, Blog posts, FAQs, Projects, Books & more ...",
+    "description": "Your journey to become a successful web developer and land on that dream job begins here.",
     "icons": [
       {
-        "src": "images/pwa-icon-512.jpg",
+        "src": "images/pwa-icon-512.png",
         "sizes": "512x512"
       }
     ]
