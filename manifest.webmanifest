@@ -4,6 +4,7 @@
     "start_url": ".",
     "display": "standalone",
     "background_color": "#5bc0de",
+    "theme_color": "#5bc0de",
     "description": "Your journey to become a successful web developer and land on that dream job begins here.",
     "icons": [
       {
