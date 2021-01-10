@@ -1,0 +1,20 @@
+{
+    "name": "MSK",
+    "short_name": "MSK",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "Your journey to become a successful web developer and land on that dream job begins here.",
+    "icons": [
+      {
+        "src": "images/pwa-icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      },
+      {
+        "src": "images/pwa-icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ]
+  }
