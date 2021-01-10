@@ -1,6 +1,16 @@
 const cacheName = 'msk-web-development';
 const staticAssets = [
+  './',
   './index.html',
+  './css/style.css',
+  './css/responsive.css',
+  './lib/bootstrap/css/bootstrap.min.css',
+  './lib/jquery/jquery.min.js',
+  './lib/jquery/jquery-migrate.min.js',
+  './lib/bootstrap/js/bootstrap.bundle.min.js',
+  './lib/typed/typed.js',
+  './js/main.js',
+  './components/testimony.html'
 ];
 
 self.addEventListener('install', async e => {
