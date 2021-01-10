@@ -114,6 +114,7 @@ $(document).ready(function () {
     $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
     $("#mobile-nav-bar").load("/components/mobile-nav-bar.html");
     $("#footer").load("/components/footer.html");
+   
   });
 });
 
@@ -131,3 +132,57 @@ async function registerSW() {
     }
   }
 }
+let deferredPrompt; 
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // alert("came")
+  try {
+    document.getElementsByClassName("pwa-install-section")[0].style.display = 'block';
+    document.getElementsByClassName("pwa-install-section")[1].style.display = 'block';
+
+  } catch (error) {
+    
+  }
+  // Prevent the mini-infobar from appearing on mobile
+  e.preventDefault();
+  // Stash the event so it can be triggered later.
+  deferredPrompt = e;
+  // Update UI notify the user they can install the PWA
+  // showInstallPromotion();
+});
+
+window.addEventListener('appinstalled', () => {
+  // Log install to analytics
+  console.log('INSTALL: Success');
+  try {
+    document.getElementsByClassName("pwa-install-section")[0].style.display = 'none';
+    document.getElementsByClassName("pwa-install-section")[1].style.display = 'none';
+
+  } catch (error) {
+    
+  }
+});
+
+
+function buttonInstall() {
+  try {
+      // Hide the app provided install promotion
+  // Show the install prompt
+  deferredPrompt.prompt();
+ 
+  // Wait for the user to respond to the prompt
+  deferredPrompt.userChoice.then((choiceResult) => {
+    if (choiceResult.outcome === 'accepted') {
+      console.log('User accepted the install prompt');
+    } else {
+      console.log('User dismissed the install prompt');
+    }
+  });
+  } catch (error) {
+    
+  }
+
+}
+
+
+
