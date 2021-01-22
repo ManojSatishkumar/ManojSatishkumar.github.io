@@ -29,6 +29,10 @@
       padding: 20px
     }
 
+    .vertical-ad-banner {
+      padding: 20px
+    }
+
     @media only screen and (min-width: 1024px) {
       .nav-bar-top-mobile-fixed {
         display: none;
@@ -39,7 +43,10 @@
     @media only screen and (max-width: 1024px) {
       .vertical-ad-banner {
         display: none;
-        padding: 20px;
+      }
+
+      #all-articles-list {
+        display: none;
       }
     }
   </style>
@@ -403,25 +410,36 @@
             </div>
             </pem>
           </div>
-          <div class="col-lg-3 col-md-4 vertical-ad-banner">
-            <div style=" padding-bottom: 5px; text-align: center; font-size: x-small; color: gray">ADVERTISEMENT</div>
-            <!-- article-vertical -->
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- article-vertical -->
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8918151191552563"
-              data-ad-slot="4729169615" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+          <div class="col-lg-3 col-md-4 ">
+            <div class="vertical-ad-banner">
+              <div style=" padding-bottom: 5px; text-align: center; font-size: x-small; color: gray">ADVERTISEMENT</div>
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+              <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8918151191552563"
+                data-ad-slot="4729169615" data-ad-format="auto" data-full-width-responsive="true"></ins>
+              <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
+            <br />
+            <br />
+            <div id="all-articles-side-list">
+            </div>
+            <br />
+            <br />
+            <div class="vertical-ad-banner">
+              <div style=" padding-bottom: 5px; text-align: center; font-size: x-small; color: gray">ADVERTISEMENT</div>
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+              <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8918151191552563"
+                data-ad-slot="4729169615" data-ad-format="auto" data-full-width-responsive="true"></ins>
+              <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <br />
-  <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid"
-    data-ad-client="ca-pub-8918151191552563" data-ad-slot="4087726117"></ins>
-  <br />
   <hr />
   <br />
   <div id="all-articles-list"></div>
@@ -439,6 +457,8 @@
   <script>
     $(function () {
       $("#all-articles-list").load("/blog/all-articles.html");
+      $("#all-articles-side-list").load("/blog/all-articles-list.html");
+
     });
   </script>
 </body>
