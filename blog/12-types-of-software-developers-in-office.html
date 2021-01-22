@@ -31,8 +31,24 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="/images/me-circle.png" />
   <style>
-    @media only screen and (min-width: 1024px) {
-      .nav-bar-top-mobile-fixed {
+    .article-feed-ad {
+      padding: 20px
+    }
+
+    .vertical-ad-banner {
+      padding: 20px
+    }
+
+    /* Desktop */
+    @media only screen and (min-width: 1024px) {}
+
+    /* mobile */
+    @media only screen and (max-width: 1024px) {
+      .vertical-ad-banner {
+        display: none;
+      }
+
+      #all-articles-list {
         display: none;
       }
     }
@@ -41,167 +57,262 @@
 </head>
 
 <body>
-  <div id=" qna" class="text-left">
+  <div id="article" class="text-left">
     <div style="margin-bottom: 100px;" id="desktop-nav-bar">
     </div>
     <div class="container ">
       <div class="journal-block">
-        <div style="padding: 0px;" class="col-lg-8 col-md-8">
-          <h2>
-            12 types of software developers in office
-          </h2>
-          <div style="margin-top: 10px;">Written by <a href="https://manojsatishkumar.com/profile/index.html">Manoj
-              Satish Kumar</a></div>
-          <img style="width: 100%; margin-top: 20px; border: 1px solid gray; margin-bottom: 30px; "
-            src="/images/blogs/12-TYPES-OF-DEVS.jpg" />
-          <div class="row ">
-            <div class="container">
-              <pem class=" " style="font-size: large; color: black">
-                <h4>Dear reader,</h3>
-                  <br />
-                  In every Software IT company, you will come across certain coding animals called <b>"developers"</b>
-                  (pun
-                  intended).<br />
-                  <br />
-                  Developers are the ones that write code. The code that executes on a given machine and is meaningful
-                  in
-                  use. This is the code that is responsible for different applications / services that we use.<br />
-                  <br />
-                  If you are a software developer or if you want to become one, in a company you will encounter 12
-                  different
-                  types of developers that you will interact with. You will come across these developers who have
-                  different
-                  qualities and they are inevitable. You cannot avoid them. You cannot work without them either.<br />
-                  <br />
-                  Let's see what type of developers you will encounter based on their behavior<br />
-                  <br />
-                  <h4>
-                    Type #1 : The Super developer&nbsp;</h4>
-                  This developer completes all the tasks within the given time. Sometimes the Super developer is the one
-                  who
-                  drives the whole project on their own.<br />
-                  <br />
-                  When you encounter the super developer, you will need to be well prepared before approaching
-                  him/her.<br />
-                  <br />
-                  <h4>
-                    Type #2 : The Delegate developer</h4>
-                  This developer always keeps delegating the task / work given and always tries to make others
-                  work.<br />
-                  The delegate developer often doesn't want to do work on their own and they are often referred to as
-                  "lazy
-                  developer"<br />
-                  <br />
-                  If you encounter the Delegate developer, you will probably be delegated to another developer (the
-                  Super
-                  developer in most cases)<br />
-                  <br />
-                  <h4>
-                    Type #3 : The Show-off developer</h4>
-                  The Show-off developer always wants to impress the management and will always try to perform the tasks
-                  that have visibility to the management.<br />
-                  <br />
-                  If you see a developer always trying to present / prepare presentations / send update emails very
-                  often,&nbsp; you are probably interacting with a Show-off developer.<br />
-                  <br />
-                  <h4>
-                    Type #4 : The Secret developer&nbsp;</h4>
-                  The secret developer is often very talented and will refuse to share what they are doing at desk. They
-                  operate in silence and will be doing impressive work behind the scenes. Yet, it will be kept
-                  secret.<br />
-                  They end up winning Hackathons and other coding challenges but remain un-noticed.<br />
-                  <br />
-                  The Secret developer is opposite to the Show-off developer<br />
-                  <br />
-                  <h4>
-                    Type #5 : The Extra activity developer</h4>
-                  This developer always tries to participate in team building activities and group non-technical
-                  meetups.
-                  The Extra activity developer spends &gt;60% of the time in performing activities that are not related
-                  to
-                  the job and tries to get attention from the management as a "team builder"<br />
-                  <br />
-                  <h4>
-                    Type #6 : The Complaining developer</h4>
-                  The Complaining developer starts complaining about every task given and always tries to avoid doing
-                  work.
-                  They sometimes start complaining about things like work-life balance, employee satisfaction
-                  etc.,<br />
-                  <br />
-                  If you come across a complaining developer, you need to realize that their career has not been that
-                  great
-                  and you shouldn't follow their route either.<br />
-                  <br />
-                  <h4>
-                    Type #7 : The Compliance developer</h4>
-                  This developer always complies to office standards, timings, attire, and other rules and regulations.
-                  Their conformance to the system is so effective that management starts noticing it and will make them
-                  a
-                  role model to other employees.<br />
-                  <br />
-                  From wearing office Identity badge to following office hours, the compliance developer follows them
-                  all.<br />
-                  <br />
-                  <h4>
-                    Type #8 : The Entrepreneur developer</h4>
-                  This is an interesting character. The entrepreneur developer always thinks about building a startup
-                  company while working in another company. They try to generate income from other sources so that one
-                  day
-                  they can stand on their own legs and not report to any manager.<br />
-                  <br />
-                  The Entrepreneur developers are usually very talented and can get the job done in an effective
-                  manner.<br />
-                  <br />
-                  <h4>
-                    Type #9 : The Utilizer developer</h4>
-                  <div>
-                    This developer always tries to utilize other developers to get the work done and they don't help
-                    them
-                    when needed. They just 'use' other people for their own benefits.</div>
-                  <div>
+        <div class="row">
+          <div class="col-lg-9 col-md-8">
+            <h2>
+              12 types of software developers in office
+            </h2>
+            <div style="margin-top: 10px;">Written by <a href="https://manojsatishkumar.com/profile/index.html">Manoj
+                Satish Kumar</a></div>
+            <img style="width: 100%; margin-top: 20px; border: 1px solid gray; margin-bottom: 30px; "
+              src="/images/blogs/12-TYPES-OF-DEVS.jpg" />
+            <div class="row ">
+              <div class="container">
+                <pem class=" " style="font-size: large; color: black">
+                  <h4>Dear reader,</h3>
                     <br />
-                  </div>
-                  <div>
-                    I personally don't like this behavior and suggest you stay away from them as well.</div>
-                  <br />
-                  <h4>
-                    Type #10 : The Noisy developer</h4>
-                  The Noisy developer always has a comment to say about different conversations that happen in the
-                  office
-                  meetings / desk. They do this to get management's attention but end up getting a tagline of
-                  "noisy".<br />
-                  <br />
-                  After a certain period of time, the management will just start ignoring them and their thoughts.<br />
-                  <br />
-                  <h4>
-                    Type #11 : The Funny developer</h4>
-                  The funny developer always tries to be the joker in a group. Whether it be at the office desk or
-                  during
-                  lunch , they try to crack jokes to gain attention in the group. They are hilarious sometimes.<br />
-                  <br />
-                  --------------------------------------<br />
-                  <br />
-                  And the last type : These are in majority in number in any office.<br />
-                  <br />
-                  <h4>
-                    Type #12 : The Casual developer</h4>
-                  The casual developer is nothing extra ordinary, nothing funny, nothing secretive.<br />
-                  They just operate in silence and complete office hours, collect their paycheck and checkout from
-                  office
-                  after work.<br />
-                  <br />
-                  <b>Conclusion</b><br />
-                  So all of these types of developers are inevitable and you will encounter them as you stay in a
-                  company
-                  for a longer time. You will have to realize and learn to interact differently with different types of
-                  developers.<br />
-                  <br />
-                  Comment below if you have encountered a different type of developer in your office<br />
-                  <br />
-                  Good luck.<br />
-                  <b><br /></b>
+                    In every Software IT company, you will come across certain coding animals called <b>"developers"</b>
+                    (pun
+                    intended).<br />
+                    <br />
+                    Developers are the ones that write code. The code that executes on a given machine and is meaningful
+                    in
+                    use. This is the code that is responsible for different applications / services that we use.<br />
+                    <br />
+                    If you are a software developer or if you want to become one, in a company you will encounter 12
+                    different
+                    types of developers that you will interact with. You will come across these developers who have
+                    different
+                    qualities and they are inevitable. You cannot avoid them. You cannot work without them either.<br />
+                    <br />
+                    Let's see what type of developers you will encounter based on their behavior<br />
+                    <br />
+                    <div class="article-feed-ad">
+                      <div style=" padding-bottom: 5px; text-align: center; font-size: x-small; color: gray">
+                        ADVERTISEMENT</div>
+                      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                      <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
+                        data-ad-format="fluid" data-ad-client="ca-pub-8918151191552563" data-ad-slot="4087726117"></ins>
+                      <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                      </script>
+                    </div>
+                    <h4>
+                      Type #1 : The Super developer&nbsp;</h4>
+                    This developer completes all the tasks within the given time. Sometimes the Super developer is the
+                    one
+                    who
+                    drives the whole project on their own.<br />
+                    <br />
+                    When you encounter the super developer, you will need to be well prepared before approaching
+                    him/her.<br />
+                    <br />
+                    <h4>
+                      Type #2 : The Delegate developer</h4>
+                    This developer always keeps delegating the task / work given and always tries to make others
+                    work.<br />
+                    The delegate developer often doesn't want to do work on their own and they are often referred to as
+                    "lazy
+                    developer"<br />
+                    <br />
+                    If you encounter the Delegate developer, you will probably be delegated to another developer (the
+                    Super
+                    developer in most cases)<br />
+                    <br />
+                    <div class="article-feed-ad">
+                      <div style=" padding-bottom: 5px; text-align: center; font-size: x-small; color: gray">
+                        ADVERTISEMENT</div>
+                      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                      <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
+                        data-ad-format="fluid" data-ad-client="ca-pub-8918151191552563" data-ad-slot="4087726117"></ins>
+                      <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                      </script>
+                    </div>
+                    <h4>
+                      Type #3 : The Show-off developer</h4>
+                    The Show-off developer always wants to impress the management and will always try to perform the
+                    tasks
+                    that have visibility to the management.<br />
+                    <br />
+                    If you see a developer always trying to present / prepare presentations / send update emails very
+                    often,&nbsp; you are probably interacting with a Show-off developer.<br />
+                    <br />
+                    <h4>
+                      Type #4 : The Secret developer&nbsp;</h4>
+                    The secret developer is often very talented and will refuse to share what they are doing at desk.
+                    They
+                    operate in silence and will be doing impressive work behind the scenes. Yet, it will be kept
+                    secret.<br />
+                    They end up winning Hackathons and other coding challenges but remain un-noticed.<br />
+                    <br />
+                    The Secret developer is opposite to the Show-off developer<br />
+                    <br />
+                    <div class="article-feed-ad">
+                      <div style=" padding-bottom: 5px; text-align: center; font-size: x-small; color: gray">
+                        ADVERTISEMENT</div>
+                      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                      <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
+                        data-ad-format="fluid" data-ad-client="ca-pub-8918151191552563" data-ad-slot="4087726117"></ins>
+                      <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                      </script>
+                    </div>
+                    <h4>
+                      Type #5 : The Extra activity developer</h4>
+                    This developer always tries to participate in team building activities and group non-technical
+                    meetups.
+                    The Extra activity developer spends &gt;60% of the time in performing activities that are not
+                    related
+                    to
+                    the job and tries to get attention from the management as a "team builder"<br />
+                    <br />
+                    <h4>
+                      Type #6 : The Complaining developer</h4>
+                    The Complaining developer starts complaining about every task given and always tries to avoid doing
+                    work.
+                    They sometimes start complaining about things like work-life balance, employee satisfaction
+                    etc.,<br />
+                    <br />
+                    If you come across a complaining developer, you need to realize that their career has not been that
+                    great
+                    and you shouldn't follow their route either.<br />
+                    <br />
+                    <div class="article-feed-ad">
+                      <div style=" padding-bottom: 5px; text-align: center; font-size: x-small; color: gray">
+                        ADVERTISEMENT</div>
+                      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                      <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
+                        data-ad-format="fluid" data-ad-client="ca-pub-8918151191552563" data-ad-slot="4087726117"></ins>
+                      <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                      </script>
+                    </div>
+                    <h4>
+                      Type #7 : The Compliance developer</h4>
+                    This developer always complies to office standards, timings, attire, and other rules and
+                    regulations.
+                    Their conformance to the system is so effective that management starts noticing it and will make
+                    them
+                    a
+                    role model to other employees.<br />
+                    <br />
+                    From wearing office Identity badge to following office hours, the compliance developer follows them
+                    all.<br />
+                    <br />
+                    <h4>
+                      Type #8 : The Entrepreneur developer</h4>
+                    This is an interesting character. The entrepreneur developer always thinks about building a startup
+                    company while working in another company. They try to generate income from other sources so that one
+                    day
+                    they can stand on their own legs and not report to any manager.<br />
+                    <br />
+                    The Entrepreneur developers are usually very talented and can get the job done in an effective
+                    manner.<br />
+                    <br />
+                    <div class="article-feed-ad">
+                      <div style=" padding-bottom: 5px; text-align: center; font-size: x-small; color: gray">
+                        ADVERTISEMENT</div>
+                      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                      <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
+                        data-ad-format="fluid" data-ad-client="ca-pub-8918151191552563" data-ad-slot="4087726117"></ins>
+                      <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                      </script>
+                    </div>
+                    <h4>
+                      Type #9 : The Utilizer developer</h4>
+                    <div>
+                      This developer always tries to utilize other developers to get the work done and they don't help
+                      them
+                      when needed. They just 'use' other people for their own benefits.</div>
+                    <div>
+                      <br />
+                    </div>
+                    <div>
+                      I personally don't like this behavior and suggest you stay away from them as well.</div>
+                    <br />
+                    <h4>
+                      Type #10 : The Noisy developer</h4>
+                    The Noisy developer always has a comment to say about different conversations that happen in the
+                    office
+                    meetings / desk. They do this to get management's attention but end up getting a tagline of
+                    "noisy".<br />
+                    <br />
+                    After a certain period of time, the management will just start ignoring them and their
+                    thoughts.<br />
+                    <br />
+                    <h4>
+                      Type #11 : The Funny developer</h4>
+                    The funny developer always tries to be the joker in a group. Whether it be at the office desk or
+                    during
+                    lunch , they try to crack jokes to gain attention in the group. They are hilarious sometimes.<br />
+                    <br />
+                    <div class="article-feed-ad">
+                      <div style=" padding-bottom: 5px; text-align: center; font-size: x-small; color: gray">
+                        ADVERTISEMENT</div>
+                      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                      <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
+                        data-ad-format="fluid" data-ad-client="ca-pub-8918151191552563" data-ad-slot="4087726117"></ins>
+                      <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                      </script>
+                    </div>
+                    <br />
+                    And the last type : These are in majority in number in any office.<br />
+                    <br />
+                    <h4>
+                      Type #12 : The Casual developer</h4>
+                    The casual developer is nothing extra ordinary, nothing funny, nothing secretive.<br />
+                    They just operate in silence and complete office hours, collect their paycheck and checkout from
+                    office
+                    after work.<br />
+                    <br />
+                    <b>Conclusion</b><br />
+                    So all of these types of developers are inevitable and you will encounter them as you stay in a
+                    company
+                    for a longer time. You will have to realize and learn to interact differently with different types
+                    of
+                    developers.<br />
+                    <br />
+                    Comment below if you have encountered a different type of developer in your office<br />
+                    <br />
+                    Good luck.<br />
+                    <b><br /></b>
+              </div>
+              </pem>
             </div>
-            </pem>
+          </div>
+          <div class="col-lg-3 col-md-4 ">
+            <div class="vertical-ad-banner">
+              <div style=" padding-bottom: 5px; text-align: center; font-size: x-small; color: gray">ADVERTISEMENT</div>
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+              <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8918151191552563"
+                data-ad-slot="4729169615" data-ad-format="auto" data-full-width-responsive="true"></ins>
+              <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
+            <br />
+            <br />
+            <div id="all-articles-side-list">
+            </div>
+            <br />
+            <br />
+            <div class="vertical-ad-banner">
+              <div style=" padding-bottom: 5px; text-align: center; font-size: x-small; color: gray">ADVERTISEMENT</div>
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+              <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8918151191552563"
+                data-ad-slot="4729169615" data-ad-format="auto" data-full-width-responsive="true"></ins>
+              <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
           </div>
         </div>
       </div>
@@ -226,6 +337,8 @@
   <script>
     $(function () {
       $("#all-articles-list").load("/blog/all-articles.html");
+      $("#all-articles-side-list").load("/blog/all-articles-list.html");
+
     });
   </script>
 </body>
