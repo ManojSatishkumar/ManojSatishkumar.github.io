@@ -8,8 +8,8 @@
     "description": "Your journey to become a successful web developer and land on that dream job begins here.",
     "icons": [
       {
-        "src": "images/pwa-icon-512.png",
-        "sizes": "512x512"
+        "src": "images/MSK-circle.png",
+        "sizes": "500x500"
       }
     ]
   }
