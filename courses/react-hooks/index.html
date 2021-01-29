@@ -27,23 +27,38 @@
   <link href="/css/style.css" rel="stylesheet" />
   <link href="/css/responsive.css" rel="stylesheet" />
   <style>
+    /* Desktop */
     @media only screen and (min-width: 1024px) {
-      .nav-bar-top-mobile-fixed {
+      #react-hooks-full-course-body {
+        margin-left: 300px
+      }
+    }
+
+    /* mobile */
+    @media only screen and (max-width: 1024px) {
+      #tutorials-react-hooks-course-sidebar {
         display: none;
       }
+
+    }
+
+    #sidebar-intro {
+      background-color: #17a2b8;
+      color: white;
     }
   </style>
   <meta name="theme-color" content="#17a2b8" />
 </head>
 
 <body>
-  <div style="margin-bottom: 100px;" id="desktop-nav-bar">
+  <div style="margin-bottom: 60px;" id="desktop-nav-bar">
   </div>
-  <div id="react-hooks-full-course" class="text-left">
-    <div class="container">
-      <img style="width:100%" src="/images/courses/react-hooks-cover.jpg" />
-    </div>
+  <div id="tutorials-react-hooks-course-sidebar"></div>
+  <div id="react-hooks-full-course-body" class="text-left">
     <br />
+    <div style="text-align: center;" class="container">
+      <img style="width:80%" src="/images/courses/react-hooks-cover.jpg" />
+    </div>
     <br />
     <div style="user-select: none; " id="intro" class="text-left courses-intro">
       <div class="container">
@@ -51,21 +66,29 @@
           <div class="col-lg-6 col-md-12 ">
             <div class="  ">
               <h2>Dear learner, </h2>
+              <br />
             </div>
             <p style=" font-size: large; color: black;">
               My name is Manoj and I'm your instructor for this course.</p>
+            <p style=" font-size: large; color: black;">I nearly have a decade of professional experience in building
+              websites and front-end web applications. I
+              have worked both in startups and giant companies. I’m here to help you become a successful front-end web
+              developer.</p>
             <p style=" font-size: large; color: black;">
               The course is beginner-friendly. You just need to know the bare minimum basics of React like components,
               props, state, and JSX.
             </p>
-            <p style=" font-size: large; color: black;">
-              Only the enrolled candidates will get access to bonus content and exercise projects. Candidates can enroll
-              to this course for FREE.
-            </p>
-            <a target="_blank" href="https://forms.gle/AjcWePPrkGt9zHjm9">
-              <button class="btn btn-info" style="text-align: center;  font-size: large;"> Enroll
-              </button>
-            </a>
+            <div>
+              <a target="_blank" href="https://forms.gle/AjcWePPrkGt9zHjm9">
+                <button class="btn btn-light" style="text-align: center;  border: 1px solid gray; font-size: large;">
+                  Enroll
+                </button>
+              </a>
+              <a href=" /courses/react-hooks/chapter-1-introduction/part-1-the-history.html">
+                <button class="btn btn-info" style="text-align: center;  font-size: large;"> Start the course
+                </button>
+              </a>
+            </div>
             <br />
             <br />
           </div>
@@ -73,41 +96,51 @@
             <div class=" ">
               <h3>Course introduction</h3>
             </div>
-            <br />
             <div class="container " style="text-align: center;">
-              <a target="blank" href="https://www.youtube.com/embed/oSLGac45MX0"><img width="100%"
-                  src="/images/courses/react-hooks/course-intro.jpg" /></a>
+              <iframe width="100%" height="300px" src="https://www.youtube.com/embed/oSLGac45MX0" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
             </div>
           </div>
         </div>
+        <hr />
+      </div>
+      <div class="container">
+        <h2>Rules</h2>
+        <br />
+        <ul>
+          <li>
+            <h6>DO NOT skip the videos in this course. The chapters are created in sequence.</h6>
+          </li>
+          <li>
+            <h6>During LIVE coding sessions, try to code along with me.</h6>
+          </li>
+          <li>
+            <h6>Don't skip the theory part. They are needed for you to understand the concepts before coding.</h6>
+          </li>
+          <li>
+            <h6>Before starting LIVE coding session, open the video on YouTube in browser to see LIVE chat</h6>
+          </li>
+        </ul>
+        <br />
       </div>
     </div>
+    <br />
+    <br />
+    <div style="text-align: center;">
+      <a href=" /courses/react-hooks/chapter-1-introduction/part-1-the-history.html">
+        <button class="btn btn-info" style="text-align: center; width: 300px; height: 70px;  font-size: xx-large;">
+          Start
+        </button>
+      </a>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div style="margin: 0px; padding: 0px;" id="footer">
+    </div>
   </div>
-  <br />
-  <hr />
-  <br />
-  <div class="container">
-    <h2>Note</h2>
-    <br />
-    <ul>
-      <li>
-        <h6>DO NOT skip the videos in this course. The chapters are created in sequence.</h6>
-      </li>
-      <li>
-        <h6>During LIVE coding sessions, try to code along with me.</h6>
-      </li>
-      <li>
-        <h6>Don't skip the theory part. They are needed for you to understand the concepts before coding.</h6>
-      </li>
-      <li>
-        <h6>Before starting LIVE coding session, open the video on YouTube in browser to see LIVE chat</h6>
-      </li>
-    </ul>
-    <br />
-    <hr />
-    <br />
-  </div>
-  <div class="container ">
+  <!-- <div class="container ">
     <h2>Chapter 1: Introduction</h2>
     <br />
     <br />
@@ -193,9 +226,7 @@
         </div>
       </div>
     </div>
-  </div>
-  <div style="margin: 0px; padding: 0px;" id="footer">
-  </div>
+  </div> -->
   <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
   <script src="/lib/jquery/jquery.min.js"></script>
   <script src="/lib/jquery/jquery-migrate.min.js"></script>
@@ -204,6 +235,9 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('contextmenu', event => event.preventDefault());
+    $(function () {
+      $("#tutorials-react-hooks-course-sidebar").load("/courses/react-hooks/components/sidebar.html");
+    });
   </script>
 </body>
 
