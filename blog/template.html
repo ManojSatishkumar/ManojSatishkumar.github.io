@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> </title>
+  <title>YOUR TITLE</title>
   <meta content="" name="keywords" />
   <meta content="" name="description" />
   <meta property="og:title" content="">
@@ -20,8 +20,24 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="/images/favicon.png" />
   <style>
-    @media only screen and (min-width: 1024px) {
-      .nav-bar-top-mobile-fixed {
+    .article-feed-ad {
+      padding: 20px
+    }
+
+    .vertical-ad-banner {
+      padding: 20px
+    }
+
+    /* Desktop */
+    @media only screen and (min-width: 1024px) {}
+
+    /* mobile */
+    @media only screen and (max-width: 1024px) {
+      .vertical-ad-banner {
+        display: none;
+      }
+
+      #all-articles-list {
         display: none;
       }
     }
@@ -34,28 +50,55 @@
     </div>
     <div class="container ">
       <div class="journal-block">
-        <div style="padding: 0px;" class="col-lg-8 col-md-8">
-          <h2>
-            My Javascript interview experiences & lessons
-          </h2>
-          <div style="margin-top: 10px;">Written by <a href="https://manojsatishkumar.com/profile/index.html">Manoj
-              Satish Kumar</a> | 1st Nov, 2020</div>
-          <img style="width: 100%; margin-top: 20px; border: 1px solid gray; margin-bottom: 30px; "
-            src="/images/blogs/my-Javascript-interview-experiences-and-lessons-cover.jpg" />
-          <div class="row ">
-            <div class="container">
-              <pem class=" " style="font-size: large; color: black">
-                <h4>Dear reader,</h3>
-                  <br />
-                  YOUR BODY
+        <div class="row">
+          <div class="col-lg-9 col-md-8">
+            <h2>
+              YOUR TITLE
+            </h2>
+            <div style="margin-top: 10px;">Written by <a href="https://manojsatishkumar.com/profile/index.html">Manoj
+                Satish Kumar</a></div>
+            <img style="width: 100%; margin-top: 20px; border: 1px solid gray; margin-bottom: 30px; "
+              src="/images/blogs/.jpg" />
+            <div class="row ">
+              <div class="container">
+                <pem class=" " style="font-size: large; color: black">
+                  <h4>Dear reader,</h3>
+                    <br />
+                    YOUR BODY
+              </div>
+              </pem>
             </div>
-            </pem>
+          </div>
+          <div class="col-lg-3 col-md-4 ">
+            <div class="vertical-ad-banner">
+              <div style=" padding-bottom: 5px; text-align: center; font-size: x-small; color: gray">ADVERTISEMENT</div>
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+              <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8918151191552563"
+                data-ad-slot="4729169615" data-ad-format="auto" data-full-width-responsive="true"></ins>
+              <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
+            <br />
+            <br />
+            <div id="all-articles-side-list">
+            </div>
+            <br />
+            <br />
+            <div class="vertical-ad-banner">
+              <div style=" padding-bottom: 5px; text-align: center; font-size: x-small; color: gray">ADVERTISEMENT</div>
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+              <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8918151191552563"
+                data-ad-slot="4729169615" data-ad-format="auto" data-full-width-responsive="true"></ins>
+              <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <br />
   <hr />
   <br />
   <div id="all-articles-list"></div>
@@ -73,6 +116,7 @@
   <script>
     $(function () {
       $("#all-articles-list").load("/blog/all-articles.html");
+      $("#all-articles-side-list").load("/blog/all-articles-list.html");
     });
   </script>
 </body>
