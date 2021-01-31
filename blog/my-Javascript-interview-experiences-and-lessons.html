@@ -31,12 +31,22 @@
     }
 
     /* Desktop */
-    @media only screen and (min-width: 1024px) {}
+    @media only screen and (min-width: 1024px) {
+      #article-wrapper {
+        padding-left: 50px;
+        padding-right: 50px;
+      }
+    }
 
     /* mobile */
     @media only screen and (max-width: 1024px) {
       .vertical-ad-banner {
         display: none;
+      }
+
+      #article-wrapper {
+        padding-left: 20px;
+        padding-right: 20px;
       }
 
       #all-articles-list {
@@ -55,7 +65,7 @@
     </div>
     <div id="social-share-strip-vertical">
     </div>
-    <div style="padding-left: 50px; padding-right: 50px;" class="">
+    <div id="article-wrapper">
       <div class="journal-block">
         <div class="row">
           <div class="col-lg-3 col-md-3">
@@ -499,8 +509,8 @@
                     <br />
                     <br />
                     Days passed...
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
                     One fine day, something strange happened. I started thinking - "Is this it?" - Is this all I got?
                     <br />
                     <br />
