@@ -39,8 +39,10 @@
     }
 
     @media only screen and (min-width: 1024px) {
-      .nav-bar-top-mobile-fixed {
-        display: none;
+
+      #article-wrapper {
+        padding-left: 50px;
+        padding-right: 50px;
       }
     }
 
@@ -48,6 +50,11 @@
     @media only screen and (max-width: 1024px) {
       .vertical-ad-banner {
         display: none;
+      }
+
+      #article-wrapper {
+        padding-left: 20px;
+        padding-right: 20px;
       }
 
       #all-articles-list {
@@ -62,15 +69,24 @@
   <div id=" qna" class="text-left">
     <div style="margin-bottom: 100px;" id="desktop-nav-bar">
     </div>
-    <div class="container">
+    <div id="social-share-strip-vertical">
+    </div>
+    <div id="article-wrapper">
       <div class="journal-block">
         <div class="row">
-          <div class="col-lg-8 col-md-8">
+          <div class="col-lg-3 col-md-3">
+            <div id="side-profile">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6">
             <h2>
               8 tips to get promoted to a Senior Software engineer
             </h2>
             <div style="margin-top: 10px;">Written by <a href="https://manojsatishkumar.com/profile/index.html">Manoj
                 Satish Kumar</a></div>
+            <hr />
+            <div id="social-share-strip-horizontal-top">
+            </div>
             <img style="width: 100%; margin-top: 20px; border: 1px solid gray; margin-bottom: 30px; "
               src="/images/blogs/sr-software-engineer.jpg" />
             <div class="">
@@ -405,6 +421,14 @@
                               next time.<br />
                               <br />
                               Good luck.
+                              <br />
+                              <br />
+                              <p><span style="font-family: helvetica; font-size: large; color: black">If you found this
+                                  article
+                                  helpful, share it with your
+                                  friends.</span></p>
+                              <div id="social-share-strip-horizontal-bottom">
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -415,7 +439,7 @@
             </div>
             </pem>
           </div>
-          <div class="col-lg-3 col-md-4 ">
+          <div class="col-lg-3 col-md-3 ">
             <div class="vertical-ad-banner">
               <div style=" padding-bottom: 5px; text-align: center; font-size: x-small; color: gray">ADVERTISEMENT</div>
               <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -463,7 +487,10 @@
     $(function () {
       $("#all-articles-list").load("/blog/all-articles.html");
       $("#all-articles-side-list").load("/blog/all-articles-list.html");
-
+      $("#social-share-strip-horizontal-top").load("/blog/components/social-share-strip-horizontal.html");
+      $("#social-share-strip-horizontal-bottom").load("/blog/components/social-share-strip-horizontal.html");
+      $("#social-share-strip-vertical").load("/blog/components/social-share-strip-vertical.html");
+      $("#side-profile").load("/components/side-profile.html");
     });
   </script>
 </body>
