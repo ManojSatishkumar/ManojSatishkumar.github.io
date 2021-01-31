@@ -51,9 +51,11 @@
 </head>
 
 <body>
-  <div id=" qna" class="text-left">
+  <div id="blog" class="text-left">
     <div style="margin-bottom: 100px;" id="desktop-nav-bar">
     </div>
+  </div>
+  <div id="social-share-strip-vertical">
   </div>
   <div class="container ">
     <div class="journal-block">
@@ -365,8 +367,9 @@
     $(function () {
       $("#all-articles-list").load("/blog/all-articles.html");
       $("#all-articles-side-list").load("/blog/all-articles-list.html");
-      $("#social-share-strip-horizontal-top").load("/blog/components/social-share-strip.html");
-      $("#social-share-strip-horizontal-bottom").load("/blog/components/social-share-strip.html");
+      $("#social-share-strip-horizontal-top").load("/blog/components/social-share-strip-horizontal.html");
+      $("#social-share-strip-horizontal-bottom").load("/blog/components/social-share-strip-horizontal.html");
+      $("#social-share-strip-vertical").load("/blog/components/social-share-strip-vertical.html");
     });
   </script>
 </body>
