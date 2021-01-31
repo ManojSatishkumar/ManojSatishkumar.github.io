@@ -41,8 +41,10 @@
       padding: 20px
     }
 
+
     /* MOBILE */
     @media only screen and (max-width: 1024px) {
+
       .nav-bar-fixed {
         display: none;
       }
@@ -55,10 +57,18 @@
       .banner-text-2 {
         font-size: 30px;
       }
+
+      #all-articles-list {
+        display: none;
+      }
     }
 
     /* DESKTOP */
     @media only screen and (min-width: 1024px) {
+
+      #all-articles-side-list {
+        display: none;
+      }
 
       .banner-text-1 {
         font-size: 70px;
@@ -169,42 +179,14 @@
           <br />
           <br />
         </div>
-        <div class="col-lg-6 col-md-12 ">
-          <a style=" color: black;" href="/blog//linkedin-job-referral.html">
-            <div class=" row">
-              <div class="container">
-                <img style="width: 95%; margin-bottom: 10px;" src="/images/blogs/linkedin-job-referral.jpg" />
-              </div>
-              <div style="text-align: center;" class="container">
-                <h5 style="width: 95%; padding: 10px;">
-                  5 Effective ways to get a linkedin job referral</h5>
-              </div>
-            </div>
-          </a>
-          </pem>
-          <br />
-          <br />
-        </div>
-        <div class="col-lg-6 col-md-12 ">
-          <a style=" color: black;" href="/blog/my-Javascript-interview-experiences-and-lessons.html">
-            <div class=" row">
-              <div class="container">
-                <img style="width: 95%; border: 1px solid gray; margin-bottom: 10px;"
-                  src="/images/blogs/my-Javascript-interview-experiences-and-lessons-cover.jpg" />
-              </div>
-              <div style="text-align: center;" class="container">
-                <h5 style="width: 95%; padding: 10px; ">
-                  My Javascript interview experiences & lessons</h5>
-              </div>
-            </div>
-          </a>
-          </pem>
-          <br />
-          <br />
-        </div>
       </div>
     </div>
   </div>
+  <br />
+  <div id="all-articles-list"></div>
+  <div id="all-articles-side-list">
+  </div>
+  <br />
   <div style="background-color: #e7e7e7;">
     <br />
     <div class="container">
@@ -253,6 +235,8 @@
   <script>
     $(function () {
       $("#msk-testimony").load("/components/testimony.html");
+      $("#all-articles-list").load("/blog/all-articles.html");
+      $("#all-articles-side-list").load("/blog/all-articles-list.html");
     });
   </script>
 </body>
