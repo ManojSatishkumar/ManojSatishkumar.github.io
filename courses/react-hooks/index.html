@@ -62,6 +62,11 @@
     <br />
     <div style="user-select: none; " id="intro" class="text-left courses-intro">
       <div class="container">
+        <hr />
+        <div style="font-size:large; margin-bottom: 5px;">Share this course with your friends & colleagues</div>
+        <div id="social-share-strip-horizontal-top">
+        </div>
+        <br />
         <div class="row ">
           <div class="col-lg-6 col-md-12 ">
             <div class="  ">
@@ -253,6 +258,8 @@
     document.addEventListener('contextmenu', event => event.preventDefault());
     $(function () {
       $("#tutorials-react-hooks-course-sidebar").load("/courses/react-hooks/components/sidebar.html");
+      $("#social-share-strip-horizontal-top").load("/blog/components/social-share-strip-horizontal.html");
+
     });
   </script>
 </body>
