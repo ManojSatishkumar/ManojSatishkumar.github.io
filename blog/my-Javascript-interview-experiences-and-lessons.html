@@ -669,6 +669,8 @@
   </div>
   <br />
   <div id="all-articles-list"></div>
+  <div id="contact-me-area">
+  </div>
   <div style="margin: 0px; padding: 0px;" id="footer">
   </div>
   <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -682,12 +684,13 @@
   </script>
   <script>
     $(function () {
+      $("#side-profile").load("/components/side-profile.html");
       $("#social-share-strip-vertical").load("/blog/components/social-share-strip-vertical.html");
+      $("#social-share-strip-horizontal-top").load("/blog/components/social-share-strip-horizontal.html");
       $("#all-articles-list").load("/blog/all-articles.html");
       $("#all-articles-side-list").load("/blog/all-articles-list.html");
-      $("#side-profile").load("/components/side-profile.html");
-      $("#social-share-strip-horizontal-top").load("/blog/components/social-share-strip-horizontal.html");
       $("#social-share-strip-horizontal-bottom").load("/blog/components/social-share-strip-horizontal.html");
+      $("#contact-me-area").load("/components/contact.html");
     });
   </script>
 </body>
