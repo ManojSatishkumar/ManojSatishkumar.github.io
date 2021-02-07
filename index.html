@@ -41,10 +41,8 @@
       padding: 20px
     }
 
-
     /* MOBILE */
     @media only screen and (max-width: 1024px) {
-
       .nav-bar-fixed {
         display: none;
       }
@@ -65,7 +63,6 @@
 
     /* DESKTOP */
     @media only screen and (min-width: 1024px) {
-
       #all-articles-side-list {
         display: none;
       }
@@ -203,6 +200,8 @@
   </div>
   <br />
   <div id="msk-testimony"></div>
+  <div id="contact-me-area">
+  </div>
   <div style="margin: 0px; padding: 0px;" id="footer">
   </div>
   <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -219,6 +218,7 @@
       $("#msk-testimony").load("/components/testimony.html");
       $("#all-articles-list").load("/blog/all-articles.html");
       $("#all-articles-side-list").load("/blog/all-articles-list.html");
+      $("#contact-me-area").load("/components/contact.html");
     });
   </script>
 </body>
