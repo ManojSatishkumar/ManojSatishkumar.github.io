@@ -33,63 +33,7 @@
 <body>
     <div style="margin-bottom: 50px;" id="desktop-nav-bar">
     </div>
-    <div style="background-color:#474747;" id="about" class="paddsection">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-lg-4 ">
-                    <div class="div-img-bg">
-                        <div class="about-img">
-                            <img src="/images/me.jpg" class="img-responsive" alt="me" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-7">
-                    <br />
-                    <div style="text-align: center;" class="about-descr">
-                        <h1 style="text-align: center;color: white; font-family: Poppins, helvetica;" class="p-heading">
-                            Contact Me
-                        </h1>
-                        <br />
-                        <a href="/profile/index.html">
-                            <button class="btn btn-secondary" style="width:265px; font-size: large; ">
-                                Profile
-                            </button>
-                        </a>
-                        <br />
-                        <br />
-                        <a target="_blank" href="mailto:85manojs@gmail.com">
-                            <button class="btn btn-secondary" style="width:265px; font-size: large; ">
-                                Email
-                            </button>
-                        </a>
-                        <br />
-                        <br />
-                        <a target="_blank" href="https://www.linkedin.com/in/manojsatishkumar/">
-                            <button class="btn btn-secondary" style="width:265px; font-size: large; ">
-                                LinkedIn
-                            </button>
-                        </a>
-                        <br />
-                        <br />
-                        <a target="_blank" href="https://www.youtube.com/user/Manojsseeker">
-                            <button class="btn btn-secondary" style="width:265px; font-size: large;">
-                                YouTube
-                            </button>
-                        </a>
-                        <br />
-                        <br />
-                        <a target="_blank" href="https://t.me/msk_web_development">
-                            <button class="btn btn-secondary" style="width:265px; font-size: large;">
-                                Telegram
-                            </button>
-                        </a>
-                        <br />
-                        <br>
-                        <br />
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="contact-me-area">
     </div>
     <div style="margin: 0px; padding: 0px;" id="footer">
     </div>
@@ -101,6 +45,9 @@
     <script src="/js/main.js"></script>
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
+        $(function () {
+            $("#contact-me-area").load("/components/contact.html");
+        });
     </script>
 </body>
 
