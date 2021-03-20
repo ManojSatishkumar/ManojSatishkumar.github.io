@@ -1,229 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-128563001-5"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
 
-      gtag("config", "UA-128563001-5");
-    </script>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <title>MSK | Web development</title>
-    <meta
-      content="ManojSatishkumar, Manoj Satish Kumar, MSK, Portfolio-Manoj Satishkumar MSK Tutorials,Web development, Web development tutorials, MSK web development, MSK Tech show, MSK Blogger, MSK FAQs, javascript course, react course, redux course, material ui course"
-      name="keywords"
-    />
-    <meta name="author" content="Manoj Satish Kumar" />
-    <meta
-      content="Web development tutorials, Full-courses, Interview guidance, Podcasts, LIVE streams, Blog posts, FAQs & Projects"
-      name="description"
-    />
-    <meta property="og:title" content="MSK | Web development" />
-    <meta
-      property="og:description"
-      content="Web development tutorials, Full-courses, Interview guidance, Podcasts, LIVE streams, Blog posts, FAQs & Projects"
-    />
-    <meta property="og:image" content="/images/msk-index-cover.png" />
-    <meta property="og:site_name" content="manojsatishkumar.com" />
-    <meta property="og:type" content="website" />
-    <link href="/css/style.css" rel="stylesheet" />
-    <link href="/css/responsive.css" rel="stylesheet" />
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="/images/favicon.png" />
-    <!-- <link rel="manifest" href="./manifest.webmanifest" />
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128563001-5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "UA-128563001-5");
+  </script>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <title>MSK | Web development</title>
+  <meta
+    content="ManojSatishkumar, Manoj Satish Kumar, MSK, Portfolio-Manoj Satishkumar MSK Tutorials,Web development, Web development tutorials, MSK web development, MSK Tech show, MSK Blogger, MSK FAQs, javascript course, react course, redux course, material ui course"
+    name="keywords" />
+  <meta name="author" content="Manoj Satish Kumar" />
+  <meta
+    content="Web development tutorials, Full-courses, Interview guidance, Podcasts, LIVE streams, Blog posts, FAQs & Projects"
+    name="description" />
+  <meta property="og:title" content="MSK | Web development" />
+  <meta property="og:description"
+    content="Web development tutorials, Full-courses, Interview guidance, Podcasts, LIVE streams, Blog posts, FAQs & Projects" />
+  <meta property="og:image" content="/images/msk-index-cover.png" />
+  <meta property="og:site_name" content="manojsatishkumar.com" />
+  <meta property="og:type" content="website" />
+  <link href="/css/style.css" rel="stylesheet" />
+  <link href="/css/responsive.css" rel="stylesheet" />
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/images/favicon.png" />
+  <!-- <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="/images/MSK-circle.png" /> -->
-    <meta name="theme-color" content="#17a2b8" />
-    <style>
-      .responsive-ad-banner {
-        padding: 20px;
+  <meta name="theme-color" content="#17a2b8" />
+  <style>
+    .responsive-ad-banner {
+      padding: 20px;
+    }
+
+    /* MOBILE */
+    @media only screen and (max-width: 1024px) {
+      .nav-bar-fixed {
+        display: none;
       }
 
-      /* MOBILE */
-      @media only screen and (max-width: 1024px) {
-        .nav-bar-fixed {
-          display: none;
-        }
-
-        .banner-text-1 {
-          font-size: 40px;
-          height: 200px;
-        }
-
-        .banner-text-2 {
-          font-size: 30px;
-        }
-
-        #all-articles-list {
-          display: none;
-        }
+      .banner-text-1 {
+        font-size: 40px;
+        height: 200px;
       }
 
-      /* DESKTOP */
-      @media only screen and (min-width: 1024px) {
-        #all-articles-side-list {
-          display: none;
-        }
-
-        .banner-text-1 {
-          font-size: 70px;
-          height: 220px;
-        }
-
-        .banner-text-2 {
-          font-size: 50px;
-        }
+      .banner-text-2 {
+        font-size: 30px;
       }
-    </style>
-  </head>
 
-  <body style="user-select: none">
-    <div style="margin-bottom: 55px" id="desktop-nav-bar"></div>
-    <div
-      id="cover"
-      style="text-align: center; margin-top: 100px; margin-bottom: 50px"
-    >
-      <div class="container">
-        <div class="col-lg-12 col-md-12">
-          <img src="/images/apps/msk-coders-wide-logo.jpg" width="100%" />
+      #all-articles-list {
+        display: none;
+      }
+    }
+
+    /* DESKTOP */
+    @media only screen and (min-width: 1024px) {
+      #all-articles-side-list {
+        display: none;
+      }
+
+      .banner-text-1 {
+        font-size: 70px;
+        height: 220px;
+      }
+
+      .banner-text-2 {
+        font-size: 50px;
+      }
+    }
+
+    .video-container {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      box-shadow: 1px 1px 39px 1px rgba(0, 0, 0, 0.85);
+      -webkit-box-shadow: 1px 1px 39px 1px rgba(0, 0, 0, 0.85);
+      -moz-box-shadow: 1px 1px 39px 1px rgba(0, 0, 0, 0.85);
+    }
+
+    .video-container::after {
+      padding-top: 56.25%;
+      display: block;
+      content: '';
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body style="user-select: none">
+  <div style="margin-bottom: 55px" id="desktop-nav-bar"></div>
+  <div id="cover" style="text-align: center; margin-top: 100px; margin-bottom: 50px">
+    <div class="container">
+      <br/>
+      <div style="font-size: 50px; color: rgb(33.1%, 33.1%, 33.1%)">Helping you get better at programming.</div>
+      <br/>
+    </div>
+    <br />
+    <div class="container">
+      <div class="col-lg-12 col-md-12">
+        <div style="padding-left: 20px; padding-right: 20px;">
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/9x5PwI4bC4I" title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+              allowfullscreen></iframe>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div id="courses" style="padding-top: 50px">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-12">
+          <div class="  ">
+            <h2>React hooks - full course</h2>
+          </div>
+          <p style="font-size: large; color: black">
+            The course is beginner-friendly. You just need to know the bare
+            minimum basics of React like components, props, state, and JSX.
+          </p>
+          <p style="font-size: large; color: black">
+            We will be building a fruit basket app in the course to understand
+            all concepts of hooks.
+          </p>
+          <a href="./courses/react-hooks/index.html">
+            <div>
+              <button class="btn btn-info" style="font-size: large">
+                Start Now
+              </button>
+            </div>
+          </a>
+          <br />
+          <br />
+          <br />
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <div>
+            <h2>MSK Referral program 2021</h2>
+          </div>
+          <p style="font-size: large; color: black">
+            In 2020, I was able to refer hundreds of candidates to various
+            companies in Bangalore and seeing them grow is a sense of personal
+            satisfaction.
+          </p>
+          <p style="font-size: large; color: black">
+            This program is launched with the intention to expand the IT
+            footprint in India and to provide opportunities for candidates.
+          </p>
+          <a target="_blank" href="https://forms.gle/kSmY9dhioUJzs7UB9">
+            <div>
+              <button class="btn btn-info" style="font-size: large">
+                Register Now
+              </button>
+            </div>
+          </a>
+          <br />
+          <br />
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div id="all-articles-list"></div>
+  <div class="container" id="all-articles-side-list"></div>
+  <br />
+  <div style="background-color: #e7e7e7">
+    <br />
+    <div class="container">
+      <br />
+      <div class="row">
         <br />
-        <div>
-          <a target="_blank" href="http://mskcoders.com">
-            <button
-              style="margin: 5px; background-color: rgb(0%, 37.2%, 76.1%)"
-              class="btn"
-              style="text-align: center; font-size: large"
-            >
-              Become an MSK Coder today!
+        <div class="col-lg-12 col-md-12 text-center">
+          <div>
+            <br />
+            <h3>Join us on Discord</h3>
+            <br />
+          </div>
+          <p style="font-size: large; color: black">
+            Become a MSK learner for resume reviews, interview questions &
+            tips, software engineering career development, web development,
+            self-improvement, quizzes, LIVE chat and more...
+          </p>
+          <a href="https://discord.gg/ekJtXEMh">
+            <button class="btn btn-info" style="text-align: center; font-size: large">
+              Join now
             </button>
           </a>
-        </div>
-      </div>
-    </div>
-    <hr />
-    <div id="courses" style="padding-top: 50px">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 col-md-12">
-            <div class="  ">
-              <h2>React hooks - full course</h2>
-            </div>
-            <p style="font-size: large; color: black">
-              The course is beginner-friendly. You just need to know the bare
-              minimum basics of React like components, props, state, and JSX.
-            </p>
-
-            <p style="font-size: large; color: black">
-              We will be building a fruit basket app in the course to understand
-              all concepts of hooks.
-            </p>
-            <a href="./courses/react-hooks/index.html">
-              <div>
-                <button class="btn btn-info" style="font-size: large">
-                  Start Now
-                </button>
-              </div>
-            </a>
-            <br />
-            <br />
-            <br />
-          </div>
-          <div class="col-lg-6 col-md-12">
-            <div>
-              <h2>MSK Referral program 2021</h2>
-            </div>
-            <p style="font-size: large; color: black">
-              In 2020, I was able to refer hundreds of candidates to various
-              companies in Bangalore and seeing them grow is a sense of personal
-              satisfaction.
-            </p>
-            <p style="font-size: large; color: black">
-              This program is launched with the intention to expand the IT
-              footprint in India and to provide opportunities for candidates.
-            </p>
-            <a target="_blank" href="https://forms.gle/kSmY9dhioUJzs7UB9">
-              <div>
-                <button class="btn btn-info" style="font-size: large">
-                  Register Now
-                </button>
-              </div>
-            </a>
-            <br />
-            <br />
-            <br />
-          </div>
-        </div>
-      </div>
-    </div>
-    <br />
-    <div id="all-articles-list"></div>
-    <div class="container" id="all-articles-side-list"></div>
-    <br />
-    <div style="background-color: #e7e7e7">
-      <br />
-      <div class="container">
-        <br />
-        <div class="row">
           <br />
-          <div class="col-lg-12 col-md-12 text-center">
-            <div>
-              <br />
-              <h3>Join us on Discord</h3>
-              <br />
-            </div>
-            <p style="font-size: large; color: black">
-              Become a MSK learner for resume reviews, interview questions &
-              tips, software engineering career development, web development,
-              self-improvement, quizzes, LIVE chat and more...
-            </p>
-            <a href="https://discord.gg/ekJtXEMh">
-              <button
-                class="btn btn-info"
-                style="text-align: center; font-size: large"
-              >
-                Join now
-              </button>
-            </a>
-            <br />
-            <br />
-            <br />
-          </div>
+          <br />
+          <br />
         </div>
       </div>
     </div>
-    <br />
-    <div id="msk-testimony"></div>
-    <div id="contact-me-area"></div>
-    <div style="margin: 0px; padding: 0px" id="footer"></div>
-    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="/lib/jquery/jquery.min.js"></script>
-    <script src="/lib/jquery/jquery-migrate.min.js"></script>
-    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/lib/typed/typed.js"></script>
-    <script src="/js/main.js"></script>
-    <script>
-      document.addEventListener("contextmenu", (event) =>
-        event.preventDefault()
-      );
-    </script>
-    <script>
-      $(function () {
-        $("#msk-testimony").load("/components/testimony.html");
-        $("#all-articles-list").load("/blog/all-articles.html");
-        $("#all-articles-side-list").load("/blog/all-articles-list.html");
-        $("#contact-me-area").load("/components/contact.html");
-      });
-    </script>
-  </body>
+  </div>
+  <br />
+  <div id="msk-testimony"></div>
+  <div id="contact-me-area"></div>
+  <div style="margin: 0px; padding: 0px" id="footer"></div>
+  <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="/lib/jquery/jquery.min.js"></script>
+  <script src="/lib/jquery/jquery-migrate.min.js"></script>
+  <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/lib/typed/typed.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener("contextmenu", (event) =>
+      event.preventDefault()
+    );
+  </script>
+  <script>
+    $(function () {
+      $("#msk-testimony").load("/components/testimony.html");
+      $("#all-articles-list").load("/blog/all-articles.html");
+      $("#all-articles-side-list").load("/blog/all-articles-list.html");
+      $("#contact-me-area").load("/components/contact.html");
+    });
+  </script>
+</body>
+
 </html>
