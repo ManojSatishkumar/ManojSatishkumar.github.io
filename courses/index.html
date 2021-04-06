@@ -78,6 +78,11 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('contextmenu', event => event.preventDefault());
+    $(function () {
+      setTimeout(()=>{
+        $('.nav-courses').addClass("active")
+      },1000)
+    });
   </script>
 </body>
 

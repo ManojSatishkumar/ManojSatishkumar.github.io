@@ -52,6 +52,9 @@
     <script>
       $(function () {
         $("#all-articles-list").load("/blog/all-articles.html");
+        setTimeout(()=>{
+        $('.nav-blogger').addClass("active")
+      },1000)
       });
     </script>
 </body>
