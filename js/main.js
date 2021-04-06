@@ -84,14 +84,16 @@ $(document).ready(function () {
   $(function () {
     typed.typed({
       strings: [
-        " am Manoj ",
+        " am Manoj Satish Kumar ",
         " have 8 years of experience in IT ",
         " am a frontend developer ",
         " work on Javascript ",
         " love to create websites ",
         " am a technology enthusiast ",
+        " will help you crack interviews ",
+        " will train you ",
+        " will guide you in your career ",
         " would love to connect with you ",
-        " ",
       ],
       typeSpeed: 30,
       loop: true,
