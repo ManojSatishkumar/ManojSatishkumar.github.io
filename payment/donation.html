@@ -99,30 +99,17 @@
                 Donate now</button>
             </a>
             <br />
-            <blockquote>
-              <blockquote>
-                <blockquote>
-                  <div></div>
-                </blockquote>
-                <div></div>
-              </blockquote>
-            </blockquote>
-            <div>
-              <span style="font-family: helvetica"><br /></span>
-            </div>
-            <div>
-              <span style="font-family: helvetica"><br /></span>
-            </div>
-            <div><br /></div>
           </div>
         </div>
       </div>
     </div>
   </div>
   <br />
-  <div class="container text-center">
+  <hr/>
+  <div id="donations" ></div>
+  <!-- <div class="container text-center">
     <img style="width: 100%" src="/images/payments/msk-foundation.jpg" />
-  </div>
+  </div> -->
   <br />
   <div style="margin: 0px; padding: 0px" id="footer"></div>
   <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -135,7 +122,12 @@
     document.addEventListener("contextmenu", (event) =>
       event.preventDefault()
     );
+    $(function () {
+      $("#donations").load("/components/donations.html");
+    });
+
   </script>
+  
 </body>
 
 </html>
