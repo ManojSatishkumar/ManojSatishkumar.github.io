@@ -195,7 +195,7 @@
 
       <div class="container">
         <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLScrYU_TH1TOHWJE6o0rE7A3Q5ex-mM4wi3mcrYXxVqKUUg-5w/viewform">
-          <button class="btn btn-info" style="text-align: center;  font-size: large;">
+          <button class="btn btn-info" style=" height:70px; width: 260px; font-size: x-large;">
             Register Now
           </button>
         </a>
@@ -204,6 +204,12 @@
       <br/>
  
   </div>
+
+  <br/>
+  <hr/>
+  <br/>
+  <br/>
+  <div id="msk-testimony"></div>
   <div style="margin: 0px; padding: 0px;" id="footer">
   </div>
   <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -216,6 +222,7 @@
     $(function () {
       setTimeout(()=>{
         $('.nav-courses').addClass("active")
+        $("#msk-testimony").load("/components/testimony.html");
       },1000)
     });
   </script>
