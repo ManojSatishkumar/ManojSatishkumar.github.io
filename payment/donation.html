@@ -127,6 +127,9 @@
     $(function () {
       $("#donations").load("/components/donations.html");
       $("#contact-me-area").load("/components/contact.html");
+      setTimeout(()=>{
+                $('.nav-donate').addClass("active")
+            },1000)
     });
 
   </script>
