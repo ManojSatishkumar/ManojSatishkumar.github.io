@@ -1,0 +1,116 @@
+
+   <div class="container">
+    <div class="row">
+        
+        <div class="col-lg-3 col-md-6">
+            <a style="color: black" target="_blank"
+            href="https://www.linkedin.com/in/manojsatishkumar/">
+                <div style=" background-color: rgb(93.3%, 93.3%, 93.3%); padding:20px; border-radius: 20px;">
+                            <span  style="font-size: xxx-large;  background: #121FCF;
+                            background: -webkit-linear-gradient(to right, #121FCF 0%, #CF1512 100%);
+                            background: -moz-linear-gradient(to right, #121FCF 0%, #CF1512 100%);
+                            background: linear-gradient(to right, #121FCF 0%, #CF1512 100%);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;" ><span class="counter-value" data-count="53600">0</span></span>
+                            <br/>
+                            <span  style="font-size: x-large;">Linkedin</span>
+                            <br/>
+                </div>
+            </a>
+            <br/>
+          </div>  
+    
+        <div class="col-lg-3 col-md-6">
+            <a style="color: black" target="_blank"
+            href="https://t.me/msk_web_development">
+                <div style=" background-color: rgb(93.3%, 93.3%, 93.3%); padding:20px; border-radius: 20px;">
+                            <span  style="font-size: xxx-large;  background: #121FCF;
+                            background: -webkit-linear-gradient(to right, #121FCF 0%, #CF1512 100%);
+                            background: -moz-linear-gradient(to right, #121FCF 0%, #CF1512 100%);
+                            background: linear-gradient(to right, #121FCF 0%, #CF1512 100%);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;" ><span class="counter-value" data-count="4100">0</span></span>
+                            <br/>
+                            <span  style="font-size: x-large;">Telegram</span>
+                            <br/>
+                </div>
+            </a>
+            <br/>
+          </div>  
+      
+
+        <div class="col-lg-3 col-md-6">
+            <a style="color: black" target="_blank"
+            href="https://www.udemy.com/user/manoj79/">
+                <div style=" background-color: rgb(93.3%, 93.3%, 93.3%); padding:20px; border-radius: 20px;">
+                            <span  style="font-size: xxx-large;  background: #121FCF;
+                            background: -webkit-linear-gradient(to right, #121FCF 0%, #CF1512 100%);
+                            background: -moz-linear-gradient(to right, #121FCF 0%, #CF1512 100%);
+                            background: linear-gradient(to right, #121FCF 0%, #CF1512 100%);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;" ><span class="counter-value" data-count="4000">0</span></span>
+                            <br/>
+                            <span  style="font-size: x-large;">Udemy</span>
+                            <br/>
+                </div>
+            </a>
+            <br/>
+          </div>  
+        <div class="col-lg-3 col-md-6">
+            <a style="color: black" target="_blank"
+            href="https://www.youtube.com/user/Manojsseeker">
+                <div style=" background-color: rgb(93.3%, 93.3%, 93.3%); padding:20px; border-radius: 20px;">
+                            <span  style="font-size: xxx-large;  background: #121FCF;
+                            background: -webkit-linear-gradient(to right, #121FCF 0%, #CF1512 100%);
+                            background: -moz-linear-gradient(to right, #121FCF 0%, #CF1512 100%);
+                            background: linear-gradient(to right, #121FCF 0%, #CF1512 100%);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;" ><span class="counter-value" data-count="3300">0</span></span>
+                            <br/>
+                            <span  style="font-size: x-large;">YouTube</span>
+                            <br/>
+                </div>
+            </a>
+            <br/>
+          </div>  
+
+        </div>  
+
+    </div>  
+</div>  
+
+
+<script>
+    var a = 0;
+    $(window).scroll(function() {
+
+  var oTop = $('#counter').offset().top - window.innerHeight;
+  if (a == 0 && $(window).scrollTop() > oTop) {
+    $('.counter-value').each(function() {
+      var $this = $(this),
+        countTo = $this.attr('data-count');
+      $({
+        countNum: $this.text()
+      }).animate({
+          countNum: countTo
+        },
+
+        {
+
+          duration: 3000,
+          easing: 'swing',
+          step: function() {
+            $this.text(Math.floor(this.countNum));
+          },
+          complete: function() {
+            $this.text(this.countNum);
+            //alert('finished');
+          }
+
+        });
+    });
+    a = 1;
+  }
+
+});
+</script>

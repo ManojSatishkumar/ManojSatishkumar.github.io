@@ -104,8 +104,8 @@
 <body style="user-select: none">
   <div style="margin-bottom: 75px" id="desktop-nav-bar"></div>
   <!-- <img style="width: 100%;"  src="/images/msk-main-banner.jpg" />  -->
-  <img style="width: 100%;"  src="/images/My_portfolio_pic_older.jpg" /> 
-  <br/>
+  <!-- <img style="width: 100%;"  src="/images/My_portfolio_pic_older.jpg" />  -->
+  <!-- <br/> -->
     <!-- <div  class="container text-center">
       
       <div style="font-size: 55px; font-weight: bold; background: #121FCF;
@@ -134,6 +134,7 @@
       </div>
     </div>  -->
   </div>
+
   <div id="courses" style="padding-top: 50px;">
     <div class="container">
       <div class="row">
@@ -304,8 +305,11 @@
       </div>
     </div>
   </div>
-  <br />
-  <div style="background-color: rgb(87%, 95.8%, 100%)">
+  <br/>
+  <br/>
+
+  <div id="social-counters"></div>
+  <!-- <div style="background-color: rgb(87%, 95.8%, 100%)">
     <div class="container">
       <br />
       <div class="row">
@@ -338,7 +342,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <br/>
   <div id="all-articles-list"></div>
   <div class="container" id="all-articles-side-list"></div>
@@ -363,6 +367,7 @@
       $("#all-articles-list").load("/blog/all-articles.html");
       $("#all-articles-side-list").load("/blog/all-articles-list.html");
       $("#contact-me-area").load("/components/contact.html");
+      $("#social-counters").load("/components/social-counters.html")
       setTimeout(()=>{
         $('.nav-home').addClass("active")
       },1000)
