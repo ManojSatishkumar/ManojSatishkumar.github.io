@@ -84,7 +84,6 @@ $(document).ready(function () {
   $(function () {
     typed.typed({
       strings: [
-        " am Manoj Satish Kumar ",
         " have 8 years of experience in IT ",
         " am a frontend developer ",
         " work on Javascript ",
