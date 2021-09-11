@@ -219,9 +219,18 @@
  
   </div>
   <br/>
-  <a href="/courses/index.html" >
-    <img style="width: 100%" src="/images/courses/msk-courses-banner.jpg" />
-   </a> 
+  <div style="background-color:#e7e7e7;">
+    <br />
+    <br />
+    <div class=" text-center">
+      <h2><i></i> Start Learning Web Development Today!</h2>
+    </div>
+    <div id="courses-cards">
+    </div>
+    <br />
+  </div>
+  <div id="contact-me-area">
+  </div>
   <br/>
   <br/>
   <br/>
@@ -239,6 +248,8 @@
       setTimeout(()=>{
         $('.nav-courses').addClass("active")
         $("#msk-testimony").load("/components/testimony.html");
+        $("#courses-cards").load("/components/courses-cards.html")
+        $("#contact-me-area").load("/components/contact.html");
       },1000)
     });
   </script>
