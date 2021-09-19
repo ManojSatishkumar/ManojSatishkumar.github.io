@@ -155,12 +155,21 @@
     <br />
     <div id="courses-cards">
     </div>
+    <div id="all-articles-list"></div>
   </div>
+  <hr/>
+
   <div style="user-select: none;" id="intro" class="text-left ">
     <br />
     <br />
     <br />
     <br />
+    <div class="container">
+      <div class=" text-center">
+        <h1><i class="ion-android-person"></i> INTRODUCTION</h1>
+      </div>
+      <br>
+    </div>
     <div class="container">
       <div class="row ">
         <div style=" padding-left: 30px;  padding-right: 30px;" class="col-lg-8 col-md-8 ">
@@ -1096,7 +1105,7 @@
       $("#contact-me-area").load("/components/contact.html");
       $("#social-counters").load("/components/social-counters.html")
       $("#courses-cards").load("/components/courses-cards.html")
-
+      $("#all-articles-list").load("/blog/all-articles.html");
       setTimeout(() => {
         $('.nav-home').addClass("active")
       }, 1000)
