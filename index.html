@@ -152,10 +152,13 @@
       </a>
     </div>
     <div id="social-counters"></div>
-    <br />
+    <br/>
     <div id="courses-cards">
     </div>
-    <div id="all-articles-list"></div>
+    <br />
+    <div id="companies-cards">
+    </div>
+   
   </div>
   <hr />
   <div style="user-select: none;" id="intro" class="text-left ">
@@ -1069,6 +1072,8 @@
   </div>
   </div>
   </div>
+ 
+   <!-- <div id="all-articles-list"></div> -->
   <div id="testimony">
     <br /><br />
     <br />
@@ -1105,7 +1110,8 @@
       $("#contact-me-area").load("/components/contact.html");
       $("#social-counters").load("/components/social-counters.html")
       $("#courses-cards").load("/components/courses-cards.html")
-      $("#all-articles-list").load("/blog/all-articles.html");
+      $("#companies-cards").load("/components/companies.html")
+      // $("#all-articles-list").load("/blog/all-articles.html");
       setTimeout(() => {
         $('.nav-home').addClass("active")
       }, 1000)
