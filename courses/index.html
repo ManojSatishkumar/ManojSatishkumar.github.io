@@ -33,6 +33,29 @@
         display: none;
       }
     }
+
+    .video-container {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      box-shadow: 1px 1px 39px 1px rgba(0, 0, 0, 0.85);
+      -webkit-box-shadow: 1px 1px 39px 1px rgba(0, 0, 0, 0.85);
+      -moz-box-shadow: 1px 1px 39px 1px rgba(0, 0, 0, 0.85);
+    }
+
+    .video-container::after {
+      padding-top: 56.25%;
+      display: block;
+      content: '';
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   </style>
   <meta name="theme-color" content="#17a2b8" />
 </head>
@@ -46,7 +69,13 @@
   <div class="container">
     
     <div style="margin-bottom: -10px;" class="text-center">
-      <img style="border-radius: 20px; width: 100%;" src="/images/bootcamps/msk-typescript-bootcamp-level-1.jpg" />
+      <div class="container">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/NHY06bpWGKU?autoplay=1" YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+            allowfullscreen></iframe>
+        </div>
+      </div>
       <br/>
       <br/>
       <span class="text-center"
