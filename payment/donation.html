@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-  
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -16,7 +15,6 @@
   <meta property='article:publisher' content='https://manojsatishkumar.com/' />
   <meta property='og:site_name' content='manojsatishkumar.com' />
   <meta property="og:type" content="article" />
-  
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() {
@@ -26,7 +24,6 @@
 
     gtag("config", "UA-128563001-5");
   </script>
-  
   <link href="/css/style.css" rel="stylesheet" />
   <link href="/css/responsive.css" rel="stylesheet" />
   <!-- Favicon -->
@@ -45,20 +42,23 @@
         background: linear-gradient(to right, #121FCF 0%, #CF1512 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;">MSK Foundation</div>
-        </div>  
+      </div>
     </a>
-    <h3 style="color:rgb(37%, 37%, 37%)" >🇮🇳 Padhega india tabhi to badhega India 🇮🇳</h3>
-
-    <br/>
-    <a target="_blank" href="https://www.linkedin.com/search/results/content/?keywords=%23mskfoundation&origin=FACETED_SEARCH&sid=lT6&sortBy=%22date_posted%22&update=urn%3Ali%3Afs_updateV2%3A(urn%3Ali%3Aactivity%3A6810790391735042048%2CBLENDED_SEARCH_FEED%2CEMPTY%2CDEFAULT%2Cfalse)">
+    <h3 style="color:rgb(37%, 37%, 37%)">🇮🇳 Padhega india tabhi to badhega India 🇮🇳</h3>
+    <br />
+    <a target="_blank"
+      href="https://www.linkedin.com/search/results/content/?keywords=%23mskfoundation&origin=FACETED_SEARCH&sid=lT6&sortBy=%22date_posted%22&update=urn%3Ali%3Afs_updateV2%3A(urn%3Ali%3Aactivity%3A6810790391735042048%2CBLENDED_SEARCH_FEED%2CEMPTY%2CDEFAULT%2Cfalse)">
       <button class="btn btn-info" style=" height:70px; width: 280px; font-size: x-large;">
         See the progress
       </button>
       <br />
     </a>
-
   </div>
-  <div id="donations" ></div>
+  <div class="container">
+    <script src="//web.webformscr.com/apps/fc3/build/loader.js" async
+      sp-form-id="ed6e6788315b7f1cb897507c45d290f4de9531e694a9cd5fc85e99cc3533c1ee"></script>
+  </div>
+  <div id="donations"></div>
   <div id="contact-me-area">
   </div>
   <!-- <div class="container text-center">
@@ -78,13 +78,12 @@
     $(function () {
       $("#donations").load("/components/donations.html");
       $("#contact-me-area").load("/components/contact.html");
-      setTimeout(()=>{
-                $('.nav-donate').addClass("active")
-            },1000)
+      setTimeout(() => {
+        $('.nav-donate').addClass("active")
+      }, 1000)
     });
 
   </script>
-  
 </body>
 
 </html>
