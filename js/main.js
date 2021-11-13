@@ -113,7 +113,7 @@ $(document).ready(function () {
 
   $(function () {
     $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
-    $("#footer").load("/components/footer.html");
+    // $("#footer").load("/components/footer.html");
   });
 });
 
