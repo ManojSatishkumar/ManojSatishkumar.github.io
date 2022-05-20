@@ -84,14 +84,11 @@ $(document).ready(function () {
   $(function () {
     typed.typed({
       strings: [
-        " have 8 years of experience in IT ",
-        " am a frontend developer ",
-        " work on Javascript ",
+        " have 9 years of experience in IT ",
+        " am a frontend web developer ",
+        " work on Javascript & React ",
         " love to create websites ",
         " am a technology enthusiast ",
-        " will help you crack interviews ",
-        " will train you ",
-        " will guide you in your career ",
         " would love to connect with you ",
       ],
       typeSpeed: 30,

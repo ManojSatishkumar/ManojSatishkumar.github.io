@@ -245,15 +245,15 @@ nav ul li a {
 /*-----------------------------------------------------------------------------------*/
 
 #header {
-  background: url("/images/My_portfolio_pic_old.jpg") repeat scroll center /
+  background: url("/images/me_in_room.png") repeat scroll center /
     cover;
-  height: 65vh;
+  height: 100vh;
   width: 100%;
-  background-position-x: right;
+  background-position-x: center;
 }
 
 #header .header-content {
-  height: 100vh;
+  height: 170vh;
   text-align: left;
   width: 100%;
   display: flex;
