@@ -247,13 +247,13 @@ nav ul li a {
 #header {
   background: url("/images/me_in_room.jpg") repeat scroll center /
     cover;
-  height: 100vh;
+  height: 90vh;
   width: 100%;
   background-position-x: center;
 }
 
 #header .header-content {
-  height: 170vh;
+  height: 150vh;
   text-align: left;
   width: 100%;
   display: flex;
