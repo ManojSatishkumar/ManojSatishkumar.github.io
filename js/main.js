@@ -84,7 +84,7 @@ $(document).ready(function () {
   $(function () {
     typed.typed({
       strings: [
-        " have 10+ years of experience in IT ",
+        " have 11+ years of experience in IT ",
         " am a frontend web developer ",
         " work on Javascript & React ",
         " love to create websites ",
