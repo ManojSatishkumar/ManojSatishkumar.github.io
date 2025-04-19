@@ -69,7 +69,6 @@
     animation: fadeInUp 1s;
   }
   .highlight {
-    /* background: linear-gradient(90deg, #007bff22 0%, #17a2b822 100%); */
     background: linear-gradient(90deg, #e9ecef 0%, #dee2e6 100%);
     border-radius: 8px;
     padding: 2px 8px;
@@ -107,11 +106,28 @@
       padding-right: 8px;
     }
   }
+  @keyframes animateHello {
+    0% {
+      opacity: 0;
+      transform: scale(0.7) rotate(-10deg) translateY(30px);
+      letter-spacing: 20px;
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.1) rotate(2deg) translateY(-10px);
+      letter-spacing: 4px;
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(0deg) translateY(0);
+      letter-spacing: 2px;
+    }
+  }
 </style>
 
 <div>
   <div class="container">
-    <div class="d-none d-md-block"><br /><br /><br /></div>
+    <div class="d-none d-md-block"><br /><br /></div>
   </div>
   <div class="container">
     <div class="row">
@@ -140,7 +156,7 @@
                 style="
                   font-size: 2rem;
                   font-weight: bold;
-                  color: black
+                  color: black;
                   margin-bottom: 0.5rem;
                   text-align: left;
                 "
@@ -160,13 +176,13 @@
               <h6 style="font-size: 1rem; font-weight: 400; color: #6c757d">
                 Walmart Global Tech India
               </h6>
+              <hr />
               <div
                 style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem"
               >
                 <i class="fas fa-map-marker-alt" style="color: #007bff"></i>
                 Bengaluru, India
               </div>
-
               <div
                 style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem"
               >
@@ -187,6 +203,7 @@
               </div>
             </div>
           </div>
+          <hr />
           <div>
             <div class="social-links" style="margin-top: 18px">
               <a
@@ -194,86 +211,91 @@
                 class="email"
                 title="Email"
                 target="_blank"
-                ><i class="fas fa-envelope"></i
-              ></a>
+              >
+                <i class="fas fa-envelope"></i>
+              </a>
               <a
                 href="https://www.linkedin.com/in/manojsatishkumar/"
                 class="linkedin"
                 title="LinkedIn"
                 target="_blank"
-                ><i class="fab fa-linkedin-in"></i
-              ></a>
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
               <a
                 href="https://www.youtube.com/@ManojSatishkumar"
                 class="youtube"
                 title="YouTube"
                 target="_blank"
-                ><i class="fab fa-youtube"></i
-              ></a>
+              >
+                <i class="fab fa-youtube"></i>
+              </a>
               <a
                 href="https://topmate.io/manoj_satishkumar"
                 class="topmate"
                 title="Topmate"
                 target="_blank"
-                ><i class="fas fa-user-tie"></i
-              ></a>
+              >
+                <i class="fas fa-user-tie"></i>
+              </a>
               <a
                 href="https://www.udemy.com/user/manoj79/"
                 class="udemy"
                 title="Udemy"
                 target="_blank"
-                ><i class="fas fa-briefcase"></i
-              ></a>
+              >
+                <i class="fas fa-briefcase"></i>
+              </a>
               <a
                 href="https://github.com/ManojSatishkumar"
                 class="github"
                 title="GitHub"
                 target="_blank"
                 style="background: #000"
-                ><i class="fab fa-github"></i
-              ></a>
+              >
+                <i class="fab fa-github"></i>
+              </a>
               <a
                 href="https://twitter.com/MSK_Web_Manoj"
                 class="twitter"
                 title="Twitter"
                 target="_blank"
-                ><i class="fab fa-twitter"></i
-              ></a>
-                <a
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a
                 href="/blog/"
                 class="articles"
                 title="Articles"
                 target="_blank"
                 style="background: #17a2b8"
-                >
+              >
                 <i class="fas fa-newspaper"></i>
-                </a>
-                 <a
-                  href="/apps/index.html"
-                  class="apps"
-                  title="Apps"
-                  target="_blank"
-                  style="background: #ff9800"
-                >
-                  <i class="fab fa-app-store-ios"></i>
-                </a>
-                <a
-                  href="/q-n-a/q-n-a-with-manoj.html"
-                  class="faqs"
-                  title="FAQs"
-                  target="_blank"
-                  style="background: #6c757d"
-                >
-                    <i class="fas fa-question-circle"></i>
-                </a>
-               
+              </a>
+              <a
+                href="/apps/index.html"
+                class="apps"
+                title="Apps"
+                target="_blank"
+                style="background: #ff9800"
+              >
+                <i class="fab fa-app-store-ios"></i>
+              </a>
+              <a
+                href="/q-n-a/q-n-a-with-manoj.html"
+                class="faqs"
+                title="FAQs"
+                target="_blank"
+                style="background: #6c757d"
+              >
+                <i class="fas fa-question-circle"></i>
+              </a>
             </div>
             <a
               href="https://topmate.io/manoj_satishkumar/709273"
               target="_blank"
               class="consult-btn"
               style="
-                margin-top: 20px;
                 width: 100%;
                 border-radius: 24px;
                 opacity: 0.7;
@@ -294,11 +316,7 @@
       <!-- Introduction -->
       <div
         class="col-md-8 wow animate__animated animate__fadeInRight"
-        style="
-          padding-left: 30px;
-          padding-right: 30px;
-          padding-top: 20px;
-        "
+        style="padding-left: 30px; padding-right: 30px; padding-top: 20px"
       >
         <h1 style="font-size: 2.5rem; text-align: left; font-weight: bold">
           <span
@@ -323,25 +341,6 @@
           >
             Hello!
           </span>
-          <style>
-            @keyframes animateHello {
-              0% {
-                opacity: 0;
-                transform: scale(0.7) rotate(-10deg) translateY(30px);
-                letter-spacing: 20px;
-              }
-              60% {
-                opacity: 1;
-                transform: scale(1.1) rotate(2deg) translateY(-10px);
-                letter-spacing: 4px;
-              }
-              100% {
-                opacity: 1;
-                transform: scale(1) rotate(0deg) translateY(0);
-                letter-spacing: 2px;
-              }
-            }
-          </style>
           <span
             class="animate__animated animate__tada animate__infinite"
             style="display: inline-block"
@@ -353,10 +352,12 @@
         <span class="highlight">Staff Software Engineer</span> with
         <span class="highlight">12 years</span> of experience building and
         leading high-performing teams to deliver
-        <span class="highlight">scalable</span>,  <span class="highlight">multi-tenant</span>, <span class="highlight">high-performance</span> web applications</span
-        >. My expertise lies in
-        <strong>JavaScript</strong>, <strong>React.js</strong>, <strong>Node.js</strong> and modern
-        web technologies, with a proven track record of designing, developing,
+        <span class="highlight">scalable</span>,
+        <span class="highlight">multi-tenant</span>,
+        <span class="highlight">high-performance</span> web applications. My
+        expertise lies in <strong>JavaScript</strong>,
+        <strong>React.js</strong>, <strong>Node.js</strong> and modern web
+        technologies, with a proven track record of designing, developing,
         deploying, and maintaining complex front-end systems at scale.
         <span>💡</span>
         <p style="font-size: large; color: #222"></p>
@@ -364,8 +365,8 @@
         <span class="highlight">Fintech</span>,
         <span class="highlight">E-Commerce</span>,
         <span class="highlight">Healthcare</span>, and
-        <span class="highlight">Semiconductor</span>. My journey
-        has taken me across the globe:
+        <span class="highlight">Semiconductor</span>. My journey has taken me
+        across the globe:
         <a
           href="https://www.google.com/maps/place/San+Francisco,+CA/"
           target="_blank"
@@ -452,16 +453,15 @@
         >
         <p style="font-size: large; color: #222"></p>
         I am deeply committed to
-        <span class="highlight">engineering excellence
-        <span>🏆</span></span> and fostering collaboration within teams. I take pride
-        in mentoring future leaders <span>🌱</span> and cultivating a culture of
-        innovation and continuous improvement. My passion for teaching drives me
-        to share knowledge and help others grow in their careers
-        <span>📚</span>.
+        <span class="highlight">engineering excellence <span>🏆</span></span>
+        and fostering collaboration within teams. I take pride in mentoring
+        future leaders <span>🌱</span> and cultivating a culture of innovation
+        and continuous improvement. My passion for teaching drives me to share
+        knowledge and help others grow in their careers <span>📚</span>.
         <p style="font-size: large; color: #222"></p>
         I have a strong affinity for the
-        <span class="highlight">JavaScript ecosystem <span>🟨</span></span> and
-        have designed and developed multiple products prioritizing user
+        <span class="highlight">JavaScript ecosystem <span>🟨</span></span>
+        and have designed and developed multiple products prioritizing user
         experience and performance. My dedication to crafting
         <span class="highlight">supreme-quality</span> front-end interfaces has
         been a cornerstone of my professional journey.
@@ -474,10 +474,10 @@
             href="https://www.google.com/maps/place/Bangalore,+Karnataka,+India/"
             target="_blank"
             >Bengaluru</a
-          > </span
-        >, where I continue to explore new challenges and opportunities to make
-        a meaningful impact in the tech industry.
-
+          >
+        </span>
+        , where I continue to explore new challenges and opportunities to make a
+        meaningful impact in the tech industry.
         <br />
       </div>
     </div>
