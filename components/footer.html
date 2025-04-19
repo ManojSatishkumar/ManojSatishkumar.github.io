@@ -1,100 +1,470 @@
-<!--footer starts from here-->
-<footer style="background-color: rgb(95.6%, 95.6%, 95.6%);" class="footer">
-  <br />
-  <div class="container bottom_border">
-    <div class="row">
-      <div class=" col-sm-4 col-md col-sm-4  col-12 col">
-        <h5 class="headin5_amrc  pt2">Manoj Satish Kumar</h5>
-        <!--headin5_amrc-->
-        <p class="mb10">Web development Courses, Workshops, Bootcamps, Interview guidance, Blog posts, FAQs &
-          Philanthropy</p>
-        <p><i class="fa fa fa-envelope"></i> <a style="color: black;"
-            href="mailto:msk@manojsatishkumar.com">msk@manojsatishkumar.com</a></p>
-        <p><i class="fa fa-location-arrow"></i> Bangalore, India </p>
-      </div>
-      <div class=" col-sm-4 col-md  col-6 col">
-        <h5 style="color: black;" class="headin5_amrc col_white_amrc pt2">Sections</h5>
-        <!--headin5_amrc-->
-        <ul class="footer_ul_amrc">
-          <li><a href="/">Home page</a></li>
-          <li><a href="/blog/index.html">Blog posts</a></li>
-          <li><a href="/courses/index.html">Courses</a></li>
-          <li><a href="/posts/index.html">Posts</a></li>
-          <li><a href="/q-n-a/q-n-a-with-manoj.html">FAQs</a></li>
-          <li><a href="/apps/index.html">Apps</a></li>
-          <li><a href="/privacy-policy/index.html">Privacy</a></li>
-        </ul>
-        <!--footer_ul_amrc ends here-->
-      </div>
-      <div class=" col-sm-4 col-md  col-6 col">
-        <h5 style="color: black;" class="headin5_amrc col_white_amrc pt2">Quick links</h5>
-        <!--headin5_amrc-->
-        <ul class="footer_ul_amrc">
-          <li><a href="/payment/donation.html">MSK Foundation</a></li>
-          <li><a target="_blank" href="https://t.me/msk_web_development">Telegram group</a></li>
-          <li><a href="/blog/linkedin-job-referral.html">LinkedIn job referral</a></li>
-          <li><a href="/blog/zoom-interview-tips.html">Zoom interview tips</a></li>
-          <li><a href="/blog/my-Javascript-interview-experiences-and-lessons.html">A javascript journey</a></li>
-          <li><a href="/blog/12-types-of-software-developers-in-office.html">12 types of devs</a></li>
-          <li><a href="/blog/how-to-get-promoted-to-senior-software-engineer.html">Sr. software engineer</a></li>
-        </ul>
-        <!--footer_ul_amrc ends here-->
-      </div>
-      <div class=" col-sm-4 col-md  col-12 col">
-        <h5 style="color: black;" class="headin5_amrc col_white_amrc pt2">Courses</h5>
-        <!--headin5_amrc ends here-->
-        <ul class="footer_ul_amrc">
-          <li><a href="/courses/index.html">All Web Courses</a></li>
-          <li><a target="_blank"
-              href="https://www.udemy.com/course/msk-frontend-system-design-interview-guidance/?referralCode=F21AB3412B4B123F5611">Frontend
-              interview kit</a></li>
-          <li><a href="/workshops/react/index.html">React redux workshop</a></li>
-          <li><a href="/guidance/frontend-system-design/index.html">Frontend system design</a></li>
-          <li><a href="/bootcamps/javascript/index.html">Javascript bootcamp</a></li>
-          <li><a href="https://www.youtube.com/playlist?list=PLyYcl2GkJ13jcmyn7Nl_HCEEv8yZN2lCH">React hooks course</a>
-          </li>
-        </ul>
-        <!--footer_ul2_amrc ends here-->
-      </div>
+<footer
+  style="
+    background: #f3f3f3;
+    color: #181818;
+    padding: 48px 0 24px 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  "
+>
+  <style>
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 48px;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+    @media (max-width: 900px) {
+      .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px !important;
+        padding: 0 16px;
+      }
+      .footer-col {
+        min-width: 0 !important;
+        width: 100% !important;
+      }
+      .footer-newsletter form {
+        flex-direction: column;
+        gap: 8px !important;
+      }
+      .footer-newsletter input,
+      .footer-newsletter button {
+        width: 100% !important;
+      }
+    }
+    @media (max-width: 600px) {
+      .footer-container {
+        padding: 0 8px;
+        gap: 16px !important;
+      }
+      .footer-newsletter p {
+        font-size: 0.95rem !important;
+      }
+      .footer-col h1 {
+        font-size: 1.5rem !important;
+      }
+      .footer-col h3 {
+        font-size: 1rem !important;
+      }
+    }
+  </style>
+  <div class="footer-container">
+    <!-- About Column -->
+    <div class="footer-col" style="flex: 1 1 220px; min-width: 220px">
+      <h1 style="font-size: 1.5rem; font-weight: bold;; margin-bottom: 16px; color: #181818">
+        Manoj Satishkumar
+      </h1>
+      <p style="font-size: 1rem; line-height: 1.6; color: #555">
+        Full Stack Developer passionate about building impactful web
+        experiences. Specializing in React, Node.js, and cloud solutions.
+      </p>
+    </div>
+    <!-- Links Column -->
+    <div class="footer-col" style="flex: 1 1 160px; min-width: 160px">
+      <h3 style="font-size: 1.1rem; font-weight: bold; margin-bottom: 12px; color: #181818">
+        Quick Links
+      </h3>
+      <ul style="list-style: none; padding: 0; margin: 0">
+        <li>
+          <a
+            href="/"
+            style="
+              color: #555;
+              text-decoration: none;
+              display: block;
+              margin-bottom: 8px;
+            "
+            >Portfolio</a
+          >
+        </li>
+        <li>
+          <a
+            href="/blog"
+            style="
+              color: #555;
+              text-decoration: none;
+              display: block;
+              margin-bottom: 8px;
+            "
+            >Blog</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://topmate.io/manoj_satishkumar/388909"
+            target="_blank"
+            style="
+              color: #555;
+              text-decoration: none;
+              display: block;
+              margin-bottom: 8px;
+            "
+            >Course</a
+          >
+        </li>
+        <li>
+          <a
+            href="apps/index.html"
+            style="
+              color: #555;
+              text-decoration: none;
+              display: block;
+              margin-bottom: 8px;
+            "
+            >Apps</a
+          >
+        </li>
+        <li>
+          <a
+            href="/q-n-a/q-n-a-with-manoj.html"
+            style="color: #555; text-decoration: none; display: block"
+            >FAQs</a
+          >
+        </li>
+      </ul>
+    </div>
+    <!-- Social Column -->
+    <div class="footer-col" style="flex: 1 1 160px; min-width: 160px">
+      <h3 style="font-size: 1.1rem;font-weight: bold; margin-bottom: 12px; color: #181818">
+        Connect
+      </h3>
+      <ul style="list-style: none; padding: 0; margin: 0">
+        <li>
+          <a
+            href="https://github.com/ManojSatishkumar"
+            target="_blank"
+            rel="noopener"
+            style="
+              color: #555;
+              text-decoration: none;
+              display: flex;
+              align-items: center;
+              margin-bottom: 8px;
+            "
+          >
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+              alt="GitHub"
+              style="width: 20px; height: 20px; margin-right: 8px"
+            />GitHub
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://linkedin.com/in/manojsatishkumar"
+            target="_blank"
+            rel="noopener"
+            style="
+              color: #555;
+              text-decoration: none;
+              display: flex;
+              align-items: center;
+              margin-bottom: 8px;
+            "
+          >
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
+              alt="LinkedIn"
+              style="width: 20px; height: 20px; margin-right: 8px"
+            />LinkedIn
+          </a>
+        <li>
+            <a
+                href="https://www.youtube.com/@ManojSatishkumar"
+                target="_blank"
+                rel="noopener"
+                style="
+                    color: #555;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 8px;
+                "
+            >
+                <img
+                    src="https://img.icons8.com/color/48/000000/youtube-play.png"
+                    alt="YouTube"
+                    style="width: 20px; height: 20px; margin-right: 8px"
+                />YouTube
+            </a>
+        </li>
+         <li>
+            <a
+                href="https://topmate.io/manoj_satishkumar"
+                target="_blank"
+                rel="noopener"
+                style="
+                    color: #555;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 8px;
+                "
+            >
+                <img
+                    src="https://img.icons8.com/color/48/000000/handshake.png"
+                    alt="Topmate"
+                    style="width: 20px; height: 20px; margin-right: 8px"
+                />Topmate
+            </a>
+        </li>
+       
+        <li>
+            <a
+                href="https://www.udemy.com/user/manoj79/"
+                target="_blank"
+                rel="noopener"
+                style="
+                    color: #555;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 8px;
+                "
+            >
+                <img
+                    src="https://img.icons8.com/color/48/000000/udemy.png"
+                    alt="Udemy"
+                    style="width: 20px; height: 20px; margin-right: 8px"
+                />Udemy
+            </a>
+        </li>
+        </li>
+        <li>
+          <a
+            href="https://twitter.com/MSK_Web_Manoj"
+            target="_blank"
+            rel="noopener"
+            style="
+              color: #555;
+              text-decoration: none;
+              display: flex;
+              align-items: center;
+            "
+          >
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg"
+              alt="Twitter"
+              style="width: 20px; height: 20px; margin-right: 8px"
+            />Twitter
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Newsletter Column -->
+    <div class="footer-col" style="flex: 1 1 260px; min-width: 260px">
+      <h3 style="font-size: 1.1rem; margin-bottom:  12px; font-weight: bold; color: #181818">
+        Tech Stack
+      </h3>
+      <p style="font-size: 1rem; color: #555; margin-bottom: 12px">
+        Tools and technologies I use regularly:
+      </p>
+      <ul
+        style="
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        "
+      >
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+            alt="React"
+            style="width: 28px; height: 28px"
+            title="React"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+            alt="Node.js"
+            style="width: 28px; height: 28px"
+            title="Node.js"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+            alt="JavaScript"
+            style="width: 28px; height: 28px"
+            title="JavaScript"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+            alt="TypeScript"
+            style="width: 28px; height: 28px"
+            title="TypeScript"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+            alt="HTML5"
+            style="width: 28px; height: 28px"
+            title="HTML5"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+            alt="CSS3"
+            style="width: 28px; height: 28px"
+            title="CSS3"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg"
+            alt="Redux"
+            style="width: 28px; height: 28px"
+            title="Redux"
+          />
+        </li>
+
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+            alt="Express"
+            style="
+              width: 28px;
+              height: 28px;
+              background: #fff;
+              border-radius: 4px;
+            "
+            title="Express"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+            alt="MongoDB"
+            style="width: 28px; height: 28px"
+            title="MongoDB"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+            alt="Docker"
+            style="width: 28px; height: 28px"
+            title="Docker"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+            alt="Git"
+            style="width: 28px; height: 28px"
+            title="Git"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+            alt="GitHub"
+            style="width: 28px; height: 28px"
+            title="GitHub"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+            alt="Linux"
+            style="width: 28px; height: 28px"
+            title="Linux"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"
+            alt="VS Code"
+            style="width: 28px; height: 28px"
+            title="VS Code"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg"
+            alt="GraphQL"
+            style="width: 28px; height: 28px"
+            title="GraphQL"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg"
+            alt="Firebase"
+            style="width: 28px; height: 28px"
+            title="Firebase"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg"
+            alt="Sass"
+            style="width: 28px; height: 28px"
+            title="Sass"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
+            alt="Bootstrap"
+            style="width: 28px; height: 28px"
+            title="Bootstrap"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg"
+            alt="Material UI"
+            style="width: 28px; height: 28px"
+            title="Material UI"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg"
+            alt="Jest"
+            style="width: 28px; height: 28px"
+            title="Jest"
+          />
+        </li>
+        <li>
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg"
+            alt="Webpack"
+            style="width: 28px; height: 28px"
+            title="Webpack"
+          />
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="container">
-    <ul class="foote_bottom_ul_amrc">
-      <li><strong><a href="/">Home</a></strong></li>
-      <li><strong><a href="/blog/index.html">Blog</a></strong></li>
-      <li><strong><a href="/courses/index.html">Courses</a></strong></li>
-      <li><strong><a target="_blank" href="https://pmny.in/5IqpkdOU4Z7O">Donate</a></strong></li>
-    </ul>
-    <!--foote_bottom_ul_amrc ends here-->
-    <p class="text-center">Copyright @2021 MSK Web development</p>
-    <ul style="padding-left: 0px;" class="social_footer_ul">
-      <li style="padding-left: 0px;"><a target="_blank" href="https://www.linkedin.com/company/71355046/admin/"><i
-            class="fab fa-linkedin"></i></a>
-      </li>
-      <li><a target="_blank" href="https://t.me/msk_web_development"><i class="fab fa-telegram
-        "></i></a></li>
-      <li><a target="_blank" href="https://www.facebook.com/MSK-Web-Development-103039448587833"><i
-            class="fab fa-facebook-f"></i></a></li>
-      <li><a target="_blank" href="https://www.youtube.com/channel/UC1pwTpxZ3s1X_Vxb8K2uWYw"><i
-            class="fab fa-youtube"></i></a></li>
-      <li><a target="_blank" href="https://twitter.com/MSK_Web_Manoj"><i class="fab fa-twitter"></i></a></li>
-    </ul>
-    <!--social_footer_ul ends here-->
+  <div
+    style="
+      max-width: 1200px;
+      margin: 32px auto 0 auto;
+      border-top: 1px solid #ccc;
+      padding-top: 16px;
+      text-align: center;
+      color: #888;
+      font-size: 0.95rem;
+    "
+  >
+    &copy; <span id="footer-year"></span> Manoj Satishkumar. All rights
+    reserved.
+    <script>
+      document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
+    </script>
   </div>
-  <br />
-  <a target="_blank" href="https://t.me/msk_web_development">
-    <div
-      style="box-shadow: 2px -1px 18px 2px rgba(0,130,207,0.52);
-    -webkit-box-shadow: 2px -1px 18px 2px rgba(0,130,207,0.52);
-    -moz-box-shadow: 2px -1px 18px 2px rgba(0,130,207,0.52);
-    cursor: pointer; font-size: 35px; width:60px; height: 60px; position: fixed; bottom: 20px; right: 20px; border-radius: 50px; background-color: rgb(0%, 50.5%, 86.6%);"
-      class="bottom-chat-bubble">
-      <div style="color: white; position: relative; bottom: -5px; right: -15px;">
-        <i class="ion-chatboxes"></i>
-      </div>
-    </div>
-  </a>
 </footer>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-  integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-<link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">

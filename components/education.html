@@ -1,0 +1,244 @@
+<!-- Modernized Education Section -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+
+<style>
+  .edu-section {
+    font-family: "Roboto", Arial, sans-serif;
+    background: #f7f9fb;
+    padding: 60px 0;
+  }
+  .edu-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #22223b;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+  }
+  .edu-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 32px;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .edu-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(34, 34, 59, 0.08);
+    padding: 32px 24px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .edu-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(34, 34, 59, 0.16);
+  }
+  .edu-level {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #22223b;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .edu-major {
+    font-size: 1.1rem;
+    color: #4a4e69;
+    margin-bottom: 2px;
+  }
+  .edu-year {
+    font-size: 1rem;
+    color: #9a8c98;
+    margin-bottom: 12px;
+  }
+  .edu-school {
+    font-size: 1.05rem;
+    color: #22223b;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  .edu-location {
+    font-size: 0.98rem;
+    color: #6c757d;
+    margin-bottom: 12px;
+  }
+  .edu-divider {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #e0e1dd;
+    margin: 12px 0;
+  }
+  .edu-desc {
+    font-size: 0.98rem;
+    color: #3a3a3a;
+    margin-bottom: 10px;
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+  .edu-desc ul {
+    margin: 8px 0 0 20px;
+    padding: 0;
+    font-size: 0.98rem;
+    color: #3a3a3a;
+  }
+  .edu-desc li {
+    margin-bottom: 4px;
+    list-style: disc;
+  }
+  @media (max-width: 1300px) {
+    .edu-grid {
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .edu-card {
+      width: 45vw;
+      min-width: 260px;
+      max-width: 350px;
+    }
+  }
+  @media (max-width: 900px) {
+    .edu-grid {
+      flex-direction: column;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+    .edu-card {
+      width: 90%;
+      max-width: 400px;
+    }
+  }
+</style>
+
+<div class="edu-section">
+  <div class="container">
+    <div class="text-center">
+      <div class="container text-center">
+        <div
+          style="
+            font-size: 50px;
+            font-weight: bold;
+            background: #121fcf;
+            background: -webkit-linear-gradient(
+              to right,
+              #121fcf 0%,
+              #cf1512 100%
+            );
+            background: -moz-linear-gradient(
+              to right,
+              #121fcf 0%,
+              #cf1512 100%
+            );
+            background: linear-gradient(to right, #121fcf 0%, #cf1512 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          "
+        >
+          <i class="fa-solid fa-graduation-cap"></i> Education
+        </div>
+      </div>
+      <br />
+      <br />
+    </div>
+    <div class="edu-grid">
+      <!-- Engineering -->
+      <div class="edu-card">
+        <div class="edu-level">
+          <i class="fa-solid fa-microchip"></i> Engineering
+        </div>
+        <div class="edu-major">Electronics</div>
+        <div class="edu-year">2013</div>
+        <div class="edu-school">BITM College</div>
+        <div class="edu-location">Bellary, India</div>
+        <div class="edu-desc">
+          <p>
+            Pursued a Bachelor’s degree in Electronics, where I developed a
+            strong foundation in circuit design, embedded systems, and digital
+            electronics.
+          </p>
+          <ul>
+            <li>Scored 85%</li>
+            <li>Rank #1</li>
+            <li>College Topper</li>
+            <li>State rank #18</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Pre-University -->
+      <div class="edu-card">
+        <div class="edu-level">
+          <i class="fa-solid fa-laptop-code"></i> Pre-University
+        </div>
+        <div class="edu-major">Computer Science</div>
+        <div class="edu-year">2009</div>
+        <div class="edu-school">Municipal College</div>
+        <div class="edu-location">Bellary, India</div>
+        <div class="edu-desc">
+          <p>
+            Focused on core science subjects with a specialization in Computer
+            Science, which sparked my interest in programming and logical
+            problem-solving. Excelled in academics and participated in
+            inter-college coding competitions.
+          </p>
+          <ul>
+            <li>Scored 91%</li>
+            <li>Rank #5</li>
+          </ul>
+        </div>
+      </div>
+      <!-- High School -->
+      <div class="edu-card">
+        <div class="edu-level">
+          <i class="fa-solid fa-school"></i> High School
+        </div>
+        <div class="edu-major">10th grade</div>
+        <div class="edu-year">2007</div>
+        <div class="edu-school">S.G. High School</div>
+        <div class="edu-location">Bellary, India</div>
+        <div class="edu-desc">
+          <p>
+            Completed secondary education with a focus on mathematics and
+            science. Achieved top ranks and was actively involved in
+            school-level science exhibitions and quiz competitions.
+          </p>
+          <ul>
+            <li>Scored 93%</li>
+            <li>Rank #1</li>
+            <li>School Topper</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Primary School -->
+      <div class="edu-card">
+        <div class="edu-level">
+          <i class="fa-solid fa-child"></i> Primary School
+        </div>
+        <div class="edu-major">Upto 7th grade</div>
+        <div class="edu-year">2004</div>
+        <div class="edu-school">Bala Bharathi School</div>
+        <div class="edu-location">Bellary, India</div>
+        <div class="edu-desc">
+          <p>
+            My formative years where I built a strong academic base and learned
+            the importance of discipline, teamwork, and curiosity. Participated
+            in various extracurricular activities and laid the groundwork for
+            future learning.
+          </p>
+          <ul>
+            <li>Well, I learnt discipline in my primary.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

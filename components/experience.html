@@ -1,0 +1,239 @@
+<section class="experience-section">
+  <div class="container">
+    <div class="text-center">
+      <div class="container text-center">
+        <div
+          style="
+            font-size: 50px;
+            font-weight: bold;
+            background: #121fcf;
+            background: -webkit-linear-gradient(
+              to right,
+              #121fcf 0%,
+              #cf1512 100%
+            );
+            background: -moz-linear-gradient(
+              to right,
+              #121fcf 0%,
+              #cf1512 100%
+            );
+            background: linear-gradient(to right, #121fcf 0%, #cf1512 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          "
+        >
+          <i class="ion-briefcase"> </i>Experience
+        </div>
+      </div>
+      <br />
+      <br />
+    </div>
+    <div class="experience-grid">
+      <div class="experience-card">
+        <h2 class="company-name">
+          <a href="https://en.wikipedia.org/wiki/Walmart" target="_blank"
+            >Walmart.</a
+          >
+        </h2>
+        <p class="industry">E-Commerce</p>
+        <p class="role">Staff Software Engineer</p>
+        <p class="location">Bangalore, India</p>
+        <p class="duration">2022 - Present</p>
+        <hr />
+        <p class="description">
+          I resumed working on Email template builder portal for Walmart
+          eCommerce Comms Platform.
+        </p>
+      </div>
+      <div class="experience-card">
+        <h2 class="company-name">
+          <a href="https://en.wikipedia.org/wiki/PayPal" target="_blank"
+            >PayPal</a
+          >
+        </h2>
+        <p class="industry">Fintech</p>
+        <p class="role">Member of Technical Staff</p>
+        <p class="location">Bangalore, India</p>
+        <p class="duration">2021 - 2022</p>
+        <hr />
+        <p class="description">
+          I worked on building next-gen merchant onboarding experience for
+          PayPal customers & improving global business.
+        </p>
+      </div>
+      <div class="experience-card">
+        <h2 class="company-name">
+          <a href="https://en.wikipedia.org/wiki/Walmart" target="_blank"
+            >Walmart.</a
+          >
+        </h2>
+        <p class="industry">E-Commerce</p>
+        <p class="role">Senior Software Engineer</p>
+        <p class="location">Bangalore, India</p>
+        <p class="duration">2019 - 2021</p>
+        <hr />
+        <p class="description">
+          I worked on Email template builder portal for Walmart eCommerce Comms
+          Platform.
+        </p>
+      </div>
+      <div class="experience-card">
+        <h2 class="company-name">
+          <a href="https://en.wikipedia.org/wiki/Cerner" target="_blank"
+            >Oracle Cerner
+          </a>
+        </h2>
+        <p class="industry">Healthcare</p>
+        <p class="role">Technical Team Lead</p>
+        <p class="location">Bangalore, India</p>
+        <p class="duration">2015 - 2019</p>
+        <hr />
+        <p class="description">
+          I managed a team of web developers and built medical vitals charting
+          applications for nurses in US hospitals.
+        </p>
+      </div>
+      <div class="experience-card">
+        <h2 class="company-name">
+          <a href="https://graniteriverlabs.com/" target="_blank">GRL</a>
+        </h2>
+        <p class="industry">Semiconductor</p>
+        <p class="role">Software Engineer</p>
+        <p class="location">Bangalore, India</p>
+        <p class="duration">2013 - 2015</p>
+        <hr />
+        <p class="description">
+          As an individual contributor, I developed high-speed SSD validation
+          test software.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience-section {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 50px;
+    color: #2d3436;
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: #007bff;
+    border-radius: 2px;
+  }
+
+  .experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .experience-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .experience-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .company-name a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    transition: color 0.2s ease;
+  }
+
+  .company-name a:hover {
+    color: #0056b3;
+  }
+
+  .industry {
+    display: inline-block;
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin: 10px 0;
+    font-weight: 500;
+  }
+
+  .role {
+    color: #2d3436;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 8px 0;
+  }
+
+  .location,
+  .duration {
+    color: #636e72;
+    font-size: 0.95rem;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .location::before {
+    content: "📍";
+  }
+
+  .duration::before {
+    content: "🗓";
+  }
+
+  hr {
+    border: none;
+    height: 1px;
+    background: #e0e0e0;
+    margin: 15px 0;
+  }
+
+  .description {
+    margin-top: 15px;
+    color: #4a4a4a;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .experience-section {
+      padding: 60px 15px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .experience-card {
+      padding: 20px;
+    }
+  }
+</style>

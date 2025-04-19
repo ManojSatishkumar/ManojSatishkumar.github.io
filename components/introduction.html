@@ -1,0 +1,447 @@
+<!-- Add this to your <head> section if not already present -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+<style>
+  .profile-card {
+    border-radius: 24px;
+    background: linear-gradient(135deg, #e3f0ff 0%, #f8fbff 100%);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    padding: 32px 24px;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+  .profile-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.18);
+  }
+  .profile-img {
+    width: 120px;
+    border-radius: 50%;
+    border: 4px solid #007bff;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    animation: bounceIn 1.2s;
+  }
+  .social-links a {
+    display: inline-block;
+    margin: 0 6px 12px 6px;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    color: #fff;
+    background: #007bff;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    vertical-align: middle;
+  }
+  .social-links a.linkedin {
+    background: #0077b5;
+  }
+  .social-links a.youtube {
+    background: #ff0000;
+  }
+  .social-links a.topmate {
+    background: #17a2b8;
+  }
+  .social-links a.udemy {
+    background: #a435f0;
+  }
+  .social-links a.twitter {
+    background: #1da1f2;
+  }
+  .social-links a.email {
+    background: #28a745;
+  }
+  .social-links a:hover {
+    transform: scale(1.15) rotate(-6deg);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    background: #343a40;
+  }
+  .wow {
+    animation: fadeInUp 1s;
+  }
+  .highlight {
+    background: linear-gradient(90deg, #007bff22 0%, #17a2b822 100%);
+    border-radius: 8px;
+    padding: 2px 8px;
+    font-weight: bold;
+    color: #007bff;
+  }
+  .location-emoji {
+    font-size: 1.2em;
+    margin-right: 4px;
+  }
+  .consult-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #007bff 0%, #17a2b8 100%);
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.15rem;
+    text-decoration: none;
+    margin-top: 18px;
+    box-shadow: 0 4px 16px rgba(0, 123, 255, 0.12);
+    transition: background 0.2s, transform 0.2s;
+    animation: pulse 1.5s infinite;
+  }
+  .consult-btn:hover {
+    background: linear-gradient(90deg, #17a2b8 0%, #007bff 100%);
+    transform: scale(1.05);
+  }
+  @media (max-width: 767px) {
+    .profile-card {
+      margin-bottom: 32px;
+    }
+    .container {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+</style>
+
+<div>
+  <div class="container">
+    <div class="d-none d-md-block"><br /><br /><br /></div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <!-- Profile Card -->
+      <div
+        class="col-md-4 wow animate__animated animate__fadeInLeft"
+        style="display: flex; flex-direction: column; height: 100%"
+      >
+        <div
+          class="profile-card"
+          style="
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          "
+        >
+          <div>
+            <img
+              class="profile-img animate__animated animate__bounceIn"
+              src="/images/me_circle.png"
+              alt="Manoj Satishkumar"
+            />
+            <div style="text-align: left">
+              <h1
+                style="
+                  font-size: 2rem;
+                  font-weight: bold;
+                  color: #007bff;
+                  margin-bottom: 0.5rem;
+                  text-align: left;
+                "
+              >
+                Manoj Satishkumar
+              </h1>
+              <h5
+                style="
+                  font-size: 1.25rem;
+                  font-weight: 500;
+                  color: #343a40;
+                  text-align: left;
+                "
+              >
+                Staff Software Engineer
+              </h5>
+              <h6 style="font-size: 1rem; font-weight: 400; color: #6c757d">
+                Walmart Global Tech, Bengaluru
+              </h6>
+              <div
+                style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem"
+              >
+                <i class="fas fa-map-marker-alt" style="color: #007bff"></i>
+                Bengaluru, India
+              </div>
+
+              <div
+                style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem"
+              >
+                <i class="fas fa-briefcase" style="color: #17a2b8"></i>
+                12+ years experience
+              </div>
+              <div
+                style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem"
+              >
+                <i class="fas fa-code" style="color: #ff9800"></i>
+                Web development
+              </div>
+              <div
+                style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem"
+              >
+                <i class="fas fa-language" style="color: #28a745"></i>
+                English, Hindi, Kannada
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="social-links" style="margin-top: 18px">
+              <a
+                href="mailto:88manojs@gmail.com"
+                class="email"
+                title="Email"
+                target="_blank"
+                ><i class="fas fa-envelope"></i
+              ></a>
+              <a
+                href="https://www.linkedin.com/in/manojsatishkumar/"
+                class="linkedin"
+                title="LinkedIn"
+                target="_blank"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a
+                href="https://www.youtube.com/@ManojSatishkumar"
+                class="youtube"
+                title="YouTube"
+                target="_blank"
+                ><i class="fab fa-youtube"></i
+              ></a>
+              <a
+                href="https://topmate.io/manoj_satishkumar"
+                class="topmate"
+                title="Topmate"
+                target="_blank"
+                ><i class="fas fa-user-tie"></i
+              ></a>
+              <a
+                href="https://www.udemy.com/user/manoj79/"
+                class="udemy"
+                title="Udemy"
+                target="_blank"
+                ><i class="fas fa-briefcase"></i
+              ></a>
+              <a
+                href="https://github.com/ManojSatishkumar"
+                class="github"
+                title="GitHub"
+                target="_blank"
+                style="background: #000"
+                ><i class="fab fa-github"></i
+              ></a>
+              <a
+                href="https://twitter.com/MSK_Web_Manoj"
+                class="twitter"
+                title="Twitter"
+                target="_blank"
+                ><i class="fab fa-twitter"></i
+              ></a>
+            </div>
+            <a
+              href="https://topmate.io/manoj_satishkumar"
+              target="_blank"
+              class="consult-btn animate__animated animate__pulse animate__infinite"
+              style="margin-top: 20px; width: 100%"
+            >
+              <i class="fas fa-comments"></i> Book a Consultation
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Introduction -->
+      <div
+        class="col-md-8 wow animate__animated animate__fadeInRight"
+        style="
+          padding-left: 30px;
+          padding-right: 30px;
+          padding-top: 20px;
+          background-color: white;
+        "
+      >
+        <h1 style="font-size: 2.5rem; text-align: left; font-weight: bold">
+          <span
+            style="
+              background: linear-gradient(
+                90deg,
+                #007bff 0%,
+                #17a2b8 25%,
+                #a435f0 50%,
+                #ff9800 75%,
+                #28a745 100%
+              );
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+              font-size: 2.8rem;
+              font-weight: bold;
+              letter-spacing: 2px;
+              display: inline-block;
+              animation: animateHello 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) 1;
+            "
+          >
+            Hello!
+          </span>
+          <style>
+            @keyframes animateHello {
+              0% {
+                opacity: 0;
+                transform: scale(0.7) rotate(-10deg) translateY(30px);
+                letter-spacing: 20px;
+              }
+              60% {
+                opacity: 1;
+                transform: scale(1.1) rotate(2deg) translateY(-10px);
+                letter-spacing: 4px;
+              }
+              100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg) translateY(0);
+                letter-spacing: 2px;
+              }
+            }
+          </style>
+          <span
+            class="animate__animated animate__tada animate__infinite"
+            style="display: inline-block"
+            >👋</span
+          >
+        </h1>
+        <p style="font-size: large; color: #222"></p>
+        I am <strong>Manoj Satishkumar</strong>, a passionate and results-driven
+        <span class="highlight">Staff Software Engineer</span> with over
+        <span class="highlight">12 years</span> of experience building and
+        leading high-performing teams to deliver
+        <span class="highlight"
+          >scalable, multi-tenant, high-performance web applications</span
+        >. My expertise lies in
+        <span class="highlight">JavaScript, React.js, Node.js</span> and modern
+        web technologies, with a proven track record of designing, developing,
+        deploying, and maintaining complex front-end systems at scale.
+        <span>💡</span>
+        <p style="font-size: large; color: #222"></p>
+        Throughout my career, I've worked in diverse industries like
+        <span class="highlight">Fintech</span> <span>💳</span>,
+        <span class="highlight">E-Commerce</span> <span>🛒</span>,
+        <span class="highlight">Healthcare</span> <span>🏥</span>, and
+        <span class="highlight">Semiconductor</span> <span>💾</span>. My journey
+        has taken me across the globe:
+        <a
+          href="https://www.google.com/maps/place/San+Francisco,+CA/"
+          target="_blank"
+          style="color: #000"
+          >San Francisco</a
+        >,
+        <a
+          href="https://www.google.com/maps/place/Las+Vegas,+NV/"
+          target="_blank"
+          style="color: #000"
+          >Las Vegas</a
+        >,
+        <a
+          href="https://www.google.com/maps/place/New+York,+NY/"
+          target="_blank"
+          style="color: #000"
+          >New York</a
+        >,
+        <a
+          href="https://www.google.com/maps/place/New+Jersey/"
+          target="_blank"
+          style="color: #000"
+          >New Jersey</a
+        >,
+        <a
+          href="https://www.google.com/maps/place/Los+Angeles,+CA/"
+          target="_blank"
+          style="color: #000"
+          >Los Angeles</a
+        >,
+        <a
+          href="https://www.google.com/maps/place/Sunnyvale,+CA/"
+          target="_blank"
+          style="color: #000"
+          >Sunnyvale</a
+        >,
+        <a
+          href="https://www.google.com/maps/place/Cupertino,+CA/"
+          target="_blank"
+          style="color: #000"
+          >Cupertino</a
+        >,
+        <a
+          href="https://www.google.com/maps/place/Kansas+City,+MO/"
+          target="_blank"
+          style="color: #000"
+          >Kansas City</a
+        >,
+        <a
+          href="https://www.google.com/maps/place/Singapore/"
+          target="_blank"
+          style="color: #000"
+          >Singapore</a
+        >,
+        <a
+          href="https://www.google.com/maps/place/Dubai,+United+Arab+Emirates/"
+          target="_blank"
+          style="color: #000"
+          >Dubai</a
+        >,
+        <a
+          href="https://www.google.com/maps/place/Abu+Dhabi,+United+Arab+Emirates/"
+          target="_blank"
+          style="color: #000"
+          >Abu Dhabi</a
+        >,
+        <a
+          href="https://www.google.com/maps/place/Thailand/"
+          target="_blank"
+          style="color: #000"
+          >Thailand</a
+        >,
+        <a
+          href="https://www.google.com/maps/place/Bali,+Indonesia/"
+          target="_blank"
+          style="color: #000"
+          >Bali</a
+        >,
+        <a
+          href="https://www.google.com/maps/place/Europe/"
+          target="_blank"
+          style="color: #000"
+          >Europe</a
+        >
+        <p style="font-size: large; color: #222"></p>
+        I am deeply committed to
+        <span class="highlight">engineering excellence</span>
+        <span>🏆</span> and fostering collaboration within teams. I take pride
+        in mentoring future leaders <span>🌱</span> and cultivating a culture of
+        innovation and continuous improvement. My passion for teaching drives me
+        to share knowledge and help others grow in their careers
+        <span>📚</span>.
+        <p style="font-size: large; color: #222"></p>
+        I have a strong affinity for the
+        <span class="highlight">JavaScript ecosystem</span> <span>🟨</span> and
+        have designed and developed multiple products prioritizing user
+        experience and performance. My dedication to crafting
+        <span class="highlight">supreme-quality</span> front-end interfaces has
+        been a cornerstone of my professional journey.
+        <p style="font-size: large; color: #222"></p>
+        Currently, I reside in
+        <span class="highlight"
+          ><span class="location-emoji">🏡</span>
+          <a
+            href="https://www.google.com/maps/place/Bangalore,+Karnataka,+India/"
+            target="_blank"
+            style="color: #007bff"
+            >Bengaluru</a
+          > </span
+        >, where I continue to explore new challenges and opportunities to make
+        a meaningful impact in the tech industry.
+
+        <br />
+      </div>
+    </div>
+  </div>
+</div>
+<br /><br />
