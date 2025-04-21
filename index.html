@@ -178,6 +178,12 @@
         </div>
         <div
           style="cursor: pointer; display: inline-block; margin-left: 20px"
+          onclick="animateScroll('courses')"
+        >
+          Courses
+        </div>
+        <div
+          style="cursor: pointer; display: inline-block; margin-left: 20px"
           onclick="animateScroll('blog')"
         >
           Articles
@@ -254,7 +260,7 @@
         $("#skill-set").load("/components/skill-set.html");
         $("#achievements").load("/components/achievements.html");
         $("#education").load("/components/education.html");
-        // $("#courses").load("/components/courses.html");
+        $("#courses").load("/components/courses.html");
         $("#blog").load("/blog/index.html");
         $("#msk-testimony").load("/components/testimony.html");
         $("#footer").load("/components/footer.html");
