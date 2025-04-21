@@ -3,6 +3,8 @@
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     backdrop-filter: saturate(1000%) blur(20px);
     background-color: rgba(255, 255, 255, 0.62) !important;
+    animation: navbarSlideDown 0.8s ease-out;
+    transform-origin: top;
   "
   class="navbar fixed-top navbar-expand-lg navbar-light bg-light"
 >
@@ -281,3 +283,67 @@
     crossorigin="anonymous"
   ></script>
 </nav>
+
+<style>
+  @keyframes navbarSlideDown {
+    0% {
+      transform: translateY(-100px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes flyInButton {
+    0% {
+      transform: translateX(100vw) rotate(360deg);
+      opacity: 0;
+    }
+    50% {
+      transform: translateX(-50px) rotate(180deg);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateX(0) rotate(0);
+      opacity: 1;
+    }
+  }
+
+  .nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, #ff512f 0%, #dd2476 50%, #1fa2ff 100%);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-link:hover {
+    transform: translateY(-2px);
+  }
+
+  #hire-manoj-btn {
+    transition: all 0.3s ease;
+    animation: flyInButton 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.8s
+      forwards;
+    opacity: 0;
+  }
+
+  #hire-manoj-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 20px rgba(31, 162, 255, 0.25);
+  }
+</style>
