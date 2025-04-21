@@ -207,6 +207,22 @@
               ribbons.remove();
             }
           }
+
+          // Add periodic ribbon animation
+          window.addEventListener("load", () => {
+            // Initial delay of 5 seconds
+            setTimeout(() => {
+              const button = document.getElementById("hire-manoj-btn");
+              if (button) {
+                const event = { target: button };
+                showPartyRibbons(event);
+                // Then repeat every 5 seconds
+                setInterval(() => {
+                  showPartyRibbons(event);
+                }, 5000);
+              }
+            }, 5000);
+          });
         </script>
       </li>
     </ul>
