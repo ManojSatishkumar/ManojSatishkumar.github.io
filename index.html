@@ -87,6 +87,39 @@
         font-weight: 500;
       }
 
+      /* Navigation menu item styles */
+      .nav-bar-fixed div div {
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .nav-bar-fixed div div::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 50%;
+        background-color: #007bff;
+        box-shadow: 0 0 10px #007bff;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      .nav-bar-fixed div div:hover::after {
+        width: 100%;
+      }
+
+      .nav-bar-fixed div div.active {
+        color: #007bff;
+        text-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        font-weight: 600;
+      }
+
+      .nav-bar-fixed div div.active::after {
+        width: 100%;
+      }
+
       /* Add this for rounded buttons */
       button,
       .btn,
@@ -250,6 +283,9 @@
           },
           1000
         );
+        // Update active menu item
+        $(".nav-bar-fixed div div").removeClass("active");
+        $(`.nav-bar-fixed div div[onclick*="${id}"]`).addClass("active");
       }
     </script>
     <script>
@@ -264,6 +300,40 @@
         $("#blog").load("/blog/index.html");
         $("#msk-testimony").load("/components/testimony.html");
         $("#footer").load("/components/footer.html");
+
+        // Track scroll position and update active menu item
+        $(window).scroll(function () {
+          var scrollPosition = $(window).scrollTop();
+          var sections = [
+            "intro",
+            "experience",
+            "projects",
+            "skill-set",
+            "achievements",
+            "education",
+            "courses",
+            "blog",
+            "msk-testimony",
+          ];
+
+          sections.forEach(function (section) {
+            var element = $(`#${section}`);
+            if (element.length) {
+              var offset = element.offset().top - 100;
+              var height = element.outerHeight();
+
+              if (
+                scrollPosition >= offset &&
+                scrollPosition < offset + height
+              ) {
+                $(".nav-bar-fixed div div").removeClass("active");
+                $(`.nav-bar-fixed div div[onclick*="${section}"]`).addClass(
+                  "active"
+                );
+              }
+            }
+          });
+        });
 
         setTimeout(() => {
           $(".nav-blogger").removeClass("active");
