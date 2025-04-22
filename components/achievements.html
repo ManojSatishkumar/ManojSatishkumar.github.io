@@ -11,7 +11,7 @@
   </div>
 
   <div class="container">
-    <div class="achievements-grid">
+    <div class="achievements-grid compact">
       <div class="achievement-card">
         <div class="achievement-content">
           <div class="achievement-header">
@@ -201,106 +201,100 @@
     padding: 1rem;
   }
 
+  .achievements-grid.compact {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    padding: 0.5rem;
+  }
+
   .achievement-card {
     background: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
     overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.05); /* subtle border for all */
-  }
-
-  /* Remove individual nth-child backgrounds and borders */
-  .achievement-card:nth-child(1),
-  .achievement-card:nth-child(2),
-  .achievement-card:nth-child(3),
-  .achievement-card:nth-child(4),
-  .achievement-card:nth-child(5),
-  .achievement-card:nth-child(6) {
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-  }
-
-  .achievement-card:nth-child(n) .achievement-company,
-  .achievement-card:nth-child(n) .achievement-description {
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    padding: 1rem;
-    margin-top: 1rem;
-  }
-
-  .achievement-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    min-width: 0;
+    padding: 0.7rem 0.7rem 0.5rem 0.7rem;
   }
 
   .achievement-content {
-    padding: 1.5rem;
+    padding: 0;
   }
 
   .achievement-header {
     text-align: center;
-    margin-bottom: 1rem;
-  }
-
-  .achievement-icon {
-    font-size: 2.5rem;
-    display: block;
     margin-bottom: 0.5rem;
   }
 
+  .achievement-icon {
+    font-size: 2rem;
+    margin-bottom: 0.2rem;
+  }
+
   .achievement-header h3 {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: #2c3e50;
-    margin: 0.5rem 0;
+    margin: 0.2rem 0;
   }
 
   .achievement-subtitle {
     color: #7f8c8d;
-    font-size: 1rem;
+    font-size: 0.92rem;
     margin: 0;
   }
 
   .achievement-company {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin: 1rem 0;
-    padding: 0.5rem;
+    gap: 0.4rem;
+    margin: 0.5rem 0 0.2rem 0;
+    padding: 0.3rem;
     background: #f8f9fa;
-    border-radius: 8px;
+    border-radius: 6px;
   }
 
   .company-logo {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
   }
 
   .location {
     color: #7f8c8d;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin-left: auto;
   }
 
   .achievement-description {
     color: #34495e;
-    line-height: 1.6;
-    font-size: 1rem;
-    padding: 1rem;
+    line-height: 1.4;
+    font-size: 0.97rem;
+    padding: 0.5rem 0.3rem 0.3rem 0.3rem;
     background: #f8f9fa;
-    border-radius: 8px;
-    margin-top: 1rem;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+    min-height: 60px;
+  }
+
+  @media (max-width: 1200px) {
+    .achievements-grid.compact {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   @media (max-width: 768px) {
     .achievements-title {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
     }
-
-    .achievements-grid {
+    .achievements-grid.compact {
       grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .achievement-card {
+      padding: 0.7rem 0.5rem 0.5rem 0.5rem;
     }
   }
 </style>
