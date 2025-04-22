@@ -207,36 +207,18 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05); /* subtle border for all */
   }
 
-  .achievement-card:nth-child(1) {
-    background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
-    border: 1px solid rgba(18, 31, 207, 0.1);
-  }
-
-  .achievement-card:nth-child(2) {
-    background: linear-gradient(135deg, #fff8f8 0%, #fff0f0 100%);
-    border: 1px solid rgba(207, 21, 18, 0.1);
-  }
-
-  .achievement-card:nth-child(3) {
-    background: linear-gradient(135deg, #f8fff8 0%, #f0fff0 100%);
-    border: 1px solid rgba(18, 207, 21, 0.1);
-  }
-
-  .achievement-card:nth-child(4) {
-    background: linear-gradient(135deg, #fff8ff 0%, #fff0ff 100%);
-    border: 1px solid rgba(207, 18, 207, 0.1);
-  }
-
-  .achievement-card:nth-child(5) {
-    background: linear-gradient(135deg, #f8f8ff 0%, #f0f0ff 100%);
-    border: 1px solid rgba(18, 18, 207, 0.1);
-  }
-
+  /* Remove individual nth-child backgrounds and borders */
+  .achievement-card:nth-child(1),
+  .achievement-card:nth-child(2),
+  .achievement-card:nth-child(3),
+  .achievement-card:nth-child(4),
+  .achievement-card:nth-child(5),
   .achievement-card:nth-child(6) {
-    background: linear-gradient(135deg, #fff8f0 0%, #fff0e0 100%);
-    border: 1px solid rgba(207, 100, 18, 0.1);
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.05);
   }
 
   .achievement-card:nth-child(n) .achievement-company,
