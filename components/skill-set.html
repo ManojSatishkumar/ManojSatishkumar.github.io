@@ -30,10 +30,10 @@
         background: #fff;
         border-radius: 18px;
         box-shadow: 0 4px 24px rgba(34, 34, 59, 0.08);
-        padding: 32px 24px;
+        padding: 24px 20px;
         margin-bottom: 30px;
         transition: transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.2s;
-        min-height: 420px;
+        min-height: 380px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -95,12 +95,15 @@
     .skill-list {
         list-style: none;
         padding-left: 0;
-        margin-bottom: 18px;
+        margin-bottom: 12px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 8px;
     }
     .skill-list li {
-        font-size: 1.08rem;
+        font-size: 1rem;
         color: #22223b;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
         padding-left: 1.8em;
         position: relative;
         transition: background 0.2s;
@@ -133,10 +136,10 @@
         100% { transform: scale(1);}
     }
     .skill-label {
-        font-size: 1.02rem;
+        font-size: 1rem;
         color: #6c757d;
         font-weight: 500;
-        margin-top: 10px;
+        margin-top: 8px;
         margin-bottom: 4px;
         letter-spacing: 0.5px;
         display: flex;
@@ -234,7 +237,7 @@
                         <li><a href="https://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap</a></li>
                         <li><a href="https://mui.com/" target="_blank" rel="noopener">Material UI</a></li>
                     </ul>
-                    <div class="skill-label"><span class="emoji">🧪</span> Unit testing</div>
+                    <div class="skill-label"><span class="emoji">🧪</span> Unit Testing </div>
                     <ul class="skill-list">
                         <li><a href="https://jestjs.io/" target="_blank" rel="noopener">Jest</a></li>
                     </ul>
@@ -249,13 +252,14 @@
                     </div>
                     <div class="skill-label"><span class="emoji">🛠️</span> Development</div>
                     <ul class="skill-list">
-                        <li><a href="https://graphql.org/" target="_blank" rel="noopener">GraphQL</a></li>
+                     
                         <li><a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a></li>
                         <li><a href="https://expressjs.com/" target="_blank" rel="noopener">Express.js</a></li>
                         <li><a href="https://restfulapi.net/" target="_blank" rel="noopener">REST APIs</a></li>
                         <li><a href="https://www.mongodb.com/" target="_blank" rel="noopener">MongoDB</a></li>
+                        <li><a href="https://graphql.org/" target="_blank" rel="noopener">GraphQL</a></li>
                     </ul>
-                    <div class="skill-label"><span class="emoji">🧪</span> Unit testing</div>
+                    <div class="skill-label"><span class="emoji">🧪</span> Unit Testing</div>
                     <ul class="skill-list">
                         <li><a href="https://jestjs.io/" target="_blank" rel="noopener">Jest</a></li>
                     </ul>
@@ -266,17 +270,18 @@
                     <div class="confetti"></div>
                     <div class="skill-header">
                         <span class="emoji">🧰</span>
-                         Tools used
+                         Tools & DevOps
                     </div>
+                    <div class="skill-label"><span class="emoji">🛠️</span> Development Tools</div>
                     <ul class="skill-list">
                         <li><a href="https://webpack.js.org/" target="_blank" rel="noopener">Webpack</a></li>
                         <li><a href="https://babeljs.io/" target="_blank" rel="noopener">Babel</a></li>
                         <li><a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a></li>
+                        <li><a href="https://kubernetes.io/" target="_blank" rel="noopener">Kubernetes</a></li>
                         <li><a href="https://www.npmjs.com/" target="_blank" rel="noopener">NPM</a></li>
                         <li><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a> / <a href="https://github.com/" target="_blank" rel="noopener">Github</a></li>
-                        <li><a href="https://www.atlassian.com/software/jira" target="_blank" rel="noopener">Jira</a>, <a href="https://www.atlassian.com/software/confluence" target="_blank" rel="noopener">Confluence</a></li>
-                        <li><a href="https://www.canva.com/" target="_blank" rel="noopener">Canva</a> / <a href="https://www.diagrams.net/" target="_blank" rel="noopener">draw.io</a></li>
-                        <li><a href="https://en.wikipedia.org/wiki/CI/CD" target="_blank" rel="noopener">CI / CD tools</a></li>
+                        <li><a href="https://www.jenkins.io/" target="_blank" rel="noopener">Jenkins</a></li>
+                        <li><a href="https://azure.microsoft.com/" target="_blank" rel="noopener">Azure</a></li>
                     </ul>
                 </div>
             </div>
@@ -284,18 +289,68 @@
                 <div class="skill-card">
                     <div class="confetti"></div>
                     <div class="skill-header">
-                        <span class="emoji">🌟</span>
-                        Other skills
+                        <span class="emoji">📊</span>
+                         Monitoring & Analytics
                     </div>
                     <ul class="skill-list">
-                        <li><a href="https://en.wikipedia.org/wiki/Teaching" target="_blank" rel="noopener">Teaching</a> / <a href="https://en.wikipedia.org/wiki/Coaching" target="_blank" rel="noopener">Coaching</a></li>
-                        <li><a href="https://developer.mozilla.org/docs/Learn/CSS/CSS_layout/Responsive_Design" target="_blank" rel="noopener">Mobile first design</a></li>
-                        <li><a href="https://en.wikipedia.org/wiki/Presentation" target="_blank" rel="noopener">Presentation skills</a></li>
-                        <li><a href="https://en.wikipedia.org/wiki/Product_demo" target="_blank" rel="noopener">Product demo</a></li>
-                        <li><a href="https://www.atlassian.com/agile/scrum/sprints" target="_blank" rel="noopener">Organising sprint tasks</a></li>
-                        <li><a href="https://en.wikipedia.org/wiki/Automator_(macOS)" target="_blank" rel="noopener">Mac Automation</a></li>
+                        <li><a href="https://www.splunk.com/" target="_blank" rel="noopener">Splunk</a></li>
+                        <li><a href="https://www.elastic.co/kibana" target="_blank" rel="noopener">Kibana</a></li>
+                        <li><a href="https://grafana.com/" target="_blank" rel="noopener">Grafana</a></li>
+                        <li><a href="https://www.tableau.com/" target="_blank" rel="noopener">Tableau</a></li>
+                        <li><a href="https://openobserve.ai/" target="_blank" rel="noopener">Open Observe</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="skill-card">
+                    <div class="confetti"></div>
+                    <div class="skill-header">
+                        <span class="emoji">👑</span>
+                       Tech Leadership
+                    </div>
+                    <ul class="skill-list">
+                        <li>Architecture Diagrams</li>
+                        <li>Tech Documentation</li>
+                        <li>Whiteboarding</li>
+                        <li>Sprint Planning</li>
+                        <li>Mentoring Newbies</li>
+                        <li>Collaboration</li>
+                        <li>Product Roadmapping</li>
+                    </ul>
+                </div>
+            </div>
+             <div class="col-lg-3 col-md-6">
+                <div class="skill-card">
+                    <div class="confetti"></div>
+                    <div class="skill-header">
+                        <span class="emoji">👨‍💼</span>
+                       Management
+                    </div>
+                    <ul class="skill-list">
+                        <li>Team Management</li>
+                        <li>Communication</li>
+                        <li>Decision Making</li>
+                        <li>Goal Setting & KPIs</li>
+                        <li>Task Management</li>
+                        <li>Conflict Resolution</li>
+                        <li>Motivation & Delegation</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="skill-card">
+                    <div class="confetti"></div>
+                    <div class="skill-header">
+                        <span class="emoji">📚</span>
+                       Knowledge Sharing
+                    </div>
+                    <ul class="skill-list">
                         <li><a href="https://www.blogger.com/" target="_blank" rel="noopener">Blogging</a></li>
-                        <li><a href="https://en.wikipedia.org/wiki/Digital_art" target="_blank" rel="noopener">Digital art</a></li>
+                        <li>Teaching</li>
+                        <li>Podcasting</li>
+                        <li>Video Editing</li>
+                        <li>Mock Interviews</li>
+                        <li>LinkedIn Posts</li>
                     </ul>
                 </div>
             </div>
