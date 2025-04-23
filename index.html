@@ -5,14 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Manoj Satishkumar | Portfolio</title>
-    <meta name="description" content="Manoj Satishkumar | Portfolio" />
+    <title>Manoj Satishkumar</title>
+    <meta name="description" content="Manoj Satishkumar" />
     <meta
       name="keywords"
       content="ManojSatishkumar, Manoj Satishkumar, MSK, Portfolio, Software Engineer, Frontend, Backend, React, Node.js"
     />
     <meta name="author" content="Manoj Satishkumar" />
     <link rel="canonical" href="https://manojsatishkumar.com/" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content="Manoj Satishkumar | Portfolio" />
@@ -339,6 +342,45 @@
           $(".nav-blogger").removeClass("active");
           $(".nav-home").addClass("active");
         }, 2000);
+      });
+    </script>
+    <!-- PWA -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then((reg) => console.log("Service Worker registered", reg))
+            .catch((err) =>
+              console.error("Service Worker registration failed", err)
+            );
+        });
+      }
+
+      // To show the install prompt,
+      let deferredPrompt;
+
+      window.addEventListener("beforeinstallprompt", (e) => {
+        // Prevent the default mini-infobar
+        e.preventDefault();
+        deferredPrompt = e;
+
+        // You can show a custom "Install" button here
+        const installBtn = document.getElementById("installBtn");
+        installBtn.style.display = "block";
+
+        installBtn.addEventListener("click", () => {
+          installBtn.style.display = "none";
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === "accepted") {
+              console.log("User accepted the A2HS prompt");
+            } else {
+              console.log("User dismissed the A2HS prompt");
+            }
+            deferredPrompt = null;
+          });
+        });
       });
     </script>
   </body>
