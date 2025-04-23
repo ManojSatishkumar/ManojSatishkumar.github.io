@@ -1,195 +1,254 @@
 <!-- Modernized Skill Set Section with Emojis & Animations -->
 <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  rel="stylesheet"
 />
 <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  rel="stylesheet"
 />
 
 <style>
-    .skill-section {
-        background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
-        padding: 60px 0;
-        overflow-x: hidden;
+  .skill-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+    padding: 60px 0;
+    overflow-x: hidden;
+  }
+  .skill-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #22223b;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    animation: fadeInDown 1s;
+  }
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-40px);
     }
-    .skill-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #22223b;
-        letter-spacing: 2px;
-        margin-bottom: 40px;
-        animation: fadeInDown 1s;
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
-    @keyframes fadeInDown {
-        from { opacity: 0; transform: translateY(-40px);}
-        to { opacity: 1; transform: translateY(0);}
+  }
+  .skill-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(34, 34, 59, 0.08);
+    padding: 24px 20px;
+    margin-bottom: 30px;
+    transition: transform 0.3s cubic-bezier(0.4, 2, 0.6, 1), box-shadow 0.2s;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    animation: fadeInUp 1s;
+  }
+  .skill-card:hover {
+    transform: translateY(-10px) scale(1.04) rotate(-1deg);
+    box-shadow: 0 12px 36px rgba(108, 99, 255, 0.18);
+    z-index: 2;
+  }
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
     }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .skill-header {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #3a3a5a;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: bounceIn 1.2s;
+  }
+  .skill-header .emoji {
+    font-size: 1.6rem;
+    margin-right: 6px;
+    filter: drop-shadow(0 2px 2px #e0e7ef);
+    animation: emojiWiggle 2s infinite;
+  }
+  @keyframes emojiWiggle {
+    0%,
+    100% {
+      transform: rotate(-8deg);
+    }
+    20% {
+      transform: rotate(8deg);
+    }
+    40% {
+      transform: rotate(-8deg);
+    }
+    60% {
+      transform: rotate(8deg);
+    }
+    80% {
+      transform: rotate(-8deg);
+    }
+  }
+  @keyframes bounceIn {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    60% {
+      transform: scale(1.1);
+    }
+    80% {
+      transform: scale(0.95);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  .skill-sub {
+    color: #6c63ff;
+    font-size: 1.08rem;
+    margin-bottom: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: fadeIn 1.2s;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .skill-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 12px;
+    /* display: grid; */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+  }
+  .skill-list li {
+    font-size: 1rem;
+    color: #22223b;
+    margin-bottom: 4px;
+    padding-left: 1.8em;
+    position: relative;
+    transition: background 0.2s;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .skill-list li::before {
+    content: "\f058";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: #6c63ff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1em;
+    transition: color 0.2s;
+  }
+  .skill-list li:hover {
+    background: #f3f0ff;
+  }
+  .skill-list li:hover::before {
+    color: #ffb300;
+    animation: tada 0.7s;
+  }
+  @keyframes tada {
+    0% {
+      transform: scale(1);
+    }
+    10%,
+    20% {
+      transform: scale(0.9) rotate(-8deg);
+    }
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: scale(1.1) rotate(8deg);
+    }
+    40%,
+    60%,
+    80% {
+      transform: scale(1.1) rotate(-8deg);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .skill-label {
+    font-size: 1rem;
+    color: #6c757d;
+    font-weight: 500;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .skill-label .emoji {
+    font-size: 1.1rem;
+  }
+  @media (max-width: 991px) {
     .skill-card {
-        background: #fff;
-        border-radius: 18px;
-        box-shadow: 0 4px 24px rgba(34, 34, 59, 0.08);
-        padding: 24px 20px;
-        margin-bottom: 30px;
-        transition: transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.2s;
-        min-height: 380px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        position: relative;
-        animation: fadeInUp 1s;
+      min-height: 0;
     }
-    .skill-card:hover {
-        transform: translateY(-10px) scale(1.04) rotate(-1deg);
-        box-shadow: 0 12px 36px rgba(108, 99, 255, 0.18);
-        z-index: 2;
+  }
+  .skill-list a {
+    color: inherit;
+    text-decoration: underline dotted #6c63ff;
+    transition: color 0.2s;
+  }
+  .skill-list a:hover {
+    color: #6c63ff;
+    text-decoration: underline solid #6c63ff;
+  }
+  /* Confetti animation */
+  .confetti {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 10;
+    width: 100%;
+    height: 0;
+    overflow: visible;
+  }
+  .confetti span {
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0.8;
+    animation: confetti-fall 1.5s linear forwards;
+  }
+  @keyframes confetti-fall {
+    0% {
+      opacity: 0.8;
+      transform: translateY(0) rotate(0);
     }
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(40px);}
-        to { opacity: 1; transform: translateY(0);}
+    100% {
+      opacity: 0;
+      transform: translateY(60px) rotate(360deg);
     }
-    .skill-header {
-        font-size: 1.4rem;
-        font-weight: 600;
-        color: #3a3a5a;
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        animation: bounceIn 1.2s;
-    }
-    .skill-header .emoji {
-        font-size: 1.6rem;
-        margin-right: 6px;
-        filter: drop-shadow(0 2px 2px #e0e7ef);
-        animation: emojiWiggle 2s infinite;
-    }
-    @keyframes emojiWiggle {
-        0%, 100% { transform: rotate(-8deg);}
-        20% { transform: rotate(8deg);}
-        40% { transform: rotate(-8deg);}
-        60% { transform: rotate(8deg);}
-        80% { transform: rotate(-8deg);}
-    }
-    @keyframes bounceIn {
-        0% { transform: scale(0.8); opacity: 0;}
-        60% { transform: scale(1.1);}
-        80% { transform: scale(0.95);}
-        100% { transform: scale(1); opacity: 1;}
-    }
-    .skill-sub {
-        color: #6c63ff;
-        font-size: 1.08rem;
-        margin-bottom: 12px;
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        animation: fadeIn 1.2s;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0;}
-        to { opacity: 1;}
-    }
-    .skill-list {
-        list-style: none;
-        padding-left: 0;
-        margin-bottom: 12px;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 8px;
-    }
-    .skill-list li {
-        font-size: 1rem;
-        color: #22223b;
-        margin-bottom: 4px;
-        padding-left: 1.8em;
-        position: relative;
-        transition: background 0.2s;
-        border-radius: 6px;
-        cursor: pointer;
-    }
-    .skill-list li::before {
-        content: "\f058";
-        font-family: "Font Awesome 6 Free";
-        font-weight: 900;
-        color: #6c63ff;
-        position: absolute;
-        left: 0;
-        top: 0;
-        font-size: 1em;
-        transition: color 0.2s;
-    }
-    .skill-list li:hover {
-        background: #f3f0ff;
-    }
-    .skill-list li:hover::before {
-        color: #ffb300;
-        animation: tada 0.7s;
-    }
-    @keyframes tada {
-        0% { transform: scale(1);}
-        10%, 20% { transform: scale(0.9) rotate(-8deg);}
-        30%, 50%, 70%, 90% { transform: scale(1.1) rotate(8deg);}
-        40%, 60%, 80% { transform: scale(1.1) rotate(-8deg);}
-        100% { transform: scale(1);}
-    }
-    .skill-label {
-        font-size: 1rem;
-        color: #6c757d;
-        font-weight: 500;
-        margin-top: 8px;
-        margin-bottom: 4px;
-        letter-spacing: 0.5px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-    .skill-label .emoji {
-        font-size: 1.1rem;
-    }
-    @media (max-width: 991px) {
-        .skill-card {
-            min-height: 0;
-        }
-    }
-    .skill-list a {
-        color: inherit;
-        text-decoration: underline dotted #6c63ff;
-        transition: color 0.2s;
-    }
-    .skill-list a:hover {
-        color: #6c63ff;
-        text-decoration: underline solid #6c63ff;
-    }
-    /* Confetti animation */
-    .confetti {
-        position: absolute;
-        top: -20px;
-        left: 50%;
-        transform: translateX(-50%);
-        pointer-events: none;
-        z-index: 10;
-        width: 100%;
-        height: 0;
-        overflow: visible;
-    }
-    .confetti span {
-        position: absolute;
-        font-size: 1.2rem;
-        opacity: 0.8;
-        animation: confetti-fall 1.5s linear forwards;
-    }
-    @keyframes confetti-fall {
-        0% { opacity: 0.8; transform: translateY(0) rotate(0);}
-        100% { opacity: 0; transform: translateY(60px) rotate(360deg);}
-    }
+  }
 </style>
 
 <section class="skill-section">
-    <div class="container">
-         <div class="text-center">
+  <div class="container">
+    <div class="text-center">
       <div class="container text-center">
         <div
           style="
@@ -211,170 +270,339 @@
             -webkit-text-fill-color: transparent;
           "
         >
-          <i class="fa-solid fa-screwdriver-wrench"></i> Skill Set   
+          <i class="fa-solid fa-screwdriver-wrench"></i> Skill Set
         </div>
       </div>
       <br />
       <br />
     </div>
-        
-        <div class="row mt-4">
-            <div class="col-lg-3 col-md-6">
-                <div class="skill-card">
-                    <div class="confetti"></div>
-                    <div class="skill-header">
-                        <span class="emoji">🎨</span>
-                        Frontend
-                    </div>
-                   
-                    <div class="skill-label"><span class="emoji">🛠️</span> Development</div>
-                    <ul class="skill-list">
-                        <li><a href="https://developer.mozilla.org/docs/Web/HTML" target="_blank" rel="noopener">HTML5</a>, <a href="https://developer.mozilla.org/docs/Web/CSS" target="_blank" rel="noopener">CSS3</a></li>
-                        <li><a href="https://developer.mozilla.org/docs/Web/JavaScript" target="_blank" rel="noopener">JavaScript</a></li>
-                        <li><a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a></li>
-                        <li><a href="https://react.dev/" target="_blank" rel="noopener">React.js</a></li>
-                        <li><a href="https://redux-saga.js.org/" target="_blank" rel="noopener">Redux-Saga</a></li>
-                        <li><a href="https://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap</a></li>
-                        <li><a href="https://mui.com/" target="_blank" rel="noopener">Material UI</a></li>
-                    </ul>
-                    <div class="skill-label"><span class="emoji">🧪</span> Unit Testing </div>
-                    <ul class="skill-list">
-                        <li><a href="https://jestjs.io/" target="_blank" rel="noopener">Jest</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="skill-card">
-                    <div class="confetti"></div>
-                    <div class="skill-header">
-                        <span class="emoji">🖥️</span>
-                        Backend
-                    </div>
-                    <div class="skill-label"><span class="emoji">🛠️</span> Development</div>
-                    <ul class="skill-list">
-                     
-                        <li><a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a></li>
-                        <li><a href="https://expressjs.com/" target="_blank" rel="noopener">Express.js</a></li>
-                        <li><a href="https://restfulapi.net/" target="_blank" rel="noopener">REST APIs</a></li>
-                        <li><a href="https://www.mongodb.com/" target="_blank" rel="noopener">MongoDB</a></li>
-                        <li><a href="https://graphql.org/" target="_blank" rel="noopener">GraphQL</a></li>
-                    </ul>
-                    <div class="skill-label"><span class="emoji">🧪</span> Unit Testing</div>
-                    <ul class="skill-list">
-                        <li><a href="https://jestjs.io/" target="_blank" rel="noopener">Jest</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="skill-card">
-                    <div class="confetti"></div>
-                    <div class="skill-header">
-                        <span class="emoji">🧰</span>
-                         Tools & DevOps
-                    </div>
-                    <div class="skill-label"><span class="emoji">🛠️</span> Development Tools</div>
-                    <ul class="skill-list">
-                        <li><a href="https://webpack.js.org/" target="_blank" rel="noopener">Webpack</a></li>
-                        <li><a href="https://babeljs.io/" target="_blank" rel="noopener">Babel</a></li>
-                        <li><a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a></li>
-                        <li><a href="https://kubernetes.io/" target="_blank" rel="noopener">Kubernetes</a></li>
-                        <li><a href="https://www.npmjs.com/" target="_blank" rel="noopener">NPM</a></li>
-                        <li><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a> / <a href="https://github.com/" target="_blank" rel="noopener">Github</a></li>
-                        <li><a href="https://www.jenkins.io/" target="_blank" rel="noopener">Jenkins</a></li>
-                        <li><a href="https://azure.microsoft.com/" target="_blank" rel="noopener">Azure</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="skill-card">
-                    <div class="confetti"></div>
-                    <div class="skill-header">
-                        <span class="emoji">📊</span>
-                         Monitoring & Analytics
-                    </div>
-                    <ul class="skill-list">
-                        <li><a href="https://www.splunk.com/" target="_blank" rel="noopener">Splunk</a></li>
-                        <li><a href="https://www.elastic.co/kibana" target="_blank" rel="noopener">Kibana</a></li>
-                        <li><a href="https://grafana.com/" target="_blank" rel="noopener">Grafana</a></li>
-                        <li><a href="https://www.tableau.com/" target="_blank" rel="noopener">Tableau</a></li>
-                        <li><a href="https://openobserve.ai/" target="_blank" rel="noopener">Open Observe</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="skill-card">
-                    <div class="confetti"></div>
-                    <div class="skill-header">
-                        <span class="emoji">👑</span>
-                       Tech Leadership
-                    </div>
-                    <ul class="skill-list">
-                        <li>Architecture Diagrams</li>
-                        <li>Tech Documentation</li>
-                        <li>Whiteboarding</li>
-                        <li>Sprint Planning</li>
-                        <li>Mentoring Newbies</li>
-                        <li>Collaboration</li>
-                        <li>Product Roadmapping</li>
-                    </ul>
-                </div>
-            </div>
-             <div class="col-lg-3 col-md-6">
-                <div class="skill-card">
-                    <div class="confetti"></div>
-                    <div class="skill-header">
-                        <span class="emoji">👨‍💼</span>
-                       Management
-                    </div>
-                    <ul class="skill-list">
-                        <li>Team Management</li>
-                        <li>Communication</li>
-                        <li>Decision Making</li>
-                        <li>Goal Setting & KPIs</li>
-                        <li>Task Management</li>
-                        <li>Conflict Resolution</li>
-                        <li>Motivation & Delegation</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="skill-card">
-                    <div class="confetti"></div>
-                    <div class="skill-header">
-                        <span class="emoji">📚</span>
-                       Knowledge Sharing
-                    </div>
-                    <ul class="skill-list">
-                        <li><a href="https://www.blogger.com/" target="_blank" rel="noopener">Blogging</a></li>
-                        <li>Teaching</li>
-                        <li>Podcasting</li>
-                        <li>Video Editing</li>
-                        <li>Mock Interviews</li>
-                        <li>LinkedIn Posts</li>
-                    </ul>
-                </div>
-            </div>
+
+    <div class="row mt-4">
+      <div class="col-lg-3 col-md-6">
+        <div class="skill-card">
+          <div class="confetti"></div>
+          <div class="skill-header">
+            <span class="emoji">🎨</span>
+            Frontend
+          </div>
+
+          <div class="skill-label">
+            <span class="emoji">🛠️</span> Development
+          </div>
+          <ul class="skill-list">
+            <li>
+              <a
+                href="https://developer.mozilla.org/docs/Web/HTML"
+                target="_blank"
+                rel="noopener"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg"
+                  alt="HTML5 Logo"
+                  style="width: 20px; height: 20px; margin-right: 8px"
+                />
+                HTML5
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://developer.mozilla.org/docs/Web/CSS"
+                target="_blank"
+                rel="noopener"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg"
+                  alt="CSS3 Logo"
+                  style="width: 20px; height: 20px; margin-right: 8px"
+                />
+                CSS3
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://developer.mozilla.org/docs/Web/JavaScript"
+                target="_blank"
+                rel="noopener"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
+                  alt="JavaScript Logo"
+                  style="width: 20px; height: 20px; margin-right: 8px"
+                />
+                JavaScript
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.typescriptlang.org/"
+                target="_blank"
+                rel="noopener"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg"
+                  alt="TypeScript Logo"
+                  style="width: 20px; height: 20px; margin-right: 8px"
+                />
+                TypeScript
+              </a>
+            </li>
+            <li>
+              <a href="https://react.dev/" target="_blank" rel="noopener">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+                  alt="React.js Logo"
+                  style="width: 20px; height: 20px; margin-right: 8px"
+                />
+                React.js
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://redux-saga.js.org/"
+                target="_blank"
+                rel="noopener"
+              >
+                <img
+                  src="https://redux-saga.js.org/img/Redux-Saga-Logo.png"
+                  alt="Redux-Saga Logo"
+                  style="width: 20px; height: 20px; margin-right: 8px"
+                />
+                Redux-Saga
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://getbootstrap.com/"
+                target="_blank"
+                rel="noopener"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg"
+                  alt="Bootstrap Logo"
+                  style="width: 20px; height: 20px; margin-right: 8px"
+                />
+                Bootstrap
+              </a>
+            </li>
+            <li>
+              <a href="https://mui.com/" target="_blank" rel="noopener">
+                <img
+                  src="https://mui.com/static/logo.png"
+                  alt="Material UI Logo"
+                  style="width: 20px; height: 20px; margin-right: 8px"
+                />
+                Material UI
+              </a>
+            </li>
+            <li>
+              <a href="https://jestjs.io/" target="_blank" rel="noopener">
+                <img
+                  src="https://raw.githubusercontent.com/facebook/jest/main/website/static/img/jest.png"
+                  alt="Jest Logo"
+                  style="width: 20px; height: 20px; margin-right: 8px"
+                />
+                Jest unit testing
+              </a>
+            </li>
+          </ul>
         </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="skill-card">
+          <div class="confetti"></div>
+          <div class="skill-header">
+            <span class="emoji">🖥️</span>
+            Backend
+          </div>
+          <div class="skill-label">
+            <span class="emoji">🛠️</span> Development
+          </div>
+          <ul class="skill-list">
+            <li>
+              <a href="https://nodejs.org/" target="_blank" rel="noopener"
+                >Node.js</a
+              >
+            </li>
+            <li>
+              <a href="https://expressjs.com/" target="_blank" rel="noopener"
+                >Express.js</a
+              >
+            </li>
+            <li>
+              <a href="https://restfulapi.net/" target="_blank" rel="noopener"
+                >REST APIs</a
+              >
+            </li>
+            <li>
+              <a href="https://www.mongodb.com/" target="_blank" rel="noopener"
+                >MongoDB</a
+              >
+            </li>
+            <li>
+              <a href="https://graphql.org/" target="_blank" rel="noopener"
+                >GraphQL</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="skill-card">
+          <div class="confetti"></div>
+          <div class="skill-header">
+            <span class="emoji">🧰</span>
+            Tools & DevOps
+          </div>
+          <div class="skill-label">
+            <span class="emoji">🛠️</span> Development Tools
+          </div>
+          <ul class="skill-list">
+            <li>
+              <a href="https://webpack.js.org/" target="_blank" rel="noopener"
+                >Webpack</a
+              >
+            </li>
+            <li>
+              <a href="https://babeljs.io/" target="_blank" rel="noopener"
+                >Babel</a
+              >
+            </li>
+            <li>
+              <a href="https://www.docker.com/" target="_blank" rel="noopener"
+                >Docker</a
+              >
+            </li>
+            <li>
+              <a href="https://kubernetes.io/" target="_blank" rel="noopener"
+                >Kubernetes</a
+              >
+            </li>
+            <li>
+              <a href="https://www.npmjs.com/" target="_blank" rel="noopener"
+                >NPM</a
+              >
+            </li>
+            <li>
+              <a href="https://git-scm.com/" target="_blank" rel="noopener"
+                >Git</a
+              >
+              /
+              <a href="https://github.com/" target="_blank" rel="noopener"
+                >Github</a
+              >
+            </li>
+            <li>
+              <a href="https://www.jenkins.io/" target="_blank" rel="noopener"
+                >Jenkins</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://azure.microsoft.com/"
+                target="_blank"
+                rel="noopener"
+                >Azure</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="skill-card">
+          <div class="confetti"></div>
+          <div class="skill-header">
+            <span class="emoji">📊</span>
+            Monitoring & Analytics
+          </div>
+          <ul class="skill-list">
+            <li>
+              <a href="https://www.splunk.com/" target="_blank" rel="noopener"
+                >Splunk</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.elastic.co/kibana"
+                target="_blank"
+                rel="noopener"
+                >Kibana</a
+              >
+            </li>
+            <li>
+              <a href="https://grafana.com/" target="_blank" rel="noopener"
+                >Grafana</a
+              >
+            </li>
+            <li>
+              <a href="https://www.tableau.com/" target="_blank" rel="noopener"
+                >Tableau</a
+              >
+            </li>
+            <li>
+              <a href="https://openobserve.ai/" target="_blank" rel="noopener"
+                >Open Observe</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="skill-card">
+          <div class="confetti"></div>
+          <div class="skill-header">
+            <span class="emoji">👑</span>
+            Tech Leadership
+          </div>
+          <ul class="skill-list">
+            <li>Architecture Diagrams</li>
+            <li>Tech Documentation</li>
+            <li>Whiteboarding</li>
+            <li>Sprint Planning</li>
+            <li>Mentoring Newbies</li>
+            <li>Collaboration</li>
+            <li>Product Roadmapping</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="skill-card">
+          <div class="confetti"></div>
+          <div class="skill-header">
+            <span class="emoji">👨‍💼</span>
+            Management
+          </div>
+          <ul class="skill-list">
+            <li>Team Management</li>
+            <li>Communication</li>
+            <li>Decision Making</li>
+            <li>Goal Setting & KPIs</li>
+            <li>Task Management</li>
+            <li>Conflict Resolution</li>
+            <li>Motivation & Delegation</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="skill-card">
+          <div class="confetti"></div>
+          <div class="skill-header">
+            <span class="emoji">📚</span>
+            Knowledge Sharing
+          </div>
+          <ul class="skill-list">
+            <li>
+              <a href="https://www.blogger.com/" target="_blank" rel="noopener"
+                >Blogging</a
+              >
+            </li>
+            <li>Teaching</li>
+            <li>Podcasting</li>
+            <li>Video Editing</li>
+            <li>Mock Interviews</li>
+            <li>LinkedIn Posts</li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
-<script>
-    // Confetti emojis for each card
-    const confettiEmojis = ["🎉","✨","🎊","🥳","💥","🌈","🦄"];
-    document.querySelectorAll('.skill-card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            const confetti = card.querySelector('.confetti');
-            confetti.innerHTML = '';
-            for(let i=0; i<7; i++) {
-                const span = document.createElement('span');
-                span.textContent = confettiEmojis[Math.floor(Math.random()*confettiEmojis.length)];
-                span.style.left = (10 + Math.random()*80) + '%';
-                span.style.animationDelay = (Math.random()*0.5) + 's';
-                confetti.appendChild(span);
-            }
-        });
-        card.addEventListener('mouseleave', () => {
-            const confetti = card.querySelector('.confetti');
-            confetti.innerHTML = '';
-        });
-    });
-</script></ul>
