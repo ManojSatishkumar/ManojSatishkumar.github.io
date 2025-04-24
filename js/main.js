@@ -2,12 +2,7 @@
 $(document).ready(function () {
   "use strict";
 
-  // ========================================================================= //
-  //  //SMOOTH SCROLL
-  // ========================================================================= //
-
   $(document).on("scroll", onScroll);
-
   $('a[href^="#"]').on("click", function (e) {
     e.preventDefault();
     $(document).off("scroll");
@@ -50,10 +45,6 @@ $(document).ready(function () {
     }
   }
 
-  // ========================================================================= //
-  //  //NAVBAR SHOW - HIDE
-  // ========================================================================= //
-
   $(window).scroll(function () {
     var scroll = $(window).scrollTop();
     if (scroll > 200) {
@@ -66,47 +57,8 @@ $(document).ready(function () {
     }
   });
 
-  // ========================================================================= //
-  //  // RESPONSIVE MENU
-  // ========================================================================= //
-
   $(".responsive").on("click", function (e) {
     $(".nav-menu").slideToggle();
-  });
-
-  // ========================================================================= //
-  //  Typed Js
-  // ========================================================================= //
-
-  var typed = $(".typed");
-  var typedBanner1 = $(".typed-banner-text-1");
-
-  $(function () {
-    typed.typed({
-      strings: [
-        " have 12 years of experience in IT ",
-        " am a frontend web developer ",
-        " work on Javascript & React ",
-        " love to create websites ",
-        " am a technology enthusiast ",
-        " would love to connect with you ",
-        " will help you prepare for interview",
-      ],
-      typeSpeed: 30,
-      loop: true,
-    });
-
-    typedBanner1.typed({
-      strings: [
-        "to land on that dream job ",
-        "to become a successful web developer ",
-        "to master web technologies ",
-        "to a much better future ",
-        "to build the world wide web ",
-      ],
-      typeSpeed: 40,
-      loop: true,
-    });
   });
 
   $(function () {
