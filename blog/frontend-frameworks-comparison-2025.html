@@ -296,13 +296,7 @@
     <div id="article-wrapper">
       <div class="journal-block">
         <div class="row">
-          <div class="col-lg-3 col-md-3">
-            <div id="side-profile"></div>
-          </div>
-          <div
-            style="padding-left: 20px; padding-right: 20px"
-            class="col-lg-6 col-md-6"
-          >
+          <div style="padding-left: 40px; padding-right: 40px" class="col-md-9">
             <div class="row">
               <link
                 href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
@@ -1294,21 +1288,21 @@ render(&lt;Counter />, document.body);</code></pre>
                     * AMP uses Google's CDN, so the framework size is not
                     included in your bundle
                   </p>
+                  <div id="social-share-strip-horizontal-top"></div>
+                  <br />
                 </section>
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-3">
-            <div id="all-articles-side-list"></div>
-            <br />
+          <div class="col-md-3">
+            <!-- Profile card -->
+            <div id="profile-card"></div>
           </div>
         </div>
       </div>
     </div>
     <br />
-    <div id="courses-cards"></div>
-    <br />
-    <div id="all-articles-list"></div>
+    <div id="all-articles"></div>
     <div id="footer"></div>
     <div style="margin: 0px; padding: 0px" id="footer"></div>
     <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -1324,14 +1318,11 @@ render(&lt;Counter />, document.body);</code></pre>
     </script>
     <script>
       $(function () {
-        $("#side-profile").load("/components/side-profile.html");
-        $("#social-share-strip-vertical").load(
-          "/blog/components/social-share-strip-vertical.html"
-        );
+        $("#profile-card").load("/components/side-profile.html");
         $("#social-share-strip-horizontal-top").load(
           "/blog/components/social-share-strip-horizontal.html"
         );
-        $("#all-articles-list").load("/blog/all-articles.html");
+        $("#all-articles").load("/blog/all-articles.html");
         $("#all-articles-side-list").load("/blog/all-articles-list.html");
         $("#social-share-strip-horizontal-bottom").load(
           "/blog/components/social-share-strip-horizontal.html"

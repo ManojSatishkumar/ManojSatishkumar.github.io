@@ -109,10 +109,11 @@
         style="margin-left: 5px; margin-right: 5px; margin-top: 3px"
         class="nav-item"
       >
+        <!--  href="mailto:88manojs@gmail.com?subject=🚀%20Job%20opportunity&body=Hi%20Manoj%2C%0A%0AI%20am%20interested%20in%20hiring%20you%20for%20a%20project%2Frole.%20Here%20are%20some%20details%3A%0A-%20Company%20Name%3A%0A-%20Role%2FPosition%3A%0A-%20Project%20Description%3A%0A-%20Expected%20Start%20Date%3A%0A-%20Other%20Information%3A%0A%0ALooking%20forward%20to%20hearing%20from%20you.%0A%0ARegards%2C%0A%5BYour%20Name%5D" -->
         <a
           class="nav-link"
           target="_blank"
-          href="mailto:88manojs@gmail.com?subject=🚀%20Job%20opportunity&body=Hi%20Manoj%2C%0A%0AI%20am%20interested%20in%20hiring%20you%20for%20a%20project%2Frole.%20Here%20are%20some%20details%3A%0A-%20Company%20Name%3A%0A-%20Role%2FPosition%3A%0A-%20Project%20Description%3A%0A-%20Expected%20Start%20Date%3A%0A-%20Other%20Information%3A%0A%0ALooking%20forward%20to%20hearing%20from%20you.%0A%0ARegards%2C%0A%5BYour%20Name%5D"
+          href="https://topmate.io/manoj_satishkumar/709273"
           style="
             display: inline-flex;
             align-items: center;
@@ -140,100 +141,88 @@
           onmouseover="showPartyRibbons(event)"
           onmouseout="removePartyRibbons()"
         >
-          <svg
-            width="22"
-            height="22"
-            fill="none"
-            viewBox="0 0 24 24"
-            style="margin-right: 4px"
-          >
-            <path
-              fill="currentColor"
-              d="M10 2a2 2 0 0 0-2 2v2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3V4a2 2 0 0 0-2-2h-4zm0 2h4v2h-4V4zm10 4v2H4V8h16zm0 4v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6h16z"
-            />
-          </svg>
-          Hire Manoj
+          Consultation
         </a>
         <script>
-          function showPartyRibbons(e) {
-            // Prevent multiple ribbons
-            if (document.querySelector(".party-ribbons-global")) return;
-            const btn = document.getElementById("hire-manoj-btn");
-            const rect = btn.getBoundingClientRect();
-            const startX = rect.left + rect.width / 2;
-            const startY = rect.top + rect.height / 2;
+          // function showPartyRibbons(e) {
+          //   // Prevent multiple ribbons
+          //   if (document.querySelector(".party-ribbons-global")) return;
+          //   const btn = document.getElementById("hire-manoj-btn");
+          //   const rect = btn.getBoundingClientRect();
+          //   const startX = rect.left + rect.width / 2;
+          //   const startY = rect.top + rect.height / 2;
 
-            const container = document.createElement("div");
-            container.className = "party-ribbons-global";
-            container.style.position = "fixed";
-            container.style.left = 0;
-            container.style.top = 0;
-            container.style.width = "100vw";
-            container.style.height = "100vh";
-            container.style.pointerEvents = "none";
-            container.style.zIndex = 9999;
+          //   const container = document.createElement("div");
+          //   container.className = "party-ribbons-global";
+          //   container.style.position = "fixed";
+          //   container.style.left = 0;
+          //   container.style.top = 0;
+          //   container.style.width = "100vw";
+          //   container.style.height = "100vh";
+          //   container.style.pointerEvents = "none";
+          //   container.style.zIndex = 9999;
 
-            // Generate 36 ribbons
-            for (let i = 0; i < 36; i++) {
-              const ribbon = document.createElement("div");
-              const colors = [
-                "#ff512f",
-                "#dd2476",
-                "#1fa2ff",
-                "#12d8fa",
-                "#a6ffcb",
-                "#f9d423",
-                "#fc913a",
-                "#ff4e50",
-              ];
-              ribbon.style.position = "absolute";
-              ribbon.style.width = `${8 + Math.random() * 8}px`;
-              ribbon.style.height = `${24 + Math.random() * 16}px`;
-              ribbon.style.borderRadius = "8px";
-              ribbon.style.background =
-                colors[Math.floor(Math.random() * colors.length)];
-              ribbon.style.left = `${startX}px`;
-              ribbon.style.top = `${startY}px`;
-              ribbon.style.opacity = 0.92;
-              ribbon.style.transform = `rotate(${Math.random() * 360}deg)`;
-              ribbon.style.transition = "all 5s cubic-bezier(.23,1.02,.64,.99)";
-              // Animate to random direction
-              setTimeout(() => {
-                ribbon.style.left = `${Math.random() * window.innerWidth}px`;
-                ribbon.style.top = `${Math.random() * window.innerHeight}px`;
-                ribbon.style.opacity = 0;
-                ribbon.style.transform += ` scale(${
-                  0.7 + Math.random() * 0.7
-                })`;
-              }, 10);
-              container.appendChild(ribbon);
-            }
-            document.body.appendChild(container);
+          //   // Generate 36 ribbons
+          //   for (let i = 0; i < 36; i++) {
+          //     const ribbon = document.createElement("div");
+          //     const colors = [
+          //       "#ff512f",
+          //       "#dd2476",
+          //       "#1fa2ff",
+          //       "#12d8fa",
+          //       "#a6ffcb",
+          //       "#f9d423",
+          //       "#fc913a",
+          //       "#ff4e50",
+          //     ];
+          //     ribbon.style.position = "absolute";
+          //     ribbon.style.width = `${8 + Math.random() * 8}px`;
+          //     ribbon.style.height = `${24 + Math.random() * 16}px`;
+          //     ribbon.style.borderRadius = "8px";
+          //     ribbon.style.background =
+          //       colors[Math.floor(Math.random() * colors.length)];
+          //     ribbon.style.left = `${startX}px`;
+          //     ribbon.style.top = `${startY}px`;
+          //     ribbon.style.opacity = 0.92;
+          //     ribbon.style.transform = `rotate(${Math.random() * 360}deg)`;
+          //     ribbon.style.transition = "all 5s cubic-bezier(.23,1.02,.64,.99)";
+          //     // Animate to random direction
+          //     setTimeout(() => {
+          //       ribbon.style.left = `${Math.random() * window.innerWidth}px`;
+          //       ribbon.style.top = `${Math.random() * window.innerHeight}px`;
+          //       ribbon.style.opacity = 0;
+          //       ribbon.style.transform += ` scale(${
+          //         0.7 + Math.random() * 0.7
+          //       })`;
+          //     }, 10);
+          //     container.appendChild(ribbon);
+          //   }
+          //   document.body.appendChild(container);
 
-            // Remove ribbons after 5s
-            setTimeout(() => {
-              removePartyRibbons();
-            }, 5000);
-          }
+          //   // Remove ribbons after 5s
+          //   setTimeout(() => {
+          //     removePartyRibbons();
+          //   }, 5000);
+          // }
 
-          function removePartyRibbons() {
-            const ribbons = document.querySelector(".party-ribbons-global");
-            if (ribbons) {
-              ribbons.remove();
-            }
-          }
+          // function removePartyRibbons() {
+          //   const ribbons = document.querySelector(".party-ribbons-global");
+          //   if (ribbons) {
+          //     ribbons.remove();
+          //   }
+          // }
 
           // Add periodic ribbon animation
-          window.addEventListener("load", () => {
-            // Initial animation after 5 seconds
-            setTimeout(() => {
-              const button = document.getElementById("hire-manoj-btn");
-              if (button) {
-                const event = { target: button };
-                showPartyRibbons(event);
-              }
-            }, 5000);
-          });
+          // window.addEventListener("load", () => {
+          //   // Initial animation after 5 seconds
+          //   setTimeout(() => {
+          //     const button = document.getElementById("hire-manoj-btn");
+          //     if (button) {
+          //       const event = { target: button };
+          //       showPartyRibbons(event);
+          //     }
+          //   }, 5000);
+          // });
         </script>
       </li>
     </ul>
