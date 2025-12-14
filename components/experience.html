@@ -30,6 +30,7 @@
     </div>
     <div class="experience-grid">
       <div class="experience-card experience-card--featured">
+        <img src="/images/walmart-logo.jpg" alt="Walmart" class="company-logo" />
         <h2 class="company-name">
           <a href="https://en.wikipedia.org/wiki/Walmart" target="_blank"
             >Walmart Global Tech</a
@@ -125,6 +126,7 @@
         </div>
       </div>
       <div class="experience-card">
+        <img src="/images/paypal-icon.png" alt="PayPal" class="company-logo" />
         <h2 class="company-name">
           <a href="https://en.wikipedia.org/wiki/PayPal" target="_blank"
             >PayPal</a
@@ -141,9 +143,10 @@
         </p>
       </div>
       <div class="experience-card">
+        <img src="/images/walmart-logo.jpg" alt="Walmart Labs" class="company-logo" />
         <h2 class="company-name">
           <a href="https://en.wikipedia.org/wiki/Walmart" target="_blank"
-            >Walmart Labs</a
+            >Walmart</a
           >
         </h2>
         <p class="industry">E-Commerce</p>
@@ -157,6 +160,7 @@
         </p>
       </div>
       <div class="experience-card">
+        <img src="/images/cerner-logo.jpg" alt="Cerner" class="company-logo" />
         <h2 class="company-name">
           <a href="https://en.wikipedia.org/wiki/Cerner" target="_blank"
             >Cerner
@@ -173,6 +177,7 @@
         </p>
       </div>
       <div class="experience-card">
+        <img src="/images/grl-logo.jpg" alt="GRL Labs" class="company-logo" />
         <h2 class="company-name">
           <a href="https://graniteriverlabs.com/" target="_blank">GRL Labs</a>
         </h2>
@@ -232,6 +237,17 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
     border: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+  }
+
+  .company-logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    background: transparent;
   }
 
   .experience-card--featured {
