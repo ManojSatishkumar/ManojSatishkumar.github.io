@@ -395,8 +395,25 @@
         line-height: 1.2;
       }
 
+      .mobile-bottom-nav .nav-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%) scaleX(0);
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(90deg, #007bff, #17a2b8);
+        border-radius: 0 0 3px 3px;
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
       .mobile-bottom-nav .nav-item.active {
         color: #007bff;
+      }
+
+      .mobile-bottom-nav .nav-item.active::before {
+        transform: translateX(-50%) scaleX(1);
       }
 
       .mobile-bottom-nav .nav-item.active i {
