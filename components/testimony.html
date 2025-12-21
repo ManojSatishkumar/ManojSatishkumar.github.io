@@ -6,7 +6,7 @@
   />
 </head>
 
-<div class="testimony-container">
+<div class="testimony-container container">
   <br />
   <br />
   <div class="testimony-header">
@@ -507,8 +507,6 @@
 
 <style>
   .testimony-container {
-    margin: 0 auto;
-    padding: 2rem;
     font-family: "Poppins", sans-serif;
   }
 
@@ -534,7 +532,7 @@
 
   .testimony-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-bottom: 3rem;
   }
@@ -543,7 +541,6 @@
     background: white;
     border-radius: 15px;
     padding: 1.5rem;
-    min-width: 350px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -617,6 +614,12 @@
   .testimony-text p {
     color: #000000;
     margin: 0;
+  }
+
+  @media (max-width: 1200px) {
+    .testimony-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   @media (max-width: 768px) {

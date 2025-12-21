@@ -294,10 +294,10 @@
       /* macOS Dock Style Navigation */
       .nav-bar-fixed {
         position: fixed !important;
-        bottom: 10px !important;
-        top: auto !important;
-        left: 50% !important;
-        transform: translateX(-50%) translateY(0) !important;
+        bottom: auto !important;
+        top: 50% !important;
+        left: 20px !important;
+        transform: translateY(-50%) !important;
         width: auto !important;
         padding: 8px !important;
         border-radius: 20px !important;
@@ -317,7 +317,8 @@
 
       .nav-bar-fixed .dock-container {
         display: flex !important;
-        align-items: flex-end !important;
+        flex-direction: column !important;
+        align-items: center !important;
         justify-content: center !important;
         gap: 0 !important;
         padding: 0 !important;
