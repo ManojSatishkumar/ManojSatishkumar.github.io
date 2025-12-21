@@ -274,6 +274,9 @@
         .mobile-bottom-nav {
           display: none !important;
         }
+        body {
+          padding-bottom: 100px;
+        }
       }
       .main-pill {
         padding-left: 20px;
@@ -288,38 +291,102 @@
         font-weight: 500;
       }
 
-      /* Navigation menu item styles */
-      .nav-bar-fixed div div {
-        position: relative;
-        transition: all 0.3s ease;
+      /* macOS Dock Style Navigation */
+      .nav-bar-fixed {
+        position: fixed !important;
+        bottom: 10px !important;
+        top: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(0) !important;
+        width: auto !important;
+        padding: 8px !important;
+        border-radius: 20px !important;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+        background-color: rgba(255, 255, 255, 0.62) !important;
+        backdrop-filter: saturate(500%) blur(10px) !important;
+        -webkit-backdrop-filter: saturate(500%) blur(10px) !important;
+        box-shadow: 
+          0 10px 40px rgba(0, 0, 0, 0.15),
+          0 4px 12px rgba(0, 0, 0, 0.1),
+          inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
+        z-index: 1000 !important;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
       }
 
-      .nav-bar-fixed div div::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: -5px;
-        left: 50%;
-        background-color: #007bff;
-        box-shadow: 0 0 10px #007bff;
-        transition: all 0.3s ease;
-        transform: translateX(-50%);
+
+      .nav-bar-fixed .dock-container {
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        gap: 0 !important;
+        padding: 0 !important;
       }
 
-      .nav-bar-fixed div div:hover::after {
-        width: 100%;
+      .nav-bar-fixed .dock-item {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        padding: 8px 10px !important;
+        margin: 0 2px !important;
+        cursor: pointer !important;
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+        transform-origin: bottom center !important;
+        position: relative !important;
+        border-radius: 12px !important;
       }
 
-      .nav-bar-fixed div div.active {
-        color: #007bff;
-        text-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-        font-weight: 600;
+      .nav-bar-fixed .dock-item:hover {
+        /* No zoom animation */
       }
 
-      .nav-bar-fixed div div.active::after {
-        width: 100%;
+      /* macOS style rounded rectangle icon */
+      .nav-bar-fixed .dock-item .icon-wrapper {
+        width: 48px !important;
+        height: 48px !important;
+        border-radius: 12px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-bottom: 6px !important;
+        transition: all 0.2s ease !important;
+        position: relative !important;
+        background: rgba(0, 0, 0, 0.04) !important;
       }
+
+      .nav-bar-fixed .dock-item:hover .icon-wrapper {
+        background: rgba(0, 0, 0, 0.1) !important;
+      }
+
+      .nav-bar-fixed .dock-item i {
+        font-size: 24px !important;
+        color: #555 !important;
+        transition: all 0.2s ease !important;
+      }
+
+      .nav-bar-fixed .dock-item span {
+        font-size: 11px !important;
+        font-weight: 500 !important;
+        color: #333 !important;
+        white-space: nowrap !important;
+        transition: all 0.2s ease !important;
+      }
+
+      .nav-bar-fixed .dock-item.active .icon-wrapper {
+        background: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%) !important;
+        box-shadow: 
+          0 4px 12px rgba(0, 122, 255, 0.3),
+          0 2px 6px rgba(0, 122, 255, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+      }
+
+      .nav-bar-fixed .dock-item.active i {
+        color: #fff !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+      }
+
+
 
       /* Add this for rounded buttons */
       button,
@@ -498,73 +565,51 @@
       </div>
     </div>
     
-    <div style="margin-bottom: 70px" id="desktop-nav-bar"></div>
-    <div
-      class="nav-bar-fixed"
-      style="
-        text-align: center;
-        position: fixed;
-        width: 100%;
-        color: black;
-        padding: 5px;
-        background-color: rgba(255, 255, 255, 0.62) !important;
-        -webkit-backdrop-filter: saturate(500%) blur(10px);
-        backdrop-filter: saturate(500%) blur(10px);
-        border-bottom: 1px solid #909090;
-        z-index: 10;
-      "
-    >
-      <div
-        style="
-          font-weight: 400;
-          color: black;
-          padding-top: 10px;
-          padding-left: 5px;
-          padding-bottom: 6px;
-          display: inline-block;
-        "
-      >
-        <div
-          style="cursor: pointer; display: inline-block; margin-left: 20px"
-          onclick="animateScroll('intro')"
-        >
-          Intro
+    <div id="desktop-nav-bar"></div>
+    <!-- macOS Dock Style Navigation -->
+    <div class="nav-bar-fixed">
+      <div class="dock-container">
+        <div class="dock-item" onclick="animateScroll('intro')" data-section="intro">
+          <div class="icon-wrapper">
+            <i class="icon ion-ios-person"></i>
+          </div>
+          <span>Intro</span>
         </div>
-        <div
-          style="cursor: pointer; display: inline-block; margin-left: 20px"
-          onclick="animateScroll('experience')"
-        >
-          Experience
+        <div class="dock-item" onclick="animateScroll('experience')" data-section="experience">
+          <div class="icon-wrapper">
+            <i class="icon ion-ios-briefcase"></i>
+          </div>
+          <span>Experience</span>
         </div>
-        <div
-          style="cursor: pointer; display: inline-block; margin-left: 20px"
-          onclick="animateScroll('projects')"
-        >
-          Projects
+        <div class="dock-item" onclick="animateScroll('projects')" data-section="projects">
+          <div class="icon-wrapper">
+            <i class="icon ion-ios-folder"></i>
+          </div>
+          <span>Projects</span>
         </div>
-        <div
-          style="cursor: pointer; display: inline-block; margin-left: 20px"
-          onclick="animateScroll('skill-set')"
-        >
-          Skills
+        <div class="dock-item" onclick="animateScroll('skill-set')" data-section="skill-set">
+          <div class="icon-wrapper">
+            <i class="icon ion-code"></i>
+          </div>
+          <span>Skills</span>
         </div>
-        <div
-          style="cursor: pointer; display: inline-block; margin-left: 20px"
-          onclick="animateScroll('achievements')"
-        >
-          Achievements
+        <div class="dock-item" onclick="animateScroll('achievements')" data-section="achievements">
+          <div class="icon-wrapper">
+            <i class="icon ion-trophy"></i>
+          </div>
+          <span>Awards</span>
         </div>
-        <div
-          style="cursor: pointer; display: inline-block; margin-left: 20px"
-          onclick="animateScroll('education')"
-        >
-          Education
+        <div class="dock-item" onclick="animateScroll('education')" data-section="education">
+          <div class="icon-wrapper">
+            <i class="icon ion-university"></i>
+          </div>
+          <span>Education</span>
         </div>
-        <div
-          style="cursor: pointer; display: inline-block; margin-left: 20px"
-          onclick="animateScroll('msk-testimony')"
-        >
-          Testimony
+        <div class="dock-item" onclick="animateScroll('msk-testimony')" data-section="msk-testimony">
+          <div class="icon-wrapper">
+            <i class="icon ion-chatbubbles"></i>
+          </div>
+          <span>Testimony</span>
         </div>
       </div>
     </div>
@@ -648,9 +693,9 @@
           },
           1000
         );
-        // Update active menu item for desktop nav
-        $(".nav-bar-fixed div div").removeClass("active");
-        $(`.nav-bar-fixed div div[onclick*="${id}"]`).addClass("active");
+        // Update active menu item for desktop dock
+        $(".nav-bar-fixed .dock-item").removeClass("active");
+        $(`.nav-bar-fixed .dock-item[data-section="${id}"]`).addClass("active");
         
         // Update active menu item for mobile bottom nav
         $(".mobile-bottom-nav .nav-item").removeClass("active");
@@ -693,11 +738,9 @@
                 scrollPosition >= offset &&
                 scrollPosition < offset + height
               ) {
-                // Update desktop nav
-                $(".nav-bar-fixed div div").removeClass("active");
-                $(`.nav-bar-fixed div div[onclick*="${section}"]`).addClass(
-                  "active"
-                );
+                // Update desktop dock
+                $(".nav-bar-fixed .dock-item").removeClass("active");
+                $(`.nav-bar-fixed .dock-item[data-section="${section}"]`).addClass("active");
                 
                 // Update mobile bottom nav
                 $(".mobile-bottom-nav .nav-item").removeClass("active");
@@ -714,6 +757,10 @@
 
         // Set initial active state for mobile bottom nav
         $(".mobile-bottom-nav .nav-item[data-section='intro']").addClass("active");
+        
+        // Set initial active state for desktop dock
+        $(".nav-bar-fixed .dock-item[data-section='intro']").addClass("active");
+        
       });
     </script>
     <!-- PWA -->
