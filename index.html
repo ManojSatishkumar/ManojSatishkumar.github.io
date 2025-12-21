@@ -127,6 +127,9 @@
         .nav-bar-top-mobile-fixed {
           display: none;
         }
+        .mobile-bottom-nav {
+          display: none !important;
+        }
       }
       .main-pill {
         padding-left: 20px;
@@ -182,6 +185,110 @@
       a.btn,
       a[style*="padding"] {
         border-radius: 25px !important;
+      }
+
+      /* Mobile Bottom Navigation Bar */
+      .mobile-bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: saturate(500%) blur(20px);
+        -webkit-backdrop-filter: saturate(500%) blur(20px);
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
+        z-index: 1000;
+        padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+        justify-content: space-around;
+        align-items: center;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .mobile-bottom-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .mobile-bottom-nav .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        min-width: 50px;
+        max-width: 80px;
+        padding: 6px 4px;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        color: #666;
+        text-decoration: none;
+        position: relative;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .mobile-bottom-nav .nav-item i {
+        font-size: 24px;
+        margin-bottom: 3px;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        display: block;
+      }
+
+      .mobile-bottom-nav .nav-item span {
+        font-size: 10px;
+        font-weight: 500;
+        text-transform: capitalize;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        line-height: 1.2;
+      }
+
+      .mobile-bottom-nav .nav-item.active {
+        color: #007bff;
+      }
+
+      .mobile-bottom-nav .nav-item.active i {
+        color: #007bff;
+        transform: scale(1.15);
+      }
+
+      .mobile-bottom-nav .nav-item.active span {
+        color: #007bff;
+        font-weight: 600;
+      }
+
+      .mobile-bottom-nav .nav-item:active {
+        transform: scale(0.92);
+        opacity: 0.8;
+      }
+
+      .mobile-bottom-nav .nav-item:hover {
+        color: #007bff;
+      }
+
+      /* Add padding to body on mobile to prevent content from being hidden behind bottom nav */
+      @media only screen and (max-width: 1024px) {
+        body {
+          padding-bottom: 70px;
+        }
+      }
+
+      /* Adjust for very small screens */
+      @media only screen and (max-width: 480px) {
+        .mobile-bottom-nav .nav-item span {
+          font-size: 9px;
+        }
+        .mobile-bottom-nav .nav-item i {
+          font-size: 22px;
+        }
       }
     </style>
 
@@ -323,6 +430,38 @@
     <div id="msk-testimony"></div>
     <div style="background-color: #eeeeee" id="footer" class="text-left"></div>
     <div style="margin: 0px; padding: 0px" id="footer"></div>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <div class="mobile-bottom-nav" id="mobile-bottom-nav">
+      <div class="nav-item" onclick="animateScroll('intro')" data-section="intro">
+        <i class="icon ion-ios-person"></i>
+        <span>Intro</span>
+      </div>
+      <div class="nav-item" onclick="animateScroll('experience')" data-section="experience">
+        <i class="icon ion-ios-briefcase"></i>
+        <span>Experience</span>
+      </div>
+      <div class="nav-item" onclick="animateScroll('projects')" data-section="projects">
+        <i class="icon ion-ios-folder"></i>
+        <span>Projects</span>
+      </div>
+      <div class="nav-item" onclick="animateScroll('skill-set')" data-section="skill-set">
+        <i class="icon ion-code"></i>
+        <span>Skills</span>
+      </div>
+      <div class="nav-item" onclick="animateScroll('achievements')" data-section="achievements">
+        <i class="icon ion-trophy"></i>
+        <span>Achievements</span>
+      </div>
+      <div class="nav-item" onclick="animateScroll('education')" data-section="education">
+        <i class="icon ion-university"></i>
+        <span>Education</span>
+      </div>
+      <div class="nav-item" onclick="animateScroll('msk-testimony')" data-section="msk-testimony">
+        <i class="icon ion-ios-chatbubble"></i>
+        <span>Testimony</span>
+      </div>
+    </div>
     <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <script src="/lib/jquery/jquery.min.js"></script>
     <script src="/lib/jquery/jquery-migrate.min.js"></script>
@@ -342,9 +481,13 @@
           },
           1000
         );
-        // Update active menu item
+        // Update active menu item for desktop nav
         $(".nav-bar-fixed div div").removeClass("active");
         $(`.nav-bar-fixed div div[onclick*="${id}"]`).addClass("active");
+        
+        // Update active menu item for mobile bottom nav
+        $(".mobile-bottom-nav .nav-item").removeClass("active");
+        $(`.mobile-bottom-nav .nav-item[data-section="${id}"]`).addClass("active");
       }
     </script>
     <script>
@@ -383,10 +526,15 @@
                 scrollPosition >= offset &&
                 scrollPosition < offset + height
               ) {
+                // Update desktop nav
                 $(".nav-bar-fixed div div").removeClass("active");
                 $(`.nav-bar-fixed div div[onclick*="${section}"]`).addClass(
                   "active"
                 );
+                
+                // Update mobile bottom nav
+                $(".mobile-bottom-nav .nav-item").removeClass("active");
+                $(`.mobile-bottom-nav .nav-item[data-section="${section}"]`).addClass("active");
               }
             }
           });
@@ -396,6 +544,9 @@
           $(".nav-blogger").removeClass("active");
           $(".nav-home").addClass("active");
         }, 2000);
+
+        // Set initial active state for mobile bottom nav
+        $(".mobile-bottom-nav .nav-item[data-section='intro']").addClass("active");
       });
     </script>
     <!-- PWA -->
