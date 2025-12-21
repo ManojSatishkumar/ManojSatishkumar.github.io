@@ -38,10 +38,20 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
+    position: relative;
   }
   .edu-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 40px rgba(34, 34, 59, 0.12);
+  }
+  .edu-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    background: linear-gradient(135deg, #121fcf 0%, #cf1512 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   .edu-level {
     font-size: 1.4rem;
@@ -50,12 +60,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-  }
-  .edu-level i {
-    font-size: 1.6rem;
-    background: linear-gradient(135deg, #121fcf 0%, #cf1512 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    padding-right: 50px;
   }
   .edu-major {
     font-size: 1rem;
@@ -176,6 +181,7 @@
     <div class="edu-grid">
       <!-- Engineering -->
       <div class="edu-card">
+        <i class="fa-solid fa-graduation-cap edu-icon"></i>
         <div class="edu-level">Engineering</div>
         <div class="edu-major">Electronics</div>
         <div class="edu-year">2013</div>
@@ -192,6 +198,7 @@
       </div>
       <!-- Pre-University -->
       <div class="edu-card">
+        <i class="fa-solid fa-graduation-cap edu-icon"></i>
         <div class="edu-level">Pre-University</div>
         <div class="edu-major">Computer Science</div>
         <div class="edu-year">2009</div>
@@ -206,6 +213,7 @@
       </div>
       <!-- High School -->
       <div class="edu-card">
+        <i class="fa-solid fa-graduation-cap edu-icon"></i>
         <div class="edu-level">High School</div>
         <div class="edu-major">10th grade</div>
         <div class="edu-year">2007</div>
@@ -221,6 +229,7 @@
       </div>
       <!-- Primary School -->
       <div class="edu-card">
+        <i class="fa-solid fa-graduation-cap edu-icon"></i>
         <div class="edu-level">Primary School</div>
         <div class="edu-major">Upto 7th grade</div>
         <div class="edu-year">2004</div>
