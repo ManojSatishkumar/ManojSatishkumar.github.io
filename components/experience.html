@@ -134,7 +134,7 @@
   .experience-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+    gap: 20px;
     max-width: 1400px;
     margin: 0 auto;
   }
@@ -142,10 +142,10 @@
   .experience-card {
     background: #ffffff;
     border-radius: 16px;
-    padding: 30px;
+    padding: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     position: relative;
   }
 
@@ -156,15 +156,6 @@
     height: 45px;
     object-fit: contain;
     background: transparent;
-  }
-
-  .experience-card--featured {
-    grid-column: 1 / -1;
-    background: linear-gradient(90deg, #f1f8ff 0%, #fff 100%);
-    border: 2px solid #121fcf;
-    box-shadow: 0 12px 32px rgba(18, 31, 207, 0.08);
-    padding: 40px 40px 30px 40px;
-    position: relative;
   }
 
   .experience-card:hover {
