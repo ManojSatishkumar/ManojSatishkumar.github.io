@@ -1153,7 +1153,7 @@
         chatbotOpen = false;
       }
 
-      // Auto-activate chatbot after 5 seconds
+      // Auto-activate chatbot after 10 seconds
       setTimeout(function() {
         if (!chatbotActivated) {
           const notification = document.getElementById('chatbot-notification');
@@ -1170,7 +1170,7 @@
             }
           }, 1500);
         }
-      }, 5000);
+      }, 10000);
 
       // Close chatbot when clicking outside
       document.addEventListener('click', function(e) {
