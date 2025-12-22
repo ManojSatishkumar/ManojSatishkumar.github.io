@@ -387,6 +387,69 @@
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
       }
 
+      /* Dock Tooltip */
+      .dock-tooltip {
+        position: absolute;
+        left: 70px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: white;
+        border-radius: 12px;
+        padding: 14px 18px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease;
+        z-index: 1001;
+        pointer-events: none;
+        width: 220px;
+      }
+
+      .dock-tooltip::before {
+        content: '';
+        position: absolute;
+        left: -15px;
+        top: 0;
+        width: 20px;
+        height: 100%;
+        background: transparent;
+      }
+
+      .nav-bar-fixed .dock-item:hover .dock-tooltip {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .dock-tooltip::after {
+        content: '';
+        position: absolute;
+        left: -16px;
+        top: 50%;
+        transform: translateY(-50%);
+        border-width: 8px;
+        border-style: solid;
+        border-color: transparent white transparent transparent;
+        filter: drop-shadow(-2px 0 2px rgba(0, 0, 0, 0.08));
+      }
+
+      .dock-tooltip h4 {
+        margin: 0 0 6px 0;
+        font-size: 14px;
+        font-weight: 700;
+        color: #1a1a1a;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .dock-tooltip p {
+        margin: 0;
+        font-size: 12px;
+        line-height: 1.5;
+        color: #555;
+        font-family: 'Poppins', sans-serif;
+      }
+
 
 
       /* Add this for rounded buttons */
@@ -828,42 +891,70 @@
             <i class="icon ion-ios-person"></i>
           </div>
           <span>Intro</span>
+          <div class="dock-tooltip">
+            <h4>Introduction</h4>
+            <p>Get to know me—my background, expertise, and what drives my passion for building world-class software.</p>
+          </div>
         </div>
         <div class="dock-item" onclick="animateScroll('experience')" data-section="experience">
           <div class="icon-wrapper">
             <i class="icon ion-ios-briefcase"></i>
           </div>
           <span>Experience</span>
+          <div class="dock-tooltip">
+            <h4>Work Experience</h4>
+            <p>12+ years at top companies like Walmart and Cerner, building scalable platforms for millions of users.</p>
+          </div>
         </div>
         <div class="dock-item" onclick="animateScroll('projects')" data-section="projects">
           <div class="icon-wrapper">
             <i class="icon ion-ios-folder"></i>
           </div>
           <span>Projects</span>
+          <div class="dock-tooltip">
+            <h4>Projects</h4>
+            <p>Enterprise platforms and open-source tools showcasing my ability to architect scalable solutions.</p>
+          </div>
         </div>
         <div class="dock-item" onclick="animateScroll('skill-set')" data-section="skill-set">
           <div class="icon-wrapper">
             <i class="icon ion-code"></i>
           </div>
           <span>Skills</span>
+          <div class="dock-tooltip">
+            <h4>Technical Skills</h4>
+            <p>Deep expertise in React, TypeScript, Node.js, and the modern JavaScript ecosystem.</p>
+          </div>
         </div>
         <div class="dock-item" onclick="animateScroll('achievements')" data-section="achievements">
           <div class="icon-wrapper">
             <i class="icon ion-trophy"></i>
           </div>
           <span>Awards</span>
+          <div class="dock-tooltip">
+            <h4>Awards & Recognition</h4>
+            <p>Hackathon championships, patents, and industry awards celebrating technical excellence.</p>
+          </div>
         </div>
         <div class="dock-item" onclick="animateScroll('education')" data-section="education">
           <div class="icon-wrapper">
             <i class="icon ion-university"></i>
           </div>
           <span>Education</span>
+          <div class="dock-tooltip">
+            <h4>Education</h4>
+            <p>Strong foundation in Electronics Engineering with top academic achievements.</p>
+          </div>
         </div>
         <div class="dock-item" onclick="animateScroll('msk-testimony')" data-section="msk-testimony">
           <div class="icon-wrapper">
             <i class="icon ion-chatbubbles"></i>
           </div>
           <span>Testimony</span>
+          <div class="dock-tooltip">
+            <h4>Testimonials</h4>
+            <p>What colleagues, mentees, and industry peers say about working with me.</p>
+          </div>
         </div>
       </div>
     </div>
