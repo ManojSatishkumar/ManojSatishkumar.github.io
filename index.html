@@ -519,6 +519,141 @@
           font-size: 22px;
         }
       }
+
+      /* Right Tech Stack Sidebar */
+      .tech-sidebar {
+        position: fixed;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 16px;
+        padding: 16px 12px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+        z-index: 998;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .tech-icons {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .tech-icon {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.03);
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+
+      .tech-icon:hover {
+        background: rgba(0, 0, 0, 0.08);
+        transform: scale(1.15);
+      }
+
+      .tech-icon img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+      }
+
+      /* Tech Tooltip */
+      .tech-tooltip {
+        position: absolute;
+        right: 36px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 260px;
+        background: white;
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease;
+        z-index: 1000;
+        pointer-events: none;
+      }
+
+      /* Invisible bridge to connect icon to tooltip */
+      .tech-tooltip::before {
+        content: '';
+        position: absolute;
+        right: -15px;
+        top: 0;
+        width: 20px;
+        height: 100%;
+        background: transparent;
+      }
+
+      .tech-icon:hover .tech-tooltip {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .tech-tooltip::after {
+        content: '';
+        position: absolute;
+        right: -8px;
+        top: 50%;
+        transform: translateY(-50%);
+        border-width: 8px;
+        border-style: solid;
+        border-color: transparent transparent transparent white;
+      }
+
+      .tech-tooltip h4 {
+        margin: 0 0 8px 0;
+        font-size: 15px;
+        font-weight: 700;
+        color: #1a1a1a;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .tech-tooltip p {
+        margin: 0 0 12px 0;
+        font-size: 12px;
+        line-height: 1.6;
+        color: #555;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .tech-tooltip a {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .tech-tooltip a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+      }
+
+      /* Hide on mobile/tablet */
+      @media only screen and (max-width: 1024px) {
+        .tech-sidebar {
+          display: none;
+        }
+      }
     </style>
 
     <!-- Google Analytics -->
@@ -566,6 +701,116 @@
       </div>
     </div>
     
+    <!-- Right Tech Stack Sidebar -->
+    <div class="tech-sidebar">
+      <div class="tech-icons">
+        <div class="tech-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" />
+          <div class="tech-tooltip">
+            <h4>HTML5</h4>
+            <p>The standard markup language for creating web pages. HTML5 introduced semantic elements, multimedia support, and APIs for complex web applications.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">Learn More →</a>
+          </div>
+        </div>
+        <div class="tech-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" />
+          <div class="tech-tooltip">
+            <h4>CSS3</h4>
+            <p>A stylesheet language used to describe the presentation of HTML documents. CSS3 brings animations, flexbox, grid layouts, and advanced visual effects.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">Learn More →</a>
+          </div>
+        </div>
+        <div class="tech-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
+          <div class="tech-tooltip">
+            <h4>JavaScript</h4>
+            <p>A versatile programming language that enables interactive web pages. It's essential for modern web development, powering both frontend and backend applications.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">Learn More →</a>
+          </div>
+        </div>
+        <div class="tech-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" />
+          <div class="tech-tooltip">
+            <h4>TypeScript</h4>
+            <p>A strongly typed superset of JavaScript that compiles to plain JavaScript. It adds optional static typing, classes, and interfaces for building robust applications.</p>
+            <a href="https://www.typescriptlang.org/" target="_blank">Learn More →</a>
+          </div>
+        </div>
+        <div class="tech-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
+          <div class="tech-tooltip">
+            <h4>React</h4>
+            <p>A JavaScript library for building user interfaces. React uses a component-based architecture and virtual DOM for efficient, declarative UI development.</p>
+            <a href="https://react.dev/" target="_blank">Learn More →</a>
+          </div>
+        </div>
+        <div class="tech-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" alt="Redux" />
+          <div class="tech-tooltip">
+            <h4>Redux</h4>
+            <p>A predictable state container for JavaScript apps. Redux helps manage application state with a single source of truth and unidirectional data flow.</p>
+            <a href="https://redux.js.org/" target="_blank">Learn More →</a>
+          </div>
+        </div>
+        <div class="tech-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg" alt="Material UI" />
+          <div class="tech-tooltip">
+            <h4>Material UI</h4>
+            <p>A popular React component library implementing Google's Material Design. It provides pre-built, customizable components for faster UI development.</p>
+            <a href="https://mui.com/" target="_blank">Learn More →</a>
+          </div>
+        </div>
+        <div class="tech-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" />
+          <div class="tech-tooltip">
+            <h4>Next.js</h4>
+            <p>A React framework for production-grade applications. Next.js offers server-side rendering, static generation, and API routes out of the box.</p>
+            <a href="https://nextjs.org/" target="_blank">Learn More →</a>
+          </div>
+        </div>
+        <div class="tech-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" />
+          <div class="tech-tooltip">
+            <h4>Tailwind CSS</h4>
+            <p>A utility-first CSS framework for rapid UI development. Tailwind provides low-level utility classes that let you build custom designs without leaving HTML.</p>
+            <a href="https://tailwindcss.com/" target="_blank">Learn More →</a>
+          </div>
+        </div>
+        <div class="tech-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg" alt="Webpack" />
+          <div class="tech-tooltip">
+            <h4>Webpack</h4>
+            <p>A powerful module bundler for JavaScript applications. Webpack processes and bundles assets, scripts, and styles for optimized production builds.</p>
+            <a href="https://webpack.js.org/" target="_blank">Learn More →</a>
+          </div>
+        </div>
+        <div class="tech-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" />
+          <div class="tech-tooltip">
+            <h4>Node.js</h4>
+            <p>A JavaScript runtime built on Chrome's V8 engine. Node.js enables server-side JavaScript execution for building scalable network applications.</p>
+            <a href="https://nodejs.org/" target="_blank">Learn More →</a>
+          </div>
+        </div>
+        <div class="tech-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express.js" />
+          <div class="tech-tooltip">
+            <h4>Express.js</h4>
+            <p>A minimal and flexible Node.js web framework. Express provides robust features for building web and mobile applications with easy routing and middleware.</p>
+            <a href="https://expressjs.com/" target="_blank">Learn More →</a>
+          </div>
+        </div>
+        <div class="tech-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" alt="Jest" />
+          <div class="tech-tooltip">
+            <h4>Jest</h4>
+            <p>A delightful JavaScript testing framework with a focus on simplicity. Jest works with React, Node, and more, offering zero-config setup and snapshot testing.</p>
+            <a href="https://jestjs.io/" target="_blank">Learn More →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="desktop-nav-bar"></div>
     <!-- macOS Dock Style Navigation -->
     <div class="nav-bar-fixed">
