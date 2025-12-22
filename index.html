@@ -698,8 +698,8 @@
           <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="splash-logo" />
           <div class="logo-ring"></div>
         </div>
-      </div>
-    </div>
+        </div>
+        </div>
     
     <!-- Right Tech Stack Sidebar -->
     <div class="tech-sidebar">
@@ -710,7 +710,7 @@
             <h4>HTML5</h4>
             <p>The standard markup language for creating web pages. HTML5 introduced semantic elements, multimedia support, and APIs for complex web applications.</p>
             <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">Learn More →</a>
-          </div>
+        </div>
         </div>
         <div class="tech-icon">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" />
@@ -718,7 +718,7 @@
             <h4>CSS3</h4>
             <p>A stylesheet language used to describe the presentation of HTML documents. CSS3 brings animations, flexbox, grid layouts, and advanced visual effects.</p>
             <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">Learn More →</a>
-          </div>
+        </div>
         </div>
         <div class="tech-icon">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
@@ -806,6 +806,14 @@
             <h4>Jest</h4>
             <p>A delightful JavaScript testing framework with a focus on simplicity. Jest works with React, Node, and more, offering zero-config setup and snapshot testing.</p>
             <a href="https://jestjs.io/" target="_blank">Learn More →</a>
+          </div>
+        </div>
+        <div class="tech-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" alt="GraphQL" />
+          <div class="tech-tooltip">
+            <h4>GraphQL</h4>
+            <p>A query language for APIs and a runtime for executing queries. GraphQL provides a complete description of your data and lets clients request exactly what they need.</p>
+            <a href="https://graphql.org/" target="_blank">Learn More →</a>
           </div>
         </div>
       </div>
@@ -1403,24 +1411,8 @@
         chatbotOpen = false;
       }
 
-      // Auto-activate chatbot after 20 seconds
-      setTimeout(function() {
-        if (!chatbotActivated) {
-          const notification = document.getElementById('chatbot-notification');
-          notification.classList.add('show');
-          chatbotActivated = true;
-          
-          // Auto-open the popup after showing notification
-          setTimeout(function() {
-            if (!chatbotOpen) {
-              const popup = document.getElementById('chatbot-popup');
-              popup.classList.add('show');
-              notification.classList.remove('show');
-              chatbotOpen = true;
-            }
-          }, 1500);
-        }
-      }, 20000);
+      // Notification badge is always visible (set in HTML with 'show' class)
+      // Chatbot only opens when user clicks on it
 
       // Close chatbot when clicking outside
       document.addEventListener('click', function(e) {
