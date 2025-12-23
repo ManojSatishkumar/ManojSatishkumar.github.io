@@ -764,6 +764,208 @@
         </div>
         </div>
     
+    <!-- About Me Modal (macOS style) -->
+    <div id="about-modal-overlay" class="about-modal-overlay" onclick="closeAboutModal()">
+      <div class="about-modal" onclick="event.stopPropagation()">
+        <button class="about-close-btn" onclick="closeAboutModal()">×</button>
+        
+        <div class="about-modal-content">
+          <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="about-photo" />
+          
+          <h1 class="about-name">Manoj Satishkumar</h1>
+          <p class="about-subtitle">Staff Software Engineer</p>
+          
+          <div class="about-specs">
+            <div class="spec-row">
+              <span class="spec-label">Role</span>
+              <span class="spec-value">Staff Software Engineer</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Company</span>
+              <span class="spec-value">Walmart Global Tech</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Experience</span>
+              <span class="spec-value">12.5+ Years</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Expertise</span>
+              <span class="spec-value">JavaScript, React</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Location</span>
+              <span class="spec-value">Bengaluru, India</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Visa</span>
+              <span class="spec-value">US B1/B2</span>
+            </div>
+          </div>
+          
+          <button class="about-more-info" onclick="window.location.href='#intro'; closeAboutModal();">More Info...</button>
+          
+          <div class="about-footer">
+            <a href="https://www.linkedin.com/in/manojsatishkumar/" target="_blank">LinkedIn</a>
+            <span>•</span>
+            <a href="https://github.com/ManojSatishkumar" target="_blank">GitHub</a>
+            <span>•</span>
+            <a href="mailto:88manojs@gmail.com">Email</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      /* About Modal Styles */
+      .about-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s ease;
+      }
+
+      .about-modal-overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .about-modal {
+        position: relative;
+        width: 320px;
+        background: linear-gradient(180deg, #f5f5f7 0%, #e8e8ec 100%);
+        border-radius: 12px;
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transform: scale(0.9);
+        transition: transform 0.2s ease;
+      }
+
+      .about-modal-overlay.show .about-modal {
+        transform: scale(1);
+      }
+
+      .about-close-btn {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 28px;
+        height: 28px;
+        border: none;
+        background: rgba(0, 0, 0, 0.06);
+        border-radius: 50%;
+        font-size: 20px;
+        line-height: 1;
+        color: rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .about-close-btn:hover {
+        background: rgba(0, 0, 0, 0.12);
+        color: rgba(0, 0, 0, 0.8);
+      }
+
+      .about-modal-content {
+        padding: 24px 32px 20px;
+        text-align: center;
+      }
+
+      .about-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .about-name {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+        font-size: 24px;
+        font-weight: 500;
+        color: #1d1d1f;
+        margin: 0 0 4px 0;
+        letter-spacing: -0.5px;
+      }
+
+      .about-subtitle {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        font-size: 13px;
+        color: rgba(0, 0, 0, 0.5);
+        margin: 0 0 20px 0;
+      }
+
+      .about-specs {
+        text-align: left;
+        margin-bottom: 20px;
+      }
+
+      .spec-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 0;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        font-size: 13px;
+      }
+
+      .spec-label {
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: 500;
+      }
+
+      .spec-value {
+        color: rgba(0, 0, 0, 0.85);
+        text-align: right;
+      }
+
+      .about-more-info {
+        background: linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%);
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 6px;
+        color: rgba(0, 0, 0, 0.85);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        font-size: 13px;
+        padding: 8px 24px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-bottom: 16px;
+      }
+
+      .about-more-info:hover {
+        background: linear-gradient(180deg, #f5f5f7 0%, #e8e8ec 100%);
+      }
+
+      .about-footer {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        font-size: 11px;
+        color: rgba(0, 0, 0, 0.4);
+      }
+
+      .about-footer a {
+        color: #007aff;
+        text-decoration: none;
+      }
+
+      .about-footer a:hover {
+        text-decoration: underline;
+      }
+
+      .about-footer span {
+        margin: 0 6px;
+      }
+    </style>
+
     <!-- Right Tech Stack Sidebar -->
     <div class="tech-sidebar">
       <div class="tech-icons">
@@ -789,7 +991,7 @@
             <h4>JavaScript</h4>
             <p>A versatile programming language that enables interactive web pages. It's essential for modern web development, powering both frontend and backend applications.</p>
             <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">Learn More →</a>
-          </div>
+        </div>
         </div>
         <div class="tech-icon">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" />
@@ -959,6 +1161,7 @@
       </div>
     </div>
 
+    <br />
     <br />
 
     <div id="intro" class="text-left"></div>
@@ -1181,6 +1384,93 @@
         </div>
       </div>
     </div>
+
+    <!-- Scroll Indicator -->
+    <div id="scroll-indicator" class="scroll-indicator" onclick="handleScrollIndicatorClick()">
+      <div class="scroll-arrow-down">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </div>
+      <div class="scroll-arrow-up">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+      </div>
+    </div>
+
+    <style>
+      /* Scroll Indicator Styles */
+      .scroll-indicator {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        width: 44px;
+        height: 44px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 999;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .scroll-indicator:hover {
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+        transform: scale(1.05);
+      }
+
+      .scroll-arrow-down,
+      .scroll-arrow-up {
+        position: absolute;
+        color: #333;
+        transition: all 0.3s ease;
+      }
+
+      .scroll-arrow-down {
+        opacity: 1;
+        animation: bounceDown 1.5s ease-in-out infinite;
+      }
+
+      .scroll-arrow-up {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      .scroll-indicator.at-bottom .scroll-arrow-down {
+        opacity: 0;
+        transform: scale(0.8);
+        animation: none;
+      }
+
+      .scroll-indicator.at-bottom .scroll-arrow-up {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      @keyframes bounceDown {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(4px);
+        }
+      }
+
+      /* Hide on mobile to avoid conflict with mobile nav */
+      @media (max-width: 1024px) {
+        .scroll-indicator {
+          display: none;
+        }
+      }
+    </style>
 
     <style>
       /* Chatbot Widget Styles */
@@ -1510,6 +1800,55 @@
         const widget = document.getElementById('chatbot-widget');
         if (chatbotOpen && !widget.contains(e.target)) {
           closeChatbot();
+        }
+      });
+
+      // Scroll Indicator functions
+      function handleScrollIndicatorClick() {
+        const indicator = document.getElementById('scroll-indicator');
+        if (indicator.classList.contains('at-bottom')) {
+          // Scroll to top
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          // Scroll down by viewport height
+          window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+        }
+      }
+
+      function updateScrollIndicator() {
+        const indicator = document.getElementById('scroll-indicator');
+        if (!indicator) return;
+        
+        const scrollTop = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        
+        // Check if near bottom (within 100px)
+        if (scrollTop + windowHeight >= documentHeight - 100) {
+          indicator.classList.add('at-bottom');
+        } else {
+          indicator.classList.remove('at-bottom');
+        }
+      }
+
+      window.addEventListener('scroll', updateScrollIndicator);
+      window.addEventListener('load', updateScrollIndicator);
+
+      // About Modal functions
+      function openAboutModal() {
+        document.getElementById('about-modal-overlay').classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeAboutModal() {
+        document.getElementById('about-modal-overlay').classList.remove('show');
+        document.body.style.overflow = '';
+      }
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeAboutModal();
         }
       });
     </script>

@@ -181,7 +181,7 @@ p {
 /*  Navbar Top
 /*-----------------------------------------------------------------------------------*/
 
-nav {
+nav:not(.macos-menubar) {
   position: fixed;
   background: #fff;
   z-index: 1000;
