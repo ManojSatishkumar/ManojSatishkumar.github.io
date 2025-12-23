@@ -85,17 +85,111 @@
     </div>
   </div>
 
+  <!-- Experience Timer (macOS clock style) -->
+  <div class="menubar-timer-container">
+    <div class="menubar-timer">
+      <span id="menubar-exp-years">12</span><span class="timer-suffix">y</span>
+      <span id="menubar-exp-months">05</span><span class="timer-suffix">m</span>
+      <span id="menubar-exp-days">22</span><span class="timer-suffix">d</span>
+      <span class="timer-divider">•</span>
+      <span id="menubar-exp-time">11:09:50</span>
+    </div>
+    
+    <!-- Experience Dropdown -->
+    <div class="experience-dropdown" id="experience-dropdown">
+      <div class="exp-dropdown-header">
+        <div class="exp-title">Professional Experience</div>
+        <div class="exp-subtitle">July 1, 2013 — Present</div>
+      </div>
+      
+      <div class="exp-stats-grid">
+        <div class="exp-stat-card">
+          <div class="exp-stat-value" id="dropdown-years">12</div>
+          <div class="exp-stat-label">Years</div>
+        </div>
+        <div class="exp-stat-card">
+          <div class="exp-stat-value" id="dropdown-months">05</div>
+          <div class="exp-stat-label">Months</div>
+        </div>
+        <div class="exp-stat-card">
+          <div class="exp-stat-value" id="dropdown-days">22</div>
+          <div class="exp-stat-label">Days</div>
+        </div>
+      </div>
+      
+      <div class="exp-progress-section">
+        <div class="exp-progress-label">Journey Progress</div>
+        <div class="exp-progress-bar">
+          <div class="exp-progress-fill" id="exp-progress-fill"></div>
+        </div>
+        <div class="exp-progress-years">
+          <span>2013</span>
+          <span>2017</span>
+          <span>2021</span>
+          <span>2025</span>
+          <span>2030</span>
+        </div>
+      </div>
+      
+      <div class="exp-milestones">
+        <div class="exp-milestone current">
+          <div class="exp-milestone-dot"></div>
+          <div class="exp-milestone-content">
+            <div class="exp-milestone-year">2022</div>
+            <div class="exp-milestone-text">Staff Software Engineer</div>
+          </div>
+        </div>
+        <div class="exp-milestone">
+          <div class="exp-milestone-dot"></div>
+          <div class="exp-milestone-content">
+            <div class="exp-milestone-year">2021</div>
+            <div class="exp-milestone-text">Member of Technical Staff</div>
+          </div>
+        </div>
+        <div class="exp-milestone">
+          <div class="exp-milestone-dot"></div>
+          <div class="exp-milestone-content">
+            <div class="exp-milestone-year">2019</div>
+            <div class="exp-milestone-text">Technical Team Lead</div>
+          </div>
+        </div>
+        <div class="exp-milestone">
+          <div class="exp-milestone-dot"></div>
+          <div class="exp-milestone-content">
+            <div class="exp-milestone-year">2017</div>
+            <div class="exp-milestone-text">Senior Software Engineer</div>
+          </div>
+        </div>
+        <div class="exp-milestone">
+          <div class="exp-milestone-dot"></div>
+          <div class="exp-milestone-content">
+            <div class="exp-milestone-year">2013</div>
+            <div class="exp-milestone-text">Software Engineer</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="exp-total-time">
+        <div class="exp-total-label">Total Time in Tech</div>
+        <div class="exp-total-value">
+          <span id="dropdown-total-hours">0</span> hours
+          <span class="exp-total-sub">(<span id="dropdown-total-mins">0</span> minutes)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </nav>
 
 <!-- Mobile navbar toggle (hidden on desktop) -->
 <!-- <button
   class="navbar-toggler d-lg-none"
-  type="button"
-  data-toggle="collapse"
+    type="button"
+    data-toggle="collapse"
   data-target="#mobileNavContent"
   aria-controls="mobileNavContent"
-  aria-expanded="false"
-  aria-label="Toggle navigation"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
   style="
     position: fixed;
     top: 8px;
@@ -106,8 +200,8 @@
     border-radius: 8px;
     padding: 8px 12px;
   "
->
-  <span class="navbar-toggler-icon"></span>
+  >
+    <span class="navbar-toggler-icon"></span>
 </button> -->
 
 <style>
@@ -239,6 +333,241 @@
     min-width: 280px;
   }
 
+  /* Menubar Timer Container */
+  .menubar-timer-container {
+    position: relative;
+    margin-left: auto;
+  }
+
+  /* Menubar Timer (macOS clock style) */
+  .menubar-timer {
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(0,0,0,0.6);
+    font-family: 'SF Mono', 'Fira Code', -apple-system, monospace;
+    display: flex;
+        align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.15s ease;
+  }
+
+  .menubar-timer:hover {
+    background: rgba(0,0,0,0.06);
+  }
+
+  .menubar-timer span:not(.timer-suffix):not(.timer-divider) {
+    font-weight: 600;
+    color: rgba(0,0,0,0.85);
+  }
+
+  .menubar-timer .timer-suffix {
+    font-weight: 400;
+    color: rgba(0,0,0,0.5);
+    font-size: 10px;
+    margin-right: 4px;
+  }
+
+  .menubar-timer .timer-divider {
+    font-weight: 400;
+    color: rgba(0,0,0,0.3);
+    margin: 0 6px;
+    font-size: 8px;
+  }
+
+  #menubar-exp-time {
+    letter-spacing: 0.5px;
+  }
+
+  /* Experience Dropdown */
+  .experience-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 380px;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.1);
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px) scale(0.98);
+    transition: all 0.2s ease;
+    z-index: 1002;
+  }
+
+  .experience-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  .exp-dropdown-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .exp-title {
+        font-size: 16px;
+        font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+  }
+
+  .exp-subtitle {
+    font-size: 12px;
+    color: #888;
+  }
+
+  .exp-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .exp-stat-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 10px;
+    padding: 16px 12px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .exp-stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    line-height: 1;
+  }
+
+  .exp-stat-label {
+    font-size: 11px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 6px;
+  }
+
+  .exp-progress-section {
+    margin-bottom: 20px;
+  }
+
+  .exp-progress-label {
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .exp-progress-bar {
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .exp-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+
+  .exp-progress-years {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 10px;
+    color: #999;
+  }
+
+  .exp-milestones {
+    margin-bottom: 20px;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 10px;
+  }
+
+  .exp-milestone {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    position: relative;
+  }
+
+  .exp-milestone:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 22px;
+    bottom: -8px;
+    width: 2px;
+    background: #ddd;
+  }
+
+  .exp-milestone-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .exp-milestone.current .exp-milestone-dot {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+  }
+
+  .exp-milestone-year {
+    font-size: 11px;
+    font-weight: 600;
+    color: #666;
+  }
+
+  .exp-milestone-text {
+    font-size: 12px;
+    color: #333;
+  }
+
+  .exp-total-time {
+    text-align: center;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .exp-total-label {
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .exp-total-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  .exp-total-sub {
+    font-size: 11px;
+    color: #888;
+    font-weight: 400;
+  }
+
   /* Hide on mobile */
   @media (max-width: 1023px) {
     .macos-menubar {
@@ -254,28 +583,101 @@
   }
 </style>
 
-<script
-  async
-  src="https://www.googletagmanager.com/gtag/js?id=UA-128563001-5"
-></script>
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=UA-128563001-5"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "UA-128563001-5");
+  </script>
+  <!-- Bootstrap JS dependencies for navbar toggling -->
+  <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    crossorigin="anonymous"
+  ></script>
+
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    dataLayer.push(arguments);
+  // Show dropdown on hover - use setTimeout to ensure DOM is ready after jQuery .load()
+  setTimeout(function() {
+    const timerContainer = document.querySelector('.menubar-timer-container');
+    const dropdown = document.getElementById('experience-dropdown');
+    
+    if (timerContainer && dropdown) {
+      timerContainer.addEventListener('mouseenter', function() {
+        dropdown.classList.add('active');
+        updateExperienceDropdown();
+      });
+      
+      timerContainer.addEventListener('mouseleave', function() {
+        dropdown.classList.remove('active');
+      });
+      
+      // Also support click
+      timerContainer.addEventListener('click', function() {
+        dropdown.classList.toggle('active');
+        if (dropdown.classList.contains('active')) {
+          updateExperienceDropdown();
+        }
+      });
+    }
+  }, 100);
+
+  function updateExperienceDropdown() {
+    const startDate = new Date(2013, 6, 1); // July 1, 2013
+    const now = new Date();
+    
+    // Calculate difference
+    let years = now.getFullYear() - startDate.getFullYear();
+    let months = now.getMonth() - startDate.getMonth();
+    let days = now.getDate() - startDate.getDate();
+    
+    if (days < 0) {
+      months--;
+      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+      days += prevMonth.getDate();
+    }
+    if (months < 0) {
+      months += 12;
+      years--;
+    }
+    
+    // Update stats
+    const dropdownYears = document.getElementById('dropdown-years');
+    const dropdownMonths = document.getElementById('dropdown-months');
+    const dropdownDays = document.getElementById('dropdown-days');
+    
+    if (dropdownYears) dropdownYears.textContent = String(years).padStart(2, '0');
+    if (dropdownMonths) dropdownMonths.textContent = String(months).padStart(2, '0');
+    if (dropdownDays) dropdownDays.textContent = String(days).padStart(2, '0');
+    
+    // Calculate total hours and minutes
+    const totalMs = now - startDate;
+    const totalHours = Math.floor(totalMs / (1000 * 60 * 60));
+    const totalMins = Math.floor(totalMs / (1000 * 60));
+    
+    const dropdownTotalHours = document.getElementById('dropdown-total-hours');
+    const dropdownTotalMins = document.getElementById('dropdown-total-mins');
+    
+    if (dropdownTotalHours) dropdownTotalHours.textContent = totalHours.toLocaleString();
+    if (dropdownTotalMins) dropdownTotalMins.textContent = totalMins.toLocaleString();
+    
+    // Update progress bar (2013 to 2030 = 17 years)
+    const progressFill = document.getElementById('exp-progress-fill');
+    const yearsFloat = (now - startDate) / (1000 * 60 * 60 * 24 * 365.25);
+    const progressPercent = Math.min((yearsFloat / 17) * 100, 100);
+    if (progressFill) progressFill.style.width = progressPercent + '%';
   }
-  gtag("js", new Date());
-  gtag("config", "UA-128563001-5");
 </script>
-<!-- Bootstrap JS dependencies for navbar toggling -->
-<script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  crossorigin="anonymous"
-></script>
-<script
-  src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-  crossorigin="anonymous"
-></script>
-<script
-  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-  crossorigin="anonymous"
-></script>

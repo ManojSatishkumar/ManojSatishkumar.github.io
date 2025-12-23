@@ -393,6 +393,16 @@
     document.getElementById('exp-hours').textContent = String(hours).padStart(2, '0');
     document.getElementById('exp-minutes').textContent = String(minutes).padStart(2, '0');
     document.getElementById('exp-seconds').textContent = String(seconds).padStart(2, '0');
+    
+    // Update menubar timer if it exists
+    const menubarYears = document.getElementById('menubar-exp-years');
+    const menubarMonths = document.getElementById('menubar-exp-months');
+    const menubarDays = document.getElementById('menubar-exp-days');
+    const menubarTime = document.getElementById('menubar-exp-time');
+    if (menubarYears) menubarYears.textContent = String(years).padStart(2, '0');
+    if (menubarMonths) menubarMonths.textContent = String(months).padStart(2, '0');
+    if (menubarDays) menubarDays.textContent = String(days).padStart(2, '0');
+    if (menubarTime) menubarTime.textContent = String(hours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
   }
   
   // Update immediately and then every second
