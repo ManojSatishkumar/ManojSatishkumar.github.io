@@ -45,21 +45,6 @@
               <span id="exp-days">00</span>
               <span class="timer-unit-label">Days</span>
             </div>
-            <div class="timer-separator">:</div>
-            <div class="timer-unit">
-              <span id="exp-hours">00</span>
-              <span class="timer-unit-label">Hours</span>
-            </div>
-            <div class="timer-separator">:</div>
-            <div class="timer-unit">
-              <span id="exp-minutes">00</span>
-              <span class="timer-unit-label">Mins</span>
-            </div>
-            <div class="timer-separator">:</div>
-            <div class="timer-unit">
-              <span id="exp-seconds">00</span>
-              <span class="timer-unit-label">Secs</span>
-            </div>
           </div>
         </div>
       </div>
@@ -282,8 +267,8 @@
   /* Experience Timer Styles */
   .experience-timer {
     background: #f5f5f5;
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: 14px;
+    padding: 16px 24px;
     margin: 0 auto 24px;
     width: fit-content;
     border: 1px solid #e0e0e0;
@@ -302,7 +287,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
     flex-wrap: wrap;
   }
 
@@ -310,11 +295,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 38px;
+    min-width: 70px;
   }
 
   .timer-unit span:first-child {
-    font-size: 22px;
+    font-size: 42px;
     font-weight: 700;
     color: #333;
     font-family: 'SF Mono', 'Fira Code', monospace;
@@ -322,32 +307,32 @@
   }
 
   .timer-unit-label {
-    font-size: 8px;
+    font-size: 11px;
     color: #888;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-top: 2px;
+    margin-top: 6px;
   }
 
   .timer-separator {
-    font-size: 18px;
+    font-size: 32px;
     font-weight: 300;
     color: #bbb;
-    margin-top: -8px;
+    margin-top: -12px;
   }
 
   @media (max-width: 600px) {
     .timer-unit span:first-child {
-      font-size: 18px;
+      font-size: 32px;
     }
     .timer-unit {
-      min-width: 32px;
+      min-width: 55px;
     }
     .timer-separator {
-      font-size: 14px;
+      font-size: 24px;
     }
     .experience-timer {
-      padding: 10px 14px;
+      padding: 12px 18px;
     }
   }
 </style>
@@ -387,22 +372,21 @@
       years--;
     }
     
-    document.getElementById('exp-years').textContent = String(years).padStart(2, '0');
-    document.getElementById('exp-months').textContent = String(months).padStart(2, '0');
-    document.getElementById('exp-days').textContent = String(days).padStart(2, '0');
-    document.getElementById('exp-hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('exp-minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('exp-seconds').textContent = String(seconds).padStart(2, '0');
+    // Update Experience section timer
+    const expYears = document.getElementById('exp-years');
+    const expMonths = document.getElementById('exp-months');
+    const expDays = document.getElementById('exp-days');
+    if (expYears) expYears.textContent = String(years).padStart(2, '0');
+    if (expMonths) expMonths.textContent = String(months).padStart(2, '0');
+    if (expDays) expDays.textContent = String(days).padStart(2, '0');
     
     // Update menubar timer if it exists
     const menubarYears = document.getElementById('menubar-exp-years');
     const menubarMonths = document.getElementById('menubar-exp-months');
     const menubarDays = document.getElementById('menubar-exp-days');
-    const menubarTime = document.getElementById('menubar-exp-time');
     if (menubarYears) menubarYears.textContent = String(years).padStart(2, '0');
     if (menubarMonths) menubarMonths.textContent = String(months).padStart(2, '0');
     if (menubarDays) menubarDays.textContent = String(days).padStart(2, '0');
-    if (menubarTime) menubarTime.textContent = String(hours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
   }
   
   // Update immediately and then every second
