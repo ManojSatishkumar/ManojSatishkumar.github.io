@@ -51,8 +51,9 @@
     transition: transform 0.2s, box-shadow 0.2s;
     margin-bottom: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: visible;
     height: 100%;
+    position: relative;
   }
 
   .project-card:hover {
@@ -80,10 +81,21 @@
   }
 
   .project-number {
-    display: none;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: rgb(162, 162, 162)
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #b0b8c4 0%, #9ca3af 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(156, 163, 175, 0.3);
+    z-index: 10;
   }
 
   .project-title {
@@ -218,7 +230,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="project-card shadow-sm">
           <div class="project-header">
-            <span class="project-number">#12</span>
+            <span class="project-number">12</span>
             <span class="project-title">Multi Tenancy</span>
             <i class="fas fa-users project-icon"></i>
           </div>
@@ -240,7 +252,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="project-card shadow-sm">
           <div class="project-header">
-            <span class="project-number">#11</span>
+            <span class="project-number">11</span>
             <span class="project-title">WhatsApp Channel</span>
             <i class="fab fa-whatsapp project-icon"></i>
           </div>
@@ -262,7 +274,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="project-card shadow-sm">
           <div class="project-header">
-            <span class="project-number">#10</span>
+            <span class="project-number">10</span>
             <span class="project-title">Internationalization</span>
             <i class="fas fa-globe project-icon"></i>
           </div>
@@ -284,7 +296,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="project-card shadow-sm">
           <div class="project-header">
-            <span class="project-number">#09</span>
+            <span class="project-number">09</span>
             <span class="project-title">Template Builder</span>
             <i class="fas fa-th-large project-icon"></i>
           </div>
@@ -306,7 +318,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="project-card shadow-sm">
           <div class="project-header">
-            <span class="project-number">#08</span>
+            <span class="project-number">08</span>
             <span class="project-title">Component Library</span>
             <i class="fas fa-cubes project-icon"></i>
           </div>
@@ -328,7 +340,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="project-card shadow-sm">
           <div class="project-header">
-            <span class="project-number">#07</span>
+            <span class="project-number">07</span>
             <span class="project-title">Merchant Onboarding UI</span>
             <i class="fas fa-user-plus project-icon"></i>
           </div>
@@ -350,7 +362,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="project-card shadow-sm">
           <div class="project-header">
-            <span class="project-number">#06</span>
+            <span class="project-number">06</span>
             <span class="project-title">Email Previewer UI</span>
             <i class="fas fa-envelope project-icon"></i>
           </div>
@@ -372,7 +384,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="project-card shadow-sm">
           <div class="project-header">
-            <span class="project-number">#05</span>
+            <span class="project-number">05</span>
             <span class="project-title">Clinical Note rendition</span>
             <i class="fas fa-file-medical project-icon"></i>
           </div>
@@ -394,7 +406,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="project-card shadow-sm">
           <div class="project-header">
-            <span class="project-number">#04</span>
+            <span class="project-number">04</span>
             <span class="project-title">Quick Charting UI</span>
             <i class="fas fa-notes-medical project-icon"></i>
           </div>
@@ -416,7 +428,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="project-card shadow-sm">
           <div class="project-header">
-            <span class="project-number">#03</span>
+            <span class="project-number">03</span>
             <span class="project-title">MPage UI</span>
             <i class="fas fa-code project-icon"></i>
           </div>
@@ -438,7 +450,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="project-card shadow-sm">
           <div class="project-header">
-            <span class="project-number">#02</span>
+            <span class="project-number">02</span>
             <span class="project-title">SAS SSD Validation UI</span>
             <i class="fas fa-hdd project-icon"></i>
           </div>
@@ -460,7 +472,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="project-card shadow-sm">
           <div class="project-header">
-            <span class="project-number">#01</span>
+            <span class="project-number">01</span>
             <span class="project-title">SAS HBA Validation</span>
             <i class="fas fa-microchip project-icon"></i>
           </div>
