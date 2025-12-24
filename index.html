@@ -1538,7 +1538,6 @@
         visibility: hidden;
         transform: translateY(20px) scale(0.95);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        overflow: hidden;
       }
 
       .chatbot-popup.show {
@@ -1547,12 +1546,26 @@
         transform: translateY(0) scale(1);
       }
 
+      .chatbot-popup::after {
+        content: '';
+        position: absolute;
+        bottom: -14px;
+        right: 18px;
+        width: 0;
+        height: 0;
+        border-left: 14px solid transparent;
+        border-right: 14px solid transparent;
+        border-top: 14px solid white;
+        filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.1));
+      }
+
       .chatbot-header {
         background: linear-gradient(135deg, #007bff 0%, #17a2b8 100%);
         padding: 16px;
         display: flex;
         align-items: center;
         gap: 12px;
+        border-radius: 20px 20px 0 0;
       }
 
       .chatbot-header-avatar {
@@ -1772,7 +1785,16 @@
       }
 
       // Notification badge is always visible (set in HTML with 'show' class)
-      // Chatbot only opens when user clicks on it
+      // Auto-open chatbot after 30 seconds
+      setTimeout(function() {
+        if (!chatbotOpen) {
+          const popup = document.getElementById('chatbot-popup');
+          const notification = document.getElementById('chatbot-notification');
+          popup.classList.add('show');
+          notification.classList.remove('show');
+          chatbotOpen = true;
+        }
+      }, 30000);
 
       // Close chatbot when clicking outside
       document.addEventListener('click', function(e) {
