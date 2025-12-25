@@ -722,6 +722,78 @@
           display: none;
         }
       }
+
+      /* ===== Navigation Slide-in Animations ===== */
+      
+      /* Top Menu Bar - slides from top */
+      #desktop-nav-bar {
+        opacity: 0;
+      }
+      
+      #desktop-nav-bar .macos-menubar {
+        transform: translateY(-100%);
+        transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.7s ease;
+        opacity: 0;
+      }
+      
+      #desktop-nav-bar.slide-in .macos-menubar {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      
+      #desktop-nav-bar.slide-in {
+        opacity: 1;
+      }
+      
+      /* Left Dock - slides from left using left position */
+      .nav-bar-fixed {
+        left: -100px !important;
+        opacity: 0 !important;
+        transition: left 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease !important;
+      }
+      
+      .nav-bar-fixed.slide-in {
+        left: 20px !important;
+        opacity: 1 !important;
+      }
+      
+      /* Right Chatbot Widget - slides from right */
+      .chatbot-widget {
+        right: -100px !important;
+        opacity: 0 !important;
+        transition: right 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease !important;
+      }
+      
+      .chatbot-widget.slide-in {
+        right: 24px !important;
+        opacity: 1 !important;
+      }
+      
+      /* Scroll Indicator - slides from left bottom */
+      .scroll-indicator {
+        left: -100px !important;
+        opacity: 0 !important;
+        transition: left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease !important;
+      }
+      
+      .scroll-indicator.slide-in {
+        left: 30px !important;
+        opacity: 1 !important;
+      }
+      
+      /* Right Tech Sidebar - slides from right */
+      .tech-sidebar {
+        right: -100px !important;
+        opacity: 0 !important;
+        transition: right 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease !important;
+      }
+      
+      .tech-sidebar.slide-in {
+        right: 20px !important;
+        opacity: 1 !important;
+      }
+      
+      /* ===== End Navigation Animations ===== */
     </style>
 
     <!-- Google Analytics -->
@@ -1341,7 +1413,7 @@
       }
     </script>
     
-    <!-- Splash Screen Handler -->
+    <!-- Splash Screen Handler with Navigation Slide-in Animations -->
     <script>
       window.addEventListener("load", function() {
         // Wait for all content to load, then hide splash screen
@@ -1349,7 +1421,49 @@
           const splashScreen = document.getElementById("splash-screen");
           if (splashScreen) {
             splashScreen.classList.add("hidden");
-            // Remove from DOM after animation completes
+            
+            // Trigger navigation slide-in animations with staggered delays
+            // Top menu bar slides first (wait a bit for jQuery to load content)
+            setTimeout(function() {
+              const desktopNavBar = document.getElementById("desktop-nav-bar");
+              if (desktopNavBar) {
+                desktopNavBar.classList.add("slide-in");
+              }
+            }, 300);
+            
+            // Left dock slides in
+            setTimeout(function() {
+              const navBarFixed = document.querySelector(".nav-bar-fixed");
+              if (navBarFixed) {
+                navBarFixed.classList.add("slide-in");
+              }
+            }, 500);
+            
+            // Right tech sidebar slides in
+            setTimeout(function() {
+              const techSidebar = document.querySelector(".tech-sidebar");
+              if (techSidebar) {
+                techSidebar.classList.add("slide-in");
+              }
+            }, 700);
+            
+            // Right chatbot widget slides in
+            setTimeout(function() {
+              const chatbotWidget = document.querySelector(".chatbot-widget");
+              if (chatbotWidget) {
+                chatbotWidget.classList.add("slide-in");
+              }
+            }, 850);
+            
+            // Scroll indicator slides in
+            setTimeout(function() {
+              const scrollIndicator = document.querySelector(".scroll-indicator");
+              if (scrollIndicator) {
+                scrollIndicator.classList.add("slide-in");
+              }
+            }, 1000);
+            
+            // Remove splash from DOM after animation completes
             setTimeout(function() {
               splashScreen.remove();
             }, 600);
