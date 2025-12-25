@@ -140,7 +140,7 @@
           color: #333;
           box-shadow: 0 4px 20px rgba(102,126,234,0.15);
         ">
-          <strong style="color: #667eea;">12+ years</strong> of crafting <strong>highly scalable, multi-tenant frontend systems</strong> at massive global scale. I architect world-class web platforms that power <strong>exceptional user experiences</strong> for millions.
+          <strong onclick="openExpModal()" style="color: #667eea; cursor: pointer; border-bottom: 2px dashed #667eea;">12+ years</strong> of crafting <strong>highly scalable, multi-tenant frontend systems</strong> at massive global scale. I architect world-class web platforms that power <strong>exceptional user experiences</strong> for millions.
         </div>
 
         <!-- Walmart Experience & Key Achievement -->
@@ -201,6 +201,95 @@
   </div>
 </div>
 <br /><br />
+
+<!-- Experience Modal Dialog (macOS style) -->
+<div id="exp-modal-overlay" class="exp-modal-overlay" onclick="closeExpModal()">
+  <div class="exp-modal" onclick="event.stopPropagation()">
+    <button class="exp-close-btn" onclick="closeExpModal()">×</button>
+    
+    <div class="exp-modal-content">
+      <div class="exp-dropdown-header">
+        <div class="exp-title">Professional Experience</div>
+        <div class="exp-subtitle">July 1, 2013 — Present</div>
+      </div>
+      
+      <div class="exp-stats-grid">
+        <div class="exp-stat-card">
+          <div class="exp-stat-value" id="modal-years">12</div>
+          <div class="exp-stat-label">Years</div>
+        </div>
+        <div class="exp-stat-card">
+          <div class="exp-stat-value" id="modal-months">05</div>
+          <div class="exp-stat-label">Months</div>
+        </div>
+        <div class="exp-stat-card">
+          <div class="exp-stat-value" id="modal-days">24</div>
+          <div class="exp-stat-label">Days</div>
+        </div>
+      </div>
+      
+      <div class="exp-progress-section">
+        <div class="exp-progress-label">Journey Progress</div>
+        <div class="exp-progress-bar">
+          <div class="exp-progress-fill" id="modal-progress-fill"></div>
+        </div>
+        <div class="exp-progress-years">
+          <span>2013</span>
+          <span>2017</span>
+          <span>2021</span>
+          <span>2025</span>
+          <span>2030</span>
+        </div>
+      </div>
+      
+      <div class="exp-milestones">
+        <div class="exp-milestone current">
+          <div class="exp-milestone-dot"></div>
+          <div class="exp-milestone-content">
+            <div class="exp-milestone-year">2022</div>
+            <div class="exp-milestone-text">Staff Software Engineer</div>
+          </div>
+        </div>
+        <div class="exp-milestone">
+          <div class="exp-milestone-dot"></div>
+          <div class="exp-milestone-content">
+            <div class="exp-milestone-year">2021</div>
+            <div class="exp-milestone-text">Member of Technical Staff</div>
+          </div>
+        </div>
+        <div class="exp-milestone">
+          <div class="exp-milestone-dot"></div>
+          <div class="exp-milestone-content">
+            <div class="exp-milestone-year">2019</div>
+            <div class="exp-milestone-text">Technical Team Lead</div>
+          </div>
+        </div>
+        <div class="exp-milestone">
+          <div class="exp-milestone-dot"></div>
+          <div class="exp-milestone-content">
+            <div class="exp-milestone-year">2017</div>
+            <div class="exp-milestone-text">Senior Software Engineer</div>
+          </div>
+        </div>
+        <div class="exp-milestone">
+          <div class="exp-milestone-dot"></div>
+          <div class="exp-milestone-content">
+            <div class="exp-milestone-year">2013</div>
+            <div class="exp-milestone-text">Software Engineer</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="exp-total-time">
+        <div class="exp-total-label">Total Time in Tech</div>
+        <div class="exp-total-value">
+          <span id="modal-total-hours">109,455</span> hours
+          <span class="exp-total-sub">(<span id="modal-total-mins">6,567,341</span> minutes)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Portal Modal Dialog (macOS style) -->
 <div id="portal-modal-overlay" class="portal-modal-overlay" onclick="closePortalModal()">
@@ -286,6 +375,242 @@
 </div>
 
 <style>
+  /* Experience Modal Styles (macOS style like About Me) */
+  .exp-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+  }
+
+  .exp-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .exp-modal {
+    position: relative;
+    width: 420px;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: linear-gradient(180deg, #f5f5f7 0%, #e8e8ec 100%);
+    border-radius: 14px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35), 0 0 1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.25s ease;
+  }
+
+  .exp-modal-overlay.show .exp-modal {
+    transform: scale(1);
+  }
+
+  .exp-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .exp-close-btn:hover {
+    background: rgba(0, 0, 0, 0.12);
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .exp-modal-content {
+    padding: 28px 32px;
+    overflow-y: auto;
+    max-height: 85vh;
+  }
+
+  .exp-dropdown-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .exp-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    background: linear-gradient(135deg, #a8956b 0%, #8b7355 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 4px;
+  }
+
+  .exp-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .exp-stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .exp-stat-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 28px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .exp-stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .exp-stat-label {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .exp-progress-section {
+    margin-bottom: 24px;
+  }
+
+  .exp-progress-label {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .exp-progress-bar {
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+
+  .exp-progress-fill {
+    height: 100%;
+    width: 70%;
+    background: linear-gradient(90deg, #4ade80 0%, #667eea 100%);
+    border-radius: 4px;
+  }
+
+  .exp-progress-years {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: #999;
+  }
+
+  .exp-milestones {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .exp-milestone {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    position: relative;
+  }
+
+  .exp-milestone:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 24px;
+    bottom: -8px;
+    width: 2px;
+    background: #e0e0e0;
+  }
+
+  .exp-milestone.current .exp-milestone-dot {
+    background: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+  }
+
+  .exp-milestone-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ccc;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .exp-milestone-content {
+    flex: 1;
+  }
+
+  .exp-milestone-year {
+    font-size: 0.75rem;
+    color: #888;
+  }
+
+  .exp-milestone-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .exp-total-time {
+    text-align: center;
+    padding-top: 16px;
+    border-top: 1px solid #ddd;
+  }
+
+  .exp-total-label {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .exp-total-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .exp-total-sub {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: #888;
+  }
+
   /* Portal Modal Styles (macOS style like About Me) */
   .portal-modal-overlay {
     position: fixed;
@@ -630,6 +955,50 @@
     $("#profile-card").load("/components/side-profile.html");
   });
   
+  // Experience Modal functions
+  function openExpModal() {
+    document.getElementById('exp-modal-overlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+    updateExpModalTime();
+  }
+
+  function closeExpModal() {
+    document.getElementById('exp-modal-overlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  function updateExpModalTime() {
+    const startDate = new Date('2013-07-01');
+    const now = new Date();
+    const diff = now - startDate;
+    
+    const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+    const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
+    const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
+    
+    const totalHours = Math.floor(diff / (1000 * 60 * 60));
+    const totalMins = Math.floor(diff / (1000 * 60));
+    
+    // Update modal values
+    const yearsEl = document.getElementById('modal-years');
+    const monthsEl = document.getElementById('modal-months');
+    const daysEl = document.getElementById('modal-days');
+    const hoursEl = document.getElementById('modal-total-hours');
+    const minsEl = document.getElementById('modal-total-mins');
+    const progressEl = document.getElementById('modal-progress-fill');
+    
+    if (yearsEl) yearsEl.textContent = years.toString().padStart(2, '0');
+    if (monthsEl) monthsEl.textContent = months.toString().padStart(2, '0');
+    if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+    if (hoursEl) hoursEl.textContent = totalHours.toLocaleString();
+    if (minsEl) minsEl.textContent = totalMins.toLocaleString();
+    
+    // Calculate progress (2013-2030 = 17 years)
+    const totalYears = 17;
+    const progressPercent = Math.min((years / totalYears) * 100, 100);
+    if (progressEl) progressEl.style.width = progressPercent + '%';
+  }
+
   // Portal Modal functions
   function openPortalModal() {
     document.getElementById('portal-modal-overlay').classList.add('show');
@@ -644,6 +1013,11 @@
   // Close modal with Escape key
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
+      const expModal = document.getElementById('exp-modal-overlay');
+      if (expModal && expModal.classList.contains('show')) {
+        closeExpModal();
+        return;
+      }
       const portalModal = document.getElementById('portal-modal-overlay');
       if (portalModal && portalModal.classList.contains('show')) {
         closePortalModal();
