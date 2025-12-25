@@ -109,150 +109,6 @@
         font-style: normal;
       }
 
-      /* Splash/Loading Screen Styles */
-      #splash-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 50%, #e8f4fc 100%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        transition: opacity 0.6s ease, visibility 0.6s ease;
-      }
-
-      #splash-screen.hidden {
-        opacity: 0;
-        visibility: hidden;
-      }
-
-      .splash-content {
-        text-align: center;
-        animation: fadeInScale 0.8s ease-out;
-      }
-
-      @keyframes fadeInScale {
-        0% {
-          opacity: 0;
-          transform: scale(0.8);
-        }
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-      }
-
-      .logo-container {
-        position: relative;
-        width: 150px;
-        height: 150px;
-        margin: 0 auto 30px;
-      }
-
-      .splash-logo {
-        width: 130px;
-        height: 130px;
-        border-radius: 50%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        box-shadow: 0 10px 40px rgba(0, 123, 255, 0.2);
-        z-index: 2;
-        animation: logoPulse 2s ease-in-out infinite;
-      }
-
-      @keyframes logoPulse {
-        0%, 100% {
-          transform: translate(-50%, -50%) scale(1);
-        }
-        50% {
-          transform: translate(-50%, -50%) scale(1.05);
-        }
-      }
-
-      .logo-ring {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        border: 3px solid transparent;
-        border-top-color: #007bff;
-        border-right-color: #17a2b8;
-        animation: spinRing 1.2s linear infinite;
-      }
-
-      @keyframes spinRing {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      .splash-loader {
-        display: flex;
-        justify-content: center;
-        gap: 8px;
-        margin-bottom: 20px;
-      }
-
-      .loader-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #007bff, #17a2b8);
-        animation: dotBounce 1.4s ease-in-out infinite;
-      }
-
-      .loader-dot:nth-child(1) {
-        animation-delay: 0s;
-      }
-
-      .loader-dot:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-
-      .loader-dot:nth-child(3) {
-        animation-delay: 0.4s;
-      }
-
-      @keyframes dotBounce {
-        0%, 80%, 100% {
-          transform: scale(0.6);
-          opacity: 0.5;
-        }
-        40% {
-          transform: scale(1);
-          opacity: 1;
-        }
-      }
-
-      .splash-text {
-        font-family: 'Poppins', sans-serif;
-        font-size: 14px;
-        color: #6c757d;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        margin: 0;
-        animation: textFade 1.5s ease-in-out infinite;
-      }
-
-      @keyframes textFade {
-        0%, 100% {
-          opacity: 0.5;
-        }
-        50% {
-          opacity: 1;
-        }
-      }
-
       @media only screen and (max-width: 1024px) {
         .nav-bar-fixed {
           display: none;
@@ -835,16 +691,6 @@
   </head>
 
   <body style="padding: 0px; margin: 0px">
-    <!-- Splash/Loading Screen -->
-    <div id="splash-screen">
-      <div class="splash-content">
-        <div class="logo-container">
-          <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="splash-logo" />
-          <div class="logo-ring"></div>
-        </div>
-        </div>
-        </div>
-    
     <!-- About Me Modal (macOS style) -->
     <div id="about-modal-overlay" class="about-modal-overlay" onclick="closeAboutModal()">
       <div class="about-modal" onclick="event.stopPropagation()">
@@ -1417,62 +1263,49 @@
       }
     </script>
     
-    <!-- Splash Screen Handler with Navigation Slide-in Animations -->
+    <!-- Navigation Slide-in Animations on Page Load -->
     <script>
       window.addEventListener("load", function() {
-        // Wait for all content to load, then hide splash screen
+        // Trigger navigation slide-in animations with staggered delays
+        // Top menu bar slides first (wait a bit for jQuery to load content)
         setTimeout(function() {
-          const splashScreen = document.getElementById("splash-screen");
-          if (splashScreen) {
-            splashScreen.classList.add("hidden");
-            
-            // Trigger navigation slide-in animations with staggered delays
-            // Top menu bar slides first (wait a bit for jQuery to load content)
-            setTimeout(function() {
-              const desktopNavBar = document.getElementById("desktop-nav-bar");
-              if (desktopNavBar) {
-                desktopNavBar.classList.add("slide-in");
-              }
-            }, 300);
-            
-            // Left dock slides in
-            setTimeout(function() {
-              const navBarFixed = document.querySelector(".nav-bar-fixed");
-              if (navBarFixed) {
-                navBarFixed.classList.add("slide-in");
-              }
-            }, 500);
-            
-            // Right tech sidebar slides in
-            setTimeout(function() {
-              const techSidebar = document.querySelector(".tech-sidebar");
-              if (techSidebar) {
-                techSidebar.classList.add("slide-in");
-              }
-            }, 700);
-            
-            // Right chatbot widget slides in
-            setTimeout(function() {
-              const chatbotWidget = document.querySelector(".chatbot-widget");
-              if (chatbotWidget) {
-                chatbotWidget.classList.add("slide-in");
-              }
-            }, 850);
-            
-            // Scroll indicator slides in
-            setTimeout(function() {
-              const scrollIndicator = document.querySelector(".scroll-indicator");
-              if (scrollIndicator) {
-                scrollIndicator.classList.add("slide-in");
-              }
-            }, 1000);
-            
-            // Remove splash from DOM after animation completes
-            setTimeout(function() {
-              splashScreen.remove();
-            }, 600);
+          const desktopNavBar = document.getElementById("desktop-nav-bar");
+          if (desktopNavBar) {
+            desktopNavBar.classList.add("slide-in");
           }
-        }, 1500); // Show splash for at least 1.5 seconds
+        }, 200);
+        
+        // Left dock slides in
+        setTimeout(function() {
+          const navBarFixed = document.querySelector(".nav-bar-fixed");
+          if (navBarFixed) {
+            navBarFixed.classList.add("slide-in");
+          }
+        }, 400);
+        
+        // Right tech sidebar slides in
+        setTimeout(function() {
+          const techSidebar = document.querySelector(".tech-sidebar");
+          if (techSidebar) {
+            techSidebar.classList.add("slide-in");
+          }
+        }, 600);
+        
+        // Right chatbot widget slides in
+        setTimeout(function() {
+          const chatbotWidget = document.querySelector(".chatbot-widget");
+          if (chatbotWidget) {
+            chatbotWidget.classList.add("slide-in");
+          }
+        }, 750);
+        
+        // Scroll indicator slides in
+        setTimeout(function() {
+          const scrollIndicator = document.querySelector(".scroll-indicator");
+          if (scrollIndicator) {
+            scrollIndicator.classList.add("slide-in");
+          }
+        }, 900);
       });
     </script>
 
