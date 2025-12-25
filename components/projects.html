@@ -57,6 +57,10 @@
   }
 
   .project-card:hover {
+    /* Animation disabled for most cards */
+  }
+  
+  .project-card.modal-trigger:hover {
     transform: translateY(-6px) scale(1.02);
     box-shadow: 0 8px 32px 0 rgba(34, 34, 59, 0.15);
   }
@@ -294,7 +298,7 @@
       </div>
       <!-- Project #09 -->
       <div class="col-lg-4 col-md-6">
-        <div class="project-card shadow-sm" onclick="openPortalModal()" style="cursor: pointer;">
+        <div class="project-card shadow-sm modal-trigger" onclick="openPortalModal()" style="cursor: pointer;">
           <div class="project-header">
             <span class="project-number">09</span>
             <span class="project-title">Template Builder</span>
