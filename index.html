@@ -1827,16 +1827,16 @@
       }
 
       // Notification badge is always visible (set in HTML with 'show' class)
-      // Auto-open chatbot after 1 minute (60 seconds)
-      setTimeout(function() {
-        if (!chatbotOpen) {
-          const popup = document.getElementById('chatbot-popup');
-          const notification = document.getElementById('chatbot-notification');
-          popup.classList.add('show');
-          notification.classList.remove('show');
-          chatbotOpen = true;
-        }
-      }, 60000);
+      // Auto-open disabled - chatbot only opens on user click
+      // setTimeout(function() {
+      //   if (!chatbotOpen) {
+      //     const popup = document.getElementById('chatbot-popup');
+      //     const notification = document.getElementById('chatbot-notification');
+      //     popup.classList.add('show');
+      //     notification.classList.remove('show');
+      //     chatbotOpen = true;
+      //   }
+      // }, 60000);
 
       // Close chatbot when clicking outside
       document.addEventListener('click', function(e) {
