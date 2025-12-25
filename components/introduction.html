@@ -166,7 +166,7 @@
           <div style="background: #f8f9fa; padding: 16px; border-radius: 8px;">
             <div style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">🚀 Key Achievement</div>
             <p style="font-size: 0.95rem; line-height: 1.7; color: #444; margin: 0;">
-              As the <strong>founding engineer & architect</strong>, I built a <span style="background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%); padding: 2px 10px; border-radius: 4px; font-weight: 600; color: #5e35b1;">no-code, self-service portal</span> from scratch and it is now used by <strong>200+ teams</strong> across Walmart's global operations (US, Canada, Mexico) empowering <strong>Order Lifecycle, Marketing, Health & Wellness, Last Mile,</strong> and <strong>Security</strong> teams.
+              As the <strong>founding engineer & architect</strong>, I built a <span onclick="openPortalModal()" style="background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%); padding: 2px 10px; border-radius: 4px; font-weight: 600; color: #5e35b1; cursor: pointer; border-bottom: 2px dashed #5e35b1;">no-code, self-service portal</span> from scratch and it is now used by <strong>200+ teams</strong> across Walmart's global operations (US, Canada, Mexico) empowering <strong>Order Lifecycle, Marketing, Health & Wellness, Last Mile,</strong> and <strong>Security</strong> teams.
             </p>
           </div>
         </div>
@@ -201,8 +201,368 @@
   </div>
 </div>
 <br /><br />
+
+<!-- Portal Modal Dialog (macOS style) -->
+<div id="portal-modal-overlay" class="portal-modal-overlay" onclick="closePortalModal()">
+  <div class="portal-modal" onclick="event.stopPropagation()">
+    <button class="portal-close-btn" onclick="closePortalModal()">×</button>
+    
+    <div class="portal-modal-content">
+      <div class="portal-modal-header">
+        <span class="portal-modal-icon">🛠️</span>
+        <div>
+          <div class="portal-modal-title">No-Code Template Builder</div>
+          <div class="portal-modal-subtitle">Self-service portal for communication templates</div>
+        </div>
+      </div>
+      
+      <p class="portal-modal-desc">A visual drag-and-drop interface that allows non-technical teams to create, customize, and deploy communication templates across Email, SMS, Push, WhatsApp, and In-App channels — without writing any code.</p>
+      
+      <!-- Mockup UI -->
+      <div class="portal-mockup">
+        <!-- Left Sidebar - Components -->
+        <div class="mockup-sidebar">
+          <div class="mockup-sidebar-title">Components</div>
+          <div class="mockup-component"><span>📝</span> Text Block</div>
+          <div class="mockup-component"><span>🖼️</span> Image</div>
+          <div class="mockup-component"><span>🔘</span> Button</div>
+          <div class="mockup-component"><span>➗</span> Divider</div>
+          <div class="mockup-component"><span>📊</span> Table</div>
+          <div class="mockup-component"><span>🔗</span> Link</div>
+        </div>
+        <!-- Main Canvas -->
+        <div class="mockup-canvas">
+          <div class="mockup-canvas-header">
+            <div class="mockup-dot red"></div>
+            <div class="mockup-dot yellow"></div>
+            <div class="mockup-dot green"></div>
+            <span>Email Template</span>
+          </div>
+          <div class="mockup-canvas-body">
+            <div class="mockup-block header-block">Header Image</div>
+            <div class="mockup-block text-block">Hello {{customer_name}},</div>
+            <div class="mockup-block text-block small">Your order has been shipped!</div>
+            <div class="mockup-block button-block">Track Order</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="portal-modal-stats">
+        <div class="stat"><strong>200+</strong> Teams</div>
+        <div class="stat"><strong>10K+</strong> Templates</div>
+        <div class="stat"><strong>70M+</strong> Daily Messages</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Portal Modal Styles (macOS style like About Me) */
+  .portal-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+  }
+
+  .portal-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .portal-modal {
+    position: relative;
+    width: 600px;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: linear-gradient(180deg, #f5f5f7 0%, #e8e8ec 100%);
+    border-radius: 14px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35), 0 0 1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.25s ease;
+  }
+
+  .portal-modal-overlay.show .portal-modal {
+    transform: scale(1);
+  }
+
+  .portal-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .portal-close-btn:hover {
+    background: rgba(0, 0, 0, 0.12);
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .portal-modal-content {
+    padding: 28px 32px;
+    overflow-y: auto;
+    max-height: 85vh;
+  }
+  
+  .portal-modal-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 16px;
+    padding-top: 8px;
+  }
+  
+  .portal-modal-icon {
+    font-size: 36px;
+    line-height: 1;
+  }
+  
+  .portal-modal-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+  }
+  
+  .portal-modal-subtitle {
+    font-size: 13px;
+    color: #666;
+  }
+  
+  .portal-modal-desc {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.7;
+    margin: 0 0 20px 0;
+    padding: 0;
+  }
+  
+  /* Mockup UI */
+  .portal-mockup {
+    display: flex;
+    gap: 8px;
+    background: #f5f7fa;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 14px;
+    border: 1px solid #e0e5eb;
+  }
+  
+  .mockup-sidebar {
+    width: 100px;
+    background: #fff;
+    border-radius: 6px;
+    padding: 8px;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .mockup-sidebar-title {
+    font-size: 9px;
+    font-weight: 700;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .mockup-component {
+    font-size: 10px;
+    color: #444;
+    padding: 5px 6px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: grab;
+    border: 1px solid #e5e7eb;
+    transition: all 0.15s ease;
+  }
+  
+  .mockup-component:hover {
+    background: #e3f2fd;
+    border-color: #90caf9;
+  }
+  
+  .mockup-component span {
+    font-size: 11px;
+  }
+  
+  .mockup-canvas {
+    flex: 1;
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+  }
+  
+  .mockup-canvas-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    color: #fff;
+    font-weight: 500;
+  }
+  
+  .mockup-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  
+  .mockup-dot.red { background: #ff5f57; }
+  .mockup-dot.yellow { background: #ffbd2e; }
+  .mockup-dot.green { background: #28c840; }
+  
+  .mockup-canvas-header span {
+    margin-left: auto;
+  }
+  
+  .mockup-canvas-body {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .mockup-block {
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 9px;
+    text-align: center;
+    border: 1px dashed #d0d5dd;
+  }
+  
+  .mockup-block.header-block {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    color: #2e7d32;
+    font-weight: 600;
+    border: none;
+  }
+  
+  .mockup-block.text-block {
+    background: #f5f5f5;
+    color: #333;
+    text-align: left;
+  }
+  
+  .mockup-block.text-block.small {
+    font-size: 8px;
+    color: #666;
+  }
+  
+  .mockup-block.button-block {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    width: 80px;
+    margin: 4px auto;
+  }
+  
+  .portal-modal-stats {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 16px;
+    margin-top: 16px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .portal-modal-stats .stat {
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .portal-modal-stats .stat strong {
+    display: block;
+    font-size: 20px;
+    color: #5e35b1;
+    margin-bottom: 4px;
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .portal-tooltip-popup {
+      width: 320px;
+      padding: 16px;
+      left: 0;
+      transform: translateX(-20%) scale(0.95);
+    }
+    
+    .portal-tooltip-trigger:hover .portal-tooltip-popup {
+      transform: translateX(-20%) scale(1);
+    }
+    
+    .portal-tooltip-popup::after {
+      left: 30%;
+    }
+    
+    .mockup-sidebar {
+      width: 80px;
+    }
+    
+    .mockup-component {
+      font-size: 9px;
+      padding: 4px 5px;
+    }
+  }
+</style>
+
 <script>
   $(function () {
     $("#profile-card").load("/components/side-profile.html");
+  });
+  
+  // Portal Modal functions
+  function openPortalModal() {
+    document.getElementById('portal-modal-overlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePortalModal() {
+    document.getElementById('portal-modal-overlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const portalModal = document.getElementById('portal-modal-overlay');
+      if (portalModal && portalModal.classList.contains('show')) {
+        closePortalModal();
+      }
+    }
   });
 </script>
