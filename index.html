@@ -469,6 +469,7 @@
         bottom: 0;
         left: 0;
         right: 0;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         width: 100%;
         background-color: rgba(255, 255, 255, 0.98);
         backdrop-filter: saturate(500%) blur(20px);
@@ -564,6 +565,10 @@
 
       .mobile-bottom-nav .nav-item:hover {
         color: #007bff;
+      }
+
+      .mobile-bottom-nav.hidden {
+        transform: translateY(100%);
       }
 
       /* Add padding to body on mobile to prevent content from being hidden behind bottom nav */
@@ -1288,6 +1293,38 @@
         // Set initial active state for desktop dock
         $(".nav-bar-fixed .dock-item[data-section='intro']").addClass("active");
         
+        // Mobile bottom nav hide/show on scroll
+        let lastScrollTop = 0;
+        let scrollThreshold = 10; // Minimum scroll amount to trigger hide/show
+        
+        $(window).on('scroll', function() {
+          // Only apply on mobile (< 1024px)
+          if ($(window).width() >= 1024) return;
+          
+          let currentScroll = $(this).scrollTop();
+          let mobileNav = $('.mobile-bottom-nav');
+          let chatbotWidget = $('.chatbot-widget');
+          
+          // Scrolling down
+          if (currentScroll > lastScrollTop + scrollThreshold) {
+            mobileNav.addClass('hidden');
+            chatbotWidget.addClass('nav-hidden');
+            lastScrollTop = currentScroll;
+          } 
+          // Scrolling up
+          else if (currentScroll < lastScrollTop - scrollThreshold) {
+            mobileNav.removeClass('hidden');
+            chatbotWidget.removeClass('nav-hidden');
+            lastScrollTop = currentScroll;
+          }
+          
+          // Always show at top of page
+          if (currentScroll <= 0) {
+            mobileNav.removeClass('hidden');
+            chatbotWidget.removeClass('nav-hidden');
+          }
+        });
+        
       });
     </script>
     <!-- PWA -->
@@ -1465,6 +1502,11 @@
         .chatbot-widget {
           bottom: calc(70px + env(safe-area-inset-bottom) + 16px);
           right: 16px;
+          transition: bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .chatbot-widget.nav-hidden {
+          bottom: 24px;
         }
       }
 
