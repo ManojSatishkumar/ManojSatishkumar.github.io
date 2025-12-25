@@ -218,31 +218,60 @@
       
       <p class="portal-modal-desc">A visual drag-and-drop interface that allows non-technical teams to create, customize, and deploy communication templates across Email, SMS, Push, WhatsApp, and In-App channels — without writing any code.</p>
       
-      <!-- Mockup UI -->
-      <div class="portal-mockup">
-        <!-- Left Sidebar - Components -->
-        <div class="mockup-sidebar">
-          <div class="mockup-sidebar-title">Components</div>
-          <div class="mockup-component"><span>📝</span> Text Block</div>
-          <div class="mockup-component"><span>🖼️</span> Image</div>
-          <div class="mockup-component"><span>🔘</span> Button</div>
-          <div class="mockup-component"><span>➗</span> Divider</div>
-          <div class="mockup-component"><span>📊</span> Table</div>
-          <div class="mockup-component"><span>🔗</span> Link</div>
-        </div>
-        <!-- Main Canvas -->
-        <div class="mockup-canvas">
-          <div class="mockup-canvas-header">
-            <div class="mockup-dot red"></div>
-            <div class="mockup-dot yellow"></div>
-            <div class="mockup-dot green"></div>
-            <span>Email Template</span>
+      <!-- Two Column Layout: Mockup + Features -->
+      <div class="portal-content-row">
+        <!-- Mockup UI -->
+        <div class="portal-mockup">
+          <!-- Left Sidebar - Components -->
+          <div class="mockup-sidebar">
+            <div class="mockup-sidebar-title">Components</div>
+            <div class="mockup-component"><span>📝</span> Text Block</div>
+            <div class="mockup-component"><span>🖼️</span> Image</div>
+            <div class="mockup-component"><span>🔘</span> Button</div>
+            <div class="mockup-component"><span>➗</span> Divider</div>
+            <div class="mockup-component"><span>📊</span> Table</div>
+            <div class="mockup-component"><span>🔗</span> Link</div>
           </div>
-          <div class="mockup-canvas-body">
-            <div class="mockup-block header-block">Header Image</div>
-            <div class="mockup-block text-block">Hello {{customer_name}},</div>
-            <div class="mockup-block text-block small">Your order has been shipped!</div>
-            <div class="mockup-block button-block">Track Order</div>
+          <!-- Main Canvas -->
+          <div class="mockup-canvas">
+            <div class="mockup-canvas-header">
+              <div class="mockup-dot red"></div>
+              <div class="mockup-dot yellow"></div>
+              <div class="mockup-dot green"></div>
+              <span>Email Template</span>
+            </div>
+            <div class="mockup-canvas-body">
+              <div class="mockup-block header-block">Header Image</div>
+              <div class="mockup-block text-block">Hello {{customer_name}},</div>
+              <div class="mockup-block text-block small">Your order has been shipped!</div>
+              <div class="mockup-block button-block">Track Order</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Divider -->
+        <div class="portal-divider"></div>
+        
+        <!-- Features Section -->
+        <div class="portal-features">
+          <div class="features-title">Features</div>
+          <div class="features-list">
+            <div class="feature-item">No code interface</div>
+            <div class="feature-item">Multi-tenancy</div>
+            <div class="feature-item">Property editor</div>
+            <div class="feature-item">Rule engine</div>
+            <div class="feature-item">Compatibility</div>
+            <div class="feature-item">Accessibility</div>
+            <div class="feature-item">Component based</div>
+            <div class="feature-item">Responsive design</div>
+            <div class="feature-item">Email preview</div>
+            <div class="feature-item">Internationalization</div>
+            <div class="feature-item">Template history</div>
+            <div class="feature-item">Customizability</div>
+            <div class="feature-item">Payload editor</div>
+            <div class="feature-item">Dynamic variables</div>
+            <div class="feature-item">Theme engine</div>
+            <div class="feature-item">Profanity check</div>
           </div>
         </div>
       </div>
@@ -283,7 +312,7 @@
 
   .portal-modal {
     position: relative;
-    width: 600px;
+    width: 820px;
     max-width: 95vw;
     max-height: 90vh;
     background: linear-gradient(180deg, #f5f5f7 0%, #e8e8ec 100%);
@@ -362,6 +391,20 @@
     padding: 0;
   }
   
+  /* Two Column Row Layout */
+  .portal-content-row {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    margin-bottom: 14px;
+  }
+  
+  .portal-divider {
+    width: 1px;
+    background: #e0e0e0;
+    flex-shrink: 0;
+  }
+  
   /* Mockup UI */
   .portal-mockup {
     display: flex;
@@ -369,8 +412,8 @@
     background: #f5f7fa;
     border-radius: 10px;
     padding: 10px;
-    margin-bottom: 14px;
     border: 1px solid #e0e5eb;
+    flex: 1;
   }
   
   .mockup-sidebar {
@@ -491,6 +534,44 @@
     margin: 4px auto;
   }
   
+  /* Features Section */
+  .portal-features {
+    width: 180px;
+    flex-shrink: 0;
+  }
+  
+  .features-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #1a1a1a;
+  }
+  
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .feature-item {
+    font-size: 0.75rem;
+    color: #333;
+    padding: 2px 0;
+    position: relative;
+    padding-left: 14px;
+    line-height: 1.4;
+  }
+  
+  .feature-item::before {
+    content: "-";
+    position: absolute;
+    left: 0;
+    color: #666;
+    font-weight: 600;
+  }
+  
   .portal-modal-stats {
     display: flex;
     justify-content: space-around;
@@ -514,19 +595,23 @@
   
   /* Mobile adjustments */
   @media (max-width: 768px) {
-    .portal-tooltip-popup {
-      width: 320px;
-      padding: 16px;
-      left: 0;
-      transform: translateX(-20%) scale(0.95);
+    .portal-content-row {
+      flex-direction: column;
     }
     
-    .portal-tooltip-trigger:hover .portal-tooltip-popup {
-      transform: translateX(-20%) scale(1);
+    .portal-divider {
+      width: 100%;
+      height: 1px;
     }
     
-    .portal-tooltip-popup::after {
-      left: 30%;
+    .portal-features {
+      width: 100%;
+    }
+    
+    .features-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px 16px;
     }
     
     .mockup-sidebar {
