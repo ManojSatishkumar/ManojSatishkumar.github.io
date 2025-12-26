@@ -95,7 +95,9 @@
     </div>
   </div>
 
-  <!-- Experience Timer (macOS clock style) -->
+  <!-- Right side items container -->
+  <div class="menubar-right-items">
+    <!-- Experience Timer (macOS clock style) -->
   <div class="menubar-timer-container">
     <div class="menubar-timer">
       <span id="menubar-exp-years">12</span><span class="timer-suffix">y</span>
@@ -182,6 +184,44 @@
         <div class="exp-total-value">
           <span id="dropdown-total-hours">0</span> hours
           <span class="exp-total-sub">(<span id="dropdown-total-mins">0</span> minutes)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Location Indicator -->
+    <div class="menubar-location-container">
+      <div class="menubar-location">
+        <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span class="location-text">Bengaluru, IN</span>
+      </div>
+      <!-- Location Dropdown -->
+      <div class="location-dropdown" id="location-dropdown">
+        <div class="location-dropdown-header">
+          <div class="location-city">Bengaluru, India</div>
+          <div class="location-timezone">IST (UTC+5:30)</div>
+        </div>
+        <div class="location-time-display">
+          <div class="location-time" id="location-current-time">--:--:--</div>
+          <div class="location-date" id="location-current-date">---</div>
+        </div>
+        <div class="location-info">
+          <div class="location-info-title">Working Hours</div>
+          <div class="location-info-row">
+            <span class="location-info-label">Weekdays</span>
+            <span class="location-info-value">10:00 AM - 5:00 PM</span>
+          </div>
+          <div class="location-info-row">
+            <span class="location-info-label">Weekends</span>
+            <span class="location-info-value closed">Not working</span>
+          </div>
+          <div class="location-info-row">
+            <span class="location-info-label">Response Time</span>
+            <span class="location-info-value">Within 24 hours</span>
+          </div>
         </div>
       </div>
     </div>
@@ -348,7 +388,6 @@
   /* Menubar Timer Container */
   .menubar-timer-container {
     position: relative;
-    margin-left: auto;
   }
 
   /* Menubar Timer (macOS clock style) */
@@ -580,6 +619,158 @@
     font-weight: 400;
   }
 
+  /* Right side items container */
+  .menubar-right-items {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 8px;
+  }
+
+  /* Location Indicator */
+  .menubar-location-container {
+    position: relative;
+  }
+
+  .menubar-location {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    font-size: 11px;
+    color: rgba(0,0,0,0.6);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.15s ease;
+  }
+
+  .menubar-location:hover {
+    background: rgba(0,0,0,0.06);
+  }
+
+  .location-icon {
+    width: 12px;
+    height: 12px;
+    color: rgba(0,0,0,0.5);
+  }
+
+  .location-text {
+    font-weight: 500;
+    color: rgba(0,0,0,0.7);
+  }
+
+  /* Location Dropdown */
+  .location-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 260px;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.1);
+    padding: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px) scale(0.98);
+    transition: all 0.2s ease;
+    z-index: 1002;
+  }
+
+  .location-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  .location-dropdown-header {
+    text-align: center;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .location-city {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .location-timezone {
+    font-size: 11px;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  .location-time-display {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .location-time {
+    font-size: 32px;
+    font-weight: 300;
+    color: #333;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    letter-spacing: 2px;
+  }
+
+  .location-date {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+  }
+
+  .location-info {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  .location-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+  }
+
+  .location-info-row:not(:last-child) {
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .location-info-label {
+    font-size: 11px;
+    color: #888;
+  }
+
+  .location-info-value {
+    font-size: 11px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .location-info-value.closed {
+    color: #999;
+    font-style: italic;
+  }
+
+  .location-info-title {
+    font-size: 10px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .location-info-divider {
+    height: 1px;
+    background: rgba(0,0,0,0.08);
+    margin: 8px 0;
+  }
+
   /* Hide on mobile */
   @media (max-width: 1023px) {
     .macos-menubar {
@@ -691,5 +882,54 @@
     const yearsFloat = (now - startDate) / (1000 * 60 * 60 * 24 * 365.25);
     const progressPercent = Math.min((yearsFloat / 17) * 100, 100);
     if (progressFill) progressFill.style.width = progressPercent + '%';
+  }
+
+  // Location dropdown functionality
+  setTimeout(function() {
+    const locationContainer = document.querySelector('.menubar-location-container');
+    const locationDropdown = document.getElementById('location-dropdown');
+    
+    if (locationContainer && locationDropdown) {
+      locationContainer.addEventListener('mouseenter', function() {
+        locationDropdown.classList.add('active');
+        updateLocationTime();
+      });
+      
+      locationContainer.addEventListener('mouseleave', function() {
+        locationDropdown.classList.remove('active');
+      });
+    }
+    
+    // Update time every second when dropdown is visible
+    setInterval(function() {
+      if (locationDropdown && locationDropdown.classList.contains('active')) {
+        updateLocationTime();
+      }
+    }, 1000);
+  }, 100);
+
+  function updateLocationTime() {
+    const timeEl = document.getElementById('location-current-time');
+    const dateEl = document.getElementById('location-current-date');
+    
+    if (timeEl && dateEl) {
+      const now = new Date();
+      // Convert to IST (UTC+5:30)
+      const istOffset = 5.5 * 60 * 60 * 1000;
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60 * 1000);
+      const istDate = new Date(utc + istOffset);
+      
+      let hours = istDate.getHours();
+      const minutes = String(istDate.getMinutes()).padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // 0 should be 12
+      const hoursStr = String(hours).padStart(2, '0');
+      
+      timeEl.textContent = `${hoursStr}:${minutes} ${ampm}`;
+      
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      dateEl.textContent = istDate.toLocaleDateString('en-IN', options);
+    }
   }
 </script>
