@@ -36,18 +36,17 @@
   <div class="container">
     <div class="patent-card">
       <div class="patent-header-row">
-        <div class="patent-badges">
-          <div class="patent-badge">
-            #16/235,857
-          </div>
+        <div class="patent-title-group">
+          <h2 class="patent-title">UMR Cloud Network</h2>
           <div class="patent-company">
             <i class="fa-solid fa-building"></i>
             Cerner Healthcare Solutions
           </div>
         </div>
+        <div class="patent-badge">
+          #16/235,857
+        </div>
       </div>
-
-      <h2 class="patent-title">UMR Cloud Network</h2>
 
       <p class="patent-description">
         The Unified Medical Record (UMR) Cloud Network allows the utilization of FHIR resources of a patient and enables an app store approach specifically for FHIR. This enables the patient to have a web portal with apps containing business logic and provide individual solutions.
@@ -118,54 +117,52 @@
 
   .patent-header-row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     margin-bottom: 20px;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 16px;
   }
 
-  .patent-badges {
+  .patent-title-group {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .patent-badge {
-    display: inline-flex;
-    align-items: center;
-    background: linear-gradient(135deg, #121fcf 0%, #764ba2 100%);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  .patent-company {
-    display: inline-flex;
-    align-items: center;
+    flex-direction: column;
     gap: 8px;
-    background: #f0f4ff;
-    color: #121fcf;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    border: 1px solid #d0dcff;
-  }
-
-  .patent-company i {
-    font-size: 14px;
   }
 
   .patent-title {
     font-size: 28px;
     font-weight: 700;
     color: #036ad9;
-    margin: 0 0 20px 0;
+    margin: 0;
     line-height: 1.3;
+  }
+
+  .patent-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #f5f5f5;
+    color: #666;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    height: fit-content;
+    border: 1px solid #e0e0e0;
+  }
+
+  .patent-company {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .patent-company i {
+    font-size: 14px;
+    color: #888;
   }
 
   .patent-description {
