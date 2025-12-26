@@ -144,9 +144,7 @@
     margin-bottom: 6px;
     padding-left: 0;
     position: relative;
-    transition: background 0.2s;
     border-radius: 6px;
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -175,13 +173,6 @@
     top: 0;
     font-size: 1em;
     transition: color 0.2s;
-  }
-  .skill-list li:hover {
-    background: #f3f0ff;
-  }
-  .skill-list li:hover::before {
-    color: #ffb300;
-    animation: tada 0.7s;
   }
   @keyframes tada {
     0% {
@@ -224,15 +215,6 @@
     .skill-card {
       min-height: 0;
     }
-  }
-  .skill-list a {
-    color: inherit;
-    text-decoration: underline dotted #6c63ff;
-    transition: color 0.2s;
-  }
-  .skill-list a:hover {
-    color: #6c63ff;
-    text-decoration: underline solid #6c63ff;
   }
   /* Confetti animation */
   .confetti {
@@ -308,39 +290,43 @@
           <ul class="skill-list">
             <li>
               <span class="tech-icon"><i class="devicon-html5-plain colored"></i></span>
-              <a href="https://developer.mozilla.org/docs/Web/HTML" target="_blank" rel="noopener">HTML5</a>
+              HTML5
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-css3-plain colored"></i></span>
-              <a href="https://developer.mozilla.org/docs/Web/CSS" target="_blank" rel="noopener">CSS3</a>
+              CSS3
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-javascript-plain colored"></i></span>
-              <a href="https://developer.mozilla.org/docs/Web/JavaScript" target="_blank" rel="noopener">JavaScript</a>
+              JavaScript
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-typescript-plain colored"></i></span>
-              <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>
+              TypeScript
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-react-original colored"></i></span>
-              <a href="https://react.dev/" target="_blank" rel="noopener">React.js</a>
+              React.js
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-redux-original colored"></i></span>
-              <a href="https://redux-saga.js.org/" target="_blank" rel="noopener">Redux-Saga</a>
+              Redux-Saga
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-bootstrap-plain colored"></i></span>
-              <a href="https://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap</a>
+              Bootstrap
+            </li>
+            <li>
+              <span class="tech-icon"><i class="devicon-tailwindcss-original colored"></i></span>
+              Tailwind
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-materialui-plain colored"></i></span>
-              <a href="https://mui.com/" target="_blank" rel="noopener">Material UI</a>
+              Material UI
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-jest-plain colored"></i></span>
-              <a href="https://jestjs.io/" target="_blank" rel="noopener">Jest unit testing</a>
+              Jest unit testing
             </li>
           </ul>
         </div>
@@ -355,23 +341,23 @@
           <ul class="skill-list">
             <li>
               <span class="tech-icon"><i class="devicon-nodejs-plain colored"></i></span>
-              <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a>
+              Node.js
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-express-original"></i></span>
-              <a href="https://expressjs.com/" target="_blank" rel="noopener">Express.js</a>
+              Express.js
             </li>
             <li>
               <span class="tech-icon"><i class="fa-solid fa-plug" style="color: #6c63ff;"></i></span>
-              <a href="https://restfulapi.net/" target="_blank" rel="noopener">REST APIs</a>
+              REST APIs
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-mongodb-plain colored"></i></span>
-              <a href="https://www.mongodb.com/" target="_blank" rel="noopener">MongoDB</a>
+              MongoDB
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-graphql-plain colored"></i></span>
-              <a href="https://graphql.org/" target="_blank" rel="noopener">GraphQL</a>
+              GraphQL
             </li>
           </ul>
         </div>
@@ -386,35 +372,39 @@
           <ul class="skill-list">
             <li>
               <span class="tech-icon"><i class="devicon-webpack-plain colored"></i></span>
-              <a href="https://webpack.js.org/" target="_blank" rel="noopener">Webpack</a>
+              Webpack
+            </li>
+            <li>
+              <span class="tech-icon"><i class="devicon-vitejs-plain colored"></i></span>
+              Vite
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-babel-plain colored"></i></span>
-              <a href="https://babeljs.io/" target="_blank" rel="noopener">Babel</a>
+              Babel
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-docker-plain colored"></i></span>
-              <a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a>
+              Docker
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-kubernetes-plain colored"></i></span>
-              <a href="https://kubernetes.io/" target="_blank" rel="noopener">Kubernetes</a>
+              Kubernetes
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-npm-original-wordmark colored"></i></span>
-              <a href="https://www.npmjs.com/" target="_blank" rel="noopener">NPM</a>
+              NPM
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-git-plain colored"></i></span>
-              <a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a> / <a href="https://github.com/" target="_blank" rel="noopener">Github</a>
+              Git / Github
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-jenkins-plain"></i></span>
-              <a href="https://www.jenkins.io/" target="_blank" rel="noopener">Jenkins</a>
+              Jenkins
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-azure-plain colored"></i></span>
-              <a href="https://azure.microsoft.com/" target="_blank" rel="noopener">Azure</a>
+              Azure
             </li>
           </ul>
         </div>
@@ -429,23 +419,23 @@
           <ul class="skill-list">
             <li>
               <span class="tech-icon"><i class="devicon-splunk-original-wordmark colored"></i></span>
-              <a href="https://www.splunk.com/" target="_blank" rel="noopener">Splunk</a>
+              Splunk
             </li>
             <li>
               <span class="tech-icon"><i class="devicon-kibana-plain colored"></i></span>
-              <a href="https://www.elastic.co/kibana" target="_blank" rel="noopener">Kibana</a>
+              Kibana
             </li>
             <li>
               <span class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana" /></span>
-              <a href="https://grafana.com/" target="_blank" rel="noopener">Grafana</a>
+              Grafana
             </li>
             <li>
               <span class="tech-icon"><i class="fa-solid fa-chart-bar" style="color: #E97627;"></i></span>
-              <a href="https://www.tableau.com/" target="_blank" rel="noopener">Tableau</a>
+              Tableau
             </li>
             <li>
               <span class="tech-icon"><i class="fa-solid fa-eye" style="color: #6c63ff;"></i></span>
-              <a href="https://openobserve.ai/" target="_blank" rel="noopener">Open Observe</a>
+              Open Observe
             </li>
           </ul>
         </div>
@@ -496,7 +486,7 @@
           <ul class="skill-list">
             <li>
               <span class="tech-icon"><i class="fa-solid fa-blog" style="color: #ff5722;"></i></span>
-              <a href="https://www.blogger.com/" target="_blank" rel="noopener">Blogging</a>
+              Blogging
             </li>
             <li><span class="tech-icon"><i class="fa-solid fa-chalkboard-user" style="color: #6c63ff;"></i></span>Teaching</li>
             <li><span class="tech-icon"><i class="fa-solid fa-podcast" style="color: #8e44ad;"></i></span>Podcasting</li>
