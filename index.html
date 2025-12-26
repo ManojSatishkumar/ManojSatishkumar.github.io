@@ -1043,7 +1043,17 @@
           <span>Awards</span>
           <div class="dock-tooltip">
             <h4>Awards & Recognition</h4>
-            <p>Hackathon championships, patents, and industry awards celebrating technical excellence.</p>
+            <p>Hackathon championships and industry awards celebrating technical excellence.</p>
+          </div>
+        </div>
+        <div class="dock-item" onclick="animateScroll('patent')" data-section="patent">
+          <div class="icon-wrapper">
+            <i class="icon ion-document-text"></i>
+          </div>
+          <span>Patent</span>
+          <div class="dock-tooltip">
+            <h4>Patent</h4>
+            <p>Unified Medical Record Cloud Network - Innovation in healthcare technology.</p>
           </div>
         </div>
         <div class="dock-item" onclick="animateScroll('education')" data-section="education">
@@ -1094,6 +1104,7 @@
       style="background-color: white"
       class="text-left"
     ></div>
+    <div id="patent"></div>
     <div
       style="background-color: #eeeeee"
       id="education"
@@ -1165,6 +1176,7 @@
         $("#projects").load("/components/projects.html");
         $("#skill-set").load("/components/skill-set.html");
         $("#achievements").load("/components/achievements.html");
+        $("#patent").load("/components/patent.html");
         $("#education").load("/components/education.html");
         $("#msk-testimony").load("/components/testimony.html");
         $("#footer").load("/components/footer.html");
@@ -1178,6 +1190,7 @@
             "projects",
             "skill-set",
             "achievements",
+            "patent",
             "education",
             "courses",
             "blog",
