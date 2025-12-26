@@ -98,6 +98,43 @@
 
   <!-- Right side items container -->
   <div class="menubar-right-items">
+    <!-- Location Indicator -->
+    <div class="menubar-location-container">
+      <div class="menubar-location">
+        <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span class="location-text">Bengaluru, IN</span>
+      </div>
+      <!-- Location Dropdown -->
+      <div class="location-dropdown" id="location-dropdown">
+        <div class="location-dropdown-header">
+          <div class="location-city">Bengaluru, India</div>
+          <div class="location-timezone">IST (UTC+5:30)</div>
+        </div>
+        <div class="location-time-display">
+          <div class="location-time" id="location-current-time">--:--:--</div>
+          <div class="location-date" id="location-current-date">---</div>
+        </div>
+        <div class="location-info">
+          <div class="location-info-title">Working Hours</div>
+          <div class="location-info-row">
+            <span class="location-info-label">Weekdays</span>
+            <span class="location-info-value">10:00 AM - 5:00 PM</span>
+          </div>
+          <div class="location-info-row">
+            <span class="location-info-label">Weekends</span>
+            <span class="location-info-value closed">Not working</span>
+          </div>
+          <div class="location-info-row">
+            <span class="location-info-label">Response Time</span>
+            <span class="location-info-value">Within 24 hours</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Experience Timer (macOS clock style) -->
   <div class="menubar-timer-container">
     <div class="menubar-timer">
@@ -189,43 +226,6 @@
       </div>
     </div>
   </div>
-
-    <!-- Location Indicator -->
-    <div class="menubar-location-container">
-      <div class="menubar-location">
-        <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-          <circle cx="12" cy="10" r="3"></circle>
-        </svg>
-        <span class="location-text">Bengaluru, IN</span>
-      </div>
-      <!-- Location Dropdown -->
-      <div class="location-dropdown" id="location-dropdown">
-        <div class="location-dropdown-header">
-          <div class="location-city">Bengaluru, India</div>
-          <div class="location-timezone">IST (UTC+5:30)</div>
-        </div>
-        <div class="location-time-display">
-          <div class="location-time" id="location-current-time">--:--:--</div>
-          <div class="location-date" id="location-current-date">---</div>
-        </div>
-        <div class="location-info">
-          <div class="location-info-title">Working Hours</div>
-          <div class="location-info-row">
-            <span class="location-info-label">Weekdays</span>
-            <span class="location-info-value">10:00 AM - 5:00 PM</span>
-          </div>
-          <div class="location-info-row">
-            <span class="location-info-label">Weekends</span>
-            <span class="location-info-value closed">Not working</span>
-          </div>
-          <div class="location-info-row">
-            <span class="location-info-label">Response Time</span>
-            <span class="location-info-value">Within 24 hours</span>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
 </nav>
