@@ -7,6 +7,10 @@
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   rel="stylesheet"
 />
+<link
+  href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+  rel="stylesheet"
+/>
 
 <style>
   .skill-section {
@@ -137,17 +141,34 @@
   .skill-list li {
     font-size: 1rem;
     color: #22223b;
-    margin-bottom: 4px;
-    padding-left: 1.8em;
+    margin-bottom: 6px;
+    padding-left: 0;
     position: relative;
     transition: background 0.2s;
     border-radius: 6px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .skill-list li .tech-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .skill-list li .tech-icon img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+  .skill-list li .tech-icon i {
+    font-size: 18px;
   }
   .skill-list li::before {
-    content: "\f058";
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
+    content: none;
     color: #6c63ff;
     position: absolute;
     left: 0;
@@ -286,73 +307,40 @@
 
           <ul class="skill-list">
             <li>
-              <a
-                href="https://developer.mozilla.org/docs/Web/HTML"
-                target="_blank"
-                rel="noopener"
-              >
-                HTML5
-              </a>
+              <span class="tech-icon"><i class="devicon-html5-plain colored"></i></span>
+              <a href="https://developer.mozilla.org/docs/Web/HTML" target="_blank" rel="noopener">HTML5</a>
             </li>
             <li>
-              <a
-                href="https://developer.mozilla.org/docs/Web/CSS"
-                target="_blank"
-                rel="noopener"
-              >
-                CSS3
-              </a>
+              <span class="tech-icon"><i class="devicon-css3-plain colored"></i></span>
+              <a href="https://developer.mozilla.org/docs/Web/CSS" target="_blank" rel="noopener">CSS3</a>
             </li>
             <li>
-              <a
-                href="https://developer.mozilla.org/docs/Web/JavaScript"
-                target="_blank"
-                rel="noopener"
-              >
-                JavaScript
-              </a>
+              <span class="tech-icon"><i class="devicon-javascript-plain colored"></i></span>
+              <a href="https://developer.mozilla.org/docs/Web/JavaScript" target="_blank" rel="noopener">JavaScript</a>
             </li>
             <li>
-              <a
-                href="https://www.typescriptlang.org/"
-                target="_blank"
-                rel="noopener"
-              >
-                TypeScript
-              </a>
+              <span class="tech-icon"><i class="devicon-typescript-plain colored"></i></span>
+              <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>
             </li>
             <li>
-              <a href="https://react.dev/" target="_blank" rel="noopener">
-                React.js
-              </a>
+              <span class="tech-icon"><i class="devicon-react-original colored"></i></span>
+              <a href="https://react.dev/" target="_blank" rel="noopener">React.js</a>
             </li>
             <li>
-              <a
-                href="https://redux-saga.js.org/"
-                target="_blank"
-                rel="noopener"
-              >
-                Redux-Saga
-              </a>
+              <span class="tech-icon"><i class="devicon-redux-original colored"></i></span>
+              <a href="https://redux-saga.js.org/" target="_blank" rel="noopener">Redux-Saga</a>
             </li>
             <li>
-              <a
-                href="https://getbootstrap.com/"
-                target="_blank"
-                rel="noopener"
-              >
-                Bootstrap
-              </a>
+              <span class="tech-icon"><i class="devicon-bootstrap-plain colored"></i></span>
+              <a href="https://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap</a>
             </li>
             <li>
-              <a href="https://mui.com/" target="_blank" rel="noopener">
-                Material UI
-              </a>
+              <span class="tech-icon"><i class="devicon-materialui-plain colored"></i></span>
+              <a href="https://mui.com/" target="_blank" rel="noopener">Material UI</a>
             </li>
             <li>
-              <a href="https://jestjs.io/" target="_blank" rel="noopener">
-                Jest unit testing
-              </a>
+              <span class="tech-icon"><i class="devicon-jest-plain colored"></i></span>
+              <a href="https://jestjs.io/" target="_blank" rel="noopener">Jest unit testing</a>
             </li>
           </ul>
         </div>
@@ -366,29 +354,24 @@
           </div>
           <ul class="skill-list">
             <li>
-              <a href="https://nodejs.org/" target="_blank" rel="noopener"
-                >Node.js</a
-              >
+              <span class="tech-icon"><i class="devicon-nodejs-plain colored"></i></span>
+              <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a>
             </li>
             <li>
-              <a href="https://expressjs.com/" target="_blank" rel="noopener"
-                >Express.js</a
-              >
+              <span class="tech-icon"><i class="devicon-express-original"></i></span>
+              <a href="https://expressjs.com/" target="_blank" rel="noopener">Express.js</a>
             </li>
             <li>
-              <a href="https://restfulapi.net/" target="_blank" rel="noopener"
-                >REST APIs</a
-              >
+              <span class="tech-icon"><i class="fa-solid fa-plug" style="color: #6c63ff;"></i></span>
+              <a href="https://restfulapi.net/" target="_blank" rel="noopener">REST APIs</a>
             </li>
             <li>
-              <a href="https://www.mongodb.com/" target="_blank" rel="noopener"
-                >MongoDB</a
-              >
+              <span class="tech-icon"><i class="devicon-mongodb-plain colored"></i></span>
+              <a href="https://www.mongodb.com/" target="_blank" rel="noopener">MongoDB</a>
             </li>
             <li>
-              <a href="https://graphql.org/" target="_blank" rel="noopener"
-                >GraphQL</a
-              >
+              <span class="tech-icon"><i class="devicon-graphql-plain colored"></i></span>
+              <a href="https://graphql.org/" target="_blank" rel="noopener">GraphQL</a>
             </li>
           </ul>
         </div>
@@ -402,51 +385,36 @@
           </div>
           <ul class="skill-list">
             <li>
-              <a href="https://webpack.js.org/" target="_blank" rel="noopener"
-                >Webpack</a
-              >
+              <span class="tech-icon"><i class="devicon-webpack-plain colored"></i></span>
+              <a href="https://webpack.js.org/" target="_blank" rel="noopener">Webpack</a>
             </li>
             <li>
-              <a href="https://babeljs.io/" target="_blank" rel="noopener"
-                >Babel</a
-              >
+              <span class="tech-icon"><i class="devicon-babel-plain colored"></i></span>
+              <a href="https://babeljs.io/" target="_blank" rel="noopener">Babel</a>
             </li>
             <li>
-              <a href="https://www.docker.com/" target="_blank" rel="noopener"
-                >Docker</a
-              >
+              <span class="tech-icon"><i class="devicon-docker-plain colored"></i></span>
+              <a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a>
             </li>
             <li>
-              <a href="https://kubernetes.io/" target="_blank" rel="noopener"
-                >Kubernetes</a
-              >
+              <span class="tech-icon"><i class="devicon-kubernetes-plain colored"></i></span>
+              <a href="https://kubernetes.io/" target="_blank" rel="noopener">Kubernetes</a>
             </li>
             <li>
-              <a href="https://www.npmjs.com/" target="_blank" rel="noopener"
-                >NPM</a
-              >
+              <span class="tech-icon"><i class="devicon-npm-original-wordmark colored"></i></span>
+              <a href="https://www.npmjs.com/" target="_blank" rel="noopener">NPM</a>
             </li>
             <li>
-              <a href="https://git-scm.com/" target="_blank" rel="noopener"
-                >Git</a
-              >
-              /
-              <a href="https://github.com/" target="_blank" rel="noopener"
-                >Github</a
-              >
+              <span class="tech-icon"><i class="devicon-git-plain colored"></i></span>
+              <a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a> / <a href="https://github.com/" target="_blank" rel="noopener">Github</a>
             </li>
             <li>
-              <a href="https://www.jenkins.io/" target="_blank" rel="noopener"
-                >Jenkins</a
-              >
+              <span class="tech-icon"><i class="devicon-jenkins-plain"></i></span>
+              <a href="https://www.jenkins.io/" target="_blank" rel="noopener">Jenkins</a>
             </li>
             <li>
-              <a
-                href="https://azure.microsoft.com/"
-                target="_blank"
-                rel="noopener"
-                >Azure</a
-              >
+              <span class="tech-icon"><i class="devicon-azure-plain colored"></i></span>
+              <a href="https://azure.microsoft.com/" target="_blank" rel="noopener">Azure</a>
             </li>
           </ul>
         </div>
@@ -460,32 +428,24 @@
           </div>
           <ul class="skill-list">
             <li>
-              <a href="https://www.splunk.com/" target="_blank" rel="noopener"
-                >Splunk</a
-              >
+              <span class="tech-icon"><i class="devicon-splunk-original-wordmark colored"></i></span>
+              <a href="https://www.splunk.com/" target="_blank" rel="noopener">Splunk</a>
             </li>
             <li>
-              <a
-                href="https://www.elastic.co/kibana"
-                target="_blank"
-                rel="noopener"
-                >Kibana</a
-              >
+              <span class="tech-icon"><i class="devicon-kibana-plain colored"></i></span>
+              <a href="https://www.elastic.co/kibana" target="_blank" rel="noopener">Kibana</a>
             </li>
             <li>
-              <a href="https://grafana.com/" target="_blank" rel="noopener"
-                >Grafana</a
-              >
+              <span class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana" /></span>
+              <a href="https://grafana.com/" target="_blank" rel="noopener">Grafana</a>
             </li>
             <li>
-              <a href="https://www.tableau.com/" target="_blank" rel="noopener"
-                >Tableau</a
-              >
+              <span class="tech-icon"><i class="fa-solid fa-chart-bar" style="color: #E97627;"></i></span>
+              <a href="https://www.tableau.com/" target="_blank" rel="noopener">Tableau</a>
             </li>
             <li>
-              <a href="https://openobserve.ai/" target="_blank" rel="noopener"
-                >Open Observe</a
-              >
+              <span class="tech-icon"><i class="fa-solid fa-eye" style="color: #6c63ff;"></i></span>
+              <a href="https://openobserve.ai/" target="_blank" rel="noopener">Open Observe</a>
             </li>
           </ul>
         </div>
@@ -498,13 +458,13 @@
             Leadership
           </div>
           <ul class="skill-list">
-            <li>Architecture Diagrams</li>
-            <li>Tech Documentation</li>
-            <li>Whiteboarding</li>
-            <li>Sprint Planning</li>
-            <li>Mentoring Newbies</li>
-            <li>Collaboration</li>
-            <li>Product Roadmapping</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-diagram-project" style="color: #6c63ff;"></i></span>Architecture Diagrams</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-file-lines" style="color: #17a2b8;"></i></span>Tech Documentation</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-chalkboard" style="color: #28a745;"></i></span>Whiteboarding</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-calendar-check" style="color: #fd7e14;"></i></span>Sprint Planning</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-user-graduate" style="color: #e83e8c;"></i></span>Mentoring Newbies</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-handshake" style="color: #20c997;"></i></span>Collaboration</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-road" style="color: #6f42c1;"></i></span>Product Roadmapping</li>
           </ul>
         </div>
       </div>
@@ -516,13 +476,13 @@
             Management
           </div>
           <ul class="skill-list">
-            <li>Team Management</li>
-            <li>Communication</li>
-            <li>Decision Making</li>
-            <li>Goal Setting & KPIs</li>
-            <li>Task Management</li>
-            <li>Conflict Resolution</li>
-            <li>Motivation & Delegation</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-people-group" style="color: #6c63ff;"></i></span>Team Management</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-comments" style="color: #17a2b8;"></i></span>Communication</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-scale-balanced" style="color: #28a745;"></i></span>Decision Making</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-bullseye" style="color: #dc3545;"></i></span>Goal Setting & KPIs</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-list-check" style="color: #fd7e14;"></i></span>Task Management</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-handshake-angle" style="color: #e83e8c;"></i></span>Conflict Resolution</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-star" style="color: #ffc107;"></i></span>Motivation & Delegation</li>
           </ul>
         </div>
       </div>
@@ -535,15 +495,14 @@
           </div>
           <ul class="skill-list">
             <li>
-              <a href="https://www.blogger.com/" target="_blank" rel="noopener"
-                >Blogging</a
-              >
+              <span class="tech-icon"><i class="fa-solid fa-blog" style="color: #ff5722;"></i></span>
+              <a href="https://www.blogger.com/" target="_blank" rel="noopener">Blogging</a>
             </li>
-            <li>Teaching</li>
-            <li>Podcasting</li>
-            <li>Video Editing</li>
-            <li>Mock Interviews</li>
-            <li>LinkedIn Posts</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-chalkboard-user" style="color: #6c63ff;"></i></span>Teaching</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-podcast" style="color: #8e44ad;"></i></span>Podcasting</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-video" style="color: #e74c3c;"></i></span>Video Editing</li>
+            <li><span class="tech-icon"><i class="fa-solid fa-user-tie" style="color: #3498db;"></i></span>Mock Interviews</li>
+            <li><span class="tech-icon"><i class="devicon-linkedin-plain colored"></i></span>LinkedIn Posts</li>
           </ul>
         </div>
       </div>
