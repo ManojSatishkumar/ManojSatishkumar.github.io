@@ -18,6 +18,7 @@
     </p>
   </div>
 
+  <!-- First 6 cards in grid -->
   <div class="testimony-grid">
     <div class="testimony-card">
       <a
@@ -190,8 +191,12 @@
         </p>
       </div>
     </div>
+  </div>
 
-    <div class="testimony-card">
+  <!-- Remaining cards in animated carousel -->
+  <div class="testimony-carousel-wrapper">
+    <div class="testimony-carousel">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -220,7 +225,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -250,7 +255,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -279,7 +284,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -308,7 +313,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -338,7 +343,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -367,7 +372,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -394,7 +399,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -420,7 +425,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -448,7 +453,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -477,7 +482,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -499,11 +504,12 @@
         <p>
           I took Manoj's TypeScript bootcamp and I must say, I have chosen the
           right course for this. If you are in some confusion with your
-          background and all, then please do not hesitate, this course is
+          background and all, then please do not hesitate,           this course is
           prepared in such a way so that a person with minimal coding experience
           can understand it.
         </p>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -538,6 +544,41 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-bottom: 3rem;
+  }
+
+  /* Carousel Styles */
+  .testimony-carousel-wrapper {
+    overflow: hidden;
+    position: relative;
+    margin-top: 2rem;
+    padding: 1rem 0;
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  }
+
+  .testimony-carousel {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    animation: scrollLeft 60s linear infinite;
+  }
+
+  .testimony-carousel:hover {
+    animation-play-state: paused;
+  }
+
+  .testimony-carousel .carousel-card {
+    flex: 0 0 380px;
+    min-width: 380px;
+  }
+
+  @keyframes scrollLeft {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
   .testimony-card {
@@ -648,5 +689,27 @@
     .testimony-grid {
       grid-template-columns: 1fr;
     }
+
+    .testimony-carousel .carousel-card {
+      flex: 0 0 300px;
+      min-width: 300px;
+    }
   }
 </style>
+
+<script>
+  // Clone carousel cards for infinite scroll effect
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+      const carousel = document.querySelector('.testimony-carousel');
+      if (carousel) {
+        const cards = carousel.querySelectorAll('.carousel-card');
+        // Clone all cards and append them for seamless loop
+        cards.forEach(function(card) {
+          const clone = card.cloneNode(true);
+          carousel.appendChild(clone);
+        });
+      }
+    }, 100);
+  });
+</script>
