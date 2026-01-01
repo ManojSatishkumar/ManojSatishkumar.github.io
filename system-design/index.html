@@ -948,19 +948,411 @@
         badge: { text: "Core Principle", color: "#3b82f6", bg: "rgba(59, 130, 246, 0.15)" },
         color: "#3b82f6",
         diagram: `
-          <div class="mind-map">
-            <div class="mind-map-center" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white;">
-              <span style="font-size: 2rem;">⬆️</span>
-              <span>99.99%</span>
-              <span style="font-size: 0.8rem; opacity: 0.8;">Uptime</span>
+          <style>
+            .availability-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 30px;
+              padding: 10px;
+            }
+            .avail-section {
+              display: flex;
+              gap: 30px;
+              align-items: flex-start;
+            }
+            @media (max-width: 900px) {
+              .avail-section { flex-direction: column; }
+            }
+            
+            /* Server Cluster Visualization */
+            .server-cluster {
+              flex: 1;
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(59, 130, 246, 0.2);
+            }
+            .cluster-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .cluster-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #3b82f6;
+              border-radius: 50%;
+            }
+            .servers-row {
+              display: flex;
+              gap: 12px;
+              margin-bottom: 20px;
+            }
+            .server-box {
+              flex: 1;
+              background: rgba(16, 185, 129, 0.1);
+              border: 1px solid rgba(16, 185, 129, 0.3);
+              border-radius: 10px;
+              padding: 16px 12px;
+              text-align: center;
+              position: relative;
+              transition: all 0.3s ease;
+            }
+            .server-box.primary {
+              background: rgba(59, 130, 246, 0.15);
+              border-color: rgba(59, 130, 246, 0.4);
+            }
+            .server-box.standby {
+              background: rgba(139, 92, 246, 0.1);
+              border-color: rgba(139, 92, 246, 0.3);
+            }
+            .server-box.failed {
+              background: rgba(239, 68, 68, 0.1);
+              border-color: rgba(239, 68, 68, 0.4);
+              animation: serverFail 2s ease-in-out infinite;
+            }
+            @keyframes serverFail {
+              0%, 100% { opacity: 0.4; }
+              50% { opacity: 0.7; }
+            }
+            .server-icon {
+              font-size: 1.5rem;
+              margin-bottom: 6px;
+            }
+            .server-label {
+              font-size: 0.7rem;
+              color: #a0a0b0;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+            }
+            .server-status {
+              position: absolute;
+              top: -6px;
+              right: -6px;
+              width: 16px;
+              height: 16px;
+              border-radius: 50%;
+              background: #10b981;
+              border: 2px solid #0f1520;
+              animation: pulse 2s infinite;
+            }
+            .server-status.standby-status {
+              background: #8b5cf6;
+              animation: none;
+            }
+            .server-status.failed-status {
+              background: #ef4444;
+              animation: none;
+            }
+            @keyframes pulse {
+              0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+              50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            }
+            .failover-arrow {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+              color: #6b7280;
+              font-size: 0.75rem;
+              margin-top: 8px;
+              padding: 10px;
+              background: rgba(139, 92, 246, 0.1);
+              border-radius: 8px;
+              border: 1px dashed rgba(139, 92, 246, 0.3);
+            }
+            .failover-arrow span {
+              animation: arrowMove 1.5s ease-in-out infinite;
+            }
+            @keyframes arrowMove {
+              0%, 100% { transform: translateX(0); }
+              50% { transform: translateX(4px); }
+            }
+            
+            /* Uptime Timeline */
+            .uptime-timeline {
+              flex: 1;
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(16, 185, 129, 0.2);
+            }
+            .timeline-header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 16px;
+            }
+            .timeline-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .timeline-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #10b981;
+              border-radius: 50%;
+            }
+            .live-badge {
+              font-size: 0.65rem;
+              padding: 4px 10px;
+              background: rgba(16, 185, 129, 0.2);
+              color: #10b981;
+              border-radius: 20px;
+              display: flex;
+              align-items: center;
+              gap: 5px;
+            }
+            .live-badge::before {
+              content: '';
+              width: 6px;
+              height: 6px;
+              background: #10b981;
+              border-radius: 50%;
+              animation: livePulse 1s infinite;
+            }
+            @keyframes livePulse {
+              0%, 100% { opacity: 1; }
+              50% { opacity: 0.3; }
+            }
+            .timeline-bar {
+              height: 40px;
+              background: #1a1f2e;
+              border-radius: 8px;
+              display: flex;
+              overflow: hidden;
+              margin-bottom: 12px;
+            }
+            .timeline-segment {
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.6rem;
+              font-weight: 600;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+            }
+            .segment-up {
+              background: linear-gradient(90deg, #10b981, #059669);
+              color: white;
+              flex: 99.99;
+            }
+            .segment-down {
+              background: linear-gradient(90deg, #ef4444, #dc2626);
+              color: white;
+              flex: 0.01;
+              min-width: 3px;
+            }
+            .timeline-labels {
+              display: flex;
+              justify-content: space-between;
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+            .uptime-calc {
+              margin-top: 16px;
+              padding: 12px;
+              background: rgba(16, 185, 129, 0.1);
+              border-radius: 8px;
+              text-align: center;
+              font-family: 'JetBrains Mono', monospace;
+              font-size: 0.85rem;
+              color: #10b981;
+            }
+            
+            /* Nines Table */
+            .nines-section {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            .nines-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .nines-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #f59e0b;
+              border-radius: 50%;
+            }
+            .nines-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 10px;
+            }
+            @media (max-width: 700px) {
+              .nines-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .nine-card {
+              background: rgba(30, 35, 50, 0.8);
+              border-radius: 12px;
+              padding: 16px;
+              text-align: center;
+              border: 1px solid rgba(255, 255, 255, 0.05);
+              transition: all 0.3s ease;
+            }
+            .nine-card:hover {
+              transform: translateY(-4px);
+              border-color: rgba(245, 158, 11, 0.3);
+            }
+            .nine-card.highlight {
+              border-color: rgba(16, 185, 129, 0.5);
+              background: rgba(16, 185, 129, 0.1);
+            }
+            .nine-percent {
+              font-size: 1.4rem;
+              font-weight: 700;
+              margin-bottom: 4px;
+            }
+            .nine-card:nth-child(1) .nine-percent { color: #ef4444; }
+            .nine-card:nth-child(2) .nine-percent { color: #f59e0b; }
+            .nine-card:nth-child(3) .nine-percent { color: #3b82f6; }
+            .nine-card:nth-child(4) .nine-percent { color: #10b981; }
+            .nine-name {
+              font-size: 0.7rem;
+              color: #6b7280;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+              margin-bottom: 10px;
+            }
+            .nine-downtime {
+              font-size: 0.75rem;
+              color: #e5e5e5;
+              font-weight: 500;
+              margin-bottom: 4px;
+            }
+            .nine-context {
+              font-size: 0.65rem;
+              color: #888;
+              line-height: 1.4;
+            }
+            .nine-bar {
+              height: 4px;
+              background: #1a1f2e;
+              border-radius: 2px;
+              margin-top: 10px;
+              overflow: hidden;
+            }
+            .nine-bar-fill {
+              height: 100%;
+              border-radius: 2px;
+              transition: width 1s ease;
+            }
+            .nine-card:nth-child(1) .nine-bar-fill { width: 99%; background: #ef4444; }
+            .nine-card:nth-child(2) .nine-bar-fill { width: 99.9%; background: #f59e0b; }
+            .nine-card:nth-child(3) .nine-bar-fill { width: 99.99%; background: #3b82f6; }
+            .nine-card:nth-child(4) .nine-bar-fill { width: 100%; background: #10b981; }
+          </style>
+          
+          <div class="availability-viz">
+            <!-- Top Row: Server Cluster + Uptime Timeline -->
+            <div class="avail-section">
+              <!-- Server Redundancy Visualization -->
+              <div class="server-cluster">
+                <div class="cluster-title">High Availability Cluster</div>
+                <div class="servers-row">
+                  <div class="server-box primary">
+                    <div class="server-status"></div>
+                    <div class="server-icon">🖥️</div>
+                    <div class="server-label">Primary</div>
+                  </div>
+                  <div class="server-box primary">
+                    <div class="server-status"></div>
+                    <div class="server-icon">🖥️</div>
+                    <div class="server-label">Primary</div>
+                  </div>
+                  <div class="server-box failed">
+                    <div class="server-status failed-status"></div>
+                    <div class="server-icon">💥</div>
+                    <div class="server-label">Failed</div>
+                  </div>
+                  <div class="server-box standby">
+                    <div class="server-status standby-status"></div>
+                    <div class="server-icon">🔄</div>
+                    <div class="server-label">Standby</div>
+                  </div>
+                </div>
+                <div class="failover-arrow">
+                  <span>→</span> Automatic failover activates standby when server fails <span>→</span>
+                </div>
+              </div>
+              
+              <!-- Uptime Timeline -->
+              <div class="uptime-timeline">
+                <div class="timeline-header">
+                  <div class="timeline-title">Annual Uptime (99.99%)</div>
+                  <div class="live-badge">LIVE</div>
+                </div>
+                <div class="timeline-bar">
+                  <div class="timeline-segment segment-up">OPERATIONAL</div>
+                  <div class="timeline-segment segment-down"></div>
+                </div>
+                <div class="timeline-labels">
+                  <span>Jan 1</span>
+                  <span>↑ 52 min downtime</span>
+                  <span>Dec 31</span>
+                </div>
+                <div class="uptime-calc">
+                  (525,600 min − 52 min) ÷ 525,600 × 100 = 99.99%
+                </div>
+              </div>
             </div>
-            <div class="mind-map-nodes">
-              <div class="mind-node">Redundancy</div>
-              <div class="mind-node">Load Balancing</div>
-              <div class="mind-node">Failover</div>
-              <div class="mind-node">Health Checks</div>
-              <div class="mind-node">Auto-scaling</div>
-              <div class="mind-node">Multi-region</div>
+            
+            <!-- Bottom Row: The Nines -->
+            <div class="nines-section">
+              <div class="nines-title">"The Nines" — Industry Availability Levels</div>
+              <div class="nines-grid">
+                <div class="nine-card">
+                  <div class="nine-percent">99%</div>
+                  <div class="nine-name">Two Nines</div>
+                  <div class="nine-downtime">3.65 days/year</div>
+                  <div class="nine-context">Internal tools, dev environments</div>
+                  <div class="nine-bar"><div class="nine-bar-fill"></div></div>
+                </div>
+                <div class="nine-card">
+                  <div class="nine-percent">99.9%</div>
+                  <div class="nine-name">Three Nines</div>
+                  <div class="nine-downtime">8.76 hours/year</div>
+                  <div class="nine-context">Business apps, SaaS products</div>
+                  <div class="nine-bar"><div class="nine-bar-fill"></div></div>
+                </div>
+                <div class="nine-card highlight">
+                  <div class="nine-percent">99.99%</div>
+                  <div class="nine-name">Four Nines</div>
+                  <div class="nine-downtime">52.6 min/year</div>
+                  <div class="nine-context">E-commerce, banking, healthcare</div>
+                  <div class="nine-bar"><div class="nine-bar-fill"></div></div>
+                </div>
+                <div class="nine-card">
+                  <div class="nine-percent">99.999%</div>
+                  <div class="nine-name">Five Nines</div>
+                  <div class="nine-downtime">5.26 min/year</div>
+                  <div class="nine-context">Telecom, emergency services</div>
+                  <div class="nine-bar"><div class="nine-bar-fill"></div></div>
+                </div>
+              </div>
             </div>
           </div>
         `,
