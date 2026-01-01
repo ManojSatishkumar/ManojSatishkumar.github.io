@@ -2117,19 +2117,245 @@
         badge: { text: "Data Management", color: "#ec4899", bg: "rgba(236, 72, 153, 0.15)" },
         color: "#ec4899",
         diagram: `
-          <div class="mind-map">
-            <div class="mind-map-center" style="background: linear-gradient(135deg, #ec4899, #db2777); color: white;">
-              <span style="font-size: 2rem;">🔗</span>
-              <span>Consistent</span>
-              <span style="font-size: 0.8rem; opacity: 0.8;">Data</span>
+          <style>
+            .consistency-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .consistency-demo {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 20px;
+            }
+            @media (max-width: 800px) {
+              .consistency-demo { grid-template-columns: 1fr; }
+            }
+            .cons-scenario {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 20px;
+              border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .cons-scenario.strong { border-color: rgba(16, 185, 129, 0.3); }
+            .cons-scenario.eventual { border-color: rgba(245, 158, 11, 0.3); }
+            .cons-header {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              margin-bottom: 16px;
+            }
+            .cons-icon {
+              width: 36px;
+              height: 36px;
+              border-radius: 8px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.2rem;
+            }
+            .strong .cons-icon { background: rgba(16, 185, 129, 0.2); }
+            .eventual .cons-icon { background: rgba(245, 158, 11, 0.2); }
+            .cons-title {
+              font-weight: 600;
+              font-size: 0.95rem;
+            }
+            .strong .cons-title { color: #10b981; }
+            .eventual .cons-title { color: #f59e0b; }
+            .cons-nodes {
+              display: flex;
+              justify-content: center;
+              gap: 12px;
+              margin-bottom: 12px;
+            }
+            .cons-node {
+              width: 60px;
+              height: 50px;
+              border-radius: 8px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.7rem;
+              border: 1px solid;
+              transition: all 0.3s ease;
+            }
+            .cons-node-icon { font-size: 1rem; margin-bottom: 2px; }
+            .cons-node.synced {
+              background: rgba(16, 185, 129, 0.15);
+              border-color: rgba(16, 185, 129, 0.4);
+              color: #10b981;
+            }
+            .cons-node.stale {
+              background: rgba(245, 158, 11, 0.15);
+              border-color: rgba(245, 158, 11, 0.4);
+              color: #f59e0b;
+            }
+            .cons-node.updating {
+              animation: nodePulse 1s ease-in-out infinite;
+            }
+            @keyframes nodePulse {
+              0%, 100% { opacity: 0.6; }
+              50% { opacity: 1; }
+            }
+            .cons-timeline {
+              text-align: center;
+              font-size: 0.75rem;
+              color: #6b7280;
+              padding: 8px;
+              background: rgba(30, 35, 50, 0.5);
+              border-radius: 6px;
+            }
+            .cons-timeline span {
+              font-weight: 500;
+            }
+            .strong .cons-timeline span { color: #10b981; }
+            .eventual .cons-timeline span { color: #f59e0b; }
+            
+            /* Models Spectrum */
+            .models-spectrum {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(236, 72, 153, 0.2);
+            }
+            .spectrum-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .spectrum-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #ec4899;
+              border-radius: 50%;
+            }
+            .spectrum-bar {
+              height: 12px;
+              background: linear-gradient(90deg, #10b981 0%, #3b82f6 33%, #8b5cf6 66%, #f59e0b 100%);
+              border-radius: 6px;
+              margin-bottom: 16px;
+            }
+            .spectrum-labels {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 20px;
+            }
+            .spectrum-label {
+              text-align: center;
+              font-size: 0.7rem;
+            }
+            .spectrum-label-name {
+              font-weight: 500;
+              margin-bottom: 2px;
+            }
+            .spectrum-label:nth-child(1) .spectrum-label-name { color: #10b981; }
+            .spectrum-label:nth-child(2) .spectrum-label-name { color: #3b82f6; }
+            .spectrum-label:nth-child(3) .spectrum-label-name { color: #8b5cf6; }
+            .spectrum-label:nth-child(4) .spectrum-label-name { color: #f59e0b; }
+            .spectrum-label-desc {
+              color: #6b7280;
+              font-size: 0.65rem;
+            }
+            .spectrum-tradeoff {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 12px;
+              background: rgba(30, 35, 50, 0.5);
+              border-radius: 8px;
+              font-size: 0.75rem;
+            }
+            .tradeoff-item {
+              display: flex;
+              align-items: center;
+              gap: 6px;
+            }
+            .tradeoff-item.perf { color: #10b981; }
+            .tradeoff-item.cons { color: #ec4899; }
+          </style>
+          
+          <div class="consistency-viz">
+            <!-- Strong vs Eventual Demo -->
+            <div class="consistency-demo">
+              <div class="cons-scenario strong">
+                <div class="cons-header">
+                  <div class="cons-icon">💪</div>
+                  <div class="cons-title">Strong Consistency</div>
+                </div>
+                <div class="cons-nodes">
+                  <div class="cons-node synced">
+                    <span class="cons-node-icon">🖥️</span>
+                    <span>v5</span>
+                  </div>
+                  <div class="cons-node synced">
+                    <span class="cons-node-icon">🖥️</span>
+                    <span>v5</span>
+                  </div>
+                  <div class="cons-node synced">
+                    <span class="cons-node-icon">🖥️</span>
+                    <span>v5</span>
+                  </div>
+                </div>
+                <div class="cons-timeline">All nodes show <span>same data instantly</span></div>
+              </div>
+              
+              <div class="cons-scenario eventual">
+                <div class="cons-header">
+                  <div class="cons-icon">⏳</div>
+                  <div class="cons-title">Eventual Consistency</div>
+                </div>
+                <div class="cons-nodes">
+                  <div class="cons-node synced">
+                    <span class="cons-node-icon">🖥️</span>
+                    <span>v5</span>
+                  </div>
+                  <div class="cons-node stale updating">
+                    <span class="cons-node-icon">🖥️</span>
+                    <span>v4</span>
+                  </div>
+                  <div class="cons-node stale updating">
+                    <span class="cons-node-icon">🖥️</span>
+                    <span>v3</span>
+                  </div>
+                </div>
+                <div class="cons-timeline">Nodes <span>converge over time</span></div>
+              </div>
             </div>
-            <div class="mind-map-nodes">
-              <div class="mind-node">Strong Consistency</div>
-              <div class="mind-node">Eventual Consistency</div>
-              <div class="mind-node">Causal Consistency</div>
-              <div class="mind-node">Read-Your-Writes</div>
-              <div class="mind-node">Linearizability</div>
-              <div class="mind-node">Sequential</div>
+            
+            <!-- Consistency Models Spectrum -->
+            <div class="models-spectrum">
+              <div class="spectrum-title">Consistency Models Spectrum</div>
+              <div class="spectrum-bar"></div>
+              <div class="spectrum-labels">
+                <div class="spectrum-label">
+                  <div class="spectrum-label-name">Linearizable</div>
+                  <div class="spectrum-label-desc">Real-time order</div>
+                </div>
+                <div class="spectrum-label">
+                  <div class="spectrum-label-name">Sequential</div>
+                  <div class="spectrum-label-desc">Global order</div>
+                </div>
+                <div class="spectrum-label">
+                  <div class="spectrum-label-name">Causal</div>
+                  <div class="spectrum-label-desc">Cause → Effect</div>
+                </div>
+                <div class="spectrum-label">
+                  <div class="spectrum-label-name">Eventual</div>
+                  <div class="spectrum-label-desc">Eventually same</div>
+                </div>
+              </div>
+              <div class="spectrum-tradeoff">
+                <div class="tradeoff-item cons">← Stronger Guarantees</div>
+                <div style="color: #6b7280;">Trade-off</div>
+                <div class="tradeoff-item perf">Better Performance →</div>
+              </div>
             </div>
           </div>
         `,
@@ -2229,29 +2455,285 @@
         badge: { text: "Architecture Pattern", color: "#06b6d4", bg: "rgba(6, 182, 212, 0.15)" },
         color: "#06b6d4",
         diagram: `
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
-            <div style="display: flex; gap: 12px;">
-              <div style="padding: 12px 20px; background: rgba(6, 182, 212, 0.2); border: 1px solid #06b6d4; border-radius: 8px; font-size: 0.9rem;">👤 User 1</div>
-              <div style="padding: 12px 20px; background: rgba(6, 182, 212, 0.2); border: 1px solid #06b6d4; border-radius: 8px; font-size: 0.9rem;">👤 User 2</div>
-              <div style="padding: 12px 20px; background: rgba(6, 182, 212, 0.2); border: 1px solid #06b6d4; border-radius: 8px; font-size: 0.9rem;">👤 User 3</div>
-            </div>
-            <div style="font-size: 1.5rem;">⬇️</div>
-            <div style="padding: 20px 40px; background: linear-gradient(135deg, #06b6d4, #0891b2); border-radius: 12px; color: white; font-weight: 600; font-size: 1.1rem; box-shadow: 0 8px 32px rgba(6, 182, 212, 0.3);">
-              ⚖️ Load Balancer
-            </div>
-            <div style="font-size: 1.5rem;">⬇️</div>
-            <div style="display: flex; gap: 16px;">
-              <div style="padding: 16px 24px; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; text-align: center;">
-                <div style="font-size: 1.2rem;">🖥️</div>
-                <div style="font-size: 0.85rem; margin-top: 4px;">Server 1</div>
+          <style>
+            .lb-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .lb-flow {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(6, 182, 212, 0.2);
+            }
+            .lb-flow-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .lb-flow-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #06b6d4;
+              border-radius: 50%;
+            }
+            .lb-diagram {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 16px;
+            }
+            .lb-users {
+              display: flex;
+              gap: 8px;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+            .lb-user {
+              padding: 8px 12px;
+              background: rgba(6, 182, 212, 0.15);
+              border: 1px solid rgba(6, 182, 212, 0.3);
+              border-radius: 6px;
+              font-size: 0.75rem;
+              display: flex;
+              align-items: center;
+              gap: 4px;
+              animation: userFlow 2s ease-in-out infinite;
+            }
+            .lb-user:nth-child(2) { animation-delay: 0.3s; }
+            .lb-user:nth-child(3) { animation-delay: 0.6s; }
+            .lb-user:nth-child(4) { animation-delay: 0.9s; }
+            .lb-user:nth-child(5) { animation-delay: 1.2s; }
+            @keyframes userFlow {
+              0%, 100% { transform: translateY(0); opacity: 0.7; }
+              50% { transform: translateY(3px); opacity: 1; }
+            }
+            .lb-arrows-down {
+              display: flex;
+              gap: 20px;
+              color: #06b6d4;
+              font-size: 1rem;
+            }
+            .lb-balancer {
+              padding: 20px 50px;
+              background: linear-gradient(135deg, #06b6d4, #0891b2);
+              border-radius: 14px;
+              color: white;
+              text-align: center;
+              box-shadow: 0 8px 32px rgba(6, 182, 212, 0.3);
+              position: relative;
+            }
+            .lb-balancer-icon {
+              font-size: 2rem;
+              margin-bottom: 6px;
+            }
+            .lb-balancer-text {
+              font-weight: 600;
+              font-size: 1.1rem;
+            }
+            .lb-balancer-sub {
+              font-size: 0.7rem;
+              opacity: 0.8;
+              margin-top: 4px;
+            }
+            .lb-distribution {
+              display: flex;
+              gap: 8px;
+              color: #06b6d4;
+              font-size: 0.9rem;
+            }
+            .lb-dist-arrow {
+              animation: distFlow 1s ease-in-out infinite;
+            }
+            .lb-dist-arrow:nth-child(1) { animation-delay: 0s; }
+            .lb-dist-arrow:nth-child(2) { animation-delay: 0.2s; }
+            .lb-dist-arrow:nth-child(3) { animation-delay: 0.4s; }
+            @keyframes distFlow {
+              0%, 100% { opacity: 0.5; }
+              50% { opacity: 1; }
+            }
+            .lb-servers {
+              display: flex;
+              gap: 16px;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+            .lb-server {
+              padding: 14px 20px;
+              background: rgba(30, 35, 50, 0.8);
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              border-radius: 10px;
+              text-align: center;
+              min-width: 90px;
+            }
+            .lb-server-icon {
+              font-size: 1.4rem;
+              margin-bottom: 4px;
+            }
+            .lb-server-name {
+              font-size: 0.8rem;
+              color: #e5e5e5;
+              margin-bottom: 6px;
+            }
+            .lb-server-load {
+              height: 6px;
+              background: rgba(255, 255, 255, 0.1);
+              border-radius: 3px;
+              overflow: hidden;
+            }
+            .lb-server-load-fill {
+              height: 100%;
+              border-radius: 3px;
+            }
+            .lb-server:nth-child(1) .lb-server-load-fill { width: 65%; background: #10b981; }
+            .lb-server:nth-child(2) .lb-server-load-fill { width: 72%; background: #10b981; }
+            .lb-server:nth-child(3) .lb-server-load-fill { width: 58%; background: #10b981; }
+            .lb-server:nth-child(4) .lb-server-load-fill { width: 70%; background: #10b981; }
+            .lb-server-percent {
+              font-size: 0.65rem;
+              color: #6b7280;
+              margin-top: 4px;
+            }
+            
+            /* Algorithms */
+            .lb-algorithms {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(16, 185, 129, 0.2);
+            }
+            .lb-algo-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .lb-algo-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #10b981;
+              border-radius: 50%;
+            }
+            .lb-algo-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 700px) {
+              .lb-algo-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .lb-algo {
+              padding: 14px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              text-align: center;
+              border: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            .lb-algo-icon {
+              font-size: 1.3rem;
+              margin-bottom: 6px;
+            }
+            .lb-algo-name {
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: #e5e5e5;
+              margin-bottom: 4px;
+            }
+            .lb-algo-desc {
+              font-size: 0.65rem;
+              color: #6b7280;
+            }
+          </style>
+          
+          <div class="lb-viz">
+            <!-- Traffic Flow -->
+            <div class="lb-flow">
+              <div class="lb-flow-title">Traffic Distribution Flow</div>
+              <div class="lb-diagram">
+                <div class="lb-users">
+                  <div class="lb-user">👤 User 1</div>
+                  <div class="lb-user">👤 User 2</div>
+                  <div class="lb-user">👤 User 3</div>
+                  <div class="lb-user">👤 User 4</div>
+                  <div class="lb-user">👤 User 5</div>
+                </div>
+                <div class="lb-arrows-down">↓ ↓ ↓ ↓ ↓</div>
+                <div class="lb-balancer">
+                  <div class="lb-balancer-icon">⚖️</div>
+                  <div class="lb-balancer-text">Load Balancer</div>
+                  <div class="lb-balancer-sub">Health checks • Routing • SSL termination</div>
+                </div>
+                <div class="lb-distribution">
+                  <span class="lb-dist-arrow">↙️</span>
+                  <span class="lb-dist-arrow">↓</span>
+                  <span class="lb-dist-arrow">↓</span>
+                  <span class="lb-dist-arrow">↘️</span>
+                </div>
+                <div class="lb-servers">
+                  <div class="lb-server">
+                    <div class="lb-server-icon">🖥️</div>
+                    <div class="lb-server-name">Server 1</div>
+                    <div class="lb-server-load"><div class="lb-server-load-fill"></div></div>
+                    <div class="lb-server-percent">65% load</div>
+                  </div>
+                  <div class="lb-server">
+                    <div class="lb-server-icon">🖥️</div>
+                    <div class="lb-server-name">Server 2</div>
+                    <div class="lb-server-load"><div class="lb-server-load-fill"></div></div>
+                    <div class="lb-server-percent">72% load</div>
+                  </div>
+                  <div class="lb-server">
+                    <div class="lb-server-icon">🖥️</div>
+                    <div class="lb-server-name">Server 3</div>
+                    <div class="lb-server-load"><div class="lb-server-load-fill"></div></div>
+                    <div class="lb-server-percent">58% load</div>
+                  </div>
+                  <div class="lb-server">
+                    <div class="lb-server-icon">🖥️</div>
+                    <div class="lb-server-name">Server 4</div>
+                    <div class="lb-server-load"><div class="lb-server-load-fill"></div></div>
+                    <div class="lb-server-percent">70% load</div>
+                  </div>
+                </div>
               </div>
-              <div style="padding: 16px 24px; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; text-align: center;">
-                <div style="font-size: 1.2rem;">🖥️</div>
-                <div style="font-size: 0.85rem; margin-top: 4px;">Server 2</div>
-              </div>
-              <div style="padding: 16px 24px; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; text-align: center;">
-                <div style="font-size: 1.2rem;">🖥️</div>
-                <div style="font-size: 0.85rem; margin-top: 4px;">Server 3</div>
+            </div>
+            
+            <!-- Algorithms -->
+            <div class="lb-algorithms">
+              <div class="lb-algo-title">Load Balancing Algorithms</div>
+              <div class="lb-algo-grid">
+                <div class="lb-algo">
+                  <div class="lb-algo-icon">🔄</div>
+                  <div class="lb-algo-name">Round Robin</div>
+                  <div class="lb-algo-desc">Sequential rotation</div>
+                </div>
+                <div class="lb-algo">
+                  <div class="lb-algo-icon">📊</div>
+                  <div class="lb-algo-name">Least Connections</div>
+                  <div class="lb-algo-desc">Fewest active</div>
+                </div>
+                <div class="lb-algo">
+                  <div class="lb-algo-icon">⚡</div>
+                  <div class="lb-algo-name">Weighted</div>
+                  <div class="lb-algo-desc">By server capacity</div>
+                </div>
+                <div class="lb-algo">
+                  <div class="lb-algo-icon">📍</div>
+                  <div class="lb-algo-name">IP Hash</div>
+                  <div class="lb-algo-desc">Session stickiness</div>
+                </div>
               </div>
             </div>
           </div>
@@ -2286,26 +2768,297 @@
         badge: { text: "Performance", color: "#f59e0b", bg: "rgba(245, 158, 11, 0.15)" },
         color: "#f59e0b",
         diagram: `
-          <div style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap; justify-content: center;">
-            <div style="text-align: center;">
-              <div style="padding: 20px 30px; background: rgba(245, 158, 11, 0.2); border: 2px solid #f59e0b; border-radius: 12px; margin-bottom: 8px;">
-                <div style="font-size: 2rem;">⚡</div>
-                <div style="font-weight: 600;">Cache</div>
-                <div style="font-size: 0.8rem; color: #a0a0b0;">~1ms</div>
+          <style>
+            .cache-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .cache-row {
+              display: flex;
+              gap: 20px;
+            }
+            @media (max-width: 900px) {
+              .cache-row { flex-direction: column; }
+            }
+            
+            /* Cache Flow */
+            .cache-flow {
+              flex: 1.5;
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            .cache-flow-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .cache-flow-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #f59e0b;
+              border-radius: 50%;
+            }
+            .cache-diagram {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 16px;
+              flex-wrap: wrap;
+            }
+            .cache-component {
+              padding: 20px;
+              border-radius: 12px;
+              text-align: center;
+              min-width: 100px;
+            }
+            .cache-app {
+              background: rgba(6, 182, 212, 0.15);
+              border: 1px solid rgba(6, 182, 212, 0.3);
+            }
+            .cache-cache {
+              background: rgba(245, 158, 11, 0.15);
+              border: 2px solid rgba(245, 158, 11, 0.5);
+              position: relative;
+            }
+            .cache-db {
+              background: rgba(59, 130, 246, 0.15);
+              border: 1px solid rgba(59, 130, 246, 0.3);
+            }
+            .cache-comp-icon {
+              font-size: 2rem;
+              margin-bottom: 6px;
+            }
+            .cache-comp-name {
+              font-weight: 500;
+              font-size: 0.9rem;
+              margin-bottom: 4px;
+            }
+            .cache-comp-time {
+              font-size: 0.75rem;
+              color: #6b7280;
+            }
+            .cache-cache .cache-comp-time { color: #f59e0b; }
+            .cache-arrow {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 4px;
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+            .cache-arrow-icon {
+              font-size: 1.2rem;
+            }
+            .cache-arrow.hit .cache-arrow-icon { color: #10b981; }
+            .cache-arrow.miss .cache-arrow-icon { color: #ef4444; }
+            
+            /* Hit Rate */
+            .hit-rate {
+              flex: 1;
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(16, 185, 129, 0.2);
+            }
+            .hit-rate-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .hit-rate-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #10b981;
+              border-radius: 50%;
+            }
+            .hit-rate-gauge {
+              text-align: center;
+              margin-bottom: 16px;
+            }
+            .hit-rate-value {
+              font-size: 3rem;
+              font-weight: 700;
+              color: #10b981;
+            }
+            .hit-rate-label {
+              font-size: 0.8rem;
+              color: #6b7280;
+            }
+            .hit-miss-bar {
+              height: 16px;
+              background: rgba(239, 68, 68, 0.3);
+              border-radius: 8px;
+              overflow: hidden;
+              margin-bottom: 8px;
+            }
+            .hit-bar {
+              height: 100%;
+              width: 95%;
+              background: linear-gradient(90deg, #10b981, #059669);
+              border-radius: 8px;
+            }
+            .hit-miss-labels {
+              display: flex;
+              justify-content: space-between;
+              font-size: 0.7rem;
+            }
+            .hit-label { color: #10b981; }
+            .miss-label { color: #ef4444; }
+            
+            /* Cache Layers */
+            .cache-layers {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(139, 92, 246, 0.2);
+            }
+            .cache-layers-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .cache-layers-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #8b5cf6;
+              border-radius: 50%;
+            }
+            .layers-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 700px) {
+              .layers-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .layer-card {
+              padding: 16px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              text-align: center;
+              border: 1px solid rgba(255, 255, 255, 0.05);
+              transition: all 0.3s ease;
+            }
+            .layer-card:hover {
+              transform: translateY(-2px);
+            }
+            .layer-card:nth-child(1) { border-color: rgba(59, 130, 246, 0.3); }
+            .layer-card:nth-child(2) { border-color: rgba(16, 185, 129, 0.3); }
+            .layer-card:nth-child(3) { border-color: rgba(245, 158, 11, 0.3); }
+            .layer-card:nth-child(4) { border-color: rgba(139, 92, 246, 0.3); }
+            .layer-icon {
+              font-size: 1.5rem;
+              margin-bottom: 8px;
+            }
+            .layer-name {
+              font-size: 0.85rem;
+              font-weight: 500;
+              margin-bottom: 4px;
+            }
+            .layer-card:nth-child(1) .layer-name { color: #3b82f6; }
+            .layer-card:nth-child(2) .layer-name { color: #10b981; }
+            .layer-card:nth-child(3) .layer-name { color: #f59e0b; }
+            .layer-card:nth-child(4) .layer-name { color: #8b5cf6; }
+            .layer-speed {
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+          </style>
+          
+          <div class="cache-viz">
+            <div class="cache-row">
+              <!-- Cache Flow Diagram -->
+              <div class="cache-flow">
+                <div class="cache-flow-title">Cache-Aside Pattern (Read-Through)</div>
+                <div class="cache-diagram">
+                  <div class="cache-component cache-app">
+                    <div class="cache-comp-icon">📱</div>
+                    <div class="cache-comp-name">Application</div>
+                    <div class="cache-comp-time">Request</div>
+                  </div>
+                  <div class="cache-arrow hit">
+                    <span class="cache-arrow-icon">→</span>
+                    <span>1. Check</span>
+                  </div>
+                  <div class="cache-component cache-cache">
+                    <div class="cache-comp-icon">⚡</div>
+                    <div class="cache-comp-name">Cache</div>
+                    <div class="cache-comp-time">~1ms</div>
+                  </div>
+                  <div class="cache-arrow miss">
+                    <span class="cache-arrow-icon">→</span>
+                    <span>2. Miss?</span>
+                  </div>
+                  <div class="cache-component cache-db">
+                    <div class="cache-comp-icon">💾</div>
+                    <div class="cache-comp-name">Database</div>
+                    <div class="cache-comp-time">~100ms</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Hit Rate -->
+              <div class="hit-rate">
+                <div class="hit-rate-title">Cache Hit Rate</div>
+                <div class="hit-rate-gauge">
+                  <div class="hit-rate-value">95%</div>
+                  <div class="hit-rate-label">Excellent Performance</div>
+                </div>
+                <div class="hit-miss-bar">
+                  <div class="hit-bar"></div>
+                </div>
+                <div class="hit-miss-labels">
+                  <span class="hit-label">✓ Hits: 950/1000</span>
+                  <span class="miss-label">✗ Misses: 50</span>
+                </div>
               </div>
             </div>
-            <div style="font-size: 1.5rem; color: #f59e0b;">→</div>
-            <div style="text-align: center;">
-              <div style="padding: 20px 30px; background: rgba(59, 130, 246, 0.2); border: 2px solid #3b82f6; border-radius: 12px; margin-bottom: 8px;">
-                <div style="font-size: 2rem;">💾</div>
-                <div style="font-weight: 600;">Database</div>
-                <div style="font-size: 0.8rem; color: #a0a0b0;">~100ms</div>
-              </div>
-            </div>
-            <div style="width: 100%; text-align: center; margin-top: 20px;">
-              <div style="display: inline-flex; gap: 16px; background: var(--bg-tertiary); padding: 16px 24px; border-radius: 12px;">
-                <span style="color: #10b981; font-weight: 600;">Cache Hit → Fast</span>
-                <span style="color: #ef4444; font-weight: 600;">Cache Miss → Slow</span>
+            
+            <!-- Cache Layers -->
+            <div class="cache-layers">
+              <div class="cache-layers-title">Multi-Level Cache Architecture</div>
+              <div class="layers-grid">
+                <div class="layer-card">
+                  <div class="layer-icon">🌐</div>
+                  <div class="layer-name">Browser</div>
+                  <div class="layer-speed">0ms (local)</div>
+                </div>
+                <div class="layer-card">
+                  <div class="layer-icon">🌍</div>
+                  <div class="layer-name">CDN Edge</div>
+                  <div class="layer-speed">10-50ms</div>
+                </div>
+                <div class="layer-card">
+                  <div class="layer-icon">⚡</div>
+                  <div class="layer-name">Redis/Memcached</div>
+                  <div class="layer-speed">1-5ms</div>
+                </div>
+                <div class="layer-card">
+                  <div class="layer-icon">💾</div>
+                  <div class="layer-name">DB Query Cache</div>
+                  <div class="layer-speed">10-50ms</div>
+                </div>
               </div>
             </div>
           </div>
@@ -3480,24 +4233,237 @@
         badge: { text: "Data Management", color: "#f59e0b", bg: "rgba(245, 158, 11, 0.15)" },
         color: "#f59e0b",
         diagram: `
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 24px;">
-            <div style="padding: 16px 32px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 12px; color: white; font-weight: 600;">📦 Full Dataset</div>
-            <div style="font-size: 1.5rem;">⬇️</div>
-            <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
-              <div style="padding: 20px; background: rgba(59, 130, 246, 0.2); border: 1px solid #3b82f6; border-radius: 12px; text-align: center; min-width: 100px;">
-                <div style="font-size: 1.5rem;">📁</div>
-                <div style="font-weight: 500;">Partition A</div>
-                <div style="font-size: 0.8rem; color: #a0a0b0;">A-F</div>
+          <style>
+            .part-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .part-demo {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            .part-demo-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .part-demo-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #f59e0b;
+              border-radius: 50%;
+            }
+            .part-flow {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 16px;
+            }
+            .part-source {
+              padding: 16px 40px;
+              background: linear-gradient(135deg, #f59e0b, #d97706);
+              border-radius: 12px;
+              color: white;
+              text-align: center;
+              box-shadow: 0 8px 32px rgba(245, 158, 11, 0.3);
+            }
+            .part-source-icon {
+              font-size: 2rem;
+              margin-bottom: 4px;
+            }
+            .part-source-text {
+              font-weight: 600;
+            }
+            .part-source-size {
+              font-size: 0.75rem;
+              opacity: 0.8;
+            }
+            .part-arrow {
+              color: #6b7280;
+              font-size: 1rem;
+            }
+            .part-key {
+              padding: 10px 20px;
+              background: rgba(139, 92, 246, 0.15);
+              border: 1px dashed rgba(139, 92, 246, 0.4);
+              border-radius: 8px;
+              font-size: 0.8rem;
+              color: #a78bfa;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .part-shards {
+              display: flex;
+              gap: 14px;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+            .part-shard {
+              padding: 16px 20px;
+              border-radius: 12px;
+              text-align: center;
+              min-width: 100px;
+              transition: all 0.3s ease;
+            }
+            .part-shard:hover {
+              transform: translateY(-3px);
+            }
+            .part-shard:nth-child(1) { background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); }
+            .part-shard:nth-child(2) { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); }
+            .part-shard:nth-child(3) { background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.4); }
+            .part-shard:nth-child(4) { background: rgba(236, 72, 153, 0.15); border: 1px solid rgba(236, 72, 153, 0.4); }
+            .part-shard-icon {
+              font-size: 1.5rem;
+              margin-bottom: 6px;
+            }
+            .part-shard-name {
+              font-size: 0.85rem;
+              font-weight: 500;
+              margin-bottom: 4px;
+            }
+            .part-shard:nth-child(1) .part-shard-name { color: #3b82f6; }
+            .part-shard:nth-child(2) .part-shard-name { color: #10b981; }
+            .part-shard:nth-child(3) .part-shard-name { color: #8b5cf6; }
+            .part-shard:nth-child(4) .part-shard-name { color: #ec4899; }
+            .part-shard-range {
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+            .part-shard-count {
+              font-size: 0.65rem;
+              color: #6b7280;
+              margin-top: 4px;
+            }
+            
+            /* Strategies */
+            .part-strategies {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(16, 185, 129, 0.2);
+            }
+            .part-strat-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .part-strat-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #10b981;
+              border-radius: 50%;
+            }
+            .part-strat-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 700px) {
+              .part-strat-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .part-strat {
+              padding: 14px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              text-align: center;
+            }
+            .part-strat-icon {
+              font-size: 1.4rem;
+              margin-bottom: 6px;
+            }
+            .part-strat-name {
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: #e5e5e5;
+              margin-bottom: 3px;
+            }
+            .part-strat-desc {
+              font-size: 0.65rem;
+              color: #6b7280;
+            }
+          </style>
+          
+          <div class="part-viz">
+            <!-- Partitioning Demo -->
+            <div class="part-demo">
+              <div class="part-demo-title">Data Partitioning (Sharding)</div>
+              <div class="part-flow">
+                <div class="part-source">
+                  <div class="part-source-icon">📦</div>
+                  <div class="part-source-text">Full Dataset</div>
+                  <div class="part-source-size">10TB • 100M records</div>
+                </div>
+                <div class="part-arrow">⬇️ Partition by user_id ⬇️</div>
+                <div class="part-key">🔑 hash(user_id) % 4 → Shard Assignment</div>
+                <div class="part-shards">
+                  <div class="part-shard">
+                    <div class="part-shard-icon">📁</div>
+                    <div class="part-shard-name">Shard 0</div>
+                    <div class="part-shard-range">hash = 0</div>
+                    <div class="part-shard-count">25M records</div>
+                  </div>
+                  <div class="part-shard">
+                    <div class="part-shard-icon">📁</div>
+                    <div class="part-shard-name">Shard 1</div>
+                    <div class="part-shard-range">hash = 1</div>
+                    <div class="part-shard-count">25M records</div>
+                  </div>
+                  <div class="part-shard">
+                    <div class="part-shard-icon">📁</div>
+                    <div class="part-shard-name">Shard 2</div>
+                    <div class="part-shard-range">hash = 2</div>
+                    <div class="part-shard-count">25M records</div>
+                  </div>
+                  <div class="part-shard">
+                    <div class="part-shard-icon">📁</div>
+                    <div class="part-shard-name">Shard 3</div>
+                    <div class="part-shard-range">hash = 3</div>
+                    <div class="part-shard-count">25M records</div>
+                  </div>
+                </div>
               </div>
-              <div style="padding: 20px; background: rgba(139, 92, 246, 0.2); border: 1px solid #8b5cf6; border-radius: 12px; text-align: center; min-width: 100px;">
-                <div style="font-size: 1.5rem;">📁</div>
-                <div style="font-weight: 500;">Partition B</div>
-                <div style="font-size: 0.8rem; color: #a0a0b0;">G-M</div>
-              </div>
-              <div style="padding: 20px; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 12px; text-align: center; min-width: 100px;">
-                <div style="font-size: 1.5rem;">📁</div>
-                <div style="font-weight: 500;">Partition C</div>
-                <div style="font-size: 0.8rem; color: #a0a0b0;">N-Z</div>
+            </div>
+            
+            <!-- Strategies -->
+            <div class="part-strategies">
+              <div class="part-strat-title">Partitioning Strategies</div>
+              <div class="part-strat-grid">
+                <div class="part-strat">
+                  <div class="part-strat-icon">📏</div>
+                  <div class="part-strat-name">Range</div>
+                  <div class="part-strat-desc">By date or ID range</div>
+                </div>
+                <div class="part-strat">
+                  <div class="part-strat-icon">#️⃣</div>
+                  <div class="part-strat-name">Hash</div>
+                  <div class="part-strat-desc">Even distribution</div>
+                </div>
+                <div class="part-strat">
+                  <div class="part-strat-icon">📋</div>
+                  <div class="part-strat-name">List</div>
+                  <div class="part-strat-desc">By category/region</div>
+                </div>
+                <div class="part-strat">
+                  <div class="part-strat-icon">🔀</div>
+                  <div class="part-strat-name">Composite</div>
+                  <div class="part-strat-desc">Combined approach</div>
+                </div>
               </div>
             </div>
           </div>
@@ -3532,29 +4498,238 @@
         badge: { text: "Data Management", color: "#10b981", bg: "rgba(16, 185, 129, 0.15)" },
         color: "#10b981",
         diagram: `
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
-            <div style="padding: 20px 40px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; color: white; font-weight: 600; text-align: center;">
-              <div style="font-size: 1.5rem;">👑</div>
-              <div>Primary</div>
-              <div style="font-size: 0.8rem; opacity: 0.8;">Writes + Reads</div>
-            </div>
-            <div style="display: flex; gap: 8px; color: #10b981;">
-              <span>↙️</span>
-              <span>⬇️</span>
-              <span>↘️</span>
-            </div>
-            <div style="display: flex; gap: 16px;">
-              <div style="padding: 16px 24px; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 12px; text-align: center;">
-                <div style="font-size: 1.2rem;">📋</div>
-                <div style="font-size: 0.9rem;">Replica 1</div>
+          <style>
+            .rep-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .rep-flow {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(16, 185, 129, 0.2);
+            }
+            .rep-flow-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .rep-flow-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #10b981;
+              border-radius: 50%;
+            }
+            .rep-diagram {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 16px;
+            }
+            .rep-primary {
+              padding: 20px 40px;
+              background: linear-gradient(135deg, #10b981, #059669);
+              border-radius: 14px;
+              color: white;
+              text-align: center;
+              box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
+              position: relative;
+            }
+            .rep-primary-icon {
+              font-size: 2rem;
+              margin-bottom: 4px;
+            }
+            .rep-primary-name {
+              font-weight: 600;
+              font-size: 1rem;
+            }
+            .rep-primary-role {
+              font-size: 0.75rem;
+              opacity: 0.8;
+            }
+            .rep-arrows {
+              display: flex;
+              gap: 30px;
+              color: #10b981;
+            }
+            .rep-arrow {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+            .rep-arrow-icon {
+              font-size: 1.2rem;
+              color: #10b981;
+              animation: repSync 1s ease-in-out infinite;
+            }
+            .rep-arrow:nth-child(2) .rep-arrow-icon { animation-delay: 0.3s; }
+            .rep-arrow:nth-child(3) .rep-arrow-icon { animation-delay: 0.6s; }
+            @keyframes repSync {
+              0%, 100% { opacity: 0.5; transform: translateY(0); }
+              50% { opacity: 1; transform: translateY(3px); }
+            }
+            .rep-replicas {
+              display: flex;
+              gap: 16px;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+            .rep-replica {
+              padding: 16px 24px;
+              background: rgba(16, 185, 129, 0.15);
+              border: 1px solid rgba(16, 185, 129, 0.4);
+              border-radius: 12px;
+              text-align: center;
+              min-width: 100px;
+            }
+            .rep-replica-icon {
+              font-size: 1.4rem;
+              margin-bottom: 4px;
+            }
+            .rep-replica-name {
+              font-size: 0.85rem;
+              font-weight: 500;
+              color: #10b981;
+            }
+            .rep-replica-role {
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+            .rep-replica-lag {
+              font-size: 0.65rem;
+              color: #6b7280;
+              margin-top: 4px;
+            }
+            
+            /* Replication Types */
+            .rep-types {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(139, 92, 246, 0.2);
+            }
+            .rep-types-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .rep-types-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #8b5cf6;
+              border-radius: 50%;
+            }
+            .rep-types-grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 600px) {
+              .rep-types-grid { grid-template-columns: 1fr; }
+            }
+            .rep-type {
+              padding: 16px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              text-align: center;
+            }
+            .rep-type-icon {
+              font-size: 1.5rem;
+              margin-bottom: 8px;
+            }
+            .rep-type-name {
+              font-size: 0.85rem;
+              font-weight: 500;
+              color: #e5e5e5;
+              margin-bottom: 4px;
+            }
+            .rep-type-desc {
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+          </style>
+          
+          <div class="rep-viz">
+            <!-- Replication Flow -->
+            <div class="rep-flow">
+              <div class="rep-flow-title">Leader-Follower Replication</div>
+              <div class="rep-diagram">
+                <div class="rep-primary">
+                  <div class="rep-primary-icon">👑</div>
+                  <div class="rep-primary-name">Primary (Leader)</div>
+                  <div class="rep-primary-role">Handles all Writes</div>
+                </div>
+                <div class="rep-arrows">
+                  <div class="rep-arrow">
+                    <span class="rep-arrow-icon">↓</span>
+                    <span>sync</span>
+                  </div>
+                  <div class="rep-arrow">
+                    <span class="rep-arrow-icon">↓</span>
+                    <span>async</span>
+                  </div>
+                  <div class="rep-arrow">
+                    <span class="rep-arrow-icon">↓</span>
+                    <span>async</span>
+                  </div>
+                </div>
+                <div class="rep-replicas">
+                  <div class="rep-replica">
+                    <div class="rep-replica-icon">📋</div>
+                    <div class="rep-replica-name">Replica 1</div>
+                    <div class="rep-replica-role">Read-only</div>
+                    <div class="rep-replica-lag">Lag: 0ms</div>
+                  </div>
+                  <div class="rep-replica">
+                    <div class="rep-replica-icon">📋</div>
+                    <div class="rep-replica-name">Replica 2</div>
+                    <div class="rep-replica-role">Read-only</div>
+                    <div class="rep-replica-lag">Lag: 120ms</div>
+                  </div>
+                  <div class="rep-replica">
+                    <div class="rep-replica-icon">📋</div>
+                    <div class="rep-replica-name">Replica 3</div>
+                    <div class="rep-replica-role">Read-only</div>
+                    <div class="rep-replica-lag">Lag: 85ms</div>
+                  </div>
+                </div>
               </div>
-              <div style="padding: 16px 24px; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 12px; text-align: center;">
-                <div style="font-size: 1.2rem;">📋</div>
-                <div style="font-size: 0.9rem;">Replica 2</div>
-              </div>
-              <div style="padding: 16px 24px; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 12px; text-align: center;">
-                <div style="font-size: 1.2rem;">📋</div>
-                <div style="font-size: 0.9rem;">Replica 3</div>
+            </div>
+            
+            <!-- Replication Types -->
+            <div class="rep-types">
+              <div class="rep-types-title">Replication Topologies</div>
+              <div class="rep-types-grid">
+                <div class="rep-type">
+                  <div class="rep-type-icon">👑</div>
+                  <div class="rep-type-name">Leader-Follower</div>
+                  <div class="rep-type-desc">One leader, many followers</div>
+                </div>
+                <div class="rep-type">
+                  <div class="rep-type-icon">👥</div>
+                  <div class="rep-type-name">Multi-Leader</div>
+                  <div class="rep-type-desc">Multiple write nodes</div>
+                </div>
+                <div class="rep-type">
+                  <div class="rep-type-icon">🔄</div>
+                  <div class="rep-type-name">Leaderless</div>
+                  <div class="rep-type-desc">Any node accepts writes</div>
+                </div>
               </div>
             </div>
           </div>
@@ -3589,26 +4764,219 @@
         badge: { text: "Data Management", color: "#8b5cf6", bg: "rgba(139, 92, 246, 0.15)" },
         color: "#8b5cf6",
         diagram: `
-          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 500px;">
-            <div style="padding: 24px; background: rgba(59, 130, 246, 0.15); border: 1px solid #3b82f6; border-radius: 16px; text-align: center;">
-              <div style="font-size: 2rem; margin-bottom: 8px;">⚛️</div>
-              <div style="font-weight: 700; color: #3b82f6;">Atomicity</div>
-              <div style="font-size: 0.8rem; color: #a0a0b0; margin-top: 4px;">All or Nothing</div>
+          <style>
+            .acid-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .acid-props {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(139, 92, 246, 0.2);
+            }
+            .acid-props-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .acid-props-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #8b5cf6;
+              border-radius: 50%;
+            }
+            .acid-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 16px;
+            }
+            @media (max-width: 700px) {
+              .acid-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .acid-prop {
+              padding: 20px;
+              border-radius: 14px;
+              text-align: center;
+              transition: all 0.3s ease;
+            }
+            .acid-prop:hover {
+              transform: translateY(-4px);
+            }
+            .acid-prop.a {
+              background: rgba(59, 130, 246, 0.15);
+              border: 1px solid rgba(59, 130, 246, 0.4);
+            }
+            .acid-prop.c {
+              background: rgba(16, 185, 129, 0.15);
+              border: 1px solid rgba(16, 185, 129, 0.4);
+            }
+            .acid-prop.i {
+              background: rgba(139, 92, 246, 0.15);
+              border: 1px solid rgba(139, 92, 246, 0.4);
+            }
+            .acid-prop.d {
+              background: rgba(245, 158, 11, 0.15);
+              border: 1px solid rgba(245, 158, 11, 0.4);
+            }
+            .acid-prop-icon {
+              font-size: 2rem;
+              margin-bottom: 10px;
+            }
+            .acid-prop-name {
+              font-weight: 700;
+              font-size: 1rem;
+              margin-bottom: 6px;
+            }
+            .acid-prop.a .acid-prop-name { color: #3b82f6; }
+            .acid-prop.c .acid-prop-name { color: #10b981; }
+            .acid-prop.i .acid-prop-name { color: #8b5cf6; }
+            .acid-prop.d .acid-prop-name { color: #f59e0b; }
+            .acid-prop-desc {
+              font-size: 0.75rem;
+              color: #a0a0b0;
+              margin-bottom: 8px;
+            }
+            .acid-prop-example {
+              font-size: 0.65rem;
+              color: #6b7280;
+              padding: 4px 8px;
+              background: rgba(0, 0, 0, 0.2);
+              border-radius: 6px;
+            }
+            
+            /* ACID vs BASE */
+            .acid-compare {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            .acid-compare-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .acid-compare-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #f59e0b;
+              border-radius: 50%;
+            }
+            .acid-compare-row {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 16px;
+            }
+            @media (max-width: 600px) {
+              .acid-compare-row { grid-template-columns: 1fr; }
+            }
+            .acid-model {
+              padding: 16px;
+              border-radius: 12px;
+              text-align: center;
+            }
+            .acid-model.acid-m {
+              background: rgba(139, 92, 246, 0.1);
+              border: 1px solid rgba(139, 92, 246, 0.3);
+            }
+            .acid-model.base {
+              background: rgba(245, 158, 11, 0.1);
+              border: 1px solid rgba(245, 158, 11, 0.3);
+            }
+            .acid-model-name {
+              font-weight: 600;
+              font-size: 1rem;
+              margin-bottom: 8px;
+            }
+            .acid-model.acid-m .acid-model-name { color: #8b5cf6; }
+            .acid-model.base .acid-model-name { color: #f59e0b; }
+            .acid-model-features {
+              display: flex;
+              flex-direction: column;
+              gap: 4px;
+              font-size: 0.75rem;
+              color: #a0a0b0;
+            }
+            .acid-model-use {
+              margin-top: 10px;
+              font-size: 0.7rem;
+              padding: 4px 10px;
+              border-radius: 10px;
+              display: inline-block;
+            }
+            .acid-model.acid-m .acid-model-use { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
+            .acid-model.base .acid-model-use { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+          </style>
+          
+          <div class="acid-viz">
+            <!-- ACID Properties -->
+            <div class="acid-props">
+              <div class="acid-props-title">The Four ACID Guarantees</div>
+              <div class="acid-grid">
+                <div class="acid-prop a">
+                  <div class="acid-prop-icon">⚛️</div>
+                  <div class="acid-prop-name">Atomicity</div>
+                  <div class="acid-prop-desc">All or Nothing</div>
+                  <div class="acid-prop-example">Rollback on failure</div>
+                </div>
+                <div class="acid-prop c">
+                  <div class="acid-prop-icon">✅</div>
+                  <div class="acid-prop-name">Consistency</div>
+                  <div class="acid-prop-desc">Valid State Only</div>
+                  <div class="acid-prop-example">Constraints enforced</div>
+                </div>
+                <div class="acid-prop i">
+                  <div class="acid-prop-icon">🔒</div>
+                  <div class="acid-prop-name">Isolation</div>
+                  <div class="acid-prop-desc">No Interference</div>
+                  <div class="acid-prop-example">Concurrent safety</div>
+                </div>
+                <div class="acid-prop d">
+                  <div class="acid-prop-icon">💾</div>
+                  <div class="acid-prop-name">Durability</div>
+                  <div class="acid-prop-desc">Permanent</div>
+                  <div class="acid-prop-example">Survives crashes</div>
+                </div>
+              </div>
             </div>
-            <div style="padding: 24px; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; border-radius: 16px; text-align: center;">
-              <div style="font-size: 2rem; margin-bottom: 8px;">✅</div>
-              <div style="font-weight: 700; color: #10b981;">Consistency</div>
-              <div style="font-size: 0.8rem; color: #a0a0b0; margin-top: 4px;">Valid State Only</div>
-            </div>
-            <div style="padding: 24px; background: rgba(139, 92, 246, 0.15); border: 1px solid #8b5cf6; border-radius: 16px; text-align: center;">
-              <div style="font-size: 2rem; margin-bottom: 8px;">🔒</div>
-              <div style="font-weight: 700; color: #8b5cf6;">Isolation</div>
-              <div style="font-size: 0.8rem; color: #a0a0b0; margin-top: 4px;">No Interference</div>
-            </div>
-            <div style="padding: 24px; background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; border-radius: 16px; text-align: center;">
-              <div style="font-size: 2rem; margin-bottom: 8px;">💾</div>
-              <div style="font-weight: 700; color: #f59e0b;">Durability</div>
-              <div style="font-size: 0.8rem; color: #a0a0b0; margin-top: 4px;">Permanent Once Committed</div>
+            
+            <!-- ACID vs BASE -->
+            <div class="acid-compare">
+              <div class="acid-compare-title">ACID vs BASE Models</div>
+              <div class="acid-compare-row">
+                <div class="acid-model acid-m">
+                  <div class="acid-model-name">ACID</div>
+                  <div class="acid-model-features">
+                    <span>✓ Strong consistency</span>
+                    <span>✓ Immediate correctness</span>
+                    <span>✓ Transaction safety</span>
+                  </div>
+                  <div class="acid-model-use">PostgreSQL, MySQL</div>
+                </div>
+                <div class="acid-model base">
+                  <div class="acid-model-name">BASE</div>
+                  <div class="acid-model-features">
+                    <span>✓ Basically Available</span>
+                    <span>✓ Soft state</span>
+                    <span>✓ Eventually consistent</span>
+                  </div>
+                  <div class="acid-model-use">Cassandra, DynamoDB</div>
+                </div>
+              </div>
             </div>
           </div>
         `,
@@ -3642,25 +5010,266 @@
         badge: { text: "Architecture Pattern", color: "#ec4899", bg: "rgba(236, 72, 153, 0.15)" },
         color: "#ec4899",
         diagram: `
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
-            <div style="padding: 12px 24px; background: rgba(236, 72, 153, 0.2); border: 1px solid #ec4899; border-radius: 8px;">🌐 API Gateway</div>
-            <div style="font-size: 1.2rem;">⬇️</div>
-            <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
-              <div style="padding: 16px; background: rgba(59, 130, 246, 0.15); border: 1px solid #3b82f6; border-radius: 12px; text-align: center; min-width: 80px;">
-                <div>👤</div>
-                <div style="font-size: 0.8rem;">Users</div>
+          <style>
+            .ms-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .ms-architecture {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(236, 72, 153, 0.2);
+            }
+            .ms-arch-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .ms-arch-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #ec4899;
+              border-radius: 50%;
+            }
+            .ms-diagram {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 16px;
+            }
+            .ms-clients {
+              display: flex;
+              gap: 12px;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+            .ms-client {
+              padding: 10px 16px;
+              background: rgba(6, 182, 212, 0.15);
+              border: 1px solid rgba(6, 182, 212, 0.3);
+              border-radius: 8px;
+              font-size: 0.8rem;
+              display: flex;
+              align-items: center;
+              gap: 6px;
+            }
+            .ms-gateway {
+              padding: 16px 40px;
+              background: linear-gradient(135deg, #ec4899, #db2777);
+              border-radius: 12px;
+              color: white;
+              text-align: center;
+              box-shadow: 0 8px 32px rgba(236, 72, 153, 0.3);
+            }
+            .ms-gateway-icon {
+              font-size: 1.5rem;
+              margin-bottom: 4px;
+            }
+            .ms-gateway-text {
+              font-weight: 600;
+            }
+            .ms-gateway-sub {
+              font-size: 0.7rem;
+              opacity: 0.8;
+            }
+            .ms-arrow {
+              color: #6b7280;
+              font-size: 0.9rem;
+            }
+            .ms-services {
+              display: flex;
+              gap: 12px;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+            .ms-service {
+              padding: 14px 18px;
+              border-radius: 10px;
+              text-align: center;
+              min-width: 90px;
+              border: 1px solid;
+              transition: all 0.3s ease;
+            }
+            .ms-service:hover {
+              transform: translateY(-3px);
+            }
+            .ms-service:nth-child(1) { background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.4); }
+            .ms-service:nth-child(2) { background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); }
+            .ms-service:nth-child(3) { background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); }
+            .ms-service:nth-child(4) { background: rgba(139, 92, 246, 0.15); border-color: rgba(139, 92, 246, 0.4); }
+            .ms-service:nth-child(5) { background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); }
+            .ms-svc-icon {
+              font-size: 1.5rem;
+              margin-bottom: 6px;
+            }
+            .ms-svc-name {
+              font-size: 0.8rem;
+              font-weight: 500;
+              margin-bottom: 4px;
+            }
+            .ms-svc-db {
+              font-size: 0.65rem;
+              color: #6b7280;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 3px;
+            }
+            .ms-queue-layer {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              padding: 12px 20px;
+              background: rgba(139, 92, 246, 0.1);
+              border: 1px dashed rgba(139, 92, 246, 0.3);
+              border-radius: 10px;
+            }
+            .ms-queue-icon {
+              font-size: 1.2rem;
+            }
+            .ms-queue-text {
+              font-size: 0.75rem;
+              color: #a0a0b0;
+            }
+            
+            /* Benefits */
+            .ms-benefits {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(16, 185, 129, 0.2);
+            }
+            .ms-ben-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .ms-ben-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #10b981;
+              border-radius: 50%;
+            }
+            .ms-ben-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 700px) {
+              .ms-ben-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .ms-ben {
+              padding: 14px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              text-align: center;
+            }
+            .ms-ben-icon {
+              font-size: 1.3rem;
+              margin-bottom: 6px;
+            }
+            .ms-ben-name {
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: #e5e5e5;
+              margin-bottom: 2px;
+            }
+            .ms-ben-desc {
+              font-size: 0.65rem;
+              color: #6b7280;
+            }
+          </style>
+          
+          <div class="ms-viz">
+            <!-- Architecture Diagram -->
+            <div class="ms-architecture">
+              <div class="ms-arch-title">Microservices Architecture</div>
+              <div class="ms-diagram">
+                <div class="ms-clients">
+                  <div class="ms-client">📱 Mobile</div>
+                  <div class="ms-client">💻 Web</div>
+                  <div class="ms-client">🔌 Partners</div>
+                </div>
+                <div class="ms-arrow">↓</div>
+                <div class="ms-gateway">
+                  <div class="ms-gateway-icon">🚪</div>
+                  <div class="ms-gateway-text">API Gateway</div>
+                  <div class="ms-gateway-sub">Auth • Rate Limit • Route</div>
+                </div>
+                <div class="ms-arrow">↓</div>
+                <div class="ms-services">
+                  <div class="ms-service">
+                    <div class="ms-svc-icon">👤</div>
+                    <div class="ms-svc-name">Users</div>
+                    <div class="ms-svc-db">💾 PostgreSQL</div>
+                  </div>
+                  <div class="ms-service">
+                    <div class="ms-svc-icon">📦</div>
+                    <div class="ms-svc-name">Orders</div>
+                    <div class="ms-svc-db">💾 MongoDB</div>
+                  </div>
+                  <div class="ms-service">
+                    <div class="ms-svc-icon">💳</div>
+                    <div class="ms-svc-name">Payments</div>
+                    <div class="ms-svc-db">💾 PostgreSQL</div>
+                  </div>
+                  <div class="ms-service">
+                    <div class="ms-svc-icon">📦</div>
+                    <div class="ms-svc-name">Inventory</div>
+                    <div class="ms-svc-db">💾 Redis</div>
+                  </div>
+                  <div class="ms-service">
+                    <div class="ms-svc-icon">📧</div>
+                    <div class="ms-svc-name">Notifications</div>
+                    <div class="ms-svc-db">💾 DynamoDB</div>
+                  </div>
+                </div>
+                <div class="ms-arrow">↑↓</div>
+                <div class="ms-queue-layer">
+                  <span class="ms-queue-icon">📬</span>
+                  <span class="ms-queue-text">Event Bus (Kafka/RabbitMQ) — Async Communication</span>
+                </div>
               </div>
-              <div style="padding: 16px; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; border-radius: 12px; text-align: center; min-width: 80px;">
-                <div>📦</div>
-                <div style="font-size: 0.8rem;">Orders</div>
-              </div>
-              <div style="padding: 16px; background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; border-radius: 12px; text-align: center; min-width: 80px;">
-                <div>💳</div>
-                <div style="font-size: 0.8rem;">Payments</div>
-              </div>
-              <div style="padding: 16px; background: rgba(139, 92, 246, 0.15); border: 1px solid #8b5cf6; border-radius: 12px; text-align: center; min-width: 80px;">
-                <div>📧</div>
-                <div style="font-size: 0.8rem;">Notifications</div>
+            </div>
+            
+            <!-- Benefits -->
+            <div class="ms-benefits">
+              <div class="ms-ben-title">Key Benefits</div>
+              <div class="ms-ben-grid">
+                <div class="ms-ben">
+                  <div class="ms-ben-icon">🚀</div>
+                  <div class="ms-ben-name">Independent Deploy</div>
+                  <div class="ms-ben-desc">Update without downtime</div>
+                </div>
+                <div class="ms-ben">
+                  <div class="ms-ben-icon">📈</div>
+                  <div class="ms-ben-name">Scale Individually</div>
+                  <div class="ms-ben-desc">Scale what's needed</div>
+                </div>
+                <div class="ms-ben">
+                  <div class="ms-ben-icon">🔧</div>
+                  <div class="ms-ben-name">Tech Flexibility</div>
+                  <div class="ms-ben-desc">Best tool per job</div>
+                </div>
+                <div class="ms-ben">
+                  <div class="ms-ben-icon">👥</div>
+                  <div class="ms-ben-name">Team Ownership</div>
+                  <div class="ms-ben-desc">Autonomous teams</div>
+                </div>
               </div>
             </div>
           </div>
@@ -3695,25 +5304,266 @@
         badge: { text: "Architecture Pattern", color: "#8b5cf6", bg: "rgba(139, 92, 246, 0.15)" },
         color: "#8b5cf6",
         diagram: `
-          <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center;">
-            <div style="padding: 20px; background: rgba(59, 130, 246, 0.2); border: 1px solid #3b82f6; border-radius: 12px; text-align: center;">
-              <div style="font-size: 1.5rem;">📤</div>
-              <div style="font-weight: 500;">Producer</div>
-            </div>
-            <div style="font-size: 1.2rem;">→</div>
-            <div style="padding: 20px 40px; background: linear-gradient(135deg, #8b5cf6, #6d28d9); border-radius: 12px; color: white; text-align: center;">
-              <div style="font-size: 1.5rem;">📬</div>
-              <div style="font-weight: 600;">Queue</div>
-              <div style="display: flex; gap: 4px; margin-top: 8px; justify-content: center;">
-                <span style="background: rgba(255,255,255,0.3); padding: 2px 8px; border-radius: 4px; font-size: 0.7rem;">msg</span>
-                <span style="background: rgba(255,255,255,0.3); padding: 2px 8px; border-radius: 4px; font-size: 0.7rem;">msg</span>
-                <span style="background: rgba(255,255,255,0.3); padding: 2px 8px; border-radius: 4px; font-size: 0.7rem;">msg</span>
+          <style>
+            .mq-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .mq-flow {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(139, 92, 246, 0.2);
+            }
+            .mq-flow-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .mq-flow-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #8b5cf6;
+              border-radius: 50%;
+            }
+            .mq-diagram {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 16px;
+              flex-wrap: wrap;
+            }
+            .mq-producers {
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            }
+            .mq-producer {
+              padding: 12px 18px;
+              background: rgba(59, 130, 246, 0.15);
+              border: 1px solid rgba(59, 130, 246, 0.4);
+              border-radius: 10px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              font-size: 0.85rem;
+              animation: produceMsg 2s ease-in-out infinite;
+            }
+            .mq-producer:nth-child(2) { animation-delay: 0.7s; }
+            .mq-producer:nth-child(3) { animation-delay: 1.4s; }
+            @keyframes produceMsg {
+              0%, 100% { transform: translateX(0); }
+              50% { transform: translateX(5px); }
+            }
+            .mq-arrows {
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+              color: #6b7280;
+            }
+            .mq-arrow {
+              animation: arrowFlow 1s ease-in-out infinite;
+            }
+            .mq-arrow:nth-child(2) { animation-delay: 0.3s; }
+            .mq-arrow:nth-child(3) { animation-delay: 0.6s; }
+            @keyframes arrowFlow {
+              0%, 100% { opacity: 0.4; }
+              50% { opacity: 1; }
+            }
+            .mq-queue {
+              padding: 20px 30px;
+              background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+              border-radius: 14px;
+              color: white;
+              text-align: center;
+              box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3);
+            }
+            .mq-queue-icon {
+              font-size: 2rem;
+              margin-bottom: 6px;
+            }
+            .mq-queue-name {
+              font-weight: 600;
+              margin-bottom: 8px;
+            }
+            .mq-messages {
+              display: flex;
+              gap: 4px;
+              justify-content: center;
+            }
+            .mq-msg {
+              padding: 4px 10px;
+              background: rgba(255, 255, 255, 0.25);
+              border-radius: 4px;
+              font-size: 0.7rem;
+              animation: msgPulse 1.5s ease-in-out infinite;
+            }
+            .mq-msg:nth-child(1) { animation-delay: 0s; }
+            .mq-msg:nth-child(2) { animation-delay: 0.3s; }
+            .mq-msg:nth-child(3) { animation-delay: 0.6s; }
+            .mq-msg:nth-child(4) { animation-delay: 0.9s; }
+            @keyframes msgPulse {
+              0%, 100% { opacity: 0.6; }
+              50% { opacity: 1; }
+            }
+            .mq-queue-count {
+              font-size: 0.7rem;
+              opacity: 0.8;
+              margin-top: 8px;
+            }
+            .mq-consumers {
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            }
+            .mq-consumer {
+              padding: 12px 18px;
+              background: rgba(16, 185, 129, 0.15);
+              border: 1px solid rgba(16, 185, 129, 0.4);
+              border-radius: 10px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              font-size: 0.85rem;
+            }
+            
+            /* Patterns */
+            .mq-patterns {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            .mq-pat-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .mq-pat-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #f59e0b;
+              border-radius: 50%;
+            }
+            .mq-pat-grid {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 16px;
+            }
+            @media (max-width: 600px) {
+              .mq-pat-grid { grid-template-columns: 1fr; }
+            }
+            .mq-pattern {
+              padding: 16px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              display: flex;
+              align-items: flex-start;
+              gap: 12px;
+            }
+            .mq-pat-icon {
+              font-size: 1.5rem;
+            }
+            .mq-pat-content {
+              flex: 1;
+            }
+            .mq-pat-name {
+              font-weight: 500;
+              font-size: 0.9rem;
+              color: #e5e5e5;
+              margin-bottom: 4px;
+            }
+            .mq-pat-desc {
+              font-size: 0.75rem;
+              color: #6b7280;
+            }
+          </style>
+          
+          <div class="mq-viz">
+            <!-- Message Flow -->
+            <div class="mq-flow">
+              <div class="mq-flow-title">Asynchronous Message Flow</div>
+              <div class="mq-diagram">
+                <div class="mq-producers">
+                  <div class="mq-producer">📤 Order Service</div>
+                  <div class="mq-producer">📤 Payment Service</div>
+                  <div class="mq-producer">📤 User Service</div>
+                </div>
+                <div class="mq-arrows">
+                  <span class="mq-arrow">→</span>
+                  <span class="mq-arrow">→</span>
+                  <span class="mq-arrow">→</span>
+                </div>
+                <div class="mq-queue">
+                  <div class="mq-queue-icon">📬</div>
+                  <div class="mq-queue-name">Message Queue</div>
+                  <div class="mq-messages">
+                    <span class="mq-msg">msg</span>
+                    <span class="mq-msg">msg</span>
+                    <span class="mq-msg">msg</span>
+                    <span class="mq-msg">msg</span>
+                  </div>
+                  <div class="mq-queue-count">4 pending messages</div>
+                </div>
+                <div class="mq-arrows">
+                  <span class="mq-arrow">→</span>
+                  <span class="mq-arrow">→</span>
+                  <span class="mq-arrow">→</span>
+                </div>
+                <div class="mq-consumers">
+                  <div class="mq-consumer">📥 Email Worker</div>
+                  <div class="mq-consumer">📥 Analytics Worker</div>
+                  <div class="mq-consumer">📥 Notification Worker</div>
+                </div>
               </div>
             </div>
-            <div style="font-size: 1.2rem;">→</div>
-            <div style="padding: 20px; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 12px; text-align: center;">
-              <div style="font-size: 1.5rem;">📥</div>
-              <div style="font-weight: 500;">Consumer</div>
+            
+            <!-- Patterns -->
+            <div class="mq-patterns">
+              <div class="mq-pat-title">Messaging Patterns</div>
+              <div class="mq-pat-grid">
+                <div class="mq-pattern">
+                  <span class="mq-pat-icon">📤</span>
+                  <div class="mq-pat-content">
+                    <div class="mq-pat-name">Point-to-Point</div>
+                    <div class="mq-pat-desc">One producer, one consumer. Each message processed once.</div>
+                  </div>
+                </div>
+                <div class="mq-pattern">
+                  <span class="mq-pat-icon">📢</span>
+                  <div class="mq-pat-content">
+                    <div class="mq-pat-name">Pub/Sub</div>
+                    <div class="mq-pat-desc">Publish to topic, multiple subscribers receive copies.</div>
+                  </div>
+                </div>
+                <div class="mq-pattern">
+                  <span class="mq-pat-icon">🔄</span>
+                  <div class="mq-pat-content">
+                    <div class="mq-pat-name">Request/Reply</div>
+                    <div class="mq-pat-desc">Async RPC with correlation IDs for response matching.</div>
+                  </div>
+                </div>
+                <div class="mq-pattern">
+                  <span class="mq-pat-icon">💀</span>
+                  <div class="mq-pat-content">
+                    <div class="mq-pat-name">Dead Letter Queue</div>
+                    <div class="mq-pat-desc">Failed messages stored for later analysis/retry.</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         `,
@@ -3747,23 +5597,233 @@
         badge: { text: "Architecture Pattern", color: "#06b6d4", bg: "rgba(6, 182, 212, 0.15)" },
         color: "#06b6d4",
         diagram: `
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
-            <div style="display: flex; gap: 12px;">
-              <div style="padding: 10px 16px; background: rgba(6, 182, 212, 0.2); border: 1px solid #06b6d4; border-radius: 8px; font-size: 0.9rem;">📱 Mobile</div>
-              <div style="padding: 10px 16px; background: rgba(6, 182, 212, 0.2); border: 1px solid #06b6d4; border-radius: 8px; font-size: 0.9rem;">💻 Web</div>
-              <div style="padding: 10px 16px; background: rgba(6, 182, 212, 0.2); border: 1px solid #06b6d4; border-radius: 8px; font-size: 0.9rem;">🔌 API</div>
+          <style>
+            .apigw-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .apigw-flow {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(6, 182, 212, 0.2);
+            }
+            .apigw-flow-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .apigw-flow-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #06b6d4;
+              border-radius: 50%;
+            }
+            .apigw-diagram {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 12px;
+            }
+            .apigw-clients {
+              display: flex;
+              gap: 10px;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+            .apigw-client {
+              padding: 10px 16px;
+              background: rgba(6, 182, 212, 0.15);
+              border: 1px solid rgba(6, 182, 212, 0.4);
+              border-radius: 8px;
+              font-size: 0.8rem;
+              display: flex;
+              align-items: center;
+              gap: 6px;
+            }
+            .apigw-arrow {
+              color: #06b6d4;
+              font-size: 1rem;
+            }
+            .apigw-gateway {
+              padding: 20px 50px;
+              background: linear-gradient(135deg, #06b6d4, #0891b2);
+              border-radius: 14px;
+              color: white;
+              text-align: center;
+              box-shadow: 0 8px 32px rgba(6, 182, 212, 0.3);
+            }
+            .apigw-gw-icon {
+              font-size: 2rem;
+              margin-bottom: 6px;
+            }
+            .apigw-gw-name {
+              font-weight: 700;
+              font-size: 1.1rem;
+            }
+            .apigw-features {
+              display: flex;
+              gap: 8px;
+              margin-top: 10px;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+            .apigw-feature {
+              padding: 4px 10px;
+              background: rgba(255, 255, 255, 0.2);
+              border-radius: 12px;
+              font-size: 0.65rem;
+            }
+            .apigw-services {
+              display: flex;
+              gap: 12px;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+            .apigw-service {
+              padding: 14px 20px;
+              border-radius: 10px;
+              text-align: center;
+              min-width: 100px;
+            }
+            .apigw-service:nth-child(1) { background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); }
+            .apigw-service:nth-child(2) { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); }
+            .apigw-service:nth-child(3) { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); }
+            .apigw-service:nth-child(4) { background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.4); }
+            .apigw-svc-icon {
+              font-size: 1.3rem;
+              margin-bottom: 4px;
+            }
+            .apigw-svc-name {
+              font-size: 0.8rem;
+              font-weight: 500;
+            }
+            .apigw-service:nth-child(1) .apigw-svc-name { color: #3b82f6; }
+            .apigw-service:nth-child(2) .apigw-svc-name { color: #10b981; }
+            .apigw-service:nth-child(3) .apigw-svc-name { color: #f59e0b; }
+            .apigw-service:nth-child(4) .apigw-svc-name { color: #8b5cf6; }
+            
+            /* Responsibilities */
+            .apigw-resp {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(16, 185, 129, 0.2);
+            }
+            .apigw-resp-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .apigw-resp-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #10b981;
+              border-radius: 50%;
+            }
+            .apigw-resp-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 700px) {
+              .apigw-resp-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .apigw-resp-item {
+              padding: 14px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              text-align: center;
+            }
+            .apigw-resp-icon {
+              font-size: 1.4rem;
+              margin-bottom: 6px;
+            }
+            .apigw-resp-name {
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: #e5e5e5;
+            }
+          </style>
+          
+          <div class="apigw-viz">
+            <!-- API Flow -->
+            <div class="apigw-flow">
+              <div class="apigw-flow-title">API Gateway Architecture</div>
+              <div class="apigw-diagram">
+                <div class="apigw-clients">
+                  <div class="apigw-client">📱 Mobile App</div>
+                  <div class="apigw-client">💻 Web App</div>
+                  <div class="apigw-client">🔌 Third Party</div>
+                  <div class="apigw-client">🖥️ Internal</div>
+                </div>
+                <div class="apigw-arrow">↓</div>
+                <div class="apigw-gateway">
+                  <div class="apigw-gw-icon">🚪</div>
+                  <div class="apigw-gw-name">API Gateway</div>
+                  <div class="apigw-features">
+                    <span class="apigw-feature">🔐 Auth</span>
+                    <span class="apigw-feature">🚦 Rate Limit</span>
+                    <span class="apigw-feature">🔀 Route</span>
+                    <span class="apigw-feature">📊 Analytics</span>
+                  </div>
+                </div>
+                <div class="apigw-arrow">↓</div>
+                <div class="apigw-services">
+                  <div class="apigw-service">
+                    <div class="apigw-svc-icon">👤</div>
+                    <div class="apigw-svc-name">Users</div>
+                  </div>
+                  <div class="apigw-service">
+                    <div class="apigw-svc-icon">📦</div>
+                    <div class="apigw-svc-name">Orders</div>
+                  </div>
+                  <div class="apigw-service">
+                    <div class="apigw-svc-icon">💳</div>
+                    <div class="apigw-svc-name">Payments</div>
+                  </div>
+                  <div class="apigw-service">
+                    <div class="apigw-svc-icon">📧</div>
+                    <div class="apigw-svc-name">Notifications</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div style="font-size: 1.2rem;">⬇️</div>
-            <div style="padding: 24px 48px; background: linear-gradient(135deg, #06b6d4, #0891b2); border-radius: 16px; color: white; text-align: center; box-shadow: 0 8px 32px rgba(6, 182, 212, 0.3);">
-              <div style="font-size: 1.8rem;">🚪</div>
-              <div style="font-weight: 700;">API Gateway</div>
-              <div style="font-size: 0.8rem; opacity: 0.8; margin-top: 4px;">Auth • Rate Limit • Route</div>
-            </div>
-            <div style="font-size: 1.2rem;">⬇️</div>
-            <div style="display: flex; gap: 12px;">
-              <div style="padding: 12px 16px; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; border-radius: 8px; font-size: 0.85rem;">Service A</div>
-              <div style="padding: 12px 16px; background: rgba(139, 92, 246, 0.15); border: 1px solid #8b5cf6; border-radius: 8px; font-size: 0.85rem;">Service B</div>
-              <div style="padding: 12px 16px; background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; border-radius: 8px; font-size: 0.85rem;">Service C</div>
+            
+            <!-- Responsibilities -->
+            <div class="apigw-resp">
+              <div class="apigw-resp-title">Gateway Responsibilities</div>
+              <div class="apigw-resp-grid">
+                <div class="apigw-resp-item">
+                  <div class="apigw-resp-icon">🔐</div>
+                  <div class="apigw-resp-name">Authentication</div>
+                </div>
+                <div class="apigw-resp-item">
+                  <div class="apigw-resp-icon">🚦</div>
+                  <div class="apigw-resp-name">Rate Limiting</div>
+                </div>
+                <div class="apigw-resp-item">
+                  <div class="apigw-resp-icon">🔄</div>
+                  <div class="apigw-resp-name">Request Transform</div>
+                </div>
+                <div class="apigw-resp-item">
+                  <div class="apigw-resp-icon">⚖️</div>
+                  <div class="apigw-resp-name">Load Balancing</div>
+                </div>
+              </div>
             </div>
           </div>
         `,
@@ -3797,24 +5857,247 @@
         badge: { text: "Architecture Pattern", color: "#10b981", bg: "rgba(16, 185, 129, 0.15)" },
         color: "#10b981",
         diagram: `
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 24px;">
-            <div style="padding: 16px 32px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; color: white; font-weight: 600;">🏢 Origin Server</div>
-            <div style="font-size: 1rem; color: #10b981;">↙️ ⬇️ ↘️</div>
-            <div style="display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;">
-              <div style="text-align: center;">
-                <div style="padding: 16px; background: rgba(59, 130, 246, 0.2); border: 1px solid #3b82f6; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px;">🌍</div>
-                <div style="font-size: 0.8rem;">Europe Edge</div>
-              </div>
-              <div style="text-align: center;">
-                <div style="padding: 16px; background: rgba(139, 92, 246, 0.2); border: 1px solid #8b5cf6; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px;">🌎</div>
-                <div style="font-size: 0.8rem;">Americas Edge</div>
-              </div>
-              <div style="text-align: center;">
-                <div style="padding: 16px; background: rgba(245, 158, 11, 0.2); border: 1px solid #f59e0b; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px;">🌏</div>
-                <div style="font-size: 0.8rem;">Asia Edge</div>
+          <style>
+            .cdn-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .cdn-network {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(16, 185, 129, 0.2);
+            }
+            .cdn-network-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .cdn-network-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #10b981;
+              border-radius: 50%;
+            }
+            .cdn-diagram {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 16px;
+            }
+            .cdn-origin {
+              padding: 18px 40px;
+              background: linear-gradient(135deg, #10b981, #059669);
+              border-radius: 12px;
+              color: white;
+              text-align: center;
+              box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
+            }
+            .cdn-origin-icon {
+              font-size: 1.8rem;
+              margin-bottom: 4px;
+            }
+            .cdn-origin-text {
+              font-weight: 600;
+            }
+            .cdn-arrows {
+              display: flex;
+              gap: 30px;
+              color: #10b981;
+            }
+            .cdn-arrow {
+              animation: cdnPush 1.5s ease-in-out infinite;
+            }
+            .cdn-arrow:nth-child(2) { animation-delay: 0.5s; }
+            .cdn-arrow:nth-child(3) { animation-delay: 1s; }
+            @keyframes cdnPush {
+              0%, 100% { transform: translateY(0); opacity: 0.5; }
+              50% { transform: translateY(4px); opacity: 1; }
+            }
+            .cdn-edges {
+              display: flex;
+              gap: 24px;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+            .cdn-edge {
+              text-align: center;
+              transition: all 0.3s ease;
+            }
+            .cdn-edge:hover {
+              transform: translateY(-3px);
+            }
+            .cdn-edge-globe {
+              width: 70px;
+              height: 70px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin: 0 auto 8px;
+              font-size: 2rem;
+              animation: globePulse 2s ease-in-out infinite;
+            }
+            .cdn-edge:nth-child(1) .cdn-edge-globe { background: rgba(59, 130, 246, 0.2); border: 2px solid rgba(59, 130, 246, 0.5); animation-delay: 0s; }
+            .cdn-edge:nth-child(2) .cdn-edge-globe { background: rgba(139, 92, 246, 0.2); border: 2px solid rgba(139, 92, 246, 0.5); animation-delay: 0.7s; }
+            .cdn-edge:nth-child(3) .cdn-edge-globe { background: rgba(245, 158, 11, 0.2); border: 2px solid rgba(245, 158, 11, 0.5); animation-delay: 1.4s; }
+            @keyframes globePulse {
+              0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.3); }
+              50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            }
+            .cdn-edge-name {
+              font-size: 0.85rem;
+              font-weight: 500;
+              margin-bottom: 2px;
+            }
+            .cdn-edge:nth-child(1) .cdn-edge-name { color: #3b82f6; }
+            .cdn-edge:nth-child(2) .cdn-edge-name { color: #8b5cf6; }
+            .cdn-edge:nth-child(3) .cdn-edge-name { color: #f59e0b; }
+            .cdn-edge-latency {
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+            .cdn-users {
+              display: flex;
+              gap: 20px;
+              flex-wrap: wrap;
+              justify-content: center;
+              margin-top: 12px;
+            }
+            .cdn-user {
+              display: flex;
+              align-items: center;
+              gap: 4px;
+              font-size: 0.75rem;
+              color: #a0a0b0;
+            }
+            
+            /* Benefits */
+            .cdn-benefits {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(59, 130, 246, 0.2);
+            }
+            .cdn-ben-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .cdn-ben-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #3b82f6;
+              border-radius: 50%;
+            }
+            .cdn-ben-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 700px) {
+              .cdn-ben-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .cdn-ben {
+              padding: 14px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              text-align: center;
+            }
+            .cdn-ben-icon {
+              font-size: 1.4rem;
+              margin-bottom: 6px;
+            }
+            .cdn-ben-name {
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: #e5e5e5;
+              margin-bottom: 2px;
+            }
+            .cdn-ben-desc {
+              font-size: 0.65rem;
+              color: #6b7280;
+            }
+          </style>
+          
+          <div class="cdn-viz">
+            <!-- CDN Network -->
+            <div class="cdn-network">
+              <div class="cdn-network-title">Global Content Distribution</div>
+              <div class="cdn-diagram">
+                <div class="cdn-origin">
+                  <div class="cdn-origin-icon">🏢</div>
+                  <div class="cdn-origin-text">Origin Server</div>
+                </div>
+                <div class="cdn-arrows">
+                  <span class="cdn-arrow">↙️</span>
+                  <span class="cdn-arrow">⬇️</span>
+                  <span class="cdn-arrow">↘️</span>
+                </div>
+                <div class="cdn-edges">
+                  <div class="cdn-edge">
+                    <div class="cdn-edge-globe">🌍</div>
+                    <div class="cdn-edge-name">Europe</div>
+                    <div class="cdn-edge-latency">~20ms</div>
+                  </div>
+                  <div class="cdn-edge">
+                    <div class="cdn-edge-globe">🌎</div>
+                    <div class="cdn-edge-name">Americas</div>
+                    <div class="cdn-edge-latency">~15ms</div>
+                  </div>
+                  <div class="cdn-edge">
+                    <div class="cdn-edge-globe">🌏</div>
+                    <div class="cdn-edge-name">Asia Pacific</div>
+                    <div class="cdn-edge-latency">~25ms</div>
+                  </div>
+                </div>
+                <div class="cdn-users">
+                  <span class="cdn-user">👤 User → Nearest Edge</span>
+                  <span class="cdn-user">⚡ Low Latency</span>
+                  <span class="cdn-user">💾 Cached Content</span>
+                </div>
               </div>
             </div>
-            <div style="font-size: 0.9rem; color: #a0a0b0;">Users served from nearest edge location</div>
+            
+            <!-- Benefits -->
+            <div class="cdn-benefits">
+              <div class="cdn-ben-title">CDN Benefits</div>
+              <div class="cdn-ben-grid">
+                <div class="cdn-ben">
+                  <div class="cdn-ben-icon">⚡</div>
+                  <div class="cdn-ben-name">Speed</div>
+                  <div class="cdn-ben-desc">Reduced latency</div>
+                </div>
+                <div class="cdn-ben">
+                  <div class="cdn-ben-icon">🛡️</div>
+                  <div class="cdn-ben-name">DDoS Protection</div>
+                  <div class="cdn-ben-desc">Absorb attacks</div>
+                </div>
+                <div class="cdn-ben">
+                  <div class="cdn-ben-icon">📈</div>
+                  <div class="cdn-ben-name">Scalability</div>
+                  <div class="cdn-ben-desc">Handle traffic spikes</div>
+                </div>
+                <div class="cdn-ben">
+                  <div class="cdn-ben-icon">💰</div>
+                  <div class="cdn-ben-name">Cost Savings</div>
+                  <div class="cdn-ben-desc">Reduce origin load</div>
+                </div>
+              </div>
+            </div>
           </div>
         `,
         definition: `
@@ -3847,24 +6130,249 @@
         badge: { text: "Architecture Pattern", color: "#f59e0b", bg: "rgba(245, 158, 11, 0.15)" },
         color: "#f59e0b",
         diagram: `
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
-            <div style="padding: 16px 40px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 12px; color: white; font-weight: 600;">🗄️ Shard Router</div>
-            <div style="display: flex; gap: 8px; color: #f59e0b;">↙️ ⬇️ ↘️</div>
-            <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
-              <div style="padding: 20px; background: rgba(59, 130, 246, 0.15); border: 1px solid #3b82f6; border-radius: 12px; text-align: center;">
-                <div style="font-size: 1.5rem;">💾</div>
-                <div style="font-weight: 600;">Shard 0</div>
-                <div style="font-size: 0.75rem; color: #a0a0b0;">user_id % 3 = 0</div>
+          <style>
+            .shard-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .shard-flow {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            .shard-flow-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .shard-flow-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #f59e0b;
+              border-radius: 50%;
+            }
+            .shard-diagram {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 14px;
+            }
+            .shard-query {
+              padding: 12px 24px;
+              background: rgba(6, 182, 212, 0.15);
+              border: 1px solid rgba(6, 182, 212, 0.4);
+              border-radius: 8px;
+              font-size: 0.8rem;
+              font-family: 'JetBrains Mono', monospace;
+              color: #06b6d4;
+            }
+            .shard-arrow {
+              color: #6b7280;
+              font-size: 0.9rem;
+            }
+            .shard-router {
+              padding: 18px 50px;
+              background: linear-gradient(135deg, #f59e0b, #d97706);
+              border-radius: 12px;
+              color: white;
+              text-align: center;
+              box-shadow: 0 8px 32px rgba(245, 158, 11, 0.3);
+            }
+            .shard-router-icon {
+              font-size: 1.8rem;
+              margin-bottom: 4px;
+            }
+            .shard-router-text {
+              font-weight: 600;
+            }
+            .shard-router-logic {
+              font-size: 0.7rem;
+              opacity: 0.9;
+              margin-top: 4px;
+              font-family: 'JetBrains Mono', monospace;
+            }
+            .shard-arrows {
+              display: flex;
+              gap: 50px;
+              color: #f59e0b;
+            }
+            .shard-arr {
+              animation: shardRoute 1s ease-in-out infinite;
+            }
+            .shard-arr:nth-child(2) { animation-delay: 0.3s; }
+            .shard-arr:nth-child(3) { animation-delay: 0.6s; }
+            @keyframes shardRoute {
+              0%, 100% { opacity: 0.4; }
+              50% { opacity: 1; }
+            }
+            .shard-nodes {
+              display: flex;
+              gap: 16px;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+            .shard-node {
+              padding: 18px 24px;
+              border-radius: 12px;
+              text-align: center;
+              min-width: 110px;
+              transition: all 0.3s ease;
+            }
+            .shard-node:hover {
+              transform: translateY(-3px);
+            }
+            .shard-node:nth-child(1) { background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); }
+            .shard-node:nth-child(2) { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); }
+            .shard-node:nth-child(3) { background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.4); }
+            .shard-node-icon {
+              font-size: 1.8rem;
+              margin-bottom: 6px;
+            }
+            .shard-node-name {
+              font-weight: 600;
+              font-size: 0.9rem;
+              margin-bottom: 4px;
+            }
+            .shard-node:nth-child(1) .shard-node-name { color: #3b82f6; }
+            .shard-node:nth-child(2) .shard-node-name { color: #10b981; }
+            .shard-node:nth-child(3) .shard-node-name { color: #8b5cf6; }
+            .shard-node-key {
+              font-size: 0.7rem;
+              color: #6b7280;
+              font-family: 'JetBrains Mono', monospace;
+            }
+            .shard-node-size {
+              font-size: 0.65rem;
+              color: #6b7280;
+              margin-top: 4px;
+            }
+            
+            /* Considerations */
+            .shard-consider {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(239, 68, 68, 0.2);
+            }
+            .shard-consider-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .shard-consider-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #ef4444;
+              border-radius: 50%;
+            }
+            .shard-consider-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 700px) {
+              .shard-consider-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .shard-cons {
+              padding: 14px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              text-align: center;
+            }
+            .shard-cons-icon {
+              font-size: 1.3rem;
+              margin-bottom: 6px;
+            }
+            .shard-cons-name {
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: #e5e5e5;
+              margin-bottom: 2px;
+            }
+            .shard-cons-desc {
+              font-size: 0.65rem;
+              color: #6b7280;
+            }
+          </style>
+          
+          <div class="shard-viz">
+            <!-- Sharding Flow -->
+            <div class="shard-flow">
+              <div class="shard-flow-title">Database Sharding Architecture</div>
+              <div class="shard-diagram">
+                <div class="shard-query">SELECT * FROM users WHERE user_id = 12345</div>
+                <div class="shard-arrow">↓</div>
+                <div class="shard-router">
+                  <div class="shard-router-icon">🗄️</div>
+                  <div class="shard-router-text">Shard Router</div>
+                  <div class="shard-router-logic">12345 % 3 = 0 → Shard 0</div>
+                </div>
+                <div class="shard-arrows">
+                  <span class="shard-arr">↙️</span>
+                  <span class="shard-arr">⬇️</span>
+                  <span class="shard-arr">↘️</span>
+                </div>
+                <div class="shard-nodes">
+                  <div class="shard-node">
+                    <div class="shard-node-icon">💾</div>
+                    <div class="shard-node-name">Shard 0</div>
+                    <div class="shard-node-key">id % 3 = 0</div>
+                    <div class="shard-node-size">~33% of data</div>
+                  </div>
+                  <div class="shard-node">
+                    <div class="shard-node-icon">💾</div>
+                    <div class="shard-node-name">Shard 1</div>
+                    <div class="shard-node-key">id % 3 = 1</div>
+                    <div class="shard-node-size">~33% of data</div>
+                  </div>
+                  <div class="shard-node">
+                    <div class="shard-node-icon">💾</div>
+                    <div class="shard-node-name">Shard 2</div>
+                    <div class="shard-node-key">id % 3 = 2</div>
+                    <div class="shard-node-size">~33% of data</div>
+                  </div>
+                </div>
               </div>
-              <div style="padding: 20px; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; border-radius: 12px; text-align: center;">
-                <div style="font-size: 1.5rem;">💾</div>
-                <div style="font-weight: 600;">Shard 1</div>
-                <div style="font-size: 0.75rem; color: #a0a0b0;">user_id % 3 = 1</div>
-              </div>
-              <div style="padding: 20px; background: rgba(139, 92, 246, 0.15); border: 1px solid #8b5cf6; border-radius: 12px; text-align: center;">
-                <div style="font-size: 1.5rem;">💾</div>
-                <div style="font-weight: 600;">Shard 2</div>
-                <div style="font-size: 0.75rem; color: #a0a0b0;">user_id % 3 = 2</div>
+            </div>
+            
+            <!-- Considerations -->
+            <div class="shard-consider">
+              <div class="shard-consider-title">Sharding Challenges</div>
+              <div class="shard-consider-grid">
+                <div class="shard-cons">
+                  <div class="shard-cons-icon">🔀</div>
+                  <div class="shard-cons-name">Cross-Shard Joins</div>
+                  <div class="shard-cons-desc">Complex queries</div>
+                </div>
+                <div class="shard-cons">
+                  <div class="shard-cons-icon">⚖️</div>
+                  <div class="shard-cons-name">Rebalancing</div>
+                  <div class="shard-cons-desc">Data migration</div>
+                </div>
+                <div class="shard-cons">
+                  <div class="shard-cons-icon">🔥</div>
+                  <div class="shard-cons-name">Hotspots</div>
+                  <div class="shard-cons-desc">Uneven load</div>
+                </div>
+                <div class="shard-cons">
+                  <div class="shard-cons-icon">🔑</div>
+                  <div class="shard-cons-name">Key Selection</div>
+                  <div class="shard-cons-desc">Critical choice</div>
+                </div>
               </div>
             </div>
           </div>
@@ -3899,23 +6407,216 @@
         badge: { text: "Resilience", color: "#ef4444", bg: "rgba(239, 68, 68, 0.15)" },
         color: "#ef4444",
         diagram: `
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
-            <div style="display: flex; gap: 16px; align-items: center;">
-              <div style="padding: 20px; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; border-radius: 12px; text-align: center;">
-                <div style="font-size: 1.5rem;">✅</div>
-                <div>Server 1</div>
+          <style>
+            .ft-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .ft-demo {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(239, 68, 68, 0.2);
+            }
+            .ft-demo-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .ft-demo-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #ef4444;
+              border-radius: 50%;
+            }
+            .ft-servers {
+              display: flex;
+              justify-content: center;
+              gap: 16px;
+              margin-bottom: 20px;
+              flex-wrap: wrap;
+            }
+            .ft-server {
+              padding: 18px 24px;
+              border-radius: 12px;
+              text-align: center;
+              min-width: 100px;
+              border: 2px solid;
+              transition: all 0.3s ease;
+            }
+            .ft-server.healthy {
+              background: rgba(16, 185, 129, 0.15);
+              border-color: rgba(16, 185, 129, 0.5);
+            }
+            .ft-server.failed {
+              background: rgba(239, 68, 68, 0.15);
+              border-color: rgba(239, 68, 68, 0.5);
+              opacity: 0.6;
+              animation: ftFailPulse 2s ease-in-out infinite;
+            }
+            @keyframes ftFailPulse {
+              0%, 100% { opacity: 0.4; }
+              50% { opacity: 0.7; }
+            }
+            .ft-server-icon {
+              font-size: 1.8rem;
+              margin-bottom: 6px;
+            }
+            .ft-server-name {
+              font-size: 0.85rem;
+              font-weight: 500;
+            }
+            .ft-server.healthy .ft-server-name { color: #10b981; }
+            .ft-server.failed .ft-server-name { color: #ef4444; }
+            .ft-server-status {
+              font-size: 0.7rem;
+              margin-top: 4px;
+            }
+            .ft-server.healthy .ft-server-status { color: #059669; }
+            .ft-server.failed .ft-server-status { color: #dc2626; }
+            .ft-result {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 12px;
+              padding: 16px 24px;
+              background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
+              border: 1px solid rgba(16, 185, 129, 0.3);
+              border-radius: 12px;
+            }
+            .ft-result-icon {
+              font-size: 1.5rem;
+            }
+            .ft-result-text {
+              font-weight: 600;
+              color: #10b981;
+            }
+            .ft-result-sub {
+              font-size: 0.8rem;
+              color: #6b7280;
+            }
+            
+            /* Patterns */
+            .ft-patterns {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(139, 92, 246, 0.2);
+            }
+            .ft-pat-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .ft-pat-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #8b5cf6;
+              border-radius: 50%;
+            }
+            .ft-pat-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 700px) {
+              .ft-pat-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .ft-pattern {
+              padding: 16px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              text-align: center;
+            }
+            .ft-pat-icon {
+              font-size: 1.5rem;
+              margin-bottom: 8px;
+            }
+            .ft-pat-name {
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: #e5e5e5;
+              margin-bottom: 4px;
+            }
+            .ft-pat-desc {
+              font-size: 0.65rem;
+              color: #6b7280;
+            }
+          </style>
+          
+          <div class="ft-viz">
+            <!-- Failure Demo -->
+            <div class="ft-demo">
+              <div class="ft-demo-title">System Continues Despite Failures</div>
+              <div class="ft-servers">
+                <div class="ft-server healthy">
+                  <div class="ft-server-icon">✅</div>
+                  <div class="ft-server-name">Server 1</div>
+                  <div class="ft-server-status">Healthy</div>
+                </div>
+                <div class="ft-server failed">
+                  <div class="ft-server-icon">💥</div>
+                  <div class="ft-server-name">Server 2</div>
+                  <div class="ft-server-status">Failed</div>
+                </div>
+                <div class="ft-server healthy">
+                  <div class="ft-server-icon">✅</div>
+                  <div class="ft-server-name">Server 3</div>
+                  <div class="ft-server-status">Healthy</div>
+                </div>
+                <div class="ft-server healthy">
+                  <div class="ft-server-icon">✅</div>
+                  <div class="ft-server-name">Server 4</div>
+                  <div class="ft-server-status">Healthy</div>
+                </div>
               </div>
-              <div style="padding: 20px; background: rgba(239, 68, 68, 0.2); border: 2px solid #ef4444; border-radius: 12px; text-align: center; opacity: 0.6;">
-                <div style="font-size: 1.5rem;">❌</div>
-                <div>Server 2</div>
-              </div>
-              <div style="padding: 20px; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; border-radius: 12px; text-align: center;">
-                <div style="font-size: 1.5rem;">✅</div>
-                <div>Server 3</div>
+              <div class="ft-result">
+                <span class="ft-result-icon">🛡️</span>
+                <div>
+                  <div class="ft-result-text">System Still Operational</div>
+                  <div class="ft-result-sub">75% capacity • Traffic rerouted automatically</div>
+                </div>
               </div>
             </div>
-            <div style="padding: 16px 32px; background: linear-gradient(135deg, #ef4444, #dc2626); border-radius: 12px; color: white; font-weight: 600;">
-              🛡️ System Continues Operating
+            
+            <!-- Patterns -->
+            <div class="ft-patterns">
+              <div class="ft-pat-title">Fault Tolerance Patterns</div>
+              <div class="ft-pat-grid">
+                <div class="ft-pattern">
+                  <div class="ft-pat-icon">🔄</div>
+                  <div class="ft-pat-name">Redundancy</div>
+                  <div class="ft-pat-desc">Multiple instances</div>
+                </div>
+                <div class="ft-pattern">
+                  <div class="ft-pat-icon">🧱</div>
+                  <div class="ft-pat-name">Bulkhead</div>
+                  <div class="ft-pat-desc">Isolate failures</div>
+                </div>
+                <div class="ft-pattern">
+                  <div class="ft-pat-icon">⏱️</div>
+                  <div class="ft-pat-name">Timeout</div>
+                  <div class="ft-pat-desc">Fail fast</div>
+                </div>
+                <div class="ft-pattern">
+                  <div class="ft-pat-icon">🔁</div>
+                  <div class="ft-pat-name">Retry</div>
+                  <div class="ft-pat-desc">Exponential backoff</div>
+                </div>
+              </div>
             </div>
           </div>
         `,
@@ -3949,24 +6650,222 @@
         badge: { text: "Resilience", color: "#8b5cf6", bg: "rgba(139, 92, 246, 0.15)" },
         color: "#8b5cf6",
         diagram: `
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 24px;">
-            <div style="display: flex; gap: 24px; align-items: center;">
-              <div style="text-align: center;">
-                <div style="width: 80px; height: 80px; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🟢</div>
-                <div style="margin-top: 8px; font-weight: 500;">Closed</div>
-                <div style="font-size: 0.75rem; color: #a0a0b0;">Normal</div>
+          <style>
+            .cb-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .cb-states {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(139, 92, 246, 0.2);
+            }
+            .cb-states-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 24px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .cb-states-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #8b5cf6;
+              border-radius: 50%;
+            }
+            .cb-state-machine {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 16px;
+              flex-wrap: wrap;
+            }
+            .cb-state {
+              text-align: center;
+              padding: 20px;
+              border-radius: 16px;
+              min-width: 120px;
+              transition: all 0.3s ease;
+            }
+            .cb-state:hover {
+              transform: scale(1.05);
+            }
+            .cb-state.closed {
+              background: rgba(16, 185, 129, 0.15);
+              border: 2px solid rgba(16, 185, 129, 0.5);
+            }
+            .cb-state.open {
+              background: rgba(239, 68, 68, 0.15);
+              border: 2px solid rgba(239, 68, 68, 0.5);
+            }
+            .cb-state.half-open {
+              background: rgba(245, 158, 11, 0.15);
+              border: 2px solid rgba(245, 158, 11, 0.5);
+            }
+            .cb-state-circle {
+              width: 60px;
+              height: 60px;
+              border-radius: 50%;
+              margin: 0 auto 12px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.8rem;
+            }
+            .cb-state.closed .cb-state-circle { background: rgba(16, 185, 129, 0.3); }
+            .cb-state.open .cb-state-circle { background: rgba(239, 68, 68, 0.3); animation: openPulse 1s ease-in-out infinite; }
+            .cb-state.half-open .cb-state-circle { background: rgba(245, 158, 11, 0.3); animation: testPulse 1.5s ease-in-out infinite; }
+            @keyframes openPulse {
+              0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+              50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            }
+            @keyframes testPulse {
+              0%, 100% { opacity: 0.7; }
+              50% { opacity: 1; }
+            }
+            .cb-state-name {
+              font-weight: 600;
+              font-size: 1rem;
+              margin-bottom: 4px;
+            }
+            .cb-state.closed .cb-state-name { color: #10b981; }
+            .cb-state.open .cb-state-name { color: #ef4444; }
+            .cb-state.half-open .cb-state-name { color: #f59e0b; }
+            .cb-state-desc {
+              font-size: 0.75rem;
+              color: #6b7280;
+              margin-bottom: 8px;
+            }
+            .cb-state-action {
+              font-size: 0.7rem;
+              padding: 4px 10px;
+              border-radius: 12px;
+              display: inline-block;
+            }
+            .cb-state.closed .cb-state-action { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+            .cb-state.open .cb-state-action { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+            .cb-state.half-open .cb-state-action { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+            .cb-arrow {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 4px;
+              color: #6b7280;
+            }
+            .cb-arrow-icon {
+              font-size: 1.5rem;
+              color: #8b5cf6;
+            }
+            .cb-arrow-label {
+              font-size: 0.65rem;
+              text-align: center;
+              max-width: 80px;
+            }
+            
+            /* Timeline */
+            .cb-timeline {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(16, 185, 129, 0.2);
+            }
+            .cb-timeline-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .cb-timeline-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #10b981;
+              border-radius: 50%;
+            }
+            .cb-timeline-bar {
+              display: flex;
+              height: 40px;
+              border-radius: 8px;
+              overflow: hidden;
+              margin-bottom: 12px;
+            }
+            .cb-tl-segment {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.7rem;
+              font-weight: 500;
+            }
+            .cb-tl-closed { flex: 4; background: linear-gradient(90deg, #10b981, #059669); color: white; }
+            .cb-tl-open { flex: 2; background: linear-gradient(90deg, #ef4444, #dc2626); color: white; }
+            .cb-tl-half { flex: 1; background: linear-gradient(90deg, #f59e0b, #d97706); color: white; }
+            .cb-tl-closed2 { flex: 3; background: linear-gradient(90deg, #059669, #10b981); color: white; }
+            .cb-timeline-labels {
+              display: flex;
+              justify-content: space-between;
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+          </style>
+          
+          <div class="cb-viz">
+            <!-- State Machine -->
+            <div class="cb-states">
+              <div class="cb-states-title">Circuit Breaker State Machine</div>
+              <div class="cb-state-machine">
+                <div class="cb-state closed">
+                  <div class="cb-state-circle">🟢</div>
+                  <div class="cb-state-name">CLOSED</div>
+                  <div class="cb-state-desc">Normal operation</div>
+                  <div class="cb-state-action">✓ Requests pass through</div>
+                </div>
+                <div class="cb-arrow">
+                  <span class="cb-arrow-icon">→</span>
+                  <span class="cb-arrow-label">Failures exceed threshold</span>
+                </div>
+                <div class="cb-state open">
+                  <div class="cb-state-circle">🔴</div>
+                  <div class="cb-state-name">OPEN</div>
+                  <div class="cb-state-desc">Circuit tripped</div>
+                  <div class="cb-state-action">✗ Fail fast immediately</div>
+                </div>
+                <div class="cb-arrow">
+                  <span class="cb-arrow-icon">→</span>
+                  <span class="cb-arrow-label">Timeout expires</span>
+                </div>
+                <div class="cb-state half-open">
+                  <div class="cb-state-circle">🟡</div>
+                  <div class="cb-state-name">HALF-OPEN</div>
+                  <div class="cb-state-desc">Testing recovery</div>
+                  <div class="cb-state-action">⚡ Limited requests</div>
+                </div>
               </div>
-              <div style="font-size: 1.5rem;">→</div>
-              <div style="text-align: center;">
-                <div style="width: 80px; height: 80px; background: rgba(239, 68, 68, 0.2); border: 2px solid #ef4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🔴</div>
-                <div style="margin-top: 8px; font-weight: 500;">Open</div>
-                <div style="font-size: 0.75rem; color: #a0a0b0;">Failing Fast</div>
+            </div>
+            
+            <!-- Timeline -->
+            <div class="cb-timeline">
+              <div class="cb-timeline-title">Circuit Breaker Timeline Example</div>
+              <div class="cb-timeline-bar">
+                <div class="cb-tl-segment cb-tl-closed">CLOSED</div>
+                <div class="cb-tl-segment cb-tl-open">OPEN</div>
+                <div class="cb-tl-segment cb-tl-half">TEST</div>
+                <div class="cb-tl-segment cb-tl-closed2">CLOSED</div>
               </div>
-              <div style="font-size: 1.5rem;">→</div>
-              <div style="text-align: center;">
-                <div style="width: 80px; height: 80px; background: rgba(245, 158, 11, 0.2); border: 2px solid #f59e0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🟡</div>
-                <div style="margin-top: 8px; font-weight: 500;">Half-Open</div>
-                <div style="font-size: 0.75rem; color: #a0a0b0;">Testing</div>
+              <div class="cb-timeline-labels">
+                <span>Normal</span>
+                <span>← Service fails</span>
+                <span>Recovery test →</span>
+                <span>Healthy</span>
               </div>
             </div>
           </div>
@@ -4001,28 +6900,295 @@
         badge: { text: "Resilience", color: "#f59e0b", bg: "rgba(245, 158, 11, 0.15)" },
         color: "#f59e0b",
         diagram: `
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
-            <div style="display: flex; gap: 8px;">
-              <span style="font-size: 1.2rem;">📨</span>
-              <span style="font-size: 1.2rem;">📨</span>
-              <span style="font-size: 1.2rem;">📨</span>
-              <span style="font-size: 1.2rem;">📨</span>
-              <span style="font-size: 1.2rem;">📨</span>
-            </div>
-            <div style="font-size: 1rem;">⬇️</div>
-            <div style="padding: 20px 40px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 16px; color: white; text-align: center;">
-              <div style="font-size: 1.5rem;">🚦</div>
-              <div style="font-weight: 600;">Rate Limiter</div>
-              <div style="font-size: 0.8rem; opacity: 0.8;">100 req/min</div>
-            </div>
-            <div style="display: flex; gap: 24px; align-items: center;">
-              <div style="text-align: center;">
-                <div style="font-size: 1.5rem;">✅✅✅</div>
-                <div style="font-size: 0.8rem; color: #10b981;">Allowed</div>
+          <style>
+            .rl-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .rl-bucket {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            .rl-bucket-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .rl-bucket-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #f59e0b;
+              border-radius: 50%;
+            }
+            .rl-flow {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 20px;
+              flex-wrap: wrap;
+            }
+            .rl-requests {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 8px;
+            }
+            .rl-req-row {
+              display: flex;
+              gap: 4px;
+            }
+            .rl-req {
+              width: 24px;
+              height: 24px;
+              background: rgba(59, 130, 246, 0.3);
+              border: 1px solid rgba(59, 130, 246, 0.5);
+              border-radius: 4px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.65rem;
+              animation: reqFlow 1.5s ease-in-out infinite;
+            }
+            .rl-req:nth-child(2) { animation-delay: 0.2s; }
+            .rl-req:nth-child(3) { animation-delay: 0.4s; }
+            .rl-req:nth-child(4) { animation-delay: 0.6s; }
+            .rl-req:nth-child(5) { animation-delay: 0.8s; }
+            @keyframes reqFlow {
+              0%, 100% { transform: translateX(0); }
+              50% { transform: translateX(3px); }
+            }
+            .rl-req-label {
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+            .rl-arrow {
+              color: #6b7280;
+              font-size: 1.2rem;
+            }
+            .rl-limiter {
+              position: relative;
+              padding: 24px 32px;
+              background: linear-gradient(135deg, #f59e0b, #d97706);
+              border-radius: 14px;
+              color: white;
+              text-align: center;
+              box-shadow: 0 8px 32px rgba(245, 158, 11, 0.3);
+            }
+            .rl-limiter-icon {
+              font-size: 2rem;
+              margin-bottom: 6px;
+            }
+            .rl-limiter-name {
+              font-weight: 600;
+              font-size: 1rem;
+            }
+            .rl-limiter-config {
+              font-size: 0.75rem;
+              opacity: 0.9;
+              margin-top: 4px;
+            }
+            .rl-bucket-visual {
+              margin-top: 12px;
+              padding: 8px 12px;
+              background: rgba(0, 0, 0, 0.2);
+              border-radius: 8px;
+            }
+            .rl-tokens {
+              display: flex;
+              gap: 4px;
+              justify-content: center;
+            }
+            .rl-token {
+              width: 16px;
+              height: 16px;
+              background: #fff;
+              border-radius: 50%;
+              opacity: 0.9;
+            }
+            .rl-token.used {
+              opacity: 0.2;
+            }
+            .rl-token-label {
+              font-size: 0.6rem;
+              text-align: center;
+              margin-top: 4px;
+              opacity: 0.8;
+            }
+            .rl-output {
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+            }
+            .rl-allowed {
+              padding: 14px 20px;
+              background: rgba(16, 185, 129, 0.15);
+              border: 1px solid rgba(16, 185, 129, 0.4);
+              border-radius: 10px;
+              text-align: center;
+            }
+            .rl-allowed-icon {
+              font-size: 1.3rem;
+              margin-bottom: 4px;
+            }
+            .rl-allowed-text {
+              font-size: 0.8rem;
+              color: #10b981;
+              font-weight: 500;
+            }
+            .rl-rejected {
+              padding: 14px 20px;
+              background: rgba(239, 68, 68, 0.15);
+              border: 1px solid rgba(239, 68, 68, 0.4);
+              border-radius: 10px;
+              text-align: center;
+            }
+            .rl-rejected-icon {
+              font-size: 1.3rem;
+              margin-bottom: 4px;
+            }
+            .rl-rejected-text {
+              font-size: 0.8rem;
+              color: #ef4444;
+              font-weight: 500;
+            }
+            .rl-rejected-code {
+              font-size: 0.65rem;
+              color: #6b7280;
+            }
+            
+            /* Algorithms */
+            .rl-algorithms {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(139, 92, 246, 0.2);
+            }
+            .rl-algo-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .rl-algo-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #8b5cf6;
+              border-radius: 50%;
+            }
+            .rl-algo-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 700px) {
+              .rl-algo-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .rl-algo {
+              padding: 16px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              text-align: center;
+            }
+            .rl-algo-icon {
+              font-size: 1.5rem;
+              margin-bottom: 8px;
+            }
+            .rl-algo-name {
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: #e5e5e5;
+              margin-bottom: 4px;
+            }
+            .rl-algo-desc {
+              font-size: 0.65rem;
+              color: #6b7280;
+            }
+          </style>
+          
+          <div class="rl-viz">
+            <!-- Token Bucket Flow -->
+            <div class="rl-bucket">
+              <div class="rl-bucket-title">Token Bucket Rate Limiting</div>
+              <div class="rl-flow">
+                <div class="rl-requests">
+                  <div class="rl-req-row">
+                    <div class="rl-req">📨</div>
+                    <div class="rl-req">📨</div>
+                    <div class="rl-req">📨</div>
+                    <div class="rl-req">📨</div>
+                    <div class="rl-req">📨</div>
+                  </div>
+                  <div class="rl-req-label">Incoming Requests</div>
+                </div>
+                <div class="rl-arrow">→</div>
+                <div class="rl-limiter">
+                  <div class="rl-limiter-icon">🚦</div>
+                  <div class="rl-limiter-name">Rate Limiter</div>
+                  <div class="rl-limiter-config">100 req/min</div>
+                  <div class="rl-bucket-visual">
+                    <div class="rl-tokens">
+                      <div class="rl-token"></div>
+                      <div class="rl-token"></div>
+                      <div class="rl-token"></div>
+                      <div class="rl-token used"></div>
+                      <div class="rl-token used"></div>
+                    </div>
+                    <div class="rl-token-label">3/5 tokens available</div>
+                  </div>
+                </div>
+                <div class="rl-arrow">→</div>
+                <div class="rl-output">
+                  <div class="rl-allowed">
+                    <div class="rl-allowed-icon">✅</div>
+                    <div class="rl-allowed-text">3 Allowed</div>
+                  </div>
+                  <div class="rl-rejected">
+                    <div class="rl-rejected-icon">❌</div>
+                    <div class="rl-rejected-text">2 Rejected</div>
+                    <div class="rl-rejected-code">HTTP 429</div>
+                  </div>
+                </div>
               </div>
-              <div style="text-align: center;">
-                <div style="font-size: 1.5rem;">❌❌</div>
-                <div style="font-size: 0.8rem; color: #ef4444;">Rejected (429)</div>
+            </div>
+            
+            <!-- Algorithms -->
+            <div class="rl-algorithms">
+              <div class="rl-algo-title">Rate Limiting Algorithms</div>
+              <div class="rl-algo-grid">
+                <div class="rl-algo">
+                  <div class="rl-algo-icon">🪣</div>
+                  <div class="rl-algo-name">Token Bucket</div>
+                  <div class="rl-algo-desc">Allows bursts, smooth average</div>
+                </div>
+                <div class="rl-algo">
+                  <div class="rl-algo-icon">💧</div>
+                  <div class="rl-algo-name">Leaky Bucket</div>
+                  <div class="rl-algo-desc">Fixed output rate</div>
+                </div>
+                <div class="rl-algo">
+                  <div class="rl-algo-icon">🪟</div>
+                  <div class="rl-algo-name">Fixed Window</div>
+                  <div class="rl-algo-desc">Reset each interval</div>
+                </div>
+                <div class="rl-algo">
+                  <div class="rl-algo-icon">📊</div>
+                  <div class="rl-algo-name">Sliding Window</div>
+                  <div class="rl-algo-desc">Smooth rolling limit</div>
+                </div>
               </div>
             </div>
           </div>
@@ -4057,23 +7223,210 @@
         badge: { text: "Resilience", color: "#10b981", bg: "rgba(16, 185, 129, 0.15)" },
         color: "#10b981",
         diagram: `
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 24px;">
-            <div style="display: flex; gap: 16px; align-items: end;">
-              <div style="padding: 40px 20px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; color: white; text-align: center;">
-                <div style="font-weight: 600;">Full</div>
-                <div style="font-size: 0.8rem;">100%</div>
+          <style>
+            .gd-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .gd-levels {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(16, 185, 129, 0.2);
+            }
+            .gd-levels-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .gd-levels-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #10b981;
+              border-radius: 50%;
+            }
+            .gd-bars {
+              display: flex;
+              align-items: flex-end;
+              justify-content: center;
+              gap: 20px;
+              height: 180px;
+              margin-bottom: 16px;
+            }
+            .gd-bar {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              text-align: center;
+            }
+            .gd-bar-fill {
+              width: 80px;
+              border-radius: 10px 10px 0 0;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: flex-end;
+              padding-bottom: 12px;
+              color: white;
+              transition: all 0.3s ease;
+            }
+            .gd-bar.full .gd-bar-fill {
+              height: 160px;
+              background: linear-gradient(180deg, #10b981, #059669);
+            }
+            .gd-bar.degraded .gd-bar-fill {
+              height: 112px;
+              background: linear-gradient(180deg, #f59e0b, #d97706);
+            }
+            .gd-bar.minimal .gd-bar-fill {
+              height: 64px;
+              background: linear-gradient(180deg, #ef4444, #dc2626);
+            }
+            .gd-bar-percent {
+              font-size: 1.3rem;
+              font-weight: 700;
+            }
+            .gd-bar-label {
+              font-size: 0.85rem;
+              font-weight: 500;
+              margin-top: 8px;
+            }
+            .gd-bar.full .gd-bar-label { color: #10b981; }
+            .gd-bar.degraded .gd-bar-label { color: #f59e0b; }
+            .gd-bar.minimal .gd-bar-label { color: #ef4444; }
+            .gd-bar-features {
+              font-size: 0.7rem;
+              color: #6b7280;
+              margin-top: 4px;
+            }
+            .gd-message {
+              text-align: center;
+              padding: 12px 20px;
+              background: rgba(16, 185, 129, 0.1);
+              border: 1px dashed rgba(16, 185, 129, 0.3);
+              border-radius: 10px;
+              color: #10b981;
+              font-size: 0.85rem;
+            }
+            
+            /* Fallback strategies */
+            .gd-strategies {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            .gd-strat-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .gd-strat-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #f59e0b;
+              border-radius: 50%;
+            }
+            .gd-strat-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 700px) {
+              .gd-strat-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .gd-strat {
+              padding: 14px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              text-align: center;
+            }
+            .gd-strat-icon {
+              font-size: 1.4rem;
+              margin-bottom: 6px;
+            }
+            .gd-strat-name {
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: #e5e5e5;
+              margin-bottom: 3px;
+            }
+            .gd-strat-desc {
+              font-size: 0.65rem;
+              color: #6b7280;
+            }
+          </style>
+          
+          <div class="gd-viz">
+            <!-- Service Levels -->
+            <div class="gd-levels">
+              <div class="gd-levels-title">Service Level Degradation</div>
+              <div class="gd-bars">
+                <div class="gd-bar full">
+                  <div class="gd-bar-fill">
+                    <span class="gd-bar-percent">100%</span>
+                  </div>
+                  <div class="gd-bar-label">Full Service</div>
+                  <div class="gd-bar-features">All features enabled</div>
+                </div>
+                <div class="gd-bar degraded">
+                  <div class="gd-bar-fill">
+                    <span class="gd-bar-percent">70%</span>
+                  </div>
+                  <div class="gd-bar-label">Degraded</div>
+                  <div class="gd-bar-features">Core features only</div>
+                </div>
+                <div class="gd-bar minimal">
+                  <div class="gd-bar-fill">
+                    <span class="gd-bar-percent">30%</span>
+                  </div>
+                  <div class="gd-bar-label">Minimal</div>
+                  <div class="gd-bar-features">Read-only mode</div>
+                </div>
               </div>
-              <div style="padding: 30px 20px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 12px; color: white; text-align: center;">
-                <div style="font-weight: 600;">Degraded</div>
-                <div style="font-size: 0.8rem;">70%</div>
-              </div>
-              <div style="padding: 20px; background: linear-gradient(135deg, #ef4444, #dc2626); border-radius: 12px; color: white; text-align: center;">
-                <div style="font-weight: 600;">Minimal</div>
-                <div style="font-size: 0.8rem;">30%</div>
+              <div class="gd-message">
+                💡 Better to serve limited features than none at all
               </div>
             </div>
-            <div style="padding: 12px 24px; background: var(--bg-tertiary); border-radius: 8px; font-size: 0.9rem;">
-              Better to serve limited features than none at all
+            
+            <!-- Fallback Strategies -->
+            <div class="gd-strategies">
+              <div class="gd-strat-title">Fallback Strategies</div>
+              <div class="gd-strat-grid">
+                <div class="gd-strat">
+                  <div class="gd-strat-icon">🚩</div>
+                  <div class="gd-strat-name">Feature Flags</div>
+                  <div class="gd-strat-desc">Disable failing features</div>
+                </div>
+                <div class="gd-strat">
+                  <div class="gd-strat-icon">💾</div>
+                  <div class="gd-strat-name">Cached Data</div>
+                  <div class="gd-strat-desc">Serve stale content</div>
+                </div>
+                <div class="gd-strat">
+                  <div class="gd-strat-icon">📄</div>
+                  <div class="gd-strat-name">Static Fallback</div>
+                  <div class="gd-strat-desc">Pre-generated pages</div>
+                </div>
+                <div class="gd-strat">
+                  <div class="gd-strat-icon">📢</div>
+                  <div class="gd-strat-name">User Notice</div>
+                  <div class="gd-strat-desc">Inform about status</div>
+                </div>
+              </div>
             </div>
           </div>
         `,
@@ -4107,22 +7460,236 @@
         badge: { text: "Resilience", color: "#dc2626", bg: "rgba(220, 38, 38, 0.15)" },
         color: "#dc2626",
         diagram: `
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 24px;">
-            <div style="display: flex; gap: 40px; align-items: center;">
-              <div style="text-align: center;">
-                <div style="width: 100px; height: 80px; background: rgba(239, 68, 68, 0.2); border: 2px dashed #ef4444; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">💥</div>
-                <div style="margin-top: 8px; font-weight: 500;">Primary</div>
-                <div style="font-size: 0.75rem; color: #ef4444;">Failed</div>
+          <style>
+            .dr-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .dr-failover {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(220, 38, 38, 0.2);
+            }
+            .dr-failover-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .dr-failover-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #dc2626;
+              border-radius: 50%;
+            }
+            .dr-sites {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 30px;
+              flex-wrap: wrap;
+              margin-bottom: 20px;
+            }
+            .dr-site {
+              padding: 20px 30px;
+              border-radius: 14px;
+              text-align: center;
+              min-width: 140px;
+            }
+            .dr-site.primary {
+              background: rgba(239, 68, 68, 0.15);
+              border: 2px dashed rgba(239, 68, 68, 0.5);
+              animation: drFail 2s ease-in-out infinite;
+            }
+            @keyframes drFail {
+              0%, 100% { opacity: 0.5; }
+              50% { opacity: 0.8; }
+            }
+            .dr-site.dr {
+              background: rgba(16, 185, 129, 0.15);
+              border: 2px solid rgba(16, 185, 129, 0.5);
+            }
+            .dr-site-icon {
+              font-size: 2.5rem;
+              margin-bottom: 8px;
+            }
+            .dr-site-name {
+              font-weight: 600;
+              font-size: 1rem;
+              margin-bottom: 4px;
+            }
+            .dr-site.primary .dr-site-name { color: #ef4444; }
+            .dr-site.dr .dr-site-name { color: #10b981; }
+            .dr-site-status {
+              font-size: 0.75rem;
+              padding: 3px 10px;
+              border-radius: 10px;
+              display: inline-block;
+            }
+            .dr-site.primary .dr-site-status { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+            .dr-site.dr .dr-site-status { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+            .dr-arrow {
+              font-size: 2rem;
+              color: #10b981;
+              animation: drArrow 1s ease-in-out infinite;
+            }
+            @keyframes drArrow {
+              0%, 100% { transform: translateX(0); }
+              50% { transform: translateX(5px); }
+            }
+            .dr-metrics {
+              display: flex;
+              justify-content: center;
+              gap: 20px;
+            }
+            .dr-metric {
+              padding: 14px 24px;
+              background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(139, 92, 246, 0.2));
+              border-radius: 10px;
+              text-align: center;
+            }
+            .dr-metric-value {
+              font-size: 1.3rem;
+              font-weight: 700;
+              color: #e5e5e5;
+            }
+            .dr-metric-label {
+              font-size: 0.7rem;
+              color: #6b7280;
+              margin-top: 2px;
+            }
+            
+            /* DR Strategies */
+            .dr-strategies {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(139, 92, 246, 0.2);
+            }
+            .dr-strat-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .dr-strat-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #8b5cf6;
+              border-radius: 50%;
+            }
+            .dr-strat-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 700px) {
+              .dr-strat-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .dr-strat {
+              padding: 14px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              text-align: center;
+              border: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            .dr-strat-icon {
+              font-size: 1.4rem;
+              margin-bottom: 6px;
+            }
+            .dr-strat-name {
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: #e5e5e5;
+              margin-bottom: 4px;
+            }
+            .dr-strat-rto {
+              font-size: 0.65rem;
+              color: #6b7280;
+              margin-bottom: 6px;
+            }
+            .dr-strat-cost {
+              font-size: 0.6rem;
+              padding: 2px 8px;
+              border-radius: 8px;
+              display: inline-block;
+            }
+            .dr-strat:nth-child(1) .dr-strat-cost { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+            .dr-strat:nth-child(2) .dr-strat-cost { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+            .dr-strat:nth-child(3) .dr-strat-cost { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+            .dr-strat:nth-child(4) .dr-strat-cost { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+          </style>
+          
+          <div class="dr-viz">
+            <!-- Failover Demo -->
+            <div class="dr-failover">
+              <div class="dr-failover-title">Disaster Recovery Failover</div>
+              <div class="dr-sites">
+                <div class="dr-site primary">
+                  <div class="dr-site-icon">💥</div>
+                  <div class="dr-site-name">Primary Site</div>
+                  <div class="dr-site-status">FAILED</div>
+                </div>
+                <div class="dr-arrow">➡️</div>
+                <div class="dr-site dr">
+                  <div class="dr-site-icon">🏢</div>
+                  <div class="dr-site-name">DR Site</div>
+                  <div class="dr-site-status">ACTIVE</div>
+                </div>
               </div>
-              <div style="font-size: 2rem; color: #10b981;">➡️</div>
-              <div style="text-align: center;">
-                <div style="width: 100px; height: 80px; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🏢</div>
-                <div style="margin-top: 8px; font-weight: 500;">DR Site</div>
-                <div style="font-size: 0.75rem; color: #10b981;">Active</div>
+              <div class="dr-metrics">
+                <div class="dr-metric">
+                  <div class="dr-metric-value">4h</div>
+                  <div class="dr-metric-label">RTO (Recovery Time)</div>
+                </div>
+                <div class="dr-metric">
+                  <div class="dr-metric-value">1h</div>
+                  <div class="dr-metric-label">RPO (Data Loss)</div>
+                </div>
               </div>
             </div>
-            <div style="padding: 12px 24px; background: linear-gradient(135deg, #dc2626, #991b1b); border-radius: 8px; color: white;">
-              RTO: 4 hours | RPO: 1 hour
+            
+            <!-- DR Strategies -->
+            <div class="dr-strategies">
+              <div class="dr-strat-title">DR Strategy Tiers</div>
+              <div class="dr-strat-grid">
+                <div class="dr-strat">
+                  <div class="dr-strat-icon">💾</div>
+                  <div class="dr-strat-name">Backup & Restore</div>
+                  <div class="dr-strat-rto">RTO: Hours-Days</div>
+                  <div class="dr-strat-cost">$ Low Cost</div>
+                </div>
+                <div class="dr-strat">
+                  <div class="dr-strat-icon">🔥</div>
+                  <div class="dr-strat-name">Pilot Light</div>
+                  <div class="dr-strat-rto">RTO: 10s of min</div>
+                  <div class="dr-strat-cost">$$ Medium</div>
+                </div>
+                <div class="dr-strat">
+                  <div class="dr-strat-icon">🌡️</div>
+                  <div class="dr-strat-name">Warm Standby</div>
+                  <div class="dr-strat-rto">RTO: Minutes</div>
+                  <div class="dr-strat-cost">$$$ Higher</div>
+                </div>
+                <div class="dr-strat">
+                  <div class="dr-strat-icon">🔄</div>
+                  <div class="dr-strat-name">Active-Active</div>
+                  <div class="dr-strat-rto">RTO: Near-Zero</div>
+                  <div class="dr-strat-cost">$$$$ Highest</div>
+                </div>
+              </div>
             </div>
           </div>
         `,
