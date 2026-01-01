@@ -810,7 +810,7 @@
         <div class="category-header" onclick="toggleCategory(this.parentElement)">
           <div class="category-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">⚡</div>
           <span class="category-name">Core Principles</span>
-          <span class="category-count">6</span>
+          <span class="category-count">8</span>
           <span class="category-arrow">›</span>
         </div>
         <div class="category-items">
@@ -831,6 +831,12 @@
           </div>
           <div class="concept-item" data-concept="security" onclick="showConcept('security')">
             <span>Security</span>
+          </div>
+          <div class="concept-item" data-concept="observability" onclick="showConcept('observability')">
+            <span>Observability</span>
+          </div>
+          <div class="concept-item" data-concept="cost-efficiency" onclick="showConcept('cost-efficiency')">
+            <span>Cost Efficiency</span>
           </div>
         </div>
       </div>
@@ -4225,6 +4231,485 @@
           { level: "SOC 2", downtime: "Security compliance", useCase: "Enterprise requirements" },
           { level: "MTTR (Security)", downtime: "Time to remediate", useCase: "Vulnerability response" },
           { level: "CVE Count", downtime: "Known vulnerabilities", useCase: "Dependency security" }
+        ]
+      },
+      observability: {
+        title: "Observability",
+        subtitle: "The ability to understand a system's internal state by examining its external outputs: logs, metrics, and traces.",
+        badge: { text: "Core Principle", color: "#14b8a6", bg: "rgba(20, 184, 166, 0.15)" },
+        color: "#14b8a6",
+        diagram: `
+          <style>
+            .obs-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .obs-pillars {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(20, 184, 166, 0.2);
+            }
+            .obs-pillars-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .obs-pillars-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #14b8a6;
+              border-radius: 50%;
+            }
+            .obs-three {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 16px;
+            }
+            @media (max-width: 700px) {
+              .obs-three { grid-template-columns: 1fr; }
+            }
+            .obs-pillar {
+              padding: 20px;
+              border-radius: 14px;
+              text-align: center;
+              transition: all 0.3s ease;
+            }
+            .obs-pillar:hover {
+              transform: translateY(-4px);
+            }
+            .obs-pillar.logs {
+              background: rgba(59, 130, 246, 0.15);
+              border: 1px solid rgba(59, 130, 246, 0.4);
+            }
+            .obs-pillar.metrics {
+              background: rgba(16, 185, 129, 0.15);
+              border: 1px solid rgba(16, 185, 129, 0.4);
+            }
+            .obs-pillar.traces {
+              background: rgba(139, 92, 246, 0.15);
+              border: 1px solid rgba(139, 92, 246, 0.4);
+            }
+            .obs-pillar-icon {
+              font-size: 2.5rem;
+              margin-bottom: 12px;
+            }
+            .obs-pillar-name {
+              font-weight: 700;
+              font-size: 1.1rem;
+              margin-bottom: 8px;
+            }
+            .obs-pillar.logs .obs-pillar-name { color: #3b82f6; }
+            .obs-pillar.metrics .obs-pillar-name { color: #10b981; }
+            .obs-pillar.traces .obs-pillar-name { color: #8b5cf6; }
+            .obs-pillar-desc {
+              font-size: 0.8rem;
+              color: #a0a0b0;
+              margin-bottom: 12px;
+            }
+            .obs-pillar-examples {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 6px;
+              justify-content: center;
+            }
+            .obs-example {
+              font-size: 0.65rem;
+              padding: 4px 8px;
+              background: rgba(0, 0, 0, 0.2);
+              border-radius: 6px;
+              color: #888;
+            }
+            
+            /* Dashboard Preview */
+            .obs-dashboard {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            .obs-dash-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .obs-dash-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #f59e0b;
+              border-radius: 50%;
+            }
+            .obs-dash-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 700px) {
+              .obs-dash-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .obs-metric {
+              padding: 14px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              text-align: center;
+            }
+            .obs-metric-value {
+              font-size: 1.4rem;
+              font-weight: 700;
+              margin-bottom: 4px;
+            }
+            .obs-metric:nth-child(1) .obs-metric-value { color: #10b981; }
+            .obs-metric:nth-child(2) .obs-metric-value { color: #3b82f6; }
+            .obs-metric:nth-child(3) .obs-metric-value { color: #f59e0b; }
+            .obs-metric:nth-child(4) .obs-metric-value { color: #ef4444; }
+            .obs-metric-label {
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+            .obs-metric-trend {
+              font-size: 0.65rem;
+              margin-top: 4px;
+            }
+            .obs-metric:nth-child(1) .obs-metric-trend { color: #10b981; }
+            .obs-metric:nth-child(2) .obs-metric-trend { color: #3b82f6; }
+            .obs-metric:nth-child(3) .obs-metric-trend { color: #f59e0b; }
+            .obs-metric:nth-child(4) .obs-metric-trend { color: #ef4444; }
+          </style>
+          
+          <div class="obs-viz">
+            <!-- Three Pillars -->
+            <div class="obs-pillars">
+              <div class="obs-pillars-title">The Three Pillars of Observability</div>
+              <div class="obs-three">
+                <div class="obs-pillar logs">
+                  <div class="obs-pillar-icon">📝</div>
+                  <div class="obs-pillar-name">Logs</div>
+                  <div class="obs-pillar-desc">Discrete events with timestamps and context</div>
+                  <div class="obs-pillar-examples">
+                    <span class="obs-example">ELK Stack</span>
+                    <span class="obs-example">Splunk</span>
+                    <span class="obs-example">Loki</span>
+                  </div>
+                </div>
+                <div class="obs-pillar metrics">
+                  <div class="obs-pillar-icon">📊</div>
+                  <div class="obs-pillar-name">Metrics</div>
+                  <div class="obs-pillar-desc">Numeric measurements over time intervals</div>
+                  <div class="obs-pillar-examples">
+                    <span class="obs-example">Prometheus</span>
+                    <span class="obs-example">Grafana</span>
+                    <span class="obs-example">Datadog</span>
+                  </div>
+                </div>
+                <div class="obs-pillar traces">
+                  <div class="obs-pillar-icon">🔗</div>
+                  <div class="obs-pillar-name">Traces</div>
+                  <div class="obs-pillar-desc">Request journey across distributed services</div>
+                  <div class="obs-pillar-examples">
+                    <span class="obs-example">Jaeger</span>
+                    <span class="obs-example">Zipkin</span>
+                    <span class="obs-example">OpenTelemetry</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Dashboard Preview -->
+            <div class="obs-dashboard">
+              <div class="obs-dash-title">Real-Time System Dashboard</div>
+              <div class="obs-dash-grid">
+                <div class="obs-metric">
+                  <div class="obs-metric-value">99.9%</div>
+                  <div class="obs-metric-label">Uptime</div>
+                  <div class="obs-metric-trend">↑ Stable</div>
+                </div>
+                <div class="obs-metric">
+                  <div class="obs-metric-value">42ms</div>
+                  <div class="obs-metric-label">P95 Latency</div>
+                  <div class="obs-metric-trend">↓ -5ms</div>
+                </div>
+                <div class="obs-metric">
+                  <div class="obs-metric-value">2.3K</div>
+                  <div class="obs-metric-label">Errors/day</div>
+                  <div class="obs-metric-trend">↑ +12%</div>
+                </div>
+                <div class="obs-metric">
+                  <div class="obs-metric-value">3</div>
+                  <div class="obs-metric-label">Active Alerts</div>
+                  <div class="obs-metric-trend">⚠ Warning</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `,
+        definition: `
+          <p><strong>Observability</strong> is the ability to understand the internal state of a system by examining its external outputs. It goes beyond traditional monitoring by enabling you to ask arbitrary questions about your system without deploying new code.</p>
+          <p>The three pillars—logs, metrics, and traces—work together to provide complete visibility into distributed systems, helping teams debug issues, understand performance, and maintain reliability.</p>
+        `,
+        keyPoints: [
+          { icon: "📝", title: "Logs", desc: "Timestamped records of discrete events. Essential for debugging and audit trails.", color: "#3b82f6" },
+          { icon: "📊", title: "Metrics", desc: "Numeric measurements aggregated over time. Great for alerting and dashboards.", color: "#10b981" },
+          { icon: "🔗", title: "Traces", desc: "End-to-end request paths across services. Critical for debugging distributed systems.", color: "#8b5cf6" },
+          { icon: "🚨", title: "Alerting", desc: "Proactive notifications when metrics exceed thresholds or anomalies are detected.", color: "#ef4444" }
+        ],
+        formula: "Observability = Logs + Metrics + Traces + Context",
+        strategies: [
+          { title: "Structured Logging", desc: "Use JSON logs with consistent fields for easy querying and correlation across services." },
+          { title: "Distributed Tracing", desc: "Implement trace context propagation (OpenTelemetry) to follow requests across service boundaries." },
+          { title: "SLI/SLO Monitoring", desc: "Define Service Level Indicators and Objectives to measure what matters to users." },
+          { title: "Correlation IDs", desc: "Use request IDs that flow through all services to connect logs, metrics, and traces." }
+        ],
+        metrics: [
+          { level: "Prometheus", downtime: "Metrics collection", useCase: "Time-series database" },
+          { level: "Grafana", downtime: "Visualization", useCase: "Dashboards and alerts" },
+          { level: "OpenTelemetry", downtime: "Instrumentation", useCase: "Vendor-neutral standard" },
+          { level: "ELK Stack", downtime: "Log aggregation", useCase: "Search and analysis" }
+        ]
+      },
+      "cost-efficiency": {
+        title: "Cost Efficiency",
+        subtitle: "Optimizing infrastructure and operational costs while maintaining performance, reliability, and scalability requirements.",
+        badge: { text: "Core Principle", color: "#22c55e", bg: "rgba(34, 197, 94, 0.15)" },
+        color: "#22c55e",
+        diagram: `
+          <style>
+            .cost-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .cost-breakdown {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(34, 197, 94, 0.2);
+            }
+            .cost-breakdown-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .cost-breakdown-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #22c55e;
+              border-radius: 50%;
+            }
+            .cost-chart {
+              display: flex;
+              align-items: flex-end;
+              justify-content: center;
+              gap: 16px;
+              height: 160px;
+              margin-bottom: 16px;
+            }
+            .cost-bar {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              text-align: center;
+            }
+            .cost-bar-fill {
+              width: 60px;
+              border-radius: 8px 8px 0 0;
+              display: flex;
+              align-items: flex-end;
+              justify-content: center;
+              padding-bottom: 8px;
+              color: white;
+              font-weight: 600;
+              font-size: 0.85rem;
+              transition: all 0.3s ease;
+            }
+            .cost-bar:nth-child(1) .cost-bar-fill { height: 140px; background: linear-gradient(180deg, #3b82f6, #1d4ed8); }
+            .cost-bar:nth-child(2) .cost-bar-fill { height: 90px; background: linear-gradient(180deg, #8b5cf6, #6d28d9); }
+            .cost-bar:nth-child(3) .cost-bar-fill { height: 60px; background: linear-gradient(180deg, #f59e0b, #d97706); }
+            .cost-bar:nth-child(4) .cost-bar-fill { height: 40px; background: linear-gradient(180deg, #10b981, #059669); }
+            .cost-bar:nth-child(5) .cost-bar-fill { height: 30px; background: linear-gradient(180deg, #ec4899, #db2777); }
+            .cost-bar-label {
+              font-size: 0.75rem;
+              color: #a0a0b0;
+              margin-top: 8px;
+            }
+            .cost-total {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 12px 16px;
+              background: rgba(34, 197, 94, 0.1);
+              border: 1px solid rgba(34, 197, 94, 0.3);
+              border-radius: 10px;
+            }
+            .cost-total-label {
+              font-size: 0.85rem;
+              color: #a0a0b0;
+            }
+            .cost-total-value {
+              font-size: 1.2rem;
+              font-weight: 700;
+              color: #22c55e;
+            }
+            
+            /* Optimization Tips */
+            .cost-tips {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            .cost-tips-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .cost-tips-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #f59e0b;
+              border-radius: 50%;
+            }
+            .cost-tips-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 700px) {
+              .cost-tips-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .cost-tip {
+              padding: 16px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              text-align: center;
+              transition: all 0.3s ease;
+            }
+            .cost-tip:hover {
+              transform: translateY(-3px);
+              border: 1px solid rgba(34, 197, 94, 0.3);
+            }
+            .cost-tip-icon {
+              font-size: 1.5rem;
+              margin-bottom: 8px;
+            }
+            .cost-tip-name {
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: #e5e5e5;
+              margin-bottom: 4px;
+            }
+            .cost-tip-savings {
+              font-size: 0.7rem;
+              color: #22c55e;
+            }
+          </style>
+          
+          <div class="cost-viz">
+            <!-- Cost Breakdown -->
+            <div class="cost-breakdown">
+              <div class="cost-breakdown-title">Typical Cloud Cost Breakdown</div>
+              <div class="cost-chart">
+                <div class="cost-bar">
+                  <div class="cost-bar-fill">40%</div>
+                  <div class="cost-bar-label">Compute</div>
+                </div>
+                <div class="cost-bar">
+                  <div class="cost-bar-fill">25%</div>
+                  <div class="cost-bar-label">Database</div>
+                </div>
+                <div class="cost-bar">
+                  <div class="cost-bar-fill">15%</div>
+                  <div class="cost-bar-label">Storage</div>
+                </div>
+                <div class="cost-bar">
+                  <div class="cost-bar-fill">12%</div>
+                  <div class="cost-bar-label">Network</div>
+                </div>
+                <div class="cost-bar">
+                  <div class="cost-bar-fill">8%</div>
+                  <div class="cost-bar-label">Other</div>
+                </div>
+              </div>
+              <div class="cost-total">
+                <span class="cost-total-label">💡 Typical savings potential with optimization</span>
+                <span class="cost-total-value">30-50%</span>
+              </div>
+            </div>
+            
+            <!-- Optimization Tips -->
+            <div class="cost-tips">
+              <div class="cost-tips-title">Cost Optimization Strategies</div>
+              <div class="cost-tips-grid">
+                <div class="cost-tip">
+                  <div class="cost-tip-icon">📉</div>
+                  <div class="cost-tip-name">Right-sizing</div>
+                  <div class="cost-tip-savings">~20-30% savings</div>
+                </div>
+                <div class="cost-tip">
+                  <div class="cost-tip-icon">💰</div>
+                  <div class="cost-tip-name">Reserved Instances</div>
+                  <div class="cost-tip-savings">~40-60% savings</div>
+                </div>
+                <div class="cost-tip">
+                  <div class="cost-tip-icon">🔄</div>
+                  <div class="cost-tip-name">Spot Instances</div>
+                  <div class="cost-tip-savings">~70-90% savings</div>
+                </div>
+                <div class="cost-tip">
+                  <div class="cost-tip-icon">🌙</div>
+                  <div class="cost-tip-name">Auto-shutdown</div>
+                  <div class="cost-tip-savings">~65% savings</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `,
+        definition: `
+          <p><strong>Cost Efficiency</strong> is the practice of optimizing cloud and infrastructure spending while maintaining required performance, reliability, and scalability. It's a critical aspect of FinOps (Financial Operations).</p>
+          <p>Effective cost management requires visibility into spending, understanding of pricing models, right-sizing resources, and building cost-awareness into the engineering culture.</p>
+        `,
+        keyPoints: [
+          { icon: "📊", title: "Cost Visibility", desc: "Track and allocate costs by team, service, and environment using tagging and cost management tools.", color: "#22c55e" },
+          { icon: "📉", title: "Right-sizing", desc: "Match resource capacity to actual usage. Eliminate over-provisioned and idle resources.", color: "#3b82f6" },
+          { icon: "💰", title: "Pricing Models", desc: "Use reserved instances, savings plans, and spot instances for predictable and flexible workloads.", color: "#f59e0b" },
+          { icon: "🔄", title: "Auto-scaling", desc: "Scale resources dynamically based on demand to avoid paying for unused capacity.", color: "#8b5cf6" }
+        ],
+        formula: "Cost Efficiency = Value Delivered / Total Cost of Ownership",
+        strategies: [
+          { title: "FinOps Practice", desc: "Establish cross-functional collaboration between engineering, finance, and business to optimize cloud value." },
+          { title: "Tagging Strategy", desc: "Implement consistent resource tagging to enable cost allocation and accountability by team/project." },
+          { title: "Architectural Optimization", desc: "Choose cost-effective architectures: serverless for spiky workloads, containers for consistent loads." },
+          { title: "Continuous Optimization", desc: "Regular reviews of spending, unused resources, and opportunities for savings (reserved instances, etc.)." }
+        ],
+        metrics: [
+          { level: "Cost per Request", downtime: "Infrastructure efficiency", useCase: "API cost tracking" },
+          { level: "Cost per Customer", downtime: "Unit economics", useCase: "Business viability" },
+          { level: "Cloud Waste %", downtime: "Unused resources", useCase: "Optimization priority" },
+          { level: "Budget Variance", downtime: "Forecast accuracy", useCase: "Financial planning" }
         ]
       },
       partitioning: {
