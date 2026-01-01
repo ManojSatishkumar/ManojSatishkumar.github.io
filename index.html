@@ -643,17 +643,6 @@
         opacity: 1 !important;
       }
       
-      /* Download Resume Button - slides from right top */
-      .download-resume-wrapper {
-        right: -100px !important;
-        opacity: 0 !important;
-        transition: right 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease !important;
-      }
-      
-      .download-resume-wrapper.slide-in {
-        right: 16px !important;
-        opacity: 1 !important;
-      }
       
       /* Right Tech Sidebar - slides from right */
       .tech-sidebar {
@@ -1327,13 +1316,6 @@
           }
         }, 900);
         
-        // Download resume button slides in
-        setTimeout(function() {
-          const downloadWrapper = document.querySelector(".download-resume-wrapper");
-          if (downloadWrapper) {
-            downloadWrapper.classList.add("slide-in");
-          }
-        }, 1050);
       });
     </script>
 
@@ -1397,17 +1379,6 @@
       </div>
     </div>
 
-    <!-- Download Resume Button -->
-    <div class="download-resume-wrapper">
-      <a href="/pdf/Manoj Satishkumar's resume.pdf" download class="download-resume-btn" title="Download Resume">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-          <polyline points="7 10 12 15 17 10"></polyline>
-          <line x1="12" y1="15" x2="12" y2="3"></line>
-        </svg>
-      </a>
-      <span class="download-resume-label">Download<br>Resume</span>
-    </div>
 
     <style>
       /* Scroll Indicator Styles */
@@ -1496,76 +1467,7 @@
         }
       }
 
-      /* Download Resume Button */
-      .download-resume-wrapper {
-        position: fixed;
-        top: 45px;
-        right: 16px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
-        z-index: 999;
-      }
-
-      .download-resume-label {
-        font-size: 10px;
-        font-weight: 500;
-        color: #666;
-        letter-spacing: 0.2px;
-        text-align: center;
-        line-height: 1.4;
-      }
-
-      .download-resume-btn {
-        width: 44px;
-        height: 44px;
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        color: #333;
-        text-decoration: none;
-      }
-
-      .download-resume-btn:hover {
-        background: rgba(255, 255, 255, 1);
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-        transform: scale(1.05);
-        color: #007AFF;
-      }
-
-      .download-resume-btn:active {
-        transform: scale(0.95);
-      }
-
-      .download-resume-btn svg {
-        animation: bounceDownSoft 2s ease-in-out infinite;
-      }
-
-      @keyframes bounceDownSoft {
-        0%, 100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(2px);
-        }
-      }
-
-      /* Hide on mobile */
-      @media (max-width: 1024px) {
-        .download-resume-wrapper {
-          display: none;
-        }
-      }
-    </style>
+      </style>
 
     <style>
       /* Chatbot Widget Styles */
