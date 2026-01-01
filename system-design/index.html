@@ -1386,19 +1386,312 @@
         badge: { text: "Core Principle", color: "#8b5cf6", bg: "rgba(139, 92, 246, 0.15)" },
         color: "#8b5cf6",
         diagram: `
-          <div class="mind-map">
-            <div class="mind-map-center" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white;">
-              <span style="font-size: 2rem;">🎯</span>
-              <span>Reliable</span>
-              <span style="font-size: 0.8rem; opacity: 0.8;">System</span>
+          <style>
+            .reliability-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .reliability-row {
+              display: flex;
+              gap: 24px;
+            }
+            @media (max-width: 900px) {
+              .reliability-row { flex-direction: column; }
+            }
+            
+            /* MTBF/MTTR Timeline */
+            .mtbf-section {
+              flex: 2;
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(139, 92, 246, 0.2);
+            }
+            .mtbf-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .mtbf-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #8b5cf6;
+              border-radius: 50%;
+            }
+            .timeline-track {
+              position: relative;
+              height: 60px;
+              background: linear-gradient(90deg, #10b981 0%, #10b981 30%, #ef4444 30%, #ef4444 35%, #f59e0b 35%, #f59e0b 40%, #10b981 40%, #10b981 75%, #ef4444 75%, #ef4444 80%, #f59e0b 80%, #f59e0b 85%, #10b981 85%, #10b981 100%);
+              border-radius: 8px;
+              margin-bottom: 16px;
+              overflow: hidden;
+            }
+            .timeline-labels-row {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 8px;
+            }
+            .timeline-label {
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              font-size: 0.7rem;
+              color: #a0a0b0;
+            }
+            .label-dot {
+              width: 10px;
+              height: 10px;
+              border-radius: 3px;
+            }
+            .label-dot.operational { background: #10b981; }
+            .label-dot.failure { background: #ef4444; }
+            .label-dot.recovery { background: #f59e0b; }
+            .mtbf-metrics {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 12px;
+              margin-top: 16px;
+            }
+            .mtbf-metric {
+              background: rgba(30, 35, 50, 0.8);
+              border-radius: 10px;
+              padding: 14px;
+              text-align: center;
+              border: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            .mtbf-metric-value {
+              font-size: 1.3rem;
+              font-weight: 700;
+              margin-bottom: 4px;
+            }
+            .mtbf-metric:nth-child(1) .mtbf-metric-value { color: #10b981; }
+            .mtbf-metric:nth-child(2) .mtbf-metric-value { color: #ef4444; }
+            .mtbf-metric:nth-child(3) .mtbf-metric-value { color: #f59e0b; }
+            .mtbf-metric-label {
+              font-size: 0.7rem;
+              color: #6b7280;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+            }
+            
+            /* Fault Handling Demo */
+            .fault-demo {
+              flex: 1;
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(16, 185, 129, 0.2);
+            }
+            .fault-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .fault-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #10b981;
+              border-radius: 50%;
+            }
+            .fault-flow {
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+            }
+            .fault-step {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              padding: 10px 14px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 8px;
+              border-left: 3px solid;
+              font-size: 0.85rem;
+            }
+            .fault-step:nth-child(1) { border-color: #ef4444; }
+            .fault-step:nth-child(2) { border-color: #f59e0b; }
+            .fault-step:nth-child(3) { border-color: #3b82f6; }
+            .fault-step:nth-child(4) { border-color: #10b981; }
+            .fault-step-icon {
+              font-size: 1.1rem;
+            }
+            .fault-step-text {
+              color: #e5e5e5;
+            }
+            .fault-arrow {
+              text-align: center;
+              color: #4b5563;
+              font-size: 0.9rem;
+            }
+            
+            /* Reliability Comparison */
+            .reliability-compare {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            .compare-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .compare-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #f59e0b;
+              border-radius: 50%;
+            }
+            .compare-grid {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 16px;
+            }
+            @media (max-width: 600px) {
+              .compare-grid { grid-template-columns: 1fr; }
+            }
+            .compare-card {
+              padding: 20px;
+              border-radius: 12px;
+              text-align: center;
+            }
+            .compare-card.brittle {
+              background: rgba(239, 68, 68, 0.1);
+              border: 1px solid rgba(239, 68, 68, 0.3);
+            }
+            .compare-card.reliable {
+              background: rgba(16, 185, 129, 0.1);
+              border: 1px solid rgba(16, 185, 129, 0.3);
+            }
+            .compare-icon {
+              font-size: 2rem;
+              margin-bottom: 10px;
+            }
+            .compare-label {
+              font-weight: 600;
+              margin-bottom: 12px;
+              font-size: 0.95rem;
+            }
+            .compare-card.brittle .compare-label { color: #ef4444; }
+            .compare-card.reliable .compare-label { color: #10b981; }
+            .compare-items {
+              display: flex;
+              flex-direction: column;
+              gap: 6px;
+              text-align: left;
+            }
+            .compare-item {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              font-size: 0.8rem;
+              color: #a0a0b0;
+            }
+            .compare-item-icon {
+              font-size: 0.75rem;
+            }
+          </style>
+          
+          <div class="reliability-viz">
+            <div class="reliability-row">
+              <!-- MTBF/MTTR Timeline -->
+              <div class="mtbf-section">
+                <div class="mtbf-title">System Reliability Timeline</div>
+                <div class="timeline-labels-row">
+                  <div class="timeline-label"><div class="label-dot operational"></div> Operational</div>
+                  <div class="timeline-label"><div class="label-dot failure"></div> Failure</div>
+                  <div class="timeline-label"><div class="label-dot recovery"></div> Recovery</div>
+                </div>
+                <div class="timeline-track"></div>
+                <div class="mtbf-metrics">
+                  <div class="mtbf-metric">
+                    <div class="mtbf-metric-value">720h</div>
+                    <div class="mtbf-metric-label">MTBF (Mean Time Between Failures)</div>
+                  </div>
+                  <div class="mtbf-metric">
+                    <div class="mtbf-metric-value">2.3h</div>
+                    <div class="mtbf-metric-label">MTTF (Mean Time To Failure)</div>
+                  </div>
+                  <div class="mtbf-metric">
+                    <div class="mtbf-metric-value">15min</div>
+                    <div class="mtbf-metric-label">MTTR (Mean Time To Recovery)</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Fault Handling Flow -->
+              <div class="fault-demo">
+                <div class="fault-title">Fault Handling Flow</div>
+                <div class="fault-flow">
+                  <div class="fault-step">
+                    <span class="fault-step-icon">💥</span>
+                    <span class="fault-step-text">Failure Occurs</span>
+                  </div>
+                  <div class="fault-arrow">↓</div>
+                  <div class="fault-step">
+                    <span class="fault-step-icon">🔔</span>
+                    <span class="fault-step-text">Detection & Alert</span>
+                  </div>
+                  <div class="fault-arrow">↓</div>
+                  <div class="fault-step">
+                    <span class="fault-step-icon">🔄</span>
+                    <span class="fault-step-text">Automatic Retry/Failover</span>
+                  </div>
+                  <div class="fault-arrow">↓</div>
+                  <div class="fault-step">
+                    <span class="fault-step-icon">✅</span>
+                    <span class="fault-step-text">Service Restored</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="mind-map-nodes">
-              <div class="mind-node">Fault Tolerance</div>
-              <div class="mind-node">Data Integrity</div>
-              <div class="mind-node">Error Handling</div>
-              <div class="mind-node">Testing</div>
-              <div class="mind-node">Monitoring</div>
-              <div class="mind-node">Recovery</div>
+            
+            <!-- Brittle vs Reliable Comparison -->
+            <div class="reliability-compare">
+              <div class="compare-title">Brittle System vs Reliable System</div>
+              <div class="compare-grid">
+                <div class="compare-card brittle">
+                  <div class="compare-icon">🏚️</div>
+                  <div class="compare-label">Brittle System</div>
+                  <div class="compare-items">
+                    <div class="compare-item"><span class="compare-item-icon">✗</span> Single point of failure</div>
+                    <div class="compare-item"><span class="compare-item-icon">✗</span> Cascading failures</div>
+                    <div class="compare-item"><span class="compare-item-icon">✗</span> No error handling</div>
+                    <div class="compare-item"><span class="compare-item-icon">✗</span> Data loss on crash</div>
+                    <div class="compare-item"><span class="compare-item-icon">✗</span> Manual recovery only</div>
+                  </div>
+                </div>
+                <div class="compare-card reliable">
+                  <div class="compare-icon">🏛️</div>
+                  <div class="compare-label">Reliable System</div>
+                  <div class="compare-items">
+                    <div class="compare-item"><span class="compare-item-icon">✓</span> Redundant components</div>
+                    <div class="compare-item"><span class="compare-item-icon">✓</span> Bulkhead isolation</div>
+                    <div class="compare-item"><span class="compare-item-icon">✓</span> Graceful degradation</div>
+                    <div class="compare-item"><span class="compare-item-icon">✓</span> Data durability</div>
+                    <div class="compare-item"><span class="compare-item-icon">✓</span> Auto-recovery</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         `,
@@ -1432,19 +1725,365 @@
         badge: { text: "Core Principle", color: "#10b981", bg: "rgba(16, 185, 129, 0.15)" },
         color: "#10b981",
         diagram: `
-          <div class="mind-map">
-            <div class="mind-map-center" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">
-              <span style="font-size: 2rem;">📈</span>
-              <span>Scale</span>
-              <span style="font-size: 0.8rem; opacity: 0.8;">Infinitely</span>
+          <style>
+            .scalability-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .scale-comparison {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 20px;
+            }
+            @media (max-width: 800px) {
+              .scale-comparison { grid-template-columns: 1fr; }
+            }
+            
+            /* Scaling Type Cards */
+            .scale-type {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .scale-type.vertical { border-color: rgba(59, 130, 246, 0.3); }
+            .scale-type.horizontal { border-color: rgba(16, 185, 129, 0.3); }
+            .scale-header {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              margin-bottom: 20px;
+            }
+            .scale-icon {
+              width: 44px;
+              height: 44px;
+              border-radius: 10px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.4rem;
+            }
+            .vertical .scale-icon { background: rgba(59, 130, 246, 0.2); }
+            .horizontal .scale-icon { background: rgba(16, 185, 129, 0.2); }
+            .scale-title-text {
+              font-weight: 600;
+              font-size: 1rem;
+            }
+            .vertical .scale-title-text { color: #3b82f6; }
+            .horizontal .scale-title-text { color: #10b981; }
+            .scale-subtitle {
+              font-size: 0.75rem;
+              color: #6b7280;
+            }
+            
+            /* Vertical Scaling Animation */
+            .vertical-demo {
+              display: flex;
+              justify-content: center;
+              gap: 16px;
+              align-items: flex-end;
+              height: 140px;
+              margin-bottom: 16px;
+            }
+            .server-tower {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 4px;
+            }
+            .server-tower.before .tower-box {
+              width: 50px;
+              height: 60px;
+              background: rgba(59, 130, 246, 0.2);
+              border: 1px solid rgba(59, 130, 246, 0.4);
+              border-radius: 6px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+            .server-tower.after .tower-box {
+              width: 70px;
+              height: 100px;
+              background: linear-gradient(180deg, rgba(59, 130, 246, 0.3), rgba(59, 130, 246, 0.15));
+              border: 2px solid rgba(59, 130, 246, 0.6);
+              border-radius: 8px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              gap: 4px;
+              animation: growTower 2s ease-in-out infinite alternate;
+            }
+            @keyframes growTower {
+              0% { transform: scaleY(0.85); }
+              100% { transform: scaleY(1); }
+            }
+            .tower-label {
+              font-size: 0.65rem;
+              color: #6b7280;
+              margin-top: 6px;
+            }
+            .tower-stats {
+              font-size: 0.6rem;
+              color: #3b82f6;
+            }
+            .scale-arrow {
+              font-size: 1.2rem;
+              color: #4b5563;
+              margin-bottom: 40px;
+            }
+            
+            /* Horizontal Scaling Animation */
+            .horizontal-demo {
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              margin-bottom: 16px;
+            }
+            .servers-line {
+              display: flex;
+              gap: 8px;
+              justify-content: center;
+              flex-wrap: wrap;
+            }
+            .servers-line.before .mini-server {
+              width: 40px;
+              height: 40px;
+              background: rgba(16, 185, 129, 0.2);
+              border: 1px solid rgba(16, 185, 129, 0.4);
+              border-radius: 6px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.9rem;
+            }
+            .servers-line.after .mini-server {
+              width: 40px;
+              height: 40px;
+              background: rgba(16, 185, 129, 0.2);
+              border: 1px solid rgba(16, 185, 129, 0.4);
+              border-radius: 6px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.9rem;
+              animation: popIn 0.5s ease-out;
+            }
+            .servers-line.after .mini-server:nth-child(3),
+            .servers-line.after .mini-server:nth-child(4),
+            .servers-line.after .mini-server:nth-child(5) {
+              border-color: rgba(16, 185, 129, 0.7);
+              background: rgba(16, 185, 129, 0.3);
+            }
+            .servers-line.after .mini-server.new {
+              animation: pulse-new 1.5s ease-in-out infinite;
+            }
+            @keyframes pulse-new {
+              0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+              50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            }
+            .horiz-arrow {
+              text-align: center;
+              color: #4b5563;
+              font-size: 1rem;
+            }
+            .horiz-label {
+              text-align: center;
+              font-size: 0.65rem;
+              color: #6b7280;
+            }
+            
+            /* Pros/Cons */
+            .scale-pros-cons {
+              display: flex;
+              gap: 16px;
+              font-size: 0.75rem;
+            }
+            .pro, .con {
+              display: flex;
+              align-items: center;
+              gap: 6px;
+            }
+            .pro { color: #10b981; }
+            .con { color: #ef4444; }
+            
+            /* Load Graph */
+            .load-section {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            .load-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .load-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #f59e0b;
+              border-radius: 50%;
+            }
+            .load-graph {
+              display: flex;
+              align-items: flex-end;
+              gap: 3px;
+              height: 80px;
+              padding: 10px;
+              background: rgba(15, 20, 30, 0.5);
+              border-radius: 8px;
+              margin-bottom: 12px;
+            }
+            .load-bar {
+              flex: 1;
+              background: linear-gradient(180deg, #10b981, #059669);
+              border-radius: 2px 2px 0 0;
+              min-height: 8px;
+              transition: height 0.3s ease;
+            }
+            .load-bar:nth-child(1) { height: 20%; }
+            .load-bar:nth-child(2) { height: 25%; }
+            .load-bar:nth-child(3) { height: 35%; }
+            .load-bar:nth-child(4) { height: 45%; }
+            .load-bar:nth-child(5) { height: 55%; }
+            .load-bar:nth-child(6) { height: 60%; }
+            .load-bar:nth-child(7) { height: 70%; }
+            .load-bar:nth-child(8) { height: 80%; background: linear-gradient(180deg, #f59e0b, #d97706); }
+            .load-bar:nth-child(9) { height: 90%; background: linear-gradient(180deg, #f59e0b, #d97706); }
+            .load-bar:nth-child(10) { height: 95%; background: linear-gradient(180deg, #ef4444, #dc2626); animation: loadPulse 1s ease-in-out infinite; }
+            .load-bar:nth-child(11) { height: 60%; background: linear-gradient(180deg, #10b981, #059669); }
+            .load-bar:nth-child(12) { height: 40%; background: linear-gradient(180deg, #10b981, #059669); }
+            .load-bar:nth-child(13) { height: 35%; }
+            .load-bar:nth-child(14) { height: 30%; }
+            .load-bar:nth-child(15) { height: 25%; }
+            @keyframes loadPulse {
+              0%, 100% { opacity: 0.8; }
+              50% { opacity: 1; }
+            }
+            .load-labels {
+              display: flex;
+              justify-content: space-between;
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+            .scale-event {
+              display: inline-flex;
+              align-items: center;
+              gap: 6px;
+              padding: 4px 10px;
+              background: rgba(16, 185, 129, 0.15);
+              border-radius: 20px;
+              font-size: 0.7rem;
+              color: #10b981;
+              margin-top: 10px;
+            }
+          </style>
+          
+          <div class="scalability-viz">
+            <!-- Horizontal vs Vertical Comparison -->
+            <div class="scale-comparison">
+              <!-- Vertical Scaling -->
+              <div class="scale-type vertical">
+                <div class="scale-header">
+                  <div class="scale-icon">↕️</div>
+                  <div>
+                    <div class="scale-title-text">Vertical Scaling</div>
+                    <div class="scale-subtitle">Scale Up — Add more power</div>
+                  </div>
+                </div>
+                <div class="vertical-demo">
+                  <div class="server-tower before">
+                    <div class="tower-box">4GB<br>2 CPU</div>
+                    <div class="tower-label">Before</div>
+                  </div>
+                  <div class="scale-arrow">→</div>
+                  <div class="server-tower after">
+                    <div class="tower-box">
+                      <div class="tower-stats">64GB</div>
+                      <div class="tower-stats">16 CPU</div>
+                      <div class="tower-stats">SSD</div>
+                    </div>
+                    <div class="tower-label">After</div>
+                  </div>
+                </div>
+                <div class="scale-pros-cons">
+                  <span class="pro">✓ Simple</span>
+                  <span class="con">✗ Has limits</span>
+                  <span class="con">✗ Single point</span>
+                </div>
+              </div>
+              
+              <!-- Horizontal Scaling -->
+              <div class="scale-type horizontal">
+                <div class="scale-header">
+                  <div class="scale-icon">↔️</div>
+                  <div>
+                    <div class="scale-title-text">Horizontal Scaling</div>
+                    <div class="scale-subtitle">Scale Out — Add more machines</div>
+                  </div>
+                </div>
+                <div class="horizontal-demo">
+                  <div class="horiz-label">2 instances</div>
+                  <div class="servers-line before">
+                    <div class="mini-server">🖥️</div>
+                    <div class="mini-server">🖥️</div>
+                  </div>
+                  <div class="horiz-arrow">↓ Auto-scale triggered ↓</div>
+                  <div class="horiz-label">5 instances</div>
+                  <div class="servers-line after">
+                    <div class="mini-server">🖥️</div>
+                    <div class="mini-server">🖥️</div>
+                    <div class="mini-server new">🖥️</div>
+                    <div class="mini-server new">🖥️</div>
+                    <div class="mini-server new">🖥️</div>
+                  </div>
+                </div>
+                <div class="scale-pros-cons">
+                  <span class="pro">✓ No limits</span>
+                  <span class="pro">✓ Redundant</span>
+                  <span class="con">✗ Complex</span>
+                </div>
+              </div>
             </div>
-            <div class="mind-map-nodes">
-              <div class="mind-node">Horizontal Scaling</div>
-              <div class="mind-node">Vertical Scaling</div>
-              <div class="mind-node">Sharding</div>
-              <div class="mind-node">Caching</div>
-              <div class="mind-node">CDN</div>
-              <div class="mind-node">Async Processing</div>
+            
+            <!-- Load Graph with Auto-scaling -->
+            <div class="load-section">
+              <div class="load-title">Traffic Spike & Auto-Scaling Response</div>
+              <div class="load-graph">
+                <div class="load-bar"></div>
+                <div class="load-bar"></div>
+                <div class="load-bar"></div>
+                <div class="load-bar"></div>
+                <div class="load-bar"></div>
+                <div class="load-bar"></div>
+                <div class="load-bar"></div>
+                <div class="load-bar"></div>
+                <div class="load-bar"></div>
+                <div class="load-bar"></div>
+                <div class="load-bar"></div>
+                <div class="load-bar"></div>
+                <div class="load-bar"></div>
+                <div class="load-bar"></div>
+                <div class="load-bar"></div>
+              </div>
+              <div class="load-labels">
+                <span>Normal load</span>
+                <span style="color: #ef4444;">← Peak (scale up) →</span>
+                <span>Scale down</span>
+              </div>
+              <div class="scale-event">
+                <span>📈</span> New instances provisioned in 45 seconds
+              </div>
             </div>
           </div>
         `,
@@ -1701,19 +2340,344 @@
         badge: { text: "Core Principle", color: "#06b6d4", bg: "rgba(6, 182, 212, 0.15)" },
         color: "#06b6d4",
         diagram: `
-          <div class="mind-map">
-            <div class="mind-map-center" style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white;">
-              <span style="font-size: 2rem;">🔧</span>
-              <span>Maintain</span>
-              <span style="font-size: 0.8rem; opacity: 0.8;">Easily</span>
+          <style>
+            .maintainability-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .maintain-row {
+              display: flex;
+              gap: 20px;
+            }
+            @media (max-width: 900px) {
+              .maintain-row { flex-direction: column; }
+            }
+            
+            /* Code Health Dashboard */
+            .code-health {
+              flex: 1.5;
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(6, 182, 212, 0.2);
+            }
+            .health-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .health-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #06b6d4;
+              border-radius: 50%;
+            }
+            .health-metrics {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 500px) {
+              .health-metrics { grid-template-columns: 1fr; }
+            }
+            .health-metric {
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              padding: 14px;
+              border: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            .health-metric-header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 8px;
+            }
+            .health-metric-name {
+              font-size: 0.75rem;
+              color: #a0a0b0;
+            }
+            .health-metric-value {
+              font-size: 0.9rem;
+              font-weight: 600;
+            }
+            .health-metric:nth-child(1) .health-metric-value { color: #10b981; }
+            .health-metric:nth-child(2) .health-metric-value { color: #3b82f6; }
+            .health-metric:nth-child(3) .health-metric-value { color: #8b5cf6; }
+            .health-metric:nth-child(4) .health-metric-value { color: #f59e0b; }
+            .health-bar {
+              height: 6px;
+              background: rgba(255, 255, 255, 0.1);
+              border-radius: 3px;
+              overflow: hidden;
+            }
+            .health-bar-fill {
+              height: 100%;
+              border-radius: 3px;
+              transition: width 1s ease;
+            }
+            .health-metric:nth-child(1) .health-bar-fill { width: 87%; background: #10b981; }
+            .health-metric:nth-child(2) .health-bar-fill { width: 92%; background: #3b82f6; }
+            .health-metric:nth-child(3) .health-bar-fill { width: 78%; background: #8b5cf6; }
+            .health-metric:nth-child(4) .health-bar-fill { width: 95%; background: #f59e0b; }
+            
+            /* Three Pillars */
+            .pillars-section {
+              flex: 1;
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(16, 185, 129, 0.2);
+            }
+            .pillars-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .pillars-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #10b981;
+              border-radius: 50%;
+            }
+            .pillar-stack {
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+            }
+            .pillar-item {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              padding: 12px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 8px;
+              border-left: 3px solid;
+            }
+            .pillar-item:nth-child(1) { border-color: #06b6d4; }
+            .pillar-item:nth-child(2) { border-color: #8b5cf6; }
+            .pillar-item:nth-child(3) { border-color: #10b981; }
+            .pillar-icon {
+              font-size: 1.3rem;
+            }
+            .pillar-content {
+              flex: 1;
+            }
+            .pillar-name {
+              font-weight: 500;
+              font-size: 0.9rem;
+              color: #e5e5e5;
+              margin-bottom: 2px;
+            }
+            .pillar-desc {
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+            
+            /* Tech Debt Visualization */
+            .debt-section {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            .debt-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .debt-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #f59e0b;
+              border-radius: 50%;
+            }
+            .debt-comparison {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 16px;
+            }
+            @media (max-width: 600px) {
+              .debt-comparison { grid-template-columns: 1fr; }
+            }
+            .debt-card {
+              padding: 16px;
+              border-radius: 10px;
+              text-align: center;
+            }
+            .debt-card.neglected {
+              background: rgba(239, 68, 68, 0.1);
+              border: 1px solid rgba(239, 68, 68, 0.3);
+            }
+            .debt-card.maintained {
+              background: rgba(16, 185, 129, 0.1);
+              border: 1px solid rgba(16, 185, 129, 0.3);
+            }
+            .debt-header {
+              font-size: 0.75rem;
+              font-weight: 500;
+              margin-bottom: 12px;
+            }
+            .debt-card.neglected .debt-header { color: #ef4444; }
+            .debt-card.maintained .debt-header { color: #10b981; }
+            .debt-graph {
+              display: flex;
+              align-items: flex-end;
+              justify-content: center;
+              gap: 4px;
+              height: 60px;
+              margin-bottom: 10px;
+            }
+            .debt-bar {
+              width: 16px;
+              border-radius: 2px 2px 0 0;
+              transition: height 0.5s ease;
+            }
+            .debt-card.neglected .debt-bar { background: #ef4444; }
+            .debt-card.maintained .debt-bar { background: #10b981; }
+            .debt-card.neglected .debt-bar:nth-child(1) { height: 20%; }
+            .debt-card.neglected .debt-bar:nth-child(2) { height: 35%; }
+            .debt-card.neglected .debt-bar:nth-child(3) { height: 50%; }
+            .debt-card.neglected .debt-bar:nth-child(4) { height: 70%; }
+            .debt-card.neglected .debt-bar:nth-child(5) { height: 95%; animation: debtPulse 1s ease-in-out infinite; }
+            .debt-card.maintained .debt-bar:nth-child(1) { height: 30%; }
+            .debt-card.maintained .debt-bar:nth-child(2) { height: 25%; }
+            .debt-card.maintained .debt-bar:nth-child(3) { height: 20%; }
+            .debt-card.maintained .debt-bar:nth-child(4) { height: 15%; }
+            .debt-card.maintained .debt-bar:nth-child(5) { height: 10%; }
+            @keyframes debtPulse {
+              0%, 100% { opacity: 0.7; }
+              50% { opacity: 1; }
+            }
+            .debt-label {
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+            .debt-impact {
+              margin-top: 8px;
+              font-size: 0.75rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 6px;
+            }
+            .debt-card.neglected .debt-impact { color: #ef4444; }
+            .debt-card.maintained .debt-impact { color: #10b981; }
+          </style>
+          
+          <div class="maintainability-viz">
+            <div class="maintain-row">
+              <!-- Code Health Dashboard -->
+              <div class="code-health">
+                <div class="health-title">Codebase Health Score</div>
+                <div class="health-metrics">
+                  <div class="health-metric">
+                    <div class="health-metric-header">
+                      <span class="health-metric-name">Test Coverage</span>
+                      <span class="health-metric-value">87%</span>
+                    </div>
+                    <div class="health-bar"><div class="health-bar-fill"></div></div>
+                  </div>
+                  <div class="health-metric">
+                    <div class="health-metric-header">
+                      <span class="health-metric-name">Documentation</span>
+                      <span class="health-metric-value">92%</span>
+                    </div>
+                    <div class="health-bar"><div class="health-bar-fill"></div></div>
+                  </div>
+                  <div class="health-metric">
+                    <div class="health-metric-header">
+                      <span class="health-metric-name">Code Complexity</span>
+                      <span class="health-metric-value">Low</span>
+                    </div>
+                    <div class="health-bar"><div class="health-bar-fill"></div></div>
+                  </div>
+                  <div class="health-metric">
+                    <div class="health-metric-header">
+                      <span class="health-metric-name">Modularity</span>
+                      <span class="health-metric-value">95%</span>
+                    </div>
+                    <div class="health-bar"><div class="health-bar-fill"></div></div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Three Pillars -->
+              <div class="pillars-section">
+                <div class="pillars-title">Three Pillars</div>
+                <div class="pillar-stack">
+                  <div class="pillar-item">
+                    <span class="pillar-icon">⚙️</span>
+                    <div class="pillar-content">
+                      <div class="pillar-name">Operability</div>
+                      <div class="pillar-desc">Easy to keep running smoothly</div>
+                    </div>
+                  </div>
+                  <div class="pillar-item">
+                    <span class="pillar-icon">🧩</span>
+                    <div class="pillar-content">
+                      <div class="pillar-name">Simplicity</div>
+                      <div class="pillar-desc">Easy to understand the codebase</div>
+                    </div>
+                  </div>
+                  <div class="pillar-item">
+                    <span class="pillar-icon">🌱</span>
+                    <div class="pillar-content">
+                      <div class="pillar-name">Evolvability</div>
+                      <div class="pillar-desc">Easy to add new features</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="mind-map-nodes">
-              <div class="mind-node">Clean Code</div>
-              <div class="mind-node">Documentation</div>
-              <div class="mind-node">Modularity</div>
-              <div class="mind-node">Testing</div>
-              <div class="mind-node">Observability</div>
-              <div class="mind-node">Automation</div>
+            
+            <!-- Technical Debt Over Time -->
+            <div class="debt-section">
+              <div class="debt-title">Technical Debt Over Time</div>
+              <div class="debt-comparison">
+                <div class="debt-card neglected">
+                  <div class="debt-header">🚨 Neglected Codebase</div>
+                  <div class="debt-graph">
+                    <div class="debt-bar"></div>
+                    <div class="debt-bar"></div>
+                    <div class="debt-bar"></div>
+                    <div class="debt-bar"></div>
+                    <div class="debt-bar"></div>
+                  </div>
+                  <div class="debt-label">Year 1 → Year 5</div>
+                  <div class="debt-impact">⬆️ Debt compounds exponentially</div>
+                </div>
+                <div class="debt-card maintained">
+                  <div class="debt-header">✨ Well-Maintained Codebase</div>
+                  <div class="debt-graph">
+                    <div class="debt-bar"></div>
+                    <div class="debt-bar"></div>
+                    <div class="debt-bar"></div>
+                    <div class="debt-bar"></div>
+                    <div class="debt-bar"></div>
+                  </div>
+                  <div class="debt-label">Year 1 → Year 5</div>
+                  <div class="debt-impact">⬇️ Continuous refactoring pays off</div>
+                </div>
+              </div>
             </div>
           </div>
         `,
@@ -1747,19 +2711,343 @@
         badge: { text: "Core Principle", color: "#ef4444", bg: "rgba(239, 68, 68, 0.15)" },
         color: "#ef4444",
         diagram: `
-          <div class="mind-map">
-            <div class="mind-map-center" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white;">
-              <span style="font-size: 2rem;">⚡</span>
-              <span>Fast</span>
-              <span style="font-size: 0.8rem; opacity: 0.8;"><100ms</span>
+          <style>
+            .performance-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .perf-row {
+              display: flex;
+              gap: 20px;
+            }
+            @media (max-width: 900px) {
+              .perf-row { flex-direction: column; }
+            }
+            
+            /* Latency Gauge */
+            .latency-gauge {
+              flex: 1;
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(239, 68, 68, 0.2);
+              text-align: center;
+            }
+            .gauge-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+            }
+            .gauge-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #ef4444;
+              border-radius: 50%;
+            }
+            .gauge-container {
+              position: relative;
+              width: 180px;
+              height: 100px;
+              margin: 0 auto 16px;
+            }
+            .gauge-bg {
+              position: absolute;
+              width: 180px;
+              height: 90px;
+              border-radius: 90px 90px 0 0;
+              background: conic-gradient(from 180deg at 50% 100%, 
+                #10b981 0deg, 
+                #10b981 60deg, 
+                #f59e0b 60deg, 
+                #f59e0b 120deg, 
+                #ef4444 120deg, 
+                #ef4444 180deg);
+              opacity: 0.3;
+            }
+            .gauge-fill {
+              position: absolute;
+              bottom: 0;
+              left: 50%;
+              width: 4px;
+              height: 70px;
+              background: linear-gradient(to top, #ef4444, #fff);
+              transform-origin: bottom center;
+              transform: translateX(-50%) rotate(-60deg);
+              border-radius: 2px;
+              animation: gaugeSwing 3s ease-in-out infinite;
+            }
+            @keyframes gaugeSwing {
+              0%, 100% { transform: translateX(-50%) rotate(-60deg); }
+              50% { transform: translateX(-50%) rotate(-45deg); }
+            }
+            .gauge-center {
+              position: absolute;
+              bottom: -5px;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 16px;
+              height: 16px;
+              background: #1a1f2e;
+              border: 3px solid #ef4444;
+              border-radius: 50%;
+            }
+            .gauge-labels {
+              display: flex;
+              justify-content: space-between;
+              font-size: 0.65rem;
+              color: #6b7280;
+              margin-top: 8px;
+            }
+            .gauge-value {
+              font-size: 2rem;
+              font-weight: 700;
+              color: #10b981;
+            }
+            .gauge-unit {
+              font-size: 0.9rem;
+              color: #6b7280;
+            }
+            .gauge-status {
+              font-size: 0.75rem;
+              color: #10b981;
+              margin-top: 4px;
+            }
+            
+            /* Percentile Distribution */
+            .percentile-section {
+              flex: 1.5;
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(59, 130, 246, 0.2);
+            }
+            .percentile-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .percentile-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #3b82f6;
+              border-radius: 50%;
+            }
+            .percentile-bars {
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+            }
+            .percentile-row {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+            }
+            .percentile-label {
+              width: 50px;
+              font-size: 0.8rem;
+              font-weight: 500;
+              text-align: right;
+            }
+            .p50-label { color: #10b981; }
+            .p90-label { color: #3b82f6; }
+            .p95-label { color: #8b5cf6; }
+            .p99-label { color: #f59e0b; }
+            .p999-label { color: #ef4444; }
+            .percentile-bar-bg {
+              flex: 1;
+              height: 24px;
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 4px;
+              overflow: hidden;
+              position: relative;
+            }
+            .percentile-bar-fill {
+              height: 100%;
+              border-radius: 4px;
+              display: flex;
+              align-items: center;
+              padding-left: 10px;
+              font-size: 0.7rem;
+              font-weight: 500;
+              color: rgba(255,255,255,0.9);
+              transition: width 1s ease;
+            }
+            .p50-bar { width: 15%; background: linear-gradient(90deg, #10b981, #059669); }
+            .p90-bar { width: 35%; background: linear-gradient(90deg, #3b82f6, #2563eb); }
+            .p95-bar { width: 50%; background: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+            .p99-bar { width: 75%; background: linear-gradient(90deg, #f59e0b, #d97706); }
+            .p999-bar { width: 100%; background: linear-gradient(90deg, #ef4444, #dc2626); }
+            .percentile-value {
+              width: 60px;
+              font-size: 0.8rem;
+              color: #a0a0b0;
+            }
+            
+            /* Throughput Stats */
+            .throughput-section {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(16, 185, 129, 0.2);
+            }
+            .throughput-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .throughput-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #10b981;
+              border-radius: 50%;
+            }
+            .throughput-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 16px;
+            }
+            @media (max-width: 700px) {
+              .throughput-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .throughput-stat {
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              padding: 16px;
+              text-align: center;
+              border: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            .throughput-value {
+              font-size: 1.5rem;
+              font-weight: 700;
+              margin-bottom: 4px;
+            }
+            .throughput-stat:nth-child(1) .throughput-value { color: #10b981; }
+            .throughput-stat:nth-child(2) .throughput-value { color: #3b82f6; }
+            .throughput-stat:nth-child(3) .throughput-value { color: #8b5cf6; }
+            .throughput-stat:nth-child(4) .throughput-value { color: #f59e0b; }
+            .throughput-label {
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+            .throughput-trend {
+              font-size: 0.65rem;
+              margin-top: 6px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 4px;
+            }
+            .trend-up { color: #10b981; }
+            .trend-stable { color: #6b7280; }
+          </style>
+          
+          <div class="performance-viz">
+            <div class="perf-row">
+              <!-- Response Time Gauge -->
+              <div class="latency-gauge">
+                <div class="gauge-title">Response Time</div>
+                <div class="gauge-container">
+                  <div class="gauge-bg"></div>
+                  <div class="gauge-fill"></div>
+                  <div class="gauge-center"></div>
+                </div>
+                <div class="gauge-labels">
+                  <span style="color: #10b981;">Fast</span>
+                  <span style="color: #f59e0b;">Medium</span>
+                  <span style="color: #ef4444;">Slow</span>
+                </div>
+                <div class="gauge-value">42<span class="gauge-unit">ms</span></div>
+                <div class="gauge-status">✓ Excellent Performance</div>
+              </div>
+              
+              <!-- Latency Percentiles -->
+              <div class="percentile-section">
+                <div class="percentile-title">Latency Distribution (Percentiles)</div>
+                <div class="percentile-bars">
+                  <div class="percentile-row">
+                    <span class="percentile-label p50-label">P50</span>
+                    <div class="percentile-bar-bg">
+                      <div class="percentile-bar-fill p50-bar">12ms</div>
+                    </div>
+                    <span class="percentile-value">Median</span>
+                  </div>
+                  <div class="percentile-row">
+                    <span class="percentile-label p90-label">P90</span>
+                    <div class="percentile-bar-bg">
+                      <div class="percentile-bar-fill p90-bar">45ms</div>
+                    </div>
+                    <span class="percentile-value">Most users</span>
+                  </div>
+                  <div class="percentile-row">
+                    <span class="percentile-label p95-label">P95</span>
+                    <div class="percentile-bar-bg">
+                      <div class="percentile-bar-fill p95-bar">78ms</div>
+                    </div>
+                    <span class="percentile-value">Typical SLA</span>
+                  </div>
+                  <div class="percentile-row">
+                    <span class="percentile-label p99-label">P99</span>
+                    <div class="percentile-bar-bg">
+                      <div class="percentile-bar-fill p99-bar">156ms</div>
+                    </div>
+                    <span class="percentile-value">Outliers</span>
+                  </div>
+                  <div class="percentile-row">
+                    <span class="percentile-label p999-label">P99.9</span>
+                    <div class="percentile-bar-bg">
+                      <div class="percentile-bar-fill p999-bar">420ms</div>
+                    </div>
+                    <span class="percentile-value">Worst case</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="mind-map-nodes">
-              <div class="mind-node">Latency</div>
-              <div class="mind-node">Throughput</div>
-              <div class="mind-node">Optimization</div>
-              <div class="mind-node">Caching</div>
-              <div class="mind-node">Indexing</div>
-              <div class="mind-node">Profiling</div>
+            
+            <!-- Throughput Metrics -->
+            <div class="throughput-section">
+              <div class="throughput-title">Real-Time Throughput Metrics</div>
+              <div class="throughput-grid">
+                <div class="throughput-stat">
+                  <div class="throughput-value">12.5K</div>
+                  <div class="throughput-label">Requests/sec</div>
+                  <div class="throughput-trend trend-up">↑ 8% from avg</div>
+                </div>
+                <div class="throughput-stat">
+                  <div class="throughput-value">99.2%</div>
+                  <div class="throughput-label">Success Rate</div>
+                  <div class="throughput-trend trend-stable">→ Stable</div>
+                </div>
+                <div class="throughput-stat">
+                  <div class="throughput-value">2.1</div>
+                  <div class="throughput-label">Apdex Score</div>
+                  <div class="throughput-trend trend-up">↑ Excellent</div>
+                </div>
+                <div class="throughput-stat">
+                  <div class="throughput-value">34%</div>
+                  <div class="throughput-label">CPU Usage</div>
+                  <div class="throughput-trend trend-stable">→ Optimal</div>
+                </div>
+              </div>
             </div>
           </div>
         `,
@@ -1793,19 +3081,372 @@
         badge: { text: "Core Principle", color: "#dc2626", bg: "rgba(220, 38, 38, 0.15)" },
         color: "#dc2626",
         diagram: `
-          <div class="mind-map">
-            <div class="mind-map-center" style="background: linear-gradient(135deg, #dc2626, #991b1b); color: white;">
-              <span style="font-size: 2rem;">🔒</span>
-              <span>Secure</span>
-              <span style="font-size: 0.8rem; opacity: 0.8;">Defense</span>
+          <style>
+            .security-viz {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+            }
+            .security-row {
+              display: flex;
+              gap: 20px;
+            }
+            @media (max-width: 900px) {
+              .security-row { flex-direction: column; }
+            }
+            
+            /* Defense in Depth */
+            .defense-layers {
+              flex: 1.5;
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(220, 38, 38, 0.2);
+            }
+            .defense-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .defense-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #dc2626;
+              border-radius: 50%;
+            }
+            .layers-container {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 6px;
+            }
+            .defense-layer {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 10px;
+              padding: 10px 20px;
+              border-radius: 30px;
+              font-size: 0.8rem;
+              font-weight: 500;
+              transition: all 0.3s ease;
+              border: 1px solid;
+            }
+            .defense-layer:hover {
+              transform: scale(1.02);
+            }
+            .layer-1 {
+              width: 95%;
+              background: rgba(239, 68, 68, 0.1);
+              border-color: rgba(239, 68, 68, 0.3);
+              color: #f87171;
+            }
+            .layer-2 {
+              width: 82%;
+              background: rgba(245, 158, 11, 0.1);
+              border-color: rgba(245, 158, 11, 0.3);
+              color: #fbbf24;
+            }
+            .layer-3 {
+              width: 69%;
+              background: rgba(139, 92, 246, 0.1);
+              border-color: rgba(139, 92, 246, 0.3);
+              color: #a78bfa;
+            }
+            .layer-4 {
+              width: 56%;
+              background: rgba(59, 130, 246, 0.1);
+              border-color: rgba(59, 130, 246, 0.3);
+              color: #60a5fa;
+            }
+            .layer-5 {
+              width: 43%;
+              background: rgba(16, 185, 129, 0.1);
+              border-color: rgba(16, 185, 129, 0.3);
+              color: #34d399;
+            }
+            .layer-core {
+              width: 30%;
+              background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(6, 182, 212, 0.3));
+              border-color: rgba(16, 185, 129, 0.5);
+              color: #10b981;
+              font-weight: 600;
+            }
+            .layer-icon {
+              font-size: 1rem;
+            }
+            .attacker-label {
+              font-size: 0.65rem;
+              color: #ef4444;
+              text-align: center;
+              margin-top: 8px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 6px;
+            }
+            
+            /* CIA Triad */
+            .cia-section {
+              flex: 1;
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(59, 130, 246, 0.2);
+            }
+            .cia-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .cia-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #3b82f6;
+              border-radius: 50%;
+            }
+            .cia-triangle {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 12px;
+            }
+            .cia-item {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              padding: 12px 16px;
+              border-radius: 10px;
+              width: 100%;
+              border: 1px solid;
+            }
+            .cia-c {
+              background: rgba(59, 130, 246, 0.1);
+              border-color: rgba(59, 130, 246, 0.3);
+            }
+            .cia-i {
+              background: rgba(16, 185, 129, 0.1);
+              border-color: rgba(16, 185, 129, 0.3);
+            }
+            .cia-a {
+              background: rgba(139, 92, 246, 0.1);
+              border-color: rgba(139, 92, 246, 0.3);
+            }
+            .cia-icon {
+              font-size: 1.5rem;
+            }
+            .cia-content {
+              flex: 1;
+            }
+            .cia-name {
+              font-weight: 600;
+              font-size: 0.9rem;
+              margin-bottom: 2px;
+            }
+            .cia-c .cia-name { color: #3b82f6; }
+            .cia-i .cia-name { color: #10b981; }
+            .cia-a .cia-name { color: #8b5cf6; }
+            .cia-desc {
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+            
+            /* Threat Landscape */
+            .threat-section {
+              background: linear-gradient(145deg, rgba(20, 25, 40, 0.8), rgba(15, 20, 35, 0.9));
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            .threat-title {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #6b7280;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .threat-title::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: #f59e0b;
+              border-radius: 50%;
+            }
+            .threat-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
+            }
+            @media (max-width: 700px) {
+              .threat-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            .threat-card {
+              background: rgba(30, 35, 50, 0.6);
+              border-radius: 10px;
+              padding: 14px;
+              text-align: center;
+              border: 1px solid rgba(255, 255, 255, 0.05);
+              transition: all 0.3s ease;
+            }
+            .threat-card:hover {
+              border-color: rgba(239, 68, 68, 0.3);
+              transform: translateY(-2px);
+            }
+            .threat-icon {
+              font-size: 1.5rem;
+              margin-bottom: 8px;
+            }
+            .threat-name {
+              font-size: 0.75rem;
+              font-weight: 500;
+              color: #e5e5e5;
+              margin-bottom: 4px;
+            }
+            .threat-severity {
+              font-size: 0.65rem;
+              padding: 2px 8px;
+              border-radius: 10px;
+              display: inline-block;
+            }
+            .severity-critical {
+              background: rgba(239, 68, 68, 0.2);
+              color: #f87171;
+            }
+            .severity-high {
+              background: rgba(245, 158, 11, 0.2);
+              color: #fbbf24;
+            }
+            .severity-medium {
+              background: rgba(59, 130, 246, 0.2);
+              color: #60a5fa;
+            }
+          </style>
+          
+          <div class="security-viz">
+            <div class="security-row">
+              <!-- Defense in Depth Layers -->
+              <div class="defense-layers">
+                <div class="defense-title">Defense in Depth</div>
+                <div class="layers-container">
+                  <div class="defense-layer layer-1">
+                    <span class="layer-icon">🌐</span>
+                    <span>Perimeter Security (Firewall, WAF, DDoS Protection)</span>
+                  </div>
+                  <div class="defense-layer layer-2">
+                    <span class="layer-icon">🔐</span>
+                    <span>Network Security (VPN, Segmentation)</span>
+                  </div>
+                  <div class="defense-layer layer-3">
+                    <span class="layer-icon">🔑</span>
+                    <span>Authentication & Authorization</span>
+                  </div>
+                  <div class="defense-layer layer-4">
+                    <span class="layer-icon">🛡️</span>
+                    <span>Application Security</span>
+                  </div>
+                  <div class="defense-layer layer-5">
+                    <span class="layer-icon">🔒</span>
+                    <span>Data Encryption</span>
+                  </div>
+                  <div class="defense-layer layer-core">
+                    <span class="layer-icon">💎</span>
+                    <span>Protected Data</span>
+                  </div>
+                </div>
+                <div class="attacker-label">
+                  <span>☠️</span> Attackers must breach multiple layers
+                </div>
+              </div>
+              
+              <!-- CIA Triad -->
+              <div class="cia-section">
+                <div class="cia-title">CIA Triad</div>
+                <div class="cia-triangle">
+                  <div class="cia-item cia-c">
+                    <span class="cia-icon">🔏</span>
+                    <div class="cia-content">
+                      <div class="cia-name">Confidentiality</div>
+                      <div class="cia-desc">Data accessible only to authorized users</div>
+                    </div>
+                  </div>
+                  <div class="cia-item cia-i">
+                    <span class="cia-icon">✅</span>
+                    <div class="cia-content">
+                      <div class="cia-name">Integrity</div>
+                      <div class="cia-desc">Data is accurate and unaltered</div>
+                    </div>
+                  </div>
+                  <div class="cia-item cia-a">
+                    <span class="cia-icon">⚡</span>
+                    <div class="cia-content">
+                      <div class="cia-name">Availability</div>
+                      <div class="cia-desc">Systems accessible when needed</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="mind-map-nodes">
-              <div class="mind-node">Authentication</div>
-              <div class="mind-node">Authorization</div>
-              <div class="mind-node">Encryption</div>
-              <div class="mind-node">Input Validation</div>
-              <div class="mind-node">Audit Logging</div>
-              <div class="mind-node">Zero Trust</div>
+            
+            <!-- Common Threats -->
+            <div class="threat-section">
+              <div class="threat-title">Common Security Threats (OWASP)</div>
+              <div class="threat-grid">
+                <div class="threat-card">
+                  <div class="threat-icon">💉</div>
+                  <div class="threat-name">Injection</div>
+                  <div class="threat-severity severity-critical">Critical</div>
+                </div>
+                <div class="threat-card">
+                  <div class="threat-icon">🔓</div>
+                  <div class="threat-name">Broken Auth</div>
+                  <div class="threat-severity severity-critical">Critical</div>
+                </div>
+                <div class="threat-card">
+                  <div class="threat-icon">📋</div>
+                  <div class="threat-name">Data Exposure</div>
+                  <div class="threat-severity severity-high">High</div>
+                </div>
+                <div class="threat-card">
+                  <div class="threat-icon">🕷️</div>
+                  <div class="threat-name">XSS Attack</div>
+                  <div class="threat-severity severity-high">High</div>
+                </div>
+                <div class="threat-card">
+                  <div class="threat-icon">⚙️</div>
+                  <div class="threat-name">Misconfig</div>
+                  <div class="threat-severity severity-medium">Medium</div>
+                </div>
+                <div class="threat-card">
+                  <div class="threat-icon">📦</div>
+                  <div class="threat-name">Vuln. Components</div>
+                  <div class="threat-severity severity-high">High</div>
+                </div>
+                <div class="threat-card">
+                  <div class="threat-icon">📝</div>
+                  <div class="threat-name">Logging Gaps</div>
+                  <div class="threat-severity severity-medium">Medium</div>
+                </div>
+                <div class="threat-card">
+                  <div class="threat-icon">🔗</div>
+                  <div class="threat-name">SSRF</div>
+                  <div class="threat-severity severity-high">High</div>
+                </div>
+              </div>
             </div>
           </div>
         `,
