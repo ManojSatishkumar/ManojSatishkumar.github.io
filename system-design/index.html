@@ -17703,6 +17703,9 @@ for user john@example.com</div>
       const concept = concepts[conceptId];
       if (!concept) return;
 
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
       // Update active states
       document.querySelectorAll('.concept-item').forEach(item => item.classList.remove('active'));
       document.querySelector(`[data-concept="${conceptId}"]`).classList.add('active');
