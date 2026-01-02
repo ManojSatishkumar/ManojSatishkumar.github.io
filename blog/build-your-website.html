@@ -48,316 +48,828 @@
         "mainEntityOfPage": "https://manojsatishkumar.com/blog/build-your-website.html"
     }
     </script>
-    <meta content="build portfolio, portfolio website, build my CV online" name="keywords" />
-    <meta content="Step by step procedure to build your online portfolio website" />
-    <meta property="og:title" content="Build your online portfolio website">
-    <meta property="og:description" content="Step by step procedure to build your online portfolio website">
-    <meta property="og:image" content="/images/blogs/build-your-website.jpg" />
-    <meta property='article:author' content='https://manojsatishkumar.com/' />
-    <meta property='article:publisher' content='https://manojsatishkumar.com/' />
-    <meta property='og:site_name' content='manojsatishkumar.com' />
-    <meta property='og:type' content='article' />
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-128563001-5');
-    </script>
-    <link href="/css/style.css" rel="stylesheet" />
-    <link href="/css/responsive.css" rel="stylesheet" />
+    
     <!-- Favicon -->
     <link rel="shortcut icon" href="/images/favicon.png" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    
+    <!-- Bootstrap -->
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
     <style>
-        .article-feed-ad {
-            padding: 20px
+        :root {
+            --color-bg: #faf9f7;
+            --color-surface: #ffffff;
+            --color-text: #1a1a2e;
+            --color-text-muted: #64748b;
+            --color-accent: #0ea5e9;
+            --color-accent-hover: #0284c7;
+            --color-border: #e2e8f0;
+            --color-highlight: #fef3c7;
+            --font-serif: 'Crimson Pro', Georgia, serif;
+            --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
         }
 
-        .vertical-ad-banner {
-            padding: 20px
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* Desktop */
-        @media only screen and (min-width: 1024px) {
-            #article-wrapper {
-                padding-left: 50px;
-                padding-right: 50px;
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation Spacer */
+        .nav-spacer {
+            height: 80px;
+        }
+
+        /* Main Layout */
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* Author Sidebar */
+        .author-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .author-card {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-border);
+        }
+
+        .author-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 16px;
+            display: block;
+            border: 3px solid var(--color-border);
+        }
+
+        .author-name {
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .author-title {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .author-company {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .author-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 16px 0;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 16px;
+        }
+
+        .author-stat {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        .author-stat i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .author-stat.highlight {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(14, 165, 233, 0.05));
+            padding: 8px 10px;
+            border-radius: var(--radius-sm);
+            margin: 0 -10px;
+        }
+
+        .author-stat.highlight a {
+            color: var(--color-accent);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .author-social {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .author-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.9rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .author-social a:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .author-social .linkedin { background: #0077b5; }
+        .author-social .youtube { background: #ff0000; }
+        .author-social .twitter { background: #1da1f2; }
+        .author-social .github { background: #333; }
+        .author-social .email { background: #10b981; }
+
+        /* Article Content */
+        .article-container {
+            min-width: 0;
+        }
+
+        .article-content {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-border);
+            overflow: hidden;
+        }
+
+        .article-hero {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .article-body {
+            padding: 40px;
+        }
+
+        .article-header {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .article-category {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-accent);
+            background: rgba(14, 165, 233, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+
+        .article-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: var(--color-text);
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        .article-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Article Prose */
+        .article-prose {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            line-height: 1.85;
+            color: var(--color-text);
+        }
+
+        .article-prose p {
+            margin-bottom: 1.5em;
+        }
+
+        .article-prose strong {
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .article-prose em {
+            font-style: italic;
+        }
+
+        .article-prose a {
+            color: var(--color-accent);
+            text-decoration: underline;
+            text-decoration-color: rgba(14, 165, 233, 0.3);
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.2s;
+        }
+
+        .article-prose a:hover {
+            text-decoration-color: var(--color-accent);
+        }
+
+        .article-prose h4 {
+            font-family: var(--font-sans);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2em 0 1em;
+            color: var(--color-text);
+        }
+
+        .article-prose ol {
+            margin: 1.5em 0;
+            padding-left: 0;
+            counter-reset: step-counter;
+            list-style: none;
+        }
+
+        .article-prose ol li {
+            position: relative;
+            padding-left: 3.5rem;
+            margin-bottom: 1.5em;
+            counter-increment: step-counter;
+        }
+
+        .article-prose ol li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2.25rem;
+            height: 2.25rem;
+            background: linear-gradient(135deg, var(--color-accent) 0%, #0284c7 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .article-prose .highlight-box {
+            background: var(--color-highlight);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5em;
+            margin: 2em 0;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-style: italic;
+        }
+
+        .article-prose .conclusion {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(14, 165, 233, 0.02) 100%);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            padding: 2em;
+            border-radius: var(--radius-md);
+            margin-top: 2em;
+        }
+
+        /* Share Strip */
+        .share-strip {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .share-strip-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-text-muted);
+        }
+
+        .share-strip a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-bg);
+            color: var(--color-text-muted);
+            transition: all 0.2s;
+            border: 1px solid var(--color-border);
+        }
+
+        .share-strip a:hover {
+            background: var(--color-accent);
+            color: white;
+            border-color: var(--color-accent);
+        }
+
+        /* Mobile Author Card (Collapsible) */
+        .mobile-author {
+            display: none;
+            background: var(--color-surface);
+            border-radius: var(--radius-md);
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border);
+            overflow: hidden;
+        }
+
+        .mobile-author-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .mobile-author-header:hover {
+            background: var(--color-bg);
+        }
+
+        .mobile-author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .mobile-author-info {
+            flex: 1;
+        }
+
+        .mobile-author-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .mobile-author-title {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+        }
+
+        .mobile-author-toggle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--color-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .mobile-author.expanded .mobile-author-toggle {
+            transform: rotate(180deg);
+        }
+
+        .mobile-author-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .mobile-author.expanded .mobile-author-details {
+            max-height: 400px;
+        }
+
+        .mobile-author-details-inner {
+            padding: 0 16px 16px;
+        }
+
+        .mobile-author-social {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .mobile-author-social a {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 900px) {
+            .blog-layout {
+                grid-template-columns: 1fr;
+                padding: 20px 16px;
+                gap: 0;
             }
-        }
 
-        /* mobile */
-        @media only screen and (max-width: 1024px) {
-            .vertical-ad-banner {
+            .author-sidebar {
                 display: none;
             }
 
-            #article-wrapper {
-                padding-left: 20px;
-                padding-right: 20px;
+            .mobile-author {
+                display: block;
             }
 
-            #all-articles-list {
-                display: none;
+            .nav-spacer {
+                height: 60px;
             }
+
+            .article-body {
+                padding: 24px;
+            }
+
+            .article-title {
+                font-size: 1.75rem;
+            }
+
+            .article-prose {
+                font-size: 1.1rem;
+            }
+
+            .article-prose ol li {
+                padding-left: 3rem;
+            }
+
+            .article-prose ol li::before {
+                width: 2rem;
+                height: 2rem;
+                font-size: 0.8rem;
+            }
+
+            .article-meta {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .article-body {
+                padding: 20px 16px;
+            }
+
+            .article-title {
+                font-size: 1.5rem;
+            }
+
+            .article-prose {
+                font-size: 1rem;
+            }
+
+            .share-strip {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .article-content {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .author-card {
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        /* Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-accent), #6366f1);
+            z-index: 9999;
+            transition: width 0.1s;
+        }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            z-index: 100;
+            border: none;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-4px);
+            background: var(--color-accent-hover);
         }
     </style>
 </head>
 
 <body>
-    <div id="blog" class="text-left">
-        <div style="margin-bottom: 100px;" id="desktop-nav-bar">
-        </div>
-    </div>
-    <div id="article-wrapper">
-        <div class="journal-block">
-            <div class="row">
-                <div class="col-lg-3 col-md-3">
-                    <div id="side-profile">
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="reading-progress"></div>
+
+    <!-- Navigation -->
+    <div id="desktop-nav-bar"></div>
+    
+    <div class="nav-spacer"></div>
+
+    <!-- Main Blog Layout -->
+    <div class="blog-layout">
+        <!-- Author Sidebar (Desktop) -->
+        <aside class="author-sidebar">
+            <div class="author-card">
+                <img src="/images/me_square.png" alt="Manoj Satishkumar" class="author-avatar">
+                <h3 class="author-name">Manoj Satishkumar</h3>
+                <p class="author-title">Staff Software Engineer</p>
+                <p class="author-company">🏢 Walmart Global Tech</p>
+                
+                <div class="author-stats">
+                    <div class="author-stat">
+                        <i class="fas fa-briefcase" style="color: #17a2b8;"></i>
+                        <span>12+ Years in Frontend</span>
+                    </div>
+                    <div class="author-stat highlight">
+                        <i class="fas fa-layer-group" style="color: #6c63ff;"></i>
+                        <a href="/system-design/">System Design Expert</a>
+                    </div>
+                    <div class="author-stat">
+                        <i class="fas fa-code" style="color: #ff9800;"></i>
+                        <span>Web Development</span>
+                    </div>
+                    <div class="author-stat">
+                        <i class="fas fa-users" style="color: #e83e8c;"></i>
+                        <span>68K+ LinkedIn Followers</span>
+                    </div>
+                    <div class="author-stat">
+                        <i class="fas fa-chalkboard-teacher" style="color: #a435f0;"></i>
+                        <span>17K+ Udemy Students</span>
+                    </div>
+                    <div class="author-stat">
+                        <i class="fas fa-map-marker-alt" style="color: #007bff;"></i>
+                        <span>Bengaluru, India</span>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                    <h2>
-                        Let's build your online portfolio website
-                    </h2>
-                    <div style="margin-top: 10px;">Written by <a href="https://manojsatishkumar.com/">Manoj
-                            Satish Kumar</a></div>
-                    <hr />
-                    <img style="width: 100%; margin-top: 20px; margin-bottom: 30px; border: 2px solid gray "
-                        src="/images/blogs/build-your-website.jpg" />
-                    <div class="row ">
-                        <div style="font-size: 20px;" class="container">
-                            <p class="p1" style="font-family: helvetica; font-size: large; color: black">If you don't
-                                have an <strong>online portfolio website</strong> yet, <strong>now</strong>
-                                is the time to create one.</p>
-                            <p class="p1" style="font-family: helvetica; font-size: large; color: black">Trust me, your
-                                <strong>portfolio</strong> <strong>website</strong> will play a
-                                <strong>major role </strong>in your career advancement and to bring <strong>new
-                                    opportunities </strong>to you. In this world where there are tons of software
-                                engineers graduating from colleges, it can become <strong>hard</strong> for the
-                                companies to reach out to the ones who really fit the roles and perform
-                                responsibilities.
-                            </p>
-                            <p class="p1" style="font-family: helvetica; font-size: large; color: black"><em>So you must
-                                </em><strong><em>separate</em></strong><em> yourself from the crowd and
-                                    be </em><strong><em>unique</em></strong><em>.</em></p>
-                            <p class="p1" style="font-family: helvetica; font-size: large; color: black">This is my
-                                <strong>personal experience</strong>. I did not have an online portfolio
-                                website in the<strong> starting stages</strong> of my career and I did not get many
-                                interview calls. But after I&nbsp;made it and deployed it, I&nbsp;was
-                                <strong>surprised</strong> at how many HRs thought I will <strong>fit a role</strong> in
-                                their company.
-                            </p>
-                            <p class="p1" style="font-family: helvetica; font-size: large; color: black"><strong><em>If
-                                        it has worked for me, it will work for you too.</em></strong></p>
-                            <p class="p1" style="font-family: helvetica; font-size: large; color: black"><br></p>
-                            <p class="p1" style="font-family: helvetica; font-size: large; color: black"><br></p>
-                            <h4><strong>Let's get started:</strong></h4>
-                            <p class="p1" style="font-family: helvetica; font-size: large; color: black"><br></p>
-                            <ol>
-                                <li>
-                                    <p class="p1" style="font-family: helvetica; font-size: large; color: black">Goto my
-                                        <a href="https://manojsatishkumar.com/" target="_blank"
-                                            rel="noopener noreferrer"><strong>Portfolio website</strong></a> and have a
-                                        birds-eye view of all the sections &amp; details I have put there.
-                                    </p>
-                                </li>
-                                <li>
-                                    <p class="p1" style="font-family: helvetica; font-size: large; color: black">Visit
-                                        the <a href="https://in.godaddy.com/" target="_blank"
-                                            rel="noopener noreferrer"><strong>Godaddy website</strong></a> and buy a
-                                        custom domain that matches your name. You can find YouTube tutorials that can
-                                        help you with this step.</p>
-                                </li>
-                                <li>
-                                    <p class="p1" style="font-family: helvetica; font-size: large; color: black">Signup
-                                        to <a href="https://github.com/" target="_blank"
-                                            rel="noopener noreferrer"><strong>Github</strong></a><strong> </strong>and
-                                        create your portfolio website code repository with plain HTML, CSS and JS. You
-                                        can refer to the <a
-                                            href="https://github.com/ManojSatishkumar/ManojSatishkumar.github.io"
-                                            target="_blank" rel="noopener noreferrer"><strong>source code</strong></a>
-                                        of my portfolio if you want. It is publicly available.</p>
-                                </li>
-                                <li>
-                                    <p class="p1" style="font-family: helvetica; font-size: large; color: black">Enable
-                                        <a href="https://pages.github.com/" target="_blank"
-                                            rel="noopener noreferrer"><strong>GitHub Pages</strong></a> in your
-                                        repository settings and set up your DNS server records in
-                                        <strong>Godaddy</strong> to point to your git repo. Read<strong> </strong><a
-                                            href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site"
-                                            target="_blank" rel="noopener noreferrer"><strong>this
-                                                documentation</strong></a><strong> </strong>from Github. You can also
-                                        watch my<strong> </strong><a
-                                            href="https://youtu.be/1cyKbLapc10?list=PLyYcl2GkJ13hyfUfkyitPobPbpOS5Dnon"
-                                            target="_blank" rel="noopener noreferrer"><strong>Youtube video
-                                            </strong></a>for reference.
-                                    </p>
-                                </li>
-                                <li>
-                                    <p class="p1" style="font-family: helvetica; font-size: large; color: black">Make
-                                        sure you enable <a href="https://en.wikipedia.org/wiki/HTTPS" target="_blank"
-                                            rel="noopener noreferrer"><strong>https://</strong></a><strong> </strong>on
-                                        your website. This is necessary because the recruiters and interviewers will try
-                                        to check your portfolio website on their<strong> office provided
-                                            laptops</strong>. If your website is missing <a
-                                            href="https://www.kaspersky.com/resource-center/definitions/what-is-a-ssl-certificate"
-                                            target="_blank" rel="noopener noreferrer"><strong>SSL
-                                                Certificate</strong></a>, it will be blocked in their <a
-                                            href="https://en.wikipedia.org/wiki/Virtual_private_network" target="_blank"
-                                            rel="noopener noreferrer"><strong>VPN</strong></a>.</p>
-                                </li>
-                                <li>
-                                    <p class="p1" style="font-family: helvetica; font-size: large; color: black">Ask
-                                        some of your colleagues to give you <a
-                                            href="https://www.linkedin.com/help/linkedin/answer/90/recommendations-overview?lang=en"
-                                            target="_blank"
-                                            rel="noopener noreferrer"><strong>Recommendations</strong></a> and <a
-                                            href="https://www.linkedin.com/help/linkedin/answer/31888/skill-endorsements-overview?lang=en"
-                                            target="_blank" rel="noopener noreferrer"><strong>Skill
-                                                endorsements</strong></a><strong> </strong>on Linkedin. They act as
-                                        <strong>social proof</strong> that what you have put on your<strong> </strong><a
-                                            href="https://in.indeed.com/career-advice/resumes-cover-letters/what-is-a-cv"
-                                            target="_blank" rel="noopener noreferrer"><strong>CV</strong></a> is
-                                        probably <strong>legitimate</strong> information.
-                                    </p>
-                                </li>
-                                <li>
-                                    <p class="p1" style="font-family: helvetica; font-size: large; color: black">On the
-                                        <strong>homepage</strong> of your portfolio, add links to all the
-                                        <strong>social media</strong> profiles. <a href="https://linkedin.com/"
-                                            target="_blank" rel="noopener noreferrer"><strong>LinkedIn</strong></a>
-                                        should be the <strong>first link</strong> in that list. The HRs should be
-                                        <strong>encouraged</strong> to click on your LinkedIn profile when they visit
-                                        your website. On the other hand, make sure you add your <strong>website
-                                            link</strong> to <a
-                                            href="https://www.linkedin.com/help/linkedin/answer/117363/featured-section-on-your-profile-faqs?lang=en"
-                                            target="_blank" rel="noopener noreferrer"><strong>LinkedIn's featured
-                                                section</strong></a>. With these <strong>connected links</strong>, you
-                                        will navigate the HR recruiter to different places online and generate
-                                        <strong>curiosity</strong> in you and they will<strong> feel like</strong>
-                                        giving you a phone call for further discussion. You can always refer to <a
-                                            href="https://www.linkedin.com/in/manojsatishkumar/" target="_blank"
-                                            rel="noopener noreferrer"><strong>My LinkedIn profile</strong></a> for
-                                        reference. Stay active on Linkedin.
-                                    </p>
-                                </li>
-                                <li>
-                                    <p class="p1" style="font-family: helvetica; font-size: large; color: black">Update
-                                        your <a
-                                            href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme"
-                                            target="_blank" rel="noopener noreferrer"><strong>Github profile
-                                                readme</strong></a> and showcase all your skills over there. This is not
-                                        for HR but this is for the <a
-                                            href="https://en.wikipedia.org/wiki/Team_leader#:~:text=A%20team%20leader%20is%20a,reports%20results%20to%20a%20manager."
-                                            target="_blank" rel="noopener noreferrer"><strong>Team leads</strong></a>
-                                        and <strong>Technical interviewers</strong> because once they receive your
-                                        profile after initial screening is done by HR, they will most likely click on
-                                        your <strong>GitHub link</strong> present in your <strong>CV</strong> to see
-                                        what projects you have done. One of my friends, <a
-                                            href="https://www.linkedin.com/in/spanion/" target="_blank"
-                                            rel="noopener noreferrer"><strong>Ankit</strong></a> has created an
-                                        excellent <a href="https://github.com/AKAspanion" target="_blank"
-                                            rel="noopener noreferrer"><strong>readme file</strong></a>. You can refer to
-                                        it if interested. Also, read<a
-                                            href="https://aboutmonica.com/blog/how-to-create-a-github-profile-readme#why-readmes"
-                                            target="_blank" rel="noopener noreferrer"> <strong>this blog
-                                                post</strong></a><strong> </strong>for reference on how to do it.</p>
-                                </li>
-                                <li>
-                                    <p class="p1" style="font-family: helvetica; font-size: large; color: black">Once
-                                        you are done setting up your portfolio website, please prepare a good
-                                        looking <strong>Resume / CV</strong> and include your website link on the
-                                        <strong>top</strong>. When the HR receives your CV through some communication
-                                        media, he/she should <strong>feel like clicking </strong>on your website link.
-                                        So please <strong>highlight</strong> it and move the link to the top. Once they
-                                        land on your website. You have gained <strong>50% more chances</strong> to
-                                        receive a phone call for discussion.
-                                    </p>
-                                </li>
-                                <li>
-                                    <p class="p1" style="font-family: helvetica; font-size: large; color: black">Don't
-                                        hesitate to ask your friends, Linkedin connections for a<strong> job
-                                            referral. </strong>It is incredibly effective. Some of the <strong>best
-                                            opportunities</strong> I&nbsp;got in my life is through job referral. This
-                                        is because, if a company receives your profile through an
-                                        <strong>existing</strong> employee, it <strong>saves their time</strong> in
-                                        hunting for a fresh candidate and they will have an <strong>established
-                                            trust</strong> that you are legit. <strong>Trust</strong> plays a major role
-                                        in recruitment because as much as you need a job in a <strong>good
-                                            company</strong>, the company needs a good candidate like
-                                        <strong>you</strong>.
-                                    </p>
-                                </li>
-                            </ol>
-                            <p class="p1" style="font-family: helvetica; font-size: large; color: black"><br></p>
-                            <p class="p1" style="font-family: helvetica; font-size: large; color: black">There are a lot
-                                of <strong>qualified</strong> and <strong>talented</strong> engineers out
-                                there but <strong>only a few</strong> of them make it to the <strong>top</strong>. One
-                                of the<strong> distinguishing factors</strong> in their career boost is how well they
-                                are able to<strong> present themselves</strong> to the external <strong>world</strong>.
-                                Think about this, the world's most valuable company <strong>Apple</strong> is incredibly
-                                successful because of the way they present their products. From package unboxing to
-                                greeting, everything matters.</p>
-                            <p class="p1" style="font-family: helvetica; font-size: large; color: black">We,
-                                <strong>humans</strong>, tend to give our attention to things that are <strong>well
-                                    crafted</strong>. We are <strong>artists</strong> after all. We value
-                                <strong>creativity</strong> and this is what <strong>separates</strong> us from the
-                                <strong>rest of the species</strong> on this <strong>planet</strong>. The same rule
-                                applies to your <strong>portfolio</strong>. Please give <strong>extreme attention to
-                                    detail</strong>, describe yourself in a <strong>professional way</strong> and it
-                                should be <strong>interesting</strong> to read as well. Trust me, the more time you
-                                spend <strong>fine-tuning</strong> your online portfolio, the more it will be
-                                <strong>beneficial</strong> to you in the long run in your amazing career. I have
-                                experienced this happening to me <strong>over and over again</strong>. So I'm pretty
-                                confident this applies <strong>universally</strong>.
-                            </p>
-                            <p class="p1" style="font-family: helvetica; font-size: large; color: black"><br></p>
-                            <p class="p1" style="font-family: helvetica; font-size: large; color: black">
-                                <strong><em>Good luck !</em></strong>
-                            </p>
-                            <div id="social-share-strip-horizontal-bottom">
-                            </div>
-                        </div>
-                        </pem>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 ">
-                    <div id="all-articles-side-list">
-                    </div>
-                    <br />
+
+                <div class="author-social">
+                    <a href="mailto:88manojs@gmail.com" class="email" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com/in/manojsatishkumar/" class="linkedin" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.youtube.com/@ManojSatishkumar" class="youtube" title="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com/ManojSatishkumar" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://twitter.com/MSK_Web_Manoj" class="twitter" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
-        </div>
+        </aside>
+
+        <!-- Article Content -->
+        <main class="article-container">
+            <!-- Mobile Author Card -->
+            <div class="mobile-author" id="mobile-author">
+                <div class="mobile-author-header" onclick="toggleMobileAuthor()">
+                    <img src="/images/me_square.png" alt="Manoj Satishkumar" class="mobile-author-avatar">
+                    <div class="mobile-author-info">
+                        <div class="mobile-author-name">Manoj Satishkumar</div>
+                        <div class="mobile-author-title">Staff Software Engineer @ Walmart</div>
+                    </div>
+                    <div class="mobile-author-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="mobile-author-details">
+                    <div class="mobile-author-details-inner">
+                        <div class="author-stat">
+                            <i class="fas fa-briefcase" style="color: #17a2b8;"></i>
+                            <span>12+ Years in Frontend</span>
+                        </div>
+                        <div class="author-stat" style="margin-top: 8px;">
+                            <i class="fas fa-users" style="color: #e83e8c;"></i>
+                            <span>68K+ LinkedIn Followers</span>
+                        </div>
+                        <div class="mobile-author-social">
+                            <a href="mailto:88manojs@gmail.com" class="email" style="background: #10b981;"><i class="fas fa-envelope"></i></a>
+                            <a href="https://www.linkedin.com/in/manojsatishkumar/" style="background: #0077b5;" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.youtube.com/@ManojSatishkumar" style="background: #ff0000;" target="_blank"><i class="fab fa-youtube"></i></a>
+                            <a href="https://github.com/ManojSatishkumar" style="background: #333;" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://twitter.com/MSK_Web_Manoj" style="background: #1da1f2;" target="_blank"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <article class="article-content">
+                <img src="/images/blogs/build-your-website.jpg" alt="Build Your Online Portfolio Website" class="article-hero">
+                
+                <div class="article-body">
+                    <header class="article-header">
+                        <span class="article-category">Career Development</span>
+                        <h1 class="article-title">Let's Build Your Online Portfolio Website</h1>
+                        <div class="article-meta">
+                            <div class="article-meta-item">
+                                <i class="fas fa-user"></i>
+                                <a href="https://manojsatishkumar.com/">Manoj Satishkumar</a>
+                            </div>
+                            <div class="article-meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>8 min read</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="article-prose">
+                        <p>If you don't have an <strong>online portfolio website</strong> yet, <strong>now</strong> is the time to create one.</p>
+                        
+                        <p>Trust me, your <strong>portfolio website</strong> will play a <strong>major role</strong> in your career advancement and to bring <strong>new opportunities</strong> to you. In this world where there are tons of software engineers graduating from colleges, it can become <strong>hard</strong> for the companies to reach out to the ones who really fit the roles and perform responsibilities.</p>
+                        
+                        <div class="highlight-box">
+                            <em>So you must <strong>separate</strong> yourself from the crowd and be <strong>unique</strong>.</em>
+                        </div>
+                        
+                        <p>This is my <strong>personal experience</strong>. I did not have an online portfolio website in the <strong>starting stages</strong> of my career and I did not get many interview calls. But after I made it and deployed it, I was <strong>surprised</strong> at how many HRs thought I will <strong>fit a role</strong> in their company.</p>
+                        
+                        <p><strong><em>If it has worked for me, it will work for you too.</em></strong></p>
+
+                        <h4>Let's get started:</h4>
+
+                        <ol>
+                            <li>
+                                <p>Go to my <a href="https://manojsatishkumar.com/" target="_blank" rel="noopener noreferrer"><strong>Portfolio website</strong></a> and have a birds-eye view of all the sections & details I have put there.</p>
+                            </li>
+                            <li>
+                                <p>Visit the <a href="https://in.godaddy.com/" target="_blank" rel="noopener noreferrer"><strong>Godaddy website</strong></a> and buy a custom domain that matches your name. You can find YouTube tutorials that can help you with this step.</p>
+                            </li>
+                            <li>
+                                <p>Signup to <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><strong>Github</strong></a> and create your portfolio website code repository with plain HTML, CSS and JS. You can refer to the <a href="https://github.com/ManojSatishkumar/ManojSatishkumar.github.io" target="_blank" rel="noopener noreferrer"><strong>source code</strong></a> of my portfolio if you want. It is publicly available.</p>
+                            </li>
+                            <li>
+                                <p>Enable <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer"><strong>GitHub Pages</strong></a> in your repository settings and set up your DNS server records in <strong>Godaddy</strong> to point to your git repo. Read <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site" target="_blank" rel="noopener noreferrer"><strong>this documentation</strong></a> from Github. You can also watch my <a href="https://youtu.be/1cyKbLapc10?list=PLyYcl2GkJ13hyfUfkyitPobPbpOS5Dnon" target="_blank" rel="noopener noreferrer"><strong>Youtube video</strong></a> for reference.</p>
+                            </li>
+                            <li>
+                                <p>Make sure you enable <a href="https://en.wikipedia.org/wiki/HTTPS" target="_blank" rel="noopener noreferrer"><strong>https://</strong></a> on your website. This is necessary because the recruiters and interviewers will try to check your portfolio website on their <strong>office provided laptops</strong>. If your website is missing <a href="https://www.kaspersky.com/resource-center/definitions/what-is-a-ssl-certificate" target="_blank" rel="noopener noreferrer"><strong>SSL Certificate</strong></a>, it will be blocked in their <a href="https://en.wikipedia.org/wiki/Virtual_private_network" target="_blank" rel="noopener noreferrer"><strong>VPN</strong></a>.</p>
+                            </li>
+                            <li>
+                                <p>Ask some of your colleagues to give you <a href="https://www.linkedin.com/help/linkedin/answer/90/recommendations-overview?lang=en" target="_blank" rel="noopener noreferrer"><strong>Recommendations</strong></a> and <a href="https://www.linkedin.com/help/linkedin/answer/31888/skill-endorsements-overview?lang=en" target="_blank" rel="noopener noreferrer"><strong>Skill endorsements</strong></a> on Linkedin. They act as <strong>social proof</strong> that what you have put on your <a href="https://in.indeed.com/career-advice/resumes-cover-letters/what-is-a-cv" target="_blank" rel="noopener noreferrer"><strong>CV</strong></a> is probably <strong>legitimate</strong> information.</p>
+                            </li>
+                            <li>
+                                <p>On the <strong>homepage</strong> of your portfolio, add links to all the <strong>social media</strong> profiles. <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer"><strong>LinkedIn</strong></a> should be the <strong>first link</strong> in that list. The HRs should be <strong>encouraged</strong> to click on your LinkedIn profile when they visit your website. On the other hand, make sure you add your <strong>website link</strong> to <a href="https://www.linkedin.com/help/linkedin/answer/117363/featured-section-on-your-profile-faqs?lang=en" target="_blank" rel="noopener noreferrer"><strong>LinkedIn's featured section</strong></a>. With these <strong>connected links</strong>, you will navigate the HR recruiter to different places online and generate <strong>curiosity</strong> in you and they will <strong>feel like</strong> giving you a phone call for further discussion. You can always refer to <a href="https://www.linkedin.com/in/manojsatishkumar/" target="_blank" rel="noopener noreferrer"><strong>My LinkedIn profile</strong></a> for reference. Stay active on Linkedin.</p>
+                            </li>
+                            <li>
+                                <p>Update your <a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme" target="_blank" rel="noopener noreferrer"><strong>Github profile readme</strong></a> and showcase all your skills over there. This is not for HR but this is for the <a href="https://en.wikipedia.org/wiki/Team_leader" target="_blank" rel="noopener noreferrer"><strong>Team leads</strong></a> and <strong>Technical interviewers</strong> because once they receive your profile after initial screening is done by HR, they will most likely click on your <strong>GitHub link</strong> present in your <strong>CV</strong> to see what projects you have done. One of my friends, <a href="https://www.linkedin.com/in/spanion/" target="_blank" rel="noopener noreferrer"><strong>Ankit</strong></a> has created an excellent <a href="https://github.com/AKAspanion" target="_blank" rel="noopener noreferrer"><strong>readme file</strong></a>. You can refer to it if interested. Also, read <a href="https://aboutmonica.com/blog/how-to-create-a-github-profile-readme#why-readmes" target="_blank" rel="noopener noreferrer"><strong>this blog post</strong></a> for reference on how to do it.</p>
+                            </li>
+                            <li>
+                                <p>Once you are done setting up your portfolio website, please prepare a good looking <strong>Resume / CV</strong> and include your website link on the <strong>top</strong>. When the HR receives your CV through some communication media, he/she should <strong>feel like clicking</strong> on your website link. So please <strong>highlight</strong> it and move the link to the top. Once they land on your website. You have gained <strong>50% more chances</strong> to receive a phone call for discussion.</p>
+                            </li>
+                            <li>
+                                <p>Don't hesitate to ask your friends, Linkedin connections for a <strong>job referral</strong>. It is incredibly effective. Some of the <strong>best opportunities</strong> I got in my life is through job referral. This is because, if a company receives your profile through an <strong>existing</strong> employee, it <strong>saves their time</strong> in hunting for a fresh candidate and they will have an <strong>established trust</strong> that you are legit. <strong>Trust</strong> plays a major role in recruitment because as much as you need a job in a <strong>good company</strong>, the company needs a good candidate like <strong>you</strong>.</p>
+                            </li>
+                        </ol>
+
+                        <div class="conclusion">
+                            <p>There are a lot of <strong>qualified</strong> and <strong>talented</strong> engineers out there but <strong>only a few</strong> of them make it to the <strong>top</strong>. One of the <strong>distinguishing factors</strong> in their career boost is how well they are able to <strong>present themselves</strong> to the external <strong>world</strong>. Think about this, the world's most valuable company <strong>Apple</strong> is incredibly successful because of the way they present their products. From package unboxing to greeting, everything matters.</p>
+                            
+                            <p>We, <strong>humans</strong>, tend to give our attention to things that are <strong>well crafted</strong>. We are <strong>artists</strong> after all. We value <strong>creativity</strong> and this is what <strong>separates</strong> us from the <strong>rest of the species</strong> on this <strong>planet</strong>. The same rule applies to your <strong>portfolio</strong>. Please give <strong>extreme attention to detail</strong>, describe yourself in a <strong>professional way</strong> and it should be <strong>interesting</strong> to read as well. Trust me, the more time you spend <strong>fine-tuning</strong> your online portfolio, the more it will be <strong>beneficial</strong> to you in the long run in your amazing career. I have experienced this happening to me <strong>over and over again</strong>. So I'm pretty confident this applies <strong>universally</strong>.</p>
+                            
+                            <p><strong><em>Good luck!</em></strong> 🚀</p>
+                        </div>
+                    </div>
+
+                    <!-- Share Strip -->
+                    <div class="share-strip">
+                        <span class="share-strip-label">Share this article:</span>
+                        <a href="https://twitter.com/intent/tweet?url=https://manojsatishkumar.com/blog/build-your-website.html&text=Build%20Your%20Online%20Portfolio%20Website" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://manojsatishkumar.com/blog/build-your-website.html" target="_blank" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://manojsatishkumar.com/blog/build-your-website.html" target="_blank" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://api.whatsapp.com/send?text=Build%20Your%20Online%20Portfolio%20Website%20https://manojsatishkumar.com/blog/build-your-website.html" target="_blank" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </article>
+
+        </main>
     </div>
-    </div>
-    <br />
-    <div id="courses-cards">
-    </div>
-    <br />
-    <div id="all-articles-list"></div>
-    <div style="background-color: #eeeeee" id="footer" class="text-left"></div>
-    <div style="margin: 0px; padding: 0px;" id="footer">
-    </div>
-    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
     <script src="/lib/jquery/jquery.min.js"></script>
-    <script src="/lib/jquery/jquery-migrate.min.js"></script>
     <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/lib/typed/typed.js"></script>
     <script src="/js/main.js"></script>
     <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
-    </script>
-    <script>
         $(function () {
-            $("#side-profile").load("/components/side-profile.html");
-            $("#social-share-strip-vertical").load("/blog/components/social-share-strip-vertical.html");
-            $("#social-share-strip-horizontal-top").load("/blog/components/social-share-strip-horizontal.html");
-            $("#all-articles-list").load("/blog/all-articles.html");
-            $("#all-articles-side-list").load("/blog/all-articles-list.html");
-            $("#social-share-strip-horizontal-bottom").load("/blog/components/social-share-strip-horizontal.html");
-             $("#footer").load("/components/footer.html");
+            $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
+            $("#footer").load("/components/footer.html");
         });
+
+        function toggleMobileAuthor() {
+            document.getElementById('mobile-author').classList.toggle('expanded');
+        }
+
+        window.addEventListener('scroll', function() {
+            const article = document.querySelector('.article-content');
+            const progressBar = document.getElementById('reading-progress');
+            const backToTop = document.getElementById('back-to-top');
+            
+            if (article) {
+                const scrollY = window.scrollY;
+                const articleTop = article.offsetTop;
+                const articleHeight = article.offsetHeight;
+                const progress = Math.min(100, Math.max(0, 
+                    ((scrollY - articleTop + window.innerHeight) / articleHeight) * 100
+                ));
+                progressBar.style.width = progress + '%';
+            }
+
+            backToTop.classList.toggle('visible', window.scrollY > 500);
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
     </script>
 </body>
 
