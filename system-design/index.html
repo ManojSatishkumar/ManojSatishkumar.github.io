@@ -1984,9 +1984,6 @@
           <div class="concept-item" data-concept="fe-progressive-enhancement" onclick="showConcept('fe-progressive-enhancement')">
             <span>Progressive Enhancement</span>
           </div>
-          <div class="concept-item" data-concept="fe-graceful-degradation" onclick="showConcept('fe-graceful-degradation')">
-            <span>Graceful Degradation</span>
-          </div>
           <div class="concept-item" data-concept="fe-cross-browser" onclick="showConcept('fe-cross-browser')">
             <span>Cross-Browser Compatibility</span>
           </div>
@@ -14521,66 +14518,6 @@ for user john@example.com</div>
           { level: "Slow 3G", downtime: "Usable", useCase: "Performance" },
           { level: "Old Browser", downtime: "Functional", useCase: "Compatibility" },
           { level: "Screen Reader", downtime: "Accessible", useCase: "Accessibility" }
-        ]
-      },
-      "fe-graceful-degradation": {
-        title: "Graceful Degradation",
-        subtitle: "Ensuring the application remains functional when features fail or are unavailable.",
-        badge: { text: "Core Principle", color: "#f97316", bg: "rgba(249, 115, 22, 0.15)" },
-        color: "#f97316",
-        diagram: `
-          <style>
-            .gd-viz { display: flex; flex-direction: column; gap: 24px; padding: 20px; }
-            .gd-scenarios { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
-            .gd-scenario { background: linear-gradient(145deg, rgba(249, 115, 22, 0.1), rgba(249, 115, 22, 0.05)); border: 1px solid rgba(249, 115, 22, 0.3); border-radius: 12px; padding: 16px; text-align: center; }
-            .gd-icon { font-size: 1.8rem; margin-bottom: 8px; }
-            .gd-title { font-size: 0.8rem; font-weight: 600; color: #f97316; }
-            .gd-desc { font-size: 0.65rem; color: #a0a0b0; margin-top: 4px; }
-            .gd-flow { background: rgba(30, 35, 50, 0.6); border-radius: 12px; padding: 20px; }
-            .gd-flow-title { font-size: 0.8rem; color: #f97316; font-weight: 600; margin-bottom: 16px; text-align: center; }
-            .gd-steps { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
-            .gd-step { background: rgba(249, 115, 22, 0.15); border-radius: 8px; padding: 10px 16px; font-size: 0.75rem; color: #e5e5e5; }
-          </style>
-          <div class="gd-viz">
-            <div class="gd-scenarios">
-              <div class="gd-scenario"><div class="gd-icon">🚫</div><div class="gd-title">JS Disabled</div><div class="gd-desc">Core functionality works</div></div>
-              <div class="gd-scenario"><div class="gd-icon">📴</div><div class="gd-title">Offline</div><div class="gd-desc">Cached content available</div></div>
-              <div class="gd-scenario"><div class="gd-icon">🐌</div><div class="gd-title">Slow Network</div><div class="gd-desc">Progressive loading</div></div>
-              <div class="gd-scenario"><div class="gd-icon">❌</div><div class="gd-title">API Failure</div><div class="gd-desc">Fallback content shown</div></div>
-            </div>
-            <div class="gd-flow">
-              <div class="gd-flow-title">Degradation Strategy</div>
-              <div class="gd-steps">
-                <div class="gd-step">Detect Failure</div>
-                <span style="color: #f97316;">→</span>
-                <div class="gd-step">Show Fallback</div>
-                <span style="color: #f97316;">→</span>
-                <div class="gd-step">Log Error</div>
-                <span style="color: #f97316;">→</span>
-                <div class="gd-step">Retry When Possible</div>
-              </div>
-            </div>
-          </div>
-        `,
-        definition: `<p><strong>Graceful Degradation</strong> ensures that when something goes wrong—JavaScript fails, API is down, network is slow—the application still provides a useful experience rather than breaking completely.</p><p>It's about planning for failure and building resilience into the system.</p>`,
-        keyPoints: [
-          { icon: "🛡️", title: "Error Boundaries", desc: "Catch and handle errors without crashing the entire app.", color: "#f97316" },
-          { icon: "📦", title: "Fallback Content", desc: "Show cached or static content when dynamic content fails.", color: "#3b82f6" },
-          { icon: "🔄", title: "Retry Logic", desc: "Automatically retry failed operations with backoff.", color: "#22c55e" },
-          { icon: "💬", title: "User Communication", desc: "Inform users about degraded functionality clearly.", color: "#8b5cf6" }
-        ],
-        formula: "Resilience = Error Handling + Fallbacks + Recovery + Communication",
-        strategies: [
-          { title: "Error Boundaries", desc: "Use React Error Boundaries or equivalent to catch component errors." },
-          { title: "Service Workers", desc: "Cache critical assets for offline access." },
-          { title: "Loading States", desc: "Show skeleton screens while content loads." },
-          { title: "Retry Mechanisms", desc: "Implement retry with exponential backoff for failed requests." }
-        ],
-        metrics: [
-          { level: "Error Rate", downtime: "< 1%", useCase: "Stability" },
-          { level: "Recovery Time", downtime: "< 3s", useCase: "Resilience" },
-          { level: "Offline Support", downtime: "Core features", useCase: "Availability" },
-          { level: "User Impact", downtime: "Minimal", useCase: "Experience" }
         ]
       },
       "fe-cross-browser": {
