@@ -146,6 +146,53 @@
       color: var(--text-primary);
     }
 
+    /* Hamburger Menu */
+    .hamburger-menu {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.2s;
+      margin-right: 12px;
+    }
+
+    .hamburger-menu:hover {
+      background: var(--bg-tertiary);
+    }
+
+    .hamburger-menu span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hamburger-menu span:nth-child(1) {
+      margin-bottom: 5px;
+    }
+
+    .hamburger-menu span:nth-child(3) {
+      margin-top: 5px;
+    }
+
+    .hamburger-menu.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger-menu.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger-menu.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
     /* Main Layout */
     .main-container {
       display: flex;
@@ -166,6 +213,7 @@
       border-right: 1px solid var(--border-color);
       overflow-y: auto;
       padding: 20px 0;
+      z-index: 100;
     }
 
     .sidebar::-webkit-scrollbar {
@@ -996,11 +1044,19 @@
 
     @media (max-width: 768px) {
       .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
+        position: fixed;
+        width: 300px;
+        height: calc(100vh - 60px);
+        left: -300px;
+        top: 60px;
+        z-index: 1001;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-right: 1px solid var(--border-color);
+        background: var(--bg-secondary);
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+      }
+      .sidebar.open {
+        left: 0;
       }
       .detail-view {
         margin-left: 0;
@@ -1011,6 +1067,23 @@
       }
       .concept-title {
         font-size: 2rem;
+      }
+      .hamburger-menu {
+        display: flex;
+      }
+      .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 300px;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 999;
+        pointer-events: auto;
+      }
+      .sidebar-overlay.active {
+        display: block;
       }
     }
 
@@ -1092,6 +1165,11 @@
 
   <!-- Header -->
   <header class="header">
+    <div class="hamburger-menu" id="hamburgerMenu" onclick="toggleSidebar()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
     <a href="/system-design" class="header-logo">
       <i class="fas fa-layer-group" style="color: #8b5cf6; font-size: 1.4rem; margin-right: 10px;"></i>
       <span class="header-title">System design</span>
@@ -1105,9 +1183,12 @@
     </a>
   </header>
 
+  <!-- Sidebar Overlay for mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
   <div class="main-container">
     <!-- Sidebar - Master View -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
         <h2>Concepts Library</h2>
         <input type="text" class="sidebar-search" placeholder="Search concepts..." id="searchInput" oninput="filterConcepts()">
@@ -17825,6 +17906,99 @@ for user john@example.com</div>
         }
       });
     }
+
+    // Mobile Sidebar Toggle
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const hamburger = document.getElementById('hamburgerMenu');
+      
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const hamburger = document.getElementById('hamburgerMenu');
+      
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      hamburger.classList.remove('active');
+    }
+
+    function openSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const hamburger = document.getElementById('hamburgerMenu');
+      
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+      hamburger.classList.add('active');
+    }
+
+    // Swipe gesture support for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let isSwiping = false;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+      
+      // Only enable swipe-to-open from left edge (within 30px)
+      if (touchStartX <= 30) {
+        isSwiping = true;
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!isSwiping) return;
+      
+      const currentX = e.changedTouches[0].screenX;
+      const currentY = e.changedTouches[0].screenY;
+      const diffX = currentX - touchStartX;
+      const diffY = Math.abs(currentY - touchStartY);
+      
+      // If horizontal swipe is more significant than vertical
+      if (diffX > 0 && diffX > diffY) {
+        // Prevent scrolling when swiping sidebar
+        const sidebar = document.getElementById('sidebar');
+        const progress = Math.min(diffX / 300, 1);
+        sidebar.style.left = `${-300 + (300 * progress)}px`;
+        sidebar.style.transition = 'none';
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      if (!isSwiping) return;
+      
+      touchEndX = e.changedTouches[0].screenX;
+      const swipeDistance = touchEndX - touchStartX;
+      const sidebar = document.getElementById('sidebar');
+      
+      // Reset transition
+      sidebar.style.transition = '';
+      sidebar.style.left = '';
+      
+      // If swiped more than 100px from left edge, open sidebar
+      if (swipeDistance > 100 && window.innerWidth <= 768) {
+        openSidebar();
+      }
+      
+      isSwiping = false;
+    }, { passive: true });
+
+    // Close sidebar when clicking on a concept (mobile)
+    document.querySelectorAll('.concept-item').forEach(item => {
+      item.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          closeSidebar();
+        }
+      });
+    });
 
     // Initialize - show first concept on load
     document.addEventListener('DOMContentLoaded', () => {
