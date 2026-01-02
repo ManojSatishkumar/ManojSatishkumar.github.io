@@ -1224,36 +1224,16 @@
         // Set initial active state for desktop dock
         $(".nav-bar-fixed .dock-item[data-section='intro']").addClass("active");
         
-        // Mobile bottom nav hide/show on scroll
-        let lastScrollTop = 0;
-        let scrollThreshold = 10; // Minimum scroll amount to trigger hide/show
-        
+        // Mobile bottom nav - always visible (removed hide/show on scroll)
+        // Keep mobile bottom nav always visible when scrolling
         $(window).on('scroll', function() {
           // Only apply on mobile (< 1024px)
           if ($(window).width() >= 1024) return;
           
-          let currentScroll = $(this).scrollTop();
           let mobileNav = $('.mobile-bottom-nav');
-          let chatbotWidget = $('.chatbot-widget');
           
-          // Scrolling down
-          if (currentScroll > lastScrollTop + scrollThreshold) {
-            mobileNav.addClass('hidden');
-            chatbotWidget.addClass('nav-hidden');
-            lastScrollTop = currentScroll;
-          } 
-          // Scrolling up
-          else if (currentScroll < lastScrollTop - scrollThreshold) {
-            mobileNav.removeClass('hidden');
-            chatbotWidget.removeClass('nav-hidden');
-            lastScrollTop = currentScroll;
-          }
-          
-          // Always show at top of page
-          if (currentScroll <= 0) {
-            mobileNav.removeClass('hidden');
-            chatbotWidget.removeClass('nav-hidden');
-          }
+          // Ensure mobile nav is always visible
+          mobileNav.removeClass('hidden');
         });
         
       });
