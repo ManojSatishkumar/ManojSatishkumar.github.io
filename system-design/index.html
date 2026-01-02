@@ -8,6 +8,7 @@
   <link rel="icon" href="/images/favicon.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --bg-primary: #0a0a0f;
@@ -345,45 +346,268 @@
     .welcome-state {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 60vh;
-      text-align: center;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    .welcome-icon {
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      border-radius: 30px;
+    .welcome-hero {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      margin-bottom: 32px;
-      animation: float 3s ease-in-out infinite;
+      gap: 32px;
+      margin-bottom: 48px;
+      padding: 32px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08));
+      border-radius: 24px;
+      border: 1px solid var(--border-color);
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    .welcome-author-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid var(--accent-blue);
+      flex-shrink: 0;
+      animation: pulse-glow 3s ease-in-out infinite;
     }
 
-    .welcome-state h1 {
-      font-size: 2.5rem;
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(139, 92, 246, 0.5); }
+    }
+
+    .welcome-intro {
+      flex: 1;
+    }
+
+    .welcome-intro h1 {
+      font-size: 1.8rem;
       font-weight: 700;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--text-primary), var(--accent-blue));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .welcome-state p {
-      font-size: 1.1rem;
+    .welcome-intro .tagline {
+      font-size: 1rem;
+      color: var(--accent-purple);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .welcome-intro p {
+      font-size: 0.95rem;
       color: var(--text-secondary);
-      max-width: 500px;
+      line-height: 1.6;
+    }
+
+    .portfolio-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .portfolio-link:hover {
+      color: var(--accent-purple);
+      transform: translateX(4px);
+    }
+
+    .welcome-section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .welcome-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    .welcome-categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .welcome-category-group {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border-color);
+    }
+
+    .welcome-category-group h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .welcome-category-group h3 .badge {
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    .backend-group h3 {
+      color: var(--accent-blue);
+    }
+
+    .backend-group h3 .badge {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--accent-blue);
+    }
+
+    .frontend-group h3 {
+      color: var(--accent-purple);
+    }
+
+    .frontend-group h3 .badge {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--accent-purple);
+    }
+
+    .category-card-description {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
       line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .category-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .category-cta-btn.backend-btn {
+      background: linear-gradient(135deg, var(--accent-blue), #6366f1);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .category-cta-btn.backend-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+    }
+
+    .category-cta-btn.frontend-btn {
+      background: linear-gradient(135deg, var(--accent-purple), #ec4899);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+    }
+
+    .category-cta-btn.frontend-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+    }
+
+    .category-cta-btn .arrow-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .category-cta-btn:hover .arrow-icon {
+      transform: translateX(5px);
+    }
+
+    .category-card-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .welcome-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+
+    .stat-card .number {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-card .label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .welcome-cta {
+      text-align: center;
+      padding: 32px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+    }
+
+    .welcome-cta p {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .welcome-cta .arrow {
+      font-size: 2rem;
+      animation: point-left 1s ease-in-out infinite;
+    }
+
+    @keyframes point-left {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(-10px); }
+    }
+
+    @media (max-width: 768px) {
+      .welcome-hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .welcome-categories {
+        grid-template-columns: 1fr;
+      }
+      
+      .welcome-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     /* Concept Detail Content */
@@ -869,7 +1093,8 @@
   <!-- Header -->
   <header class="header">
     <a href="/system-design" class="header-logo">
-      <span class="header-title">System design concepts</span>
+      <i class="fas fa-layer-group" style="color: #8b5cf6; font-size: 1.4rem; margin-right: 10px;"></i>
+      <span class="header-title">System design</span>
     </a>
     <nav class="header-nav">
       <!-- <a href="/">Portfolio</a> -->
@@ -1302,7 +1527,7 @@
       <div class="category expanded" data-category="fe-core">
         <div class="category-header" onclick="toggleCategory(this.parentElement)">
           <div class="category-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">⚡</div>
-          <span class="category-name">Core Frontend Principles</span>
+          <span class="category-name">Core Principles</span>
           <span class="category-count">10</span>
           <span class="category-arrow">›</span>
         </div>
@@ -1344,7 +1569,7 @@
       <div class="category" data-category="fe-architecture">
         <div class="category-header" onclick="toggleCategory(this.parentElement)">
           <div class="category-icon" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">🧱</div>
-          <span class="category-name">Architecture & Design Patterns</span>
+          <span class="category-name">Architecture Patterns</span>
           <span class="category-count">9</span>
           <span class="category-arrow">›</span>
         </div>
@@ -1467,7 +1692,7 @@
       <div class="category" data-category="fe-performance">
         <div class="category-header" onclick="toggleCategory(this.parentElement)">
           <div class="category-icon" style="background: linear-gradient(135deg, #ec4899, #db2777);">🚀</div>
-          <span class="category-name">Performance Optimization</span>
+          <span class="category-name">Performance</span>
           <span class="category-count">10</span>
           <span class="category-arrow">›</span>
         </div>
@@ -1898,9 +2123,65 @@
       <div class="detail-container">
         <!-- Welcome State -->
         <div class="welcome-state" id="welcomeState">
-          <div class="welcome-icon">🧠</div>
-          <h1>System design</h1>
-          <p>Explore comprehensive visual explanations of essential system design principles. Select a concept from the sidebar to begin your learning journey.</p>
+          <!-- Hero Section with Author -->
+          <div class="welcome-hero">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="welcome-author-photo">
+            <div class="welcome-intro">
+              <h1>Welcome to System Design</h1>
+              <div class="tagline">A Visual Learning Experience</div>
+              <p>I'm Manoj, a Staff Engineer with 12+ years of experience. I've created this interactive guide to help you master system design concepts through visual explanations and real-world examples. Whether you're preparing for interviews or building scalable systems, this resource has you covered.</p>
+              <a href="/" class="portfolio-link">Visit My Portfolio →</a>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="welcome-stats">
+            <div class="stat-card">
+              <div class="number">100+</div>
+              <div class="label">Concepts</div>
+            </div>
+            <div class="stat-card">
+              <div class="number">2</div>
+              <div class="label">Tracks</div>
+            </div>
+            <div class="stat-card">
+              <div class="number">100%</div>
+              <div class="label">Visual</div>
+            </div>
+            <div class="stat-card">
+              <div class="number">Free</div>
+              <div class="label">Forever</div>
+            </div>
+          </div>
+
+          <!-- What's Inside -->
+          <div class="welcome-section-title">What's Inside</div>
+          
+          <div class="welcome-categories">
+            <!-- Frontend -->
+            <div class="welcome-category-group frontend-group">
+              <div class="category-card-icon">🎨</div>
+              <h3>Frontend System Design</h3>
+              <p class="category-card-description">
+                Dive deep into modern frontend architecture patterns. Explore component design, state management, performance optimization, SSR/SSG strategies, accessibility best practices, testing methodologies, and micro-frontend architectures. Essential knowledge for frontend architects.
+              </p>
+              <button class="category-cta-btn frontend-btn" onclick="switchDomain('frontend')">
+                Explore Frontend <span class="arrow-icon">→</span>
+              </button>
+            </div>
+
+            <!-- Backend -->
+            <div class="welcome-category-group backend-group">
+              <div class="category-card-icon">⚡</div>
+              <h3>Backend System Design</h3>
+              <p class="category-card-description">
+                Master the core principles of building robust, scalable backend systems. Learn about availability, load balancing, caching strategies, microservices architecture, database sharding, API design patterns, and more. Perfect for engineers preparing for senior-level interviews.
+              </p>
+              <button class="category-cta-btn backend-btn" onclick="switchDomain('backend')">
+                Explore Backend <span class="arrow-icon">→</span>
+              </button>
+            </div>
+          </div>
         </div>
 
         <!-- Concept Details will be inserted here dynamically -->
