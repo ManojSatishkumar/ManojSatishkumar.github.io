@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Core Principles - Manoj Satishkumar</title>
+  <title>System design - Manoj Satishkumar</title>
   <meta name="description" content="Interactive visual guide to system design concepts including Availability, Reliability, Scalability, and more.">
   <link rel="icon" href="/images/favicon.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -91,27 +91,12 @@
     .header-logo {
       display: flex;
       align-items: center;
-      gap: 12px;
       text-decoration: none;
-      color: var(--text-primary);
     }
 
-    .header-logo img {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-    }
-
-    .header-logo span {
-      font-weight: 600;
-      font-size: 1rem;
-    }
-
-    .header-title {
-      margin-left: auto;
-      margin-right: auto;
-      font-size: 1.1rem;
-      font-weight: 600;
+    .header-logo .header-title {
+      font-size: 1.2rem;
+      font-weight: 700;
       background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -121,6 +106,32 @@
     .header-nav {
       display: flex;
       gap: 16px;
+      margin-left: auto;
+    }
+
+    .header-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      margin-left: 24px;
+      transition: color 0.2s;
+    }
+
+    .header-author:hover {
+      color: var(--text-primary);
+    }
+
+    .header-author span {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .header-author img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
     }
 
     .header-nav a {
@@ -857,15 +868,16 @@
 
   <!-- Header -->
   <header class="header">
-    <a href="/" class="header-logo">
-      <img src="/images/me_circle.png" alt="Manoj">
-      <span>Manoj Satishkumar</span>
+    <a href="/system-design" class="header-logo">
+      <span class="header-title">System design concepts</span>
     </a>
-    <span class="header-title">Core Principles</span>
     <nav class="header-nav">
-      <a href="/">Portfolio</a>
-      <a href="/blog">Blog</a>
+      <!-- <a href="/">Portfolio</a> -->
     </nav>
+    <a href="/" class="header-author">
+      <span><span style="color: var(--text-muted);">by </span>Manoj</span>
+      <img src="/images/me_circle.png" alt="Manoj">
+    </a>
   </header>
 
   <div class="main-container">
@@ -1887,7 +1899,7 @@
         <!-- Welcome State -->
         <div class="welcome-state" id="welcomeState">
           <div class="welcome-icon">🧠</div>
-          <h1>Core Principles</h1>
+          <h1>System design</h1>
           <p>Explore comprehensive visual explanations of essential system design principles. Select a concept from the sidebar to begin your learning journey.</p>
         </div>
 
