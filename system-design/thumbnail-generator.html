@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Design Thumbnail Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #1a1a2e;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .instructions {
+      display: none;
+    }
+
+    /* Thumbnail container - 1200x630 (standard OG image size) */
+    .thumbnail {
+      width: 1200px;
+      height: 630px;
+      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+      position: relative;
+      overflow: hidden;
+      border-radius: 0;
+    }
+
+    /* Animated grid background */
+    .grid-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Glowing orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.6;
+    }
+
+    .orb-1 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.5), transparent);
+      top: -100px;
+      left: -50px;
+    }
+
+    .orb-2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent);
+      bottom: -150px;
+      right: -100px;
+    }
+
+    .orb-3 {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.3), transparent);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Content container */
+    .content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      height: 100%;
+      padding: 50px 60px;
+    }
+
+    /* Left side - Author info */
+    .left-section {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-right: 40px;
+    }
+
+    .author-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 4px solid transparent;
+      background: linear-gradient(#1a1a2e, #1a1a2e) padding-box,
+                  linear-gradient(135deg, #3b82f6, #8b5cf6, #10b981) border-box;
+      overflow: hidden;
+      margin-bottom: 30px;
+      box-shadow: 
+        0 0 40px rgba(59, 130, 246, 0.3),
+        0 0 80px rgba(139, 92, 246, 0.2);
+    }
+
+    .author-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .author-name {
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .author-title {
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 400;
+    }
+
+    /* Right side - Content */
+    .right-section {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 40px;
+      border-left: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      color: #3b82f6;
+      font-weight: 500;
+      margin-bottom: 24px;
+      width: fit-content;
+    }
+
+    .main-title {
+      font-size: 72px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+      margin-bottom: 32px;
+    }
+
+    /* Topic pills */
+    .topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .topic-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .topic-pill.blue {
+      background: rgba(59, 130, 246, 0.2);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+
+    .topic-pill.purple {
+      background: rgba(139, 92, 246, 0.2);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+    }
+
+    .topic-pill.green {
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .topic-pill.orange {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .topic-pill.pink {
+      background: rgba(236, 72, 153, 0.2);
+      border: 1px solid rgba(236, 72, 153, 0.4);
+    }
+
+    .topic-pill.cyan {
+      background: rgba(6, 182, 212, 0.2);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+    }
+
+    /* Floating icons */
+    .floating-icons {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .float-icon {
+      position: absolute;
+      font-size: 28px;
+      opacity: 0.4;
+    }
+
+    .float-icon:nth-child(1) { top: 60px; right: 80px; }
+    .float-icon:nth-child(2) { top: 120px; right: 180px; }
+    .float-icon:nth-child(3) { bottom: 100px; right: 120px; }
+    .float-icon:nth-child(4) { bottom: 60px; right: 250px; }
+    .float-icon:nth-child(5) { top: 200px; right: 60px; }
+    .float-icon:nth-child(6) { bottom: 180px; right: 60px; }
+
+    /* MSK Branding */
+    .branding {
+      position: absolute;
+      bottom: 30px;
+      right: 50px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .brand-logo {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .brand-text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 500;
+    }
+
+    /* Decorative circuit lines */
+    .circuit-line {
+      position: absolute;
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+      height: 1px;
+    }
+
+    .circuit-line-1 {
+      width: 200px;
+      top: 150px;
+      right: 0;
+    }
+
+    .circuit-line-2 {
+      width: 150px;
+      bottom: 200px;
+      right: 50px;
+      transform: rotate(-30deg);
+    }
+
+    .node {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #3b82f6;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #3b82f6;
+    }
+
+    .node-1 { top: 147px; right: 200px; }
+    .node-2 { bottom: 197px; right: 200px; }
+  </style>
+</head>
+<body>
+  <div class="thumbnail">
+    <!-- Background elements -->
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    
+    <!-- Floating icons -->
+    <div class="floating-icons">
+      <span class="float-icon">⚡</span>
+      <span class="float-icon">🔄</span>
+      <span class="float-icon">🚀</span>
+      <span class="float-icon">🛡️</span>
+      <span class="float-icon">📊</span>
+      <span class="float-icon">🌐</span>
+    </div>
+
+    <!-- Circuit decorations -->
+    <div class="circuit-line circuit-line-1"></div>
+    <div class="circuit-line circuit-line-2"></div>
+    <div class="node node-1"></div>
+    <div class="node node-2"></div>
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="left-section">
+        <div class="author-photo">
+          <img src="../images/me_circle.png" alt="Manoj Satishkumar">
+        </div>
+        <div class="author-name">Manoj Satishkumar</div>
+        <div class="author-title">Staff Software Engineer</div>
+      </div>
+
+      <div class="right-section">
+        <div class="badge">
+          <span>📚</span> Interactive Visual Guide
+        </div>
+        <h1 class="main-title">System Design</h1>
+        <p class="subtitle">Master scalability, performance, and architecture patterns</p>
+        
+        <div class="topics">
+          <div class="topic-pill blue">⚙️ Scalability</div>
+          <div class="topic-pill purple">🔄 Performance</div>
+          <div class="topic-pill green">✅ Availability</div>
+          <div class="topic-pill orange">🚀 CDN & Caching</div>
+          <div class="topic-pill pink">📱 PWA</div>
+          <div class="topic-pill cyan">🛡️ Security</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branding -->
+    <div class="branding">
+      <div class="brand-logo">MSK</div>
+      <div class="brand-text">manojsatishkumar.com</div>
+    </div>
+  </div>
+</body>
+</html>
+
