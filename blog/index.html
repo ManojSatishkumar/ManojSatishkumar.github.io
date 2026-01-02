@@ -2,84 +2,671 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MSK Blog | Articles on Web Development, Career, and Tech</title>
-  <meta name="description" content="Read articles by Manoj Satishkumar on web development, JavaScript, React, software engineering, and career growth. Stay updated with the latest tech insights." />
-  <meta name="keywords" content="MSK Blog, Web Development, JavaScript, React, Software Engineering, Career, Tech Articles, Tutorials, Advice, Manoj Satishkumar" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://manojsatishkumar.com/blog/index.html" />
-  <meta name="author" content="Manoj Satishkumar" />
-  <meta name="publisher" content="Manoj Satishkumar" />
-  <meta property="og:title" content="MSK Blog | Articles on Web Development, Career, and Tech" />
-  <meta property="og:description" content="Read articles by Manoj Satishkumar on web development, JavaScript, React, software engineering, and career growth. Stay updated with the latest tech insights." />
-  <meta property="og:url" content="https://manojsatishkumar.com/blog/index.html" />
-  <meta property="og:site_name" content="manojsatishkumar.com" />
-  <meta property="og:type" content="blog" />
-  <meta property="og:image" content="https://manojsatishkumar.com/images/msk-posts.jpg" />
-  <meta property="article:author" content="https://manojsatishkumar.com" />
-  <meta property="article:publisher" content="https://manojsatishkumar.com/" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="MSK Blog | Articles on Web Development, Career, and Tech" />
-  <meta name="twitter:description" content="Read articles by Manoj Satishkumar on web development, JavaScript, React, software engineering, and career growth." />
-  <meta name="twitter:site" content="@MSK_Web_Manoj" />
-  <meta name="twitter:image" content="https://manojsatishkumar.com/images/msk-posts.jpg" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Blog",
-    "name": "MSK Blog",
-    "url": "https://manojsatishkumar.com/blog/index.html",
-    "author": {
-      "@type": "Person",
-      "name": "Manoj Satishkumar"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSK Blog | Articles on Web Development, Career & Tech</title>
+    <meta name="description" content="Read articles by Manoj Satishkumar on web development, JavaScript, React, software engineering, and career growth. Stay updated with the latest tech insights." />
+    <meta name="keywords" content="MSK Blog, Web Development, JavaScript, React, Software Engineering, Career, Tech Articles, Tutorials, Advice, Manoj Satishkumar" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://manojsatishkumar.com/blog/" />
+    <meta name="author" content="Manoj Satishkumar" />
+    <meta name="publisher" content="Manoj Satishkumar" />
+    <meta property="og:title" content="MSK Blog | Articles on Web Development, Career & Tech" />
+    <meta property="og:description" content="Read articles by Manoj Satishkumar on web development, JavaScript, React, software engineering, and career growth." />
+    <meta property="og:url" content="https://manojsatishkumar.com/blog/" />
+    <meta property="og:site_name" content="manojsatishkumar.com" />
+    <meta property="og:type" content="blog" />
+    <meta property="og:image" content="https://manojsatishkumar.com/images/blogs/msk-blog-banner.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MSK Blog | Articles on Web Development, Career & Tech" />
+    <meta name="twitter:description" content="Read articles by Manoj Satishkumar on web development, JavaScript, React, software engineering, and career growth." />
+    <meta name="twitter:site" content="@MSK_Web_Manoj" />
+    <meta name="twitter:image" content="https://manojsatishkumar.com/images/blogs/msk-blog-banner.jpg" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "MSK Blog",
+        "url": "https://manojsatishkumar.com/blog/",
+        "description": "Articles on Web Development, Career & Tech by Manoj Satishkumar",
+        "author": { "@type": "Person", "name": "Manoj Satishkumar" }
     }
-  }
-  </script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    </script>
 
-    gtag('config', 'UA-128563001-5');
-  </script>
-  <link href="/css/style.css" rel="stylesheet" />
-  <link href="/css/responsive.css" rel="stylesheet" />
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="/images/favicon.png" />
-  <style>
-    @media only screen and (min-width: 1024px) {
-      .nav-bar-top-mobile-fixed {
-        display: none;
-      }
-    }
-  </style>
+    <link rel="shortcut icon" href="/images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            --color-bg: #faf9f7;
+            --color-surface: #ffffff;
+            --color-text: #1a1a2e;
+            --color-text-muted: #64748b;
+            --color-accent: #0ea5e9;
+            --color-accent-hover: #0284c7;
+            --color-border: #e2e8f0;
+            --font-serif: 'Crimson Pro', Georgia, serif;
+            --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        .nav-spacer { height: 80px; }
+
+        /* Main Content */
+        .blog-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .section-subtitle {
+            color: var(--color-text-muted);
+            font-size: 1rem;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--color-accent);
+            color: #fff;
+            border-color: var(--color-accent);
+        }
+
+        /* Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 32px;
+        }
+
+        /* Article Card */
+        .article-card {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--color-accent);
+        }
+
+        .article-card-image {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .article-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .article-card:hover .article-card-image img {
+            transform: scale(1.08);
+        }
+
+        .article-card-category {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .article-card-body {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-card-title {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 12px;
+            color: var(--color-text);
+            transition: color 0.2s;
+        }
+
+        .article-card:hover .article-card-title {
+            color: var(--color-accent);
+        }
+
+        .article-card-excerpt {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .article-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            padding-top: 16px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .article-card-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .read-more-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--color-accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-left: auto;
+            transition: gap 0.2s;
+        }
+
+        .article-card:hover .read-more-link {
+            gap: 10px;
+        }
+
+        /* Author Section */
+        .author-section {
+            background: linear-gradient(135deg, var(--color-surface) 0%, #f8fafc 100%);
+            border-radius: var(--radius-xl);
+            padding: 48px;
+            margin-top: 60px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-md);
+        }
+
+        .author-avatar-large {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--color-border);
+            flex-shrink: 0;
+        }
+
+        .author-info h3 {
+            font-family: var(--font-serif);
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .author-info .author-title {
+            color: var(--color-accent);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .author-info p {
+            color: var(--color-text-muted);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .author-social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .author-social-links a {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .author-social-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .author-social-links .linkedin { background: #0077b5; }
+        .author-social-links .youtube { background: #ff0000; }
+        .author-social-links .twitter { background: #1da1f2; }
+        .author-social-links .github { background: #333; }
+        .author-social-links .email { background: #10b981; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .nav-spacer { height: 60px; }
+            .articles-grid { grid-template-columns: 1fr; gap: 24px; }
+            .author-section { flex-direction: column; text-align: center; padding: 32px 24px; }
+            .author-social-links { justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .section-header { flex-direction: column; align-items: flex-start; }
+            .category-filter { width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 8px; }
+            .filter-btn { white-space: nowrap; }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .article-card {
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .article-card:nth-child(1) { animation-delay: 0.1s; }
+        .article-card:nth-child(2) { animation-delay: 0.15s; }
+        .article-card:nth-child(3) { animation-delay: 0.2s; }
+        .article-card:nth-child(4) { animation-delay: 0.25s; }
+        .article-card:nth-child(5) { animation-delay: 0.3s; }
+        .article-card:nth-child(6) { animation-delay: 0.35s; }
+
+    </style>
 </head>
 
 <body>
-  <div id="desktop-nav-bar">
-  </div>
-  <div id="blogger" class="text-left">
-    <div id="all-articles-list"></div>
-    <div style="margin: 0px; padding: 0px;" id="footer">
-    </div>
-    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <div id="desktop-nav-bar"></div>
+    <div class="nav-spacer"></div>
+
+
+    <!-- Main Content -->
+    <main class="blog-main">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">All Articles</h2>
+                <p class="section-subtitle">Explore insights on career, interviews, and workplace dynamics</p>
+            </div>
+            <div class="category-filter">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="career">Career</button>
+                <button class="filter-btn" data-category="interview">Interviews</button>
+                <button class="filter-btn" data-category="workplace">Workplace</button>
+            </div>
+        </div>
+
+        <div class="articles-grid">
+            <a href="/blog/build-your-website.html" class="article-card" data-category="career">
+                <div class="article-card-image">
+                    <img src="/images/blogs/build-your-website.jpg" alt="Build Your Portfolio Website">
+                    <span class="article-card-category">Career</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">Build Your Online Portfolio Website</h3>
+                    <p class="article-card-excerpt">Step-by-step guide to building your online portfolio website with tips and best practices.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 8 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/zoom-interview-tips.html" class="article-card" data-category="interview">
+                <div class="article-card-image">
+                    <img src="/images/blogs/zoom-interview-tips.jpg" alt="Zoom Interview Tips">
+                    <span class="article-card-category">Interview</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">5 Essential Tips Before Your Next Zoom Interview</h3>
+                    <p class="article-card-excerpt">Master virtual interviews with these proven tips for success in remote hiring processes.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 6 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/linkedin-job-referral.html" class="article-card" data-category="career">
+                <div class="article-card-image">
+                    <img src="/images/blogs/linkedin-job-referral.jpg" alt="LinkedIn Job Referral">
+                    <span class="article-card-category">Career</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">5 Effective Ways to Get a LinkedIn Job Referral</h3>
+                    <p class="article-card-excerpt">Learn how to leverage LinkedIn connections to get referrals for your dream job.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 10 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/my-Javascript-interview-experiences-and-lessons.html" class="article-card" data-category="interview">
+                <div class="article-card-image">
+                    <img src="/images/blogs/my-Javascript-interview-experiences-and-lessons-cover.jpg" alt="JavaScript Interview">
+                    <span class="article-card-category">Interview</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">My JavaScript Interview Experiences & Lessons</h3>
+                    <p class="article-card-excerpt">Real experiences and lessons learned from JavaScript interviews at top companies.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 15 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/software-engineer-versus-architect.html" class="article-card" data-category="career">
+                <div class="article-card-image">
+                    <img src="/images/blogs/software-engineer-versus-architect.jpg" alt="Engineer vs Architect">
+                    <span class="article-card-category">Career</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">Software Engineer V/S Software Architect</h3>
+                    <p class="article-card-excerpt">Understand the key differences between these two crucial roles in tech.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 7 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/how-to-get-promoted-to-senior-software-engineer.html" class="article-card" data-category="career">
+                <div class="article-card-image">
+                    <img src="/images/blogs/sr-software-engineer.jpg" alt="Senior Software Engineer">
+                    <span class="article-card-category">Career</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">8 Tips to Get Promoted to Senior Software Engineer</h3>
+                    <p class="article-card-excerpt">Actionable strategies to accelerate your path to a senior engineering role.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 8 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/12-types-of-software-developers-in-office.html" class="article-card" data-category="workplace">
+                <div class="article-card-image">
+                    <img src="/images/blogs/12-TYPES-OF-DEVS.jpg" alt="Types of Developers">
+                    <span class="article-card-category">Workplace</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">12 Types of Software Developers in Office</h3>
+                    <p class="article-card-excerpt">A fun and insightful look at the different developer personalities you'll meet.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 10 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/professional-relationships-in-IT-The-key.html" class="article-card" data-category="workplace">
+                <div class="article-card-image">
+                    <img src="/images/blogs/professional-relationships.jpg" alt="Professional Relationships">
+                    <span class="article-card-category">Workplace</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">Professional Relationships in IT - The Key</h3>
+                    <p class="article-card-excerpt">Why building strong professional relationships is crucial for your IT career.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 5 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/5-mistakes-you-should-avoid-as-a-manager-in-IT.html" class="article-card" data-category="workplace">
+                <div class="article-card-image">
+                    <img src="/images/blogs/5-manager-mistakes.jpg" alt="Manager Mistakes">
+                    <span class="article-card-category">Workplace</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">5 Mistakes You Should Avoid as a Manager</h3>
+                    <p class="article-card-excerpt">Common pitfalls that new and experienced managers should watch out for.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 6 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/5-reasons-you-should-avoid-a-job-change-in-IT.html" class="article-card" data-category="career">
+                <div class="article-card-image">
+                    <img src="/images/blogs/avoid-job-change.jpg" alt="Job Change">
+                    <span class="article-card-category">Career</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">5 Reasons You Should Avoid a Job Change</h3>
+                    <p class="article-card-excerpt">When staying in your current role might be the smarter career move.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 5 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/5-ways-to-overcome-The-Low-Salary-Syndrome.html" class="article-card" data-category="career">
+                <div class="article-card-image">
+                    <img src="/images/blogs/low-salary.jpg" alt="Low Salary">
+                    <span class="article-card-category">Career</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">5 Ways to Overcome The Low Salary Syndrome</h3>
+                    <p class="article-card-excerpt">Strategies to break free from salary stagnation and boost your earnings.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 5 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/save-time-save-health-focus-and-do-it.html" class="article-card" data-category="career">
+                <div class="article-card-image">
+                    <img src="/images/blogs/save-time-save-health.jpg" alt="Save Time and Health">
+                    <span class="article-card-category">Productivity</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">Save Time. Save Health. Focus and Do It.</h3>
+                    <p class="article-card-excerpt">Productivity tips to maintain work-life balance while achieving your goals.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 5 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/treating-technology-as-colleagues.html" class="article-card" data-category="workplace">
+                <div class="article-card-image">
+                    <img src="/images/blogs/tech-as-colleagues.jpg" alt="Technology as Colleagues">
+                    <span class="article-card-category">Perspectives</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">Treating Technology as Colleagues</h3>
+                    <p class="article-card-excerpt">A unique perspective on how we interact with tools and technologies.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 4 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/50-signs-your-co-worke-is-quitting-the-job.html" class="article-card" data-category="workplace">
+                <div class="article-card-image">
+                    <img src="/images/blogs/50-signs.jpg" alt="50 Signs Quitting">
+                    <span class="article-card-category">Workplace</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">50 Signs Your Co-worker is Quitting</h3>
+                    <p class="article-card-excerpt">Recognize the telltale signs when a colleague is about to leave.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 15 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/4-types-of-1-on-1-meetings.html" class="article-card" data-category="workplace">
+                <div class="article-card-image">
+                    <img src="/images/blogs/4-types-of-1-on-1-meetings.jpg" alt="1-on-1 Meetings">
+                    <span class="article-card-category">Workplace</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">4 Types of 1-on-1 Meetings in Office</h3>
+                    <p class="article-card-excerpt">Understanding different types of one-on-one meetings and their purposes.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 6 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/should-frontend-devs-learn-UX.html" class="article-card" data-category="career">
+                <div class="article-card-image">
+                    <img src="/images/blogs/frontend-ux.jpg" alt="Frontend UX">
+                    <span class="article-card-category">Skills</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">Should Frontend Developers Learn UX Design?</h3>
+                    <p class="article-card-excerpt">Exploring the intersection of frontend development and UX design skills.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 3 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/blog/gain-business-trip-to-abroad-for-junior-engineers-in-India.html" class="article-card" data-category="career">
+                <div class="article-card-image">
+                    <img src="/images/blogs/business-trip.jpg" alt="Business Trip">
+                    <span class="article-card-category">Career</span>
+                </div>
+                <div class="article-card-body">
+                    <h3 class="article-card-title">How to Gain a Business Trip Abroad</h3>
+                    <p class="article-card-excerpt">Tips for junior engineers to earn international business travel opportunities.</p>
+                    <div class="article-card-meta">
+                        <span class="article-card-meta-item"><i class="fas fa-clock"></i> 7 min</span>
+                        <span class="read-more-link">Read <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Author Section -->
+        <section class="author-section">
+            <img src="/images/me_square.png" alt="Manoj Satishkumar" class="author-avatar-large">
+            <div class="author-info">
+                <h3>Manoj Satishkumar</h3>
+                <p class="author-title">Staff Software Engineer @ Walmart Global Tech</p>
+                <p>With 12+ years of experience in frontend development, I share insights on web technologies, career growth, and workplace dynamics. Follow me for regular updates on software engineering and career advice.</p>
+                <div class="author-social-links">
+                    <a href="mailto:88manojs@gmail.com" class="email" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com/in/manojsatishkumar/" class="linkedin" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.youtube.com/@ManojSatishkumar" class="youtube" title="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com/ManojSatishkumar" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://twitter.com/MSK_Web_Manoj" class="twitter" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
     <script src="/lib/jquery/jquery.min.js"></script>
-    <script src="/lib/jquery/jquery-migrate.min.js"></script>
     <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/lib/typed/typed.js"></script>
     <script src="/js/main.js"></script>
     <script>
-      document.addEventListener('contextmenu', event => event.preventDefault());
-    </script>
-    <script>
-      $(function () {
-        $("#all-articles-list").load("/blog/all-articles.html");
-        $("#footer").load("/components/footer.html");
-        setTimeout(()=>{
-        $('.nav-blogger').addClass("active")
-      },1000)
-      });
+        $(function () {
+            $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
+            $("#footer").load("/components/footer.html");
+        });
+
+        // Category filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                document.querySelectorAll('.article-card').forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'flex';
+                        card.style.animation = 'fadeInUp 0.5s ease-out both';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
     </script>
 </body>
 
