@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>System Design Concepts - Manoj Satishkumar</title>
+  <title>Core Principles - Manoj Satishkumar</title>
   <meta name="description" content="Interactive visual guide to system design concepts including Availability, Reliability, Scalability, and more.">
   <link rel="icon" href="/images/favicon.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -861,7 +861,7 @@
       <img src="/images/me_circle.png" alt="Manoj">
       <span>Manoj Satishkumar</span>
     </a>
-    <span class="header-title">System Design Concepts</span>
+    <span class="header-title">Core Principles</span>
     <nav class="header-nav">
       <a href="/">Portfolio</a>
       <a href="/blog">Blog</a>
@@ -878,18 +878,18 @@
 
       <!-- Domain Toggle -->
       <div class="domain-toggle">
-        <button class="domain-toggle-btn active" id="backendToggle" onclick="switchDomain('backend')">
-          <span class="toggle-icon">🖥️</span>
-          <span>Backend</span>
-        </button>
-        <button class="domain-toggle-btn" id="frontendToggle" onclick="switchDomain('frontend')">
+        <button class="domain-toggle-btn active" id="frontendToggle" onclick="switchDomain('frontend')">
           <span class="toggle-icon">🎨</span>
           <span>Frontend</span>
+        </button>
+        <button class="domain-toggle-btn" id="backendToggle" onclick="switchDomain('backend')">
+          <span class="toggle-icon">🖥️</span>
+          <span>Backend</span>
         </button>
       </div>
 
       <!-- Backend Concepts -->
-      <div class="concepts-container active" id="backendConcepts">
+      <div class="concepts-container" id="backendConcepts">
 
       <!-- Core Principles -->
       <div class="category expanded" data-category="core">
@@ -1284,7 +1284,7 @@
       </div><!-- End Backend Concepts -->
 
       <!-- Frontend Concepts -->
-      <div class="concepts-container" id="frontendConcepts">
+      <div class="concepts-container active" id="frontendConcepts">
 
       <!-- Core Frontend Principles -->
       <div class="category expanded" data-category="fe-core">
@@ -1887,7 +1887,7 @@
         <!-- Welcome State -->
         <div class="welcome-state" id="welcomeState">
           <div class="welcome-icon">🧠</div>
-          <h1>System Design Concepts</h1>
+          <h1>Core Principles</h1>
           <p>Explore comprehensive visual explanations of essential system design principles. Select a concept from the sidebar to begin your learning journey.</p>
         </div>
 
@@ -16939,7 +16939,7 @@ for user john@example.com</div>
           { level: "Edge", downtime: "Latest 2", useCase: "Standard" }
         ]
       },
-      "fe-touch-events": {
+      "fe-touch-pointer": {
         title: "Touch vs Pointer Events",
         subtitle: "Handling user input across touch, mouse, and stylus devices.",
         badge: { text: "Cross-Platform", color: "#8b5cf6", bg: "rgba(139, 92, 246, 0.15)" },
@@ -17213,7 +17213,7 @@ for user john@example.com</div>
       },
 
       // Micro-Frontends
-      "fe-mfe-app-shell": {
+      "fe-app-shell": {
         title: "App Shell",
         subtitle: "The minimal UI that hosts micro-frontend applications.",
         badge: { text: "Micro-FE", color: "#a855f7", bg: "rgba(168, 85, 247, 0.15)" },
@@ -17240,7 +17240,7 @@ for user john@example.com</div>
           { level: "Auth", downtime: "Shell level", useCase: "Centralized" }
         ]
       },
-      "fe-mfe-routing": {
+      "fe-routing-isolation": {
         title: "Routing Isolation",
         subtitle: "Managing routing in a micro-frontend architecture.",
         badge: { text: "Micro-FE", color: "#3b82f6", bg: "rgba(59, 130, 246, 0.15)" },
@@ -17267,7 +17267,7 @@ for user john@example.com</div>
           { level: "Events", downtime: "Navigation", useCase: "Cross-MFE" }
         ]
       },
-      "fe-mfe-shared-deps": {
+      "fe-shared-dependencies": {
         title: "Shared Dependencies",
         subtitle: "Managing shared libraries across micro-frontends.",
         badge: { text: "Micro-FE", color: "#22c55e", bg: "rgba(34, 197, 94, 0.15)" },
