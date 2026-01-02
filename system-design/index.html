@@ -1543,18 +1543,18 @@
 
       <!-- Domain Toggle -->
       <div class="domain-toggle">
-        <button class="domain-toggle-btn active" id="frontendToggle" onclick="switchDomain('frontend')">
-          <span class="toggle-icon">🎨</span>
-          <span>Frontend</span>
-        </button>
-        <button class="domain-toggle-btn" id="backendToggle" onclick="switchDomain('backend')">
+        <button class="domain-toggle-btn active" id="backendToggle" onclick="switchDomain('backend')">
           <span class="toggle-icon">🖥️</span>
           <span>Backend</span>
+        </button>
+        <button class="domain-toggle-btn" id="frontendToggle" onclick="switchDomain('frontend')">
+          <span class="toggle-icon">🎨</span>
+          <span>Frontend</span>
         </button>
       </div>
 
       <!-- Backend Concepts -->
-      <div class="concepts-container" id="backendConcepts">
+      <div class="concepts-container active" id="backendConcepts">
 
       <!-- Core Principles -->
       <div class="category expanded" data-category="core">
@@ -1854,7 +1854,7 @@
       <div class="category" data-category="devops">
         <div class="category-header" onclick="toggleCategory(this.parentElement)">
           <div class="category-icon" style="background: linear-gradient(135deg, #84cc16, #65a30d);">⚙️</div>
-          <span class="category-name">DevOps & Operations</span>
+          <span class="category-name">DevOps</span>
           <span class="category-count">7</span>
           <span class="category-arrow">›</span>
         </div>
@@ -1949,7 +1949,7 @@
       </div><!-- End Backend Concepts -->
 
       <!-- Frontend Concepts -->
-      <div class="concepts-container active" id="frontendConcepts">
+      <div class="concepts-container" id="frontendConcepts">
 
       <!-- Core Frontend Principles -->
       <div class="category expanded" data-category="fe-core">
@@ -2583,18 +2583,6 @@
           <div class="welcome-section-title">What's Inside</div>
           
           <div class="welcome-categories">
-            <!-- Frontend -->
-            <div class="welcome-category-group frontend-group">
-              <div class="category-card-icon">🎨</div>
-              <h3>Frontend System Design</h3>
-              <p class="category-card-description">
-                Dive deep into modern frontend architecture patterns. Explore component design, state management, performance optimization, SSR/SSG strategies, accessibility best practices, testing methodologies, and micro-frontend architectures. Essential knowledge for frontend architects.
-              </p>
-              <button class="category-cta-btn frontend-btn" onclick="switchDomain('frontend'); showConcept('fe-usability');">
-                Explore Frontend <span class="arrow-icon">→</span>
-              </button>
-            </div>
-
             <!-- Backend -->
             <div class="welcome-category-group backend-group">
               <div class="category-card-icon">⚡</div>
@@ -2604,6 +2592,18 @@
               </p>
               <button class="category-cta-btn backend-btn" onclick="switchDomain('backend'); showConcept('availability');">
                 Explore Backend <span class="arrow-icon">→</span>
+              </button>
+            </div>
+
+            <!-- Frontend -->
+            <div class="welcome-category-group frontend-group">
+              <div class="category-card-icon">🎨</div>
+              <h3>Frontend System Design</h3>
+              <p class="category-card-description">
+                Dive deep into modern frontend architecture patterns. Explore component design, state management, performance optimization, SSR/SSG strategies, accessibility best practices, testing methodologies, and micro-frontend architectures. Essential knowledge for frontend architects.
+              </p>
+              <button class="category-cta-btn frontend-btn" onclick="switchDomain('frontend'); showConcept('fe-usability');">
+                Explore Frontend <span class="arrow-icon">→</span>
               </button>
             </div>
           </div>
@@ -18183,6 +18183,9 @@ for user john@example.com</div>
       document.getElementById('welcomeState').style.display = 'flex';
       document.getElementById('conceptContainer').innerHTML = '';
       document.querySelectorAll('.concept-item').forEach(item => item.classList.remove('active'));
+      
+      // Show footer only on homepage
+      document.querySelector('.site-footer').style.display = 'block';
     }
 
     // Toggle category expansion
@@ -18204,6 +18207,9 @@ for user john@example.com</div>
 
       // Hide welcome state
       document.getElementById('welcomeState').style.display = 'none';
+      
+      // Hide footer when viewing a concept
+      document.querySelector('.site-footer').style.display = 'none';
 
       // Generate content
       const container = document.getElementById('conceptContainer');
