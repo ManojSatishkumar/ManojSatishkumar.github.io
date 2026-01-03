@@ -51,19 +51,7 @@
         body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
         .nav-spacer { height: 80px; }
         .blog-layout { display: grid; grid-template-columns: 280px 1fr; gap: 40px; max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
-        .author-sidebar { position: sticky; top: 100px; height: fit-content; }
-        .author-card { background: var(--color-surface); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-md); border: 1px solid var(--color-border); }
-        .author-avatar { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; display: block; border: 3px solid var(--color-border); }
-        .author-name { font-size: 1.25rem; font-weight: 700; text-align: center; margin-bottom: 4px; }
-        .author-title { font-size: 0.875rem; color: var(--color-text-muted); text-align: center; margin-bottom: 4px; }
-        .author-company { font-size: 0.8rem; color: var(--color-text-muted); text-align: center; margin-bottom: 16px; }
-        .author-stats { display: flex; flex-direction: column; gap: 8px; padding: 16px 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); margin-bottom: 16px; }
-        .author-stat { display: flex; align-items: center; gap: 10px; font-size: 0.875rem; color: var(--color-text-muted); }
-        .author-stat i { width: 20px; text-align: center; }
-        .author-social { display: flex; justify-content: center; gap: 8px; }
-        .author-social a { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.9rem; transition: transform 0.2s; }
-        .author-social a:hover { transform: translateY(-2px); }
-        .author-social .linkedin { background: #0077b5; } .author-social .youtube { background: #ff0000; } .author-social .twitter { background: #1da1f2; } .author-social .github { background: #333; } .author-social .email { background: #10b981; }
+        #author-sidebar { position: sticky; top: 100px; height: fit-content; }
         .article-container { min-width: 0; }
         .article-content { background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--color-border); overflow: hidden; animation: fadeInUp 0.6s ease-out; }
         .article-hero { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
@@ -85,20 +73,7 @@
         .share-strip-label { font-size: 0.875rem; font-weight: 600; color: var(--color-text-muted); }
         .share-strip a { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--color-bg); color: var(--color-text-muted); border: 1px solid var(--color-border); transition: all 0.2s; }
         .share-strip a:hover { background: var(--color-accent); color: white; border-color: var(--color-accent); }
-        .mobile-author { display: none; background: var(--color-surface); border-radius: var(--radius-md); margin-bottom: 24px; border: 1px solid var(--color-border); overflow: hidden; }
-        .mobile-author-header { display: flex; align-items: center; gap: 12px; padding: 16px; cursor: pointer; }
-        .mobile-author-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
-        .mobile-author-info { flex: 1; }
-        .mobile-author-name { font-weight: 600; font-size: 0.95rem; }
-        .mobile-author-title { font-size: 0.8rem; color: var(--color-text-muted); }
-        .mobile-author-toggle { width: 32px; height: 32px; border-radius: 50%; background: var(--color-bg); display: flex; align-items: center; justify-content: center; transition: transform 0.3s; }
-        .mobile-author.expanded .mobile-author-toggle { transform: rotate(180deg); }
-        .mobile-author-details { max-height: 0; overflow: hidden; transition: max-height 0.3s; }
-        .mobile-author.expanded .mobile-author-details { max-height: 400px; }
-        .mobile-author-details-inner { padding: 0 16px 16px; }
-        .mobile-author-social { display: flex; gap: 8px; margin-top: 12px; }
-        .mobile-author-social a { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.8rem; }
-        @media (max-width: 900px) { .blog-layout { grid-template-columns: 1fr; padding: 20px 16px; gap: 0; } .author-sidebar { display: none; } .mobile-author { display: block; } .nav-spacer { height: 60px; } .article-body { padding: 24px; } .article-title { font-size: 1.75rem; } .article-prose { font-size: 1.1rem; } }
+        @media (max-width: 900px) { .blog-layout { grid-template-columns: 1fr; padding: 20px 16px; gap: 0; } #author-sidebar { display: none; } .nav-spacer { height: 60px; } .article-body { padding: 24px; } .article-title { font-size: 1.75rem; } .article-prose { font-size: 1.1rem; } }
         @media (max-width: 480px) { .article-body { padding: 20px 16px; } .article-title { font-size: 1.5rem; } .article-prose { font-size: 1rem; } .share-strip { flex-wrap: wrap; } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .reading-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, var(--color-accent), #6366f1); z-index: 9999; }
@@ -113,50 +88,9 @@
     <div class="nav-spacer"></div>
 
     <div class="blog-layout">
-        <aside class="author-sidebar">
-            <div class="author-card">
-                <img src="/images/me_square.png" alt="Manoj Satishkumar" class="author-avatar">
-                <h3 class="author-name">Manoj Satishkumar</h3>
-                <p class="author-title">Staff Software Engineer</p>
-                <p class="author-company">Walmart Global Tech</p>
-                <div class="author-stats">
-                    <div class="author-stat"><i class="fas fa-briefcase" style="color: #17a2b8;"></i><span>12+ Years in Frontend</span></div>
-                    <div class="author-stat"><i class="fas fa-users" style="color: #e83e8c;"></i><span>68K+ LinkedIn Followers</span></div>
-                    <div class="author-stat"><i class="fas fa-map-marker-alt" style="color: #007bff;"></i><span>Bengaluru, India</span></div>
-                </div>
-                <div class="author-social">
-                    <a href="mailto:88manojs@gmail.com" class="email"><i class="fas fa-envelope"></i></a>
-                    <a href="https://www.linkedin.com/in/manojsatishkumar/" class="linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://www.youtube.com/@ManojSatishkumar" class="youtube" target="_blank"><i class="fab fa-youtube"></i></a>
-                    <a href="https://github.com/ManojSatishkumar" class="github" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://twitter.com/MSK_Web_Manoj" class="twitter" target="_blank"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-        </aside>
+        <div id="author-sidebar"></div>
 
         <main class="article-container">
-            <div class="mobile-author" id="mobile-author">
-                <div class="mobile-author-header" onclick="toggleMobileAuthor()">
-                    <img src="/images/me_square.png" alt="Manoj Satishkumar" class="mobile-author-avatar">
-                    <div class="mobile-author-info">
-                        <div class="mobile-author-name">Manoj Satishkumar</div>
-                        <div class="mobile-author-title">Staff Software Engineer @ Walmart</div>
-                    </div>
-                    <div class="mobile-author-toggle"><i class="fas fa-chevron-down"></i></div>
-                </div>
-                <div class="mobile-author-details">
-                    <div class="mobile-author-details-inner">
-                        <div class="author-stat"><i class="fas fa-briefcase" style="color: #17a2b8;"></i><span>12+ Years in Frontend</span></div>
-                        <div class="mobile-author-social">
-                            <a href="mailto:88manojs@gmail.com" style="background: #10b981;"><i class="fas fa-envelope"></i></a>
-                            <a href="https://www.linkedin.com/in/manojsatishkumar/" style="background: #0077b5;" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://www.youtube.com/@ManojSatishkumar" style="background: #ff0000;" target="_blank"><i class="fab fa-youtube"></i></a>
-                            <a href="https://github.com/ManojSatishkumar" style="background: #333;" target="_blank"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <article class="article-content">
                 <img src="/images/blogs/5-manager-mistakes.jpg" alt="5 Mistakes You Should Avoid as a Manager in IT" class="article-hero">
                 
@@ -248,8 +182,7 @@
     <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/main.js"></script>
     <script>
-        $(function () { $("#desktop-nav-bar").load("/components/desktop-nav-bar.html"); $("#footer").load("/components/footer.html"); });
-        function toggleMobileAuthor() { document.getElementById('mobile-author').classList.toggle('expanded'); }
+        $(function () { $("#desktop-nav-bar").load("/components/desktop-nav-bar.html"); $("#footer").load("/components/footer.html"); $("#author-sidebar").load("/components/side-profile.html"); });
         window.addEventListener('scroll', function() { const article = document.querySelector('.article-content'); const progressBar = document.getElementById('reading-progress'); const backToTop = document.getElementById('back-to-top'); if (article) { const scrollY = window.scrollY; const articleTop = article.offsetTop; const articleHeight = article.offsetHeight; const progress = Math.min(100, Math.max(0, ((scrollY - articleTop + window.innerHeight) / articleHeight) * 100)); progressBar.style.width = progress + '%'; } backToTop.classList.toggle('visible', window.scrollY > 500); });
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
         document.addEventListener('contextmenu', e => e.preventDefault());

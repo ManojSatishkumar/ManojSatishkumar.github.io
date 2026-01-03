@@ -491,41 +491,7 @@
     <div class="nav-spacer"></div>
 
     <div class="blog-layout">
-        <aside class="author-sidebar">
-            <div class="author-card">
-                <img src="/images/me_square.png" alt="Manoj Satishkumar" class="author-avatar">
-                <h3 class="author-name">Manoj Satishkumar</h3>
-                <p class="author-title">Staff Software Engineer</p>
-                <p class="author-company">Walmart Global Tech</p>
-                
-                <div class="author-stats">
-                    <div class="author-stat">
-                        <i class="fas fa-briefcase" style="color: #17a2b8;"></i>
-                        <span>12+ Years in Frontend</span>
-                    </div>
-                    <div class="author-stat">
-                        <i class="fas fa-users" style="color: #e83e8c;"></i>
-                        <span>68K+ LinkedIn Followers</span>
-                    </div>
-                    <div class="author-stat">
-                        <i class="fas fa-chalkboard-teacher" style="color: #a435f0;"></i>
-                        <span>17K+ Udemy Students</span>
-                    </div>
-                    <div class="author-stat">
-                        <i class="fas fa-map-marker-alt" style="color: #007bff;"></i>
-                        <span>Bengaluru, India</span>
-                    </div>
-                </div>
-
-                <div class="author-social">
-                    <a href="mailto:88manojs@gmail.com" class="email" title="Email"><i class="fas fa-envelope"></i></a>
-                    <a href="https://www.linkedin.com/in/manojsatishkumar/" class="linkedin" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://www.youtube.com/@ManojSatishkumar" class="youtube" title="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
-                    <a href="https://github.com/ManojSatishkumar" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://twitter.com/MSK_Web_Manoj" class="twitter" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-        </aside>
+        <aside class="author-sidebar" id="author-sidebar"></aside>
 
         <main class="article-container">
             <div class="mobile-author" id="mobile-author">
@@ -658,6 +624,7 @@
         $(function () {
             $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
             $("#footer").load("/components/footer.html");
+            $("#author-sidebar").load("/components/side-profile.html");
         });
 
         function toggleMobileAuthor() {
