@@ -273,6 +273,37 @@
       </div>
     </div>
     
+    <!-- Services Expandable Menu -->
+    <div class="mobile-menu-expandable">
+      <div class="mobile-menu-expand-trigger" onclick="toggleMobileServices()">
+        <i class="fas fa-concierge-bell"></i>
+        <span>Services</span>
+        <i class="fas fa-chevron-down mobile-menu-chevron" id="services-chevron"></i>
+      </div>
+      <div class="mobile-menu-submenu" id="mobile-services-submenu">
+        <a href="https://topmate.io/manoj_satishkumar" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
+          <i class="fas fa-user-tie"></i>
+          1:1 Mentorship
+        </a>
+        <a href="https://topmate.io/manoj_satishkumar" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
+          <i class="fas fa-file-alt"></i>
+          Resume Review
+        </a>
+        <a href="https://topmate.io/manoj_satishkumar" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
+          <i class="fas fa-comments"></i>
+          Mock Interviews
+        </a>
+        <a href="https://topmate.io/manoj_satishkumar" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
+          <i class="fas fa-compass"></i>
+          Career Guidance
+        </a>
+        <a href="https://topmate.io/manoj_satishkumar" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
+          <i class="fas fa-handshake"></i>
+          Job Referral
+        </a>
+      </div>
+    </div>
+    
     <a href="/q-n-a/q-n-a-with-manoj.html" class="mobile-menu-link" onclick="closeMobileMenu()">
       <i class="fas fa-question-circle"></i>
       <span>FAQs</span>
@@ -1277,6 +1308,18 @@
   function toggleMobileCourses() {
     var submenu = document.getElementById('mobile-courses-submenu');
     var chevron = document.getElementById('courses-chevron');
+    
+    if (submenu) {
+      submenu.classList.toggle('open');
+    }
+    if (chevron) {
+      chevron.classList.toggle('rotated');
+    }
+  }
+
+  function toggleMobileServices() {
+    var submenu = document.getElementById('mobile-services-submenu');
+    var chevron = document.getElementById('services-chevron');
     
     if (submenu) {
       submenu.classList.toggle('open');
