@@ -239,81 +239,10 @@
             gap: 10px;
         }
 
-        /* Author Section */
-        .author-section {
-            background: linear-gradient(135deg, var(--color-surface) 0%, #f8fafc 100%);
-            border-radius: var(--radius-xl);
-            padding: 48px;
-            margin-top: 60px;
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            border: 1px solid var(--color-border);
-            box-shadow: var(--shadow-md);
-        }
-
-        .author-avatar-large {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--color-border);
-            flex-shrink: 0;
-        }
-
-        .author-info h3 {
-            font-family: var(--font-serif);
-            font-size: 1.75rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .author-info .author-title {
-            color: var(--color-accent);
-            font-weight: 500;
-            margin-bottom: 12px;
-        }
-
-        .author-info p {
-            color: var(--color-text-muted);
-            margin-bottom: 20px;
-            line-height: 1.7;
-        }
-
-        .author-social-links {
-            display: flex;
-            gap: 12px;
-        }
-
-        .author-social-links a {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .author-social-links a:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .author-social-links .linkedin { background: #0077b5; }
-        .author-social-links .youtube { background: #ff0000; }
-        .author-social-links .twitter { background: #1da1f2; }
-        .author-social-links .github { background: #333; }
-        .author-social-links .email { background: #10b981; }
-
         /* Responsive */
         @media (max-width: 900px) {
             .nav-spacer { height: 60px; }
             .articles-grid { grid-template-columns: 1fr; gap: 24px; }
-            .author-section { flex-direction: column; text-align: center; padding: 32px 24px; }
-            .author-social-links { justify-content: center; }
         }
 
         @media (max-width: 480px) {
@@ -619,22 +548,6 @@
             </a>
         </div>
 
-        <!-- Author Section -->
-        <section class="author-section">
-            <img src="/images/me_square.png" alt="Manoj Satishkumar" class="author-avatar-large">
-            <div class="author-info">
-                <h3>Manoj Satishkumar</h3>
-                <p class="author-title">Staff Software Engineer @ Walmart Global Tech</p>
-                <p>With 12+ years of experience in frontend development, I share insights on web technologies, career growth, and workplace dynamics. Follow me for regular updates on software engineering and career advice.</p>
-                <div class="author-social-links">
-                    <a href="mailto:88manojs@gmail.com" class="email" title="Email"><i class="fas fa-envelope"></i></a>
-                    <a href="https://www.linkedin.com/in/manojsatishkumar/" class="linkedin" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://www.youtube.com/@ManojSatishkumar" class="youtube" title="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
-                    <a href="https://github.com/ManojSatishkumar" class="github" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://twitter.com/MSK_Web_Manoj" class="twitter" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-        </section>
     </main>
 
     <div id="footer"></div>
