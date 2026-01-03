@@ -423,6 +423,7 @@
       font-size: 0.95rem;
       background: linear-gradient(135deg, var(--color-accent-2), var(--color-accent));
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     
@@ -1249,9 +1250,10 @@
     // Disable right-click
     document.addEventListener('contextmenu', event => event.preventDefault());
     
-    // Load navbar
+    // Load navbar and footer
     $(function () {
       $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
+      $("#footer").load("/components/footer.html");
       setTimeout(() => {
         $('.nav-faqs').addClass("active");
       }, 1000);
