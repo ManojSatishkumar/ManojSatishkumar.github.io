@@ -208,8 +208,8 @@
 <!-- Mobile Navbar -->
 <nav class="mobile-navbar">
   <a href="/" class="mobile-navbar-brand">
-    <img src="/images/me_circle.png" alt="Manoj" class="mobile-navbar-avatar">
-    <span class="mobile-navbar-name">Manoj</span>
+    <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="mobile-navbar-avatar">
+    <span class="mobile-navbar-name">Manoj Satishkumar</span>
   </a>
   <button class="mobile-navbar-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
     <span class="hamburger-line"></span>
@@ -796,12 +796,15 @@
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     z-index: 1000;
     padding: 0 16px;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -2px rgba(0, 0, 0, 0.1),
+      0 10px 20px -5px rgba(0, 0, 0, 0.08);
   }
 
   .mobile-navbar-brand {
@@ -815,15 +818,19 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border: 2px solid #0ea5e9;
     object-fit: cover;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
   .mobile-navbar-name {
     font-size: 1.1rem;
-    font-weight: 600;
-    color: #1a1a2e;
+    font-weight: 800;
+    background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    letter-spacing: -0.02em;
   }
 
   .mobile-navbar-toggle {
