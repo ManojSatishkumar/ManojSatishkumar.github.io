@@ -73,34 +73,117 @@
   
   <!-- Font Awesome for mobile menu icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
    
    
 </head>
 
 <body>
-  <div style="margin-bottom: 100px;" id="desktop-nav-bar">
+  <div id="desktop-nav-bar"></div>
+  
+  <!-- FAQ Header Section -->
+  <div class="faq-header-section">
+    <div class="faq-header-container">
+      <div class="faq-header-content">
+        <h1 class="faq-title">Frequently Asked Questions</h1>
+        <p class="faq-subtitle">Get answers to common questions about web development, career growth, and software engineering</p>
+      </div>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMyGu2wrPkMUARRoAEV3eERruwx0FqvWBOmglJPlUQ7uhFjg/viewform?usp=sf_link" target="_blank" class="ask-question-btn">
+        <i class="fas fa-plus-circle"></i>
+        Ask a Question
+      </a>
+    </div>
   </div>
-  <!-- <div id="qna-header" class="home">
-  </div> -->
-  <div style="text-align: center; margin-bottom: 50px;" class="container">
-    <div class="container text-center">
-      <div style="font-size: 50px; font-weight: bold; background: #121FCF;
-      background: -webkit-linear-gradient(to right, #121FCF 0%, #CF1512 100%);
-      background: -moz-linear-gradient(to right, #121FCF 0%, #CF1512 100%);
-      background: linear-gradient(to right, #121FCF 0%, #CF1512 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;">Frequently Asked Questions</div>
-  </div>  
-    <br/>
-    <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdMyGu2wrPkMUARRoAEV3eERruwx0FqvWBOmglJPlUQ7uhFjg/viewform?usp=sf_link">
-      <button class="btn btn-info" style="height:70px; width:260px; font-size:x-large; border-radius:35px; background: linear-gradient(90deg, #17a2b8 0%, #ff6a00 100%); color: #fff; border: none; box-shadow: 0 4px 12px rgba(23,162,184,0.2); transition: background 0.3s;">
-        Ask a question
-      </button>
-      <br />
-    </a>
 
-  </div>
-  <br/>
+  <style>
+    .faq-header-section {
+      background: linear-gradient(135deg, #faf9f7 0%, #f0f4f8 100%);
+      padding: 40px 24px;
+      margin-bottom: 32px;
+    }
+    
+    .faq-header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    
+    .faq-header-content {
+      flex: 1;
+      min-width: 280px;
+    }
+    
+    .faq-title {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      line-height: 1.2;
+      margin: 0 0 8px 0;
+    }
+    
+    .faq-subtitle {
+      color: #64748b;
+      font-size: 1.1rem;
+      margin: 0;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    .ask-question-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .ask-question-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+      color: #fff;
+      text-decoration: none;
+    }
+    
+    .ask-question-btn i {
+      font-size: 1.1rem;
+    }
+    
+    @media (max-width: 600px) {
+      .faq-header-section {
+        padding: 32px 16px;
+      }
+      .faq-title {
+        font-size: 1.75rem;
+      }
+      .faq-subtitle {
+        font-size: 1rem;
+      }
+      .faq-header-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .ask-question-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+
   <div id="qna" class="text-left">
     <div class="container ">
       <div class="card-columns ">
