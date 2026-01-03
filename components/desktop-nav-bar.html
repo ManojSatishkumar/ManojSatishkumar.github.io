@@ -241,6 +241,38 @@
       <i class="fas fa-newspaper"></i>
       <span>Blog</span>
     </a>
+    
+    <!-- Courses Expandable Menu -->
+    <div class="mobile-menu-expandable">
+      <div class="mobile-menu-expand-trigger" onclick="toggleMobileCourses()">
+        <i class="fas fa-graduation-cap"></i>
+        <span>Courses</span>
+        <i class="fas fa-chevron-down mobile-menu-chevron" id="courses-chevron"></i>
+      </div>
+      <div class="mobile-menu-submenu" id="mobile-courses-submenu">
+        <a href="https://www.udemy.com/course/msk-frontend-system-design-interview-guidance/?referralCode=F21AB3412B4B123F5611" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
+          <i class="fas fa-star"></i>
+          Complete Interview Prep Kit
+        </a>
+        <a href="https://www.udemy.com/course/designing-scalable-frontend-systems/?referralCode=8B2D2910F7EA2FABB17F" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
+          <i class="fas fa-sitemap"></i>
+          Frontend System Design
+        </a>
+        <a href="https://www.udemy.com/course/msk-javascript-bootcamp/?referralCode=FD0B655E3F12E8610717" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
+          <i class="fab fa-js-square"></i>
+          JavaScript Bootcamp
+        </a>
+        <a href="https://www.udemy.com/course/msk-typescript-bootcamp-level-1/?referralCode=BA9964C6FFEC8306F9CB" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
+          <i class="fas fa-code"></i>
+          TypeScript Bootcamp
+        </a>
+        <a href="https://www.udemy.com/course/react-redux-material-ui-workshop/?referralCode=A2ED2C3382A3F16FC154" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
+          <i class="fab fa-react"></i>
+          React Redux Workshop
+        </a>
+      </div>
+    </div>
+    
     <a href="/q-n-a/q-n-a-with-manoj.html" class="mobile-menu-link" onclick="closeMobileMenu()">
       <i class="fas fa-question-circle"></i>
       <span>FAQs</span>
@@ -903,8 +935,8 @@
   .mobile-menu-drawer {
     position: fixed;
     top: 0;
-    right: -280px;
-    width: 280px;
+    right: -320px;
+    width: 320px;
     height: 100vh;
     background: #fff;
     z-index: 100000;
@@ -967,6 +999,82 @@
 
   .mobile-menu-link:hover {
     background: rgba(14, 165, 233, 0.08);
+    color: #0ea5e9;
+  }
+
+  /* Expandable Menu Styles */
+  .mobile-menu-expandable {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .mobile-menu-expand-trigger {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 24px;
+    color: #1a1a2e;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .mobile-menu-expand-trigger:hover {
+    background: rgba(14, 165, 233, 0.08);
+    color: #0ea5e9;
+  }
+
+  .mobile-menu-expand-trigger span {
+    flex: 1;
+  }
+
+  .mobile-menu-chevron {
+    font-size: 0.75rem;
+    transition: transform 0.3s ease;
+    color: #64748b;
+  }
+
+  .mobile-menu-chevron.rotated {
+    transform: rotate(180deg);
+  }
+
+  .mobile-menu-submenu {
+    max-height: 0;
+    overflow: hidden;
+    background: #f8fafc;
+    transition: max-height 0.3s ease;
+  }
+
+  .mobile-menu-submenu.open {
+    max-height: 400px;
+  }
+
+  .mobile-submenu-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px 12px 56px;
+    color: #475569;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: background 0.2s, color 0.2s;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  }
+
+  .mobile-submenu-link:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-submenu-link:hover {
+    background: rgba(14, 165, 233, 0.1);
+    color: #0ea5e9;
+  }
+
+  .mobile-submenu-link i {
+    width: 18px;
+    text-align: center;
+    font-size: 0.9rem;
     color: #0ea5e9;
   }
 
@@ -1164,5 +1272,17 @@
     if (overlay) overlay.classList.remove('active');
     if (drawer) drawer.classList.remove('active');
     document.body.style.overflow = '';
+  }
+
+  function toggleMobileCourses() {
+    var submenu = document.getElementById('mobile-courses-submenu');
+    var chevron = document.getElementById('courses-chevron');
+    
+    if (submenu) {
+      submenu.classList.toggle('open');
+    }
+    if (chevron) {
+      chevron.classList.toggle('rotated');
+    }
   }
 </script>
