@@ -57,7 +57,22 @@
         display: none;
       }
     }
+
+    /* Mobile navbar - ensure it shows on mobile */
+    @media (max-width: 1023px) {
+      #desktop-nav-bar .mobile-navbar {
+        display: flex !important;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+      body {
+        padding-top: 56px !important;
+      }
+    }
   </style>
+  
+  <!-- Font Awesome for mobile menu icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
    
    
 </head>
@@ -87,8 +102,6 @@
   </div>
   <br/>
   <div id="qna" class="text-left">
-    <div id="desktop-nav-bar">
-    </div>
     <div class="container ">
       <div class="card-columns ">
 
