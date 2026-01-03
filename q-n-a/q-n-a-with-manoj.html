@@ -24,6 +24,8 @@
   <meta name="twitter:description" content="Frequently asked questions about web development, software engineering, and career advice by Manoj Satishkumar." />
   <meta name="twitter:site" content="@MSK_Web_Manoj" />
   <meta name="twitter:image" content="https://manojsatishkumar.com/images/msk-faqs.jpg" />
+  <meta name="theme-color" content="#f8fafc" />
+  
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -41,24 +43,91 @@
   }
   </script>
   
-  <link href="/css/style.css" rel="stylesheet" />
-  <link href="/css/responsive.css" rel="stylesheet" />
-  <link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
-
   <!-- Favicon -->
   <link rel="shortcut icon" href="/images/favicon.png" />
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
   <style>
-    .responsive-ad-banner {
-      padding: 20px;
+    :root {
+      --color-bg: #f8fafc;
+      --color-surface: #ffffff;
+      --color-surface-2: #f1f5f9;
+      --color-surface-3: #e2e8f0;
+      --color-text: #1e293b;
+      --color-text-muted: #64748b;
+      --color-accent: #6366f1;
+      --color-accent-2: #0891b2;
+      --color-accent-3: #db2777;
+      --color-border: rgba(0, 0, 0, 0.08);
+      --color-question-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.06) 0%, rgba(8, 145, 178, 0.03) 100%);
+      --color-answer-bg: linear-gradient(135deg, rgba(8, 145, 178, 0.06) 0%, rgba(99, 102, 241, 0.03) 100%);
+      --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
     }
-
-    @media only screen and (min-width: 1024px) {
-      .nav-bar-top-mobile-fixed {
-        display: none;
-      }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-
-    /* Mobile navbar - ensure it shows on mobile */
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: var(--font-main);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    /* Background pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.08), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(8, 145, 178, 0.06), transparent),
+        radial-gradient(ellipse 50% 30% at 0% 100%, rgba(219, 39, 119, 0.04), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    /* Grid pattern overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    /* Mobile navbar fix */
     @media (max-width: 1023px) {
       #desktop-nav-bar .mobile-navbar {
         display: flex !important;
@@ -69,902 +138,1123 @@
         padding-top: 56px !important;
       }
     }
+    
+    @media (min-width: 1024px) {
+      .nav-bar-top-mobile-fixed {
+        display: none;
+      }
+    }
+    
+    /* Main container */
+    .faq-page {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+    
+    /* Hero section */
+    .faq-hero {
+      text-align: center;
+      padding: 60px 0 80px;
+      position: relative;
+    }
+    
+    .faq-hero::before {
+      content: '?';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 400px;
+      font-weight: 800;
+      opacity: 0.06;
+      color: var(--color-accent);
+      pointer-events: none;
+    }
+    
+    .faq-title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    
+    .faq-title .gradient {
+      background: linear-gradient(135deg, #6366f1 0%, #0891b2 50%, #db2777 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .faq-subtitle {
+      font-size: 1.15rem;
+      color: var(--color-text-muted);
+      max-width: 500px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    
+    .faq-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--color-accent) 0%, #8b5cf6 100%);
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: var(--radius-xl);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 30px rgba(99, 102, 241, 0.3);
+    }
+    
+    .faq-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(99, 102, 241, 0.4);
+      color: white;
+      text-decoration: none;
+    }
+    
+    .faq-cta i {
+      font-size: 1.1rem;
+    }
+    
+    /* Category filters */
+    .faq-categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+    
+    .category-btn {
+      padding: 10px 20px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+    
+    .category-btn:hover,
+    .category-btn.active {
+      background: var(--color-surface-2);
+      border-color: var(--color-accent);
+      color: var(--color-text);
+    }
+    
+    .category-btn.active {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(8, 145, 178, 0.08));
+    }
+    
+    /* FAQ items */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .faq-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    
+    .faq-item:hover {
+      border-color: rgba(99, 102, 241, 0.3);
+      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.08);
+    }
+    
+    .faq-item.open {
+      border-color: var(--color-accent);
+      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.12);
+    }
+    
+    .faq-question {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 24px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .faq-question:hover {
+      background: var(--color-surface-2);
+    }
+    
+    .question-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--color-border);
+    }
+    
+    .question-content {
+      flex: 1;
+    }
+    
+    .question-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    
+    .question-author {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--color-text);
+    }
+    
+    .question-author a {
+      color: var(--color-accent);
+      text-decoration: none;
+      margin-left: 8px;
+      font-size: 0.85rem;
+    }
+    
+    .question-author a:hover {
+      text-decoration: underline;
+    }
+    
+    .question-tag {
+      padding: 4px 10px;
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--color-accent);
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+    
+    .question-toggle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .question-toggle i {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      transition: transform 0.3s ease;
+    }
+    
+    .faq-item.open .question-toggle {
+      background: var(--color-accent);
+    }
+    
+    .faq-item.open .question-toggle i {
+      color: white;
+      transform: rotate(180deg);
+    }
+    
+    /* Answer section */
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    
+    .faq-item.open .faq-answer {
+      max-height: 2000px;
+    }
+    
+    .answer-inner {
+      display: flex;
+      gap: 16px;
+      padding: 0 24px 24px;
+      border-top: 1px solid var(--color-border);
+      margin-top: 0;
+      padding-top: 24px;
+      background: var(--color-answer-bg);
+    }
+    
+    .answer-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--color-accent-2);
+    }
+    
+    .answer-content {
+      flex: 1;
+    }
+    
+    .answer-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    
+    .answer-author {
+      font-weight: 700;
+      font-size: 0.95rem;
+      background: linear-gradient(135deg, var(--color-accent-2), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .verified-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      background: rgba(8, 145, 178, 0.12);
+      color: var(--color-accent-2);
+      font-size: 0.7rem;
+      font-weight: 600;
+      border-radius: 50px;
+      text-transform: uppercase;
+    }
+    
+    .verified-badge i {
+      font-size: 0.65rem;
+    }
+    
+    .answer-text {
+      font-size: 1rem;
+      color: var(--color-text);
+      line-height: 1.8;
+    }
+    
+    .answer-text p {
+      margin-bottom: 12px;
+    }
+    
+    .answer-text p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .answer-text a {
+      color: var(--color-accent-2);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .answer-text a:hover {
+      text-decoration: underline;
+    }
+    
+    .answer-list {
+      margin: 16px 0;
+      padding-left: 0;
+      list-style: none;
+    }
+    
+    .answer-list li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 10px;
+      color: var(--color-text);
+    }
+    
+    .answer-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+    }
+    
+    /* Video link */
+    .video-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: rgba(244, 114, 182, 0.15);
+      color: var(--color-accent-3);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: 16px;
+      transition: all 0.3s ease;
+    }
+    
+    .video-link:hover {
+      background: rgba(244, 114, 182, 0.25);
+      color: var(--color-accent-3);
+      text-decoration: none;
+    }
+    
+    /* Footer */
+    .faq-footer {
+      text-align: center;
+      padding: 60px 24px;
+      margin-top: 60px;
+      border-top: 1px solid var(--color-border);
+    }
+    
+    .footer-text {
+      font-size: 1.1rem;
+      color: var(--color-text-muted);
+      margin-bottom: 24px;
+    }
+    
+    .footer-text strong {
+      color: var(--color-text);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .faq-page {
+        padding: 24px 16px 60px;
+      }
+      
+      .faq-hero {
+        padding: 40px 0 60px;
+      }
+      
+      .faq-hero::before {
+        font-size: 200px;
+      }
+      
+      .faq-question {
+        padding: 20px 16px;
+      }
+      
+      .answer-inner {
+        padding: 16px;
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .question-avatar,
+      .answer-avatar {
+        width: 36px;
+        height: 36px;
+      }
+      
+      .question-toggle {
+        width: 36px;
+        height: 36px;
+      }
+      
+      .question-text {
+        font-size: 0.95rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .faq-categories {
+        gap: 8px;
+      }
+      
+      .category-btn {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+      }
+    }
   </style>
-  
-  <!-- Font Awesome for mobile menu icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-   
-   
 </head>
 
 <body>
   <div id="desktop-nav-bar"></div>
   
-  <!-- FAQ Header Section -->
-  <div class="faq-header-section">
-    <div class="faq-header-container">
-      <div class="faq-header-content">
-        <h1 class="faq-title">Frequently Asked Questions</h1>
-        <p class="faq-subtitle">Get answers to common questions about web development, career growth, and software engineering</p>
+  <div class="faq-page">
+    <!-- Hero Section -->
+    <section class="faq-hero">
+      <h1 class="faq-title">
+        Got <span class="gradient">Questions?</span>
+      </h1>
+      <p class="faq-subtitle">
+        Real questions from developers like you, answered with practical insights on web development, career growth, and tech interviews.
+      </p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMyGu2wrPkMUARRoAEV3eERruwx0FqvWBOmglJPlUQ7uhFjg/viewform?usp=sf_link" target="_blank" class="faq-cta">
+        <i class="fas fa-paper-plane"></i>
+        Submit Your Question
+      </a>
+      
+    </section>
+    
+    <!-- Category Filters -->
+    <div class="faq-categories">
+      <button class="category-btn active" onclick="filterFAQs('all')">All Questions</button>
+      <button class="category-btn" onclick="filterFAQs('career')">Career</button>
+      <button class="category-btn" onclick="filterFAQs('javascript')">JavaScript</button>
+      <button class="category-btn" onclick="filterFAQs('interview')">Interview</button>
+      <button class="category-btn" onclick="filterFAQs('learning')">Learning</button>
+    </div>
+    
+    <!-- FAQ List -->
+    <div class="faq-list">
+      
+      <!-- FAQ Item 1 -->
+      <div class="faq-item" data-category="career learning">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/people/saloni.jpg" alt="Saloni Jain" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Saloni Jain <a href="https://www.linkedin.com/in/saloni--jain/" target="_blank"><i class="fab fa-linkedin"></i></a></span>
+              <span class="question-tag">Career</span>
+            </div>
+            <p class="question-text">As a non-btech person, how do I navigate the overwhelming choices in tech and deal with the fear of missing out?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>I agree that there are so many EdTech companies trying to sell you a piece of their pie.</p>
+                <p>Non B.Tech graduates stand an equal chance in a place where skills are valued. I highly suggest you look at various roadmaps in the tech world. There are many legit YouTubers who have put the roadmaps. After going through these, do your own investigation online before trying to buy courses and trainings.</p>
+                <p>This is just like the stock market. You should never buy something just because it is trending. Do your homework and research online. The Internet is pretty powerful when it comes to sharing knowledge.</p>
+                <p>After that, think about your interests. Programming is not for everyone. Maybe you like designing or marketing. Pursue what interests you and keeps you engaged without boredom for the years to come.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMyGu2wrPkMUARRoAEV3eERruwx0FqvWBOmglJPlUQ7uhFjg/viewform?usp=sf_link" target="_blank" class="ask-question-btn">
-        <i class="fas fa-plus-circle"></i>
-        Ask a Question
+      
+      <!-- FAQ Item 2 -->
+      <div class="faq-item" data-category="interview javascript">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Interview</span>
+            </div>
+            <p class="question-text">What are the important DS and algorithms one should prepare for a frontend interview?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>If you are applying for a software engineer or senior software engineer positions, which demand under 8 years of experience, then you will have a DS & Algo round.</p>
+                <p>And for frontend, there is <strong>1 data structure</strong> which you must focus more than others — <strong>Trees</strong>.</p>
+                <p>We work with browser's DOM pretty much all the time as frontend engineers because that's how the web is designed. No matter which web framework/library you use, they will all create the DOM in some way and then finally render it out in the browser.</p>
+                <p>DOM is a tree data structure. Hence the name "DOM Tree". So please prepare how to traverse trees, finding node elements and manipulating them with lower time complexities.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 3 -->
+      <div class="faq-item" data-category="learning">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Learning</span>
+            </div>
+            <p class="question-text">Is it good making projects by looking at Udemy courses / YouTube videos?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <a href="https://youtu.be/tlNtaJRokmw" target="_blank" class="video-link">
+                  <i class="fas fa-play-circle"></i> Watch the Video
+                </a>
+                <p>Video tutorials are always good because they give you an initial "hand-holding".</p>
+                <p>What is not good is not practicing after the Udemy course is completed. Because the instructors will help you make a project which they are comfortable with and believes that it gives good insights into the topic.</p>
+                <p>You must however practice with more projects post the training to truly understand and get a grasp of the topic.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 4 -->
+      <div class="faq-item" data-category="javascript learning">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">JavaScript</span>
+            </div>
+            <p class="question-text">Which are some of the best resources/materials to learn JavaScript?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>There are a ton of materials online, but I can suggest based on my learning journey:</p>
+                <ul class="answer-list">
+                  <li>YDKJS Book series by Mr. Kyle Simpson</li>
+                  <li>Traversy Media YouTube channel by Mr. Brad Traversy</li>
+                  <li>MDN docs are easy to read and most accurate</li>
+                  <li>Read a lot of Medium blog posts on various aspects of JS</li>
+                  <li>Practice on FreeCodeCamp</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 5 -->
+      <div class="faq-item" data-category="career javascript">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Career</span>
+            </div>
+            <p class="question-text">I am a backend developer and I am interested to move to frontend with JavaScript. How do I get started?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>Welcome to frontend! You will need to learn in the below order:</p>
+                <ul class="answer-list">
+                  <li>HTML > CSS > JS (basics)</li>
+                  <li>Advanced JS</li>
+                  <li>Web browser basics & dev tools</li>
+                  <li>Web APIs, HTTP protocol</li>
+                  <li>Setup VS Code and practice</li>
+                  <li>Learn a library (like React)</li>
+                  <li>Learn JSS, SASS, LESS, Webpack, Babel, ESLint</li>
+                  <li>Learn UI framework (like Material UI)</li>
+                  <li>Learn state management (like Redux)</li>
+                  <li>Create websites</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 6 -->
+      <div class="faq-item" data-category="javascript">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">JavaScript</span>
+            </div>
+            <p class="question-text">What is IIFE pattern in JavaScript? Where can I use it?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p><strong>IIFE</strong> stands for <strong>Immediately Invoked Function Expression</strong>.</p>
+                <p>If you declare a function in JavaScript and immediately execute it using 2 parenthesis (), it becomes an IIFE.</p>
+                <p>This pattern is widely used in many JS libraries to isolate the variable declarations that are within them. This will allow various scripts to have scope and thus will not pollute the global object.</p>
+                <p>Another use of IIFE is to initialize a module or run effects in your app upon compiler pass/load.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 7 -->
+      <div class="faq-item" data-category="interview javascript">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Interview</span>
+            </div>
+            <p class="question-text">What do interviewers expect from me in a frontend interview specifically for JavaScript?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>As an interviewer myself, whenever I interview a candidate for a frontend position, I expect the following:</p>
+                <ul class="answer-list">
+                  <li>Have core understanding of JS prototype, event loop, web APIs & promises (async JS)</li>
+                  <li>Can create projects from scratch with Node | Webpack</li>
+                  <li>Should have good understanding on Web security, browser dev tools and compatibility</li>
+                  <li>Should be willing to adapt to a new framework quickly</li>
+                  <li>Should know 1 library deeply like React.js (Redux is a bonus)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 8 -->
+      <div class="faq-item" data-category="javascript interview">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">JavaScript</span>
+            </div>
+            <p class="question-text">Why do almost all frontend interviewers ask a question on JavaScript promises?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>JavaScript runs on a single thread in the JS engine. It is the developer's responsibility to use asynchronous requests so that the stack in the event loop is not put into wait mode for a long-time causing freeze time.</p>
+                <p>When this happens, the browser gets frozen until the execution stack is empty again.</p>
+                <p>In real world projects, there will be many upstream & downstream systems sending and receiving huge payloads from your app.</p>
+                <p><strong>The better you understand promises, the better you will handle these situations and produce quality code.</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 9 -->
+      <div class="faq-item" data-category="interview">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Interview</span>
+            </div>
+            <p class="question-text">I am attending a frontend interview and I'm comfortable with HTML. What should I prepare in CSS?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>Your interview will probably be focused more on JavaScript, but I see many interviewers still ask a few CSS concepts to check if you are comfortable changing styles in their product.</p>
+                <p>Few important topics:</p>
+                <ul class="answer-list">
+                  <li>Flexbox</li>
+                  <li>Specificity</li>
+                  <li>Media queries</li>
+                  <li>Make div shapes with CSS</li>
+                  <li>Box Model</li>
+                  <li>Transforms</li>
+                  <li>Viewport metric</li>
+                  <li>Different selectors</li>
+                  <li>Content overflow</li>
+                  <li>SASS / SCSS / LESS</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 10 -->
+      <div class="faq-item" data-category="learning">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Learning</span>
+            </div>
+            <p class="question-text">I don't have subscription for Udemy or LinkedIn Learning. How do I learn JavaScript without paying?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>I believe the best things in life are free which includes knowledge also.</p>
+                <p>If you prefer watching videos, then I don't have to mention about YouTube. It is just fully loaded.</p>
+                <p>But if you prefer writing code while learning, then try out <strong>freecodecamp.org</strong></p>
+                <p>Finally, <strong>MDN</strong> is free for you which happens to be the 2nd most accurate resource to know about JavaScript.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 11 -->
+      <div class="faq-item" data-category="career">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Career</span>
+            </div>
+            <p class="question-text">I am working on old technologies in my company, but I am interested in React.js. What should I do?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>Well, if you are starting your career and working on old technologies, then it is a problem for sure.</p>
+                <p>Why don't you ask your manager to shift you internally to a team working on React and other tech?</p>
+                <p>If this doesn't workout, what is stopping you from learning on your own? Pretty much all the materials are available for free. You only must make up your mind and start the journey. You will find help as you go.</p>
+                <p>The React community is big now and you will get solutions to your problems along the way.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 12 -->
+      <div class="faq-item" data-category="career">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Career</span>
+            </div>
+            <p class="question-text">I am a frontend engineer (JS) and I want to get promoted to higher levels. Should I learn backend also?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>If you are into JavaScript, you are already a full stack engineer pal.</p>
+                <p>See if you can move some of the projects to <strong>Node.js</strong> so that you can truly apply your JS skills there.</p>
+                <p>Most companies are adopting to Node.js now due to various kinds of benefits. One of the major benefits is that a separate backend team is not necessary to build the product.</p>
+                <p>So it's a win-win for employee and the company due to cost saving and faster time to market. All the best!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 13 -->
+      <div class="faq-item" data-category="career">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Career</span>
+            </div>
+            <p class="question-text">I am doing well in frontend, but my manager knows only backend. Do I have a good future here?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>Firstly, <strong>your future is decided by only 1 person – You</strong></p>
+                <p>Secondly, your manager knows that without frontend, he can't showcase the backend to stakeholders very effectively.</p>
+                <p>There is a reason you are there in the team. And you need to abstract most of the techy frontend things and start demonstrating real output to your team and gain trust.</p>
+                <p>You see, once trust comes into picture, people start believing the quality work you are doing in the team and the organization.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 14 -->
+      <div class="faq-item" data-category="javascript">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">JavaScript</span>
+            </div>
+            <p class="question-text">What is Babel?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>Most of the web browsers today support ECMAScript 6 specification code to run in their JavaScript engine.</p>
+                <p>There used to be a time when this was not so true and even today few clients do not fully support all ES6 syntax.</p>
+                <p>So we are forced to transpile our code to an older ES5 version to achieve compatibility.</p>
+                <p><strong>Babel helps us achieve just that.</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 15 -->
+      <div class="faq-item" data-category="interview">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Interview</span>
+            </div>
+            <p class="question-text">I am attending an interview for a frontend role. Should I prepare for DS and Algorithms also?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>The short answer is <strong>YES</strong></p>
+                <p>The long answer:</p>
+                <p>Data structures and algorithms are not related to any language. DS defines how data can be stored in memory and Algorithms define how one can manipulate this data to produce a meaningful result out of it in a given time.</p>
+                <p>But if you are specifically giving interview for frontend, it's better you practice solutions in JavaScript itself.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 16 -->
+      <div class="faq-item" data-category="career learning">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Learning</span>
+            </div>
+            <p class="question-text">I am a 2nd year UG student. How do I get started with full-stack development with JavaScript?</p>
+          </div>
+          <div class="question-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>Good that you asked early.</p>
+                <p>I suggest you first learn JavaScript, the language itself well enough first before thinking about full-stack / frontend / backend.</p>
+                <p>Since you already made up your mind for full-stack, you need Frontend library like <strong>React</strong> and knowledge of <strong>Node.js</strong>. I prefer express.js for backend beginners.</p>
+                <p>I am giving this advice as you are still in UG and companies won't expect you to have advanced skills for internship or your first job.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- Footer CTA -->
+    <div class="faq-footer">
+      <p class="footer-text">Didn't find what you're looking for? <strong>Ask your question!</strong></p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMyGu2wrPkMUARRoAEV3eERruwx0FqvWBOmglJPlUQ7uhFjg/viewform?usp=sf_link" target="_blank" class="faq-cta">
+        <i class="fas fa-paper-plane"></i>
+        Submit Your Question
       </a>
     </div>
   </div>
-
-  <style>
-    .faq-header-section {
-      background: linear-gradient(135deg, #faf9f7 0%, #f0f4f8 100%);
-      padding: 40px 24px;
-      margin-bottom: 32px;
-    }
-    
-    .faq-header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 24px;
-    }
-    
-    .faq-header-content {
-      flex: 1;
-      min-width: 280px;
-    }
-    
-    .faq-title {
-      font-family: 'Crimson Pro', Georgia, serif;
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: #1a1a2e;
-      line-height: 1.2;
-      margin: 0 0 8px 0;
-    }
-    
-    .faq-subtitle {
-      color: #64748b;
-      font-size: 1.1rem;
-      margin: 0;
-      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    
-    .ask-question-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
-      color: #fff;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 50px;
-      text-decoration: none;
-      box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
-      transition: all 0.3s ease;
-    }
-    
-    .ask-question-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
-      color: #fff;
-      text-decoration: none;
-    }
-    
-    .ask-question-btn i {
-      font-size: 1.1rem;
-    }
-    
-    @media (max-width: 600px) {
-      .faq-header-section {
-        padding: 32px 16px;
-      }
-      .faq-title {
-        font-size: 1.75rem;
-      }
-      .faq-subtitle {
-        font-size: 1rem;
-      }
-      .faq-header-container {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .ask-question-btn {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-  </style>
-
-  <div id="qna" class="text-left">
-    <div class="container ">
-      <div class="card-columns ">
-
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-              <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-                Question</div>
-              <hr />
-              <div class="row ">
-                <img style="margin:10px; margin-right:0px; border-radius: 20px; margin-top:10px; width: 30px; height: 30px; "
-                  src="/images/people/saloni.jpg">
-                <div class="col-lg-10 col-md-10 col-sm-10"
-                  style="margin-left:10px;  margin-right: 10px; padding: 10px; padding-top: 5px; border-radius: 10px; background-color:  #e7e7e7; color: black; font-size: mediun;">
-                  <p style="color: black; font-weight: bold; margin-bottom: 0px; font-size: larger;" >Saloni Jain</p>
-                  <a target="_blank" href="https://www.linkedin.com/in/saloni--jain/" >
-                    <p style="color: rgb(0%, 29.4%, 70.2%); margin-top: -5px;"><i 
-                      class="ion-social-linkedin"></i> Profile</p>
-                  </a>
-                  <hr/>
-                  2021 has been both a boon and a curse for many people. Many people have lost their jobs, and the stigma associated with tier one universities and a btech degree is progressively dissipating. My question is that there is so much to pick from, and we, as non-btech people, don't know where to begin. It's always overwhelming, and there are so many new edtech products cropping up every day, which causes a lot of uncertainty and anxiety of missing out on other technologies. So, what are our options for dealing with these issues ?
-                </div>
-              </div>
-              <br />
-              <div class="row ">
-                <img
-                  style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                  src="/images/me_circle.png">
-                <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-                  style=" margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-                  I agree that there are so many EdTech companies trying to sell you a piece of their pie. 
-                  <br/>
-                  <br/>
-                  Non B.Tech graduates stand an equal chance in a place where skills are valued. I highly suggest you to look at various roadmaps in the tech world. There are many legit YouTubers who have put the roadmaps. After going through these, do your own investigation online before trying to buy courses and trainings.
-                  <br/>
-                  <br/>
-                  This is just like the stock market. You should never buy something just because it is trending. Do your homework and research online. The Internet is pretty powerful when it comes to sharing knowledge.
-                  <br/>
-                  <br/>
-                  After that, think about your interests. Programming is not for everyone. Maybe you like designing or marketing. Pursue what interests you and keeps you engaged without boredom for the years to come.
-                  <br/>
-                  <br/>
-                  Hope it helps.
-                </pem>
-                </div>
-                  
-              <br/>
-              <br/>
-          </div>
-       </div>
-       
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-              <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-                Question</div>
-              <hr />
-              <div class="row ">
-                <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-                  src="/images/person_2.png">
-                <pem class=" col-lg-10 col-md-10 col-sm-10"
-                  style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px; background-color:  #e7e7e7; color: black; font-size: mediun;">
-                  What are the important DS and algorithms, one should prepare for frontend interview ?
-                </pem>
-              </div>
-              <br />
-              <div class="row ">
-                <img
-                  style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                  src="/images/me_circle.png">
-                <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-                  style=" margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-                  If you are applying for a software engineer or senior software engineer positions, which demand under 8 years of experience, then you will have a DS & Algo round. 
-                  <br/>
-                  <br/>
-                  And for frontend, there is 1 data structure which you must focus more than others - Trees.
-                  <br/>
-                  <br/>
-                  We work with browser's DOM pretty much all the time as frontend engineers because that's how the web is designed. No matter which web framework / library you use, they will all create the DOM in some way and then finally render it out in the browser.
-                  <br/>
-                  <br/>
-                  DOM is a tree data structure. Hence the name "DOM Tree"
-                  <br/>
-                  <br/>
-                  So please prepare how to traverse trees. finding node elements and manipulating them with lower time complexities.</div>
-                  </pem>
-              <br/>
-              <br/>
-          </div>
-       </div>
-       
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-              <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-                Question</div>
-              <hr />
-              <div class="row ">
-                <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-                  src="/images/person_2.png">
-                <pem class=" col-lg-10 col-md-10 col-sm-10"
-                  style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px; background-color:  #e7e7e7; color: black; font-size: mediun;">
-                  Is it good making projects by looking at Udemy courses / YouTube videos ?
-                </pem>
-              </div>
-              <br />
-              <div class="row ">
-                <img
-                  style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                  src="/images/me_circle.png">
-                <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-                  style=" margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-                  <a target="_blank" style="color: rgb(90.3%, 100%, 0%)" href="https://youtu.be/tlNtaJRokmw" >Watch the video</a>
-                  <br/>
-                  <br/>
-                  Video tutorials are always good because they give you an initial "hand-holding". 
-                  <br/>
-                  <br/>
-                  What is not good is not practicing after the Udemy course is completed. Because the instructors will help you make a project which they are comfortable with and believes that it gives good insights into the topic.
-                  <br/>
-                  <br/>
-                  You must however practice with more projects post the training to truly understand and get a grasp of the topic.
-              </div>
-              </pem>
-              <br/>
-              <br/>
-          </div>
-       </div>
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-              <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-                Question</div>
-              <hr />
-              <div class="row ">
-                <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-                  src="/images/person_2.png">
-                <pem class=" col-lg-10 col-md-10 col-sm-10"
-                  style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px; background-color:  #e7e7e7; color: black; font-size: mediun;">
-                  Which are some of the best resources | materials to learn JavaScript ?
-                </pem>
-              </div>
-              <br />
-              <div class="row ">
-                <img
-                  style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                  src="/images/me_circle.png">
-                <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-                  style=" margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-                  <div>There are a ton of materials online, but I can suggest based on my learning journey.</div>
-                  <br />
-                  <div>
-                    1. YDKJS Book series by Mr. Kyle Simpson
-                  </div />
-                  <br />
-                  <div>
-                    2. Traversy Media Youtube channel by Mr. Brad Traversy
-                  </div>
-                  <br />
-                  <div>
-                    3. MDN docs are easy to read and most accurate
-                  </div>
-                  <br />
-                  <div>
-                    4. Read a lot of Medium blog posts on various
-                    aspects of JS
-                  </div>
-                  <br />
-                  <div>
-                    5. Practice on FreeCodeCamp
-                  </div>
-              </div>
-              </pem>
-              <br/>
-              <br/>
-          </div>
-       </div>
-
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-            <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-              Question</div>
-            <hr />
-            <div class="row ">
-              <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-                src="/images/person_2.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10"
-                style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px;background-color:  #e7e7e7; color: black;  font-size: medium;">
-                I am a backend developer and I am interested to move to frontend with JavaScript. How do I get started
-                ? </pem>
-            </div>
-            <br />
-            <div class="row ">
-              <img
-                style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                src="/images/me_circle.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info "
-                style=" margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px;  color: white; font-size: medium;">
-                <div>
-                  Welcome to frontend.
-                </div>
-                <br />
-                <div>
-                  You will need to learn in the below order :
-                </div />
-                <br />
-                <div>
-                  1. HTML > CSS > JS (basics)
-                </div>
-                <div>
-                  2. Advanced JS
-                </div>
-                <div>
-                  3. Web browser basics & dev tools
-                </div>
-                <div>
-                  4. Web APIs, HTTP protocol
-                </div>
-                <div>
-                  5. Setup VS code and practice
-                </div>
-                <div>
-                  6. Learn a library ( like React )
-                </div>
-                <div>
-                  7. Learn JSS, SASS, LESS, Webpack, Babel, ESlint
-                </div>
-                <div>
-                  8. Learn UI framework ( like Material UI)
-                </div>
-                <div>
-                  9. Learn state mgmt ( like Redux )
-                </div>
-                <div>
-                  10. Create websites
-                </div>
-            </div>
-            <br/>
-            <br/>
-          </div>
-        </div>
-
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-            <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-              Question</div>
-            <hr />
-            <div class="row ">
-              <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-                src="/images/person_2.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10"
-                style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px; background-color:  #e7e7e7; color: black; font-size: medium;">
-                What is IIFE pattern in Javascript ? Where can I use it ?
-              </pem>
-            </div>
-            <br />
-            <div class="row ">
-              <img
-                style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                src="/images/me_circle.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-                style=" margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-                <div>
-                  IIFE stands for Immediately Invoked Function Expression.
-                </div>
-                <br />
-                <div>
-                  If you declare a function in JavaScript and immediately execute it using 2 parenthesis ( ) , it
-                  becomes an IIFE.
-                </div />
-                <br />
-                <div>
-                  This pattern is widely used in many JS libraries to isolate the variable declarations that are
-                  within
-                  them. This will allow various scripts to have scope and thus will not pollute the global object.
-                </div>
-                <br />
-                <div>
-                  Another use of IIFE is to initialize a module or run effects in your app upon compiler pass / load.
-                </div>
-            </div>
-            </pem>
-            <br/>
-            <br/>
-          </div>
-         </div>
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-            <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-              Question</div>
-            <hr />
-            <div class="row ">
-              <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-                src="/images/person_2.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10"
-                style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px; background-color:  #e7e7e7; color: black; font-size: medium;">
-                What do interviewers expect from me in a frontend interview specifically for javascript ? </pem>
-            </div>
-            <br />
-            <div class="row ">
-              <img
-                style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                src="/images/me_circle.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-                style=" margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-                <div>
-                  As an interviewer myself, </div>
-                <br />
-                <div>
-                  Whenever I interview a candidate for a frontend position, I expect the following
-                </div />
-                <br />
-                <div>
-                  Candidate should:
-                </div>
-                <br />
-                <div>
-                  1. Have core understanding of JS prototype, event loop, web APIs & promises (async JS)
-                </div>
-                <br />
-                <div>
-                  2. Can create projects from scratch with Node | Webpack </div>
-                <br />
-                <div>
-                  3. Should have good understanding on Web security, browser dev tools and compatibility </div>
-                <br />
-                <div>
-                  4. Should be willing to adapt to a new framework quickly
-                </div>
-                <br />
-                <div>
-                  5. Should know 1 library deeply like React.js (Redux is a bonus)
-                </div>
-            </div>
-            </pem>
-            <br/>
-            <br/>
-          </div>
-         </div>
-
-
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-          <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-            Question</div>
-          <hr />
-          <div class="row ">
-            <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-              src="/images/person_2.png">
-            <pem class=" col-lg-10 col-md-10 col-sm-10"
-              style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px;background-color:  #e7e7e7; color: black;  font-size: medium;">
-              Why do almost all frontend interviewers ask a question on Javascript promises ?
-            </pem>
-          </div>
-          <br />
-          <div class="row ">
-            <img
-              style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-              src="/images/me_circle.png">
-            <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-              style="margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-              <div>
-                Javascript runs on a single thread in the JS engine. It is the developer’s responsibility to use
-                asynchronous requests so that the stack in the event loop is not put into wait mode for a long-time
-                causing freeze time. </div>
-              <br />
-              <div>
-                When this happens, the browser gets frozen until the execution stack is empty again.
-              </div>
-              <br />
-              <div>
-                In real world projects, there will be many upstream & downstream systems sending and receiving huge
-                payloads from your app.
-              </div>
-              <br />
-              <div>
-                The better you understand promises, the better you will handle these situations and produce quality
-                code.
-              </div>
-          </div>
-          </pem>
-          <br/>
-          <br/>
-        </div>
-         </div>
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-            <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-              Question</div>
-            <hr />
-            <div class="row ">
-              <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-                src="/images/person_2.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10"
-                style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px; background-color:  #e7e7e7; color: black; font-size: medium;">
-                I am attending a frontend interview and I’m comfortable with HTML
-                What should I prepare in CSS ?
-              </pem>
-            </div>
-            <br />
-            <div class="row ">
-              <img
-                style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                src="/images/me_circle.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-                style=" margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-                <div>
-                  Your interview will probably be focused more on Javascript, but I see many interviewers still ask
-                  few
-                  CSS concepts to check if you are comfortable changing styles in their product.
-                </div>
-                <br />
-                <div>
-                  Few important topics : </div />
-                <br />
-                <div>
-                  1. Flexbox
-                </div>
-                <div>
-                  2. Specificity
-                </div>
-                <div>
-                  3. Media queries
-                </div>
-                <div>
-                  4. Make div shapes with CSS
-                </div>
-                <div>
-                  5. Box Model
-                </div>
-                <div>
-                  6. Transforms
-                </div>
-                <div>
-                  7. Viewport metric
-                </div>
-                <div>
-                  8. Different selectors
-                </div>
-                <div>
-                  9. Content overflow
-                </div>
-                <div>
-                  10.SASS / SCSS / LESS
-                </div>
-            </div>
-            </pem>
-            <br/>
-            <br/>
-          </div>
-         </div>
-
-
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-            <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-              Question</div>
-            <hr />
-            <div class="row ">
-              <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-                src="/images/person_2.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10"
-                style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px; background-color:  #e7e7e7; color: black;  font-size: medium;">
-                I don’t have subscription for udemy or LinkedIn learning. How do I learn Javascript without paying
-              </pem>
-            </div>
-            <br />
-            <div class="row ">
-              <img
-                style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                src="/images/me_circle.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-                style=" margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-                <div>
-                  I believe the best things in life are free which includes knowledge also.
-                </div>
-                <br />
-                <div>
-                  If you prefer watching videos, then I don’t have to mention about YouTube. It is just fully loaded.
-                </div />
-                <br />
-                <div>
-                  But if you prefer writing code while learning, then try out freecodecamp.org
-                </div>
-                <br />
-                <div>
-                  Finally, MDN is free for you which happens to be the 2nd Most accurate resource to know about
-                  Javascript .
-                </div>
-            </div>
-            </pem>
-            <br/>
-            <br/>
-          </div>
-         </div>
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-            <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-              Question</div>
-            <hr />
-            <div class="row ">
-              <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-                src="/images/person_2.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10"
-                style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px;background-color:  #e7e7e7; color: black;  font-size: medium;">
-                I am working on old technologies in my company, but I am interested in React.js . What should I do ?
-              </pem>
-            </div>
-            <br />
-            <div class="row ">
-              <img
-                style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                src="/images/me_circle.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-                style="margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-                <div>
-                  Well, if you are starting your career and working on old technologies, then it is a problem for
-                  sure.
-                </div>
-                <br />
-                <div>
-                  Why don’t you ask your manager to shift you internally to a team working on React and other tech ?
-                </div />
-                <br />
-                <div>
-                  If this doesn’t workout, what is stopping you from learning on your own ? Pretty much all the
-                  materials are available for free. You only must make up your mind and start the journey. You will
-                  find
-                  help as you go
-                </div>
-                <br />
-                <div>
-                  The React community is big now and you will get solutions to your problems along the way 
-                </div>
-            </div>
-            </pem>
-            <br/>
-            <br/>
-          </div>
-         </div>
-
-
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-            <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-              Question</div>
-            <hr />
-            <div class="row ">
-              <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-                src="/images/person_2.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10"
-                style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px; background-color:  #e7e7e7; color: black;  font-size: medium;">
-                I am a frontend engineer | JS and I want to get promoted to higher levels. Should I learn backend also
-                ?
-              </pem>
-            </div>
-            <br />
-            <div class="row ">
-              <img
-                style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                src="/images/me_circle.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-                style=" margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-                <div>
-                  If you are into Javascript, you are already a full stack engineer pal.
-                </div>
-                <br />
-                <div>
-                  See if you can move some of the projects to Node.js so that you can truly apply your JS skills
-                  there.
-                </div />
-                <br />
-                <div>
-                  Most companies are adopting to Node.js now due to various kinds of benefits.
-                  One of the major benefits is that a separate backend team is not necessary to build the product.
-                </div>
-                <br />
-                <div>
-                  So it’s a win-win for employee and the company due to cost saving and faster time to market.
-                </div>
-                <br />
-                <div>
-                  All the best !
-                </div>
-            </div>
-            </pem>
-            <br/>
-            <br/>
-          </div>
-         </div>
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-            <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-              Question</div>
-            <hr />
-            <div class="row ">
-              <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-                src="/images/person_2.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10"
-                style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px; background-color:  #e7e7e7; color: black;  font-size: medium;">
-                I am doing well in frontend, but my manager knows only backend. Do I have a good future here?
-              </pem>
-            </div>
-            <br />
-            <div class="row ">
-              <img
-                style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                src="/images/me_circle.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-                style="margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-                <div>
-                  Firstly, your future is decided by only 1 person – You
-                </div>
-                <br />
-                <div>
-                  Secondly, your manager knows that without frontend, he can’t showcase the backend to stakeholders
-                  very
-                  effectively.
-                </div />
-                <br />
-                <div>
-                  There is a reason you are there in the team. and you need to abstract most of the techy frontend
-                  things and start demonstrating real output to your team and gain trust.
-                </div>
-                <br />
-                <div>
-                  You see, once trust comes into picture, people start believing the quality work you are doing in the
-                  team and the organization.
-                </div>
-            </div>
-            </pem>
-            <br/>
-            <br/>
-          </div>
-         </div>
-
-
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-            <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-              Question</div>
-            <hr />
-            <div class="row ">
-              <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-                src="/images/person_2.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10"
-                style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px; background-color:  #e7e7e7; color: black;  font-size: medium;">
-                What is Babel ? </pem>
-            </div>
-            <br />
-            <div class="row ">
-              <img
-                style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                src="/images/me_circle.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-                style=" margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-                <div>
-                  Most of the web browsers today support ECMAScript 6 specification code to run in their JavaScript
-                  engine. </div>
-                <br />
-                <div>
-                  There used to be time when this was not so true and even today few clients do not fully support all
-                  ES6 syntax.
-                </div />
-                <br />
-                <div>
-                  So we are forced to transpile our code to an older ES5 version to achieve compatibility.
-                </div>
-                <br />
-                <div>
-                  Babel helps us achieve just that.
-                </div>
-            </div>
-            </pem>
-            <br/>
-            <br/>
-          </div>
-         </div>
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-            <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-              Question</div>
-            <hr />
-            <div class="row ">
-              <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-                src="/images/person_2.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10"
-                style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px;background-color:  #e7e7e7; color: black;  font-size: medium;">
-                I am attending an interview for frontend role. Should I prepare for DS and Algorithms also ?</pem>
-            </div>
-            <br />
-            <div class="row ">
-              <img
-                style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                src="/images/me_circle.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-                style="margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-                <div>
-                  The short answer is YES </div>
-                <br />
-                <div>
-                  The Long answer,
-                </div />
-                <br />
-                <div>
-                  Data structures and algorithms are not related to any language </div>
-                <br />
-                <div>
-                  DS defines how data can be stored in memory and Algorithms define how one can manipulate this data
-                  to
-                  produce a meaningful result out of it in a given time. </div>
-                <br />
-                <div>
-                  But if you are specifically giving interview for frontend, it's better you practice solutions in
-                  javascript itself </div>
-            </div>
-            </pem>
-            <br/>
-            <br/>
-          </div>
-         </div>
-
-        <div style="border: 0px; padding: 5px" class="card">
-          <div>
-            <div style=" font-weight: bold; color: black;text-align: center; font-size: large;">
-              Question</div>
-            <hr />
-            <div class="row ">
-              <img style="margin:10px; margin-right:0px;  margin-top:0px; width: 30px; height: 30px; "
-                src="/images/person_2.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10"
-                style="margin-left:10px;  margin-right: 10px; padding: 10px; border-radius: 10px;background-color:  #e7e7e7; color: black;  font-size: medium;">
-                I am a 2nd year UG student. How do I get started with full-stack development with javascript in 2020?
-              </pem>
-            </div>
-            <br />
-            <div class="row ">
-              <img
-                style="margin:10px; margin-right:0px; margin-top:0px; width: 30px; height: 30px;border-radius: 50%; "
-                src="/images/me_circle.png">
-              <pem class=" col-lg-10 col-md-10 col-sm-10 bg-info"
-                style="margin-left:10px; margin-right: 10px; padding: 10px; border-radius: 10px; color: white; font-size: medium;">
-                Good that you asked early.
-                <br />
-                <br />
-                I suggest you first learn javascript, the language itself well enough first before thinking about
-                full-stack / frontend / backend.
-                <br />
-                <br />
-                Since you already madeup your mind for full-stack, you need Frontend library like React and knowledge
-                of
-                Node.js. I prefer express.js for backed beginners.
-                <br />
-                <br />
-                I am giving this advice as you are still in UG and companies won't expect you to have advanced skills
-                for
-                internship or your first job.
-            </div>
-            </pem>
-            <br/>
-            <br/>
-          </div>
-         </div>
-      </div>
-
-    </div>
-  </div>
-  <div style="margin: 0px; padding: 0px;" id="footer">
-  </div>
+  
+  <div style="margin: 0px; padding: 0px;" id="footer"></div>
+  
   <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
   <script src="/lib/jquery/jquery.min.js"></script>
   <script src="/lib/jquery/jquery-migrate.min.js"></script>
   <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/lib/typed/typed.js"></script>
   <script src="/js/main.js"></script>
+  
   <script>
+    // Toggle FAQ accordion
+    function toggleFAQ(element) {
+      const faqItem = element.closest('.faq-item');
+      const isOpen = faqItem.classList.contains('open');
+      
+      // Close all other items
+      document.querySelectorAll('.faq-item.open').forEach(item => {
+        if (item !== faqItem) {
+          item.classList.remove('open');
+        }
+      });
+      
+      // Toggle current item
+      faqItem.classList.toggle('open');
+    }
+    
+    // Filter FAQs by category
+    function filterFAQs(category) {
+      const buttons = document.querySelectorAll('.category-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        if (category === 'all') {
+          item.style.display = 'block';
+        } else {
+          const itemCategories = item.dataset.category || '';
+          if (itemCategories.includes(category)) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        }
+      });
+    }
+    
+    // Disable right-click
     document.addEventListener('contextmenu', event => event.preventDefault());
-  </script>
-  <script>
+    
+    // Load navbar
     $(function () {
       $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
-        setTimeout(()=>{
-            $('.nav-faqs').addClass("active")
-        },1000)
+      setTimeout(() => {
+        $('.nav-faqs').addClass("active");
+      }, 1000);
     });
   </script>
 </body>
