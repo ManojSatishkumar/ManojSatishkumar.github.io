@@ -1,0 +1,155 @@
+<!--
+  Mock Interview Ad – embed in blog posts:
+  1. Add where you want the ad: <div id="mock-interview-ad"></div>
+  2. In your page script: $("#mock-interview-ad").load("/components/mock-interview-ad.html");
+  Requires: Font Awesome (e.g. cdnjs.cloudflare.com/ajax/libs/font-awesome/6.x) for icons.
+-->
+<div class="mock-interview-ad" role="complementary" aria-label="Mock interview booking">
+  <style>
+    .mock-interview-ad {
+      --mock-ad-bg: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #fef3c7 100%);
+      --mock-ad-surface: #ffffff;
+      --mock-ad-border: rgba(14, 165, 233, 0.25);
+      --mock-ad-accent: #0ea5e9;
+      --mock-ad-accent-hover: #0284c7;
+      --mock-ad-text: #1e293b;
+      --mock-ad-text-muted: #64748b;
+      --mock-ad-radius: 14px;
+      --mock-ad-shadow: 0 4px 14px rgba(14, 165, 233, 0.12);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      box-sizing: border-box;
+      max-width: 100%;
+      margin: 2em 0;
+    }
+    .mock-interview-ad *,
+    .mock-interview-ad *::before,
+    .mock-interview-ad *::after { box-sizing: border-box; }
+    .mock-interview-ad__card {
+      background: var(--mock-ad-surface);
+      border: 1px solid var(--mock-ad-border);
+      border-radius: var(--mock-ad-radius);
+      box-shadow: var(--mock-ad-shadow);
+      overflow: hidden;
+      display: grid;
+      gap: 0;
+    }
+    .mock-interview-ad__banner {
+      background: var(--mock-ad-bg);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .mock-interview-ad__avatar {
+      width: 80px;
+      height: 80px;
+      min-width: 80px;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 2px solid var(--mock-ad-border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+    .mock-interview-ad__headline {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--mock-ad-text);
+      line-height: 1.3;
+    }
+    .mock-interview-ad__body {
+      padding: 1.25rem 1.5rem;
+    }
+    .mock-interview-ad__copy {
+      margin: 0 0 1rem 0;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--mock-ad-text-muted);
+    }
+    .mock-interview-ad__list {
+      margin: 0 0 1.25rem 0;
+      padding-left: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--mock-ad-text-muted);
+      line-height: 1.6;
+    }
+    .mock-interview-ad__list li { margin-bottom: 0.35rem; }
+    .mock-interview-ad__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--mock-ad-accent);
+      color: #fff !important;
+      text-decoration: none !important;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.35);
+    }
+    .mock-interview-ad__cta:hover {
+      background: var(--mock-ad-accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+    }
+    .mock-interview-ad__cta:focus {
+      outline: 2px solid var(--mock-ad-accent);
+      outline-offset: 2px;
+    }
+    @media (min-width: 560px) {
+      .mock-interview-ad__card {
+        grid-template-columns: 1fr auto;
+        align-items: stretch;
+      }
+      .mock-interview-ad__banner {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 1.5rem;
+        min-width: 200px;
+      }
+      .mock-interview-ad__headline { font-size: 1.1rem; }
+    }
+    @media (max-width: 400px) {
+      .mock-interview-ad__banner { padding: 1rem 1.25rem; }
+      .mock-interview-ad__body { padding: 1rem 1.25rem; }
+      .mock-interview-ad__headline { font-size: 1.05rem; }
+      .mock-interview-ad__cta { width: 100%; }
+    }
+  </style>
+  <div class="mock-interview-ad__card">
+    <div class="mock-interview-ad__banner">
+      <img
+        src="/images/me_circle.png"
+        alt="Manoj Satishkumar"
+        class="mock-interview-ad__avatar"
+        width="80"
+        height="80"
+        loading="lazy"
+      />
+      <h3 class="mock-interview-ad__headline">Practice with a real interviewer</h3>
+    </div>
+    <div class="mock-interview-ad__body">
+      <p class="mock-interview-ad__copy">
+        Book a <strong>Mock Interview</strong> with me and get actionable feedback to improve your confidence and answers.
+      </p>
+      <ul class="mock-interview-ad__list">
+        <li>Realistic interview simulation (behavioral &amp; technical)</li>
+        <li>Personalized feedback and tips</li>
+        <li>Flexible slots — choose a time that works for you</li>
+      </ul>
+      <a
+        href="https://topmate.io/manoj_satishkumar"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mock-interview-ad__cta"
+      >
+        <i class="fas fa-calendar-check" aria-hidden="true"></i>
+        Book a Mock Interview
+      </a>
+    </div>
+  </div>
+</div>
