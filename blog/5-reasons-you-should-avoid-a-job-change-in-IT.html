@@ -161,6 +161,8 @@
                         <h5>Advantage #4: You make some good friends</h5>
                         <p>Because you stayed for a very long time you would have made some really good friends that are going to help you in your life. Money is not everything. Friendship is also important.</p>
 
+                        <div id="mock-interview-ad"></div>
+
                         <div class="conclusion">
                             <p>That being said, if a lot of these reasons are your reasons to quit your job, I'm sure there are reasons not to quit the job. What if something else is bothering you? There's absolutely no harm in switching companies. But it should be fruitful and it should be the right decision to make.</p>
                             <p><strong>Good luck!</strong> 🚀</p>
@@ -189,7 +191,7 @@
     <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/main.js"></script>
     <script>
-        $(function () { $("#desktop-nav-bar").load("/components/desktop-nav-bar.html"); $("#footer").load("/components/footer.html"); $("#author-sidebar").load("/components/side-profile.html"); $("#blog-articles-grid").load("/components/blog-articles-grid.html"); });
+        $(function () { $("#desktop-nav-bar").load("/components/desktop-nav-bar.html"); $("#footer").load("/components/footer.html"); $("#author-sidebar").load("/components/side-profile.html"); $("#blog-articles-grid").load("/components/blog-articles-grid.html"); $("#mock-interview-ad").load("/components/mock-interview-ad.html"); });
         function toggleMobileAuthor() { document.getElementById('mobile-author').classList.toggle('expanded'); }
         window.addEventListener('scroll', function() { const article = document.querySelector('.article-content'); const progressBar = document.getElementById('reading-progress'); const backToTop = document.getElementById('back-to-top'); if (article) { const scrollY = window.scrollY; const articleTop = article.offsetTop; const articleHeight = article.offsetHeight; const progress = Math.min(100, Math.max(0, ((scrollY - articleTop + window.innerHeight) / articleHeight) * 100)); progressBar.style.width = progress + '%'; } backToTop.classList.toggle('visible', window.scrollY > 500); });
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }

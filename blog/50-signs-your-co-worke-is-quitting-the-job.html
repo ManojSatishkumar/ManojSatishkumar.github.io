@@ -282,6 +282,8 @@
                         <h4>Sign #50: He starts praising other companies.</h4>
                         <p>He will start praising other companies and will yell about the salary that is currently being paid in the market. He will start these discussions and will have long 1-on-1s with his manager.</p>
 
+                        <div id="mock-interview-ad"></div>
+
                         <div class="conclusion">
                             <p>Thank you for reading all the way. I really appreciate your patience and interest in reading this article.</p>
                             <p>I hope this will help you to analyze and not to be surprised when your co-worker who was working so hard suddenly quits the job.</p>
@@ -311,7 +313,7 @@
     <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/main.js"></script>
     <script>
-        $(function () { $("#desktop-nav-bar").load("/components/desktop-nav-bar.html"); $("#footer").load("/components/footer.html"); $("#author-sidebar").load("/components/side-profile.html"); $("#blog-articles-grid").load("/components/blog-articles-grid.html"); });
+        $(function () { $("#desktop-nav-bar").load("/components/desktop-nav-bar.html"); $("#footer").load("/components/footer.html"); $("#author-sidebar").load("/components/side-profile.html"); $("#blog-articles-grid").load("/components/blog-articles-grid.html"); $("#mock-interview-ad").load("/components/mock-interview-ad.html"); });
         function toggleMobileAuthor() { document.getElementById('mobile-author').classList.toggle('expanded'); }
         window.addEventListener('scroll', function() { const article = document.querySelector('.article-content'); const progressBar = document.getElementById('reading-progress'); const backToTop = document.getElementById('back-to-top'); if (article) { const scrollY = window.scrollY; const articleTop = article.offsetTop; const articleHeight = article.offsetHeight; const progress = Math.min(100, Math.max(0, ((scrollY - articleTop + window.innerHeight) / articleHeight) * 100)); progressBar.style.width = progress + '%'; } backToTop.classList.toggle('visible', window.scrollY > 500); });
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
