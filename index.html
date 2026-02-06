@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -162,15 +162,17 @@
         background-color: rgba(255, 255, 255, 0.62) !important;
         backdrop-filter: saturate(500%) blur(10px) !important;
         -webkit-backdrop-filter: saturate(500%) blur(10px) !important;
-        box-shadow: 
+        box-shadow:
           0 15px 50px rgba(0, 0, 0, 0.2),
           0 8px 20px rgba(0, 0, 0, 0.15),
           0 2px 8px rgba(0, 0, 0, 0.1),
           inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
         z-index: 1000 !important;
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition:
+          transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.4s ease,
+          bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
       }
-
 
       .nav-bar-fixed .dock-container {
         display: flex !important;
@@ -232,8 +234,12 @@
       }
 
       .nav-bar-fixed .dock-item.active .icon-wrapper {
-        background: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%) !important;
-        box-shadow: 
+        background: linear-gradient(
+          135deg,
+          #007aff 0%,
+          #5ac8fa 100%
+        ) !important;
+        box-shadow:
           0 4px 12px rgba(0, 122, 255, 0.3),
           0 2px 6px rgba(0, 122, 255, 0.2),
           inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
@@ -253,7 +259,9 @@
         background: white;
         border-radius: 12px;
         padding: 14px 18px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+        box-shadow:
+          0 8px 32px rgba(0, 0, 0, 0.15),
+          0 2px 8px rgba(0, 0, 0, 0.1);
         border: 1px solid rgba(0, 0, 0, 0.08);
         opacity: 0;
         visibility: hidden;
@@ -264,7 +272,7 @@
       }
 
       .dock-tooltip::before {
-        content: '';
+        content: "";
         position: absolute;
         left: -15px;
         top: 0;
@@ -280,7 +288,7 @@
       }
 
       .dock-tooltip::after {
-        content: '';
+        content: "";
         position: absolute;
         left: -16px;
         top: 50%;
@@ -296,7 +304,7 @@
         font-size: 14px;
         font-weight: 700;
         color: #1a1a1a;
-        font-family: 'Poppins', sans-serif;
+        font-family: "Poppins", sans-serif;
       }
 
       .dock-tooltip p {
@@ -304,10 +312,8 @@
         font-size: 12px;
         line-height: 1.5;
         color: #555;
-        font-family: 'Poppins', sans-serif;
+        font-family: "Poppins", sans-serif;
       }
-
-
 
       /* Add this for rounded buttons */
       button,
@@ -334,7 +340,9 @@
         border-top: 1px solid rgba(0, 0, 0, 0.08);
         box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
         z-index: 1000;
-        padding: 8px max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+        padding: 8px max(8px, env(safe-area-inset-right))
+          max(8px, env(safe-area-inset-bottom))
+          max(8px, env(safe-area-inset-left));
         justify-content: space-around;
         align-items: center;
         overflow-x: auto;
@@ -385,7 +393,7 @@
       }
 
       .mobile-bottom-nav .nav-item::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 50%;
@@ -458,7 +466,7 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 20px;
         padding: 8px;
-        box-shadow: 
+        box-shadow:
           0 15px 50px rgba(0, 0, 0, 0.2),
           0 8px 20px rgba(0, 0, 0, 0.15),
           0 2px 8px rgba(0, 0, 0, 0.1),
@@ -510,7 +518,9 @@
         background: white;
         border-radius: 12px;
         padding: 16px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+        box-shadow:
+          0 8px 32px rgba(0, 0, 0, 0.15),
+          0 2px 8px rgba(0, 0, 0, 0.1);
         border: 1px solid rgba(0, 0, 0, 0.08);
         opacity: 0;
         visibility: hidden;
@@ -521,7 +531,7 @@
 
       /* Invisible bridge to connect icon to tooltip */
       .tech-tooltip::before {
-        content: '';
+        content: "";
         position: absolute;
         right: -15px;
         top: 0;
@@ -537,7 +547,7 @@
       }
 
       .tech-tooltip::after {
-        content: '';
+        content: "";
         position: absolute;
         right: -8px;
         top: 50%;
@@ -552,7 +562,7 @@
         font-size: 15px;
         font-weight: 700;
         color: #1a1a1a;
-        font-family: 'Poppins', sans-serif;
+        font-family: "Poppins", sans-serif;
       }
 
       .tech-tooltip p {
@@ -560,7 +570,7 @@
         font-size: 12px;
         line-height: 1.6;
         color: #555;
-        font-family: 'Poppins', sans-serif;
+        font-family: "Poppins", sans-serif;
       }
 
       .tech-tooltip a {
@@ -570,7 +580,7 @@
         color: #007bff;
         text-decoration: none;
         transition: color 0.2s ease;
-        font-family: 'Poppins', sans-serif;
+        font-family: "Poppins", sans-serif;
       }
 
       .tech-tooltip a:hover {
@@ -586,18 +596,20 @@
       }
 
       /* ===== Navigation Slide-in Animations ===== */
-      
+
       /* Top Menu Bar - slides from top */
       #desktop-nav-bar {
         opacity: 0;
       }
-      
+
       #desktop-nav-bar .macos-menubar {
         transform: translateY(-100%);
-        transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.7s ease;
+        transition:
+          transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+          opacity 0.7s ease;
         opacity: 0;
       }
-      
+
       /* Mobile navbar - show immediately on mobile without animation */
       @media (max-width: 1023px) {
         #desktop-nav-bar {
@@ -609,65 +621,72 @@
           opacity: 1 !important;
         }
       }
-      
+
       #desktop-nav-bar.slide-in .macos-menubar {
         transform: translateY(0);
         opacity: 1;
       }
-      
+
       #desktop-nav-bar.slide-in {
         opacity: 1;
       }
-      
+
       /* Left Dock - slides from left using left position */
       .nav-bar-fixed {
         left: -100px !important;
         opacity: 0 !important;
-        transition: left 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease !important;
+        transition:
+          left 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+          opacity 0.5s ease !important;
       }
-      
+
       .nav-bar-fixed.slide-in {
         left: 20px !important;
         opacity: 1 !important;
       }
-      
+
       /* Right Chatbot Widget - slides from right */
       .chatbot-widget {
         right: -100px !important;
         opacity: 0 !important;
-        transition: right 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease !important;
+        transition:
+          right 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+          opacity 0.5s ease !important;
       }
-      
+
       .chatbot-widget.slide-in {
         right: 24px !important;
         opacity: 1 !important;
       }
-      
+
       /* Scroll Indicator - slides from left bottom */
       .scroll-indicator-wrapper {
         left: -100px !important;
         opacity: 0 !important;
-        transition: left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease !important;
+        transition:
+          left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+          opacity 0.4s ease !important;
       }
-      
+
       .scroll-indicator-wrapper.slide-in {
         left: 30px !important;
         opacity: 1 !important;
       }
-      
-      
+
       /* Right Tech Sidebar - slides from right */
       .tech-sidebar {
         right: -100px !important;
         opacity: 0 !important;
-        transition: right 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease !important;
+        transition:
+          right 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+          opacity 0.5s ease !important;
       }
-      
+
       .tech-sidebar.slide-in {
         right: 20px !important;
         opacity: 1 !important;
       }
-      
+
       /* ===== End Navigation Animations ===== */
     </style>
 
@@ -707,16 +726,24 @@
 
   <body style="padding: 0px; margin: 0px">
     <!-- About Me Modal (macOS style) -->
-    <div id="about-modal-overlay" class="about-modal-overlay" onclick="closeAboutModal()">
+    <div
+      id="about-modal-overlay"
+      class="about-modal-overlay"
+      onclick="closeAboutModal()"
+    >
       <div class="about-modal" onclick="event.stopPropagation()">
         <button class="about-close-btn" onclick="closeAboutModal()">×</button>
-        
+
         <div class="about-modal-content">
-          <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="about-photo" />
-          
+          <img
+            src="/images/me_circle.png"
+            alt="Manoj Satishkumar"
+            class="about-photo"
+          />
+
           <h1 class="about-name">Manoj Satishkumar</h1>
           <p class="about-subtitle">Staff Software Engineer</p>
-          
+
           <div class="about-specs">
             <div class="spec-row">
               <span class="spec-label">Role</span>
@@ -743,13 +770,27 @@
               <span class="spec-value">US B1/B2</span>
             </div>
           </div>
-          
-          <button class="about-more-info" onclick="window.location.href='#intro'; closeAboutModal();">More Info...</button>
-          
+
+          <button
+            class="about-more-info"
+            onclick="
+              window.location.href = '#intro';
+              closeAboutModal();
+            "
+          >
+            More Info...
+          </button>
+
           <div class="about-footer">
-            <a href="https://www.linkedin.com/in/manojsatishkumar/" target="_blank">LinkedIn</a>
+            <a
+              href="https://www.linkedin.com/in/manojsatishkumar/"
+              target="_blank"
+              >LinkedIn</a
+            >
             <span>•</span>
-            <a href="https://github.com/ManojSatishkumar" target="_blank">GitHub</a>
+            <a href="https://github.com/ManojSatishkumar" target="_blank"
+              >GitHub</a
+            >
             <span>•</span>
             <a href="mailto:88manojs@gmail.com">Email</a>
           </div>
@@ -785,7 +826,9 @@
         width: 320px;
         background: linear-gradient(180deg, #f5f5f7 0%, #e8e8ec 100%);
         border-radius: 12px;
-        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.1);
+        box-shadow:
+          0 25px 80px rgba(0, 0, 0, 0.3),
+          0 0 1px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         transform: scale(0.9);
         transition: transform 0.2s ease;
@@ -833,7 +876,8 @@
       }
 
       .about-name {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
         font-size: 24px;
         font-weight: 500;
         color: #1d1d1f;
@@ -842,7 +886,8 @@
       }
 
       .about-subtitle {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
         font-size: 13px;
         color: rgba(0, 0, 0, 0.5);
         margin: 0 0 20px 0;
@@ -857,7 +902,8 @@
         display: flex;
         justify-content: space-between;
         padding: 6px 0;
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
         font-size: 13px;
       }
 
@@ -876,7 +922,8 @@
         border: 1px solid rgba(0, 0, 0, 0.12);
         border-radius: 6px;
         color: rgba(0, 0, 0, 0.85);
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
         font-size: 13px;
         padding: 8px 24px;
         cursor: pointer;
@@ -889,7 +936,8 @@
       }
 
       .about-footer {
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
         font-size: 11px;
         color: rgba(0, 0, 0, 0.4);
       }
@@ -912,87 +960,171 @@
     <div class="tech-sidebar">
       <div class="tech-icons">
         <div class="tech-icon">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+            alt="HTML5"
+          />
           <div class="tech-tooltip">
             <h4>HTML5</h4>
-            <p>The standard markup language for creating web pages. HTML5 introduced semantic elements, multimedia support, and APIs for complex web applications.</p>
-        </div>
+            <p>
+              The standard markup language for creating web pages. HTML5
+              introduced semantic elements, multimedia support, and APIs for
+              complex web applications.
+            </p>
+          </div>
         </div>
         <div class="tech-icon">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+            alt="CSS3"
+          />
           <div class="tech-tooltip">
             <h4>CSS3</h4>
-            <p>A stylesheet language used to describe the presentation of HTML documents. CSS3 brings animations, flexbox, grid layouts, and advanced visual effects.</p>
-        </div>
+            <p>
+              A stylesheet language used to describe the presentation of HTML
+              documents. CSS3 brings animations, flexbox, grid layouts, and
+              advanced visual effects.
+            </p>
+          </div>
         </div>
         <div class="tech-icon">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+            alt="JavaScript"
+          />
           <div class="tech-tooltip">
             <h4>JavaScript</h4>
-            <p>A versatile programming language that enables interactive web pages. It's essential for modern web development, powering both frontend and backend applications.</p>
-        </div>
+            <p>
+              A versatile programming language that enables interactive web
+              pages. It's essential for modern web development, powering both
+              frontend and backend applications.
+            </p>
+          </div>
         </div>
         <div class="tech-icon">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+            alt="TypeScript"
+          />
           <div class="tech-tooltip">
             <h4>TypeScript</h4>
-            <p>A strongly typed superset of JavaScript that compiles to plain JavaScript. It adds optional static typing, classes, and interfaces for building robust applications.</p>
+            <p>
+              A strongly typed superset of JavaScript that compiles to plain
+              JavaScript. It adds optional static typing, classes, and
+              interfaces for building robust applications.
+            </p>
           </div>
         </div>
         <div class="tech-icon">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+            alt="React"
+          />
           <div class="tech-tooltip">
             <h4>React</h4>
-            <p>A JavaScript library for building user interfaces. React uses a component-based architecture and virtual DOM for efficient, declarative UI development.</p>
+            <p>
+              A JavaScript library for building user interfaces. React uses a
+              component-based architecture and virtual DOM for efficient,
+              declarative UI development.
+            </p>
           </div>
         </div>
         <div class="tech-icon">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" alt="Redux" />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg"
+            alt="Redux"
+          />
           <div class="tech-tooltip">
             <h4>Redux</h4>
-            <p>A predictable state container for JavaScript apps. Redux helps manage application state with a single source of truth and unidirectional data flow.</p>
+            <p>
+              A predictable state container for JavaScript apps. Redux helps
+              manage application state with a single source of truth and
+              unidirectional data flow.
+            </p>
           </div>
         </div>
         <div class="tech-icon">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg" alt="Material UI" />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg"
+            alt="Material UI"
+          />
           <div class="tech-tooltip">
             <h4>Material UI</h4>
-            <p>A popular React component library implementing Google's Material Design. It provides pre-built, customizable components for faster UI development.</p>
+            <p>
+              A popular React component library implementing Google's Material
+              Design. It provides pre-built, customizable components for faster
+              UI development.
+            </p>
           </div>
         </div>
         <div class="tech-icon">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg" alt="Webpack" />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg"
+            alt="Webpack"
+          />
           <div class="tech-tooltip">
             <h4>Webpack</h4>
-            <p>A powerful module bundler for JavaScript applications. Webpack processes and bundles assets, scripts, and styles for optimized production builds.</p>
+            <p>
+              A powerful module bundler for JavaScript applications. Webpack
+              processes and bundles assets, scripts, and styles for optimized
+              production builds.
+            </p>
           </div>
         </div>
         <div class="tech-icon">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+            alt="Node.js"
+          />
           <div class="tech-tooltip">
             <h4>Node.js</h4>
-            <p>A JavaScript runtime built on Chrome's V8 engine. Node.js enables server-side JavaScript execution for building scalable network applications.</p>
+            <p>
+              A JavaScript runtime built on Chrome's V8 engine. Node.js enables
+              server-side JavaScript execution for building scalable network
+              applications.
+            </p>
           </div>
         </div>
         <div class="tech-icon">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express.js" />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+            alt="Express.js"
+          />
           <div class="tech-tooltip">
             <h4>Express.js</h4>
-            <p>A minimal and flexible Node.js web framework. Express provides robust features for building web and mobile applications with easy routing and middleware.</p>
+            <p>
+              A minimal and flexible Node.js web framework. Express provides
+              robust features for building web and mobile applications with easy
+              routing and middleware.
+            </p>
           </div>
         </div>
         <div class="tech-icon">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" alt="Jest" />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg"
+            alt="Jest"
+          />
           <div class="tech-tooltip">
             <h4>Jest</h4>
-            <p>A delightful JavaScript testing framework with a focus on simplicity. Jest works with React, Node, and more, offering zero-config setup and snapshot testing.</p>
+            <p>
+              A delightful JavaScript testing framework with a focus on
+              simplicity. Jest works with React, Node, and more, offering
+              zero-config setup and snapshot testing.
+            </p>
           </div>
         </div>
         <div class="tech-icon">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" alt="GraphQL" />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg"
+            alt="GraphQL"
+          />
           <div class="tech-tooltip">
             <h4>GraphQL</h4>
-            <p>A query language for APIs and a runtime for executing queries. GraphQL provides a complete description of your data and lets clients request exactly what they need.</p>
+            <p>
+              A query language for APIs and a runtime for executing queries.
+              GraphQL provides a complete description of your data and lets
+              clients request exactly what they need.
+            </p>
           </div>
         </div>
       </div>
@@ -1002,84 +1134,140 @@
     <!-- macOS Dock Style Navigation -->
     <div class="nav-bar-fixed">
       <div class="dock-container">
-        <div class="dock-item" onclick="animateScroll('intro')" data-section="intro">
+        <div
+          class="dock-item"
+          onclick="animateScroll('intro')"
+          data-section="intro"
+        >
           <div class="icon-wrapper">
             <i class="icon ion-ios-person"></i>
           </div>
           <span>Intro</span>
           <div class="dock-tooltip">
             <h4>Introduction</h4>
-            <p>Get to know me—my background, expertise, and what drives my passion for building world-class software.</p>
+            <p>
+              Get to know me—my background, expertise, and what drives my
+              passion for building world-class software.
+            </p>
           </div>
         </div>
-        <div class="dock-item" onclick="animateScroll('experience')" data-section="experience">
+        <div
+          class="dock-item"
+          onclick="animateScroll('experience')"
+          data-section="experience"
+        >
           <div class="icon-wrapper">
             <i class="icon ion-ios-briefcase"></i>
           </div>
           <span>Experience</span>
           <div class="dock-tooltip">
             <h4>Work Experience</h4>
-            <p>12+ years at top companies like Walmart and Cerner, building scalable platforms for millions of users.</p>
+            <p>
+              12+ years at top companies like Walmart and Cerner, building
+              scalable platforms for millions of users.
+            </p>
           </div>
         </div>
-        <div class="dock-item" onclick="animateScroll('projects')" data-section="projects">
+        <div
+          class="dock-item"
+          onclick="animateScroll('projects')"
+          data-section="projects"
+        >
           <div class="icon-wrapper">
             <i class="icon ion-ios-folder"></i>
           </div>
           <span>Projects</span>
           <div class="dock-tooltip">
             <h4>Projects</h4>
-            <p>Enterprise platforms and open-source tools showcasing my ability to architect scalable solutions.</p>
+            <p>
+              Enterprise platforms and open-source tools showcasing my ability
+              to architect scalable solutions.
+            </p>
           </div>
         </div>
-        <div class="dock-item" onclick="animateScroll('skill-set')" data-section="skill-set">
+        <div
+          class="dock-item"
+          onclick="animateScroll('skill-set')"
+          data-section="skill-set"
+        >
           <div class="icon-wrapper">
             <i class="icon ion-code"></i>
           </div>
           <span>Skills</span>
           <div class="dock-tooltip">
             <h4>Technical Skills</h4>
-            <p>Deep expertise in React, TypeScript, Node.js, and the modern JavaScript ecosystem.</p>
+            <p>
+              Deep expertise in React, TypeScript, Node.js, and the modern
+              JavaScript ecosystem.
+            </p>
           </div>
         </div>
-        <div class="dock-item" onclick="animateScroll('achievements')" data-section="achievements">
+        <div
+          class="dock-item"
+          onclick="animateScroll('achievements')"
+          data-section="achievements"
+        >
           <div class="icon-wrapper">
             <i class="icon ion-trophy"></i>
           </div>
           <span>Awards</span>
           <div class="dock-tooltip">
             <h4>Awards & Recognition</h4>
-            <p>Hackathon championships and industry awards celebrating technical excellence.</p>
+            <p>
+              Hackathon championships and industry awards celebrating technical
+              excellence.
+            </p>
           </div>
         </div>
-        <div class="dock-item" onclick="animateScroll('patent')" data-section="patent">
+        <div
+          class="dock-item"
+          onclick="animateScroll('patent')"
+          data-section="patent"
+        >
           <div class="icon-wrapper">
             <i class="icon ion-document-text"></i>
           </div>
           <span>Patent</span>
           <div class="dock-tooltip">
             <h4>Patent</h4>
-            <p>Unified Medical Record Cloud Network - Innovation in healthcare technology.</p>
+            <p>
+              Unified Medical Record Cloud Network - Innovation in healthcare
+              technology.
+            </p>
           </div>
         </div>
-        <div class="dock-item" onclick="animateScroll('education')" data-section="education">
+        <div
+          class="dock-item"
+          onclick="animateScroll('education')"
+          data-section="education"
+        >
           <div class="icon-wrapper">
             <i class="icon ion-university"></i>
           </div>
           <span>Education</span>
           <div class="dock-tooltip">
             <h4>Education</h4>
-            <p>Strong foundation in Electronics Engineering with top academic achievements.</p>
+            <p>
+              Strong foundation in Electronics Engineering with top academic
+              achievements.
+            </p>
           </div>
         </div>
-        <div class="dock-item" onclick="animateScroll('msk-testimony')" data-section="msk-testimony">
+        <div
+          class="dock-item"
+          onclick="animateScroll('msk-testimony')"
+          data-section="msk-testimony"
+        >
           <div class="icon-wrapper">
             <i class="icon ion-chatbubbles"></i>
           </div>
           <span>Testimony</span>
           <div class="dock-tooltip">
             <h4>Testimonials</h4>
-            <p>What colleagues, mentees, and industry peers say about working with me.</p>
+            <p>
+              What colleagues, mentees, and industry peers say about working
+              with me.
+            </p>
           </div>
         </div>
       </div>
@@ -1117,38 +1305,74 @@
       class="text-left"
     ></div>
     <div id="msk-testimony"></div>
-    <div id="mock-interview-ad" class="text-left" style="max-width: 800px; margin-left: auto; margin-right: auto; padding: 0 20px;"></div>
+    <div
+      id="mock-interview-ad"
+      class="text-left"
+      style="
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 20px;
+      "
+    ></div>
     <div style="background-color: #eeeeee" id="footer" class="text-left"></div>
     <div style="margin: 0px; padding: 0px" id="footer"></div>
 
     <!-- Mobile Bottom Navigation Bar -->
     <div class="mobile-bottom-nav" id="mobile-bottom-nav">
-      <div class="nav-item" onclick="animateScroll('intro')" data-section="intro">
+      <div
+        class="nav-item"
+        onclick="animateScroll('intro')"
+        data-section="intro"
+      >
         <i class="icon ion-ios-person"></i>
         <span>Intro</span>
       </div>
-      <div class="nav-item" onclick="animateScroll('experience')" data-section="experience">
+      <div
+        class="nav-item"
+        onclick="animateScroll('experience')"
+        data-section="experience"
+      >
         <i class="icon ion-ios-briefcase"></i>
         <span>Experience</span>
       </div>
-      <div class="nav-item" onclick="animateScroll('projects')" data-section="projects">
+      <div
+        class="nav-item"
+        onclick="animateScroll('projects')"
+        data-section="projects"
+      >
         <i class="icon ion-ios-folder"></i>
         <span>Projects</span>
       </div>
-      <div class="nav-item" onclick="animateScroll('skill-set')" data-section="skill-set">
+      <div
+        class="nav-item"
+        onclick="animateScroll('skill-set')"
+        data-section="skill-set"
+      >
         <i class="icon ion-code"></i>
         <span>Skills</span>
       </div>
-      <div class="nav-item" onclick="animateScroll('achievements')" data-section="achievements">
+      <div
+        class="nav-item"
+        onclick="animateScroll('achievements')"
+        data-section="achievements"
+      >
         <i class="icon ion-trophy"></i>
         <span>Awards</span>
       </div>
-      <div class="nav-item" onclick="animateScroll('education')" data-section="education">
+      <div
+        class="nav-item"
+        onclick="animateScroll('education')"
+        data-section="education"
+      >
         <i class="icon ion-university"></i>
         <span>Education</span>
       </div>
     </div>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
     <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <script src="/lib/jquery/jquery.min.js"></script>
     <script src="/lib/jquery/jquery-migrate.min.js"></script>
@@ -1157,7 +1381,7 @@
     <script src="/js/main.js"></script>
     <script>
       document.addEventListener("contextmenu", (event) =>
-        event.preventDefault()
+        event.preventDefault(),
       );
     </script>
     <script>
@@ -1166,15 +1390,17 @@
           {
             scrollTop: $(`#${id}`).offset().top,
           },
-          1000
+          1000,
         );
         // Update active menu item for desktop dock
         $(".nav-bar-fixed .dock-item").removeClass("active");
         $(`.nav-bar-fixed .dock-item[data-section="${id}"]`).addClass("active");
-        
+
         // Update active menu item for mobile bottom nav
         $(".mobile-bottom-nav .nav-item").removeClass("active");
-        $(`.mobile-bottom-nav .nav-item[data-section="${id}"]`).addClass("active");
+        $(`.mobile-bottom-nav .nav-item[data-section="${id}"]`).addClass(
+          "active",
+        );
       }
     </script>
     <script>
@@ -1187,7 +1413,7 @@
         $("#patent").load("/components/patent.html");
         $("#education").load("/components/education.html");
         $("#msk-testimony").load("/components/testimony.html");
-        $("#mock-interview-ad").load("/components/mock-interview-ad.html");
+        // $("#mock-interview-ad").load("/components/mock-interview-ad.html");
         $("#footer").load("/components/footer.html");
 
         // Track scroll position and update active menu item
@@ -1218,11 +1444,15 @@
               ) {
                 // Update desktop dock
                 $(".nav-bar-fixed .dock-item").removeClass("active");
-                $(`.nav-bar-fixed .dock-item[data-section="${section}"]`).addClass("active");
-                
+                $(
+                  `.nav-bar-fixed .dock-item[data-section="${section}"]`,
+                ).addClass("active");
+
                 // Update mobile bottom nav
                 $(".mobile-bottom-nav .nav-item").removeClass("active");
-                $(`.mobile-bottom-nav .nav-item[data-section="${section}"]`).addClass("active");
+                $(
+                  `.mobile-bottom-nav .nav-item[data-section="${section}"]`,
+                ).addClass("active");
               }
             }
           });
@@ -1234,23 +1464,24 @@
         }, 2000);
 
         // Set initial active state for mobile bottom nav
-        $(".mobile-bottom-nav .nav-item[data-section='intro']").addClass("active");
-        
+        $(".mobile-bottom-nav .nav-item[data-section='intro']").addClass(
+          "active",
+        );
+
         // Set initial active state for desktop dock
         $(".nav-bar-fixed .dock-item[data-section='intro']").addClass("active");
-        
+
         // Mobile bottom nav - always visible (removed hide/show on scroll)
         // Keep mobile bottom nav always visible when scrolling
-        $(window).on('scroll', function() {
+        $(window).on("scroll", function () {
           // Only apply on mobile (< 1024px)
           if ($(window).width() >= 1024) return;
-          
-          let mobileNav = $('.mobile-bottom-nav');
-          
+
+          let mobileNav = $(".mobile-bottom-nav");
+
           // Ensure mobile nav is always visible
-          mobileNav.removeClass('hidden');
+          mobileNav.removeClass("hidden");
         });
-        
       });
     </script>
     <!-- PWA -->
@@ -1261,56 +1492,57 @@
             .register("/sw.js")
             .then((reg) => console.log("Service Worker registered", reg))
             .catch((err) =>
-              console.error("Service Worker registration failed", err)
+              console.error("Service Worker registration failed", err),
             );
         });
       }
     </script>
-    
+
     <!-- Navigation Slide-in Animations on Page Load -->
     <script>
-      window.addEventListener("load", function() {
+      window.addEventListener("load", function () {
         // Trigger navigation slide-in animations with staggered delays
         // Top menu bar slides first (wait a bit for jQuery to load content)
-        setTimeout(function() {
+        setTimeout(function () {
           const desktopNavBar = document.getElementById("desktop-nav-bar");
           if (desktopNavBar) {
             desktopNavBar.classList.add("slide-in");
           }
         }, 200);
-        
+
         // Left dock slides in
-        setTimeout(function() {
+        setTimeout(function () {
           const navBarFixed = document.querySelector(".nav-bar-fixed");
           if (navBarFixed) {
             navBarFixed.classList.add("slide-in");
           }
         }, 400);
-        
+
         // Right tech sidebar slides in
-        setTimeout(function() {
+        setTimeout(function () {
           const techSidebar = document.querySelector(".tech-sidebar");
           if (techSidebar) {
             techSidebar.classList.add("slide-in");
           }
         }, 600);
-        
+
         // Right chatbot widget slides in
-        setTimeout(function() {
+        setTimeout(function () {
           const chatbotWidget = document.querySelector(".chatbot-widget");
           if (chatbotWidget) {
             chatbotWidget.classList.add("slide-in");
           }
         }, 750);
-        
+
         // Scroll indicator slides in
-        setTimeout(function() {
-          const scrollWrapper = document.querySelector(".scroll-indicator-wrapper");
+        setTimeout(function () {
+          const scrollWrapper = document.querySelector(
+            ".scroll-indicator-wrapper",
+          );
           if (scrollWrapper) {
             scrollWrapper.classList.add("slide-in");
           }
         }, 900);
-        
       });
     </script>
 
@@ -1322,10 +1554,16 @@
       </div>
       <div class="chatbot-popup" id="chatbot-popup">
         <div class="chatbot-header">
-          <img src="/images/me_circle.png" alt="Manoj" class="chatbot-header-avatar" />
+          <img
+            src="/images/me_circle.png"
+            alt="Manoj"
+            class="chatbot-header-avatar"
+          />
           <div class="chatbot-header-info">
             <span class="chatbot-name">Manoj Satishkumar</span>
-            <span class="chatbot-status"><span class="status-dot"></span> Online</span>
+            <span class="chatbot-status"
+              ><span class="status-dot"></span> Online</span
+            >
           </div>
           <button class="chatbot-close" onclick="closeChatbot()">×</button>
         </div>
@@ -1335,22 +1573,33 @@
               <span>Hey there! 👋</span>
             </div>
           </div>
-          <div class="chatbot-message" style="animation-delay: 0.5s;">
+          <div class="chatbot-message" style="animation-delay: 0.5s">
             <div class="message-bubble">
-              <span>Thanks for checking out my profile! I'm a Staff Software Engineer with 12+ years of experience in building scalable frontend systems.</span>
+              <span
+                >Thanks for checking out my profile! I'm a Staff Software
+                Engineer with 12+ years of experience in building scalable
+                frontend systems.</span
+              >
             </div>
           </div>
-          <div class="chatbot-message" style="animation-delay: 1s;">
+          <div class="chatbot-message" style="animation-delay: 1s">
             <div class="message-bubble">
               <span>Do you want to hire me?</span>
             </div>
           </div>
         </div>
         <div class="chatbot-actions">
-          <a href="mailto:88manojs@gmail.com?subject=Interested%20in%20Hiring%20You&body=Hi%20Manoj%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I'm%20interested%20in%20discussing%20a%20potential%20opportunity%20with%20you.%0A%0ALooking%20forward%20to%20connecting!%0A%0ABest%20regards" class="chatbot-hire-btn">
+          <a
+            href="mailto:88manojs@gmail.com?subject=Interested%20in%20Hiring%20You&body=Hi%20Manoj%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I'm%20interested%20in%20discussing%20a%20potential%20opportunity%20with%20you.%0A%0ALooking%20forward%20to%20connecting!%0A%0ABest%20regards"
+            class="chatbot-hire-btn"
+          >
             <i class="ion-ios-email"></i> 88manojs@gmail.com
           </a>
-          <a href="https://www.linkedin.com/in/manojsatishkumar/" target="_blank" class="chatbot-linkedin-btn">
+          <a
+            href="https://www.linkedin.com/in/manojsatishkumar/"
+            target="_blank"
+            class="chatbot-linkedin-btn"
+          >
             <i class="ion-social-linkedin"></i>
           </a>
         </div>
@@ -1360,20 +1609,37 @@
     <!-- Scroll Indicator -->
     <div class="scroll-indicator-wrapper">
       <span class="scroll-indicator-label">Scroll</span>
-      <div id="scroll-indicator" class="scroll-indicator" onclick="handleScrollIndicatorClick()">
+      <div
+        id="scroll-indicator"
+        class="scroll-indicator"
+        onclick="handleScrollIndicatorClick()"
+      >
         <div class="scroll-arrow-down">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 5v14M5 12l7 7 7-7"/>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M12 5v14M5 12l7 7 7-7" />
           </svg>
         </div>
         <div class="scroll-arrow-up">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 19V5M5 12l7-7 7 7"/>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M12 19V5M5 12l7-7 7 7" />
           </svg>
         </div>
       </div>
     </div>
-
 
     <style>
       /* Scroll Indicator Styles */
@@ -1447,7 +1713,8 @@
       }
 
       @keyframes bounceDown {
-        0%, 100% {
+        0%,
+        100% {
           transform: translateY(0);
         }
         50% {
@@ -1461,8 +1728,7 @@
           display: none;
         }
       }
-
-      </style>
+    </style>
 
     <style>
       /* Chatbot Widget Styles */
@@ -1471,7 +1737,13 @@
         bottom: 24px;
         right: 24px;
         z-index: 9998;
-        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family:
+          "Poppins",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
       }
 
       @media (max-width: 1024px) {
@@ -1480,7 +1752,7 @@
           right: 16px;
           transition: bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
         .chatbot-widget.nav-hidden {
           bottom: 24px;
         }
@@ -1492,22 +1764,33 @@
         border-radius: 50%;
         cursor: pointer;
         position: relative;
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
-        box-shadow: 0 4px 20px rgba(0, 123, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition:
+          transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+          box-shadow 0.3s ease;
+        box-shadow:
+          0 4px 20px rgba(0, 123, 255, 0.3),
+          0 2px 8px rgba(0, 0, 0, 0.1);
         animation: chatbotPulse 2s ease-in-out infinite;
       }
 
       .chatbot-bubble:hover {
         transform: scale(1.1);
-        box-shadow: 0 6px 28px rgba(0, 123, 255, 0.4), 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow:
+          0 6px 28px rgba(0, 123, 255, 0.4),
+          0 4px 12px rgba(0, 0, 0, 0.15);
       }
 
       @keyframes chatbotPulse {
-        0%, 100% {
-          box-shadow: 0 4px 20px rgba(0, 123, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.1);
+        0%,
+        100% {
+          box-shadow:
+            0 4px 20px rgba(0, 123, 255, 0.3),
+            0 2px 8px rgba(0, 0, 0, 0.1);
         }
         50% {
-          box-shadow: 0 4px 30px rgba(0, 123, 255, 0.5), 0 2px 12px rgba(0, 0, 0, 0.15);
+          box-shadow:
+            0 4px 30px rgba(0, 123, 255, 0.5),
+            0 2px 12px rgba(0, 0, 0, 0.15);
         }
       }
 
@@ -1551,7 +1834,9 @@
         width: 340px;
         background: white;
         border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+        box-shadow:
+          0 10px 40px rgba(0, 0, 0, 0.15),
+          0 4px 12px rgba(0, 0, 0, 0.1);
         opacity: 0;
         visibility: hidden;
         transform: translateY(20px) scale(0.95);
@@ -1565,7 +1850,7 @@
       }
 
       .chatbot-popup::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -14px;
         right: 18px;
@@ -1623,8 +1908,13 @@
       }
 
       @keyframes statusPulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
       }
 
       .chatbot-close {
@@ -1700,7 +1990,9 @@
         justify-content: center;
         gap: 8px;
         text-decoration: none;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
       }
 
       .chatbot-hire-btn i {
@@ -1725,7 +2017,9 @@
         align-items: center;
         justify-content: center;
         text-decoration: none;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
       }
 
       .chatbot-linkedin-btn i {
@@ -1758,12 +2052,22 @@
         animation: typingBounce 1.4s ease-in-out infinite;
       }
 
-      .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-      .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+      .typing-dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .typing-dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
 
       @keyframes typingBounce {
-        0%, 60%, 100% { transform: translateY(0); }
-        30% { transform: translateY(-6px); }
+        0%,
+        60%,
+        100% {
+          transform: translateY(0);
+        }
+        30% {
+          transform: translateY(-6px);
+        }
       }
 
       /* Mobile responsive */
@@ -1781,24 +2085,24 @@
       let chatbotActivated = false;
 
       function toggleChatbot() {
-        const popup = document.getElementById('chatbot-popup');
-        const notification = document.getElementById('chatbot-notification');
-        
+        const popup = document.getElementById("chatbot-popup");
+        const notification = document.getElementById("chatbot-notification");
+
         if (chatbotOpen) {
-          popup.classList.remove('show');
-          notification.classList.add('show');
+          popup.classList.remove("show");
+          notification.classList.add("show");
         } else {
-          popup.classList.add('show');
-          notification.classList.remove('show');
+          popup.classList.add("show");
+          notification.classList.remove("show");
         }
         chatbotOpen = !chatbotOpen;
       }
 
       function closeChatbot() {
-        const popup = document.getElementById('chatbot-popup');
-        const notification = document.getElementById('chatbot-notification');
-        popup.classList.remove('show');
-        notification.classList.add('show');
+        const popup = document.getElementById("chatbot-popup");
+        const notification = document.getElementById("chatbot-notification");
+        popup.classList.remove("show");
+        notification.classList.add("show");
         chatbotOpen = false;
       }
 
@@ -1815,8 +2119,8 @@
       // }, 60000);
 
       // Close chatbot when clicking outside
-      document.addEventListener('click', function(e) {
-        const widget = document.getElementById('chatbot-widget');
+      document.addEventListener("click", function (e) {
+        const widget = document.getElementById("chatbot-widget");
         if (chatbotOpen && !widget.contains(e.target)) {
           closeChatbot();
         }
@@ -1824,49 +2128,49 @@
 
       // Scroll Indicator functions
       function handleScrollIndicatorClick() {
-        const indicator = document.getElementById('scroll-indicator');
-        if (indicator.classList.contains('at-bottom')) {
+        const indicator = document.getElementById("scroll-indicator");
+        if (indicator.classList.contains("at-bottom")) {
           // Scroll to top
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
           // Scroll down by viewport height
-          window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+          window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
         }
       }
 
       function updateScrollIndicator() {
-        const indicator = document.getElementById('scroll-indicator');
+        const indicator = document.getElementById("scroll-indicator");
         if (!indicator) return;
-        
+
         const scrollTop = window.scrollY;
         const windowHeight = window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
-        
+
         // Check if near bottom (within 100px)
         if (scrollTop + windowHeight >= documentHeight - 100) {
-          indicator.classList.add('at-bottom');
+          indicator.classList.add("at-bottom");
         } else {
-          indicator.classList.remove('at-bottom');
+          indicator.classList.remove("at-bottom");
         }
       }
 
-      window.addEventListener('scroll', updateScrollIndicator);
-      window.addEventListener('load', updateScrollIndicator);
+      window.addEventListener("scroll", updateScrollIndicator);
+      window.addEventListener("load", updateScrollIndicator);
 
       // About Modal functions
       function openAboutModal() {
-        document.getElementById('about-modal-overlay').classList.add('show');
-        document.body.style.overflow = 'hidden';
+        document.getElementById("about-modal-overlay").classList.add("show");
+        document.body.style.overflow = "hidden";
       }
 
       function closeAboutModal() {
-        document.getElementById('about-modal-overlay').classList.remove('show');
-        document.body.style.overflow = '';
+        document.getElementById("about-modal-overlay").classList.remove("show");
+        document.body.style.overflow = "";
       }
 
       // Close modal with Escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
           closeAboutModal();
         }
       });
