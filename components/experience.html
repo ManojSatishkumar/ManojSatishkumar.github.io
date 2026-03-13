@@ -50,8 +50,8 @@
       </div>
     </div>
     <div class="experience-grid">
-      <div class="experience-card">
-        <img src="/images/walmart-logo.jpg" alt="Walmart Labs" class="company-logo" />
+      <div class="experience-card experience-card--walmart">
+        <img src="/images/walmart-logo.png" alt="Walmart" class="company-logo" />
         <h2 class="company-name">
           <a href="https://en.wikipedia.org/wiki/Walmart" target="_blank"
             >Walmart</a
@@ -70,8 +70,8 @@
           Architected and built a no-code, multi-tenant template builder portal powering 70M+ daily communications across Email, SMS, Push, WhatsApp & In-App channels.
         </p>
       </div>
-       <div class="experience-card">
-        <img src="/images/paypal-icon.png" alt="PayPal" class="company-logo" />
+       <div class="experience-card experience-card--paypal">
+        <img src="/images/paypal-icon.png" alt="PayPal" class="company-logo company-logo--paypal" />
         <h2 class="company-name">
           <a href="https://en.wikipedia.org/wiki/PayPal" target="_blank"
             >PayPal</a
@@ -87,8 +87,8 @@
           Built next-gen merchant onboarding experience for PayPal's global business customers. Developed React-based micro-frontends with internationalization support for 25+ countries and streamlined KYC verification flows.
         </p>
       </div>
-      <div class="experience-card">
-        <img src="/images/cerner-logo.jpg" alt="Cerner" class="company-logo" />
+      <div class="experience-card experience-card--cerner">
+        <img src="/images/cerner-logo.png" alt="Cerner" class="company-logo" />
         <h2 class="company-name">
           <a href="https://en.wikipedia.org/wiki/Cerner" target="_blank"
             >Cerner
@@ -103,8 +103,8 @@
           Led a team of 8 developers building mission-critical medical vitals charting applications for nurses in 3 US hospitals. Implemented real-time data sync with HL7 FHIR standards and achieved 99.9% uptime for patient care systems.
         </p>
       </div>
-      <div class="experience-card">
-        <img src="/images/grl-logo.jpg" alt="GRL Labs" class="company-logo" />
+      <div class="experience-card experience-card--grl">
+        <img src="/images/grl-logo.png" alt="GRL Labs" class="company-logo" />
         <h2 class="company-name">
           <a href="https://graniteriverlabs.com/" target="_blank">GRL Labs</a>
         </h2>
@@ -123,7 +123,10 @@
 <style>
   .experience-section {
     padding: 80px 20px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background:
+      radial-gradient(circle at top left, rgba(255, 225, 130, 0.2), transparent 24%),
+      radial-gradient(circle at top right, rgba(125, 211, 252, 0.18), transparent 28%),
+      linear-gradient(135deg, #fffef8 0%, #f7fbff 48%, #f3f8f6 100%);
     font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
@@ -150,7 +153,7 @@
 
   .experience-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 20px;
     max-width: 1400px;
     margin: 0 auto;
@@ -164,15 +167,140 @@
     transition: all 0.3s ease;
     border: 1px solid rgba(0, 0, 0, 0.1);
     position: relative;
+    overflow: hidden;
+  }
+
+  .experience-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .experience-card--walmart {
+    background:
+      radial-gradient(circle at top right, rgba(255, 210, 76, 0.18), transparent 24%),
+      linear-gradient(150deg, #fffdf3 0%, #fff9e4 46%, #fdf2c9 100%);
+    border-color: rgba(0, 113, 206, 0.18);
+    box-shadow: 0 14px 28px rgba(0, 113, 206, 0.08);
+  }
+
+  .experience-card--walmart::before {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0) 42%),
+      radial-gradient(circle at 12% 82%, rgba(0, 113, 206, 0.05), transparent 18%);
+  }
+
+  .experience-card--walmart .company-name a {
+    color: #003b73;
+  }
+
+  .experience-card--paypal {
+    background:
+      radial-gradient(circle at top right, rgba(0, 166, 255, 0.14), transparent 24%),
+      linear-gradient(155deg, #f7fbff 0%, #eef6ff 54%, #e3f0ff 100%);
+    border-color: rgba(0, 48, 135, 0.12);
+    box-shadow: 0 16px 32px rgba(0, 48, 135, 0.07);
+  }
+
+  .experience-card--paypal::before {
+    background:
+      linear-gradient(125deg, rgba(255, 255, 255, 0.45), transparent 40%),
+      radial-gradient(circle at 84% 20%, rgba(0, 156, 222, 0.08), transparent 18%);
+  }
+
+  .experience-card--paypal .company-name a,
+  .experience-card--paypal .role {
+    color: #003087;
+  }
+
+  .experience-card--paypal .industry,
+  .experience-card--paypal .duration,
+  .experience-card--paypal .description {
+    color: #29476d;
+  }
+
+  .experience-card--paypal hr {
+    background: rgba(0, 48, 135, 0.16);
+  }
+
+  .experience-card--cerner {
+    background:
+      radial-gradient(circle at top right, rgba(0, 188, 212, 0.12), transparent 22%),
+      linear-gradient(155deg, #fcfffe 0%, #f4fcfa 48%, #ebf8f4 100%);
+    border-color: rgba(0, 169, 157, 0.16);
+    box-shadow: 0 14px 28px rgba(0, 169, 157, 0.06);
+  }
+
+  .experience-card--cerner::before {
+    background:
+      linear-gradient(180deg, rgba(0, 169, 157, 0.06), transparent 38%);
+  }
+
+  .experience-card--cerner .company-name a,
+  .experience-card--cerner .role {
+    color: #0f4f49;
+  }
+
+  .experience-card--cerner .industry,
+  .experience-card--cerner .duration,
+  .experience-card--cerner .description {
+    color: #315f59;
+  }
+
+  .experience-card--cerner hr {
+    background: rgba(0, 169, 157, 0.16);
+  }
+
+  .experience-card--cerner .company-name a {
+    color: #00897b;
+  }
+
+  .experience-card--grl {
+    background:
+      radial-gradient(circle at top right, rgba(255, 166, 127, 0.12), transparent 24%),
+      linear-gradient(155deg, #fcfcfe 0%, #f4f6fb 52%, #ebf0f8 100%);
+    border-color: rgba(73, 85, 111, 0.12);
+    box-shadow: 0 16px 30px rgba(73, 85, 111, 0.07);
+  }
+
+  .experience-card--grl::before {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent 36%),
+      radial-gradient(circle at 88% 18%, rgba(255, 196, 168, 0.1), transparent 20%);
+  }
+
+  .experience-card--grl .company-name a,
+  .experience-card--grl .role {
+    color: #43506a;
+  }
+
+  .experience-card--grl .industry,
+  .experience-card--grl .duration,
+  .experience-card--grl .description {
+    color: #4b5a71;
+  }
+
+  .experience-card--grl hr {
+    background: rgba(73, 85, 111, 0.16);
+  }
+
+  .experience-card--grl .company-logo {
+    filter: brightness(1.03) contrast(1.02);
   }
 
   .company-logo {
     position: absolute;
     right: 20px;
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
     background: transparent;
+  }
+
+  .company-logo--paypal {
+    width: 42px;
+    height: 42px;
   }
 
   .experience-card:hover {
@@ -211,7 +339,7 @@
 
   .location,
   .duration {
-    color: #636e72;
+    color: #48515c;
     font-size: 0.95rem;
     margin: 5px 0;
     display: flex;
@@ -236,7 +364,7 @@
 
   .description {
     margin-top: 15px;
-    color: #4a4a4a;
+    color: #334155;
     font-size: 0.95rem;
     line-height: 1.6;
   }
@@ -246,16 +374,16 @@
       padding: 60px 0px;
     }
 
+    .experience-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .section-title {
       font-size: 2rem;
     }
 
     .experience-card {
       padding: 20px;
-    }
-
-    .experience-card--featured {
-      padding: 24px 12px;
     }
   }
 
@@ -317,6 +445,10 @@
   }
 
   @media (max-width: 600px) {
+    .experience-grid {
+      grid-template-columns: 1fr;
+    }
+
     .timer-unit span:first-child {
       font-size: 32px;
     }
