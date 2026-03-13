@@ -1,0 +1,1114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manoj's Journal | Manoj Satishkumar</title>
+    <meta
+      name="description"
+      content="A daily work-life journal by Manoj Satishkumar documenting experiments, tools, engineering observations, and career reflections."
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      :root {
+        color-scheme: light;
+        --surface: rgba(255, 255, 255, 0.78);
+        --surface-strong: rgba(255, 255, 255, 0.92);
+        --border: rgba(148, 163, 184, 0.18);
+        --text: #0f172a;
+        --muted: #58667a;
+        --soft: #718198;
+        --blue: #2563eb;
+        --violet: #7c3aed;
+        --teal: #0f766e;
+        --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        font-family:
+          Inter,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(147, 197, 253, 0.24),
+            transparent 24%
+          ),
+          radial-gradient(
+            circle at top right,
+            rgba(244, 114, 182, 0.15),
+            transparent 22%
+          ),
+          radial-gradient(
+            circle at 80% 78%,
+            rgba(45, 212, 191, 0.14),
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 14% 82%,
+            rgba(251, 191, 36, 0.16),
+            transparent 22%
+          ),
+          linear-gradient(135deg, #fbfdff 0%, #f8faff 44%, #f8fffc 100%);
+        padding: 96px 0 0;
+        overflow: hidden;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .page-shell {
+        width: min(100vw - 32px, 1600px);
+        margin: 0 auto;
+        height: calc(100dvh - 96px);
+        padding: 0;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        border-radius: 36px;
+        padding: 42px;
+        background:
+          radial-gradient(
+            circle at top right,
+            rgba(191, 219, 254, 0.72),
+            transparent 26%
+          ),
+          radial-gradient(
+            circle at 20% 80%,
+            rgba(253, 230, 138, 0.45),
+            transparent 24%
+          ),
+          linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.86) 0%,
+            rgba(255, 255, 255, 0.68) 100%
+          );
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(14px);
+      }
+
+      .hero-identity {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 18px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-avatar {
+        width: 74px;
+        height: 74px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid rgba(255, 255, 255, 0.92);
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
+      }
+
+      .hero-name {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .hero-name strong {
+        font-size: 1.1rem;
+        color: var(--text);
+      }
+
+      .hero-name span {
+        color: var(--soft);
+        font-size: 0.92rem;
+      }
+
+      .hero-topline {
+        display: inline-flex;
+        align-items: center;
+        padding: 9px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.84);
+        border: 1px solid rgba(148, 163, 184, 0.16);
+        color: var(--violet);
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .hero h1 {
+        margin: 18px 0 12px;
+        font-size: clamp(2.8rem, 6vw, 5.6rem);
+        line-height: 0.92;
+        letter-spacing: -0.05em;
+        font-weight: 900;
+      }
+
+      .hero p {
+        max-width: 820px;
+        margin: 0;
+        font-size: 1.06rem;
+        line-height: 1.85;
+        color: var(--muted);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr);
+        gap: 22px;
+        margin-top: 28px;
+      }
+
+      .hero-card {
+        padding: 22px 22px 20px;
+        border-radius: 24px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.05);
+      }
+
+      .hero-card h3 {
+        margin: 0 0 10px;
+        font-size: 1rem;
+      }
+
+      .hero-card p {
+        font-size: 0.95rem;
+        line-height: 1.75;
+      }
+
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .stat {
+        padding: 16px 14px;
+        border-radius: 20px;
+        background: var(--surface-strong);
+        border: 1px solid rgba(148, 163, 184, 0.15);
+        text-align: center;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.25rem;
+      }
+
+      .stat span {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.82rem;
+        color: var(--soft);
+      }
+
+      .topics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .topic-chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 9px 12px;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #334155;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+      }
+
+      .journal-layout {
+        display: grid;
+        grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+        gap: 20px;
+        height: 100%;
+        align-items: stretch;
+      }
+
+      .journal-master,
+      .journal-detail {
+        height: 100%;
+        border-radius: 30px;
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.88),
+          rgba(255, 255, 255, 0.72)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.92);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(12px);
+      }
+
+      .journal-master {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      .journal-master-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 8px 8px 14px;
+      }
+
+      .journal-master-header h2,
+      .journal-detail-header h2 {
+        margin: 0;
+        font-size: 1.1rem;
+      }
+
+      .journal-master-header span {
+        color: var(--soft);
+        font-size: 0.86rem;
+        font-weight: 600;
+      }
+
+      .entry-list {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        overflow-y: auto;
+        padding-right: 4px;
+        min-height: 0;
+      }
+
+      .entry-card {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        text-align: left;
+        cursor: pointer;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.66);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          border-color 0.2s ease,
+          background 0.2s ease;
+      }
+
+      .entry-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
+      }
+
+      .entry-card.is-active {
+        background:
+          radial-gradient(circle at top left, rgba(125, 211, 252, 0.5), transparent 48%),
+          radial-gradient(circle at 85% 20%, rgba(196, 181, 253, 0.48), transparent 42%),
+          radial-gradient(circle at bottom right, rgba(253, 186, 116, 0.34), transparent 44%),
+          linear-gradient(135deg, rgba(236, 244, 255, 0.98), rgba(225, 236, 248, 0.96));
+        border-color: rgba(96, 165, 250, 0.42);
+        box-shadow: 0 22px 42px rgba(96, 165, 250, 0.18);
+      }
+
+      .entry-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .entry-heading {
+        min-width: 0;
+      }
+
+      .entry-topline,
+      .detail-topline {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .entry-day {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .entry-date,
+      .detail-date {
+        color: var(--soft);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+
+      .entry-day--one {
+        color: #1d4ed8;
+        background: rgba(219, 234, 254, 0.9);
+      }
+
+      .entry-day--two {
+        color: #7c3aed;
+        background: rgba(237, 233, 254, 0.9);
+      }
+
+      .entry-day--three {
+        color: #0f766e;
+        background: rgba(204, 251, 241, 0.92);
+      }
+
+      .entry-card h2 {
+        margin: 10px 0 6px;
+        font-size: clamp(1.02rem, 1.2vw, 1.18rem);
+        line-height: 1.25;
+        letter-spacing: -0.03em;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .entry-subtitle {
+        margin: 0;
+        color: var(--soft);
+        font-size: 0.84rem;
+        line-height: 1.45;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .entry-tags {
+        display: none;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        min-width: 0;
+        background: rgba(255, 255, 255, 0.84);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        font-size: 0.76rem;
+        font-weight: 700;
+        color: #475569;
+      }
+
+      .entry-brief {
+        margin-top: 0;
+        display: none;
+      }
+
+      .entry-brief p {
+        margin: 0;
+      }
+
+      .entry-meta-panel {
+        display: none;
+      }
+
+      .side-card {
+        border-radius: 22px;
+        padding: 18px 18px 16px;
+        background: rgba(255, 255, 255, 0.84);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+      }
+
+      .side-card h3 {
+        margin: 0 0 10px;
+        font-size: 0.96rem;
+      }
+
+      .side-list {
+        display: grid;
+        gap: 9px;
+      }
+
+      .side-list span {
+        color: #526071;
+        font-size: 0.92rem;
+        line-height: 1.55;
+      }
+
+      .read-more {
+        margin-top: 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--blue);
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
+      .journal-detail {
+        padding: 24px 24px 22px;
+        display: grid;
+        align-content: start;
+        overflow-y: auto;
+      }
+
+      .journal-detail-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 14px;
+      }
+
+      .detail-back-button {
+        display: none;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        background: rgba(255, 255, 255, 0.92);
+        color: #334155;
+        border-radius: 12px;
+        padding: 9px 12px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .journal-detail.is-overview .detail-topline,
+      .journal-detail.is-overview .detail-tags,
+      .journal-detail.is-overview .detail-signoff {
+        display: none;
+      }
+
+      .detail-title-wrap h1 {
+        margin: 14px 0 8px;
+        font-size: clamp(1.9rem, 2.6vw, 2.8rem);
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+      }
+
+      .detail-subtitle {
+        margin: 0;
+        color: var(--soft);
+        font-size: 0.98rem;
+        line-height: 1.75;
+      }
+
+      .detail-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 18px 0;
+      }
+
+      .detail-body {
+        display: grid;
+        gap: 16px;
+        margin-top: 8px;
+      }
+
+      .detail-body p {
+        margin: 0;
+        color: #334155;
+        font-size: 1rem;
+        line-height: 1.9;
+      }
+
+      .detail-overview {
+        display: grid;
+        gap: 22px;
+      }
+
+      .detail-overview-intro {
+        color: var(--muted);
+        font-size: 1.04rem;
+        line-height: 1.85;
+      }
+
+      .detail-overview-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
+        gap: 20px;
+      }
+
+      .detail-overview-card {
+        padding: 22px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+      }
+
+      .detail-overview-card h3 {
+        margin: 0 0 12px;
+        font-size: 1rem;
+      }
+
+      .detail-overview-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.96rem;
+        line-height: 1.75;
+      }
+
+      .detail-overview-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .detail-overview-stat {
+        padding: 16px 14px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        text-align: center;
+      }
+
+      .detail-overview-stat strong {
+        display: block;
+        font-size: 1.2rem;
+      }
+
+      .detail-overview-stat span {
+        display: block;
+        margin-top: 6px;
+        color: var(--soft);
+        font-size: 0.82rem;
+      }
+
+      .detail-overview-topics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .detail-signoff {
+        margin-top: 18px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(148, 163, 184, 0.16);
+        color: #64748b;
+        font-style: italic;
+      }
+
+      .future-note {
+        margin-top: 18px;
+        padding: 18px 18px 16px;
+        border-radius: 22px;
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.82),
+          rgba(255, 255, 255, 0.66)
+        );
+        border: 1px dashed rgba(124, 58, 237, 0.22);
+        text-align: left;
+        color: #526071;
+      }
+
+      .future-note strong {
+        display: block;
+        margin-bottom: 8px;
+        color: #111827;
+        font-size: 1.02rem;
+      }
+
+      @media (max-width: 980px) {
+        body {
+          padding-top: 104px;
+          overflow: auto;
+        }
+
+        .hero-grid,
+        .journal-layout,
+        .detail-overview-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .page-shell {
+          width: min(100% - 20px, 1180px);
+          height: auto;
+        }
+
+        .journal-layout {
+          height: auto;
+        }
+
+        .journal-layout.mobile-master-view .journal-detail {
+          display: none;
+        }
+
+        .journal-layout.mobile-detail-view .journal-master {
+          display: none;
+        }
+
+        .journal-master,
+        .journal-detail {
+          height: auto;
+        }
+
+        .entry-list,
+        .journal-detail {
+          overflow: visible;
+        }
+
+        .entry-header {
+          flex-direction: column;
+        }
+
+        .entry-tags {
+          justify-content: flex-start;
+        }
+
+        .detail-back-button {
+          display: inline-flex;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .page-shell {
+          width: min(100% - 20px, 1180px);
+        }
+
+        .hero-identity {
+          align-items: flex-start;
+        }
+
+        .hero,
+        .journal-master,
+        .journal-detail {
+          padding: 22px;
+          border-radius: 26px;
+        }
+
+        .hero-stats {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="desktop-nav-bar"></div>
+    <br/>
+    <main class="page-shell">
+      <section class="journal-layout">
+        <div class="journal-master">
+          <div class="journal-master-header">
+            <h2>Journal Timeline</h2>
+            <span>Latest first</span>
+          </div>
+          <div class="entry-list">
+            <button
+              class="entry-card"
+              type="button"
+              data-entry="day-3"
+              aria-label="Open Day 3 journal entry"
+            >
+              <div class="entry-header">
+                <div class="entry-heading">
+                  <div class="entry-topline">
+                    <span class="entry-day entry-day--three">Day 3</span>
+                    <span class="entry-date">13/3/2026</span>
+                  </div>
+                  <h2>
+                    When typing becomes the bottleneck, display scaling, and
+                    tool choices that feel more natural
+                  </h2>
+                  <p class="entry-subtitle">
+                    A day focused on friction: how AI changes the input method,
+                    how setup annoyances affect flow, and how everyday tools
+                    keep shifting toward what feels simplest and fastest.
+                  </p>
+                </div>
+                <div class="entry-tags">
+                  <span class="tag">BetterDisplay</span>
+                  <span class="tag">GitHub Desktop</span>
+                  <span class="tag">Raycast</span>
+                </div>
+              </div>
+              <div class="entry-brief">
+                <p>
+                  Today’s biggest observation was that typing itself is starting
+                  to feel like the bottleneck when working with AI. I also fixed
+                  a frustrating monitor-scaling issue on macOS, shifted fully to
+                  GitHub Desktop for commits, and spent more time evaluating
+                  Raycast, VS Code, and current-model workflows.
+                </p>
+                <div class="read-more">Loads in detail pane</div>
+              </div>
+              <div class="entry-meta-panel side-card">
+                <h3>Quick themes</h3>
+                <div class="side-list">
+                  <span>Voice vs typing in AI-assisted coding</span>
+                  <span>BetterDisplay for QHD monitor scaling</span>
+                  <span>GitHub Desktop over CLI for commits</span>
+                  <span>Raycast and VS Code settling into the workflow</span>
+                </div>
+              </div>
+            </button>
+
+            <button
+              class="entry-card"
+              type="button"
+              data-entry="day-2"
+              aria-label="Open Day 2 journal entry"
+            >
+              <div class="entry-header">
+                <div class="entry-heading">
+                  <div class="entry-topline">
+                    <span class="entry-day entry-day--two">Day 2</span>
+                    <span class="entry-date">12/3/2026</span>
+                  </div>
+                  <h2>
+                    CI/CD thinking, model comparisons, notes cleanup, and
+                    voice-controlled workflows
+                  </h2>
+                  <p class="entry-subtitle">
+                    A day of refining engineering standards visually, comparing
+                    coding models, organizing systems for myself, and tracking
+                    how AI may reshape software and platforms.
+                  </p>
+                </div>
+                <div class="entry-tags">
+                  <span class="tag">Excalidraw</span>
+                  <span class="tag">Codex</span>
+                  <span class="tag">Notion + TickTick</span>
+                </div>
+              </div>
+              <div class="entry-brief">
+                <p>
+                  I spent time refining my CI/CD thinking in Excalidraw, tested
+                  a small prototype with Codex, reflected on Kyle Simpson’s
+                  views on AI-generated code, organized my notes into Notion,
+                  and experimented with voice-driven Mac automation through
+                  HeyLemon AI.
+                </p>
+                <div class="read-more">Loads in detail pane</div>
+              </div>
+              <div class="entry-meta-panel side-card">
+                <h3>Quick themes</h3>
+                <div class="side-list">
+                  <span>CI/CD architecture as a visual system</span>
+                  <span>Codex vs Opus code generation quality</span>
+                  <span>AI-code reliability and maintainability debate</span>
+                  <span>Personal systems: Notion, TickTick, voice tools</span>
+                </div>
+              </div>
+            </button>
+
+            <button
+              class="entry-card"
+              type="button"
+              data-entry="day-1"
+              aria-label="Open Day 1 journal entry"
+            >
+              <div class="entry-header">
+                <div class="entry-heading">
+                  <div class="entry-topline">
+                    <span class="entry-day entry-day--one">Day 1</span>
+                    <span class="entry-date">6/3/2026</span>
+                  </div>
+                  <h2>
+                    Unit tests, Bruno, MacBooks, AI tools, and a returned water
+                    bottle
+                  </h2>
+                  <p class="entry-subtitle">
+                    A day shaped by AI-assisted testing, tool experiments,
+                    hardware curiosity, geopolitical news, and a quietly
+                    recovered piece of office life.
+                  </p>
+                </div>
+                <div class="entry-tags">
+                  <span class="tag">Claude Opus 4.6</span>
+                  <span class="tag">Bruno</span>
+                  <span class="tag">Chrome DevTools AI</span>
+                </div>
+              </div>
+              <div class="entry-brief">
+                <p>
+                  I used Claude Opus 4.6 to generate unit tests for a frontend
+                  repo, tried Bruno as a lighter alternative to Postman,
+                  explored AI features in Chrome DevTools, looked into new
+                  MacBooks, watched discussions around agentic AI, and ended the
+                  day with a surprisingly good AI-generated presentation from
+                  Gamma.
+                </p>
+                <div class="read-more">Loads in detail pane</div>
+              </div>
+              <div class="entry-meta-panel side-card">
+                <h3>Quick themes</h3>
+                <div class="side-list">
+                  <span>AI-generated unit tests and code coverage</span>
+                  <span>Bruno vs Postman for API testing</span>
+                  <span>MacBook lineup and M5-series curiosity</span>
+                  <span
+                    >Agentic AI tools, Gamma, and daily experimentation</span
+                  >
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+        <article class="journal-detail">
+          <div class="journal-detail-header">
+            <button
+              type="button"
+              class="detail-back-button"
+              id="detail-back-button"
+              aria-label="Back to journal list"
+            >
+              ← Back
+            </button>
+            <h2 id="detail-panel-title">Journal Overview</h2>
+          </div>
+          <div class="detail-title-wrap">
+            <div class="detail-topline">
+              <span class="entry-day" id="detail-day"></span>
+              <span class="detail-date" id="detail-date"></span>
+            </div>
+            <h1 id="detail-title"></h1>
+            <p class="detail-subtitle" id="detail-subtitle"></p>
+          </div>
+          <div class="detail-tags" id="detail-tags"></div>
+          <div class="detail-body" id="detail-body"></div>
+          <div class="detail-signoff">Warm regards,<br />Manoj</div>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      const journalEntries = {
+        "day-3": {
+          dayLabel: "Day 3",
+          dateLabel: "13/3/2026",
+          dayClass: "entry-day entry-day--three",
+          title:
+            "When typing becomes the bottleneck, display scaling, and tool choices that feel more natural",
+          subtitle:
+            "A day focused on friction: how AI changes the input method, how setup annoyances affect flow, and how everyday tools keep shifting toward what feels simplest and fastest.",
+          tags: ["BetterDisplay", "GitHub Desktop", "Raycast"],
+          paragraphs: [
+            "Today, an observation I had while coding with AI is that typing itself is starting to feel like the bottleneck. When working with AI tools, especially while generating or modifying code, speaking instructions can often be faster than typing them. It also changes how I think about mistakes. Instead of worrying too much about something going wrong and constantly undoing commits, it might be more useful to move forward, identify what breaks, and then correct it.",
+            "I also ran into a technical annoyance with my external monitor setup. When connecting my QHD monitor to my Mac, macOS was not giving me the scaling I wanted. The display looked best at 1080p scaling, but achieving that without losing clarity was tricky. I eventually found a tool called BetterDisplay which solved the issue quite well.",
+            "Another small workflow change I made today was switching fully to GitHub Desktop for managing commits. I have decided to let go of using the command line for this part of the workflow. The visual interface makes it easier to see branches and changes, and for my current needs it actually feels faster.",
+            "I also spent some time listening to a podcast featuring Vaibhav Sisinty in conversation with Raj about the future of AI. I found the discussion thoughtful and worth listening to.",
+            "On the tools side, I am considering purchasing a Raycast license. I have already shifted to using it instead of the default macOS Spotlight search. Before buying the license, I want to spend another week or so exploring whether the additional features genuinely improve my daily workflow.",
+            "One more change I noticed in my own setup is that I have mostly stopped using Cursor IDE. For now I am back to using VS Code with Claude Opus 4.6 or simply using the Codex app 5.4. At this point many of the models feel very capable, and the difference between tools does not feel as dramatic as it once did.",
+          ],
+        },
+        "day-2": {
+          dayLabel: "Day 2",
+          dateLabel: "12/3/2026",
+          dayClass: "entry-day entry-day--two",
+          title:
+            "CI/CD thinking, model comparisons, notes cleanup, and voice-controlled workflows",
+          subtitle:
+            "A day of refining engineering standards visually, comparing coding models, organizing systems for myself, and tracking how AI may reshape software and platforms.",
+          tags: ["Excalidraw", "Codex", "Notion + TickTick"],
+          paragraphs: [
+            "Today I spent some time updating my personal Excalidraw diagram for how I think about setting up a proper CI/CD pipeline. I have been slowly refining it to include all the pieces that contribute to good engineering standards, from testing to deployment and monitoring. Putting it visually in one place helps me think more clearly about how everything connects.",
+            "I also experimented with building a small prototype using Codex. It worked reasonably well, but in my experience Opus 4.6 still tends to generate code with a cleaner structure. It is interesting to see how different models approach the same problem.",
+            "Something else that caught my attention today was reading a few posts from my mentor Kyle Simpson about AI generated code. He has been quite vocal about questioning the reliability and long term implications of relying too heavily on generated code. I find myself having mixed opinions on this. AI clearly speeds up many parts of development, but it also raises questions about code ownership, understanding, and maintainability.",
+            "On the personal productivity side, I spent some time cleaning up my notes. I moved a lot of scattered text and ideas into Notion so everything is organized in one place. I also added a few new habits to track in the TickTick app. It has been a game changer for managing my to-do lists and keeping track of small daily habits.",
+            "Inspired by the Open Claw project, I also experimented with an AI tool called HeyLemon AI that allows voice control of a Mac. It was able to browse the web and open applications, which was interesting to see in action. However, Open Claw still feels much more sophisticated when it comes to real workflows. It is not surprising that OpenAI became interested in the project and eventually acquired its founder.",
+            "There were also a few industry updates that caught my attention. I came across news that Facebook has acquired Moltbook. It makes me wonder what their longer term plan might be, especially if agent-based systems start creating content or posts. Perhaps platforms like Facebook could eventually become a hybrid space where both humans and AI agents are actively participating. Time will tell.",
+            "Outside of work, I noticed something interesting happening in the travel and real estate space. Hotel prices in Dubai appear to be dropping significantly. Some of the hotels I stayed at last year are currently listed at almost sixty percent lower prices. The ongoing war situation seems to be affecting tourism in the region. It also appears to be affecting other areas, including LPG supply and pricing in India, which many hotels rely on.",
+          ],
+        },
+        "day-1": {
+          dayLabel: "Day 1",
+          dateLabel: "6/3/2026",
+          dayClass: "entry-day entry-day--one",
+          title:
+            "Unit tests, Bruno, MacBooks, AI tools, and a returned water bottle",
+          subtitle:
+            "A day shaped by AI-assisted testing, tool experiments, hardware curiosity, geopolitical news, and a quietly recovered piece of office life.",
+          tags: ["Claude Opus 4.6", "Bruno", "Chrome DevTools AI"],
+          paragraphs: [
+            "Today I spent some time generating unit test cases for a frontend repository. I used Claude Opus 4.6 for this. What surprised me was that it kept working for more than two hours continuously before finally timing out but it did finish the job. I always didn't like writing unit tests. So thanks Mr. Opus!. One thing I noticed though is that it tends to generate a very large number of tests to achieve 100 percent code coverage.",
+            "I also decided to try Bruno for API testing instead of Postman. So far it feels much simpler. Postman has been frustrating lately because it often gets stuck and keeps loading whenever I open it. Bruno feels lighter, but I will give it a week before deciding if I want to switch permanently.",
+            "During the day I also spent some time looking at the new MacBooks that Apple recently announced, including the MacBook with the new mobile processor. It almost feels like the lineup might have been structured in a way that also nudges the pricing of the other MacBooks higher. That said, the M5 Pro and M5 Max chips look incredibly powerful.",
+            "I watched a few videos about how agentic AI might shape the future of payments. There seems to be a lot of discussion around systems that can act autonomously and handle workflows end to end. I also watched some content about the benchmarks and capabilities of GPT 5.4. The numbers being discussed look very impressive.",
+            "I enabled the AI features in Chrome DevTools and experimented a bit by asking questions about the Network tab. It feels like debugging tools are slowly becoming more conversational.",
+            "I also came across a VS Code extension called Peacock, which lets you visually differentiate workspaces. It looks like a small thing, but it might actually be useful when working across multiple projects.",
+            "On the way back from the office in the cab, I tried to catch up on what is happening with the war situation between Iran and Israel. The pace of information is so fast that it is surprisingly difficult to stay properly updated.",
+            "There was also a small unexpected moment today. I had lost my Walmart water bottle yesterday, and when I reached my desk today it was sitting there again. Whoever took it decided to quietly return it.",
+            "There is also a huge amount of discussion happening around Open Claw and the growing number of agentic tools being released. I am trying to spend some time reading about what these systems might make possible.",
+            "Before wrapping up the day, I also experimented with Gamma to generate a PowerPoint presentation using AI. The output was surprisingly good.",
+            "There is a lot happening right now across AI tools, developer workflows, and hardware. Trying to keep learning and experimenting one day at a time.",
+          ],
+        },
+      };
+
+      const detailDay = document.getElementById("detail-day");
+      const detailDate = document.getElementById("detail-date");
+      const detailPanelTitle = document.getElementById("detail-panel-title");
+      const detailTitle = document.getElementById("detail-title");
+      const detailSubtitle = document.getElementById("detail-subtitle");
+      const detailTags = document.getElementById("detail-tags");
+      const detailBody = document.getElementById("detail-body");
+      const detailBackButton = document.getElementById("detail-back-button");
+      const journalLayout = document.querySelector(".journal-layout");
+      const journalDetail = document.querySelector(".journal-detail");
+      const entryCards = document.querySelectorAll(".entry-card");
+      let currentEntryId = null;
+
+      function isMobileLayout() {
+        return window.innerWidth <= 980;
+      }
+
+      function showMobileMasterView() {
+        journalLayout.classList.add("mobile-master-view");
+        journalLayout.classList.remove("mobile-detail-view");
+      }
+
+      function showMobileDetailView() {
+        journalLayout.classList.add("mobile-detail-view");
+        journalLayout.classList.remove("mobile-master-view");
+      }
+
+      function loadOverview() {
+        journalDetail.classList.add("is-overview");
+        detailPanelTitle.textContent = "Journal Overview";
+        detailDay.className = "entry-day";
+        detailDay.textContent = "";
+        detailDate.textContent = "";
+        detailTitle.textContent = "Manoj's Journal";
+        detailSubtitle.textContent = "Daily notes from my work life";
+        detailTags.innerHTML = "";
+        detailBody.innerHTML = `
+          <div class="detail-overview">
+            <p class="detail-overview-intro">
+              A running documentation of my work life: what I build, what I test, what I learn, what I question, and which tools, ideas, and industry shifts are shaping the way I think every day.
+            </p>
+            <div class="detail-overview-grid">
+              <section class="detail-overview-card">
+                <h3>How this page works</h3>
+                <p>
+                  Each day appears as a short journal card in reverse chronological order. Click any card to open the full story, reflections, and details from that day.
+                </p>
+                <div class="detail-overview-stats">
+                  <div class="detail-overview-stat">
+                    <strong>3</strong>
+                    <span>Stories published</span>
+                  </div>
+                  <div class="detail-overview-stat">
+                    <strong>1</strong>
+                    <span>Story added per day</span>
+                  </div>
+                  <div class="detail-overview-stat">
+                    <strong>Latest first</strong>
+                    <span>Timeline order</span>
+                  </div>
+                </div>
+              </section>
+              <section class="detail-overview-card">
+                <h3>Recurring themes</h3>
+                <div class="detail-overview-topics">
+                  <span class="topic-chip">AI workflows</span>
+                  <span class="topic-chip">Developer tooling</span>
+                  <span class="topic-chip">System design</span>
+                  <span class="topic-chip">CI/CD thinking</span>
+                  <span class="topic-chip">Hardware curiosity</span>
+                  <span class="topic-chip">Future of software</span>
+                  <span class="topic-chip">Work-life observations</span>
+                </div>
+              </section>
+            </div>
+          </div>
+        `;
+
+        entryCards.forEach((card) => {
+          card.classList.remove("is-active");
+        });
+
+        currentEntryId = null;
+      }
+
+      function loadEntry(entryId) {
+        const entry = journalEntries[entryId];
+        if (!entry) return;
+
+        journalDetail.classList.remove("is-overview");
+        detailPanelTitle.textContent = "Selected Entry";
+        detailDay.className = entry.dayClass;
+        detailDay.textContent = entry.dayLabel;
+        detailDate.textContent = entry.dateLabel;
+        detailTitle.textContent = entry.title;
+        detailSubtitle.textContent = entry.subtitle;
+        detailTags.innerHTML = entry.tags
+          .map((tag) => `<span class="tag">${tag}</span>`)
+          .join("");
+        detailBody.innerHTML = entry.paragraphs
+          .map((paragraph) => `<p>${paragraph}</p>`)
+          .join("");
+
+        currentEntryId = entryId;
+
+        entryCards.forEach((card) => {
+          card.classList.toggle("is-active", card.dataset.entry === entryId);
+        });
+
+        if (isMobileLayout()) {
+          showMobileDetailView();
+        }
+      }
+
+      function syncJournalLayout() {
+        if (isMobileLayout()) {
+          if (journalLayout.classList.contains("mobile-detail-view") && currentEntryId) {
+            showMobileDetailView();
+          } else {
+            showMobileMasterView();
+          }
+          return;
+        }
+
+        journalLayout.classList.remove("mobile-master-view", "mobile-detail-view");
+        if (!currentEntryId) {
+          loadEntry("day-3");
+        }
+      }
+
+      entryCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          loadEntry(card.dataset.entry);
+        });
+      });
+
+      detailBackButton.addEventListener("click", () => {
+        showMobileMasterView();
+      });
+
+      if (isMobileLayout()) {
+        loadEntry("day-3");
+        showMobileMasterView();
+      } else {
+        loadEntry("day-3");
+      }
+
+      window.addEventListener("resize", syncJournalLayout);
+
+      $(function () {
+        $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
+      });
+    </script>
+  </body>
+</html>
