@@ -546,6 +546,264 @@
     text-transform: uppercase;
   }
 
+  .city-modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(10, 18, 35, 0.52);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    z-index: 10050;
+  }
+
+  .city-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .city-modal {
+    position: relative;
+    width: min(100%, 920px);
+    padding: 18px;
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at top right, rgba(255, 163, 77, 0.2), transparent 22%),
+      radial-gradient(circle at bottom left, rgba(31, 136, 61, 0.16), transparent 26%),
+      linear-gradient(145deg, #fbfdff 0%, #f2f7ff 100%);
+    box-shadow:
+      0 34px 90px rgba(18, 29, 58, 0.24),
+      0 8px 24px rgba(18, 29, 58, 0.12);
+    border: 1px solid rgba(201, 213, 239, 0.95);
+    overflow: hidden;
+    transform: scale(0.96);
+    transition: transform 0.25s ease;
+  }
+
+  .city-modal-overlay.show .city-modal {
+    transform: scale(1);
+  }
+
+  .city-card {
+    position: relative;
+    border-radius: 24px;
+    border: 1px solid rgba(191, 203, 232, 0.95);
+    background:
+      radial-gradient(circle at top left, rgba(31, 136, 61, 0.08), transparent 24%),
+      radial-gradient(circle at bottom right, rgba(255, 153, 51, 0.08), transparent 24%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(246, 249, 255, 0.98));
+    padding: 18px;
+    overflow: hidden;
+  }
+
+  .city-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent 30%),
+      repeating-linear-gradient(
+        90deg,
+        rgba(19, 136, 8, 0.025) 0,
+        rgba(19, 136, 8, 0.025) 28px,
+        rgba(255, 153, 51, 0.02) 28px,
+        rgba(255, 153, 51, 0.02) 56px
+      );
+    opacity: 0.7;
+  }
+
+  .city-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.94);
+    color: #2e3b60;
+    font-size: 24px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 3;
+    box-shadow: 0 10px 24px rgba(18, 29, 58, 0.12);
+  }
+
+  .city-close-btn:hover {
+    background: rgba(19, 34, 74, 0.14);
+  }
+
+  .city-header {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    padding-right: 64px;
+  }
+
+  .city-kicker {
+    margin: 0 0 6px;
+    color: #d16d22;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .city-title {
+    margin: 0;
+    color: #15315f;
+    font-size: 1.65rem;
+    font-weight: 800;
+    line-height: 1.05;
+  }
+
+  .city-subtitle {
+    margin: 6px 0 0;
+    color: #556582;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    max-width: 560px;
+  }
+
+  .city-badge {
+    flex: 0 0 88px;
+    width: 88px;
+    height: 88px;
+    border-radius: 22px;
+    display: grid;
+    place-items: center;
+    background:
+      linear-gradient(180deg, rgba(255, 153, 51, 0.18), rgba(255, 255, 255, 0.84) 42%, rgba(19, 136, 8, 0.18));
+    border: 1px solid rgba(191, 203, 232, 0.95);
+    box-shadow: inset 0 0 0 8px rgba(255, 255, 255, 0.35);
+    color: #1a3d6d;
+    text-align: center;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .city-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 12px;
+    align-items: start;
+  }
+
+  .city-panel,
+  .city-metrics,
+  .city-highlights {
+    border-radius: 18px;
+    border: 1px solid rgba(201, 213, 239, 0.95);
+    background: rgba(255, 255, 255, 0.82);
+  }
+
+  .city-panel {
+    padding: 16px;
+  }
+
+  .city-panel-title {
+    margin: 0 0 10px;
+    color: #67758f;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .city-panel-copy {
+    margin: 0;
+    color: #31425f;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .city-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    padding: 12px;
+    margin-top: 12px;
+  }
+
+  .city-highlight-card {
+    padding: 12px;
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(248, 251, 255, 0.96), rgba(255, 255, 255, 0.9));
+    border: 1px solid rgba(214, 223, 246, 0.95);
+  }
+
+  .city-highlight-value {
+    margin: 0 0 4px;
+    color: #15315f;
+    font-size: 1.05rem;
+    font-weight: 800;
+  }
+
+  .city-highlight-copy {
+    margin: 0;
+    color: #61708b;
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  .city-metrics {
+    padding: 14px;
+  }
+
+  .city-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .city-metric-card {
+    padding: 12px;
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(248, 251, 255, 0.96), rgba(255, 255, 255, 0.9));
+    border: 1px solid rgba(214, 223, 246, 0.95);
+  }
+
+  .city-metric-label {
+    margin: 0 0 4px;
+    color: #7a869c;
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .city-metric-value {
+    margin: 0;
+    color: #15315f;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.3;
+  }
+
+  .city-metric-note {
+    margin: 4px 0 0;
+    color: #61708b;
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
   .visa-travel-history {
     height: 100%;
     padding: 12px 12px 10px;
@@ -646,6 +904,36 @@
     }
 
     .visa-trip-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .city-modal {
+      padding: 16px;
+      border-radius: 22px;
+    }
+
+    .city-close-btn {
+      top: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+    }
+
+    .city-header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-right: 0;
+    }
+
+    .city-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .city-highlights {
+      grid-template-columns: 1fr;
+    }
+
+    .city-metrics-grid {
       grid-template-columns: 1fr;
     }
   }
@@ -765,10 +1053,15 @@
           <i class="fas fa-microphone" style="color: #e74c3c; width: 25px"></i>
           Tech Speaker
         </div>
-        <div style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem">
+        <button
+          type="button"
+          class="profile-detail-button"
+          onclick="openCityModal()"
+          aria-label="Open Bengaluru details"
+        >
           <i class="fas fa-map-marker-alt" style="color: #007bff; width: 25px"></i>
-          Bengaluru, India
-        </div>
+          <span class="profile-detail-link">Bengaluru, India</span>
+        </button>
         <button
           type="button"
           class="profile-detail-button"
@@ -864,6 +1157,112 @@
         >
           <i class="fas fa-question-circle"></i>
         </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="city-modal-overlay"
+  class="city-modal-overlay"
+  onclick="closeCityModal()"
+>
+  <div class="city-modal" onclick="event.stopPropagation()">
+    <button
+      type="button"
+      class="city-close-btn"
+      aria-label="Close Bengaluru details"
+      onclick="closeCityModal()"
+    >
+      ×
+    </button>
+    <div class="city-card">
+      <div class="city-header">
+        <div>
+          <p class="city-kicker">Home City</p>
+          <h3 class="city-title">Bengaluru, India</h3>
+          <p class="city-subtitle">
+            India’s leading technology hub known for deep engineering talent,
+            global R&D centers, startup density, and a strong culture of
+            product building.
+          </p>
+        </div>
+        <div class="city-badge">
+          Silicon<br />
+          Valley<br />
+          of India
+        </div>
+      </div>
+
+      <div class="city-grid">
+        <div>
+          <div class="city-panel">
+            <p class="city-panel-title">Why It Matters</p>
+            <p class="city-panel-copy">
+              Bengaluru combines large-scale enterprise engineering, startup
+              energy, and a strong developer ecosystem. It is home to major
+              tech campuses, product teams, global capability centers, and
+              communities that shape modern software in India.
+            </p>
+          </div>
+
+          <div class="city-highlights">
+            <div class="city-highlight-card">
+              <p class="city-highlight-value">Tech Ecosystem</p>
+              <p class="city-highlight-copy">
+                Dense network of product companies, startups, and engineering communities.
+              </p>
+            </div>
+            <div class="city-highlight-card">
+              <p class="city-highlight-value">Global Engineering</p>
+              <p class="city-highlight-copy">
+                Major destination for R&D, platform engineering, and innovation teams.
+              </p>
+            </div>
+            <div class="city-highlight-card">
+              <p class="city-highlight-value">Talent Hub</p>
+              <p class="city-highlight-copy">
+                Strong pipeline of developers, architects, founders, and operators.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="city-metrics">
+          <p class="city-panel-title">Quick Metrics</p>
+          <div class="city-metrics-grid">
+            <div class="city-metric-card">
+              <p class="city-metric-label">Metro Population</p>
+              <p class="city-metric-value">13M+</p>
+              <p class="city-metric-note">One of India’s largest urban economies.</p>
+            </div>
+            <div class="city-metric-card">
+              <p class="city-metric-label">Climate</p>
+              <p class="city-metric-value">15°C - 35°C</p>
+              <p class="city-metric-note">Known for a relatively moderate climate.</p>
+            </div>
+            <div class="city-metric-card">
+              <p class="city-metric-label">Airport Code</p>
+              <p class="city-metric-value">BLR</p>
+              <p class="city-metric-note">Kempegowda International Airport.</p>
+            </div>
+            <div class="city-metric-card">
+              <p class="city-metric-label">Time Zone</p>
+              <p class="city-metric-value">IST</p>
+              <p class="city-metric-note">UTC +05:30</p>
+            </div>
+            <div class="city-metric-card">
+              <p class="city-metric-label">Industry Profile</p>
+              <p class="city-metric-value">IT / SaaS / R&D</p>
+              <p class="city-metric-note">Core sectors driving the city’s growth.</p>
+            </div>
+            <div class="city-metric-card">
+              <p class="city-metric-label">Identity</p>
+              <p class="city-metric-value">Garden + Tech City</p>
+              <p class="city-metric-note">Balances livability with engineering density.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -977,6 +1376,20 @@
 </div>
 
 <script>
+  function openCityModal() {
+    const overlay = document.getElementById("city-modal-overlay");
+    if (!overlay) return;
+    overlay.classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeCityModal() {
+    const overlay = document.getElementById("city-modal-overlay");
+    if (!overlay) return;
+    overlay.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+
   function openVisaModal() {
     const overlay = document.getElementById("visa-modal-overlay");
     if (!overlay) return;
@@ -993,6 +1406,7 @@
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
+      closeCityModal();
       closeVisaModal();
     }
   });
