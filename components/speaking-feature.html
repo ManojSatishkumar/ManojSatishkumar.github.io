@@ -188,18 +188,24 @@
   }
 
   .speaking-host-mark {
-    flex: 0 0 58px;
-    width: 58px;
-    height: 58px;
+    flex: 0 0 72px;
+    width: 72px;
+    height: 72px;
     border-radius: 18px;
-    display: grid;
-    place-items: center;
-    background: linear-gradient(135deg, #566ef0, #7f78ff 58%, #f0a55e);
-    color: #fff;
-    font-size: 18px;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    box-shadow: 0 14px 30px rgba(96, 112, 188, 0.2);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 14px 30px rgba(96, 112, 188, 0.14);
+    border: 1px solid rgba(222, 228, 245, 0.95);
+  }
+
+  .speaking-host-mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .speaking-host-label {
@@ -390,7 +396,12 @@
         </div>
 
         <div class="speaking-host-card">
-          <div class="speaking-host-mark">AU</div>
+          <div class="speaking-host-mark">
+            <img
+              src="/images/adithya-university.jpeg"
+              alt="Aditya University logo"
+            />
+          </div>
           <div>
             <p class="speaking-host-label">Hosted At</p>
             <p class="speaking-host-name">Aditya University</p>
