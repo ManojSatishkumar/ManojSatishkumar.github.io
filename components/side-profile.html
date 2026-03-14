@@ -444,7 +444,7 @@
 
   .visa-body {
     display: grid;
-    grid-template-columns: 112px minmax(0, 1fr);
+    grid-template-columns: 112px minmax(0, 1fr) minmax(280px, 0.88fr);
     gap: 14px;
     align-items: start;
   }
@@ -484,13 +484,6 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
-
-  .visa-lower-row {
-    display: grid;
-    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
-    gap: 10px;
-    align-items: start;
   }
 
   .visa-field {
@@ -554,6 +547,7 @@
   }
 
   .visa-travel-history {
+    height: 100%;
     padding: 12px 12px 10px;
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.82);
@@ -571,7 +565,7 @@
 
   .visa-trip-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 10px;
   }
 
@@ -648,10 +642,6 @@
     }
 
     .visa-fields {
-      grid-template-columns: 1fr;
-    }
-
-    .visa-lower-row {
       grid-template-columns: 1fr;
     }
 
@@ -938,43 +928,40 @@
               <p class="visa-field-label">Profile Status</p>
               <p class="visa-field-value">Travel Ready</p>
             </div>
-            </div>
-
-          <div class="visa-lower-row">
             <div class="visa-field">
               <p class="visa-field-label">Expiry</p>
               <p class="visa-field-value">2035</p>
             </div>
+          </div>
+        </div>
 
-            <div class="visa-travel-history">
-              <p class="visa-travel-history-title">U.S. Travel History</p>
-              <div class="visa-trip-grid">
-                <div class="visa-trip-card">
-                  <img
-                    class="visa-trip-logo"
-                    src="/images/walmart-logo.png"
-                    alt="Walmart logo"
-                  />
-                  <div>
-                    <p class="visa-trip-year">2024 • San Francisco</p>
-                    <p class="visa-trip-copy">
-                      Travelled to the United States for work with Walmart.
-                    </p>
-                  </div>
-                </div>
-                <div class="visa-trip-card">
-                  <img
-                    class="visa-trip-logo"
-                    src="/images/cerner-logo.png"
-                    alt="Cerner logo"
-                  />
-                  <div>
-                    <p class="visa-trip-year">2017 • Kansas City</p>
-                    <p class="visa-trip-copy">
-                      Travelled to the United States for work with Cerner.
-                    </p>
-                  </div>
-                </div>
+        <div class="visa-travel-history">
+          <p class="visa-travel-history-title">U.S. Travel History</p>
+          <div class="visa-trip-grid">
+            <div class="visa-trip-card">
+              <img
+                class="visa-trip-logo"
+                src="/images/walmart-logo.png"
+                alt="Walmart logo"
+              />
+              <div>
+                <p class="visa-trip-year">2024 • San Francisco</p>
+                <p class="visa-trip-copy">
+                  Travelled to the United States for work with Walmart.
+                </p>
+              </div>
+            </div>
+            <div class="visa-trip-card">
+              <img
+                class="visa-trip-logo"
+                src="/images/cerner-logo.png"
+                alt="Cerner logo"
+              />
+              <div>
+                <p class="visa-trip-year">2017 • Kansas City</p>
+                <p class="visa-trip-copy">
+                  Travelled to the United States for work with Cerner.
+                </p>
               </div>
             </div>
           </div>
