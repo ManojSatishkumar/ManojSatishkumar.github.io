@@ -242,6 +242,8 @@
     visibility: hidden;
     transition: all 0.25s ease;
     z-index: 10050;
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .visa-modal-overlay.show {
@@ -252,6 +254,7 @@
   .visa-modal {
     position: relative;
     width: min(100%, 900px);
+    max-height: calc(100vh - 48px);
     padding: 18px;
     border-radius: 28px;
     background:
@@ -262,7 +265,8 @@
       0 34px 90px rgba(18, 29, 58, 0.28),
       0 8px 24px rgba(18, 29, 58, 0.14);
     border: 1px solid rgba(201, 213, 239, 0.95);
-    overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     transform: scale(0.96);
     transition: transform 0.25s ease;
   }
@@ -560,6 +564,8 @@
     visibility: hidden;
     transition: all 0.25s ease;
     z-index: 10050;
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .city-modal-overlay.show {
@@ -570,6 +576,7 @@
   .city-modal {
     position: relative;
     width: min(100%, 920px);
+    max-height: calc(100vh - 48px);
     padding: 18px;
     border-radius: 28px;
     background:
@@ -580,7 +587,8 @@
       0 34px 90px rgba(18, 29, 58, 0.24),
       0 8px 24px rgba(18, 29, 58, 0.12);
     border: 1px solid rgba(201, 213, 239, 0.95);
-    overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     transform: scale(0.96);
     transition: transform 0.25s ease;
   }
@@ -864,8 +872,15 @@
   }
 
   @media (max-width: 640px) {
+    .visa-modal-overlay,
+    .city-modal-overlay {
+      align-items: flex-start;
+      padding: 12px;
+    }
+
     .visa-modal {
-      padding: 18px;
+      max-height: calc(100vh - 24px);
+      padding: 16px;
       border-radius: 22px;
     }
 
@@ -908,6 +923,7 @@
     }
 
     .city-modal {
+      max-height: calc(100vh - 24px);
       padding: 16px;
       border-radius: 22px;
     }
