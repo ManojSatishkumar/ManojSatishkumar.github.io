@@ -18,9 +18,10 @@
     </p>
   </div>
 
-  <!-- First 6 cards in grid -->
-  <div class="testimony-grid">
-    <div class="testimony-card">
+  <!-- Single animated carousel for all testimony cards -->
+  <div class="testimony-carousel-wrapper">
+    <div class="testimony-carousel">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -49,7 +50,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -78,7 +79,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -106,7 +107,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -135,7 +136,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -164,7 +165,7 @@
       </div>
     </div>
 
-    <div class="testimony-card">
+    <div class="testimony-card carousel-card">
       <a
         class="profile-link"
         target="blank"
@@ -191,11 +192,6 @@
         </p>
       </div>
     </div>
-  </div>
-
-  <!-- Remaining cards in animated carousel -->
-  <div class="testimony-carousel-wrapper">
-    <div class="testimony-carousel">
     <div class="testimony-card carousel-card">
       <a
         class="profile-link"
@@ -539,13 +535,6 @@
     margin-top: 0.5rem;
   }
 
-  .testimony-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
-
   /* Carousel Styles */
   .testimony-carousel-wrapper {
     overflow: hidden;
@@ -671,12 +660,6 @@
     margin: 0;
   }
 
-  @media (max-width: 1200px) {
-    .testimony-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
   @media (max-width: 768px) {
     .testimony-container {
       padding: 1rem;
@@ -684,10 +667,6 @@
 
     .gradient-text {
       font-size: 2rem;
-    }
-
-    .testimony-grid {
-      grid-template-columns: 1fr;
     }
 
     .testimony-carousel .carousel-card {
@@ -701,15 +680,16 @@
   // Clone carousel cards for infinite scroll effect
   document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
-      const carousel = document.querySelector('.testimony-carousel');
-      if (carousel) {
+      const carousels = document.querySelectorAll('.testimony-carousel');
+      carousels.forEach(function(carousel) {
+        if (carousel.dataset.cloned === 'true') return;
         const cards = carousel.querySelectorAll('.carousel-card');
-        // Clone all cards and append them for seamless loop
         cards.forEach(function(card) {
           const clone = card.cloneNode(true);
           carousel.appendChild(clone);
         });
-      }
+        carousel.dataset.cloned = 'true';
+      });
     }, 100);
   });
 </script>
