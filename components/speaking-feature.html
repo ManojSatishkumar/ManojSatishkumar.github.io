@@ -1,0 +1,407 @@
+<style>
+  .speaking-feature-section {
+    position: relative;
+    overflow: hidden;
+    padding: 64px 0 68px;
+    background:
+      radial-gradient(circle at top left, rgba(132, 177, 255, 0.2), transparent 32%),
+      radial-gradient(circle at bottom right, rgba(255, 196, 130, 0.16), transparent 34%),
+      linear-gradient(180deg, #f9fbff 0%, #f4f8ff 100%);
+  }
+
+  .speaking-feature-shell {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  .speaking-feature-header {
+    max-width: 920px;
+    margin: 0 auto 22px;
+    text-align: center;
+  }
+
+  .speaking-feature-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(108, 131, 255, 0.1);
+    color: #5164d8;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .speaking-feature-title {
+    margin: 14px 0 10px;
+    color: #17213c;
+    font-size: clamp(30px, 3.6vw, 44px);
+    line-height: 1.08;
+    font-weight: 800;
+  }
+
+  .speaking-feature-summary {
+    margin: 0;
+    color: #586684;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .speaking-feature-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 22px;
+    align-items: start;
+  }
+
+  .speaking-video-card,
+  .speaking-story-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(214, 223, 246, 0.9);
+    border-radius: 28px;
+    box-shadow:
+      0 24px 60px rgba(104, 121, 167, 0.1),
+      0 10px 24px rgba(104, 121, 167, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .speaking-video-card {
+    padding: 22px;
+    height: fit-content;
+  }
+
+  .speaking-video-frame {
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, #dfe7ff, #f6f8ff);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+  }
+
+  .speaking-video-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .speaking-video-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .speaking-meta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 13px;
+    border-radius: 999px;
+    background: #f4f7ff;
+    color: #44516f;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .speaking-story-card {
+    padding: 22px 22px 20px;
+  }
+
+  .speaking-story-topline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .speaking-story-pill {
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(101, 119, 255, 0.12), rgba(255, 180, 126, 0.16));
+    color: #3f4c7b;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .speaking-story-heading {
+    margin: 0 0 12px;
+    color: #17213c;
+    font-size: 25px;
+    line-height: 1.16;
+    font-weight: 800;
+  }
+
+  .speaking-story-copy {
+    margin: 0;
+    color: #5f6d89;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .speaking-story-copy + .speaking-story-copy {
+    margin-top: 12px;
+  }
+
+  .speaking-focus-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .speaking-focus-card {
+    padding: 14px 15px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #f7f9ff 100%);
+    border: 1px solid rgba(222, 228, 245, 0.95);
+  }
+
+  .speaking-focus-title {
+    color: #1a2651;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.3;
+  }
+
+  .speaking-focus-copy {
+    margin-top: 6px;
+    color: #66738f;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .speaking-host-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 14px;
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(244, 247, 255, 0.98), rgba(255, 248, 241, 0.96));
+    border: 1px solid rgba(222, 228, 245, 0.95);
+  }
+
+  .speaking-host-mark {
+    flex: 0 0 58px;
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #566ef0, #7f78ff 58%, #f0a55e);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    box-shadow: 0 14px 30px rgba(96, 112, 188, 0.2);
+  }
+
+  .speaking-host-label {
+    margin: 0 0 4px;
+    color: #66738f;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .speaking-host-name {
+    margin: 0;
+    color: #1c2a4f;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .speaking-host-copy {
+    margin: 6px 0 0;
+    color: #66738f;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .speaking-projects {
+    margin-top: 16px;
+    padding: 16px 16px 14px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(246, 249, 255, 0.96), rgba(255, 249, 243, 0.96));
+    border: 1px solid rgba(222, 228, 245, 0.95);
+  }
+
+  .speaking-projects-title {
+    margin: 0 0 12px;
+    color: #243257;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .speaking-project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+
+  .speaking-project-tag {
+    padding: 9px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(216, 225, 246, 0.95);
+    color: #49577a;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 991px) {
+    .speaking-feature-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .speaking-focus-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .speaking-feature-section {
+      padding: 56px 0 60px;
+    }
+
+    .speaking-feature-shell {
+      padding: 0 18px;
+    }
+
+    .speaking-video-card,
+    .speaking-story-card {
+      border-radius: 24px;
+    }
+
+    .speaking-video-card {
+      padding: 18px;
+    }
+
+    .speaking-story-card {
+      padding: 22px 18px 20px;
+    }
+
+    .speaking-focus-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .speaking-host-card {
+      align-items: flex-start;
+    }
+
+    .speaking-feature-summary {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<section class="speaking-feature-section">
+  <div class="speaking-feature-shell">
+    <div class="speaking-feature-header">
+      <span class="speaking-feature-kicker">Guest Speaker and Jury Panel</span>
+      <h2 class="speaking-feature-title">
+        Tech Talks
+      </h2>
+      <p class="speaking-feature-summary">
+        I use speaking engagements to share engineering ideas, mentor builders,
+        and stay close to the energy of the broader tech community. This talk
+        and jury-panel experience at Project Space Season 7 stood out as one of
+        the most energizing builder events I have been part of.
+      </p>
+    </div>
+
+    <div class="speaking-feature-grid">
+      <div class="speaking-video-card">
+        <div class="speaking-video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/13qRZ02oDHI"
+            title="Project Space Season 7"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="speaking-video-meta">
+          <span class="speaking-meta-pill">5-day innovation sprint</span>
+          <span class="speaking-meta-pill">700+ participants</span>
+          <span class="speaking-meta-pill">120+ projects</span>
+          <span class="speaking-meta-pill">20 finalists judged</span>
+        </div>
+        <div class="speaking-projects">
+          <h4 class="speaking-projects-title">Projects that stood out</h4>
+          <div class="speaking-project-tags">
+            <span class="speaking-project-tag">Codepulse</span>
+            <span class="speaking-project-tag">Quick Docs</span>
+            <span class="speaking-project-tag">Flutterverse</span>
+            <span class="speaking-project-tag">Grow Hive</span>
+            <span class="speaking-project-tag">Tech Path</span>
+            <span class="speaking-project-tag">V-Bus Ticketing</span>
+            <span class="speaking-project-tag">CampusGeeks</span>
+            <span class="speaking-project-tag">Campus Fix</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaking-story-card">
+        <div class="speaking-story-topline">
+          <span class="speaking-story-pill">Technical Hub x Aditya University</span>
+          <span class="speaking-story-pill">Project Space Season 7</span>
+        </div>
+        <h3 class="speaking-story-heading">
+          A launchpad where curiosity met courage and theory met execution.
+        </h3>
+        <p class="speaking-story-copy">
+          This was not just another tech fest. Entire corridors became code
+          labs, students stayed close to their whiteboards, debugged till dawn,
+          and collaborated across departments with one shared instinct: the urge
+          to create.
+        </p>
+        <p class="speaking-story-copy">
+          What stood out most was the range of ideas and the quality of
+          execution. Students as early as second year were building around
+          AI-enhanced education, campus problem-solving, donation platforms, and
+          full-stack product experiences with real conviction.
+        </p>
+
+        <div class="speaking-focus-grid">
+          <div class="speaking-focus-card">
+            <div class="speaking-focus-title">React to GenAI</div>
+            <div class="speaking-focus-copy">
+              Web, Flutter, Android, AI, ML, VLSI, and embedded systems all showed up in one event.
+            </div>
+          </div>
+          <div class="speaking-focus-card">
+            <div class="speaking-focus-title">Builders, not just learners</div>
+            <div class="speaking-focus-copy">
+              Every team walked away having shipped something, not just pitched an idea.
+            </div>
+          </div>
+        </div>
+
+        <div class="speaking-host-card">
+          <div class="speaking-host-mark">AU</div>
+          <div>
+            <p class="speaking-host-label">Hosted At</p>
+            <p class="speaking-host-name">Aditya University</p>
+            <p class="speaking-host-copy">
+              In collaboration with Technical Hub, this campus became a live
+              builder space where innovation, mentorship, and execution came
+              together at scale.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
