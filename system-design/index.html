@@ -2577,7 +2577,7 @@
             <div class="welcome-intro">
               <h1>Welcome to System Design</h1>
               <div class="tagline">A Visual Learning Experience</div>
-              <p>I'm Manoj, a Staff Engineer with 12+ years of experience. I've created this interactive guide to help you master system design concepts through visual explanations and real-world examples. Whether you're preparing for interviews or building scalable systems, this resource has you covered.</p>
+              <p>I'm Manoj, a Staff Engineer with <span class="js-experience-years">12</span> years of experience. I've created this interactive guide to help you master system design concepts through visual explanations and real-world examples. Whether you're preparing for interviews or building scalable systems, this resource has you covered.</p>
               <a href="/" class="portfolio-link">Visit My Portfolio →</a>
             </div>
           </div>
@@ -2693,6 +2693,29 @@
   </footer>
 
   <script>
+    function getExperienceYears() {
+      const startDate = new Date(2013, 6, 1);
+      const today = new Date();
+      let years = today.getFullYear() - startDate.getFullYear();
+      const beforeAnniversary =
+        today.getMonth() < startDate.getMonth() ||
+        (today.getMonth() === startDate.getMonth() &&
+          today.getDate() < startDate.getDate());
+
+      if (beforeAnniversary) {
+        years -= 1;
+      }
+
+      return years;
+    }
+
+    function syncExperienceYears(root = document) {
+      const years = getExperienceYears();
+      root.querySelectorAll('.js-experience-years').forEach((node) => {
+        node.textContent = years;
+      });
+    }
+
     // Concept navigation order - Backend concepts
     const backendConceptOrder = [
       // Core Principles
@@ -18470,10 +18493,10 @@ for user john@example.com</div>
 
     // Initialize - show first concept on load
     document.addEventListener('DOMContentLoaded', () => {
+      syncExperienceYears();
       // Optional: show first concept by default
       // showConcept('availability');
     });
   </script>
 </body>
 </html>
-

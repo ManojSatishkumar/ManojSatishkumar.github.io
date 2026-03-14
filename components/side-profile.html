@@ -196,6 +196,469 @@
   .wow {
     animation: fadeInUp 1s;
   }
+
+  .profile-detail-button {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 10px 0 0 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #495057;
+    font-size: 1.05rem;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .profile-detail-button:hover {
+    color: #1f2937;
+  }
+
+  .profile-detail-link {
+    margin-left: 2px;
+    color: #3c3b6e;
+    font-weight: 700;
+    border-bottom: 2px dashed #3c3b6e;
+    line-height: 1.2;
+  }
+
+  .profile-detail-button:hover .profile-detail-link {
+    color: #1f2f66;
+    border-bottom-color: #1f2f66;
+  }
+
+  .visa-modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(10, 18, 35, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    z-index: 10050;
+  }
+
+  .visa-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .visa-modal {
+    position: relative;
+    width: min(100%, 900px);
+    padding: 18px;
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at top right, rgba(212, 40, 73, 0.22), transparent 24%),
+      radial-gradient(circle at bottom left, rgba(57, 92, 175, 0.2), transparent 28%),
+      linear-gradient(145deg, #f8fbff 0%, #eef3fb 100%);
+    box-shadow:
+      0 34px 90px rgba(18, 29, 58, 0.28),
+      0 8px 24px rgba(18, 29, 58, 0.14);
+    border: 1px solid rgba(201, 213, 239, 0.95);
+    overflow: hidden;
+    transform: scale(0.96);
+    transition: transform 0.25s ease;
+  }
+
+  .visa-modal-overlay.show .visa-modal {
+    transform: scale(1);
+  }
+
+  .visa-modal::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.46), transparent 28%),
+      repeating-linear-gradient(
+        90deg,
+        rgba(60, 92, 175, 0.04) 0,
+        rgba(60, 92, 175, 0.04) 26px,
+        rgba(212, 40, 73, 0.035) 26px,
+        rgba(212, 40, 73, 0.035) 52px
+      );
+    opacity: 0.55;
+  }
+
+  .visa-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    color: #2e3b60;
+    font-size: 24px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 3;
+    box-shadow: 0 10px 24px rgba(18, 29, 58, 0.12);
+  }
+
+  .visa-close-btn:hover {
+    background: rgba(19, 34, 74, 0.14);
+  }
+
+  .visa-card {
+    position: relative;
+    z-index: 1;
+    border-radius: 24px;
+    border: 1px solid rgba(191, 203, 232, 0.95);
+    background:
+      radial-gradient(circle at top left, rgba(58, 89, 168, 0.1), transparent 28%),
+      radial-gradient(circle at bottom right, rgba(212, 40, 73, 0.1), transparent 26%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(244, 248, 255, 0.96));
+    padding: 18px 18px 14px;
+    overflow: hidden;
+  }
+
+  .visa-card::after {
+    content: "B1/B2";
+    position: absolute;
+    right: 14px;
+    bottom: 10px;
+    font-size: 64px;
+    font-weight: 800;
+    color: rgba(53, 82, 158, 0.08);
+    letter-spacing: 0.08em;
+  }
+
+  .visa-card::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    right: 38px;
+    width: 180px;
+    height: 114px;
+    border-radius: 18px;
+    opacity: 0.12;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(191, 10, 48, 0.95) 0%,
+        rgba(191, 10, 48, 0.95) 10%,
+        rgba(255, 255, 255, 0.95) 10%,
+        rgba(255, 255, 255, 0.95) 20%,
+        rgba(191, 10, 48, 0.95) 20%,
+        rgba(191, 10, 48, 0.95) 30%,
+        rgba(255, 255, 255, 0.95) 30%,
+        rgba(255, 255, 255, 0.95) 40%,
+        rgba(191, 10, 48, 0.95) 40%,
+        rgba(191, 10, 48, 0.95) 50%,
+        rgba(255, 255, 255, 0.95) 50%,
+        rgba(255, 255, 255, 0.95) 60%,
+        rgba(191, 10, 48, 0.95) 60%,
+        rgba(191, 10, 48, 0.95) 70%,
+        rgba(255, 255, 255, 0.95) 70%,
+        rgba(255, 255, 255, 0.95) 80%,
+        rgba(191, 10, 48, 0.95) 80%,
+        rgba(191, 10, 48, 0.95) 90%,
+        rgba(255, 255, 255, 0.95) 90%,
+        rgba(255, 255, 255, 0.95) 100%
+      );
+    box-shadow: 0 16px 30px rgba(36, 51, 91, 0.08);
+  }
+
+  .visa-card-flag-canton {
+    position: absolute;
+    top: 18px;
+    right: 146px;
+    width: 76px;
+    height: 61px;
+    border-top-left-radius: 18px;
+    border-bottom-right-radius: 10px;
+    background:
+      radial-gradient(circle, rgba(255, 255, 255, 0.95) 0 1.2px, transparent 1.3px);
+    background-size: 12px 12px;
+    background-color: rgba(10, 49, 97, 0.96);
+    opacity: 0.13;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .visa-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    padding-right: 64px;
+  }
+
+  .visa-header-kicker {
+    margin: 0 0 6px;
+    color: #a52f46;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .visa-title {
+    margin: 0;
+    color: #1b2d57;
+    font-size: 1.55rem;
+    font-weight: 800;
+    line-height: 1.05;
+  }
+
+  .visa-subtitle {
+    margin: 6px 0 0;
+    color: #556582;
+    font-size: 0.92rem;
+    line-height: 1.42;
+  }
+
+  .visa-seal {
+    flex: 0 0 74px;
+    width: 74px;
+    height: 74px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(circle, rgba(255, 255, 255, 0.85), rgba(227, 235, 252, 0.9));
+    border: 1px solid rgba(189, 201, 228, 0.95);
+    box-shadow: inset 0 0 0 8px rgba(57, 92, 175, 0.05);
+    color: #2e4b8f;
+    text-align: center;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .visa-body {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+  }
+
+  .visa-photo {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(189, 201, 228, 0.95);
+    background: #fff;
+    box-shadow: 0 12px 24px rgba(40, 57, 103, 0.1);
+  }
+
+  .visa-photo img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 0.78;
+    object-fit: cover;
+  }
+
+  .visa-photo-label {
+    padding: 7px 8px;
+    color: #5d6c86;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: #f8fbff;
+  }
+
+  .visa-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .visa-details-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .visa-lower-row {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    gap: 10px;
+    align-items: start;
+  }
+
+  .visa-field {
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(201, 213, 239, 0.95);
+  }
+
+  .visa-field--wide {
+    grid-column: 1 / -1;
+  }
+
+  .visa-field-label {
+    margin: 0 0 4px;
+    color: #7a869c;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .visa-field-value {
+    margin: 0;
+    color: #1b2d57;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .visa-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(121, 137, 173, 0.45);
+  }
+
+  .visa-note {
+    margin: 0;
+    color: #7a869c;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .visa-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(46, 125, 50, 0.1);
+    color: #2e7d32;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .visa-travel-history {
+    padding: 12px 12px 10px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(201, 213, 239, 0.95);
+  }
+
+  .visa-travel-history-title {
+    margin: 0 0 10px;
+    color: #6a768f;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .visa-trip-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .visa-trip-card {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px 11px;
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(248, 251, 255, 0.96), rgba(255, 255, 255, 0.9));
+    border: 1px solid rgba(214, 223, 246, 0.95);
+  }
+
+  .visa-trip-logo {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    object-fit: contain;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(222, 228, 245, 0.95);
+    padding: 5px;
+  }
+
+  .visa-trip-year {
+    margin: 0 0 4px;
+    color: #1b2d57;
+    font-size: 0.86rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .visa-trip-copy {
+    margin: 0;
+    color: #5e6b84;
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 640px) {
+    .visa-modal {
+      padding: 18px;
+      border-radius: 22px;
+    }
+
+    .visa-close-btn {
+      top: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+    }
+
+    .visa-header,
+    .visa-footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .visa-header {
+      padding-right: 0;
+    }
+
+    .visa-card::before,
+    .visa-card-flag-canton {
+      display: none;
+    }
+
+    .visa-body {
+      grid-template-columns: 1fr;
+    }
+
+    .visa-photo {
+      width: 132px;
+    }
+
+    .visa-fields {
+      grid-template-columns: 1fr;
+    }
+
+    .visa-lower-row {
+      grid-template-columns: 1fr;
+    }
+
+    .visa-trip-grid {
+      grid-template-columns: 1fr;
+    }
+  }
   .highlight {
     background: linear-gradient(90deg, #e9ecef 0%, #dee2e6 100%);
     border-radius: 8px;
@@ -290,7 +753,7 @@
         <hr />
         <div style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem">
           <i class="fas fa-briefcase" style="color: #17a2b8; width: 25px"></i>
-          12+ Years of Experience
+          <span class="js-experience-years">12+</span> Years of Experience
         </div>
         <div style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem">
           <i class="fas fa-layer-group" style="color: #6c63ff; width: 25px"></i>
@@ -316,10 +779,15 @@
           <i class="fas fa-map-marker-alt" style="color: #007bff; width: 25px"></i>
           Bengaluru, India
         </div>
-        <div style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem">
+        <button
+          type="button"
+          class="profile-detail-button"
+          onclick="openVisaModal()"
+          aria-label="Open U.S. visa details"
+        >
           <i class="fas fa-passport" style="color: #3C3B6E; width: 25px"></i>
-          US Visa B1/B2
-        </div>
+          <span class="profile-detail-link">US Visa B1/B2</span>
+        </button>
       </div>
     </div>
     <hr />
@@ -410,3 +878,135 @@
     </div>
   </div>
 </div>
+
+<div
+  id="visa-modal-overlay"
+  class="visa-modal-overlay"
+  onclick="closeVisaModal()"
+>
+  <div class="visa-modal" onclick="event.stopPropagation()">
+    <button
+      type="button"
+      class="visa-close-btn"
+      aria-label="Close visa details"
+      onclick="closeVisaModal()"
+    >
+      ×
+    </button>
+    <div class="visa-card">
+      <div class="visa-card-flag-canton"></div>
+      <div class="visa-header">
+        <div>
+          <p class="visa-header-kicker">Portfolio Display</p>
+          <h3 class="visa-title">U.S. Visa Status</h3>
+          <p class="visa-subtitle">
+            A stylized, non-official visa-inspired profile detail for Manoj
+            Satishkumar.
+          </p>
+        </div>
+        <div class="visa-seal">
+          U.S.<br />
+          Travel
+        </div>
+      </div>
+
+      <div class="visa-body">
+        <div class="visa-photo">
+          <img src="/images/me_square.png" alt="Manoj Satishkumar" />
+          <div class="visa-photo-label">Profile Holder</div>
+        </div>
+
+        <div class="visa-details-column">
+          <div class="visa-fields">
+            <div class="visa-field visa-field--wide">
+              <p class="visa-field-label">Name</p>
+              <p class="visa-field-value">Manoj Satishkumar</p>
+            </div>
+            <div class="visa-field">
+              <p class="visa-field-label">Visa Class</p>
+              <p class="visa-field-value">B1 / B2</p>
+            </div>
+            <div class="visa-field">
+              <p class="visa-field-label">Country</p>
+              <p class="visa-field-value">United States</p>
+            </div>
+            <div class="visa-field">
+              <p class="visa-field-label">Purpose</p>
+              <p class="visa-field-value">Business / Visitor</p>
+            </div>
+            <div class="visa-field">
+              <p class="visa-field-label">Profile Status</p>
+              <p class="visa-field-value">Travel Ready</p>
+            </div>
+            </div>
+
+          <div class="visa-lower-row">
+            <div class="visa-field">
+              <p class="visa-field-label">Expiry</p>
+              <p class="visa-field-value">2035</p>
+            </div>
+
+            <div class="visa-travel-history">
+              <p class="visa-travel-history-title">U.S. Travel History</p>
+              <div class="visa-trip-grid">
+                <div class="visa-trip-card">
+                  <img
+                    class="visa-trip-logo"
+                    src="/images/walmart-logo.png"
+                    alt="Walmart logo"
+                  />
+                  <div>
+                    <p class="visa-trip-year">2024 • San Francisco</p>
+                    <p class="visa-trip-copy">
+                      Travelled to the United States for work with Walmart.
+                    </p>
+                  </div>
+                </div>
+                <div class="visa-trip-card">
+                  <img
+                    class="visa-trip-logo"
+                    src="/images/cerner-logo.png"
+                    alt="Cerner logo"
+                  />
+                  <div>
+                    <p class="visa-trip-year">2017 • Kansas City</p>
+                    <p class="visa-trip-copy">
+                      Travelled to the United States for work with Cerner.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="visa-footer">
+        <p class="visa-note">Concept card for portfolio presentation only.</p>
+        <span class="visa-status">B1/B2 Noted</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openVisaModal() {
+    const overlay = document.getElementById("visa-modal-overlay");
+    if (!overlay) return;
+    overlay.classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeVisaModal() {
+    const overlay = document.getElementById("visa-modal-overlay");
+    if (!overlay) return;
+    overlay.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      closeVisaModal();
+    }
+  });
+</script>

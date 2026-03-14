@@ -756,7 +756,7 @@
             </div>
             <div class="spec-row">
               <span class="spec-label">Experience</span>
-              <span class="spec-value">12+ Years</span>
+              <span class="spec-value"><span class="js-experience-years">12</span> Years</span>
             </div>
             <div class="spec-row">
               <span class="spec-label">Expertise</span>
@@ -1164,7 +1164,7 @@
           <div class="dock-tooltip">
             <h4>Work Experience</h4>
             <p>
-              12+ years at top companies like Walmart and Cerner, building
+              <span class="js-experience-years">12</span> years at top companies like Walmart and Cerner, building
               scalable platforms for millions of users.
             </p>
           </div>
@@ -1404,6 +1404,29 @@
       );
     </script>
     <script>
+      function getExperienceYears() {
+        const startDate = new Date(2013, 6, 1);
+        const today = new Date();
+        let years = today.getFullYear() - startDate.getFullYear();
+        const beforeAnniversary =
+          today.getMonth() < startDate.getMonth() ||
+          (today.getMonth() === startDate.getMonth() &&
+            today.getDate() < startDate.getDate());
+
+        if (beforeAnniversary) {
+          years -= 1;
+        }
+
+        return years;
+      }
+
+      function syncExperienceYears(root = document) {
+        const years = getExperienceYears();
+        root.querySelectorAll(".js-experience-years").forEach((node) => {
+          node.textContent = years;
+        });
+      }
+
       function animateScroll(id) {
         $("html, body").animate(
           {
@@ -1424,17 +1447,18 @@
     </script>
     <script>
       $(function () {
-        $("#intro").load("/components/introduction.html");
-        $("#experience").load("/components/experience.html");
-        $("#projects").load("/components/projects.html");
-        $("#skill-set").load("/components/skill-set.html");
-        $("#achievements").load("/components/achievements.html");
-        $("#patent").load("/components/patent.html");
-        $("#education").load("/components/education.html");
-        $("#tech-talks").load("/components/speaking-feature.html");
-        $("#msk-testimony").load("/components/testimony.html");
+        syncExperienceYears();
+        $("#intro").load("/components/introduction.html", syncExperienceYears);
+        $("#experience").load("/components/experience.html", syncExperienceYears);
+        $("#projects").load("/components/projects.html", syncExperienceYears);
+        $("#skill-set").load("/components/skill-set.html", syncExperienceYears);
+        $("#achievements").load("/components/achievements.html", syncExperienceYears);
+        $("#patent").load("/components/patent.html", syncExperienceYears);
+        $("#education").load("/components/education.html", syncExperienceYears);
+        $("#tech-talks").load("/components/speaking-feature.html", syncExperienceYears);
+        $("#msk-testimony").load("/components/testimony.html", syncExperienceYears);
         // $("#mock-interview-ad").load("/components/mock-interview-ad.html");
-        $("#footer").load("/components/footer.html");
+        $("#footer").load("/components/footer.html", syncExperienceYears);
 
         // Track scroll position and update active menu item
         $(window).scroll(function () {
@@ -1598,7 +1622,7 @@
             <div class="message-bubble">
               <span
                 >Thanks for checking out my profile! I'm a Staff Software
-                Engineer with 12+ years of experience in building scalable
+                Engineer with <span class="js-experience-years">12</span> years of experience in building scalable
                 frontend systems.</span
               >
             </div>

@@ -367,7 +367,7 @@
         <div class="intro-lead-card">
           <p class="intro-lead-text">
             <strong onclick="openExpModal()" class="intro-link-highlight"
-              >12+ years</strong
+              ><span class="js-experience-years">12</span> years</strong
             >
             of crafting
             <strong>highly scalable, multi-tenant frontend systems</strong> at
@@ -1344,7 +1344,11 @@
 
 <script>
   $(function () {
-    $("#profile-card").load("/components/side-profile.html");
+    $("#profile-card").load("/components/side-profile.html", function () {
+      if (window.syncExperienceYears) {
+        window.syncExperienceYears();
+      }
+    });
   });
 
   // Experience Modal functions
