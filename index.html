@@ -588,8 +588,9 @@
         text-decoration: underline;
       }
 
-      /* Hide on mobile/tablet */
-      @media only screen and (max-width: 1024px) {
+      /* Show these side rails only on large laptop / desktop screens */
+      @media only screen and (max-width: 1365px) {
+        .nav-bar-fixed,
         .tech-sidebar {
           display: none;
         }
