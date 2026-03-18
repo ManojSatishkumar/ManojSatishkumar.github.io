@@ -377,6 +377,11 @@
         background: rgba(204, 251, 241, 0.92);
       }
 
+      .entry-day--four {
+        color: #be185d;
+        background: rgba(251, 207, 232, 0.92);
+      }
+
       .entry-card h2 {
         margin: 10px 0 6px;
         font-size: clamp(1.02rem, 1.2vw, 1.18rem);
@@ -718,6 +723,54 @@
             <button
               class="entry-card"
               type="button"
+              data-entry="day-4"
+              aria-label="Open Day 4 journal entry"
+            >
+              <div class="entry-header">
+                <div class="entry-heading">
+                  <div class="entry-topline">
+                    <span class="entry-day entry-day--four">Day 4</span>
+                    <span class="entry-date">18/03/2026</span>
+                  </div>
+                  <h2>
+                    DevOps debugging, a portfolio refresh, Parallels on Mac, and
+                    resetting for focus
+                  </h2>
+                  <p class="entry-subtitle">
+                    A day centered on CI/CD issues, redesigning my portfolio,
+                    testing Windows 11 on Parallels, cleaning up my Mac, and
+                    choosing focus over multitasking.
+                  </p>
+                </div>
+                <div class="entry-tags">
+                  <span class="tag">CI/CD</span>
+                  <span class="tag">Portfolio</span>
+                  <span class="tag">Parallels Desktop</span>
+                </div>
+              </div>
+              <div class="entry-brief">
+                <p>
+                  I spent the day debugging build-breaking CI/CD issues, gave my
+                  portfolio a more modern macOS-inspired look, tested Windows 11
+                  on Parallels Desktop, reset my Mac to reduce clutter, and
+                  reflected on why focused work beats forced multitasking.
+                </p>
+                <div class="read-more">Loads in detail pane</div>
+              </div>
+              <div class="entry-meta-panel side-card">
+                <h3>Quick themes</h3>
+                <div class="side-list">
+                  <span>DevOps debugging and broken build fixes</span>
+                  <span>Colorful portfolio redesign with macOS-inspired UI</span>
+                  <span>Windows 11 and gaming performance on Parallels</span>
+                  <span>System reset, browser choice, and deeper focus</span>
+                </div>
+              </div>
+            </button>
+
+            <button
+              class="entry-card"
+              type="button"
               data-entry="day-3"
               aria-label="Open Day 3 journal entry"
             >
@@ -895,6 +948,24 @@
 
     <script>
       const journalEntries = {
+        "day-4": {
+          dayLabel: "Day 4",
+          dateLabel: "18/03/2026",
+          dayClass: "entry-day entry-day--four",
+          title:
+            "DevOps debugging, a portfolio refresh, Parallels on Mac, and resetting for focus",
+          subtitle:
+            "A day centered on CI/CD issues, redesigning my portfolio, testing Windows 11 on Parallels, cleaning up my Mac, and choosing focus over multitasking.",
+          tags: ["CI/CD", "Portfolio", "Parallels Desktop"],
+          paragraphs: [
+            "Today, I spent time on DevOps-related work. I was working through CI/CD flows and debugging issues that were breaking the build. These are not always the most visible tasks, but they are critical to keeping everything running smoothly.",
+            "I also spent some time updating my personal portfolio website. I gave it a fresh, more modern look with a colorful theme and a UI inspired by macOS. It was a satisfying exercise to rethink how I present my work.",
+            "Out of curiosity, I tried Parallels Desktop on my Mac and installed Windows 11. I was genuinely surprised by how smooth the experience was. It handled everything well, and I was even able to play games like Need for Speed at around 60 FPS. It feels like virtualization has come a long way.",
+            "I also took some time to clean up my system. Over the last three years, I had installed a lot of software on my Mac while experimenting with different tools. It had become quite cluttered, so I decided to do a full reset and start fresh. This time I want to be more intentional about what I install and keep my setup minimal.",
+            "Another small but important change I made today was switching back to Chrome for my browsing workflow. I had been using Brave for the past couple of weeks, but it did not feel as comfortable for my daily use. While I appreciate the focus on privacy that Brave offers, I realized that my own workflow preferences matter just as much.",
+            "One thing that stood out to me again today is the importance of focus. I am realizing more clearly that if I am not truly good at multitasking, I should not force it. It is far better to pick one task, stay with it, and complete it fully instead of constantly switching context.",
+          ],
+        },
         "day-3": {
           dayLabel: "Day 3",
           dateLabel: "13/3/2026",
@@ -1006,7 +1077,7 @@
                 </p>
                 <div class="detail-overview-stats">
                   <div class="detail-overview-stat">
-                    <strong>3</strong>
+                    <strong>4</strong>
                     <span>Stories published</span>
                   </div>
                   <div class="detail-overview-stat">
@@ -1083,7 +1154,7 @@
 
         journalLayout.classList.remove("mobile-master-view", "mobile-detail-view");
         if (!currentEntryId) {
-          loadEntry("day-3");
+      loadEntry("day-4");
         }
       }
 
