@@ -4,9 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My favorite quotes of Life | Manoj Satishkumar</title>
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://manojsatishkumar.com/quotes/" />
+    <meta name="author" content="Manoj Satishkumar" />
     <meta
       name="description"
-      content="A curated gallery of life quotes presented as A4-inspired posters with distinct themes and supporting graphics."
+      content="Explore Manoj Satishkumar's favorite life quotes in a beautifully designed poster gallery, with reflective explanations, themed visuals, and shareable inspiration."
+    />
+    <meta
+      name="keywords"
+      content="favorite life quotes, inspirational quotes about life, growth quotes, healing quotes, boundaries quotes, self respect quotes, quote posters, Manoj Satishkumar quotes"
     />
     <meta
       property="og:title"
@@ -14,14 +21,29 @@
     />
     <meta
       property="og:description"
-      content="A curated gallery of life quotes presented as A4-inspired posters with distinct themes and supporting graphics."
+      content="Explore a poster gallery of favorite life quotes on growth, healing, courage, boundaries, discipline, and meaningful living."
     />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Manoj Satishkumar" />
     <meta property="og:url" content="https://manojsatishkumar.com/quotes/" />
     <meta
       property="og:image"
-      content="https://manojsatishkumar.com/images/thumbnail.jpg"
+      content="https://manojsatishkumar.com/images/quotes-thumbnail.png"
     />
+    <meta property="og:image:secure_url" content="https://manojsatishkumar.com/images/quotes-thumbnail.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="My favorite quotes of Life poster gallery preview" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="My favorite quotes of Life | Manoj Satishkumar" />
+    <meta
+      name="twitter:description"
+      content="Explore a poster gallery of favorite life quotes on growth, healing, courage, boundaries, discipline, and meaningful living."
+    />
+    <meta name="twitter:image" content="https://manojsatishkumar.com/images/quotes-thumbnail.png" />
+    <meta name="twitter:image:alt" content="My favorite quotes of Life poster gallery preview" />
+    <meta name="twitter:site" content="@MSK_Web_Manoj" />
     <link rel="icon" href="/images/favicon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -145,6 +167,10 @@
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 22px;
         margin-top: 28px;
+      }
+
+      #footer {
+        margin-top: 48px;
       }
 
       .poster {
@@ -1002,6 +1028,28 @@
         }
       }
     </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "My favorite quotes of Life",
+        "headline": "My favorite quotes of Life",
+        "description": "A curated poster gallery of favorite life quotes on growth, healing, boundaries, discipline, courage, and meaningful living.",
+        "url": "https://manojsatishkumar.com/quotes/",
+        "image": "https://manojsatishkumar.com/images/quotes-thumbnail.png",
+        "author": {
+          "@type": "Person",
+          "name": "Manoj Satishkumar",
+          "url": "https://manojsatishkumar.com/"
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Manoj Satishkumar",
+          "url": "https://manojsatishkumar.com/"
+        },
+        "inLanguage": "en"
+      }
+    </script>
   </head>
   <body>
     <div id="desktop-nav-bar"></div>
@@ -1022,6 +1070,7 @@
 
       <section class="quotes-grid" id="quotes-grid" aria-label="Favorite quotes posters"></section>
     </main>
+    <div id="footer"></div>
 
     <div class="quote-modal" id="quote-modal" aria-hidden="true">
       <div class="quote-modal-panel" id="quote-modal-panel" role="dialog" aria-modal="true" aria-labelledby="quote-modal-title">
@@ -1801,6 +1850,7 @@
 
       $(function () {
         $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
+        $("#footer").load("/components/footer.html");
       });
     </script>
   </body>

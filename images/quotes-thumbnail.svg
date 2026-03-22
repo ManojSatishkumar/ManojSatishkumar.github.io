@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="80" y1="50" x2="1120" y2="580" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7F1E5"/>
+      <stop offset="0.5" stop-color="#F6EFE8"/>
+      <stop offset="1" stop-color="#EDE7DB"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(158 124) rotate(38.973) scale(294.675 241.305)">
+      <stop stop-color="#F2C94C" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#F2C94C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1036 96) rotate(140.642) scale(256.775 228.89)">
+      <stop stop-color="#7DC4E4" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#7DC4E4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow3" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(962 522) rotate(176.658) scale(330.562 231.786)">
+      <stop stop-color="#B48FD8" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#B48FD8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="card1" x1="0" y1="0" x2="242" y2="328" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8C68A7"/>
+      <stop offset="1" stop-color="#A681BC"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0" y1="0" x2="242" y2="328" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6D9652"/>
+      <stop offset="1" stop-color="#84AB68"/>
+    </linearGradient>
+    <linearGradient id="card3" x1="0" y1="0" x2="242" y2="328" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5B9F79"/>
+      <stop offset="1" stop-color="#6FBA90"/>
+    </linearGradient>
+    <linearGradient id="card4" x1="0" y1="0" x2="242" y2="328" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A46B63"/>
+      <stop offset="1" stop-color="#BE857C"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1200" height="630" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="16"/>
+      <feGaussianBlur stdDeviation="18"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.163 0 0 0 0 0.129 0 0 0 0 0.085 0 0 0 0.16 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_1"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_1" result="shape"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" rx="0" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+  <rect width="1200" height="630" fill="url(#glow3)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="54" y="48" width="1092" height="534" rx="42" fill="#FCFBF8" fill-opacity="0.96"/>
+    <rect x="54.75" y="48.75" width="1090.5" height="532.5" rx="41.25" stroke="#F0E5D8" stroke-width="1.5"/>
+  </g>
+
+  <rect x="92" y="90" width="262" height="44" rx="22" fill="#FFF8EB" stroke="#EAD9BF"/>
+  <text x="118" y="118" fill="#A65819" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="3">MY FAVORITE QUOTES</text>
+
+  <text x="92" y="222" fill="#202B3D" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="800" letter-spacing="-2">Life Lessons</text>
+  <text x="92" y="298" fill="#202B3D" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="800" letter-spacing="-2">in Poster Form</text>
+
+  <text x="96" y="372" fill="#5D687A" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="500">
+    A shareable gallery of reflective quotes on growth, healing,
+  </text>
+  <text x="96" y="412" fill="#5D687A" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="500">
+    courage, boundaries, self-respect, and meaningful living.
+  </text>
+
+  <g transform="translate(816 110)">
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="250" height="336" rx="28" fill="url(#card1)"/>
+    </g>
+    <text x="24" y="34" fill="#F7EDF9" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="2.4">FUTURE</text>
+    <text x="24" y="108" fill="#FFFFFF" font-family="Georgia, Times New Roman, serif" font-size="28" font-weight="700">
+      <tspan x="24" dy="0">Forget about the</tspan>
+      <tspan x="24" dy="38">people in your</tspan>
+      <tspan x="24" dy="38">past; they didn&apos;t</tspan>
+      <tspan x="24" dy="38">make it to your</tspan>
+      <tspan x="24" dy="38">future for a reason.</tspan>
+    </text>
+    <circle cx="190" cy="278" r="48" stroke="#F0E0F8" stroke-width="4"/>
+    <circle cx="190" cy="278" r="28" stroke="#E9D3F4" stroke-width="4"/>
+  </g>
+
+  <g transform="translate(694 214) scale(0.82)">
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="242" height="328" rx="28" fill="url(#card2)"/>
+    </g>
+    <text x="22" y="34" fill="#EEF8E7" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="2.4">BOUNDARIES</text>
+    <text x="22" y="98" fill="#FFFFFF" font-family="Trebuchet MS, Arial, sans-serif" font-size="24" font-weight="700">
+      <tspan x="22" dy="0">If you look at the</tspan>
+      <tspan x="22" dy="34">people in your</tspan>
+      <tspan x="22" dy="34">circle and don&apos;t</tspan>
+      <tspan x="22" dy="34">get inspired, you</tspan>
+      <tspan x="22" dy="34">have a cage.</tspan>
+    </text>
+  </g>
+
+  <g transform="translate(896 246) scale(0.76)">
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="242" height="328" rx="28" fill="url(#card3)"/>
+    </g>
+    <text x="22" y="34" fill="#ECFFF6" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="2.4">HEALING</text>
+    <text x="22" y="106" fill="#FFFFFF" font-family="Palatino, Book Antiqua, serif" font-size="23" font-weight="700">
+      <tspan x="22" dy="0">You cannot heal</tspan>
+      <tspan x="22" dy="34">in the same</tspan>
+      <tspan x="22" dy="34">environment where</tspan>
+      <tspan x="22" dy="34">you got sick.</tspan>
+    </text>
+  </g>
+
+  <g transform="translate(980 150) scale(0.62)">
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="242" height="328" rx="28" fill="url(#card4)"/>
+    </g>
+    <text x="22" y="34" fill="#FFF0EC" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="2.4">GROWTH</text>
+    <text x="22" y="102" fill="#FFFFFF" font-family="Verdana, Arial, sans-serif" font-size="22" font-weight="700">
+      <tspan x="22" dy="0">The longer you</tspan>
+      <tspan x="22" dy="32">entertain what&apos;s</tspan>
+      <tspan x="22" dy="32">not for you, the</tspan>
+      <tspan x="22" dy="32">longer you</tspan>
+      <tspan x="22" dy="32">postpone what is.</tspan>
+    </text>
+  </g>
+
+  <circle cx="102" cy="526" r="24" fill="#FFFFFF" stroke="#E4D9CC"/>
+  <text x="146" y="536" fill="#7A6A58" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">manojsatishkumar.com/quotes</text>
+</svg>
