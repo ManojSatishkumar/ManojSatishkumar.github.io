@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Album | Manoj Satishkumar</title>
+    <meta
+      name="description"
+      content="Photo album gallery by Manoj Satishkumar."
+    />
+    <link rel="icon" href="/images/favicon.png" type="image/png" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/albums/data.js"></script>
+    <style>
+      :root {
+        color-scheme: light;
+        --page: #f6f1e8;
+        --paper: rgba(255, 251, 245, 0.88);
+        --paper-strong: rgba(255, 255, 255, 0.96);
+        --ink: #2f241a;
+        --muted: #756454;
+        --line: rgba(128, 97, 62, 0.14);
+        --shadow: 0 24px 70px rgba(67, 45, 24, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        color: var(--ink);
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background:
+          radial-gradient(circle at 12% 10%, rgba(245, 158, 11, 0.15), transparent 20%),
+          radial-gradient(circle at 88% 16%, rgba(59, 130, 246, 0.12), transparent 18%),
+          radial-gradient(circle at 78% 82%, rgba(16, 185, 129, 0.12), transparent 22%),
+          linear-gradient(180deg, #fcfaf6 0%, #f6f0e6 48%, #f2eadd 100%);
+        padding: 92px 18px 48px;
+      }
+
+      .page-shell {
+        width: min(1500px, calc(100vw - 36px));
+        margin: 0 auto;
+      }
+
+      .album-page {
+        margin-top: 22px;
+        padding: 24px;
+        border-radius: 30px;
+        background: var(--paper);
+        border: 1px solid rgba(255, 255, 255, 0.78);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .album-header {
+        display: grid;
+        gap: 14px;
+        margin-bottom: 26px;
+      }
+
+      .album-back {
+        width: fit-content;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(191, 170, 145, 0.35);
+        background: rgba(255, 255, 255, 0.7);
+        color: #6b4f35;
+        text-decoration: none;
+        font-size: 0.88rem;
+        font-weight: 700;
+      }
+
+      .album-header-top {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .album-title {
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        line-height: 0.95;
+        letter-spacing: -0.06em;
+      }
+
+      .album-note {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.8;
+        max-width: 900px;
+      }
+
+      .album-stats {
+        color: #9a8a78;
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+
+      .collage-grid {
+        column-count: 4;
+        column-gap: 18px;
+      }
+
+      .photo-card {
+        width: 100%;
+        margin: 0 0 18px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        border-radius: 24px;
+        overflow: hidden;
+        break-inside: avoid;
+        cursor: pointer;
+        box-shadow:
+          0 18px 36px rgba(67, 45, 24, 0.12),
+          0 4px 10px rgba(67, 45, 24, 0.08);
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+      }
+
+      .photo-card:hover {
+        transform: translateY(-4px);
+        box-shadow:
+          0 24px 44px rgba(67, 45, 24, 0.16),
+          0 8px 14px rgba(67, 45, 24, 0.1);
+      }
+
+      .photo-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .photo-modal {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 28px;
+        background: rgba(22, 16, 11, 0.82);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+        z-index: 2000;
+      }
+
+      .photo-modal.is-open {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .photo-modal-frame {
+        position: relative;
+        width: min(92vw, 1200px);
+        max-height: min(90dvh, 1000px);
+      }
+
+      .photo-modal-image {
+        display: block;
+        width: 100%;
+        max-height: 90dvh;
+        object-fit: contain;
+        border-radius: 24px;
+        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.28);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .photo-modal-close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 44px;
+        height: 44px;
+        border: 0;
+        border-radius: 999px;
+        background: rgba(22, 16, 11, 0.58);
+        color: #fffaf1;
+        font-size: 1.45rem;
+        cursor: pointer;
+      }
+
+      @media (max-width: 1100px) {
+        .collage-grid {
+          column-count: 3;
+        }
+      }
+
+      @media (max-width: 800px) {
+        body {
+          padding: 84px 14px 36px;
+        }
+
+        .album-page {
+          margin-top: 18px;
+          padding: 20px 16px;
+          border-radius: 26px;
+        }
+
+        .album-header-top {
+          display: grid;
+          gap: 12px;
+        }
+
+        .collage-grid {
+          column-count: 2;
+          column-gap: 12px;
+        }
+
+        .photo-card {
+          margin-bottom: 12px;
+          border-radius: 18px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .collage-grid {
+          column-count: 1;
+        }
+
+        .photo-modal {
+          padding: 14px;
+        }
+
+        .photo-modal-frame {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="desktop-nav-bar"></div>
+
+    <main class="page-shell">
+      <section class="album-page">
+        <header class="album-header">
+            <a class="album-back" href="/albums/">&larr; Back to albums</a>
+          <div class="album-header-top">
+            <div>
+              <h1 class="album-title" id="album-title">Album</h1>
+            </div>
+            <div class="album-stats" id="album-stats"></div>
+          </div>
+          <p class="album-note" id="album-note"></p>
+        </header>
+
+        <div class="collage-grid" id="collage-grid"></div>
+      </section>
+    </main>
+
+    <div class="photo-modal" id="photo-modal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="photo-modal-frame">
+        <button class="photo-modal-close" id="photo-modal-close" aria-label="Close photo">×</button>
+        <img class="photo-modal-image" id="photo-modal-image" src="" alt="" />
+      </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+      const albums = window.albumCatalog || [];
+      const params = new URLSearchParams(window.location.search);
+      const requestedSlug = params.get("album");
+      const currentAlbum =
+        albums.find((album) => album.slug === requestedSlug) || albums[0];
+
+      const albumTitle = document.getElementById("album-title");
+      const albumStats = document.getElementById("album-stats");
+      const albumNote = document.getElementById("album-note");
+      const collageGrid = document.getElementById("collage-grid");
+      const photoModal = document.getElementById("photo-modal");
+      const photoModalImage = document.getElementById("photo-modal-image");
+      const photoModalClose = document.getElementById("photo-modal-close");
+
+      function renderAlbumPage() {
+        document.title = `${currentAlbum.title} | Manoj Satishkumar`;
+        albumTitle.textContent = currentAlbum.title;
+        albumStats.textContent = `${currentAlbum.images.length} photos`;
+        albumNote.textContent = currentAlbum.note;
+
+        collageGrid.innerHTML = currentAlbum.images
+          .map(
+            (image, index) => `
+              <button
+                class="photo-card"
+                type="button"
+                data-image-index="${index}"
+                aria-label="Open ${currentAlbum.title} photo ${index + 1}"
+              >
+                <img src="${image}" alt="${currentAlbum.title} photo ${index + 1}" loading="lazy" />
+              </button>
+            `
+          )
+          .join("");
+
+        document.querySelectorAll(".photo-card").forEach((card) => {
+          card.addEventListener("click", () => {
+            const index = Number(card.dataset.imageIndex);
+            openPhoto(currentAlbum.images[index], `${currentAlbum.title} photo ${index + 1}`);
+          });
+        });
+      }
+
+      function openPhoto(src, alt) {
+        photoModalImage.src = src;
+        photoModalImage.alt = alt;
+        photoModal.classList.add("is-open");
+        photoModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closePhoto() {
+        photoModal.classList.remove("is-open");
+        photoModal.setAttribute("aria-hidden", "true");
+        photoModalImage.removeAttribute("src");
+        photoModalImage.alt = "";
+        document.body.style.overflow = "";
+      }
+
+      renderAlbumPage();
+
+      photoModalClose.addEventListener("click", closePhoto);
+      photoModal.addEventListener("click", (event) => {
+        if (event.target === photoModal) {
+          closePhoto();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && photoModal.classList.contains("is-open")) {
+          closePhoto();
+        }
+      });
+
+      $(function () {
+        $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
+        $("#footer").load("/components/footer.html");
+      });
+    </script>
+  </body>
+</html>

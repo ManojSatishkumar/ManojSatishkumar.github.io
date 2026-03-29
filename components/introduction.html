@@ -100,6 +100,8 @@
     margin-top: 18px;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
     gap: 12px;
   }
 
@@ -126,6 +128,36 @@
     color: #0a66c2;
     text-decoration: none;
   }
+
+  .intro-avatar-stack {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding-left: 14px;
+  }
+
+  .intro-avatar {
+    width: 40px;
+    height: 40px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 1.5px solid #5f6778;
+    object-fit: cover;
+    box-shadow: 0 10px 20px rgba(95, 112, 163, 0.12);
+    background: #f6f8ff;
+  }
+
+  .intro-avatar-stack .intro-avatar:first-child {
+    margin-left: 0;
+    position: relative;
+    z-index: 7;
+  }
+
+  .intro-avatar-stack .intro-avatar:nth-child(2) { z-index: 6; }
+  .intro-avatar-stack .intro-avatar:nth-child(3) { z-index: 5; }
+  .intro-avatar-stack .intro-avatar:nth-child(4) { z-index: 4; }
+  .intro-avatar-stack .intro-avatar:nth-child(5) { z-index: 3; }
+  .intro-avatar-stack .intro-avatar:nth-child(6) { z-index: 2; }
 
   .intro-link-highlight {
     color: #4a5bc7;
@@ -343,6 +375,16 @@
       border-radius: 18px;
     }
 
+    .intro-link-row {
+      justify-content: flex-start;
+    }
+
+    .intro-avatar-stack {
+      margin-left: 0;
+      padding-left: 0;
+      width: 100%;
+    }
+
     .profile-card {
       margin-bottom: 32px;
     }
@@ -414,6 +456,15 @@
             >
               69,000+ followers on LinkedIn
             </a>
+            <div class="intro-avatar-stack" aria-label="Community avatars">
+              <img class="intro-avatar" src="/images/people/sharmee.jpg" alt="Sharmee" />
+              <img class="intro-avatar" src="/images/people/harshita.jpg" alt="Harshita" />
+              <img class="intro-avatar" src="/images/people/pooja.jpg" alt="Pooja" />
+              <img class="intro-avatar" src="/images/people/shreyas.png" alt="Shreyas" />
+              <img class="intro-avatar" src="/images/people/sahil.jpg" alt="Sahil" />
+              <img class="intro-avatar" src="/images/people/krishnendu.png" alt="Krishnendu" />
+              <img class="intro-avatar" src="/images/people/Mahesh.jpg" alt="Mahesh" />
+            </div>
           </div>
         </div>
 

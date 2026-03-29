@@ -1041,6 +1041,10 @@
       const entryCards = document.querySelectorAll(".entry-card");
       let currentEntryId = null;
 
+      function getTopEntryId() {
+        return entryCards[0]?.dataset.entry ?? null;
+      }
+
       function isMobileLayout() {
         return window.innerWidth <= 980;
       }
@@ -1154,7 +1158,10 @@
 
         journalLayout.classList.remove("mobile-master-view", "mobile-detail-view");
         if (!currentEntryId) {
-      loadEntry("day-4");
+          const topEntryId = getTopEntryId();
+          if (topEntryId) {
+            loadEntry(topEntryId);
+          }
         }
       }
 
@@ -1168,11 +1175,13 @@
         showMobileMasterView();
       });
 
+      const topEntryId = getTopEntryId();
+      if (topEntryId) {
+        loadEntry(topEntryId);
+      }
+
       if (isMobileLayout()) {
-        loadEntry("day-3");
         showMobileMasterView();
-      } else {
-        loadEntry("day-3");
       }
 
       window.addEventListener("resize", syncJournalLayout);
