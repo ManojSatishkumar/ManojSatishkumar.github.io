@@ -69,6 +69,7 @@
         <p class="description">
           Architected and built a no-code, multi-tenant template builder portal powering 70M+ daily communications across Email, SMS, Push, WhatsApp & In-App channels.
         </p>
+        <a class="experience-album-link" href="/albums/view.html?album=walmart">View photo album</a>
       </div>
        <div class="experience-card experience-card--paypal">
         <img src="/images/paypal-icon.png" alt="PayPal" class="company-logo company-logo--paypal" />
@@ -102,6 +103,7 @@
         <p class="description">
           Led a team of 8 developers building mission-critical medical vitals charting applications for nurses in 3 US hospitals. Implemented real-time data sync with HL7 FHIR standards and achieved 99.9% uptime for patient care systems.
         </p>
+        <a class="experience-album-link" href="/albums/view.html?album=cerner">View photo album</a>
       </div>
       <div class="experience-card experience-card--grl">
         <img src="/images/grl-logo.png" alt="GRL Labs" class="company-logo" />
@@ -313,6 +315,30 @@
     color: #111111;
     font-size: 0.95rem;
     line-height: 1.6;
+  }
+
+  .experience-album-link {
+    margin-top: auto;
+    padding-top: 14px;
+    color: #1f4fa3;
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-top: 1px solid rgba(209, 218, 235, 0.9);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .experience-album-link::after {
+    content: "↗";
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+
+  .experience-album-link:hover {
+    color: #163a7b;
+    text-decoration: none;
   }
 
   @media (max-width: 768px) {
