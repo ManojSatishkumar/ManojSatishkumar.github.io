@@ -45,10 +45,10 @@ window.albumCatalog = [
     note: "Memories and moments from the Cerner journey.",
     images: [
       "/images/cerner/20170620_073630.jpg",
-      "/images/cerner/_DSC0031.JPG",
+      "/images/cerner/DSC0031.JPG",
       "/images/cerner/20170619_172915(1).jpg",
       "/images/cerner/20170617_011914.jpg",
-      "/images/cerner/_DSC0032.JPG",
+      "/images/cerner/DSC0032.JPG",
       "/images/cerner/20170620_073616.jpg",
       "/images/cerner/20170628_192519(1).jpg",
       "/images/cerner/20170623_165319.jpg",
