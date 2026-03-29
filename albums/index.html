@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Albums | Manoj Satishkumar</title>
+    <meta
+      name="description"
+      content="A visual collection of photo albums by Manoj Satishkumar."
+    />
+    <link rel="icon" href="/images/favicon.png" type="image/png" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      :root {
+        color-scheme: light;
+        --page: #f6f1e8;
+        --paper: rgba(255, 251, 245, 0.86);
+        --paper-strong: rgba(255, 255, 255, 0.94);
+        --line: rgba(128, 97, 62, 0.14);
+        --ink: #2f241a;
+        --muted: #756454;
+        --shadow: 0 24px 70px rgba(67, 45, 24, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        color: var(--ink);
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background:
+          radial-gradient(circle at 12% 10%, rgba(245, 158, 11, 0.15), transparent 20%),
+          radial-gradient(circle at 88% 16%, rgba(59, 130, 246, 0.12), transparent 18%),
+          radial-gradient(circle at 78% 82%, rgba(16, 185, 129, 0.12), transparent 22%),
+          linear-gradient(180deg, #fcfaf6 0%, #f6f0e6 48%, #f2eadd 100%);
+        padding: 92px 18px 48px;
+      }
+
+      .page-shell {
+        width: min(1360px, calc(100vw - 36px));
+        margin: 0 auto;
+      }
+
+      .albums-panel {
+        margin-top: 22px;
+        padding: 24px;
+        border-radius: 30px;
+        background: var(--paper);
+        border: 1px solid rgba(255, 255, 255, 0.78);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .section-header {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 24px;
+      }
+
+      .section-header h2 {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 3rem);
+        letter-spacing: -0.04em;
+      }
+
+      .section-header p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .album-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 240px));
+        gap: 24px 18px;
+      }
+
+      .album-card {
+        display: grid;
+        gap: 18px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        text-align: left;
+        color: inherit;
+        cursor: pointer;
+      }
+
+      .album-card:focus-visible {
+        outline: 3px solid rgba(59, 130, 246, 0.42);
+        outline-offset: 6px;
+        border-radius: 24px;
+      }
+
+      .album-card:hover .stack {
+        transform: translateY(-4px);
+      }
+
+      .album-card:hover .stack-photo--top {
+        transform: translateY(-10px) rotate(0deg) scale(1.015);
+      }
+
+      .stack {
+        position: relative;
+        aspect-ratio: 0.9 / 1;
+        transition: transform 0.28s ease;
+      }
+
+      .stack-photo {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 28px;
+        border: 9px solid var(--paper-strong);
+        box-shadow:
+          0 18px 30px rgba(66, 46, 28, 0.12),
+          0 4px 10px rgba(66, 46, 28, 0.08);
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .stack-doc {
+        position: absolute;
+        inset: 0;
+        border-radius: 28px;
+        border: 9px solid var(--paper-strong);
+        box-shadow:
+          0 18px 30px rgba(66, 46, 28, 0.12),
+          0 4px 10px rgba(66, 46, 28, 0.08);
+        background: linear-gradient(180deg, rgba(255, 251, 245, 0.98), rgba(239, 229, 214, 0.96));
+        display: grid;
+        place-items: center;
+        padding: 18px;
+        color: #6b4f35;
+        font-size: 0.76rem;
+        font-weight: 800;
+        line-height: 1.35;
+        letter-spacing: 0.04em;
+        text-align: center;
+        text-transform: uppercase;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .stack-photo--back {
+        transform: rotate(-9deg) translate(-8px, 8px) scale(0.96);
+        filter: saturate(0.9) brightness(0.98);
+      }
+
+      .stack-photo--mid {
+        transform: rotate(7deg) translate(8px, 4px) scale(0.98);
+        filter: saturate(0.96) brightness(0.99);
+      }
+
+      .stack-photo--top {
+        transform: translateY(0) rotate(-2deg);
+        transition: transform 0.28s ease;
+      }
+
+      .stack-doc--back {
+        transform: rotate(-9deg) translate(-8px, 8px) scale(0.96);
+      }
+
+      .stack-doc--mid {
+        transform: rotate(7deg) translate(8px, 4px) scale(0.98);
+      }
+
+      .stack-doc--top {
+        transform: translateY(0) rotate(-2deg);
+        transition: transform 0.28s ease;
+      }
+
+      .album-meta h3 {
+        margin: 0;
+        font-size: 1.05rem;
+        line-height: 1.08;
+        letter-spacing: -0.04em;
+      }
+
+      .album-count {
+        margin-top: 4px;
+        color: #9a8a78;
+        font-size: 0.84rem;
+        font-weight: 600;
+      }
+
+      .album-note {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.8rem;
+        line-height: 1.6;
+      }
+
+      .album-modal {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: stretch;
+        justify-content: stretch;
+        padding: 0;
+        background: rgba(22, 16, 11, 0.82);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+        z-index: 2000;
+      }
+
+      .album-modal.is-open {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .album-modal-dialog {
+        width: 100vw;
+        height: 100dvh;
+        overflow: hidden;
+        border-radius: 0;
+        background:
+          radial-gradient(circle at top left, rgba(251, 191, 36, 0.08), transparent 18%),
+          linear-gradient(180deg, rgba(22, 16, 11, 0.96) 0%, rgba(28, 20, 13, 0.98) 100%);
+        border: 0;
+        box-shadow: none;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+      }
+
+      .album-modal-header {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 20px 24px 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .album-modal-title {
+        margin: 0;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        letter-spacing: -0.04em;
+        color: #fff7eb;
+      }
+
+      .album-modal-subtitle {
+        margin: 8px 0 0;
+        color: rgba(255, 244, 230, 0.72);
+        font-size: 0.96rem;
+        line-height: 1.6;
+      }
+
+      .album-modal-close,
+      .album-nav,
+      .album-thumbnail {
+        border: 0;
+        cursor: pointer;
+      }
+
+      .album-modal-close,
+      .album-nav {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fffaf1;
+        transition: background 0.2s ease;
+      }
+
+      .album-modal-close:hover,
+      .album-nav:hover {
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      .album-modal-close {
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        font-size: 1.5rem;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+
+      .album-modal-body {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 18px;
+        align-items: center;
+        padding: 10px 24px 12px;
+        min-height: 0;
+      }
+
+      .album-nav {
+        width: 48px;
+        height: 48px;
+        border-radius: 999px;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+      }
+
+      .album-viewer {
+        min-width: 0;
+        display: grid;
+        gap: 8px;
+      }
+
+      .album-stage {
+        min-height: 0;
+        height: min(68dvh, calc(100dvh - 250px));
+        border-radius: 28px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          radial-gradient(circle at top left, rgba(251, 191, 36, 0.12), transparent 22%),
+          linear-gradient(180deg, rgba(43, 31, 21, 0.96) 0%, rgba(24, 17, 12, 0.98) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .album-stage img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+
+      .album-stage-frame {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: #ffffff;
+        display: none;
+      }
+
+      .album-photo-position {
+        color: rgba(255, 244, 230, 0.8);
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .album-thumbnails {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+      }
+
+      .album-thumbnail {
+        flex: 0 0 72px;
+        padding: 0;
+        background: transparent;
+        border-radius: 12px;
+        overflow: hidden;
+        width: 72px;
+        height: 72px;
+        border: 2px solid transparent;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+        opacity: 0.78;
+        transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+      }
+
+      .album-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .album-thumbnail-label {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+        padding: 8px;
+        background: linear-gradient(180deg, rgba(255, 251, 245, 0.98), rgba(239, 229, 214, 0.94));
+        color: #5f4731;
+        font-size: 0.58rem;
+        line-height: 1.35;
+        font-weight: 800;
+        letter-spacing: 0.03em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .album-thumbnail.is-active {
+        border-color: rgba(37, 99, 235, 0.56);
+        opacity: 1;
+      }
+
+      .album-thumbnail:hover {
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+
+      #footer {
+        margin-top: 40px;
+      }
+
+      @media (max-width: 900px) {
+        body {
+          padding: 84px 14px 36px;
+        }
+
+        .albums-panel {
+          margin-top: 18px;
+          padding: 20px 16px;
+          border-radius: 26px;
+        }
+
+        .section-header {
+          display: block;
+        }
+
+        .album-grid {
+          grid-template-columns: repeat(2, minmax(140px, 1fr));
+          gap: 20px 14px;
+        }
+
+        .album-modal {
+          padding: 0;
+        }
+
+        .album-modal-dialog {
+          width: 100vw;
+          height: 100dvh;
+        }
+
+        .album-modal-body {
+          grid-template-columns: 1fr;
+          gap: 14px;
+          padding: 10px 14px 12px;
+        }
+
+        .album-viewer {
+          position: relative;
+        }
+
+        .album-stage {
+          height: min(58dvh, calc(100dvh - 220px));
+          border-radius: 22px;
+        }
+
+        .album-nav {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 1;
+        }
+
+        .album-nav--prev {
+          left: 12px;
+        }
+
+        .album-nav--next {
+          right: 12px;
+        }
+
+        .album-meta h3 {
+          font-size: 1rem;
+        }
+
+        .album-count {
+          font-size: 0.8rem;
+        }
+
+        .album-thumbnail {
+          flex-basis: 64px;
+          width: 64px;
+          height: 64px;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .album-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 18px 12px;
+        }
+
+        .stack-photo {
+          border-width: 8px;
+          border-radius: 24px;
+        }
+
+        .stack-doc {
+          border-width: 8px;
+          border-radius: 24px;
+          font-size: 0.68rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="desktop-nav-bar"></div>
+
+    <main class="page-shell">
+      <section class="albums-panel" aria-labelledby="albums-title">
+        <div class="section-header">
+          <div>
+            <h2 id="albums-title">Photo Albums</h2>
+            <p>Grouped as card stacks, inspired by a photo library overview.</p>
+          </div>
+        </div>
+
+        <div class="album-grid" id="album-grid"></div>
+      </section>
+    </main>
+
+    <div
+      class="album-modal"
+      id="album-modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="album-modal-title"
+    >
+      <div class="album-modal-dialog">
+        <div class="album-modal-header">
+          <div>
+            <h2 class="album-modal-title" id="album-modal-title"></h2>
+            <p class="album-modal-subtitle" id="album-modal-subtitle"></p>
+          </div>
+          <button class="album-modal-close" id="album-modal-close" aria-label="Close album viewer">×</button>
+        </div>
+
+        <div class="album-modal-body">
+          <button class="album-nav album-nav--prev" id="album-prev" aria-label="Previous photo">‹</button>
+          <div class="album-viewer">
+            <div class="album-stage">
+              <img id="album-modal-image" src="" alt="" />
+              <iframe class="album-stage-frame" id="album-modal-frame" title="Album document viewer"></iframe>
+            </div>
+            <div class="album-photo-position" id="album-photo-position"></div>
+            <div class="album-thumbnails" id="album-thumbnails"></div>
+          </div>
+          <button class="album-nav album-nav--next" id="album-next" aria-label="Next photo">›</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+      const albums = [
+        {
+          title: "Walmart",
+          badge: "Work",
+          note: "Moments, events, and snapshots from the Walmart journey.",
+          images: [
+            "/images/walmart/20191008_142235.jpg",
+            "/images/walmart/20240123_100205.jpg",
+            "/images/walmart/20241118_145041.jpg",
+            "/images/walmart/20241118_150232.jpg",
+            "/images/walmart/20241120_085830.jpg",
+            "/images/walmart/20241122_085016.jpg",
+            "/images/walmart/20241124_104204.jpg",
+            "/images/walmart/20241124_104309.jpg",
+            "/images/walmart/20241124_105214.jpg",
+            "/images/walmart/20241125_225628.jpg",
+            "/images/walmart/20241126_102653.jpg",
+            "/images/walmart/20241126_102656.jpg",
+            "/images/walmart/20241126_102701.jpg",
+            "/images/walmart/20241130_075355.jpg",
+            "/images/walmart/20241130_085924.jpg",
+            "/images/walmart/20241130_104636.jpg",
+            "/images/walmart/20241130_105104.jpg",
+            "/images/walmart/20241202_205052.jpg",
+            "/images/walmart/IMG-20241130-WA0041.jpg",
+            "/images/walmart/IMG-20241201-WA0007.jpg",
+            "/images/walmart/IMG-20241201-WA0057.jpg",
+            "/images/walmart/IMG-20241201-WA0064.jpg",
+            "/images/walmart/IMG-20241201-WA0095.jpg",
+            "/images/walmart/IMG-20241201-WA0100.jpg",
+            "/images/walmart/IMG_5777.jpg",
+            "/images/walmart/IMG_6201 copy.jpg",
+            "/images/walmart/IMG_6204 copy.jpg",
+            "/images/walmart/IMG_6557 copy.jpg",
+            "/images/walmart/IMG_6561 copy.jpg",
+            "/images/walmart/IMG_7505 copy.jpg",
+            "/images/walmart/IMG_7907 copy.jpg",
+          ],
+        },
+        {
+          title: "Cerner",
+          note: "Memories and moments from the Cerner journey.",
+          images: [
+            "/images/cerner/_DSC0031.JPG",
+            "/images/cerner/20170619_172915(1).jpg",
+            "/images/cerner/20170617_011914.jpg",
+            "/images/cerner/_DSC0032.JPG",
+            "/images/cerner/20170620_073616.jpg",
+            "/images/cerner/20170628_192519(1).jpg",
+            "/images/cerner/20170623_165319.jpg",
+            "/images/cerner/20170623_104350.jpg",
+            "/images/cerner/20170619_173130.jpg",
+            "/images/cerner/20170617_134107(1).jpg",
+            "/images/cerner/20170619_171302.jpg",
+            "/images/cerner/20170617_134835(1).jpg",
+            "/images/cerner/20170627_191927.jpg",
+            "/images/cerner/20170619_082612.jpg",
+            "/images/cerner/20170620_073630.jpg",
+            "/images/cerner/DSC_0025.JPG",
+          ],
+        },
+        {
+          title: "Adithya university",
+          note: "Campus memories and moments from Adithya College.",
+          images: [
+            "/images/adithya-college/0.png",
+            "/images/adithya-college/1.png",
+            "/images/adithya-college/2.png",
+            "/images/adithya-college/3.jpg",
+            "/images/adithya-college/3 2.jpg",
+            "/images/adithya-college/4.jpg",
+            "/images/adithya-college/5.jpg",
+            "/images/adithya-college/6.JPG",
+            "/images/adithya-college/7.jpeg",
+          ],
+        },
+        {
+          title: "Achievements",
+          badge: "Milestones",
+          note: "Awards, recognition, and important milestones.",
+          images: [
+            "/images/achievements/Hackathon Champion.jpg",
+            "/images/achievements/Clutch Award.jpg",
+            "/images/achievements/NOTT Awards.jpg",
+          ],
+        },
+        {
+          title: "Badges",
+          badge: "Awards",
+          note: "Badge certificates and recognition documents.",
+          images: [
+            "/images/badges/Disruptor_Date Issued  -  March 11, 2024.jpg",
+            "/images/badges/Energizer_Date Issued  -  November 27, 2020.jpg",
+            "/images/badges/Fire Fighter_Date Issued  -  May 15, 2025.jpg",
+            "/images/badges/Impact driver - Nidhi Sept  12 2025.jpg",
+            "/images/badges/Inspirer_Date Issued  -  July 18, 2025.jpg",
+            "/images/badges/Space Creator_Date Issued  -  March 15, 2024.jpg",
+          ],
+        },
+      ];
+
+      let activeAlbumIndex = 0;
+      let activePhotoIndex = 0;
+
+      const albumModal = document.getElementById("album-modal");
+      const albumModalTitle = document.getElementById("album-modal-title");
+      const albumModalSubtitle = document.getElementById("album-modal-subtitle");
+      const albumModalImage = document.getElementById("album-modal-image");
+      const albumModalFrame = document.getElementById("album-modal-frame");
+      const albumPhotoPosition = document.getElementById("album-photo-position");
+      const albumThumbnails = document.getElementById("album-thumbnails");
+      const albumPrevButton = document.getElementById("album-prev");
+      const albumNextButton = document.getElementById("album-next");
+      const albumCloseButton = document.getElementById("album-modal-close");
+
+      function renderAlbums() {
+        const albumGrid = document.getElementById("album-grid");
+
+        const renderCoverLayer = (source, className, title) => {
+          if (source.toLowerCase().endsWith(".pdf")) {
+            return `<div class="stack-doc ${className.replace("stack-photo", "stack-doc")}">${title}</div>`;
+          }
+
+          return `<img class="${className}" src="${source}" alt="${title} preview photo" loading="lazy" />`;
+        };
+
+        albumGrid.innerHTML = albums
+          .map(
+            (album, index) => `
+              <button class="album-card" type="button" data-album-index="${index}" aria-label="Open ${album.title} album">
+                <div class="stack" aria-hidden="true">
+                  ${renderCoverLayer(album.images[0], "stack-photo stack-photo--back", album.title)}
+                  ${renderCoverLayer(album.images[1] || album.images[0], "stack-photo stack-photo--mid", album.title)}
+                  ${renderCoverLayer(album.images[2] || album.images[0], "stack-photo stack-photo--top", album.title)}
+                </div>
+                <div class="album-meta">
+                  <h3>${album.title}</h3>
+                  <div class="album-count">${album.images.length} photos</div>
+                  <div class="album-note">${album.note}</div>
+                </div>
+              </button>
+            `
+          )
+          .join("");
+
+        document.querySelectorAll(".album-card").forEach((card) => {
+          card.addEventListener("click", () => {
+            openAlbum(Number(card.dataset.albumIndex));
+          });
+        });
+      }
+
+      function renderActivePhoto() {
+        const album = albums[activeAlbumIndex];
+        const image = album.images[activePhotoIndex];
+        const isPdf = image.toLowerCase().endsWith(".pdf");
+
+        albumModalTitle.textContent = album.title;
+        albumModalSubtitle.textContent = album.note;
+        albumModalImage.style.display = isPdf ? "none" : "block";
+        albumModalFrame.style.display = isPdf ? "block" : "none";
+
+        if (isPdf) {
+          albumModalFrame.src = image;
+          albumModalImage.removeAttribute("src");
+          albumModalImage.alt = "";
+        } else {
+          albumModalImage.src = image;
+          albumModalImage.alt = `${album.title} photo ${activePhotoIndex + 1}`;
+          albumModalFrame.removeAttribute("src");
+        }
+
+        albumPhotoPosition.textContent = `${activePhotoIndex + 1} of ${album.images.length}`;
+
+        albumThumbnails.innerHTML = album.images
+          .map(
+            (thumbnail, index) => `
+              <button
+                class="album-thumbnail ${index === activePhotoIndex ? "is-active" : ""}"
+                type="button"
+                data-photo-index="${index}"
+                aria-label="View photo ${index + 1}"
+              >
+                ${
+                  thumbnail.toLowerCase().endsWith(".pdf")
+                    ? `<div class="album-thumbnail-label">${thumbnail
+                        .split("/")
+                        .pop()
+                        .replace(".pdf", "")
+                        .replaceAll("_", " ")
+                        .replaceAll("  ", " ")}</div>`
+                    : `<img src="${thumbnail}" alt="" loading="lazy" />`
+                }
+              </button>
+            `
+          )
+          .join("");
+
+        document.querySelectorAll(".album-thumbnail").forEach((thumb) => {
+          thumb.addEventListener("click", () => {
+            activePhotoIndex = Number(thumb.dataset.photoIndex);
+            renderActivePhoto();
+          });
+        });
+
+        const activeThumbnail = document.querySelector(".album-thumbnail.is-active");
+        if (activeThumbnail) {
+          activeThumbnail.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "center",
+          });
+        }
+      }
+
+      function openAlbum(albumIndex) {
+        activeAlbumIndex = albumIndex;
+        activePhotoIndex = 0;
+        renderActivePhoto();
+        albumModal.classList.add("is-open");
+        albumModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeAlbum() {
+        albumModal.classList.remove("is-open");
+        albumModal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+
+      function navigateAlbum(step) {
+        const photoCount = albums[activeAlbumIndex].images.length;
+        activePhotoIndex = (activePhotoIndex + step + photoCount) % photoCount;
+        renderActivePhoto();
+      }
+
+      function attachModalEvents() {
+        albumPrevButton.addEventListener("click", () => navigateAlbum(-1));
+        albumNextButton.addEventListener("click", () => navigateAlbum(1));
+        albumCloseButton.addEventListener("click", closeAlbum);
+
+        albumModal.addEventListener("click", (event) => {
+          if (event.target === albumModal) {
+            closeAlbum();
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (!albumModal.classList.contains("is-open")) return;
+
+          if (event.key === "Escape") {
+            closeAlbum();
+          }
+
+          if (event.key === "ArrowLeft") {
+            navigateAlbum(-1);
+          }
+
+          if (event.key === "ArrowRight") {
+            navigateAlbum(1);
+          }
+        });
+      }
+
+      renderAlbums();
+      attachModalEvents();
+
+      $(function () {
+        $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
+        $("#footer").load("/components/footer.html");
+      });
+    </script>
+  </body>
+</html>

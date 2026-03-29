@@ -96,6 +96,37 @@
     color: #1f2937;
   }
 
+  .intro-link-row {
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .intro-link-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(196, 206, 236, 0.95);
+    color: #0a66c2;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 700;
+    box-shadow: 0 10px 24px rgba(95, 112, 163, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .intro-link-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(95, 112, 163, 0.14);
+    border-color: rgba(10, 102, 194, 0.28);
+    color: #0a66c2;
+    text-decoration: none;
+  }
+
   .intro-link-highlight {
     color: #4a5bc7;
     cursor: pointer;
@@ -374,6 +405,16 @@
             massive global scale. I architect world-class web platforms that
             power <strong>exceptional user experiences</strong> for millions.
           </p>
+          <div class="intro-link-row">
+            <a
+              class="intro-link-pill"
+              href="https://www.linkedin.com/in/manojsatishkumar/"
+              target="_blank"
+              rel="noopener"
+            >
+              69,000+ followers on LinkedIn
+            </a>
+          </div>
         </div>
 
         <!-- Walmart Experience & Key Achievement -->
