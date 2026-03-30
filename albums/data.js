@@ -85,6 +85,10 @@ window.albumCatalog = [
     badge: "Milestones",
     note: "Awards, recognition, and important milestones.",
     images: [
+      "/images/achievements/Bravo award - August 2024.jpg",
+      "/images/achievements/Bravo award - Jan 2024.jpg",
+      "/images/achievements/Bravo award - Jan 2025.jpg",
+      "/images/achievements/Bravo award - May 2025.jpg",
       "/images/achievements/Hackathon Champion.jpg",
       "/images/achievements/Clutch Award.jpg",
       "/images/achievements/NOTT Awards.jpg",
