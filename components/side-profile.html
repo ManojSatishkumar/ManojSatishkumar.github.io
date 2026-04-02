@@ -228,6 +228,30 @@
     border-bottom-color: #1f2f66;
   }
 
+  .profile-inline-link {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 10px 0 0 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #495057;
+    font-size: 1.05rem;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .profile-inline-link:hover {
+    color: #1f2937;
+    text-decoration: none;
+  }
+
+  .profile-inline-link:hover .profile-detail-link {
+    color: #1f2f66;
+    border-bottom-color: #1f2f66;
+  }
+
   .visa-modal-overlay {
     position: fixed;
     inset: 0;
@@ -1065,10 +1089,15 @@
           <i class="fas fa-lightbulb" style="color: #f59e0b; width: 25px"></i>
           Problem Solver
         </div>
-        <div style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem">
+        <button
+          type="button"
+          class="profile-inline-link"
+          onclick="if (typeof animateScroll === 'function') { animateScroll('tech-talks'); } else { window.location.hash = 'tech-talks'; }"
+          aria-label="Go to Tech Talks section"
+        >
           <i class="fas fa-microphone" style="color: #e74c3c; width: 25px"></i>
-          Tech Speaker
-        </div>
+          <span class="profile-detail-link">Tech Speaker</span>
+        </button>
         <button
           type="button"
           class="profile-detail-button"
