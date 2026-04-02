@@ -134,6 +134,9 @@
     align-items: center;
     margin-left: auto;
     padding-left: 14px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
   }
 
   .intro-avatar {
@@ -456,7 +459,12 @@
             >
               69,000+ followers on LinkedIn
             </a>
-            <div class="intro-avatar-stack" aria-label="Community avatars">
+            <button
+              type="button"
+              class="intro-avatar-stack"
+              aria-label="Go to Testimony section"
+              onclick="if (typeof animateScroll === 'function') { animateScroll('msk-testimony'); } else { window.location.hash = 'msk-testimony'; }"
+            >
               <img class="intro-avatar" src="/images/people/shreyas.png" alt="Shreyas" />
               <img class="intro-avatar" src="/images/people/sharmee.jpg" alt="Sharmee" />
               <img class="intro-avatar" src="/images/people/bala.jpg" alt="Bala" />
@@ -464,7 +472,7 @@
               <img class="intro-avatar" src="/images/people/raja-sir.jpeg" alt="Raja Sir" />
               <img class="intro-avatar" src="/images/people/aravind.jpg" alt="Aravind" />
               <img class="intro-avatar" src="/images/people/harshita.jpg" alt="Harshita" />
-            </div>
+            </button>
           </div>
         </div>
 

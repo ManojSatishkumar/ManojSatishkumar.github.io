@@ -75,7 +75,6 @@ window.albumCatalog = [
       "/images/adithya-college/3 2.jpg",
       "/images/adithya-college/4.jpg",
       "/images/adithya-college/5.jpg",
-      "/images/adithya-college/6.JPG",
       "/images/adithya-college/7.jpeg",
     ],
   },

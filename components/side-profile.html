@@ -252,6 +252,46 @@
     border-bottom-color: #1f2f66;
   }
 
+  .profile-copy-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 10px 0 0 0;
+    color: #495057;
+    font-size: 1.05rem;
+    text-align: left;
+  }
+
+  .profile-copy-main {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .profile-copy-action {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .profile-copy-action:hover {
+    color: #111827;
+    transform: scale(1.06);
+  }
+
+  .profile-copy-action.is-copied {
+    color: #16a34a;
+  }
+
   .visa-modal-overlay {
     position: fixed;
     inset: 0;
@@ -1071,7 +1111,7 @@
         <hr />
         <div style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem">
           <i class="fas fa-briefcase" style="color: #17a2b8; width: 25px"></i>
-          <span class="js-experience-years">12+</span> Years of Experience
+          <span class="js-experience-years">12</span>+ Years of Experience
         </div>
         <div style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem">
           <i class="fas fa-layer-group" style="color: #6c63ff; width: 25px"></i>
@@ -1116,6 +1156,21 @@
           <i class="fas fa-passport" style="color: #3C3B6E; width: 25px"></i>
           <span class="profile-detail-link">US Visa B1/B2</span>
         </button>
+        <div class="profile-copy-row">
+          <div class="profile-copy-main">
+            <i class="fas fa-envelope" style="color: #28a745; width: 25px"></i>
+            <span class="profile-detail-link">88manojs@gmail.com</span>
+          </div>
+          <button
+            type="button"
+            class="profile-copy-action"
+            aria-label="Copy email address"
+            title="Copy email ID"
+            onclick="copyProfileEmail(this)"
+          >
+            <i class="far fa-copy" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
     </div>
     <hr />
@@ -1447,6 +1502,40 @@
     if (!overlay) return;
     overlay.classList.remove("show");
     document.body.style.overflow = "";
+  }
+
+  async function copyProfileEmail(button) {
+    const email = "88manojs@gmail.com";
+
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(email);
+      } else {
+        const tempInput = document.createElement("textarea");
+        tempInput.value = email;
+        tempInput.setAttribute("readonly", "");
+        tempInput.style.position = "absolute";
+        tempInput.style.left = "-9999px";
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+      }
+
+      const icon = button.querySelector("i");
+      if (!icon) return;
+
+      button.classList.add("is-copied");
+      icon.className = "fas fa-check";
+
+      clearTimeout(button._copyResetTimer);
+      button._copyResetTimer = setTimeout(() => {
+        button.classList.remove("is-copied");
+        icon.className = "far fa-copy";
+      }, 3000);
+    } catch (error) {
+      console.error("Failed to copy email", error);
+    }
   }
 
   document.addEventListener("keydown", function (event) {
