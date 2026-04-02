@@ -688,6 +688,217 @@
         opacity: 1 !important;
       }
 
+      .intro-skeleton {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 28px 18px;
+      }
+
+      .intro-skeleton-grid {
+        display: grid;
+        grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.7fr);
+        gap: 28px;
+        align-items: start;
+      }
+
+      .intro-skeleton-card {
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(220, 228, 245, 0.9);
+        box-shadow:
+          0 18px 40px rgba(95, 112, 163, 0.08),
+          0 8px 18px rgba(95, 112, 163, 0.05);
+        overflow: hidden;
+      }
+
+      .intro-skeleton-profile {
+        padding: 32px 30px 28px;
+      }
+
+      .intro-skeleton-main {
+        padding: 10px 0 0;
+      }
+
+      .intro-skeleton-shimmer {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(90deg, #eef3ff 0%, #f8fbff 40%, #eef3ff 100%);
+        background-size: 200% 100%;
+        animation: introSkeletonSweep 1.35s linear infinite;
+      }
+
+      .intro-skeleton-avatar {
+        width: min(100%, 360px);
+        aspect-ratio: 1 / 1;
+        margin: 0 auto 30px;
+        border-radius: 50%;
+      }
+
+      .intro-skeleton-line {
+        border-radius: 999px;
+        height: 18px;
+        margin-bottom: 14px;
+      }
+
+      .intro-skeleton-line.title {
+        height: 28px;
+        width: 88%;
+      }
+
+      .intro-skeleton-line.subtitle {
+        width: 62%;
+      }
+
+      .intro-skeleton-line.company {
+        width: 58%;
+        margin-bottom: 20px;
+      }
+
+      .intro-skeleton-divider {
+        height: 1px;
+        margin: 18px 0 20px;
+        background: rgba(223, 229, 243, 0.9);
+      }
+
+      .intro-skeleton-detail {
+        height: 16px;
+        width: 74%;
+        border-radius: 999px;
+        margin-bottom: 16px;
+      }
+
+      .intro-skeleton-kicker {
+        width: 320px;
+        max-width: 56%;
+        height: 42px;
+        border-radius: 999px;
+        margin-bottom: 24px;
+      }
+
+      .intro-skeleton-heading {
+        width: 56%;
+        height: 62px;
+        border-radius: 22px;
+        margin-bottom: 24px;
+      }
+
+      .intro-skeleton-panel {
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(220, 228, 245, 0.9);
+        box-shadow:
+          0 18px 40px rgba(95, 112, 163, 0.08),
+          0 8px 18px rgba(95, 112, 163, 0.05);
+        padding: 28px;
+        margin-bottom: 22px;
+      }
+
+      .intro-skeleton-copy {
+        height: 18px;
+        border-radius: 999px;
+        margin-bottom: 16px;
+      }
+
+      .intro-skeleton-copy.wide {
+        width: 94%;
+      }
+
+      .intro-skeleton-copy.medium {
+        width: 82%;
+      }
+
+      .intro-skeleton-copy.short {
+        width: 62%;
+      }
+
+      .intro-skeleton-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      .intro-skeleton-pill {
+        width: 280px;
+        max-width: 48%;
+        height: 54px;
+        border-radius: 999px;
+      }
+
+      .intro-skeleton-avatars {
+        width: 260px;
+        max-width: 36%;
+        height: 44px;
+        border-radius: 999px;
+      }
+
+      .intro-skeleton-role-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 20px;
+      }
+
+      .intro-skeleton-brand {
+        width: 280px;
+        max-width: 60%;
+        height: 42px;
+        border-radius: 999px;
+      }
+
+      .intro-skeleton-tag {
+        width: 160px;
+        height: 42px;
+        border-radius: 999px;
+      }
+
+      .intro-skeleton-box {
+        margin-top: 24px;
+        border-radius: 18px;
+        border: 1px solid rgba(224, 229, 241, 0.95);
+        padding: 20px;
+        background: rgba(248, 250, 252, 0.95);
+      }
+
+      .intro-skeleton-box .intro-skeleton-copy:last-child {
+        margin-bottom: 0;
+      }
+
+      @keyframes introSkeletonSweep {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+
+      @media (max-width: 991px) {
+        .intro-skeleton {
+          padding: 0 18px 12px;
+        }
+
+        .intro-skeleton-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .intro-skeleton-heading,
+        .intro-skeleton-kicker,
+        .intro-skeleton-pill,
+        .intro-skeleton-avatars,
+        .intro-skeleton-brand {
+          max-width: 100%;
+          width: 100%;
+        }
+
+        .intro-skeleton-row,
+        .intro-skeleton-role-top {
+          flex-direction: column;
+          align-items: stretch;
+        }
+      }
+
       /* ===== End Navigation Animations ===== */
     </style>
 
@@ -1294,7 +1505,57 @@
     <br />
     <br />
 
-    <div id="intro" class="text-left"></div>
+    <div id="intro" class="text-left">
+      <div class="intro-skeleton" aria-hidden="true">
+        <div class="intro-skeleton-grid">
+          <div class="intro-skeleton-card intro-skeleton-profile">
+            <div class="intro-skeleton-avatar intro-skeleton-shimmer"></div>
+            <div class="intro-skeleton-line title intro-skeleton-shimmer"></div>
+            <div class="intro-skeleton-line subtitle intro-skeleton-shimmer"></div>
+            <div class="intro-skeleton-line company intro-skeleton-shimmer"></div>
+            <div class="intro-skeleton-divider"></div>
+            <div class="intro-skeleton-detail intro-skeleton-shimmer"></div>
+            <div class="intro-skeleton-detail intro-skeleton-shimmer"></div>
+            <div class="intro-skeleton-detail intro-skeleton-shimmer"></div>
+            <div class="intro-skeleton-detail intro-skeleton-shimmer"></div>
+            <div class="intro-skeleton-detail intro-skeleton-shimmer"></div>
+            <div class="intro-skeleton-detail intro-skeleton-shimmer"></div>
+            <div class="intro-skeleton-detail intro-skeleton-shimmer"></div>
+            <div class="intro-skeleton-detail intro-skeleton-shimmer" style="width: 82%"></div>
+          </div>
+
+          <div class="intro-skeleton-main">
+            <div class="intro-skeleton-kicker intro-skeleton-shimmer"></div>
+            <div class="intro-skeleton-heading intro-skeleton-shimmer"></div>
+
+            <div class="intro-skeleton-panel">
+              <div class="intro-skeleton-copy wide intro-skeleton-shimmer"></div>
+              <div class="intro-skeleton-copy medium intro-skeleton-shimmer"></div>
+              <div class="intro-skeleton-copy short intro-skeleton-shimmer"></div>
+              <div class="intro-skeleton-row">
+                <div class="intro-skeleton-pill intro-skeleton-shimmer"></div>
+                <div class="intro-skeleton-avatars intro-skeleton-shimmer"></div>
+              </div>
+            </div>
+
+            <div class="intro-skeleton-panel">
+              <div class="intro-skeleton-role-top">
+                <div class="intro-skeleton-brand intro-skeleton-shimmer"></div>
+                <div class="intro-skeleton-tag intro-skeleton-shimmer"></div>
+              </div>
+              <div class="intro-skeleton-copy wide intro-skeleton-shimmer"></div>
+              <div class="intro-skeleton-copy medium intro-skeleton-shimmer"></div>
+              <div class="intro-skeleton-copy short intro-skeleton-shimmer"></div>
+              <div class="intro-skeleton-box">
+                <div class="intro-skeleton-copy medium intro-skeleton-shimmer"></div>
+                <div class="intro-skeleton-copy wide intro-skeleton-shimmer"></div>
+                <div class="intro-skeleton-copy short intro-skeleton-shimmer"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div
       style="background-color: #e1f3ff"
@@ -1447,20 +1708,33 @@
       }
     </script>
     <script>
+      function deferSectionLoad(selector, url, callback = syncExperienceYears) {
+        const load = () => $(selector).load(url, callback);
+
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(load, { timeout: 1500 });
+        } else {
+          setTimeout(load, 60);
+        }
+      }
+
       $(function () {
         syncExperienceYears();
-        $("#intro").load("/components/introduction.html", syncExperienceYears);
-        $("#experience").load("/components/experience.html", syncExperienceYears);
-        $("#projects").load("/components/projects.html", syncExperienceYears);
-        $("#skill-set").load("/components/skill-set.html", syncExperienceYears);
-        $("#achievements").load("/components/achievements.html", syncExperienceYears);
-        $("#patent").load("/components/patent.html", syncExperienceYears);
-        $("#education").load("/components/education.html", syncExperienceYears);
-        $("#tech-talks").load("/components/speaking-feature.html", syncExperienceYears);
-        $("#albums-showcase").load("/components/albums-showcase.html", syncExperienceYears);
-        $("#msk-testimony").load("/components/testimony.html", syncExperienceYears);
+        requestAnimationFrame(() => {
+          $("#intro").load("/components/introduction.html", syncExperienceYears);
+        });
+
+        deferSectionLoad("#experience", "/components/experience.html");
+        deferSectionLoad("#projects", "/components/projects.html");
+        deferSectionLoad("#skill-set", "/components/skill-set.html");
+        deferSectionLoad("#achievements", "/components/achievements.html");
+        deferSectionLoad("#patent", "/components/patent.html");
+        deferSectionLoad("#education", "/components/education.html");
+        deferSectionLoad("#tech-talks", "/components/speaking-feature.html");
+        deferSectionLoad("#albums-showcase", "/components/albums-showcase.html");
+        deferSectionLoad("#msk-testimony", "/components/testimony.html");
         // $("#mock-interview-ad").load("/components/mock-interview-ad.html");
-        $("#footer").load("/components/footer.html", syncExperienceYears);
+        deferSectionLoad("#footer", "/components/footer.html");
 
         // Track scroll position and update active menu item
         $(window).scroll(function () {
