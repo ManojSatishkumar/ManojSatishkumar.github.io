@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      Inside My Walmart US Store Visit During the Holidays | Manoj Satishkumar
+      My Walmart US Store Visit During the Holidays | Manoj Satishkumar
     </title>
     <meta
       name="description"
@@ -65,7 +65,7 @@
       {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        "headline": "Inside My Walmart US Store Visit During the Holidays",
+        "headline": "My Walmart US Store Visit During the Holidays",
         "image": "https://manojsatishkumar.com/images/walmart-us-visit/01.jpeg",
         "author": { "@type": "Person", "name": "Manoj Satishkumar" },
         "publisher": {
@@ -336,14 +336,14 @@
       }
 
       .article-shell {
-        max-width: 1160px;
+        max-width: 1280px;
         margin: 0 auto;
         padding: 42px 20px 70px;
       }
 
       .intro-panel {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 320px;
+        grid-template-columns: minmax(0, 0.9fr) minmax(520px, 1.1fr);
         gap: 28px;
         align-items: start;
         margin-bottom: 42px;
@@ -374,8 +374,82 @@
         font-weight: 600;
       }
 
+      .stores-heading {
+        margin: 0 0 14px;
+        color: var(--wm-blue);
+        font-size: 0.82rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .stores-list ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
       .stores-list li + li {
         margin-top: 10px;
+      }
+
+      .stores-list a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        width: 100%;
+        padding: 11px 12px;
+        color: var(--wm-blue);
+        background: #ffffff;
+        border: 1px solid #d7e7f5;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 113, 206, 0.06);
+        text-decoration: none;
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .stores-list a::before {
+        content: "\f3c5";
+        color: var(--wm-blue);
+        font-family: "Font Awesome 6 Free";
+        font-size: 0.9rem;
+        font-weight: 900;
+        flex: 0 0 auto;
+      }
+
+      .stores-list a::after {
+        content: "Open map";
+        color: #526476;
+        font-size: 0.78rem;
+        font-weight: 900;
+        white-space: nowrap;
+      }
+
+      .stores-list a:hover {
+        color: var(--wm-blue);
+        border-color: var(--wm-blue);
+        box-shadow: 0 8px 18px rgba(0, 113, 206, 0.14);
+        text-decoration: none;
+        transform: translateY(-1px);
+      }
+
+      .stores-list a:hover::after {
+        color: var(--wm-blue);
+      }
+
+      .store-link-text {
+        min-width: 0;
+        flex: 1;
+      }
+
+      @media (min-width: 1051px) {
+        .store-link-text {
+          white-space: nowrap;
+        }
       }
 
       .section-kicker {
@@ -658,9 +732,14 @@
         transform: translateY(-2px);
       }
 
+      @media (max-width: 1050px) {
+        .intro-panel {
+          grid-template-columns: 1fr;
+        }
+      }
+
       @media (max-width: 940px) {
         .visit-hero-inner,
-        .intro-panel,
         .visit-moment,
         .visit-moment.reverse {
           grid-template-columns: 1fr;
@@ -711,11 +790,22 @@
           grid-template-columns: 1fr;
         }
 
-        .wide-gallery,
-        .photo-pair {
-          display: grid;
-        }
+      .wide-gallery,
+      .photo-pair {
+        display: grid;
       }
+
+      .stores-list a {
+        align-items: flex-start;
+      }
+
+      .stores-list a::after {
+        content: "\f061";
+        font-family: "Font Awesome 6 Free";
+        font-size: 0.82rem;
+        margin-top: 2px;
+      }
+    }
     </style>
   </head>
 
@@ -730,7 +820,7 @@
           <div class="eyebrow">
             <span class="spark"></span> Walmart US Field Notes
           </div>
-          <h1>Inside My Walmart US Store Visit During the Holidays</h1>
+          <h1>My Walmart US Store Visit During the Holidays</h1>
           <p class="hero-lede">
             I walked into Walmart as an employee who wanted to understand the
             operation, and as a customer who wanted to experience the promise of
@@ -783,13 +873,26 @@
           the late-night operation, the fulfillment flow, the holiday rush, and
           the way the store becomes both a workplace and a customer destination.
         </p>
-        <ul class="stores-list" aria-label="Walmart stores visited">
-          <li>600 Showers Dr, Mountain View</li>
-          <li>30600 Dyer St, Union City</li>
-          <li>301 Ranch Dr, Milpitas Supercenter</li>
-          <li>3075 E Tropicana Ave Supercenter</li>
-          <li>4080 Stevens Creek Blvd Neighborhood Market</li>
-        </ul>
+        <div class="stores-list" aria-label="Walmart stores visited">
+          <h2 class="stores-heading">Walmart Stores I Visited</h2>
+          <ul>
+            <li>
+              <a href="https://www.google.com/maps/search/?api=1&query=Walmart%20600%20Showers%20Dr%20Mountain%20View%20CA" target="_blank" rel="noopener"><span class="store-link-text">600 Showers Dr, Mountain View</span></a>
+            </li>
+            <li>
+              <a href="https://www.google.com/maps/search/?api=1&query=Walmart%2030600%20Dyer%20St%20Union%20City%20CA" target="_blank" rel="noopener"><span class="store-link-text">30600 Dyer St, Union City</span></a>
+            </li>
+            <li>
+              <a href="https://www.google.com/maps/search/?api=1&query=Walmart%20Supercenter%20301%20Ranch%20Dr%20Milpitas%20CA" target="_blank" rel="noopener"><span class="store-link-text">301 Ranch Dr, Milpitas Supercenter</span></a>
+            </li>
+            <li>
+              <a href="https://www.google.com/maps/search/?api=1&query=Walmart%20Supercenter%203075%20E%20Tropicana%20Ave%20Las%20Vegas%20NV" target="_blank" rel="noopener"><span class="store-link-text">3075 E Tropicana Ave Supercenter</span></a>
+            </li>
+            <li>
+              <a href="https://www.google.com/maps/search/?api=1&query=Walmart%20Neighborhood%20Market%204080%20Stevens%20Creek%20Blvd%20San%20Jose%20CA" target="_blank" rel="noopener"><span class="store-link-text">4080 Stevens Creek Blvd Neighborhood Market</span></a>
+            </li>
+          </ul>
+        </div>
       </section>
 
       <section class="section-kicker">
