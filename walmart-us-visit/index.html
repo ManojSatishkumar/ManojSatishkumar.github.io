@@ -298,6 +298,7 @@
         width: 100%;
         aspect-ratio: 4 / 3;
         object-fit: cover;
+        cursor: zoom-in;
       }
 
       .hero-photo figcaption {
@@ -540,6 +541,7 @@
         max-height: 430px;
         aspect-ratio: 4 / 5;
         object-fit: cover;
+        cursor: zoom-in;
       }
 
       .moment-media.landscape img {
@@ -724,6 +726,67 @@
         color: #ffffff;
       }
 
+      .photo-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 20000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 28px;
+        background: rgba(5, 15, 28, 0.88);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .photo-modal.is-open {
+        display: flex;
+      }
+
+      .photo-modal-inner {
+        position: relative;
+        width: min(1120px, 100%);
+        max-height: 92vh;
+      }
+
+      .photo-modal-image {
+        display: block;
+        width: 100%;
+        max-height: 82vh;
+        object-fit: contain;
+        border-radius: 8px;
+        background: #0b1724;
+        box-shadow: 0 26px 80px rgba(0, 0, 0, 0.42);
+      }
+
+      .photo-modal-caption {
+        margin: 12px 48px 0 0;
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      .photo-modal-close {
+        position: absolute;
+        top: -14px;
+        right: -14px;
+        width: 42px;
+        height: 42px;
+        border: 0;
+        border-radius: 8px;
+        background: #ffffff;
+        color: #102a43;
+        cursor: pointer;
+        font-size: 1.3rem;
+        font-weight: 900;
+        line-height: 1;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      }
+
+      body.photo-modal-open {
+        overflow: hidden;
+      }
+
       .back-to-top {
         position: fixed;
         right: 22px;
@@ -826,6 +889,20 @@
         font-family: "Font Awesome 6 Free";
         font-size: 0.82rem;
         margin-top: 2px;
+      }
+
+      .photo-modal {
+        padding: 16px;
+      }
+
+      .photo-modal-close {
+        top: 8px;
+        right: 8px;
+      }
+
+      .photo-modal-caption {
+        margin-right: 0;
+        font-size: 0.86rem;
       }
     }
     </style>
@@ -1465,6 +1542,14 @@
       <i class="fas fa-arrow-up"></i>
     </button>
 
+    <div class="photo-modal" id="photo-modal" role="dialog" aria-modal="true" aria-label="Expanded article photo">
+      <div class="photo-modal-inner">
+        <button class="photo-modal-close" id="photo-modal-close" type="button" aria-label="Close expanded photo">&times;</button>
+        <img class="photo-modal-image" id="photo-modal-image" src="" alt="" />
+        <div class="photo-modal-caption" id="photo-modal-caption"></div>
+      </div>
+    </div>
+
     <script src="/lib/jquery/jquery.min.js"></script>
     <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/main.js"></script>
@@ -1488,6 +1573,56 @@
       function scrollToTop() {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
+
+      const photoModal = document.getElementById("photo-modal");
+      const photoModalImage = document.getElementById("photo-modal-image");
+      const photoModalCaption = document.getElementById("photo-modal-caption");
+      const photoModalClose = document.getElementById("photo-modal-close");
+
+      function openPhotoModal(image) {
+        const figure = image.closest("figure");
+        const caption = figure?.querySelector("figcaption")?.innerText.trim() || image.alt;
+
+        photoModalImage.src = image.currentSrc || image.src;
+        photoModalImage.alt = image.alt || caption || "Expanded article photo";
+        photoModalCaption.textContent = caption;
+        photoModal.classList.add("is-open");
+        document.body.classList.add("photo-modal-open");
+        photoModalClose.focus();
+      }
+
+      function closePhotoModal() {
+        photoModal.classList.remove("is-open");
+        document.body.classList.remove("photo-modal-open");
+        photoModalImage.src = "";
+        photoModalImage.alt = "";
+        photoModalCaption.textContent = "";
+      }
+
+      document.querySelectorAll(".hero-photo > img, .moment-media img").forEach((image) => {
+        image.setAttribute("tabindex", "0");
+        image.setAttribute("role", "button");
+        image.setAttribute("aria-label", "Open photo in larger view");
+        image.addEventListener("click", () => openPhotoModal(image));
+        image.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openPhotoModal(image);
+          }
+        });
+      });
+
+      photoModalClose.addEventListener("click", closePhotoModal);
+      photoModal.addEventListener("click", (event) => {
+        if (event.target === photoModal) {
+          closePhotoModal();
+        }
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && photoModal.classList.contains("is-open")) {
+          closePhotoModal();
+        }
+      });
     </script>
   </body>
 </html>

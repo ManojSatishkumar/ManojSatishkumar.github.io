@@ -280,6 +280,39 @@
     border-bottom: 2px dashed #5e35b1;
   }
 
+  .intro-store-visit-link {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 10px 14px;
+    border: 1px solid rgba(0, 113, 206, 0.22);
+    border-radius: 999px;
+    background: #ffffff;
+    color: #0071ce;
+    font-size: 0.92rem;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 10px 24px rgba(0, 113, 206, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .intro-store-visit-link::after {
+    content: "↗";
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+
+  .intro-store-visit-link:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 113, 206, 0.42);
+    box-shadow: 0 14px 30px rgba(0, 113, 206, 0.12);
+    color: #005da8;
+    text-decoration: none;
+  }
+
   .intro-quote-card {
     background: rgba(255, 255, 255, 0.9);
     padding: 22px 24px;
@@ -513,6 +546,7 @@
               and <strong>Security</strong> teams.
             </p>
           </div>
+          <a class="intro-store-visit-link" href="/walmart-us-visit/">Read US store visit story</a>
         </div>
 
         <!-- Philosophy -->
