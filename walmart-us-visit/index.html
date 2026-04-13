@@ -291,6 +291,50 @@
         font-size: 0.88rem;
       }
 
+      .hero-author {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px;
+        background: rgba(255, 255, 255, 0.96);
+        border-top: 1px solid rgba(0, 113, 206, 0.18);
+      }
+
+      .hero-author img {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #ffffff;
+        box-shadow: 0 6px 18px rgba(0, 23, 52, 0.18);
+        flex: 0 0 auto;
+      }
+
+      .hero-author-label {
+        color: var(--wm-blue);
+        font-size: 0.74rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      .hero-author-name {
+        margin-top: 3px;
+        color: #102a43;
+        font-size: 1rem;
+        font-weight: 900;
+        line-height: 1.2;
+      }
+
+      .hero-author-note {
+        margin-top: 3px;
+        color: #526476;
+        font-size: 0.86rem;
+        font-weight: 600;
+        line-height: 1.35;
+      }
+
       .article-shell {
         max-width: 1160px;
         margin: 0 auto;
@@ -715,6 +759,16 @@
             Photo 01: One of the Walmart stores I visited during the holiday
             week.
           </figcaption>
+          <div class="hero-author">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" />
+            <div>
+              <div class="hero-author-label">Author</div>
+              <div class="hero-author-name">Manoj Satishkumar</div>
+              <div class="hero-author-note">
+                I wrote this field note from my Walmart US holiday store visit.
+              </div>
+            </div>
+          </div>
         </figure>
       </div>
     </header>
