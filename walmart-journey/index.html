@@ -650,6 +650,90 @@
         background: #ffffff;
         border: 1px solid rgba(0, 113, 206, 0.12);
         box-shadow: 0 18px 46px rgba(0, 55, 110, 0.08);
+        cursor: pointer;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .award-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 24px 56px rgba(0, 55, 110, 0.14);
+      }
+
+      /* ── Image Lightbox Modal ── */
+      .lightbox-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 20, 50, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      .lightbox-modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .lightbox-modal img {
+        max-width: 90vw;
+        max-height: 88vh;
+        border-radius: 18px;
+        box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+        transform: scale(0.92);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .lightbox-modal.active img {
+        transform: scale(1);
+      }
+
+      .lightbox-caption {
+        position: absolute;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        text-align: center;
+        background: rgba(0, 20, 50, 0.6);
+        padding: 10px 28px;
+        border-radius: 999px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        white-space: nowrap;
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 22px;
+        right: 28px;
+        width: 48px;
+        height: 48px;
+        border: none;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+        font-size: 1.3rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s ease, transform 0.2s ease;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+
+      .lightbox-close:hover {
+        background: rgba(255, 255, 255, 0.28);
+        transform: scale(1.08);
       }
 
       .award-card img {
@@ -1377,17 +1461,17 @@
             </div>
             <div class="award-card">
               <img
-                src="/images/badges/Disruptor_Date Issued  -  March 11, 2024.jpg"
-                alt="Disruptor badge"
+                src="/images/achievements/Bravo award - Jan 2024.jpg"
+                alt="Bravo award January 2024"
               />
-              <span>Disruptor badge</span>
+              <span>Bravo Award - Engineering excellence</span>
             </div>
             <div class="award-card">
               <img
-                src="/images/badges/Space Creator_Date Issued  -  March 15, 2024.jpg"
-                alt="Space Creator badge"
+                src="/images/achievements/Bravo award - Jan 2025.jpg"
+                alt="Bravo award January 2025"
               />
-              <span>Space Creator badge</span>
+              <span>Bravo Award - Continued impact</span>
             </div>
           </div>
         </div>
@@ -1549,6 +1633,15 @@
       </section>
     </main>
 
+    <!-- ── Image Lightbox Modal ── -->
+    <div class="lightbox-modal" id="lightbox-modal" onclick="closeLightbox(event)">
+      <button class="lightbox-close" onclick="closeLightbox(event)" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
+      <img id="lightbox-img" src="" alt="" />
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
     <div id="footer"></div>
     <button
       class="back-to-top"
@@ -1599,6 +1692,38 @@
       document
         .querySelectorAll(".reveal")
         .forEach((element) => observer.observe(element));
+
+      // ── Lightbox logic ──
+      const lightboxModal = document.getElementById("lightbox-modal");
+      const lightboxImg = document.getElementById("lightbox-img");
+      const lightboxCaption = document.getElementById("lightbox-caption");
+
+      document.querySelectorAll(".award-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          const img = card.querySelector("img");
+          const caption = card.querySelector("span");
+          if (img) {
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt || "";
+            lightboxCaption.textContent = caption ? caption.textContent : "";
+            lightboxModal.classList.add("active");
+            document.body.style.overflow = "hidden";
+          }
+        });
+      });
+
+      function closeLightbox(e) {
+        if (e.target === lightboxImg) return;
+        lightboxModal.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightboxModal.classList.contains("active")) {
+          lightboxModal.classList.remove("active");
+          document.body.style.overflow = "";
+        }
+      });
     </script>
   </body>
 </html>
