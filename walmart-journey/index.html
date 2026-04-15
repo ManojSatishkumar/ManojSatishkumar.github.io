@@ -772,6 +772,132 @@
         line-height: 1.85;
       }
 
+      /* ── About My Team section ── */
+      .team-section-card {
+        border-radius: 32px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #ffffff, #f0f7ff);
+        border: 1px solid var(--line);
+        box-shadow: 0 28px 80px rgba(0, 55, 110, 0.1);
+      }
+
+      .team-section-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .team-image-wrapper {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .team-image-wrapper img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .team-image-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 22px 28px;
+        background: linear-gradient(0deg, rgba(0, 36, 76, 0.82), transparent);
+        color: #ffffff;
+        font-size: 0.88rem;
+        font-weight: 750;
+        letter-spacing: 0.03em;
+      }
+
+      .team-story-content {
+        padding: 42px 46px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .team-story-content h2 {
+        color: var(--wm-blue-deep);
+        font-size: clamp(1.7rem, 3vw, 2.4rem);
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+        margin: 0 0 18px;
+      }
+
+      .team-story-content p {
+        color: #3f4b5a;
+        font-size: 1.03rem;
+        line-height: 1.9;
+        margin: 0 0 16px;
+      }
+
+      .team-stats-row {
+        display: flex;
+        gap: 18px;
+        margin-top: 22px;
+        flex-wrap: wrap;
+      }
+
+      .team-stat {
+        padding: 16px 20px;
+        border-radius: 18px;
+        background: rgba(0, 113, 206, 0.07);
+        border: 1px solid rgba(0, 113, 206, 0.13);
+        flex: 1;
+        min-width: 120px;
+      }
+
+      .team-stat strong {
+        display: block;
+        color: var(--wm-blue);
+        font-size: 1.45rem;
+        line-height: 1;
+        font-weight: 900;
+      }
+
+      .team-stat span {
+        display: block;
+        margin-top: 6px;
+        color: #4f5d6d;
+        font-size: 0.78rem;
+        font-weight: 750;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .team-story-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 18px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, rgba(0, 113, 206, 0.1), rgba(255, 194, 32, 0.12));
+        border: 1px solid rgba(0, 113, 206, 0.18);
+        color: var(--wm-blue-dark);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+        width: fit-content;
+      }
+
+      .team-story-badge i {
+        color: var(--wm-blue);
+      }
+
+      @media (max-width: 640px) {
+        .team-story-content {
+          padding: 26px 22px;
+        }
+
+        .team-stats-row {
+          flex-direction: column;
+        }
+      }
+
       .reveal {
         opacity: 0;
         transform: translateY(24px);
@@ -1334,6 +1460,53 @@
               src="/images/walmart-us-visit/16.jpg"
               alt="Walmart store visit moment"
             />
+          </div>
+        </div>
+      </section>
+
+      <!-- ── About My Team ── -->
+      <section class="section" id="my-team">
+        <div class="journey-shell">
+          <div class="section-eyebrow reveal">
+            <i class="fas fa-users"></i>
+            About my team
+          </div>
+          <h2 class="section-title reveal">
+            The people behind millions of customer communications.
+          </h2>
+
+          <div class="team-section-card reveal">
+            <div class="team-section-grid">
+              <div class="team-image-wrapper">
+                <img
+                  src="/images/walmart/IMG_7505 copy.jpg"
+                  alt="Manoj's team at Walmart Global Tech — the communications platform team"
+                />
+                <div class="team-image-overlay">
+                  <i class="fas fa-map-marker-alt"></i> &nbsp;Walmart Global Tech, India
+                </div>
+              </div>
+
+              <div class="team-story-content">
+                <div class="team-story-badge">
+                  <i class="fas fa-satellite-dish"></i>
+                  Communications Platform Team
+                </div>
+                <h2>We send the messages that millions of customers trust.</h2>
+                <p>
+                  Behind every order confirmation, delivery update, promotional offer, and transactional alert that reaches a Walmart.com customer, there is a platform and behind that platform, there is this team. We are the communications engineering group responsible for designing, building, and operating the systems that power millions of messages every single day across email, SMS, push notifications, WhatsApp, voice, and in-app channels.
+                </p>
+                <p>
+                  Our work is invisible when done right. A customer places an order and receives a confirmation within seconds. A delivery driver is dispatched and the customer gets a live update. A price drop happens on a wish-listed item and a personalised notification lands on their phone. Each of these moments is orchestrated by the platform our team built and continuously evolves.
+                </p>
+                <p>
+                  What makes this team special is not just the technical scale, it is the ownership, collaboration, and relentless focus on reliability. We build multi-tenant systems that serve hundreds of internal teams, create no-code tooling that empowers non-engineers to author and manage templates, and maintain guardrails that ensure every communication meets Walmart's quality and compliance standards.
+                </p>
+                <p>
+                  This is the team I am proud to be a part of. Together, we turn complex communication workflows into seamless customer experiences at Walmart scale.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
