@@ -36,6 +36,8 @@ window.albumCatalog = [
       "/images/walmart/IMG_6557 copy.jpg",
       "/images/walmart/IMG_6561 copy.jpg",
       "/images/walmart/IMG_7907 copy.jpg",
+      "/images/walmart/walmart-lwd.jpeg",
+      "/images/walmart/walmart-ptp.jpeg",
     ],
   },
   {

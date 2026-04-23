@@ -252,6 +252,7 @@
         background: rgba(255, 255, 255, 0.13);
         box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
         backdrop-filter: blur(14px);
+        cursor: zoom-in;
       }
 
       .profile-note img.profile {
@@ -463,6 +464,10 @@
 
       .memory-collage--strip {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .memory-collage--single {
+        grid-template-columns: 1fr;
       }
 
       .memory-photo {
@@ -901,7 +906,7 @@
           <aside class="profile-note reveal" aria-label="Profile note">
             <img
               class="profile"
-              src="/images/me_square.png"
+              src="/images/walmart/walmart-lwd.jpeg"
               alt="Manoj Satishkumar"
             />
             <div class="profile-caption">
@@ -989,7 +994,9 @@
                   src="/images/walmart/IMG_7505 copy.jpg"
                   alt="Walmart colleagues together during a team outing"
                 />
-                <figcaption>The people who made the journey unforgettable</figcaption>
+                <figcaption>
+                  The people who made the journey unforgettable
+                </figcaption>
               </figure>
               <figure class="memory-photo">
                 <img
@@ -1077,6 +1084,21 @@
               of what we built, but I am even more proud of how we built it
               together.
             </p>
+
+            <div
+              class="memory-collage memory-collage--single"
+              aria-label="Walmart workplace memory"
+            >
+              <figure class="memory-photo">
+                <img
+                  src="/images/walmart/walmart-ptp.jpeg"
+                  alt="Walmart Prestige Tech Park, Bellandur"
+                />
+                <figcaption>
+                  Walmart office - Prestige Tech Park, Bangalore
+                </figcaption>
+              </figure>
+            </div>
 
             <p>
               Leaving is emotional, but it is also beautiful in its own way. It
@@ -1218,6 +1240,19 @@
         photo.addEventListener("click", () => {
           const image = photo.querySelector("img");
           const caption = photo.querySelector("figcaption");
+          if (!image) return;
+          openLightbox(
+            image.src,
+            image.alt,
+            caption ? caption.textContent.trim() : "",
+          );
+        });
+      });
+
+      document.querySelectorAll(".profile-note").forEach((card) => {
+        card.addEventListener("click", () => {
+          const image = card.querySelector("img.profile");
+          const caption = card.querySelector(".profile-caption p");
           if (!image) return;
           openLightbox(
             image.src,
