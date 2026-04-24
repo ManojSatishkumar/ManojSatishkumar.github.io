@@ -1,0 +1,1298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Internationalization Project | Manoj Satishkumar</title>
+    <meta
+      name="description"
+      content="A public-safe case study about Manoj Satishkumar's contribution to designing an internationalization system for a large-scale communication template platform."
+    />
+    <meta
+      name="keywords"
+      content="internationalization project, i18n architecture, localization, template platform, frontend architecture, Manoj Satishkumar"
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://manojsatishkumar.com/projects/Internationalization/"
+    />
+    <meta name="author" content="Manoj Satishkumar" />
+
+    <meta
+      property="og:title"
+      content="Internationalization Project | Manoj Satishkumar"
+    />
+    <meta
+      property="og:description"
+      content="How a single-language template workflow evolved into a multilingual authoring model without exposing internal implementation details."
+    />
+    <meta
+      property="og:url"
+      content="https://manojsatishkumar.com/projects/Internationalization/"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Manoj Satishkumar" />
+    <meta
+      property="og:image"
+      content="https://manojsatishkumar.com/images/msk-main-banner.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="shortcut icon" href="/images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,760&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
+
+    <style>
+      :root {
+        --i18n-ink: #122033;
+        --i18n-muted: #5f7084;
+        --i18n-line: rgba(25, 89, 160, 0.16);
+        --i18n-blue: #1769d8;
+        --i18n-teal: #00a6a6;
+        --i18n-gold: #f5b83d;
+        --i18n-coral: #f06b5f;
+        --i18n-paper: #ffffff;
+        --i18n-soft: #f5f9ff;
+        --serif: "Source Serif 4", Georgia, serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #f5f9ff 0%,
+          #ffffff 34%,
+          #f7fbfa 68%,
+          #ffffff 100%
+        );
+        color: var(--i18n-ink);
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      @media (max-width: 1023px) {
+        #desktop-nav-bar {
+          opacity: 1 !important;
+        }
+
+        #desktop-nav-bar .mobile-navbar {
+          display: flex !important;
+          transform: translateY(0) !important;
+          opacity: 1 !important;
+        }
+      }
+
+      .reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10000;
+        width: 0%;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--i18n-blue),
+          var(--i18n-teal),
+          var(--i18n-gold)
+        );
+      }
+
+      .nav-spacer {
+        height: 76px;
+      }
+
+      .page-shell {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      .project-hero {
+        position: relative;
+        min-height: calc(100vh - 76px);
+        display: grid;
+        align-items: center;
+        overflow: hidden;
+        color: #fff;
+        background:
+          linear-gradient(
+            120deg,
+            rgba(13, 57, 116, 0.98),
+            rgba(12, 111, 134, 0.92) 58%,
+            rgba(245, 184, 61, 0.88)
+          ),
+          url("/images/msk-main-banner.jpg") center/cover;
+      }
+
+      .project-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(6, 23, 48, 0.7), rgba(6, 72, 91, 0.22)),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(255, 255, 255, 0.28),
+            transparent 24%
+          );
+      }
+
+      .project-hero::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 10px;
+        background: repeating-linear-gradient(
+          90deg,
+          var(--i18n-blue) 0 34px,
+          #ffffff 34px 45px,
+          var(--i18n-teal) 45px 78px,
+          var(--i18n-gold) 78px 105px
+        );
+      }
+
+      .hero-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
+        gap: 42px;
+        align-items: center;
+        padding: 72px 24px 88px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        width: fit-content;
+        padding: 9px 13px;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .hero-eyebrow {
+        background: rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.26);
+      }
+
+      .project-hero h1 {
+        max-width: 830px;
+        margin: 24px 0 20px;
+        font-size: 100px;
+        line-height: 1.1;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+      }
+
+      .hero-lead {
+        max-width: 720px;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.92);
+        font-size: clamp(1.05rem, 1.55vw, 1.36rem);
+        line-height: 1.75;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .article-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 18px;
+        border-radius: 999px;
+        font-size: 0.92rem;
+        font-weight: 850;
+        text-decoration: none;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .article-button:hover {
+        transform: translateY(-2px);
+        text-decoration: none;
+      }
+
+      .button-primary {
+        background: #ffffff;
+        color: #114d8b;
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.2);
+      }
+
+      .button-secondary {
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .hero-card {
+        padding: 26px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+        backdrop-filter: blur(16px);
+      }
+
+      .translation-widget {
+        padding: 18px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.96);
+        color: var(--i18n-ink);
+      }
+
+      .widget-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .widget-dots {
+        display: flex;
+        gap: 6px;
+      }
+
+      .widget-dots span {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--i18n-line);
+      }
+
+      .widget-dots span:nth-child(1) {
+        background: var(--i18n-coral);
+      }
+
+      .widget-dots span:nth-child(2) {
+        background: var(--i18n-gold);
+      }
+
+      .widget-dots span:nth-child(3) {
+        background: var(--i18n-teal);
+      }
+
+      .language-tabs {
+        display: flex;
+        gap: 8px;
+      }
+
+      .language-tabs span {
+        padding: 7px 10px;
+        border-radius: 999px;
+        color: var(--i18n-muted);
+        background: #eef5ff;
+        font-size: 0.75rem;
+        font-weight: 800;
+      }
+
+      .language-tabs span.active {
+        background: var(--i18n-blue);
+        color: #fff;
+      }
+
+      .template-preview {
+        display: grid;
+        gap: 12px;
+      }
+
+      .preview-block {
+        min-height: 62px;
+        padding: 14px;
+        border-radius: 12px;
+        background: #f6f9fc;
+        border: 1px solid #e4eef8;
+      }
+
+      .preview-line {
+        height: 10px;
+        margin-bottom: 10px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #b8c8dc, #dce7f3);
+      }
+
+      .preview-line.short {
+        width: 62%;
+      }
+
+      .preview-line.medium {
+        width: 82%;
+      }
+
+      .placeholder-chip {
+        display: inline-flex;
+        padding: 5px 9px;
+        border-radius: 999px;
+        color: #075f5f;
+        background: #dff8f5;
+        font-size: 0.72rem;
+        font-weight: 850;
+      }
+
+      .section {
+        padding: 84px 0;
+      }
+
+      .section:nth-of-type(even) {
+        background: rgba(245, 249, 255, 0.72);
+      }
+
+      .section-eyebrow {
+        color: var(--i18n-blue);
+        background: rgba(23, 105, 216, 0.1);
+        border: 1px solid rgba(23, 105, 216, 0.16);
+      }
+
+      .section-title {
+        max-width: 900px;
+        margin: 18px 0;
+        font-size: clamp(2.2rem, 4.2vw, 4.8rem);
+        line-height: 0.98;
+        font-weight: 900;
+        letter-spacing: -0.055em;
+      }
+
+      .section-intro {
+        max-width: 860px;
+        color: var(--i18n-muted);
+        font-size: clamp(1.04rem, 1.45vw, 1.25rem);
+        line-height: 1.85;
+      }
+
+      .metrics-grid,
+      .decision-grid,
+      .contribution-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 34px;
+      }
+
+      .metric-card,
+      .decision-card,
+      .contribution-card,
+      .story-card,
+      .principle-card {
+        background: var(--i18n-paper);
+        border: 1px solid var(--i18n-line);
+        border-radius: 16px;
+        box-shadow: 0 16px 38px rgba(29, 60, 95, 0.08);
+      }
+
+      .metric-card {
+        padding: 22px;
+      }
+
+      .metric-card strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--i18n-blue);
+        font-size: 2rem;
+        font-weight: 900;
+      }
+
+      .metric-card span {
+        color: var(--i18n-muted);
+        line-height: 1.65;
+      }
+
+      .story-layout {
+        display: grid;
+        grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1fr);
+        gap: 34px;
+        align-items: start;
+      }
+
+      .story-card {
+        position: sticky;
+        top: 98px;
+        overflow: hidden;
+      }
+
+      .story-visual {
+        min-height: 280px;
+        padding: 24px;
+        background:
+          linear-gradient(
+            135deg,
+            rgba(23, 105, 216, 0.92),
+            rgba(0, 166, 166, 0.9)
+          ),
+          radial-gradient(
+            circle at 80% 10%,
+            rgba(245, 184, 61, 0.7),
+            transparent 32%
+          );
+      }
+
+      .globe {
+        position: relative;
+        width: 220px;
+        height: 220px;
+        margin: 8px auto 0;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        background:
+          repeating-linear-gradient(
+            90deg,
+            transparent 0 30px,
+            rgba(255, 255, 255, 0.17) 30px 32px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            transparent 0 34px,
+            rgba(255, 255, 255, 0.16) 34px 36px
+          );
+      }
+
+      .globe::before,
+      .globe::after {
+        content: "";
+        position: absolute;
+        inset: 34px;
+        border: 2px solid rgba(255, 255, 255, 0.28);
+        border-radius: 50%;
+      }
+
+      .globe::after {
+        inset: 74px;
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      .story-card-content {
+        padding: 24px;
+      }
+
+      .story-card h2,
+      .story-card h3,
+      .decision-card h3,
+      .contribution-card h3,
+      .principle-card h3 {
+        margin: 0 0 10px;
+        font-family: var(--serif);
+        font-weight: 760;
+        line-height: 1.15;
+      }
+
+      .story-card p,
+      .decision-card p,
+      .contribution-card p,
+      .principle-card p {
+        margin: 0;
+        color: var(--i18n-muted);
+        line-height: 1.75;
+      }
+
+      .article-copy {
+        color: var(--i18n-ink);
+        font-size: clamp(1.16rem, 1.55vw, 1.32rem);
+        line-height: 1.9;
+      }
+
+      .article-copy p {
+        margin: 0 0 1.35em;
+        font-size: medium;
+      }
+
+      .feature-panel {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1fr);
+        gap: 34px;
+        align-items: center;
+        margin-top: 36px;
+        padding: 30px;
+        border: 1px solid var(--i18n-line);
+        border-radius: 20px;
+        background: #fff;
+        box-shadow: 0 18px 48px rgba(29, 60, 95, 0.09);
+      }
+
+      .feature-panel h2 {
+        margin: 0 0 14px;
+        font-size: clamp(1.8rem, 2.9vw, 3.2rem);
+        line-height: 1;
+        font-weight: 900;
+        letter-spacing: -0.045em;
+      }
+
+      .feature-panel p {
+        color: var(--i18n-muted);
+        line-height: 1.8;
+      }
+
+      .flow-board {
+        display: grid;
+        grid-template-columns: 1fr 52px 1fr 52px 1fr;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .flow-node {
+        min-height: 132px;
+        padding: 18px;
+        border-radius: 16px;
+        background: #f7fbff;
+        border: 1px solid #dbeaf8;
+      }
+
+      .flow-node i {
+        display: inline-flex;
+        width: 38px;
+        height: 38px;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 12px;
+        border-radius: 12px;
+        color: #fff;
+        background: var(--i18n-blue);
+      }
+
+      .flow-node h3 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+        font-weight: 900;
+      }
+
+      .flow-node p {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.55;
+      }
+
+      .flow-arrow {
+        text-align: center;
+        color: var(--i18n-teal);
+        font-size: 1.7rem;
+      }
+
+      .decision-card,
+      .contribution-card,
+      .principle-card {
+        padding: 24px;
+      }
+
+      .decision-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .decision-card {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .decision-card::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto;
+        height: 6px;
+        background: var(--i18n-coral);
+      }
+
+      .decision-card.selected::before {
+        background: linear-gradient(
+          90deg,
+          var(--i18n-blue),
+          var(--i18n-teal),
+          var(--i18n-gold)
+        );
+      }
+
+      .decision-label {
+        display: inline-flex;
+        margin-bottom: 16px;
+        padding: 7px 10px;
+        border-radius: 999px;
+        color: #7b2b25;
+        background: #fff1ef;
+        font-size: 0.75rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .selected .decision-label {
+        color: #075f5f;
+        background: #ddf8f5;
+      }
+
+      .contribution-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .contribution-card i,
+      .principle-card i {
+        display: inline-flex;
+        width: 46px;
+        height: 46px;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        border-radius: 14px;
+        color: #fff;
+        background: linear-gradient(135deg, var(--i18n-blue), var(--i18n-teal));
+      }
+
+      .principles {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 34px;
+      }
+
+      .system-map {
+        margin-top: 34px;
+        padding: 28px;
+        border-radius: 20px;
+        color: #fff;
+        background: linear-gradient(135deg, #0d3974, #087b8c);
+        box-shadow: 0 24px 58px rgba(13, 57, 116, 0.22);
+      }
+
+      .map-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .map-card {
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .map-card strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .map-card span {
+        color: rgba(255, 255, 255, 0.82);
+        line-height: 1.65;
+      }
+
+      .conclusion {
+        position: relative;
+        overflow: hidden;
+        color: #fff;
+        background:
+          linear-gradient(
+            120deg,
+            rgba(13, 57, 116, 0.97),
+            rgba(23, 105, 216, 0.9),
+            rgba(0, 166, 166, 0.9)
+          ),
+          url("/images/msk-banner.jpg") center/cover;
+      }
+
+      .conclusion::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(4, 23, 48, 0.66),
+          rgba(4, 23, 48, 0.18)
+        );
+      }
+
+      .conclusion .page-shell {
+        position: relative;
+        z-index: 1;
+      }
+
+      .conclusion h2 {
+        max-width: 950px;
+        margin: 18px 0;
+        font-size: clamp(2.3rem, 5vw, 5.5rem);
+        line-height: 0.98;
+        font-weight: 900;
+        letter-spacing: -0.055em;
+      }
+
+      .conclusion p {
+        max-width: 880px;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: clamp(1.08rem, 1.5vw, 1.28rem);
+        line-height: 1.85;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 980px) {
+        .hero-grid,
+        .story-layout,
+        .feature-panel {
+          grid-template-columns: 1fr;
+        }
+
+        .story-card {
+          position: static;
+        }
+
+        .metrics-grid,
+        .contribution-grid,
+        .principles {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 700px) {
+        .nav-spacer {
+          height: 62px;
+        }
+
+        .project-hero {
+          min-height: auto;
+        }
+
+        .hero-grid {
+          padding: 54px 18px 74px;
+        }
+
+        .section {
+          padding: 58px 0;
+        }
+
+        .page-shell {
+          padding: 0 18px;
+        }
+
+        .metrics-grid,
+        .decision-grid,
+        .contribution-grid,
+        .principles,
+        .map-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .flow-board {
+          grid-template-columns: 1fr;
+        }
+
+        .flow-arrow {
+          transform: rotate(90deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reading-progress" id="reading-progress"></div>
+    <div id="desktop-nav-bar"></div>
+
+    <main>
+      <section class="project-hero">
+        <div class="page-shell hero-grid">
+          <div class="reveal">
+            <div class="eyebrow hero-eyebrow">
+              <i class="fas fa-globe"></i>
+              Project case study
+            </div>
+            <h1>Designing multilingual template system.</h1>
+            <p class="hero-lead">
+              This is the public-safe story of an internationalization project I
+              led from the technical design side: turning a single-language
+              authoring experience into a multilingual platform capability
+              without exposing internal system names, vendor names, or sensitive
+              implementation details.
+            </p>
+            <div class="hero-actions">
+              <a class="article-button button-primary" href="#problem">
+                Read the story <i class="fas fa-arrow-down"></i>
+              </a>
+              <a class="article-button button-secondary" href="/#projects">
+                Back to projects <i class="fas fa-layer-group"></i>
+              </a>
+            </div>
+          </div>
+
+          <aside class="hero-card reveal">
+            <div
+              class="translation-widget"
+              aria-label="Abstract multilingual template editor visual"
+            >
+              <div class="widget-topbar">
+                <div class="widget-dots">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="language-tabs">
+                  <span class="active">EN</span>
+                  <span>ES</span>
+                  <span>FR</span>
+                </div>
+              </div>
+              <div class="template-preview">
+                <div class="preview-block">
+                  <div class="preview-line medium"></div>
+                  <div class="preview-line short"></div>
+                  <span class="placeholder-chip">dynamic value</span>
+                </div>
+                <div class="preview-block">
+                  <div class="preview-line"></div>
+                  <div class="preview-line medium"></div>
+                </div>
+                <div class="preview-block">
+                  <div class="preview-line short"></div>
+                  <span class="placeholder-chip">localized content</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="problem">
+        <div class="page-shell">
+          <div class="eyebrow section-eyebrow reveal">
+            <i class="fas fa-compass"></i>
+            The real problem
+          </div>
+          <h2 class="section-title reveal">
+            Translation was not the hard part. Control was.
+          </h2>
+          <p class="section-intro reveal">
+            The platform already allowed teams to create customer communication
+            templates. The challenge was that multilingual content was becoming
+            a product and architecture problem, not just a copywriting problem.
+            Teams needed localized messages, but the platform also needed
+            consistency, reviewability, publishing discipline, and a way to keep
+            variants tied to one logical template.
+          </p>
+
+          <div class="metrics-grid">
+            <div class="metric-card reveal">
+              <strong>1</strong>
+              <span
+                >Logical template needed to support multiple language
+                variants.</span
+              >
+            </div>
+            <div class="metric-card reveal">
+              <strong>Many</strong>
+              <span
+                >Teams needed a repeatable model instead of custom work for each
+                use case.</span
+              >
+            </div>
+            <div class="metric-card reveal">
+              <strong>Zero</strong>
+              <span
+                >Room for accidental mixed-language messages in customer-facing
+                communication.</span
+              >
+            </div>
+            <div class="metric-card reveal">
+              <strong>Clear</strong>
+              <span
+                >Ownership, review, preview, and publishing rules had to be
+                designed up front.</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="page-shell story-layout">
+          <aside class="story-card reveal">
+            <div class="story-visual">
+              <div class="globe" aria-hidden="true"></div>
+            </div>
+            <div class="story-card-content">
+              <h2>Why it mattered</h2>
+              <p>
+                A communication template is small on screen, but large in
+                consequence. If language handling is messy, the customer sees
+                the mess immediately.
+              </p>
+            </div>
+          </aside>
+
+          <div class="article-copy">
+            <p class="reveal">
+              Internationalization work can look deceptively simple from the
+              outside. Add a language selector. Store translated text. Show the
+              right version. Done.
+            </p>
+            <p class="reveal">
+              In a real platform, that view breaks quickly. A template may have
+              dynamic values, required legal text, reusable components, preview
+              modes, approvals, publishing rules, channel constraints, and
+              downstream delivery expectations. Once every one of those pieces
+              needs to behave correctly across languages, the project becomes a
+              design problem.
+            </p>
+            <p class="reveal">
+              My contribution was to prepare the technical design document and
+              shape the implementation direction. I documented the current
+              limitation, compared solution approaches, drove the workflow
+              thinking, and helped convert a broad product ask into a platform
+              design that engineers and product stakeholders could discuss,
+              estimate, and build.
+            </p>
+            <p class="reveal">
+              The public version of that design is simple: keep the authoring
+              model understandable, keep the localized variants connected, and
+              make it difficult for teams to publish an incomplete language
+              experience by accident.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="page-shell">
+          <div class="eyebrow section-eyebrow reveal">
+            <i class="fas fa-route"></i>
+            Design direction
+          </div>
+          <h2 class="section-title reveal">
+            Two paths were possible. Only one scaled well.
+          </h2>
+          <p class="section-intro reveal">
+            The core design decision was whether each language should become an
+            independent template or whether a single template should own
+            multiple localized variants. Both models can work, but they create
+            very different long-term behavior.
+          </p>
+
+          <div class="decision-grid">
+            <div class="decision-card reveal">
+              <span class="decision-label">Rejected path</span>
+              <h3>Separate template per language</h3>
+              <p>
+                This approach is easier to understand initially, but it creates
+                duplicate maintenance, fragmented ownership, inconsistent
+                publishing, and more chances for variants to drift apart over
+                time.
+              </p>
+            </div>
+            <div class="decision-card selected reveal">
+              <span class="decision-label">Chosen path</span>
+              <h3>One template with localized variants</h3>
+              <p>
+                This model keeps all language versions tied to one logical
+                template. It supports cleaner previews, stronger governance, and
+                a better authoring experience as more languages are introduced.
+              </p>
+            </div>
+          </div>
+
+          <div class="feature-panel reveal">
+            <div>
+              <h2>The workflow had to feel calm.</h2>
+              <p>
+                The product should not make authors think like database
+                designers. The interface needed a predictable flow: create the
+                base template, add a localized version, review missing content,
+                preview the customer experience, and publish only when the
+                required pieces are ready.
+              </p>
+              <p>
+                That calmness was the real architecture goal. Behind the scenes,
+                the system could enforce structure. On the screen, the user
+                should feel guided.
+              </p>
+            </div>
+
+            <div
+              class="flow-board"
+              aria-label="Abstract localization workflow diagram"
+            >
+              <div class="flow-node">
+                <i class="fas fa-file-alt"></i>
+                <h3>Base template</h3>
+                <p>Authors create the canonical structure once.</p>
+              </div>
+              <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+              <div class="flow-node">
+                <i class="fas fa-language"></i>
+                <h3>Language variant</h3>
+                <p>Localized copy is added within the same logical template.</p>
+              </div>
+              <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+              <div class="flow-node">
+                <i class="fas fa-check-circle"></i>
+                <h3>Governed publish</h3>
+                <p>Preview and validation protect the customer experience.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="page-shell">
+          <div class="eyebrow section-eyebrow reveal">
+            <i class="fas fa-user-gear"></i>
+            My contribution
+          </div>
+          <h2 class="section-title reveal">
+            I turned ambiguity into a buildable design.
+          </h2>
+          <p class="section-intro reveal">
+            My role was not only to implement screens. I prepared the technical
+            design document, mapped trade-offs, and helped the team reason about
+            how authoring, validation, preview, and publishing should evolve for
+            multilingual communication.
+          </p>
+
+          <div class="contribution-grid">
+            <div class="contribution-card reveal">
+              <i class="fas fa-pen-ruler"></i>
+              <h3>Technical design ownership</h3>
+              <p>
+                Wrote the design narrative, captured the problem statement,
+                compared approaches, and converted the chosen direction into a
+                practical workflow.
+              </p>
+            </div>
+            <div class="contribution-card reveal">
+              <i class="fas fa-layer-group"></i>
+              <h3>Authoring model</h3>
+              <p>
+                Helped define how a base template and its localized variants
+                should relate, so authors could work without creating duplicate
+                template sprawl.
+              </p>
+            </div>
+            <div class="contribution-card reveal">
+              <i class="fas fa-shield-halved"></i>
+              <h3>Guardrails and validation</h3>
+              <p>
+                Focused on the product rules needed to prevent partially
+                translated or mixed-language content from reaching customers.
+              </p>
+            </div>
+            <div class="contribution-card reveal">
+              <i class="fas fa-eye"></i>
+              <h3>Preview experience</h3>
+              <p>
+                Considered how teams would verify each localized version before
+                publishing, including dynamic placeholders and channel-specific
+                rendering.
+              </p>
+            </div>
+            <div class="contribution-card reveal">
+              <i class="fas fa-people-arrows"></i>
+              <h3>Cross-functional alignment</h3>
+              <p>
+                Created a document that product, design, engineering, and
+                leadership stakeholders could use to discuss scope and sequence.
+              </p>
+            </div>
+            <div class="contribution-card reveal">
+              <i class="fas fa-seedling"></i>
+              <h3>Future-ready foundation</h3>
+              <p>
+                Designed the first language rollout as a foundation for more
+                locales later, instead of treating it as a one-time patch.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="page-shell">
+          <div class="eyebrow section-eyebrow reveal">
+            <i class="fas fa-sitemap"></i>
+            Architecture thinking
+          </div>
+          <h2 class="section-title reveal">
+            The cleanest UI was backed by strict mental models.
+          </h2>
+          <p class="section-intro reveal">
+            The public-safe architecture can be described with four ideas:
+            stable template identity, localized content variants, validation
+            before publishing, and consistent rendering across communication
+            channels.
+          </p>
+
+          <div class="system-map reveal">
+            <h3>Public-safe system map</h3>
+            <div class="map-grid">
+              <div class="map-card">
+                <strong>Template identity</strong>
+                <span
+                  >One logical template remains the source of structure and
+                  ownership.</span
+                >
+              </div>
+              <div class="map-card">
+                <strong>Localized variants</strong>
+                <span
+                  >Language-specific content is attached as a variant, not
+                  scattered as unrelated templates.</span
+                >
+              </div>
+              <div class="map-card">
+                <strong>Authoring checks</strong>
+                <span
+                  >Required fields, placeholders, and preview states are
+                  validated before release.</span
+                >
+              </div>
+              <div class="map-card">
+                <strong>Delivery readiness</strong>
+                <span
+                  >The selected language version is prepared for customer-facing
+                  channels in a consistent way.</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="principles">
+            <div class="principle-card reveal">
+              <i class="fas fa-link"></i>
+              <h3>Keep variants connected</h3>
+              <p>
+                A localized version should never feel like a forgotten copy. It
+                should stay attached to the template it represents.
+              </p>
+            </div>
+            <div class="principle-card reveal">
+              <i class="fas fa-ban"></i>
+              <h3>Block incomplete states</h3>
+              <p>
+                The safest multilingual system is one that makes invalid states
+                difficult to publish.
+              </p>
+            </div>
+            <div class="principle-card reveal">
+              <i class="fas fa-expand-arrows-alt"></i>
+              <h3>Design for the next language</h3>
+              <p>
+                The first rollout should teach the platform how to support the
+                second, third, and fourth rollout more gracefully.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section conclusion">
+        <div class="page-shell">
+          <div class="eyebrow hero-eyebrow reveal">
+            <i class="fas fa-flag-checkered"></i>
+            Conclusion
+          </div>
+          <h2 style="color: white" class="reveal">
+            Internationalization is empathy disguised as architecture.
+          </h2>
+          <p class="reveal">
+            The most interesting part of this project was not adding another
+            language. It was designing respect into the platform. Respect for
+            customers who should receive communication in a language they are
+            comfortable with. Respect for authors who need a clear workflow.
+            Respect for engineers who need a maintainable model. And respect for
+            the business, which needs global capability without global chaos.
+          </p>
+          <p class="reveal">
+            That is why this project stays with me. It reminded me that a good
+            technical design document is more than a document. It is a bridge
+            between an unclear need and a system that many people can trust.
+          </p>
+          <div class="hero-actions reveal">
+            <a class="article-button button-primary" href="/#projects">
+              View more projects <i class="fas fa-arrow-right"></i>
+            </a>
+            <a class="article-button button-secondary" href="/walmart-journey/">
+              Read my broader journey <i class="fas fa-store"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+      $(function () {
+        $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
+        $("#footer").load("/components/footer.html");
+      });
+
+      const progressBar = document.getElementById("reading-progress");
+
+      function updateProgress() {
+        const scrollable =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const progress =
+          scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+        progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.16 },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((item) => observer.observe(item));
+      window.addEventListener("scroll", updateProgress, { passive: true });
+      updateProgress();
+    </script>
+  </body>
+</html>

@@ -56,6 +56,18 @@
     position: relative;
   }
 
+  .project-card-link {
+    color: inherit;
+    display: block;
+    height: 100%;
+    text-decoration: none;
+  }
+
+  .project-card-link:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+
   .project-card:hover {
     /* Animation disabled for most cards */
   }
@@ -114,6 +126,12 @@
     padding: 0px 20px 20px 20px;
   }
 
+  .project-body.project-body-with-link {
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+  }
+
   .project-company {
     display: flex;
     align-items: center;
@@ -142,6 +160,22 @@
     display: flex;
     align-items: flex-start;
     gap: 12px;
+  }
+
+  .project-read-more {
+    margin-top: auto;
+    padding-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #036ad9;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .project-read-more:hover {
+    color: #0254ab;
+    text-decoration: underline;
   }
 
   .project-avatar {
@@ -276,15 +310,14 @@
       </div>
       <!-- Project #10 -->
       <div class="col-lg-4 col-md-6">
-        <div class="project-card shadow-sm">
+        <div class="project-card shadow-sm modal-trigger">
           <div class="project-header">
             <span class="project-number">10</span>
             <span class="project-title">Internationalization</span>
             <i class="fas fa-globe project-icon"></i>
           </div>
-          <div class="project-body">
+          <div class="project-body project-body-with-link">
             <div class="project-company">
-              
               Walmart Global Tech India
             </div>
             <div class="project-location">
@@ -293,6 +326,9 @@
             <div class="project-description">
               Built i18n framework supporting 10,000+ templates across multiple languages, powering communications for US, Canada, Mexico & International markets.
             </div>
+            <a class="project-read-more" href="/projects/Internationalization/">
+              Read more <i class="fas fa-arrow-right"></i>
+            </a>
           </div>
         </div>
       </div>
