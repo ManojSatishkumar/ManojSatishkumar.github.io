@@ -117,7 +117,9 @@
     font-size: 0.92rem;
     font-weight: 700;
     box-shadow: 0 10px 24px rgba(95, 112, 163, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease,
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
       border-color 0.2s ease;
   }
 
@@ -156,11 +158,21 @@
     z-index: 7;
   }
 
-  .intro-avatar-stack .intro-avatar:nth-child(2) { z-index: 6; }
-  .intro-avatar-stack .intro-avatar:nth-child(3) { z-index: 5; }
-  .intro-avatar-stack .intro-avatar:nth-child(4) { z-index: 4; }
-  .intro-avatar-stack .intro-avatar:nth-child(5) { z-index: 3; }
-  .intro-avatar-stack .intro-avatar:nth-child(6) { z-index: 2; }
+  .intro-avatar-stack .intro-avatar:nth-child(2) {
+    z-index: 6;
+  }
+  .intro-avatar-stack .intro-avatar:nth-child(3) {
+    z-index: 5;
+  }
+  .intro-avatar-stack .intro-avatar:nth-child(4) {
+    z-index: 4;
+  }
+  .intro-avatar-stack .intro-avatar:nth-child(5) {
+    z-index: 3;
+  }
+  .intro-avatar-stack .intro-avatar:nth-child(6) {
+    z-index: 2;
+  }
 
   .intro-link-highlight {
     color: #4a5bc7;
@@ -296,7 +308,10 @@
     font-weight: 800;
     text-decoration: none;
     box-shadow: 0 10px 24px rgba(0, 113, 206, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      border-color 0.2s ease;
   }
 
   .intro-store-visit-link::after {
@@ -496,15 +511,49 @@
               type="button"
               class="intro-avatar-stack"
               aria-label="Go to Testimony section"
-              onclick="if (typeof animateScroll === 'function') { animateScroll('msk-testimony'); } else { window.location.hash = 'msk-testimony'; }"
+              onclick="
+                if (typeof animateScroll === 'function') {
+                  animateScroll('msk-testimony');
+                } else {
+                  window.location.hash = 'msk-testimony';
+                }
+              "
             >
-              <img class="intro-avatar" src="/images/people/shreyas.png" alt="Shreyas" />
-              <img class="intro-avatar" src="/images/people/sharmee.jpg" alt="Sharmee" />
-              <img class="intro-avatar" src="/images/people/bala.jpg" alt="Bala" />
-              <img class="intro-avatar" src="/images/people/pooja.jpg" alt="Pooja" />
-              <img class="intro-avatar" src="/images/people/raja-sir.jpeg" alt="Raja Sir" />
-              <img class="intro-avatar" src="/images/people/aravind.jpg" alt="Aravind" />
-              <img class="intro-avatar" src="/images/people/harshita.jpg" alt="Harshita" />
+              <img
+                class="intro-avatar"
+                src="/images/people/shreyas.png"
+                alt="Shreyas"
+              />
+              <img
+                class="intro-avatar"
+                src="/images/people/sharmee.jpg"
+                alt="Sharmee"
+              />
+              <img
+                class="intro-avatar"
+                src="/images/people/bala.jpg"
+                alt="Bala"
+              />
+              <img
+                class="intro-avatar"
+                src="/images/people/pooja.jpg"
+                alt="Pooja"
+              />
+              <img
+                class="intro-avatar"
+                src="/images/people/raja-sir.jpeg"
+                alt="Raja Sir"
+              />
+              <img
+                class="intro-avatar"
+                src="/images/people/aravind.jpg"
+                alt="Aravind"
+              />
+              <img
+                class="intro-avatar"
+                src="/images/people/harshita.jpg"
+                alt="Harshita"
+              />
             </button>
           </div>
         </div>
@@ -516,7 +565,7 @@
               <img src="/images/walmart-logo.png" alt="Walmart" />
               <strong class="intro-role-company">Walmart Global Tech</strong>
             </div>
-            <span class="intro-role-tag">Current Job</span>
+            <span class="intro-role-tag">India</span>
           </div>
 
           <p class="intro-role-copy">
@@ -546,7 +595,9 @@
               and <strong>Security</strong> teams.
             </p>
           </div>
-          <a class="intro-store-visit-link" href="/walmart-journey/">Read More</a>
+          <a class="intro-store-visit-link" href="/walmart-journey/"
+            >Read More</a
+          >
         </div>
 
         <!-- Philosophy -->
