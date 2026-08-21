@@ -6,12 +6,8 @@
 
   <!-- Menu Items -->
   <div class="menubar-items">
-    <div class="menu-item">
+    <div class="menu-item menu-brand">
       <span class="menu-label">Manoj Satishkumar</span>
-      <div class="menu-dropdown">
-        <a href="/">Portfolio</a>
-        <a href="javascript:void(0)" onclick="openAboutModal()">About Me</a>
-      </div>
     </div>
 
     <a class="menu-item menu-item-link" href="/">
@@ -20,10 +16,6 @@
 
     <a class="menu-item menu-item-link" href="/blog/">
       <span class="menu-label">Blog</span>
-    </a>
-
-    <a class="menu-item menu-item-link" href="/journal/">
-      <span class="menu-label">Journal</span>
     </a>
 
     <a class="menu-item menu-item-link" href="/quotes/">
@@ -260,10 +252,6 @@
       <i class="fas fa-newspaper"></i>
       <span>Blog</span>
     </a>
-    <a href="/journal/" class="mobile-menu-link" onclick="closeMobileMenu()">
-      <i class="fas fa-book-open"></i>
-      <span>Journal</span>
-    </a>
     <a href="/quotes/" class="mobile-menu-link" onclick="closeMobileMenu()">
       <i class="fas fa-quote-right"></i>
       <span>Quotes</span>
@@ -468,8 +456,14 @@
     color: #4f46e5;
   }
 
+  /* The brand is a static label, so it gets no hover affordance */
+  .menu-brand:hover .menu-label {
+    background: transparent;
+    color: #0f172a;
+  }
+
   /* Dropdown parents get a caret */
-  .menu-item:not(.menu-item-link) > .menu-label::after {
+  .menu-item:not(.menu-item-link):not(.menu-brand) > .menu-label::after {
     content: "";
     width: 6px;
     height: 6px;
@@ -482,7 +476,7 @@
     transition: transform 0.2s ease;
   }
 
-  .menu-item:not(.menu-item-link):hover > .menu-label::after {
+  .menu-item:not(.menu-item-link):not(.menu-brand):hover > .menu-label::after {
     transform: translateY(1px) rotate(225deg);
   }
 
