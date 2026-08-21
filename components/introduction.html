@@ -292,6 +292,19 @@
     border-bottom: 2px dashed #5e35b1;
   }
 
+  .intro-role-links {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .intro-role-links .intro-store-visit-link {
+    margin-top: 0;
+  }
+
   .intro-store-visit-link {
     position: relative;
     z-index: 1;
@@ -595,9 +608,14 @@
               and <strong>Security</strong> teams.
             </p>
           </div>
-          <a class="intro-store-visit-link" href="/walmart-journey/"
-            >Read More</a
-          >
+          <div class="intro-role-links">
+            <a class="intro-store-visit-link" href="/walmart-journey/"
+              >Read More</a
+            >
+            <a class="intro-store-visit-link" href="/walmart-last-day/"
+              >Last Working Day</a
+            >
+          </div>
         </div>
 
         <!-- Philosophy -->
