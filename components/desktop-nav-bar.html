@@ -336,49 +336,75 @@
 </div>
 
 <style>
-  /* macOS-style Menu Bar */
+  /* Desktop Menu Bar */
   .macos-menubar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 28px;
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: saturate(200%) blur(25px);
-    -webkit-backdrop-filter: saturate(200%) blur(25px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    height: 64px;
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: saturate(200%) blur(28px);
+    -webkit-backdrop-filter: saturate(200%) blur(28px);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.07);
     display: flex;
     align-items: center;
-    padding: 0 12px;
+    gap: 18px;
+    padding: 0 26px;
     z-index: 1000;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
-    box-shadow: 
-      0 4px 20px rgba(0, 0, 0, 0.12),
-      0 2px 8px rgba(0, 0, 0, 0.08),
-      0 0 1px rgba(0, 0, 0, 0.1);
+    box-shadow:
+      0 10px 30px rgba(15, 23, 42, 0.08),
+      0 2px 8px rgba(15, 23, 42, 0.04);
+    transition: box-shadow 0.25s ease, background 0.25s ease;
+  }
+
+  /* Gradient accent line along the top edge */
+  .macos-menubar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #60a5fa 0%, #a855f7 50%, #fbbf24 100%);
+  }
+
+  .macos-menubar.scrolled {
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow:
+      0 14px 40px rgba(15, 23, 42, 0.14),
+      0 3px 10px rgba(15, 23, 42, 0.06);
   }
 
   .menubar-logo {
     display: flex;
     align-items: center;
-    margin-right: 12px;
-    margin-top:8px;
-    position: relative;
+    flex-shrink: 0;
+    padding: 3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #60a5fa 0%, #a855f7 55%, #fbbf24 100%);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .menubar-logo:hover {
+    transform: scale(1.06);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.32);
   }
 
   .menubar-logo img {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    border: 2px solid rgba(255, 255, 255, 0.9);
-    position: relative;
-    top: 6px;
+    display: block;
+    object-fit: cover;
+    border: 2px solid #ffffff;
   }
 
   .menubar-items {
     display: flex;
     align-items: center;
+    gap: 2px;
     height: 100%;
   }
 
@@ -390,23 +416,49 @@
   }
 
   .menu-label {
-    padding: 0 12px;
-    font-size: 13px;
-    font-weight: 500;
-    color: rgba(0,0,0,0.85);
+    padding: 9px 14px;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #334155;
     cursor: default;
-    height: 100%;
     display: flex;
     align-items: center;
-    transition: background 0.1s ease;
+    border-radius: 10px;
+    white-space: nowrap;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
   }
 
+  /* Brand name */
   .menu-item:first-child .menu-label {
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #0f172a;
+    margin-right: 8px;
   }
 
   .menu-item:hover .menu-label {
-    background: rgba(0,0,0,0.08);
+    background: rgba(99, 102, 241, 0.1);
+    color: #4f46e5;
+  }
+
+  /* Dropdown parents get a caret */
+  .menu-item:not(.menu-item-link) > .menu-label::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    margin-left: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    border-radius: 1px;
+    transform: translateY(-2px) rotate(45deg);
+    opacity: 0.55;
+    transition: transform 0.2s ease;
+  }
+
+  .menu-item:not(.menu-item-link):hover > .menu-label::after {
+    transform: translateY(1px) rotate(225deg);
   }
 
   .menu-item-link {
@@ -419,37 +471,46 @@
   }
 
   .menu-item-link.active .menu-label {
-    background: linear-gradient(135deg, rgba(96, 165, 250, 0.94) 0%, rgba(168, 85, 247, 0.92) 54%, rgba(251, 191, 36, 0.9) 100%);
+    background: linear-gradient(135deg, #60a5fa 0%, #a855f7 54%, #fbbf24 100%);
     color: #ffffff;
-    border-radius: 0;
-    padding: 0 14px;
-    margin: 0 4px;
     font-weight: 700;
-    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.18);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.32);
   }
 
   .menu-item-link.active:hover .menu-label {
-    background: linear-gradient(135deg, rgba(96, 165, 250, 0.98) 0%, rgba(168, 85, 247, 0.96) 54%, rgba(251, 191, 36, 0.94) 100%);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(99, 102, 241, 0.4);
   }
 
   /* Dropdown Menu */
   .menu-dropdown {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 4px);
     left: 0;
-    min-width: 220px;
+    min-width: 230px;
     background: rgba(255,255,255,0.98);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 6px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.1);
-    padding: 4px 0;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 14px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18), 0 4px 12px rgba(15, 23, 42, 0.06);
+    padding: 8px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-4px);
-    transition: all 0.15s ease;
+    transform: translateY(-6px);
+    transition: all 0.18s ease;
     z-index: 1001;
+  }
+
+  /* Invisible bridge so the dropdown survives the gap under the menubar */
+  .menu-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 10px;
   }
 
   .menu-item:hover .menu-dropdown {
@@ -461,15 +522,17 @@
   .menu-dropdown a {
     display: flex;
     align-items: center;
-    padding: 6px 16px;
-    font-size: 13px;
-    color: rgba(0,0,0,0.85);
+    padding: 9px 14px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #334155;
     text-decoration: none;
-    transition: background 0.1s ease;
+    border-radius: 9px;
+    transition: background 0.15s ease, color 0.15s ease;
   }
 
   .menu-dropdown a:hover {
-    background: #007AFF;
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
     color: white;
   }
 
@@ -483,8 +546,8 @@
 
   .menu-divider {
     height: 1px;
-    background: rgba(0,0,0,0.1);
-    margin: 4px 0;
+    background: rgba(15, 23, 42, 0.08);
+    margin: 6px 8px;
   }
 
   .menu-dropdown-wide {
@@ -498,33 +561,37 @@
 
   /* Menubar Timer (macOS clock style) */
   .menubar-timer {
-    padding: 4px 12px;
-    font-size: 11px;
+    padding: 8px 14px;
+    font-size: 13px;
     font-weight: 500;
-    color: rgba(0,0,0,0.6);
+    color: #475569;
     font-family: 'SF Mono', 'Fira Code', -apple-system, monospace;
     display: flex;
-        align-items: center;
+    align-items: center;
     gap: 3px;
     cursor: default;
-    border-radius: 4px;
-    transition: background 0.15s ease;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
   }
 
   .menubar-timer:hover {
-    background: rgba(0,0,0,0.06);
+    background: #ffffff;
+    border-color: rgba(99, 102, 241, 0.35);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.14);
   }
 
   .menubar-timer span:not(.timer-suffix):not(.timer-divider) {
-    font-weight: 600;
-    color: rgba(0,0,0,0.85);
+    font-weight: 700;
+    color: #0f172a;
   }
 
   .menubar-timer .timer-suffix {
     font-weight: 400;
-    color: rgba(0,0,0,0.5);
-    font-size: 10px;
-    margin-right: 4px;
+    color: #94a3b8;
+    font-size: 11px;
+    margin-right: 5px;
   }
 
   .menubar-timer .timer-divider {
@@ -731,7 +798,7 @@
     display: flex;
     align-items: center;
     margin-left: auto;
-    gap: 8px;
+    gap: 10px;
   }
 
   /* Location Indicator */
@@ -742,28 +809,33 @@
   .menubar-location {
     display: flex;
     align-items: center;
-    gap: 4px;
-    padding: 4px 10px;
-    font-size: 11px;
-    color: rgba(0,0,0,0.6);
+    gap: 6px;
+    padding: 8px 14px;
+    font-size: 13px;
+    color: #475569;
     cursor: default;
-    border-radius: 4px;
-    transition: background 0.15s ease;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+    transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
   }
 
   .menubar-location:hover {
-    background: rgba(0,0,0,0.06);
+    background: #ffffff;
+    border-color: rgba(99, 102, 241, 0.35);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.14);
   }
 
   .location-icon {
-    width: 12px;
-    height: 12px;
-    color: rgba(0,0,0,0.5);
+    width: 15px;
+    height: 15px;
+    color: #6366f1;
   }
 
   .location-text {
-    font-weight: 500;
-    color: rgba(0,0,0,0.7);
+    font-weight: 600;
+    color: #334155;
   }
 
   /* Location Dropdown */
@@ -888,7 +960,30 @@
   /* Adjust body padding for menu bar */
   @media (min-width: 1024px) {
     body {
-      padding-top: 28px !important;
+      padding-top: 64px !important;
+    }
+  }
+
+  /* Tighten spacing where the full-size bar would overflow */
+  @media (min-width: 1024px) and (max-width: 1400px) {
+    .macos-menubar {
+      gap: 12px;
+      padding: 0 16px;
+    }
+
+    .menu-label {
+      padding: 9px 10px;
+      font-size: 13.5px;
+    }
+
+    .menu-item:first-child .menu-label {
+      font-size: 15px;
+    }
+
+    .menubar-location,
+    .menubar-timer {
+      padding: 7px 11px;
+      font-size: 12px;
     }
   }
 
@@ -1201,6 +1296,17 @@
   ></script>
 
 <script>
+  setTimeout(function() {
+    const menubar = document.querySelector('.macos-menubar');
+    if (menubar) {
+      const syncMenubarScrollState = function() {
+        menubar.classList.toggle('scrolled', window.scrollY > 12);
+      };
+      syncMenubarScrollState();
+      window.addEventListener('scroll', syncMenubarScrollState, { passive: true });
+    }
+  }, 100);
+
   // Show dropdown on hover - use setTimeout to ensure DOM is ready after jQuery .load()
   setTimeout(function() {
     const timerContainer = document.querySelector('.menubar-timer-container');
