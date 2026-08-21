@@ -248,6 +248,53 @@
     text-transform: uppercase;
   }
 
+  .intro-role-tag--past {
+    background: #eef1f6;
+    color: #64748b;
+  }
+
+  .intro-role-card--current {
+    background: linear-gradient(
+      135deg,
+      rgba(240, 247, 255, 0.96) 0%,
+      rgba(248, 250, 255, 0.98) 100%
+    );
+    border-color: rgba(0, 99, 229, 0.22);
+  }
+
+  .intro-role-card--current::after {
+    background:
+      radial-gradient(
+        circle at top right,
+        rgba(0, 99, 229, 0.12),
+        transparent 24%
+      ),
+      radial-gradient(
+        circle at bottom left,
+        rgba(113, 89, 226, 0.1),
+        transparent 22%
+      );
+  }
+
+  .intro-role-company--disney {
+    color: #0063e5;
+  }
+
+  .intro-role-meta {
+    position: relative;
+    z-index: 1;
+    margin: -8px 0 14px;
+    color: #475569;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .intro-role-copy--compact {
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+
   .intro-role-copy {
     position: relative;
     z-index: 1;
@@ -578,11 +625,11 @@
               <img src="/images/walmart-logo.png" alt="Walmart" />
               <strong class="intro-role-company">Walmart Global Tech</strong>
             </div>
-            <span class="intro-role-tag">India</span>
+            <span class="intro-role-tag intro-role-tag--past">Previously</span>
           </div>
 
           <p class="intro-role-copy">
-            I lead frontend engineering for a
+            I led frontend engineering for a
             <strong>mission-critical global communications platform</strong>
             powering
             <span style="color: #d32f2f; font-weight: 700">70+ million</span>
@@ -678,6 +725,13 @@
 
       <div class="exp-milestones">
         <div class="exp-milestone current">
+          <div class="exp-milestone-dot"></div>
+          <div class="exp-milestone-content">
+            <div class="exp-milestone-year">2026</div>
+            <div class="exp-milestone-text">Software Architect</div>
+          </div>
+        </div>
+        <div class="exp-milestone">
           <div class="exp-milestone-dot"></div>
           <div class="exp-milestone-content">
             <div class="exp-milestone-year">2022</div>

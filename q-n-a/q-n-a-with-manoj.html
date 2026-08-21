@@ -66,8 +66,9 @@
       --color-accent-2: #0891b2;
       --color-accent-3: #db2777;
       --color-border: rgba(0, 0, 0, 0.08);
-      --color-question-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.06) 0%, rgba(8, 145, 178, 0.03) 100%);
-      --color-answer-bg: linear-gradient(135deg, rgba(8, 145, 178, 0.06) 0%, rgba(99, 102, 241, 0.03) 100%);
+      --color-card: #f4f5f7;
+      --color-card-border: rgba(15, 23, 42, 0.07);
+      --color-card-divider: rgba(15, 23, 42, 0.06);
       --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'Space Mono', monospace;
       --radius-sm: 8px;
@@ -149,155 +150,162 @@
     .faq-page {
       position: relative;
       z-index: 1;
-      max-width: 900px;
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 40px 24px 80px;
+      padding: 88px 24px 60px;
     }
     
-    /* Hero section */
-    .faq-hero {
-      text-align: center;
-      padding: 60px 0 80px;
-      position: relative;
-    }
-    
-    .faq-hero::before {
-      content: '?';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 400px;
+    .faq-heading {
+      font-size: clamp(1.5rem, 3vw, 2rem);
       font-weight: 800;
-      opacity: 0.06;
-      color: var(--color-accent);
-      pointer-events: none;
-    }
-    
-    .faq-title {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 20px;
       letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 16px;
     }
     
-    .faq-title .gradient {
+    .faq-heading .gradient {
       background: linear-gradient(135deg, #6366f1 0%, #0891b2 50%, #db2777 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
     
-    .faq-subtitle {
-      font-size: 1.15rem;
-      color: var(--color-text-muted);
-      max-width: 500px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
-    }
-    
-    .faq-cta {
-      display: inline-flex;
+    /* Toolbar: search + filters + actions */
+    .faq-toolbar {
+      display: flex;
+      flex-wrap: wrap;
       align-items: center;
       gap: 10px;
-      padding: 16px 32px;
-      background: linear-gradient(135deg, var(--color-accent) 0%, #8b5cf6 100%);
-      color: white;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: var(--radius-xl);
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 30px rgba(99, 102, 241, 0.3);
+      padding: 12px;
+      margin-bottom: 16px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
     }
     
-    .faq-cta:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(99, 102, 241, 0.4);
-      color: white;
-      text-decoration: none;
+    .faq-search {
+      position: relative;
+      flex: 1 1 240px;
+      min-width: 0;
     }
     
-    .faq-cta i {
-      font-size: 1.1rem;
+    .faq-search i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      pointer-events: none;
+    }
+    
+    .faq-search input {
+      width: 100%;
+      padding: 10px 14px 10px 38px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--color-text);
+      background: var(--color-surface-2);
+      border: 1px solid transparent;
+      border-radius: 50px;
+      outline: none;
+      transition: all 0.25s ease;
+    }
+    
+    .faq-search input::placeholder {
+      color: var(--color-text-muted);
+    }
+    
+    .faq-search input:focus {
+      background: var(--color-surface);
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
     }
     
     /* Category filters */
     .faq-categories {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 48px;
+      gap: 6px;
     }
     
     .category-btn {
-      padding: 10px 20px;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
+      padding: 8px 14px;
+      background: var(--color-surface-2);
+      border: 1px solid transparent;
       border-radius: 50px;
-      font-size: 0.9rem;
+      font-family: inherit;
+      font-size: 0.82rem;
       font-weight: 500;
       color: var(--color-text-muted);
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      transition: all 0.25s ease;
     }
     
-    .category-btn:hover,
+    .category-btn:hover {
+      color: var(--color-text);
+      border-color: var(--color-border);
+    }
+    
     .category-btn.active {
-      background: var(--color-surface-2);
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.14), rgba(8, 145, 178, 0.1));
       border-color: var(--color-accent);
       color: var(--color-text);
     }
     
-    .category-btn.active {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(8, 145, 178, 0.08));
+    .faq-count {
+      margin-left: auto;
+      padding-right: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--color-text-muted);
+      white-space: nowrap;
     }
     
-    /* FAQ items */
+    /* Empty state */
+    .faq-empty {
+      display: none;
+      padding: 60px 20px;
+      text-align: center;
+      color: var(--color-text-muted);
+    }
+    
+    .faq-empty.visible {
+      display: block;
+    }
+    
+    /* FAQ items: masonry-style columns so cards pack without gaps */
     .faq-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+      column-count: 2;
+      column-gap: 12px;
     }
     
     .faq-item {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 12px;
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      page-break-inside: avoid;
+      vertical-align: top;
+      background: var(--color-card);
+      border: 1px solid var(--color-card-border);
+      border-radius: var(--radius-md);
       overflow: hidden;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    }
-    
-    .faq-item:hover {
-      border-color: rgba(99, 102, 241, 0.3);
-      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.08);
-    }
-    
-    .faq-item.open {
-      border-color: var(--color-accent);
-      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.12);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 6px 16px rgba(15, 23, 42, 0.05);
     }
     
     .faq-question {
       display: flex;
       align-items: flex-start;
-      gap: 16px;
-      padding: 24px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    
-    .faq-question:hover {
-      background: var(--color-surface-2);
+      gap: 12px;
+      padding: 14px 16px;
     }
     
     .question-avatar {
-      width: 42px;
-      height: 42px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       object-fit: cover;
       flex-shrink: 0;
@@ -306,19 +314,20 @@
     
     .question-content {
       flex: 1;
+      min-width: 0;
     }
     
     .question-meta {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
+      gap: 8px;
+      margin-bottom: 4px;
     }
     
     .question-author {
       font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--color-text);
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
     }
     
     .question-author a {
@@ -333,10 +342,10 @@
     }
     
     .question-tag {
-      padding: 4px 10px;
-      background: rgba(99, 102, 241, 0.15);
+      padding: 2px 8px;
+      background: rgba(99, 102, 241, 0.12);
       color: var(--color-accent);
-      font-size: 0.75rem;
+      font-size: 0.65rem;
       font-weight: 600;
       border-radius: 50px;
       text-transform: uppercase;
@@ -344,63 +353,23 @@
     }
     
     .question-text {
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       font-weight: 500;
       color: var(--color-text);
-      line-height: 1.6;
-    }
-    
-    .question-toggle {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--color-surface-2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: all 0.3s ease;
-    }
-    
-    .question-toggle i {
-      font-size: 0.9rem;
-      color: var(--color-text-muted);
-      transition: transform 0.3s ease;
-    }
-    
-    .faq-item.open .question-toggle {
-      background: var(--color-accent);
-    }
-    
-    .faq-item.open .question-toggle i {
-      color: white;
-      transform: rotate(180deg);
+      line-height: 1.5;
     }
     
     /* Answer section */
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s ease;
-    }
-    
-    .faq-item.open .faq-answer {
-      max-height: 2000px;
-    }
-    
     .answer-inner {
       display: flex;
-      gap: 16px;
-      padding: 0 24px 24px;
-      border-top: 1px solid var(--color-border);
-      margin-top: 0;
-      padding-top: 24px;
-      background: var(--color-answer-bg);
+      gap: 12px;
+      padding: 14px 16px 16px;
+      border-top: 1px solid var(--color-card-divider);
     }
     
     .answer-avatar {
-      width: 42px;
-      height: 42px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       object-fit: cover;
       flex-shrink: 0;
@@ -409,18 +378,19 @@
     
     .answer-content {
       flex: 1;
+      min-width: 0;
     }
     
     .answer-meta {
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
     
     .answer-author {
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       background: linear-gradient(135deg, var(--color-accent-2), var(--color-accent));
       -webkit-background-clip: text;
       background-clip: text;
@@ -445,13 +415,13 @@
     }
     
     .answer-text {
-      font-size: 1rem;
+      font-size: 0.92rem;
       color: var(--color-text);
-      line-height: 1.8;
+      line-height: 1.7;
     }
     
     .answer-text p {
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     
     .answer-text p:last-child {
@@ -469,15 +439,15 @@
     }
     
     .answer-list {
-      margin: 16px 0;
+      margin: 12px 0;
       padding-left: 0;
       list-style: none;
     }
     
     .answer-list li {
       position: relative;
-      padding-left: 24px;
-      margin-bottom: 10px;
+      padding-left: 18px;
+      margin-bottom: 6px;
       color: var(--color-text);
     }
     
@@ -485,9 +455,9 @@
       content: '';
       position: absolute;
       left: 0;
-      top: 10px;
-      width: 8px;
-      height: 8px;
+      top: 9px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
     }
@@ -513,72 +483,42 @@
       text-decoration: none;
     }
     
-    /* Footer */
-    .faq-footer {
-      text-align: center;
-      padding: 60px 24px;
-      margin-top: 60px;
-      border-top: 1px solid var(--color-border);
-    }
-    
-    .footer-text {
-      font-size: 1.1rem;
-      color: var(--color-text-muted);
-      margin-bottom: 24px;
-    }
-    
-    .footer-text strong {
-      color: var(--color-text);
-    }
-    
     /* Responsive */
-    @media (max-width: 768px) {
+    @media (max-width: 1100px) {
+      .faq-list {
+        column-count: 1;
+      }
+    }
+    
+    @media (max-width: 1023px) {
       .faq-page {
-        padding: 24px 16px 60px;
+        padding: 20px 16px 40px;
       }
-      
-      .faq-hero {
-        padding: 40px 0 60px;
+    }
+    
+    @media (max-width: 768px) {
+      .faq-count {
+        margin-left: 0;
       }
-      
-      .faq-hero::before {
-        font-size: 200px;
-      }
-      
-      .faq-question {
-        padding: 20px 16px;
-      }
-      
+
       .answer-inner {
-        padding: 16px;
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
       }
       
-      .question-avatar,
       .answer-avatar {
-        width: 36px;
-        height: 36px;
-      }
-      
-      .question-toggle {
-        width: 36px;
-        height: 36px;
-      }
-      
-      .question-text {
-        font-size: 0.95rem;
+        display: none;
       }
     }
     
     @media (max-width: 480px) {
-      .faq-categories {
-        gap: 8px;
+      .category-btn {
+        padding: 7px 12px;
+        font-size: 0.78rem;
       }
       
-      .category-btn {
-        padding: 8px 14px;
-        font-size: 0.8rem;
+      .question-text {
+        font-size: 0.92rem;
       }
     }
   </style>
@@ -588,36 +528,213 @@
   <div id="desktop-nav-bar"></div>
   
   <div class="faq-page">
-    <!-- Hero Section -->
-    <section class="faq-hero">
-      <h1 class="faq-title">
-        Got <span class="gradient">Questions?</span>
-      </h1>
-      <p class="faq-subtitle">
-        Real questions from developers like you, answered with practical insights on web development, career growth, and tech interviews.
-      </p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMyGu2wrPkMUARRoAEV3eERruwx0FqvWBOmglJPlUQ7uhFjg/viewform?usp=sf_link" target="_blank" class="faq-cta">
-        <i class="fas fa-paper-plane"></i>
-        Submit Your Question
-      </a>
-      
-    </section>
+    <h1 class="faq-heading">Frequently Asked <span class="gradient">Questions</span></h1>
     
-    <!-- Category Filters -->
-    <div class="faq-categories">
-      <button class="category-btn active" onclick="filterFAQs('all')">All Questions</button>
-      <button class="category-btn" onclick="filterFAQs('career')">Career</button>
-      <button class="category-btn" onclick="filterFAQs('javascript')">JavaScript</button>
-      <button class="category-btn" onclick="filterFAQs('interview')">Interview</button>
-      <button class="category-btn" onclick="filterFAQs('learning')">Learning</button>
+    <!-- Search, filters and actions -->
+    <div class="faq-toolbar">
+      <div class="faq-search">
+        <i class="fas fa-search"></i>
+        <input type="search" id="faq-search-input" placeholder="Search questions and answers..." aria-label="Search questions and answers" autocomplete="off">
+      </div>
+      
+      <div class="faq-categories">
+        <button class="category-btn active" onclick="filterFAQs(this, 'all')">All</button>
+        <button class="category-btn" onclick="filterFAQs(this, 'career')">Career</button>
+        <button class="category-btn" onclick="filterFAQs(this, 'javascript')">JavaScript</button>
+        <button class="category-btn" onclick="filterFAQs(this, 'interview')">Interview</button>
+        <button class="category-btn" onclick="filterFAQs(this, 'learning')">Learning</button>
+      </div>
+      
+      <span class="faq-count" id="faq-count"></span>
     </div>
     
     <!-- FAQ List -->
     <div class="faq-list">
       
       <!-- FAQ Item 1 -->
+      <div class="faq-item" data-category="career">
+        <div class="faq-question">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Career</span>
+            </div>
+            <p class="question-text">What are the career prospects for front-end developers, especially as they gain more experience?</p>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>While it's not entirely true that there's no scope in front-end development, reaching top-tier positions like distinguished engineer can be challenging due to intense competition and fewer available roles.</p>
+                <p>My advice is to consider transitioning into a full-stack role. You can achieve this by incorporating backend technologies like <strong>Node.js</strong> and <strong>Express.js</strong>, leveraging your existing JavaScript expertise, rather than making a complete switch to other languages like Java.</p>
+                <p>This approach can significantly broaden your opportunities.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 2 -->
+      <div class="faq-item" data-category="interview">
+        <div class="faq-question">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Interview</span>
+            </div>
+            <p class="question-text">How important is Data Structures and Algorithms (DSA) for experienced front-end developers during interviews?</p>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>Even with significant front-end experience, DSA remains a critical component of interviews. Interviewers generally understand your background, but I highly recommend solving at least <strong>70 to 80 LeetCode questions</strong> before interviews.</p>
+                <p>A key practice I suggest is to write down your thought process and the algorithm steps for each problem on paper. This method helps in retaining the problem-solving approach in your mind, which is more beneficial than just keeping the code handy on a laptop.</p>
+                <p>Dedicate about <strong>50% of your preparation time</strong> to DSA and this structured note-taking.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 3 -->
+      <div class="faq-item" data-category="career javascript learning">
+        <div class="faq-question">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Career</span>
+            </div>
+            <p class="question-text">Should front-end developers learn Java for backend to become full-stack?</p>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>My strong recommendation is to stick with JavaScript and explore <strong>Node.js</strong> and <strong>Express.js</strong> for backend development.</p>
+                <p>While many large organizations do use Java for their backend, they often look for individuals deeply invested in a JavaScript-specific career. If you include both JavaScript and Java on your resume, it might give the impression of being a generalist rather than an expert.</p>
+                <p>As your experience grows, depth in one language (like JavaScript for both frontend and backend) becomes more valuable than breadth across disparate languages. This specialized focus can lead to better opportunities.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 4 -->
+      <div class="faq-item" data-category="career">
+        <div class="faq-question">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Career</span>
+            </div>
+            <p class="question-text">I received a job offer but am hearing negative feedback about the company's work culture. What should I do?</p>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>It's natural to have second thoughts, but it's crucial not to take external feedback at face value. Your personal experience at a company can be vastly different from others'.</p>
+                <p>I've personally experienced this; despite hearing negative things about my current company, my journey has been positive, and I even rejoined twice.</p>
+                <p>Evaluate if the offer aligns with your personal career goals and checkboxes. If it does, consider making the move.</p>
+                <p>Also, be mindful of the current market; joining companies not currently undergoing layoffs might be a safer option, especially since <strong>"last in, first out"</strong> is a common practice during workforce reductions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 5 -->
+      <div class="faq-item" data-category="career interview">
+        <div class="faq-question">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Career</span>
+            </div>
+            <p class="question-text">What's the best approach to applying for jobs, especially when seeking referrals?</p>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>When applying, consider using a different email ID for direct applications on career sites and for referral applications. This allows you to pursue both avenues simultaneously.</p>
+                <p>While getting responses for referrals can be challenging due to the volume of requests, persistence pays off — keep pinging, and eventually, someone will likely refer you.</p>
+                <p>Don't solely rely on referrals; many individuals, including myself, have received interview calls directly from career site applications.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 6 -->
+      <div class="faq-item" data-category="career">
+        <div class="faq-question">
+          <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
+          <div class="question-content">
+            <div class="question-meta">
+              <span class="question-author">Anonymous Developer</span>
+              <span class="question-tag">Career</span>
+            </div>
+            <p class="question-text">How do job opportunities change as a professional gains more experience?</p>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <div class="answer-inner">
+            <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="answer-avatar">
+            <div class="answer-content">
+              <div class="answer-meta">
+                <span class="answer-author">Manoj Satishkumar</span>
+                <span class="verified-badge"><i class="fas fa-check"></i> Expert</span>
+              </div>
+              <div class="answer-text">
+                <p>The number of job opportunities tends to decrease significantly with increasing experience. For instance, after five years, opportunities can halve, and after ten years, they may reduce to a quarter.</p>
+                <p>Therefore, it's advisable to make significant career switches you desire <strong>before reaching the ten-year mark</strong>.</p>
+                <p>Beyond that, the focus typically shifts more towards internal promotions, gaining deeper expertise, and broader understanding within your current role, rather than expecting drastic salary hikes through frequent job changes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 7 -->
       <div class="faq-item" data-category="career learning">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/people/saloni.jpg" alt="Saloni Jain" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -625,9 +742,6 @@
               <span class="question-tag">Career</span>
             </div>
             <p class="question-text">As a non-btech person, how do I navigate the overwhelming choices in tech and deal with the fear of missing out?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -649,9 +763,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 2 -->
+      <!-- FAQ Item 8 -->
       <div class="faq-item" data-category="interview javascript">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -659,9 +773,6 @@
               <span class="question-tag">Interview</span>
             </div>
             <p class="question-text">What are the important DS and algorithms one should prepare for a frontend interview?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -683,9 +794,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 3 -->
+      <!-- FAQ Item 9 -->
       <div class="faq-item" data-category="learning">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -693,9 +804,6 @@
               <span class="question-tag">Learning</span>
             </div>
             <p class="question-text">Is it good making projects by looking at Udemy courses / YouTube videos?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -719,9 +827,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 4 -->
+      <!-- FAQ Item 10 -->
       <div class="faq-item" data-category="javascript learning">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -729,9 +837,6 @@
               <span class="question-tag">JavaScript</span>
             </div>
             <p class="question-text">Which are some of the best resources/materials to learn JavaScript?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -757,9 +862,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 5 -->
+      <!-- FAQ Item 11 -->
       <div class="faq-item" data-category="career javascript">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -767,9 +872,6 @@
               <span class="question-tag">Career</span>
             </div>
             <p class="question-text">I am a backend developer and I am interested to move to frontend with JavaScript. How do I get started?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -800,9 +902,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 6 -->
+      <!-- FAQ Item 12 -->
       <div class="faq-item" data-category="javascript">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -810,9 +912,6 @@
               <span class="question-tag">JavaScript</span>
             </div>
             <p class="question-text">What is IIFE pattern in JavaScript? Where can I use it?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -834,9 +933,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 7 -->
+      <!-- FAQ Item 13 -->
       <div class="faq-item" data-category="interview javascript">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -844,9 +943,6 @@
               <span class="question-tag">Interview</span>
             </div>
             <p class="question-text">What do interviewers expect from me in a frontend interview specifically for JavaScript?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -872,9 +968,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 8 -->
+      <!-- FAQ Item 14 -->
       <div class="faq-item" data-category="javascript interview">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -882,9 +978,6 @@
               <span class="question-tag">JavaScript</span>
             </div>
             <p class="question-text">Why do almost all frontend interviewers ask a question on JavaScript promises?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -906,9 +999,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 9 -->
+      <!-- FAQ Item 15 -->
       <div class="faq-item" data-category="interview">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -916,9 +1009,6 @@
               <span class="question-tag">Interview</span>
             </div>
             <p class="question-text">I am attending a frontend interview and I'm comfortable with HTML. What should I prepare in CSS?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -950,9 +1040,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 10 -->
+      <!-- FAQ Item 16 -->
       <div class="faq-item" data-category="learning">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -960,9 +1050,6 @@
               <span class="question-tag">Learning</span>
             </div>
             <p class="question-text">I don't have subscription for Udemy or LinkedIn Learning. How do I learn JavaScript without paying?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -984,9 +1071,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 11 -->
+      <!-- FAQ Item 17 -->
       <div class="faq-item" data-category="career">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -994,9 +1081,6 @@
               <span class="question-tag">Career</span>
             </div>
             <p class="question-text">I am working on old technologies in my company, but I am interested in React.js. What should I do?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -1018,9 +1102,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 12 -->
+      <!-- FAQ Item 18 -->
       <div class="faq-item" data-category="career">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -1028,9 +1112,6 @@
               <span class="question-tag">Career</span>
             </div>
             <p class="question-text">I am a frontend engineer (JS) and I want to get promoted to higher levels. Should I learn backend also?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -1052,9 +1133,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 13 -->
+      <!-- FAQ Item 19 -->
       <div class="faq-item" data-category="career">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -1062,9 +1143,6 @@
               <span class="question-tag">Career</span>
             </div>
             <p class="question-text">I am doing well in frontend, but my manager knows only backend. Do I have a good future here?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -1086,9 +1164,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 14 -->
+      <!-- FAQ Item 20 -->
       <div class="faq-item" data-category="javascript">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -1096,9 +1174,6 @@
               <span class="question-tag">JavaScript</span>
             </div>
             <p class="question-text">What is Babel?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -1120,9 +1195,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 15 -->
+      <!-- FAQ Item 21 -->
       <div class="faq-item" data-category="interview">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -1130,9 +1205,6 @@
               <span class="question-tag">Interview</span>
             </div>
             <p class="question-text">I am attending an interview for a frontend role. Should I prepare for DS and Algorithms also?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -1154,9 +1226,9 @@
         </div>
       </div>
       
-      <!-- FAQ Item 16 -->
+      <!-- FAQ Item 22 -->
       <div class="faq-item" data-category="career learning">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <img src="/images/person_2.png" alt="Anonymous" class="question-avatar">
           <div class="question-content">
             <div class="question-meta">
@@ -1164,9 +1236,6 @@
               <span class="question-tag">Learning</span>
             </div>
             <p class="question-text">I am a 2nd year UG student. How do I get started with full-stack development with JavaScript?</p>
-          </div>
-          <div class="question-toggle">
-            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
         <div class="faq-answer">
@@ -1190,14 +1259,7 @@
       
     </div>
     
-    <!-- Footer CTA -->
-    <div class="faq-footer">
-      <p class="footer-text">Didn't find what you're looking for? <strong>Ask your question!</strong></p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMyGu2wrPkMUARRoAEV3eERruwx0FqvWBOmglJPlUQ7uhFjg/viewform?usp=sf_link" target="_blank" class="faq-cta">
-        <i class="fas fa-paper-plane"></i>
-        Submit Your Question
-      </a>
-    </div>
+    <p class="faq-empty" id="faq-empty">No questions matched your search. Try a different keyword or category.</p>
   </div>
   
   <div style="margin: 0px; padding: 0px;" id="footer"></div>
@@ -1210,42 +1272,38 @@
   <script src="/js/main.js"></script>
   
   <script>
-    // Toggle FAQ accordion
-    function toggleFAQ(element) {
-      const faqItem = element.closest('.faq-item');
-      const isOpen = faqItem.classList.contains('open');
-      
-      // Close all other items
-      document.querySelectorAll('.faq-item.open').forEach(item => {
-        if (item !== faqItem) {
-          item.classList.remove('open');
-        }
-      });
-      
-      // Toggle current item
-      faqItem.classList.toggle('open');
+    let activeCategory = 'all';
+    let searchTerm = '';
+    
+    function filterFAQs(button, category) {
+      document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      activeCategory = category;
+      applyFilters();
     }
     
-    // Filter FAQs by category
-    function filterFAQs(category) {
-      const buttons = document.querySelectorAll('.category-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+    function applyFilters() {
+      let visible = 0;
       
-      const faqItems = document.querySelectorAll('.faq-item');
-      faqItems.forEach(item => {
-        if (category === 'all') {
-          item.style.display = 'block';
-        } else {
-          const itemCategories = item.dataset.category || '';
-          if (itemCategories.includes(category)) {
-            item.style.display = 'block';
-          } else {
-            item.style.display = 'none';
-          }
-        }
+      document.querySelectorAll('.faq-item').forEach(item => {
+        const inCategory = activeCategory === 'all' || (item.dataset.category || '').includes(activeCategory);
+        const matchesSearch = !searchTerm || item.textContent.toLowerCase().includes(searchTerm);
+        const show = inCategory && matchesSearch;
+        
+        item.style.display = show ? '' : 'none';
+        if (show) visible++;
       });
+      
+      document.getElementById('faq-count').textContent = visible + (visible === 1 ? ' question' : ' questions');
+      document.getElementById('faq-empty').classList.toggle('visible', visible === 0);
     }
+    
+    document.getElementById('faq-search-input').addEventListener('input', event => {
+      searchTerm = event.target.value.trim().toLowerCase();
+      applyFilters();
+    });
+    
+    applyFilters();
     
     // Disable right-click
     document.addEventListener('contextmenu', event => event.preventDefault());

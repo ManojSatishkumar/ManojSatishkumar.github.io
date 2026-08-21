@@ -1,136 +1,210 @@
 <section class="experience-section">
   <div class="container">
-    <div class="text-center">
-      <div class="container text-center">
-        <div
-          style="
-            font-size: 50px;
-            font-weight: bold;
-            background: #121fcf;
-            background: -webkit-linear-gradient(
-              to right,
-              #121fcf 0%,
-              #cf1512 100%
-            );
-            background: -moz-linear-gradient(
-              to right,
-              #121fcf 0%,
-              #cf1512 100%
-            );
-            background: linear-gradient(to right, #121fcf 0%, #cf1512 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          "
-        >
-          Experience
-        </div>
-        <p style="max-width: 800px; margin: 20px auto 30px; font-size: 16px; line-height: 1.8; color: #555; text-align: center;">
-          Over 12 years of building production-grade frontend systems at industry giants like Walmart and Cerner, where I've architected scalable platforms serving millions of users, led cross-functional teams, and championed engineering excellence across the stack.
-        </p>
-        
-        <!-- Experience Timer -->
-        <div class="experience-timer">
-          <div class="timer-display">
-            <div class="timer-unit">
-              <span id="exp-years">00</span>
-              <span class="timer-unit-label">Years</span>
-            </div>
-            <div class="timer-separator">:</div>
-            <div class="timer-unit">
-              <span id="exp-months">00</span>
-              <span class="timer-unit-label">Months</span>
-            </div>
-            <div class="timer-separator">:</div>
-            <div class="timer-unit">
-              <span id="exp-days">00</span>
-              <span class="timer-unit-label">Days</span>
-            </div>
+    <div class="experience-header text-center">
+      <div
+        style="
+          font-size: 50px;
+          font-weight: bold;
+          background: #121fcf;
+          background: -webkit-linear-gradient(
+            to right,
+            #121fcf 0%,
+            #cf1512 100%
+          );
+          background: -moz-linear-gradient(
+            to right,
+            #121fcf 0%,
+            #cf1512 100%
+          );
+          background: linear-gradient(to right, #121fcf 0%, #cf1512 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        "
+      >
+        Experience
+      </div>
+      <p class="experience-intro">
+        Over <span class="js-experience-years">12</span> years of building production-grade frontend systems at industry giants like Disney, Walmart, and Cerner, where I've architected scalable platforms serving millions of users, led cross-functional teams, and championed engineering excellence across the stack.
+      </p>
+
+      <!-- Experience Timer -->
+      <div class="experience-timer">
+        <div class="timer-display">
+          <div class="timer-unit">
+            <span id="exp-years">00</span>
+            <span class="timer-unit-label">Years</span>
+          </div>
+          <div class="timer-separator">:</div>
+          <div class="timer-unit">
+            <span id="exp-months">00</span>
+            <span class="timer-unit-label">Months</span>
+          </div>
+          <div class="timer-separator">:</div>
+          <div class="timer-unit">
+            <span id="exp-days">00</span>
+            <span class="timer-unit-label">Days</span>
           </div>
         </div>
       </div>
     </div>
+
     <div class="experience-grid">
-      <div class="experience-card experience-card--walmart">
-        <img src="/images/walmart-logo.png" alt="Walmart" class="company-logo" />
-        <h2 class="company-name">
-          <a href="https://en.wikipedia.org/wiki/Walmart" target="_blank"
-            >Walmart</a
-          >
-        </h2>
-        <div class="industry">E-Commerce</div>
-        <hr/>
-        <div class="role">Staff Software Engineer</div>
-        <div class="duration">2022 - 2026</div>
-        <div class="role" style="margin-top: 8px;">Senior Software Engineer</div>
-        <div class="duration">2019 - 2021</div>
-        
-        
-        <hr />
-        <p class="description">
-          Architected and built a no-code, multi-tenant template builder portal powering 70M+ daily communications across Email, SMS, Push, WhatsApp & In-App channels.
-        </p>
-        <a class="experience-album-link" href="/walmart-journey/">My Walmart Journey</a>
-        <a class="experience-album-link experience-album-link--story" href="/walmart-us-visit/">US store visit experience</a>
-        <a class="experience-album-link" href="/albums/view.html?album=walmart">View photo album</a>
-      </div>
-       <div class="experience-card experience-card--paypal">
-        <img src="/images/paypal-icon.png" alt="PayPal" class="company-logo company-logo--paypal" />
-        <h2 class="company-name">
-          <a href="https://en.wikipedia.org/wiki/PayPal" target="_blank"
-            >PayPal</a
-          >
-        </h2>
-        <div class="industry">Fintech</div>
-        <hr/>
-        <div class="role">Member of Technical Staff</div>
-        
-        <div class="duration">2021 - 2022</div>
-        <hr />
-        <p class="description">
-          Built next-gen merchant onboarding experience for PayPal's global business customers. Developed React-based micro-frontends with internationalization support for 25+ countries and streamlined KYC verification flows.
-        </p>
-      </div>
-      <div class="experience-card experience-card--cerner">
-        <img src="/images/cerner-logo.png" alt="Cerner" class="company-logo" />
-        <h2 class="company-name">
-          <a href="https://en.wikipedia.org/wiki/Cerner" target="_blank"
-            >Cerner
-          </a>
-        </h2>
-        <div class="industry">Healthcare</div>
-        <hr/>
-        <div class="role">Technical Team Lead</div>
-        <div class="duration">2018 - 2019</div>
-        <div class="role">Senior Software Engineer</div>
-        <div class="duration">2017 - 2018</div>
-        <div class="role">Software Engineer</div>
-        <div class="duration">2015 - 2017</div>
-        <hr />
-        <p class="description">
-          Led a team of 8 developers building mission-critical medical vitals charting applications for nurses in 3 US hospitals. Implemented real-time data sync with HL7 FHIR standards and achieved 99.9% uptime for patient care systems.
-        </p>
-        <a class="experience-album-link" href="/albums/view.html?album=cerner">View photo album</a>
-      </div>
-      <div class="experience-card experience-card--grl">
-        <img src="/images/grl-logo.png" alt="GRL Labs" class="company-logo" />
-        <h2 class="company-name">
-          <a href="https://graniteriverlabs.com/" target="_blank">GRL Labs</a>
-        </h2>
-        <div class="industry">Semiconductor</div>
-        <hr/>
-        <div class="role">Software Engineer</div>
-        <div class="duration">2013 - 2015</div>
-        <hr />
-        <p class="description">
-          Developed high-speed SSD validation test suite software for Windows platform. Built automated testing frameworks for USB 3.0, SATA, and PCIe protocols used by major semiconductor manufacturers including Intel, Samsung, Seagate, and Micron.
-        </p>
-      </div>
+      <article class="experience-card experience-card--disney experience-card--featured">
+        <div class="experience-card__main">
+          <header class="experience-card__head">
+            <div class="experience-card__identity">
+              <h2 class="company-name">
+                <a href="https://en.wikipedia.org/wiki/The_Walt_Disney_Company" target="_blank" rel="noopener">Disney</a>
+              </h2>
+              <p class="industry">Media &amp; Entertainment</p>
+            </div>
+            <img
+              src="/images/disney-logo.png"
+              alt="The Walt Disney Company"
+              class="company-logo"
+              onerror="this.style.display='none'"
+            />
+          </header>
+          <ul class="role-list">
+            <li class="role-item">
+              <span class="role">Software Architect</span>
+              <span class="duration">2026 &ndash; Present <span class="role-chip">Current</span></span>
+            </li>
+          </ul>
+        </div>
+        <div class="experience-card__body">
+          <p class="description">
+            Setting frontend technical direction as a Software Architect — shaping system design, platform foundations, and engineering standards for products built at global scale.
+          </p>
+        </div>
+      </article>
+
+      <article class="experience-card experience-card--walmart">
+        <div class="experience-card__main">
+          <header class="experience-card__head">
+            <div class="experience-card__identity">
+              <h2 class="company-name">
+                <a href="https://en.wikipedia.org/wiki/Walmart" target="_blank" rel="noopener">Walmart</a>
+              </h2>
+              <p class="industry">E-Commerce</p>
+            </div>
+            <img src="/images/walmart-logo.png" alt="Walmart" class="company-logo" />
+          </header>
+          <ul class="role-list">
+            <li class="role-item">
+              <span class="role">Staff Software Engineer</span>
+              <span class="duration">2022 &ndash; 2026</span>
+            </li>
+            <li class="role-item">
+              <span class="role">Senior Software Engineer</span>
+              <span class="duration">2019 &ndash; 2021</span>
+            </li>
+          </ul>
+        </div>
+        <div class="experience-card__body">
+          <p class="description">
+            Architected and built a no-code, multi-tenant template builder portal powering 70M+ daily communications across Email, SMS, Push, WhatsApp &amp; In-App channels.
+          </p>
+          <div class="experience-links">
+            <a class="experience-album-link" href="/walmart-journey/">My Walmart Journey</a>
+            <a class="experience-album-link" href="/walmart-us-visit/">US store visit experience</a>
+            <a class="experience-album-link" href="/albums/view.html?album=walmart">View photo album</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="experience-card experience-card--paypal">
+        <div class="experience-card__main">
+          <header class="experience-card__head">
+            <div class="experience-card__identity">
+              <h2 class="company-name">
+                <a href="https://en.wikipedia.org/wiki/PayPal" target="_blank" rel="noopener">PayPal</a>
+              </h2>
+              <p class="industry">Fintech</p>
+            </div>
+            <img src="/images/paypal-icon.png" alt="PayPal" class="company-logo company-logo--paypal" />
+          </header>
+          <ul class="role-list">
+            <li class="role-item">
+              <span class="role">Member of Technical Staff</span>
+              <span class="duration">2021 &ndash; 2022</span>
+            </li>
+          </ul>
+        </div>
+        <div class="experience-card__body">
+          <p class="description">
+            Built next-gen merchant onboarding experience for PayPal's global business customers. Developed React-based micro-frontends with internationalization support for 25+ countries and streamlined KYC verification flows.
+          </p>
+        </div>
+      </article>
+
+      <article class="experience-card experience-card--cerner">
+        <div class="experience-card__main">
+          <header class="experience-card__head">
+            <div class="experience-card__identity">
+              <h2 class="company-name">
+                <a href="https://en.wikipedia.org/wiki/Cerner" target="_blank" rel="noopener">Cerner</a>
+              </h2>
+              <p class="industry">Healthcare</p>
+            </div>
+            <img src="/images/cerner-logo.png" alt="Cerner" class="company-logo" />
+          </header>
+          <ul class="role-list">
+            <li class="role-item">
+              <span class="role">Technical Team Lead</span>
+              <span class="duration">2018 &ndash; 2019</span>
+            </li>
+            <li class="role-item">
+              <span class="role">Senior Software Engineer</span>
+              <span class="duration">2017 &ndash; 2018</span>
+            </li>
+            <li class="role-item">
+              <span class="role">Software Engineer</span>
+              <span class="duration">2015 &ndash; 2017</span>
+            </li>
+          </ul>
+        </div>
+        <div class="experience-card__body">
+          <p class="description">
+            Led a team of 8 developers building mission-critical medical vitals charting applications for nurses in 3 US hospitals. Implemented real-time data sync with HL7 FHIR standards and achieved 99.9% uptime for patient care systems.
+          </p>
+          <div class="experience-links">
+            <a class="experience-album-link" href="/albums/view.html?album=cerner">View photo album</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="experience-card experience-card--grl">
+        <div class="experience-card__main">
+          <header class="experience-card__head">
+            <div class="experience-card__identity">
+              <h2 class="company-name">
+                <a href="https://graniteriverlabs.com/" target="_blank" rel="noopener">GRL Labs</a>
+              </h2>
+              <p class="industry">Semiconductor</p>
+            </div>
+            <img src="/images/grl-logo.png" alt="GRL Labs" class="company-logo" />
+          </header>
+          <ul class="role-list">
+            <li class="role-item">
+              <span class="role">Software Engineer</span>
+              <span class="duration">2013 &ndash; 2015</span>
+            </li>
+          </ul>
+        </div>
+        <div class="experience-card__body">
+          <p class="description">
+            Developed high-speed SSD validation test suite software for Windows platform. Built automated testing frameworks for USB 3.0, SATA, and PCIe protocols used by major semiconductor manufacturers including Intel, Samsung, Seagate, and Micron.
+          </p>
+        </div>
+      </article>
     </div>
+  </div>
 </section>
 
 <style>
   .experience-section {
-    padding: 80px 20px;
+    padding: 72px 0;
     background:
       radial-gradient(circle at top left, rgba(255, 225, 130, 0.2), transparent 24%),
       radial-gradient(circle at top right, rgba(125, 211, 252, 0.18), transparent 28%),
@@ -159,23 +233,32 @@
     border-radius: 2px;
   }
 
+  .experience-intro {
+    max-width: 800px;
+    margin: 20px auto 30px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+  }
+
   .experience-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
-    max-width: 1400px;
-    margin: 0 auto;
+    gap: 22px;
   }
 
   .experience-card {
+    --accent: #64748b;
+    --accent-soft: rgba(100, 116, 139, 0.14);
     background: #ffffff;
     border-radius: 16px;
-    padding: 20px;
+    padding: 24px 22px 22px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    gap: 18px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    border: 1px solid rgba(15, 23, 42, 0.08);
     position: relative;
     overflow: hidden;
   }
@@ -183,193 +266,277 @@
   .experience-card::before {
     content: "";
     position: absolute;
-    inset: 0;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-soft) 100%);
     pointer-events: none;
   }
 
-  .experience-card--walmart {
-    background: #ffffff;
-    border-color: rgba(0, 113, 206, 0.18);
-    box-shadow: 0 12px 24px rgba(0, 113, 206, 0.05);
+  .experience-card:hover {
+    box-shadow: 0 16px 32px rgba(15, 23, 42, 0.09);
+    border-color: var(--accent-soft);
   }
 
-  .experience-card--walmart::before {
-    background: none;
+  .experience-card--featured {
+    grid-column: 1 / -1;
+  }
+
+  .experience-card--disney {
+    --accent: #0063e5;
+    --accent-soft: rgba(0, 99, 229, 0.16);
+  }
+
+  .experience-card--walmart {
+    --accent: #0071ce;
+    --accent-soft: rgba(0, 113, 206, 0.16);
   }
 
   .experience-card--paypal {
-    background: #ffffff;
-    border-color: rgba(0, 48, 135, 0.12);
-    box-shadow: 0 12px 24px rgba(0, 48, 135, 0.05);
-  }
-
-  .experience-card--paypal::before {
-    background: none;
-  }
-
-  .experience-card--paypal hr {
-    background: rgba(0, 48, 135, 0.16);
+    --accent: #003087;
+    --accent-soft: rgba(0, 48, 135, 0.16);
   }
 
   .experience-card--cerner {
-    background: #ffffff;
-    border-color: rgba(0, 169, 157, 0.16);
-    box-shadow: 0 12px 24px rgba(0, 169, 157, 0.05);
-  }
-
-  .experience-card--cerner::before {
-    background: none;
-  }
-
-  .experience-card--cerner hr {
-    background: rgba(0, 169, 157, 0.16);
+    --accent: #00a99d;
+    --accent-soft: rgba(0, 169, 157, 0.16);
   }
 
   .experience-card--grl {
-    background: #ffffff;
-    border-color: rgba(73, 85, 111, 0.12);
-    box-shadow: 0 12px 24px rgba(73, 85, 111, 0.05);
+    --accent: #49556f;
+    --accent-soft: rgba(73, 85, 111, 0.16);
   }
 
-  .experience-card--grl::before {
-    background: none;
+  .experience-card__main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
-  .experience-card--grl hr {
-    background: rgba(73, 85, 111, 0.16);
+  .experience-card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .experience-card__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .experience-card__identity {
+    min-width: 0;
+  }
+
+  .experience-section .company-name {
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .experience-section .company-name a {
+    text-decoration: none;
+    color: #111111;
+    font-size: 1.35rem;
+    font-weight: 700;
+    transition: color 0.2s ease;
+  }
+
+  .experience-section .company-name a:hover {
+    color: var(--accent);
+  }
+
+  .experience-section .industry {
+    margin: 4px 0 0;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #7c8698;
+  }
+
+  .company-logo {
+    margin-left: auto;
+    height: 34px;
+    width: auto;
+    max-width: 92px;
+    object-fit: contain;
+    flex-shrink: 0;
+    background: transparent;
+  }
+
+  .company-logo--paypal {
+    height: 30px;
   }
 
   .experience-card--grl .company-logo {
     filter: brightness(1.03) contrast(1.02);
   }
 
-  .company-logo {
-    position: absolute;
-    right: 20px;
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-    background: transparent;
-  }
-
-  .company-logo--paypal {
-    width: 42px;
-    height: 42px;
-  }
-
-  .experience-card:hover {
-    /* Animation disabled */
-  }
-
-  .company-name a {
-    text-decoration: none;
-    color: #111111;
-    font-size: 1.6rem;
-    font-weight: 700;
-    transition: color 0.2s ease;
-  }
-
-  .company-name a:hover {
-    color: #111111;
-  }
-
-  .industry {
-    /* display: inline-block;
-    background: #e3f2fd;
-    color: #1976d2;
-    padding: 4px 2px;
-    border-radius: 10px;
-    font-size: 0.9rem;
-    margin: 10px 0;
-    font-weight: 500; */
-  }
-
-  .role {
-    color: #111111;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 8px 0;
-  }
-
-  .location,
-  .duration {
-    color: #111111;
-    font-size: 0.95rem;
-    margin: 5px 0;
+  .role-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    align-items: center;
-    gap: 5px;
+    flex-direction: column;
+    gap: 12px;
   }
 
-  .location::before {
-    content: "📍";
+  .role-item {
+    position: relative;
+    padding-left: 16px;
   }
 
-  .duration::before {
-    content: "🗓";
+  .role-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
   }
 
-  hr {
-    border: none;
-    height: 1px;
-    background: #e0e0e0;
-    margin: 15px 0;
+  .role-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 16px;
+    bottom: -10px;
+    width: 1px;
+    background: var(--accent-soft);
   }
 
-  .description {
-    margin-top: 15px;
-    color: #111111;
-    font-size: 0.95rem;
-    line-height: 1.6;
+  .experience-section .role {
+    display: block;
+    color: #101828;
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .experience-section .duration {
+    display: block;
+    margin-top: 2px;
+    color: #667085;
+    font-size: 0.84rem;
+    font-weight: 500;
+  }
+
+  .role-chip {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+
+  .experience-section .description {
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px solid rgba(15, 23, 42, 0.07);
+    color: #46505f;
+    font-size: 0.94rem;
+    line-height: 1.65;
+  }
+
+  .experience-links {
+    margin-top: auto;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 
   .experience-album-link {
-    margin-top: auto;
-    padding-top: 14px;
-    color: #1f4fa3;
-    font-size: 0.92rem;
-    font-weight: 700;
+    color: var(--accent);
+    font-size: 0.88rem;
+    font-weight: 600;
     text-decoration: none;
-    border-top: 1px solid rgba(209, 218, 235, 0.9);
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-  }
-
-  .experience-album-link + .experience-album-link {
-    margin-top: 10px;
-  }
-
-  .experience-album-link--story {
-    color: #0071ce;
+    gap: 6px;
   }
 
   .experience-album-link::after {
     content: "↗";
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1;
   }
 
   .experience-album-link:hover {
-    color: #163a7b;
-    text-decoration: none;
+    color: var(--accent);
+    text-decoration: underline;
   }
 
-  @media (max-width: 768px) {
+  /* Featured card lays its identity and story side by side on wide screens */
+  @media (min-width: 1200px) {
+    .experience-card--featured {
+      flex-direction: row;
+      align-items: stretch;
+      gap: 34px;
+      padding: 28px;
+    }
+
+    .experience-card--featured .experience-card__main {
+      flex: 0 0 300px;
+      justify-content: center;
+      padding-right: 34px;
+      border-right: 1px solid rgba(15, 23, 42, 0.07);
+    }
+
+    .experience-card--featured .experience-card__body {
+      justify-content: center;
+    }
+
+    .experience-card--featured .company-name a {
+      font-size: 2rem;
+    }
+
+    .experience-card--featured .company-logo {
+      height: 46px;
+      max-width: 120px;
+    }
+
+    .experience-card--featured .description {
+      padding-top: 0;
+      border-top: none;
+      font-size: 1.02rem;
+      line-height: 1.75;
+    }
+  }
+
+  @media (max-width: 1199.98px) {
+    .experience-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 767.98px) {
     .experience-section {
-      padding: 60px 0px;
+      padding: 56px 0;
     }
 
     .experience-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
     }
 
     .section-title {
       font-size: 2rem;
     }
+  }
 
-    .experience-card {
-      padding: 20px;
+  @media (max-width: 575.98px) {
+    .experience-grid {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 
@@ -378,7 +545,7 @@
     background: #f5f5f5;
     border-radius: 14px;
     padding: 16px 24px;
-    margin: 0 auto 24px;
+    margin: 0 auto 36px;
     width: fit-content;
     border: 1px solid #e0e0e0;
   }
@@ -431,10 +598,6 @@
   }
 
   @media (max-width: 600px) {
-    .experience-grid {
-      grid-template-columns: 1fr;
-    }
-
     .timer-unit span:first-child {
       font-size: 32px;
     }

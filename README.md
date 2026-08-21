@@ -16,7 +16,7 @@ Welcome to the source code for [manojsatishkumar.com](https://manojsatishkumar.c
 
 ## About
 
-This project is a comprehensive personal website and blog, serving as a portfolio, knowledge base, and resource hub for software engineers and aspiring developers. It features articles, project showcases, Q&A, and more, authored by Manoj Satishkumar (Staff Software Engineer, educator, and content creator).
+This project is a comprehensive personal website and blog, serving as a portfolio, knowledge base, and resource hub for software engineers and aspiring developers. It features articles, project showcases, Q&A, and more, authored by Manoj Satishkumar (Software Architect, educator, and content creator).
 
 ## Features
 

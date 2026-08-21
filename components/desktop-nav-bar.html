@@ -172,6 +172,13 @@
         <div class="exp-milestone current">
           <div class="exp-milestone-dot"></div>
           <div class="exp-milestone-content">
+            <div class="exp-milestone-year">2026</div>
+            <div class="exp-milestone-text">Software Architect</div>
+          </div>
+        </div>
+        <div class="exp-milestone">
+          <div class="exp-milestone-dot"></div>
+          <div class="exp-milestone-content">
             <div class="exp-milestone-year">2022</div>
             <div class="exp-milestone-text">Staff Software Engineer</div>
           </div>
@@ -241,7 +248,7 @@
     <img src="/images/me_circle.png" alt="Manoj" class="mobile-menu-avatar">
     <div class="mobile-menu-info">
       <div class="mobile-menu-name">Manoj Satishkumar</div>
-      <div class="mobile-menu-title">Staff Software Engineer</div>
+      <div class="mobile-menu-title">Software Architect</div>
     </div>
   </div>
   <div class="mobile-menu-links">
@@ -356,7 +363,10 @@
     box-shadow:
       0 10px 30px rgba(15, 23, 42, 0.08),
       0 2px 8px rgba(15, 23, 42, 0.04);
-    transition: box-shadow 0.25s ease, background 0.25s ease;
+    transform: translateY(0);
+    will-change: transform;
+    transition: transform 0.38s cubic-bezier(0.22, 0.61, 0.36, 1),
+      box-shadow 0.25s ease, background 0.25s ease;
   }
 
   /* Gradient accent line along the top edge */
@@ -375,6 +385,21 @@
     box-shadow:
       0 14px 40px rgba(15, 23, 42, 0.14),
       0 3px 10px rgba(15, 23, 42, 0.06);
+  }
+
+  /* Slide out of view while reading downwards */
+  .macos-menubar.nav-hidden,
+  .mobile-navbar.nav-hidden {
+    transform: translateY(-105%);
+    box-shadow: none;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .macos-menubar,
+    .mobile-navbar {
+      transition: box-shadow 0.25s ease, background 0.25s ease;
+    }
   }
 
   .menubar-logo {
@@ -1007,6 +1032,10 @@
       0 4px 6px -1px rgba(0, 0, 0, 0.1),
       0 2px 4px -2px rgba(0, 0, 0, 0.1),
       0 10px 20px -5px rgba(0, 0, 0, 0.08);
+    transform: translateY(0);
+    will-change: transform;
+    transition: transform 0.38s cubic-bezier(0.22, 0.61, 0.36, 1),
+      box-shadow 0.25s ease;
   }
 
   .mobile-navbar-brand {
@@ -1298,13 +1327,60 @@
 <script>
   setTimeout(function() {
     const menubar = document.querySelector('.macos-menubar');
-    if (menubar) {
-      const syncMenubarScrollState = function() {
-        menubar.classList.toggle('scrolled', window.scrollY > 12);
-      };
-      syncMenubarScrollState();
-      window.addEventListener('scroll', syncMenubarScrollState, { passive: true });
-    }
+    const mobilebar = document.querySelector('.mobile-navbar');
+    const bars = [menubar, mobilebar].filter(Boolean);
+    if (!bars.length) return;
+
+    const REVEAL_ZONE = 90; // always visible this close to the top
+    const DELTA = 6;        // ignore trackpad jitter
+    let lastY = Math.max(window.scrollY, 0);
+    let ticking = false;
+    let pinned = false;     // pointer or keyboard focus is inside a bar
+
+    bars.forEach(function(bar) {
+      bar.addEventListener('mouseenter', function() {
+        pinned = true;
+        bar.classList.remove('nav-hidden');
+      });
+      bar.addEventListener('mouseleave', function() {
+        pinned = false;
+      });
+      bar.addEventListener('focusin', function() {
+        pinned = true;
+        bar.classList.remove('nav-hidden');
+      });
+      bar.addEventListener('focusout', function() {
+        pinned = false;
+      });
+    });
+
+    const syncMenubarScrollState = function() {
+      ticking = false;
+      const y = Math.max(window.scrollY, 0);
+
+      if (menubar) menubar.classList.toggle('scrolled', y > 12);
+
+      const diff = y - lastY;
+      // Let small movements accumulate instead of resetting the reference point
+      if (Math.abs(diff) < DELTA) return;
+
+      const drawer = document.getElementById('mobile-menu-drawer');
+      const drawerOpen = drawer && drawer.classList.contains('active');
+      const hide = !pinned && !drawerOpen && y > REVEAL_ZONE && diff > 0;
+
+      bars.forEach(function(bar) {
+        bar.classList.toggle('nav-hidden', hide);
+      });
+      lastY = y;
+    };
+
+    syncMenubarScrollState();
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(syncMenubarScrollState);
+      }
+    }, { passive: true });
   }, 100);
 
   // Show dropdown on hover - use setTimeout to ensure DOM is ready after jQuery .load()
@@ -1436,6 +1512,8 @@
     if (drawer.classList.contains('active')) {
       closeMobileMenu();
     } else {
+      var bar = document.querySelector('.mobile-navbar');
+      if (bar) bar.classList.remove('nav-hidden');
       toggle.classList.add('active');
       overlay.classList.add('active');
       drawer.classList.add('active');
