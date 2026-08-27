@@ -629,14 +629,18 @@
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
-    width: 380px;
+    width: 320px;
+    /* Never extend past the bottom of the viewport on short screens */
+    max-height: calc(100vh - 84px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     background: rgba(255,255,255,0.98);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     border: 1px solid rgba(0,0,0,0.12);
     border-radius: 12px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.1);
-    padding: 20px;
+    padding: 14px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-8px) scale(0.98);
@@ -650,42 +654,55 @@
     transform: translateY(0) scale(1);
   }
 
+  /* Slim, so the panel stays visually centred if a scrollbar does appear */
+  .experience-dropdown::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .experience-dropdown::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.18);
+    border-radius: 3px;
+  }
+
   .exp-dropdown-header {
     text-align: center;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
+    margin-bottom: 10px;
+    padding-bottom: 9px;
     border-bottom: 1px solid rgba(0,0,0,0.08);
   }
 
   .exp-title {
-        font-size: 16px;
-        font-weight: 600;
+    font-size: 14px;
+    font-weight: 600;
     color: #1a1a1a;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
 
   .exp-subtitle {
-    font-size: 12px;
+    font-size: 11px;
     color: #888;
   }
 
   .exp-stats-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
+    /* minmax(0, ...) rather than a bare 1fr: the default auto minimum lets the
+       widest label (MONTHS) push its track out, making the cards uneven and
+       the row wider than the panel's padding box */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+    margin-bottom: 12px;
   }
 
   .exp-stat-card {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-radius: 10px;
-    padding: 16px 12px;
+    border-radius: 8px;
+    padding: 9px 4px;
     text-align: center;
     border: 1px solid rgba(0,0,0,0.08);
   }
 
   .exp-stat-value {
-    font-size: 28px;
+    font-size: 19px;
     font-weight: 700;
     color: #333;
     font-family: 'SF Mono', 'Fira Code', monospace;
@@ -693,76 +710,78 @@
   }
 
   .exp-stat-label {
-    font-size: 11px;
+    font-size: 9.5px;
     color: #666;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 6px;
+    letter-spacing: 0.3px;
+    margin-top: 3px;
   }
 
   .exp-progress-section {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
 
   .exp-progress-label {
-    font-size: 11px;
+    font-size: 9.5px;
     color: #888;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
+    letter-spacing: 0.4px;
+    margin-bottom: 6px;
   }
 
   .exp-progress-bar {
-    height: 8px;
+    height: 6px;
     background: #e9ecef;
-    border-radius: 4px;
+    border-radius: 3px;
     overflow: hidden;
   }
 
   .exp-progress-fill {
     height: 100%;
     background: linear-gradient(90deg, #667eea, #764ba2);
-    border-radius: 4px;
+    border-radius: 3px;
     transition: width 0.5s ease;
   }
 
   .exp-progress-years {
     display: flex;
     justify-content: space-between;
-    margin-top: 6px;
-    font-size: 10px;
+    margin-top: 5px;
+    font-size: 9.5px;
     color: #999;
   }
 
   .exp-milestones {
-    margin-bottom: 20px;
-    padding: 16px;
+    margin-bottom: 12px;
+    /* Rows carry 4px of their own vertical padding, so the box uses 7px
+       to land on a visually even 11px inset */
+    padding: 7px 11px;
     background: #f8f9fa;
-    border-radius: 10px;
+    border-radius: 8px;
     border: 1px solid rgba(0,0,0,0.08);
   }
 
   .exp-milestone {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    padding: 8px 0;
+    gap: 10px;
+    padding: 4px 0;
     position: relative;
   }
 
   .exp-milestone:not(:last-child)::after {
     content: '';
     position: absolute;
-    left: 5px;
-    top: 22px;
-    bottom: -8px;
+    left: 4px;
+    top: 15px;
+    bottom: -6px;
     width: 2px;
     background: #ddd;
   }
 
   .exp-milestone-dot {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background: #ddd;
     flex-shrink: 0;
@@ -771,43 +790,60 @@
 
   .exp-milestone.current .exp-milestone-dot {
     background: linear-gradient(135deg, #667eea, #764ba2);
-    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  }
+
+  /* Year beside the role rather than above it - halves the timeline's height,
+     which is the panel's single biggest block */
+  .exp-milestone-content {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    min-width: 0;
   }
 
   .exp-milestone-year {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
-    color: #666;
+    color: #888;
+    line-height: 1.3;
+    /* Fixed so every role starts on the same x */
+    flex: 0 0 26px;
   }
 
   .exp-milestone-text {
-    font-size: 12px;
+    font-size: 11px;
     color: #333;
+    line-height: 1.3;
+    min-width: 0;
   }
 
   .exp-total-time {
     text-align: center;
-    padding-top: 16px;
+    padding-top: 10px;
     border-top: 1px solid rgba(0,0,0,0.08);
   }
 
   .exp-total-label {
-    font-size: 10px;
+    font-size: 9.5px;
     color: #888;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 4px;
+    letter-spacing: 0.4px;
+    margin-bottom: 3px;
   }
 
   .exp-total-value {
-    font-size: 14px;
+    font-size: 12.5px;
     font-weight: 600;
     color: #333;
     font-family: 'SF Mono', 'Fira Code', monospace;
+    line-height: 1.35;
   }
 
+  /* Its own line, otherwise the minute count overflows the panel width */
   .exp-total-sub {
-    font-size: 11px;
+    display: block;
+    font-size: 10px;
     color: #888;
     font-weight: 400;
   }
@@ -1322,7 +1358,13 @@
   setTimeout(function() {
     const menubar = document.querySelector('.macos-menubar');
     const mobilebar = document.querySelector('.mobile-navbar');
-    const bars = [menubar, mobilebar].filter(Boolean);
+    // Mobile bottom bar hides too; its own CSS sends it down rather than up
+    const bottomNav = document.querySelector('.mobile-bottom-nav');
+    // The section rail is never hidden. It docks upward into the menubar's slot
+    // instead, so it stays reachable without leaving a gap where the menubar was
+    const sectionRail = document.querySelector('.nav-bar-fixed');
+
+    const bars = [menubar, mobilebar, bottomNav].filter(Boolean);
     if (!bars.length) return;
 
     const REVEAL_ZONE = 90; // always visible this close to the top
@@ -1331,17 +1373,26 @@
     let ticking = false;
     let pinned = false;     // pointer or keyboard focus is inside a bar
 
+    const setHidden = function(hide) {
+      bars.forEach(function(bar) {
+        bar.classList.toggle('nav-hidden', hide);
+      });
+      if (sectionRail) sectionRail.classList.toggle('rail-docked', hide);
+    };
+
+    // Only the bars that actually hide pin on hover. The rail is deliberately
+    // excluded: pointing at it should not drag the menubar back onto the page
     bars.forEach(function(bar) {
       bar.addEventListener('mouseenter', function() {
         pinned = true;
-        bar.classList.remove('nav-hidden');
+        setHidden(false);
       });
       bar.addEventListener('mouseleave', function() {
         pinned = false;
       });
       bar.addEventListener('focusin', function() {
         pinned = true;
-        bar.classList.remove('nav-hidden');
+        setHidden(false);
       });
       bar.addEventListener('focusout', function() {
         pinned = false;
@@ -1362,9 +1413,7 @@
       const drawerOpen = drawer && drawer.classList.contains('active');
       const hide = !pinned && !drawerOpen && y > REVEAL_ZONE && diff > 0;
 
-      bars.forEach(function(bar) {
-        bar.classList.toggle('nav-hidden', hide);
-      });
+      setHidden(hide);
       lastY = y;
     };
 

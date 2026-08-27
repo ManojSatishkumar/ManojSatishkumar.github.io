@@ -147,39 +147,43 @@
         font-weight: 500;
       }
 
-      /* macOS Dock Style Navigation */
+      /* macOS Dock Style Navigation - horizontal rail under the app bar */
       .nav-bar-fixed {
         position: fixed !important;
+        top: 64px !important;
         bottom: auto !important;
-        top: 50% !important;
-        left: 20px !important;
-        transform: translateY(-50%) !important;
-        width: auto !important;
-        padding: 6px !important;
-        border-radius: 18px !important;
-        border: 1px solid rgba(255, 255, 255, 0.4) !important;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
-        background-color: rgba(255, 255, 255, 0.62) !important;
-        backdrop-filter: saturate(500%) blur(10px) !important;
-        -webkit-backdrop-filter: saturate(500%) blur(10px) !important;
-        box-shadow:
-          0 15px 50px rgba(0, 0, 0, 0.2),
-          0 8px 20px rgba(0, 0, 0, 0.15),
-          0 2px 8px rgba(0, 0, 0, 0.1),
-          inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
-        z-index: 1000 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        transform: translateY(0) !important;
+        padding: 5px 20px !important;
+        border-radius: 0 !important;
+        border: none !important;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.07) !important;
+        background-color: rgba(255, 255, 255, 0.72) !important;
+        backdrop-filter: saturate(200%) blur(18px) !important;
+        -webkit-backdrop-filter: saturate(200%) blur(18px) !important;
+        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06) !important;
+        /* Sits under the app bar so it slides away behind it */
+        z-index: 999 !important;
+        will-change: transform;
         transition:
-          transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-          opacity 0.4s ease,
-          bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+          transform 0.38s cubic-bezier(0.22, 0.61, 0.36, 1),
+          opacity 0.4s ease !important;
+      }
+
+      /* The rail stays on screen the whole time. When the app bar slides away it
+         moves up into that slot, so it never leaves a gap under the viewport top */
+      .nav-bar-fixed.rail-docked {
+        transform: translateY(-64px) !important;
       }
 
       .nav-bar-fixed .dock-container {
         display: flex !important;
-        flex-direction: column !important;
+        flex-direction: row !important;
         align-items: center !important;
         justify-content: center !important;
-        gap: 0 !important;
+        gap: 4px !important;
         padding: 0 !important;
       }
 
@@ -187,29 +191,24 @@
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
-        justify-content: flex-end !important;
-        padding: 4px 5px !important;
+        justify-content: center !important;
+        padding: 3px 8px !important;
         margin: 0 !important;
         cursor: pointer !important;
         transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-        transform-origin: bottom center !important;
         position: relative !important;
         border-radius: 8px !important;
       }
 
-      .nav-bar-fixed .dock-item:hover {
-        /* No zoom animation */
-      }
-
       /* macOS style rounded rectangle icon */
       .nav-bar-fixed .dock-item .icon-wrapper {
-        width: 34px !important;
-        height: 34px !important;
-        border-radius: 9px !important;
+        width: 28px !important;
+        height: 28px !important;
+        border-radius: 8px !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        margin-bottom: 3px !important;
+        margin-bottom: 2px !important;
         transition: all 0.2s ease !important;
         position: relative !important;
         background: rgba(0, 0, 0, 0.04) !important;
@@ -220,13 +219,13 @@
       }
 
       .nav-bar-fixed .dock-item i {
-        font-size: 22px !important;
+        font-size: 17px !important;
         color: #555 !important;
         transition: all 0.2s ease !important;
       }
 
       .nav-bar-fixed .dock-item span {
-        font-size: 9px !important;
+        font-size: 9.5px !important;
         font-weight: 500 !important;
         color: #333 !important;
         white-space: nowrap !important;
@@ -250,12 +249,12 @@
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
       }
 
-      /* Dock Tooltip */
+      /* Dock Tooltip - drops below the horizontal rail */
       .dock-tooltip {
         position: absolute;
-        left: 70px;
-        top: 50%;
-        transform: translateY(-50%);
+        top: calc(100% + 12px);
+        left: 50%;
+        transform: translateX(-50%);
         background: white;
         border-radius: 12px;
         padding: 14px 18px;
@@ -271,13 +270,14 @@
         width: 220px;
       }
 
+      /* Invisible bridge so the tooltip survives the gap under the item */
       .dock-tooltip::before {
         content: "";
         position: absolute;
-        left: -15px;
-        top: 0;
-        width: 20px;
-        height: 100%;
+        top: -14px;
+        left: 0;
+        right: 0;
+        height: 14px;
         background: transparent;
       }
 
@@ -290,13 +290,13 @@
       .dock-tooltip::after {
         content: "";
         position: absolute;
-        left: -16px;
-        top: 50%;
-        transform: translateY(-50%);
+        top: -16px;
+        left: 50%;
+        transform: translateX(-50%);
         border-width: 8px;
         border-style: solid;
-        border-color: transparent white transparent transparent;
-        filter: drop-shadow(-2px 0 2px rgba(0, 0, 0, 0.08));
+        border-color: transparent transparent white transparent;
+        filter: drop-shadow(0 -2px 2px rgba(0, 0, 0, 0.08));
       }
 
       .dock-tooltip h4 {
@@ -332,7 +332,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.38s cubic-bezier(0.22, 0.61, 0.36, 1);
         width: 100%;
         background-color: rgba(255, 255, 255, 0.98);
         backdrop-filter: saturate(500%) blur(20px);
@@ -432,8 +432,12 @@
         color: #007bff;
       }
 
-      .mobile-bottom-nav.hidden {
-        transform: translateY(100%);
+      /* Toggled by the shared nav scroll handler, so the bottom bar leaves and
+         returns in step with the top bar - just downwards instead of up */
+      .mobile-bottom-nav.nav-hidden {
+        transform: translateY(105%);
+        box-shadow: none;
+        pointer-events: none;
       }
 
       /* Add padding to body on mobile to prevent content from being hidden behind bottom nav */
@@ -453,146 +457,18 @@
         }
       }
 
-      /* Right Tech Stack Sidebar */
-      .tech-sidebar {
-        position: fixed;
-        top: 50%;
-        right: 20px;
-        transform: translateY(-50%);
-        background-color: rgba(255, 255, 255, 0.62);
-        backdrop-filter: saturate(500%) blur(10px);
-        -webkit-backdrop-filter: saturate(500%) blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 20px;
-        padding: 8px;
-        box-shadow:
-          0 15px 50px rgba(0, 0, 0, 0.2),
-          0 8px 20px rgba(0, 0, 0, 0.15),
-          0 2px 8px rgba(0, 0, 0, 0.1),
-          inset 0 1px 1px rgba(255, 255, 255, 0.8);
-        z-index: 998;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .tech-icons {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        align-items: center;
-      }
-
-      .tech-icon {
-        width: 36px;
-        height: 36px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10px;
-        background: rgba(0, 0, 0, 0.03);
-        transition: all 0.2s ease;
-        cursor: pointer;
-      }
-
-      .tech-icon:hover {
-        background: rgba(0, 0, 0, 0.08);
-        transform: scale(1.15);
-      }
-
-      .tech-icon img {
-        width: 24px;
-        height: 24px;
-        object-fit: contain;
-      }
-
-      /* Tech Tooltip */
-      .tech-tooltip {
-        position: absolute;
-        right: 36px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 260px;
-        background: white;
-        border-radius: 12px;
-        padding: 16px;
-        box-shadow:
-          0 8px 32px rgba(0, 0, 0, 0.15),
-          0 2px 8px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.2s ease;
-        z-index: 1000;
-        pointer-events: none;
-      }
-
-      /* Invisible bridge to connect icon to tooltip */
-      .tech-tooltip::before {
-        content: "";
-        position: absolute;
-        right: -15px;
-        top: 0;
-        width: 20px;
-        height: 100%;
-        background: transparent;
-      }
-
-      .tech-icon:hover .tech-tooltip {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-      }
-
-      .tech-tooltip::after {
-        content: "";
-        position: absolute;
-        right: -8px;
-        top: 50%;
-        transform: translateY(-50%);
-        border-width: 8px;
-        border-style: solid;
-        border-color: transparent transparent transparent white;
-      }
-
-      .tech-tooltip h4 {
-        margin: 0 0 8px 0;
-        font-size: 15px;
-        font-weight: 700;
-        color: #1a1a1a;
-        font-family: "Poppins", sans-serif;
-      }
-
-      .tech-tooltip p {
-        margin: 0;
-        font-size: 12px;
-        line-height: 1.6;
-        color: #555;
-        font-family: "Poppins", sans-serif;
-      }
-
-      .tech-tooltip a {
-        display: inline-block;
-        font-size: 12px;
-        font-weight: 600;
-        color: #007bff;
-        text-decoration: none;
-        transition: color 0.2s ease;
-        font-family: "Poppins", sans-serif;
-      }
-
-      .tech-tooltip a:hover {
-        color: #0056b3;
-        text-decoration: underline;
-      }
-
-      /* Show these side rails only on large laptop / desktop screens */
+      /* Show this rail only on large laptop / desktop screens */
       @media only screen and (max-width: 1365px) {
-        .nav-bar-fixed,
-        .tech-sidebar {
+        .nav-bar-fixed {
           display: none;
+        }
+      }
+
+      /* Where the rail is visible it stacks under the 64px app bar, so the page
+         needs room for both. Outranks the app bar's own body padding rule. */
+      @media only screen and (min-width: 1366px) {
+        html body {
+          padding-top: 124px !important;
         }
       }
 
@@ -631,18 +507,12 @@
         opacity: 1;
       }
 
-      /* Left Dock - slides from left using left position */
-      .nav-bar-fixed {
-        left: -100px !important;
+      /* Sub-nav rail - stays tucked behind the app bar until the load
+         animation runs. Uses a pre-state class rather than a keyframe because
+         the rail's own transform is !important and would outrank an animation */
+      .nav-bar-fixed:not(.slide-in) {
+        transform: translateY(calc(-100% - 72px)) !important;
         opacity: 0 !important;
-        transition:
-          left 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
-          opacity 0.5s ease !important;
-      }
-
-      .nav-bar-fixed.slide-in {
-        left: 20px !important;
-        opacity: 1 !important;
       }
 
       /* Right Chatbot Widget - slides from right */
@@ -671,20 +541,6 @@
 
       .scroll-indicator-wrapper.slide-in {
         left: 30px !important;
-        opacity: 1 !important;
-      }
-
-      /* Right Tech Sidebar - slides from right */
-      .tech-sidebar {
-        right: -100px !important;
-        opacity: 0 !important;
-        transition:
-          right 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
-          opacity 0.5s ease !important;
-      }
-
-      .tech-sidebar.slide-in {
-        right: 20px !important;
         opacity: 1 !important;
       }
 
@@ -951,180 +807,6 @@
   </head>
 
   <body style="padding: 0px; margin: 0px">
-    <!-- Right Tech Stack Sidebar -->
-    <div class="tech-sidebar">
-      <div class="tech-icons">
-        <div class="tech-icon">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
-            alt="HTML5"
-          />
-          <div class="tech-tooltip">
-            <h4>HTML5</h4>
-            <p>
-              The standard markup language for creating web pages. HTML5
-              introduced semantic elements, multimedia support, and APIs for
-              complex web applications.
-            </p>
-          </div>
-        </div>
-        <div class="tech-icon">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
-            alt="CSS3"
-          />
-          <div class="tech-tooltip">
-            <h4>CSS3</h4>
-            <p>
-              A stylesheet language used to describe the presentation of HTML
-              documents. CSS3 brings animations, flexbox, grid layouts, and
-              advanced visual effects.
-            </p>
-          </div>
-        </div>
-        <div class="tech-icon">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-            alt="JavaScript"
-          />
-          <div class="tech-tooltip">
-            <h4>JavaScript</h4>
-            <p>
-              A versatile programming language that enables interactive web
-              pages. It's essential for modern web development, powering both
-              frontend and backend applications.
-            </p>
-          </div>
-        </div>
-        <div class="tech-icon">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
-            alt="TypeScript"
-          />
-          <div class="tech-tooltip">
-            <h4>TypeScript</h4>
-            <p>
-              A strongly typed superset of JavaScript that compiles to plain
-              JavaScript. It adds optional static typing, classes, and
-              interfaces for building robust applications.
-            </p>
-          </div>
-        </div>
-        <div class="tech-icon">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-            alt="React"
-          />
-          <div class="tech-tooltip">
-            <h4>React</h4>
-            <p>
-              A JavaScript library for building user interfaces. React uses a
-              component-based architecture and virtual DOM for efficient,
-              declarative UI development.
-            </p>
-          </div>
-        </div>
-        <div class="tech-icon">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg"
-            alt="Redux"
-          />
-          <div class="tech-tooltip">
-            <h4>Redux</h4>
-            <p>
-              A predictable state container for JavaScript apps. Redux helps
-              manage application state with a single source of truth and
-              unidirectional data flow.
-            </p>
-          </div>
-        </div>
-        <div class="tech-icon">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg"
-            alt="Material UI"
-          />
-          <div class="tech-tooltip">
-            <h4>Material UI</h4>
-            <p>
-              A popular React component library implementing Google's Material
-              Design. It provides pre-built, customizable components for faster
-              UI development.
-            </p>
-          </div>
-        </div>
-        <div class="tech-icon">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg"
-            alt="Webpack"
-          />
-          <div class="tech-tooltip">
-            <h4>Webpack</h4>
-            <p>
-              A powerful module bundler for JavaScript applications. Webpack
-              processes and bundles assets, scripts, and styles for optimized
-              production builds.
-            </p>
-          </div>
-        </div>
-        <div class="tech-icon">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
-            alt="Node.js"
-          />
-          <div class="tech-tooltip">
-            <h4>Node.js</h4>
-            <p>
-              A JavaScript runtime built on Chrome's V8 engine. Node.js enables
-              server-side JavaScript execution for building scalable network
-              applications.
-            </p>
-          </div>
-        </div>
-        <div class="tech-icon">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
-            alt="Express.js"
-          />
-          <div class="tech-tooltip">
-            <h4>Express.js</h4>
-            <p>
-              A minimal and flexible Node.js web framework. Express provides
-              robust features for building web and mobile applications with easy
-              routing and middleware.
-            </p>
-          </div>
-        </div>
-        <div class="tech-icon">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg"
-            alt="Jest"
-          />
-          <div class="tech-tooltip">
-            <h4>Jest</h4>
-            <p>
-              A delightful JavaScript testing framework with a focus on
-              simplicity. Jest works with React, Node, and more, offering
-              zero-config setup and snapshot testing.
-            </p>
-          </div>
-        </div>
-        <div class="tech-icon">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg"
-            alt="GraphQL"
-          />
-          <div class="tech-tooltip">
-            <h4>GraphQL</h4>
-            <p>
-              A query language for APIs and a runtime for executing queries.
-              GraphQL provides a complete description of your data and lets
-              clients request exactly what they need.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div id="desktop-nav-bar"></div>
     <!-- macOS Dock Style Navigation -->
     <div class="nav-bar-fixed">
@@ -1493,10 +1175,22 @@
         });
       }
 
+      // Height of whatever fixed bars are stacked at the top right now, so a
+      // jumped-to section doesn't land underneath them
+      function getStickyHeaderOffset() {
+        return [".macos-menubar", ".nav-bar-fixed"].reduce((total, selector) => {
+          const bar = document.querySelector(selector);
+          if (!bar || getComputedStyle(bar).display === "none") {
+            return total;
+          }
+          return total + bar.offsetHeight;
+        }, 0);
+      }
+
       function animateScroll(id) {
         $("html, body").animate(
           {
-            scrollTop: $(`#${id}`).offset().top,
+            scrollTop: $(`#${id}`).offset().top - getStickyHeaderOffset(),
           },
           1000,
         );
@@ -1596,18 +1290,6 @@
 
         // Set initial active state for desktop dock
         $(".nav-bar-fixed .dock-item[data-section='intro']").addClass("active");
-
-        // Mobile bottom nav - always visible (removed hide/show on scroll)
-        // Keep mobile bottom nav always visible when scrolling
-        $(window).on("scroll", function () {
-          // Only apply on mobile (< 1024px)
-          if ($(window).width() >= 1024) return;
-
-          let mobileNav = $(".mobile-bottom-nav");
-
-          // Ensure mobile nav is always visible
-          mobileNav.removeClass("hidden");
-        });
       });
     </script>
     <!-- PWA -->
@@ -1643,14 +1325,6 @@
             navBarFixed.classList.add("slide-in");
           }
         }, 400);
-
-        // Right tech sidebar slides in
-        setTimeout(function () {
-          const techSidebar = document.querySelector(".tech-sidebar");
-          if (techSidebar) {
-            techSidebar.classList.add("slide-in");
-          }
-        }, 600);
 
         // Right chatbot widget slides in
         setTimeout(function () {
