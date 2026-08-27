@@ -975,31 +975,34 @@
     max-height: 85vh;
   }
 
-  .exp-dropdown-header {
+  /* Scoped to the modal: the navbar's experience dropdown reuses every one of
+     these class names at a much smaller scale, and this component is injected
+     later in the document, so unscoped rules would win there and blow it out */
+  .exp-modal-content .exp-dropdown-header {
     text-align: center;
     margin-bottom: 20px;
   }
 
-  .exp-title {
+  .exp-modal-content .exp-title {
     font-size: 1.3rem;
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 4px;
   }
 
-  .exp-subtitle {
+  .exp-modal-content .exp-subtitle {
     font-size: 0.9rem;
     color: #666;
   }
 
-  .exp-stats-grid {
+  .exp-modal-content .exp-stats-grid {
     display: flex;
     justify-content: center;
     gap: 16px;
     margin-bottom: 24px;
   }
 
-  .exp-stat-card {
+  .exp-modal-content .exp-stat-card {
     background: #fff;
     border-radius: 12px;
     padding: 16px 28px;
@@ -1007,24 +1010,24 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   }
 
-  .exp-stat-value {
+  .exp-modal-content .exp-stat-value {
     font-size: 2rem;
     font-weight: 700;
     color: #333;
   }
 
-  .exp-stat-label {
+  .exp-modal-content .exp-stat-label {
     font-size: 0.75rem;
     color: #888;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
-  .exp-progress-section {
+  .exp-modal-content .exp-progress-section {
     margin-bottom: 24px;
   }
 
-  .exp-progress-label {
+  .exp-modal-content .exp-progress-label {
     font-size: 0.75rem;
     color: #888;
     text-transform: uppercase;
@@ -1032,7 +1035,7 @@
     margin-bottom: 8px;
   }
 
-  .exp-progress-bar {
+  .exp-modal-content .exp-progress-bar {
     height: 8px;
     background: #e0e0e0;
     border-radius: 4px;
@@ -1040,21 +1043,21 @@
     margin-bottom: 6px;
   }
 
-  .exp-progress-fill {
+  .exp-modal-content .exp-progress-fill {
     height: 100%;
     width: 70%;
     background: linear-gradient(90deg, #4ade80 0%, #667eea 100%);
     border-radius: 4px;
   }
 
-  .exp-progress-years {
+  .exp-modal-content .exp-progress-years {
     display: flex;
     justify-content: space-between;
     font-size: 0.7rem;
     color: #999;
   }
 
-  .exp-milestones {
+  .exp-modal-content .exp-milestones {
     background: #fff;
     border-radius: 12px;
     padding: 16px 20px;
@@ -1062,7 +1065,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   }
 
-  .exp-milestone {
+  .exp-modal-content .exp-milestone {
     display: flex;
     align-items: flex-start;
     gap: 12px;
@@ -1070,7 +1073,7 @@
     position: relative;
   }
 
-  .exp-milestone:not(:last-child)::after {
+  .exp-modal-content .exp-milestone:not(:last-child)::after {
     content: "";
     position: absolute;
     left: 7px;
@@ -1080,12 +1083,12 @@
     background: #e0e0e0;
   }
 
-  .exp-milestone.current .exp-milestone-dot {
+  .exp-modal-content .exp-milestone.current .exp-milestone-dot {
     background: #667eea;
     box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
   }
 
-  .exp-milestone-dot {
+  .exp-modal-content .exp-milestone-dot {
     width: 16px;
     height: 16px;
     border-radius: 50%;
@@ -1094,28 +1097,28 @@
     margin-top: 2px;
   }
 
-  .exp-milestone-content {
+  .exp-modal-content .exp-milestone-content {
     flex: 1;
   }
 
-  .exp-milestone-year {
+  .exp-modal-content .exp-milestone-year {
     font-size: 0.75rem;
     color: #888;
   }
 
-  .exp-milestone-text {
+  .exp-modal-content .exp-milestone-text {
     font-size: 0.95rem;
     font-weight: 600;
     color: #333;
   }
 
-  .exp-total-time {
+  .exp-modal-content .exp-total-time {
     text-align: center;
     padding-top: 16px;
     border-top: 1px solid #ddd;
   }
 
-  .exp-total-label {
+  .exp-modal-content .exp-total-label {
     font-size: 0.75rem;
     color: #888;
     text-transform: uppercase;
@@ -1123,13 +1126,13 @@
     margin-bottom: 4px;
   }
 
-  .exp-total-value {
+  .exp-modal-content .exp-total-value {
     font-size: 1.2rem;
     font-weight: 700;
     color: #333;
   }
 
-  .exp-total-sub {
+  .exp-modal-content .exp-total-sub {
     font-size: 0.85rem;
     font-weight: 400;
     color: #888;

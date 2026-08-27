@@ -629,7 +629,7 @@
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
-    width: 320px;
+    width: 368px;
     /* Never extend past the bottom of the viewport on short screens */
     max-height: calc(100vh - 84px);
     overflow-y: auto;
@@ -664,52 +664,54 @@
     border-radius: 3px;
   }
 
-  .exp-dropdown-header {
+  /* Scoped to the dropdown: the introduction component's experience modal
+     reuses every one of these class names at a much larger scale */
+  .experience-dropdown .exp-dropdown-header {
     text-align: center;
     margin-bottom: 10px;
     padding-bottom: 9px;
     border-bottom: 1px solid rgba(0,0,0,0.08);
   }
 
-  .exp-title {
+  .experience-dropdown .exp-title {
     font-size: 14px;
     font-weight: 600;
     color: #1a1a1a;
     margin-bottom: 2px;
   }
 
-  .exp-subtitle {
+  .experience-dropdown .exp-subtitle {
     font-size: 11px;
     color: #888;
   }
 
-  .exp-stats-grid {
+  .experience-dropdown .exp-stats-grid {
     display: grid;
     /* minmax(0, ...) rather than a bare 1fr: the default auto minimum lets the
        widest label (MONTHS) push its track out, making the cards uneven and
        the row wider than the panel's padding box */
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 7px;
+    gap: 8px;
     margin-bottom: 12px;
   }
 
-  .exp-stat-card {
+  .experience-dropdown .exp-stat-card {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     border-radius: 8px;
-    padding: 9px 4px;
+    padding: 10px 6px;
     text-align: center;
     border: 1px solid rgba(0,0,0,0.08);
   }
 
-  .exp-stat-value {
-    font-size: 19px;
+  .experience-dropdown .exp-stat-value {
+    font-size: 21px;
     font-weight: 700;
     color: #333;
     font-family: 'SF Mono', 'Fira Code', monospace;
     line-height: 1;
   }
 
-  .exp-stat-label {
+  .experience-dropdown .exp-stat-label {
     font-size: 9.5px;
     color: #666;
     text-transform: uppercase;
@@ -717,11 +719,11 @@
     margin-top: 3px;
   }
 
-  .exp-progress-section {
+  .experience-dropdown .exp-progress-section {
     margin-bottom: 12px;
   }
 
-  .exp-progress-label {
+  .experience-dropdown .exp-progress-label {
     font-size: 9.5px;
     color: #888;
     text-transform: uppercase;
@@ -729,21 +731,21 @@
     margin-bottom: 6px;
   }
 
-  .exp-progress-bar {
+  .experience-dropdown .exp-progress-bar {
     height: 6px;
     background: #e9ecef;
     border-radius: 3px;
     overflow: hidden;
   }
 
-  .exp-progress-fill {
+  .experience-dropdown .exp-progress-fill {
     height: 100%;
     background: linear-gradient(90deg, #667eea, #764ba2);
     border-radius: 3px;
     transition: width 0.5s ease;
   }
 
-  .exp-progress-years {
+  .experience-dropdown .exp-progress-years {
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
@@ -751,7 +753,7 @@
     color: #999;
   }
 
-  .exp-milestones {
+  .experience-dropdown .exp-milestones {
     margin-bottom: 12px;
     /* Rows carry 4px of their own vertical padding, so the box uses 7px
        to land on a visually even 11px inset */
@@ -761,7 +763,7 @@
     border: 1px solid rgba(0,0,0,0.08);
   }
 
-  .exp-milestone {
+  .experience-dropdown .exp-milestone {
     display: flex;
     align-items: flex-start;
     gap: 10px;
@@ -769,7 +771,7 @@
     position: relative;
   }
 
-  .exp-milestone:not(:last-child)::after {
+  .experience-dropdown .exp-milestone:not(:last-child)::after {
     content: '';
     position: absolute;
     left: 4px;
@@ -779,7 +781,7 @@
     background: #ddd;
   }
 
-  .exp-milestone-dot {
+  .experience-dropdown .exp-milestone-dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
@@ -788,21 +790,21 @@
     margin-top: 2px;
   }
 
-  .exp-milestone.current .exp-milestone-dot {
+  .experience-dropdown .exp-milestone.current .exp-milestone-dot {
     background: linear-gradient(135deg, #667eea, #764ba2);
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
   }
 
   /* Year beside the role rather than above it - halves the timeline's height,
      which is the panel's single biggest block */
-  .exp-milestone-content {
+  .experience-dropdown .exp-milestone-content {
     display: flex;
     align-items: baseline;
     gap: 8px;
     min-width: 0;
   }
 
-  .exp-milestone-year {
+  .experience-dropdown .exp-milestone-year {
     font-size: 10px;
     font-weight: 600;
     color: #888;
@@ -811,20 +813,20 @@
     flex: 0 0 26px;
   }
 
-  .exp-milestone-text {
+  .experience-dropdown .exp-milestone-text {
     font-size: 11px;
     color: #333;
     line-height: 1.3;
     min-width: 0;
   }
 
-  .exp-total-time {
+  .experience-dropdown .exp-total-time {
     text-align: center;
     padding-top: 10px;
     border-top: 1px solid rgba(0,0,0,0.08);
   }
 
-  .exp-total-label {
+  .experience-dropdown .exp-total-label {
     font-size: 9.5px;
     color: #888;
     text-transform: uppercase;
@@ -832,7 +834,7 @@
     margin-bottom: 3px;
   }
 
-  .exp-total-value {
+  .experience-dropdown .exp-total-value {
     font-size: 12.5px;
     font-weight: 600;
     color: #333;
@@ -841,7 +843,7 @@
   }
 
   /* Its own line, otherwise the minute count overflows the panel width */
-  .exp-total-sub {
+  .experience-dropdown .exp-total-sub {
     display: block;
     font-size: 10px;
     color: #888;
