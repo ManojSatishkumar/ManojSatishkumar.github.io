@@ -181,7 +181,11 @@ p {
 /*  Navbar Top
 /*-----------------------------------------------------------------------------------*/
 
-nav:not(.macos-menubar) {
+/* Legacy theme navbar. Both bars in components/desktop-nav-bar.html are <nav>
+   elements that style themselves, so they are excluded here — otherwise this
+   rule's `display: none` outranks their own `.mobile-navbar` rule (an element
+   plus a :not(class) beats a bare class) and the mobile bar never appears. */
+nav:not(.macos-menubar):not(.mobile-navbar) {
   position: fixed;
   background: #fff;
   z-index: 1000;

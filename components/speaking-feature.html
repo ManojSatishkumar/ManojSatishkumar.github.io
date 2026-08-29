@@ -17,30 +17,8 @@
 
   .speaking-feature-header {
     max-width: 920px;
-    margin: 0 auto 22px;
+    margin: 0 auto 26px;
     text-align: center;
-  }
-
-  .speaking-feature-kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 14px;
-    border-radius: 999px;
-    background: rgba(108, 131, 255, 0.1);
-    color: #5164d8;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .speaking-feature-title {
-    margin: 14px 0 10px;
-    color: #17213c;
-    font-size: clamp(30px, 3.6vw, 44px);
-    line-height: 1.08;
-    font-weight: 800;
   }
 
   .speaking-feature-summary {
@@ -50,19 +28,19 @@
     line-height: 1.65;
   }
 
-  .speaking-feature-grid {
+  /* A single teaser card: thumbnail on the left, one-paragraph pitch and a
+     read-more on the right. The full write-up lives at /project-space/. */
+  .speaking-teaser {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    gap: 22px;
-    align-items: start;
-  }
-
-  .speaking-video-card,
-  .speaking-story-card {
-    position: relative;
-    background: rgba(255, 255, 255, 0.88);
-    border: 1px solid rgba(214, 223, 246, 0.9);
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: 26px;
+    align-items: center;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 22px;
     border-radius: 28px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(214, 223, 246, 0.9);
     box-shadow:
       0 24px 60px rgba(104, 121, 167, 0.1),
       0 10px 24px rgba(104, 121, 167, 0.08);
@@ -70,160 +48,129 @@
     -webkit-backdrop-filter: blur(12px);
   }
 
-  .speaking-video-card {
-    padding: 22px;
-    height: fit-content;
-  }
-
-  .speaking-video-frame {
+  .speaking-teaser-media {
     position: relative;
-    border-radius: 22px;
+    display: block;
+    border-radius: 20px;
     overflow: hidden;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 16 / 10;
     background: linear-gradient(135deg, #dfe7ff, #f6f8ff);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
   }
 
-  .speaking-video-frame iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-
-  .speaking-video-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 16px;
-  }
-
-  .speaking-meta-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 9px 13px;
-    border-radius: 999px;
-    background: #f4f7ff;
-    color: #44516f;
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  .speaking-story-card {
-    padding: 22px 22px 20px;
-  }
-
-  .speaking-story-heading {
-    margin: 0 0 12px;
-    color: #17213c;
-    font-size: 25px;
-    line-height: 1.16;
-    font-weight: 800;
-  }
-
-  .speaking-story-copy {
-    margin: 0;
-    color: #5f6d89;
-    font-size: 15px;
-    line-height: 1.7;
-  }
-
-  .speaking-story-copy + .speaking-story-copy {
-    margin-top: 12px;
-  }
-
-  .speaking-host-card {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 14px;
-    padding: 16px 18px;
-    border-radius: 18px;
-    background: linear-gradient(135deg, rgba(244, 247, 255, 0.98), rgba(255, 248, 241, 0.96));
-    border: 1px solid rgba(222, 228, 245, 0.95);
-  }
-
-  .speaking-host-mark {
-    flex: 0 0 72px;
-    width: 72px;
-    height: 72px;
-    border-radius: 18px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.92);
-    box-shadow: 0 14px 30px rgba(96, 112, 188, 0.14);
-    border: 1px solid rgba(222, 228, 245, 0.95);
-  }
-
-  .speaking-host-mark img {
+  .speaking-teaser-media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.45s ease;
   }
 
-  .speaking-host-label {
-    margin: 0 0 4px;
-    color: #66738f;
+  .speaking-teaser-media:hover img {
+    transform: scale(1.05);
+  }
+
+  .speaking-teaser-badge {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    background: rgba(6, 48, 26, 0.82);
+    color: #fff;
     font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .speaking-teaser-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: rgba(22, 163, 74, 0.1);
+    color: #0b6b34;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .speaking-teaser-heading {
+    margin: 14px 0 10px;
+    color: #17213c;
+    font-size: clamp(21px, 2.4vw, 27px);
+    line-height: 1.18;
+    font-weight: 800;
+  }
+
+  .speaking-teaser-copy {
+    margin: 0;
+    color: #5f6d89;
+    font-size: 15.5px;
+    line-height: 1.72;
+  }
+
+  .speaking-teaser-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin: 18px 0 20px;
+  }
+
+  .speaking-teaser-stat b {
+    display: block;
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #16a34a 0%, #0b6b34 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .speaking-teaser-stat span {
+    display: block;
+    margin-top: 3px;
+    color: #7a869c;
+    font-size: 11.5px;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
-  .speaking-host-name {
-    margin: 0;
-    color: #1c2a4f;
-    font-size: 20px;
-    font-weight: 800;
-    line-height: 1.2;
+  .speaking-teaser-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 20px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 12px 26px rgba(21, 128, 61, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .speaking-host-copy {
-    margin: 6px 0 0;
-    color: #66738f;
-    font-size: 13px;
-    line-height: 1.55;
+  .speaking-teaser-link:hover {
+    transform: translateY(-2px);
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 16px 34px rgba(21, 128, 61, 0.34);
   }
 
-  .speaking-projects {
-    margin-top: 16px;
-    padding: 16px 16px 14px;
-    border-radius: 22px;
-    background: linear-gradient(135deg, rgba(246, 249, 255, 0.96), rgba(255, 249, 243, 0.96));
-    border: 1px solid rgba(222, 228, 245, 0.95);
-  }
-
-  .speaking-projects-title {
-    margin: 0 0 12px;
-    color: #243257;
-    font-size: 14px;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .speaking-project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 9px;
-  }
-
-  .speaking-project-tag {
-    padding: 9px 12px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.88);
-    border: 1px solid rgba(216, 225, 246, 0.95);
-    color: #49577a;
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  @media (max-width: 991px) {
-    .speaking-feature-grid {
+  @media (max-width: 860px) {
+    .speaking-teaser {
       grid-template-columns: 1fr;
+      gap: 20px;
     }
   }
 
@@ -236,119 +183,99 @@
       padding: 0 18px;
     }
 
-    .speaking-video-card,
-    .speaking-story-card {
-      border-radius: 24px;
-    }
-
-    .speaking-video-card {
+    .speaking-teaser {
       padding: 18px;
-    }
-
-    .speaking-story-card {
-      padding: 22px 18px 20px;
-    }
-
-    .speaking-host-card {
-      align-items: flex-start;
+      border-radius: 24px;
     }
 
     .speaking-feature-summary {
       font-size: 16px;
     }
 
+    .speaking-teaser-stats {
+      gap: 16px;
+    }
   }
 </style>
 
 <section class="speaking-feature-section">
   <div class="speaking-feature-shell">
     <div class="speaking-feature-header">
-       <div
-          style="
-            font-size: 50px;
-            font-weight: bold;
-            background: #121fcf;
-            background: -webkit-linear-gradient(
-              to right,
-              #121fcf 0%,
-              #cf1512 100%
-            );
-            background: -moz-linear-gradient(
-              to right,
-              #121fcf 0%,
-              #cf1512 100%
-            );
-            background: linear-gradient(to right, #121fcf 0%, #cf1512 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          "
-        >
-          Tech Talks
-        </div>
-        <br/>
+      <div
+        style="
+          font-size: 50px;
+          font-weight: bold;
+          background: #121fcf;
+          background: -webkit-linear-gradient(
+            to right,
+            #121fcf 0%,
+            #cf1512 100%
+          );
+          background: -moz-linear-gradient(to right, #121fcf 0%, #cf1512 100%);
+          background: linear-gradient(to right, #121fcf 0%, #cf1512 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        "
+      >
+        Tech Talks
+      </div>
+      <br />
       <p class="speaking-feature-summary">
         I use speaking engagements to share engineering perspective, encourage
         young builders, and stay closely connected to the next generation of
-        developers. This appearance reflects how seriously I take mentoring,
-        community involvement, and showing up for students beyond my day job.
+        developers.
       </p>
     </div>
 
-    <div class="speaking-feature-grid">
-      <div class="speaking-video-card">
-        <div class="speaking-video-frame">
-          <iframe
-            src="https://www.youtube.com/embed/13qRZ02oDHI"
-            title="Project Space Season 7"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
-        </div>
-        <div class="speaking-video-meta">
-          <span class="speaking-meta-pill">Guest Speaker</span>
-          <span class="speaking-meta-pill">Jury Panel Judge</span>
-          <span class="speaking-meta-pill">Student Mentorship</span>
-          <span class="speaking-meta-pill">Career Inspiration</span>
-        </div>
-      </div>
+    <div class="speaking-teaser">
+      <a
+        class="speaking-teaser-media"
+        href="/project-space/"
+        aria-label="Read about Project Space 7.0 at Aditya University"
+      >
+        <img
+          src="/images/project-space/crowd.jpg"
+          alt="Project Space 7.0 participants filling the Aditya University amphitheatre"
+          loading="lazy"
+          width="1600"
+          height="922"
+        />
+        <span class="speaking-teaser-badge">
+          <i class="fas fa-microphone-lines"></i>
+          Guest Speaker &middot; Jury
+        </span>
+      </a>
 
-      <div class="speaking-story-card">
-        <h3 class="speaking-story-heading">
-          Showing up for students as a speaker, mentor, and industry voice.
+      <div>
+        <span class="speaking-teaser-kicker">
+          <i class="fas fa-university"></i> Aditya University
+        </span>
+        <h3 class="speaking-teaser-heading">
+          Project Space 7.0 &mdash; a campus that moved into its own build for a
+          week.
         </h3>
-        <p class="speaking-story-copy">
-          I had the opportunity to join Aditya University as a guest speaker
-          and jury panel member, sharing practical industry perspective with
-          students who are actively preparing for real engineering careers.
-        </p>
-        <p class="speaking-story-copy">
-          What mattered most to me was being present in a way that could
-          genuinely encourage them: talking about building with conviction,
-          thinking beyond theory, and helping them see what strong engineering
-          standards and long-term growth can look like in the real world.
+        <p class="speaking-teaser-copy">
+          Technical Hub invited me as a guest speaker and jury panel member. I
+          spoke to the participants, walked their projects, judged the finals
+          and handed over the prizes.
         </p>
 
-        <div class="speaking-host-card">
-          <div class="speaking-host-mark">
-            <img
-              src="/images/adithya-university.jpeg"
-              alt="Aditya University logo"
-            />
+        <div class="speaking-teaser-stats">
+          <div class="speaking-teaser-stat">
+            <b>700+</b><span>Participants</span>
           </div>
-          <div>
-            <p class="speaking-host-label">Hosted At</p>
-            <p class="speaking-host-name">Aditya University</p>
-            <p class="speaking-host-copy">
-              This invitation meant a lot to me because it created space to
-              connect directly with students, share what the industry expects,
-              and hopefully leave them a little more confident about their path.
-            </p>
+          <div class="speaking-teaser-stat">
+            <b>120+</b><span>Projects</span>
+          </div>
+          <div class="speaking-teaser-stat">
+            <b>20</b><span>Finalists</span>
           </div>
         </div>
+
+        <a class="speaking-teaser-link" href="/project-space/">
+          Read the full story <i class="fas fa-arrow-right"></i>
+        </a>
       </div>
     </div>
-
   </div>
 </section>

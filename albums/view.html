@@ -100,6 +100,35 @@
         column-gap: 18px;
       }
 
+      /* Multicol balances on height, so an album holding fewer photos than
+         there are columns stacks them all in the first one and leaves the rest
+         of the row blank. Short albums lay out as an explicit row instead. */
+      .collage-grid[data-count="1"],
+      .collage-grid[data-count="2"],
+      .collage-grid[data-count="3"] {
+        display: grid;
+        gap: 18px;
+        align-items: start;
+      }
+
+      .collage-grid[data-count="1"] {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .collage-grid[data-count="2"] {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .collage-grid[data-count="3"] {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .collage-grid[data-count="1"] .photo-card,
+      .collage-grid[data-count="2"] .photo-card,
+      .collage-grid[data-count="3"] .photo-card {
+        margin-bottom: 0;
+      }
+
       .photo-card {
         width: 100%;
         margin: 0 0 18px;
@@ -123,10 +152,85 @@
           0 8px 14px rgba(67, 45, 24, 0.1);
       }
 
-      .photo-card img {
-        width: 100%;
-        height: auto;
+      /* The box is sized from the photo's real pixel ratio, so the masonry
+         columns settle at first paint and nothing moves as files arrive. */
+      .photo-frame {
+        position: relative;
         display: block;
+        width: 100%;
+        aspect-ratio: var(--ratio, 4 / 3);
+        overflow: hidden;
+        background: #e7dbc9;
+      }
+
+      /* The gradient tiles, and travels exactly one tile per cycle, so the
+         highlight sweeps at a steady pace and never leaves the box bare. */
+      .photo-frame::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          100deg,
+          #e7dbc9 0%,
+          #e7dbc9 32%,
+          #fbf6ed 50%,
+          #e7dbc9 68%,
+          #e7dbc9 100%
+        );
+        background-size: 300% 100%;
+        animation: photo-shimmer 1.3s linear infinite;
+      }
+
+      /* Skeleton retires the moment the file is decoded */
+      .photo-frame.is-loaded::before,
+      .photo-frame.is-failed::before {
+        content: none;
+        animation: none;
+      }
+
+      .photo-frame.is-failed {
+        display: grid;
+        place-items: center;
+      }
+
+      .photo-frame.is-failed::after {
+        content: "Photo unavailable";
+        color: #a3927d;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+
+      @keyframes photo-shimmer {
+        from {
+          background-position: 75% 0;
+        }
+        to {
+          background-position: -75% 0;
+        }
+      }
+
+      .photo-card img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+      }
+
+      .photo-frame.is-loaded img {
+        opacity: 1;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .photo-frame::before {
+          animation: none;
+        }
+
+        .photo-card img {
+          transition: none;
+        }
       }
 
       .photo-modal {
@@ -207,6 +311,16 @@
           column-gap: 12px;
         }
 
+        .collage-grid[data-count="1"],
+        .collage-grid[data-count="2"],
+        .collage-grid[data-count="3"] {
+          gap: 12px;
+        }
+
+        .collage-grid[data-count="3"] {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
         .photo-card {
           margin-bottom: 12px;
           border-radius: 18px;
@@ -216,6 +330,11 @@
       @media (max-width: 520px) {
         .collage-grid {
           column-count: 1;
+        }
+
+        .collage-grid[data-count="2"],
+        .collage-grid[data-count="3"] {
+          grid-template-columns: minmax(0, 1fr);
         }
 
         .photo-modal {
@@ -276,31 +395,93 @@
         albumTitle.textContent = currentAlbum.title;
         albumStats.textContent = `${currentAlbum.images.length} photos`;
         albumNote.textContent = currentAlbum.note;
+        collageGrid.dataset.count = currentAlbum.images.length;
 
         collageGrid.innerHTML = currentAlbum.images
-          .map(
-            (image, index) => `
+          .map((entry, index) => {
+            const photo = window.albumPhoto(entry);
+            // Fall back to a 4:3 box when an entry has no measured size, so the
+            // slot is still reserved rather than collapsing to zero height.
+            const ratio = photo.w && photo.h ? `${photo.w} / ${photo.h}` : "4 / 3";
+            const label = `${currentAlbum.title} photo ${index + 1}`;
+
+            return `
               <button
                 class="photo-card"
                 type="button"
                 data-image-index="${index}"
-                aria-label="Open ${currentAlbum.title} photo ${index + 1}"
+                aria-label="Open ${escapeAttr(label)}"
               >
-                <img src="${image}" alt="${currentAlbum.title} photo ${index + 1}" loading="lazy" />
+                <span class="photo-frame" style="--ratio: ${ratio}">
+                  <img
+                    src="${escapeAttr(photo.src)}"
+                    alt="${escapeAttr(label)}"
+                    width="${photo.w || ""}"
+                    height="${photo.h || ""}"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </span>
               </button>
-            `
-          )
+            `;
+          })
           .join("");
+
+        collageGrid.querySelectorAll(".photo-frame").forEach(watchPhotoLoad);
 
         document.querySelectorAll(".photo-card").forEach((card) => {
           card.addEventListener("click", () => {
             const index = Number(card.dataset.imageIndex);
-            openPhoto(currentAlbum.images[index], `${currentAlbum.title} photo ${index + 1}`);
+            const photo = window.albumPhoto(currentAlbum.images[index]);
+            openPhoto(photo.src, `${currentAlbum.title} photo ${index + 1}`, photo);
           });
         });
       }
 
-      function openPhoto(src, alt) {
+      function escapeAttr(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/"/g, "&quot;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+
+      function watchPhotoLoad(frame) {
+        const img = frame.querySelector("img");
+        if (!img) return;
+
+        const reveal = () => frame.classList.add("is-loaded");
+        const fail = () => frame.classList.add("is-failed");
+
+        // These photos are 12 megapixels and up, so `load` fires well before
+        // Chrome can paint them. decode() resolves when the frame is actually
+        // paintable, which keeps the skeleton up instead of swapping it for a
+        // blank box.
+        const settle = () => {
+          if (typeof img.decode === "function") {
+            img.decode().then(reveal, reveal);
+          } else {
+            reveal();
+          }
+        };
+
+        // A cached image can finish before these listeners attach, and its load
+        // event would never fire again, leaving the skeleton up forever.
+        if (img.complete) {
+          if (img.naturalWidth) settle();
+          else fail();
+          return;
+        }
+
+        img.addEventListener("load", settle, { once: true });
+        img.addEventListener("error", fail, { once: true });
+      }
+
+      function openPhoto(src, alt, photo) {
+        // Sizing the modal box up front stops it snapping open as the full
+        // resolution file lands.
+        photoModalImage.style.aspectRatio =
+          photo && photo.w && photo.h ? `${photo.w} / ${photo.h}` : "";
         photoModalImage.src = src;
         photoModalImage.alt = alt;
         photoModal.classList.add("is-open");

@@ -109,7 +109,7 @@
         transform: translateY(-4px);
       }
 
-      .album-card:hover .stack-photo--top {
+      .album-card:hover .stack-slot--top {
         transform: translateY(-10px) rotate(0deg) scale(1.015);
       }
 
@@ -119,12 +119,14 @@
         transition: transform 0.28s ease;
       }
 
-      .stack-photo {
+      /* The skeleton lives on this wrapper rather than on the img, because a
+         pending img paints its own alt text and broken glyph on top and Chrome
+         ignores any attempt to style that away. The photo stays hidden until
+         it has pixels to show. */
+      .stack-slot {
         position: absolute;
         inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        overflow: hidden;
         border-radius: 28px;
         border: 9px solid var(--paper-strong);
         box-shadow:
@@ -132,6 +134,61 @@
           0 4px 10px rgba(66, 46, 28, 0.08);
         user-select: none;
         pointer-events: none;
+        /* Tiled, travelling exactly one tile per cycle, so the highlight
+           sweeps at a steady pace and never leaves the box bare. */
+        background: linear-gradient(
+            100deg,
+            #e7dbc9 0%,
+            #e7dbc9 32%,
+            #fbf6ed 50%,
+            #e7dbc9 68%,
+            #e7dbc9 100%
+          )
+          0 0 / 300% 100%;
+        animation: cover-shimmer 1.3s linear infinite;
+      }
+
+      .stack-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+      }
+
+      /* Stop the animation once there is nothing left to hide */
+      .stack-slot.is-loaded {
+        background: none;
+        animation: none;
+      }
+
+      .stack-slot.is-loaded .stack-photo {
+        opacity: 1;
+      }
+
+      .stack-slot.is-failed {
+        background: #f1e8db;
+        animation: none;
+      }
+
+      @keyframes cover-shimmer {
+        from {
+          background-position: 75% 0;
+        }
+        to {
+          background-position: -75% 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .stack-slot {
+          animation: none;
+        }
+
+        .stack-photo {
+          transition: none;
+        }
       }
 
       .stack-doc {
@@ -157,17 +214,17 @@
         pointer-events: none;
       }
 
-      .stack-photo--back {
+      .stack-slot--back {
         transform: rotate(-9deg) translate(-8px, 8px) scale(0.96);
         filter: saturate(0.9) brightness(0.98);
       }
 
-      .stack-photo--mid {
+      .stack-slot--mid {
         transform: rotate(7deg) translate(8px, 4px) scale(0.98);
         filter: saturate(0.96) brightness(0.99);
       }
 
-      .stack-photo--top {
+      .stack-slot--top {
         transform: translateY(0) rotate(-2deg);
         transition: transform 0.28s ease;
       }
@@ -245,7 +302,7 @@
           gap: 18px 12px;
         }
 
-        .stack-photo {
+        .stack-slot {
           border-width: 8px;
           border-radius: 24px;
         }
@@ -282,12 +339,17 @@
       function renderAlbums() {
         const albumGrid = document.getElementById("album-grid");
 
-        const renderCoverLayer = (source, className, title) => {
-          if (source.toLowerCase().endsWith(".pdf")) {
-            return `<div class="stack-doc ${className.replace("stack-photo", "stack-doc")}">${title}</div>`;
+        const renderCoverLayer = (entry, layer, title) => {
+          const photo = window.albumPhoto(entry);
+          if (photo.src.toLowerCase().endsWith(".pdf")) {
+            return `<div class="stack-doc stack-doc--${layer}">${title}</div>`;
           }
 
-          return `<img class="${className}" src="${source}" alt="${title} preview photo" loading="lazy" />`;
+          return `
+            <span class="stack-slot stack-slot--${layer}">
+              <img class="stack-photo" src="${photo.src}" alt="${title} preview photo" loading="lazy" decoding="async" />
+            </span>
+          `;
         };
 
         albumGrid.innerHTML = albums
@@ -295,9 +357,9 @@
             (album, index) => `
               <a class="album-card" href="/albums/view.html?album=${encodeURIComponent(album.slug)}" data-album-index="${index}" aria-label="Open ${album.title} album page">
                 <div class="stack" aria-hidden="true">
-                  ${renderCoverLayer(album.images[2] || album.images[0], "stack-photo stack-photo--back", album.title)}
-                  ${renderCoverLayer(album.images[1] || album.images[0], "stack-photo stack-photo--mid", album.title)}
-                  ${renderCoverLayer(album.images[0], "stack-photo stack-photo--top", album.title)}
+                  ${renderCoverLayer(album.images[2] || album.images[0], "back", album.title)}
+                  ${renderCoverLayer(album.images[1] || album.images[0], "mid", album.title)}
+                  ${renderCoverLayer(album.images[0], "top", album.title)}
                 </div>
                 <div class="album-meta">
                   <h3>${album.title}</h3>
@@ -308,6 +370,39 @@
             `
           )
           .join("");
+
+        albumGrid.querySelectorAll(".stack-slot").forEach(watchCoverLoad);
+      }
+
+      function watchCoverLoad(slot) {
+        const img = slot.querySelector("img");
+        if (!img) return;
+
+        const reveal = () => slot.classList.add("is-loaded");
+        const fail = () => slot.classList.add("is-failed");
+
+        // These covers are 12 megapixels and up, so `load` fires well before
+        // Chrome can paint them. decode() resolves when the frame is actually
+        // paintable, which keeps the skeleton up instead of swapping it for a
+        // blank box.
+        const settle = () => {
+          if (typeof img.decode === "function") {
+            img.decode().then(reveal, reveal);
+          } else {
+            reveal();
+          }
+        };
+
+        // A cached cover can already be done before this runs, and its load
+        // event would never fire again, leaving the shimmer running forever.
+        if (img.complete) {
+          if (img.naturalWidth) settle();
+          else fail();
+          return;
+        }
+
+        img.addEventListener("load", settle, { once: true });
+        img.addEventListener("error", fail, { once: true });
       }
 
       renderAlbums();

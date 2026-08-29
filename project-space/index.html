@@ -1,0 +1,1952 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Project Space 7.0 at Aditya University | Guest Speaker &amp; Jury | Manoj
+      Satishkumar
+    </title>
+    <meta
+      name="description"
+      content="My full experience as Guest Speaker and Jury Panel member at Project Space Season 7, the 24/7 innovation sprint hosted by Technical Hub at Aditya University: 700+ participants, 120+ projects, 20 finalists."
+    />
+    <meta
+      name="keywords"
+      content="Manoj Satishkumar, Project Space, Aditya University, Technical Hub, guest speaker, jury panel, tech talk, student hackathon, ProjectSpace Season 7"
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://manojsatishkumar.com/project-space/" />
+    <meta name="author" content="Manoj Satishkumar" />
+
+    <meta
+      property="og:title"
+      content="Project Space 7.0 at Aditya University — Guest Speaker &amp; Jury"
+    />
+    <meta
+      property="og:description"
+      content="700+ participants. 120+ projects. 20 finalists. One week of students living inside their own build. Here is everything I saw."
+    />
+    <meta property="og:url" content="https://manojsatishkumar.com/project-space/" />
+    <meta property="og:site_name" content="manojsatishkumar.com" />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:image"
+      content="https://manojsatishkumar.com/images/project-space/thumbnail.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Project Space 7.0 at Aditya University - 700+ participants, 120+ projects, 20 finalists. Manoj Satishkumar, guest speaker and jury panel member."
+    />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Project Space 7.0 at Aditya University — Guest Speaker &amp; Jury"
+    />
+    <meta
+      name="twitter:description"
+      content="700+ participants. 120+ projects. 20 finalists. One week of students living inside their own build. Here is everything I saw."
+    />
+    <meta name="twitter:site" content="@MSK_Web_Manoj" />
+    <meta
+      name="twitter:image"
+      content="https://manojsatishkumar.com/images/project-space/thumbnail.jpg"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Project Space 7.0 at Aditya University - 700+ participants, 120+ projects, 20 finalists. Manoj Satishkumar, guest speaker and jury panel member."
+    />
+
+    <link rel="shortcut icon" href="/images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,650&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
+
+    <style>
+      /* Every rule on this page is prefixed `ps-` so the standalone styles
+         cannot leak into the shared nav bar or footer components. */
+      :root {
+        --ps-green: #16a34a;
+        --ps-green-deep: #0b6b34;
+        --ps-green-ink: #063d1e;
+        --ps-lime: #a3e635;
+        --ps-ink: #0f1b2a;
+        --ps-muted: #5a6b7f;
+        --ps-line: rgba(15, 27, 42, 0.09);
+        --ps-serif: "Source Serif 4", Georgia, serif;
+      }
+
+      .ps-page * {
+        box-sizing: border-box;
+      }
+
+      .ps-page {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        color: var(--ps-ink);
+        background: #f6f9f7;
+        overflow-x: hidden;
+      }
+
+      /* The shared site stylesheet sets a flat `line-height: 20px`, which
+         crops any type larger than that — and because the display numbers are
+         painted with `background-clip: text`, the gradient gets clipped to the
+         short line box too. Scoped to `main` so the shared nav and footer,
+         which sit outside it, keep their own metrics. */
+      .ps-page main {
+        line-height: 1.6;
+      }
+
+      .ps-shell {
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 26px;
+      }
+
+      .ps-narrow {
+        max-width: 820px;
+      }
+
+      /* ---------- Hero ---------- */
+      .ps-hero {
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        min-height: min(88vh, 780px);
+        /* Bottom padding clears the stat band, which pulls up over the hero */
+        padding: 140px 0 92px;
+        color: #fff;
+        overflow: hidden;
+        background: #06301a;
+      }
+
+      .ps-hero-media {
+        position: absolute;
+        inset: 0;
+      }
+
+      .ps-hero-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 42%;
+      }
+
+      /* Two stacked washes: a vertical one to seat the text, and a green tint
+         to marry the photo to the event's branding. */
+      .ps-hero-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            180deg,
+            rgba(3, 26, 15, 0.72) 0%,
+            rgba(3, 26, 15, 0.42) 34%,
+            rgba(3, 26, 15, 0.88) 100%
+          ),
+          linear-gradient(
+            118deg,
+            rgba(11, 107, 52, 0.55) 0%,
+            rgba(6, 48, 26, 0.2) 62%
+          );
+      }
+
+      .ps-hero-inner {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+        gap: 44px;
+        align-items: center;
+      }
+
+      /* ---------- Hero video ---------- */
+      /* A poster-and-play facade rather than a live iframe: the video now sits
+         above the fold, and embedding YouTube here would pull its player
+         bundle into every first paint. The real iframe is swapped in on click. */
+      .ps-video-facade {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding: 0;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        border-radius: 22px;
+        overflow: hidden;
+        aspect-ratio: 16 / 9;
+        background: #06301a;
+        cursor: pointer;
+        box-shadow: 0 30px 70px rgba(3, 20, 11, 0.5);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .ps-video-facade:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 36px 84px rgba(3, 20, 11, 0.58);
+      }
+
+      .ps-video-facade > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+
+      .ps-video-facade:hover > img {
+        transform: scale(1.04);
+      }
+
+      .ps-video-facade::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(3, 26, 15, 0) 42%,
+          rgba(3, 26, 15, 0.82) 100%
+        );
+      }
+
+      .ps-video-play {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 66px;
+        height: 66px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+        color: #fff;
+        font-size: 21px;
+        padding-left: 4px;
+        box-shadow: 0 12px 30px rgba(6, 48, 26, 0.55);
+        transition: transform 0.25s ease;
+      }
+
+      .ps-video-facade:hover .ps-video-play {
+        transform: translate(-50%, -50%) scale(1.08);
+      }
+
+      .ps-video-label {
+        position: absolute;
+        z-index: 2;
+        left: 18px;
+        right: 18px;
+        bottom: 15px;
+        text-align: left;
+      }
+
+      .ps-video-label b {
+        display: block;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 800;
+        line-height: 1.3;
+      }
+
+      .ps-video-label em {
+        display: block;
+        margin-top: 2px;
+        color: rgba(255, 255, 255, 0.76);
+        font-size: 12.5px;
+        font-style: normal;
+        line-height: 1.4;
+      }
+
+      /* Once clicked, the facade is replaced by this wrapper + iframe */
+      .ps-video-live {
+        position: relative;
+        width: 100%;
+        border-radius: 22px;
+        overflow: hidden;
+        aspect-ratio: 16 / 9;
+        background: #06301a;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        box-shadow: 0 30px 70px rgba(3, 20, 11, 0.5);
+      }
+
+      .ps-video-live iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+      }
+
+      .ps-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 16px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        font-size: 12.5px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .ps-hero h1 {
+        margin: 20px 0 0;
+        max-width: 15ch;
+        font-size: clamp(2.3rem, 4.4vw, 3.6rem);
+        font-weight: 900;
+        line-height: 1.02;
+        letter-spacing: -0.025em;
+      }
+
+      .ps-hero h1 em {
+        display: block;
+        font-family: var(--ps-serif);
+        font-style: italic;
+        font-weight: 650;
+        /* Italic serif descenders need more room than the h1's 1.02 */
+        line-height: 1.16;
+        padding-bottom: 0.04em;
+        background: linear-gradient(100deg, #bbf7d0 0%, #a3e635 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .ps-hero-lead {
+        margin: 22px 0 0;
+        max-width: 60ch;
+        font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+        line-height: 1.72;
+        color: rgba(255, 255, 255, 0.86);
+      }
+
+      .ps-hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .ps-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 22px;
+        border-radius: 14px;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 700;
+        text-decoration: none;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease,
+          background 0.2s ease;
+      }
+
+      .ps-btn:hover {
+        transform: translateY(-2px);
+        text-decoration: none;
+      }
+
+      .ps-btn--primary {
+        background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+        color: #fff;
+        box-shadow: 0 14px 30px rgba(21, 128, 61, 0.42);
+      }
+
+      .ps-btn--primary:hover {
+        color: #fff;
+      }
+
+      .ps-btn--ghost {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.32);
+        color: #fff;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      .ps-btn--ghost:hover {
+        background: rgba(255, 255, 255, 0.18);
+        color: #fff;
+      }
+
+      .ps-btn--solid {
+        background: var(--ps-ink);
+        color: #fff;
+        box-shadow: 0 14px 30px rgba(15, 27, 42, 0.24);
+      }
+
+      .ps-btn--solid:hover {
+        color: #fff;
+      }
+
+      .ps-btn--outline {
+        background: #fff;
+        border-color: var(--ps-line);
+        color: var(--ps-ink);
+      }
+
+      .ps-btn--outline:hover {
+        color: var(--ps-green-deep);
+        border-color: rgba(22, 163, 74, 0.4);
+      }
+
+      .ps-btn--outline.is-copied {
+        background: var(--ps-green);
+        border-color: var(--ps-green);
+        color: #fff;
+      }
+
+      /* ---------- Stat band ---------- */
+      .ps-stats-wrap {
+        position: relative;
+        z-index: 2;
+        margin-top: -46px;
+      }
+
+      .ps-stats {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2px;
+        border-radius: 22px;
+        overflow: hidden;
+        background: var(--ps-line);
+        box-shadow: 0 26px 60px rgba(9, 46, 27, 0.16);
+      }
+
+      .ps-stat {
+        padding: 26px 18px 22px;
+        background: #fff;
+        text-align: center;
+      }
+
+      .ps-stat b {
+        display: block;
+        font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+        font-weight: 900;
+        /* Needs headroom above the cap height or the gradient fill clips */
+        line-height: 1.22;
+        letter-spacing: -0.02em;
+        background: linear-gradient(135deg, #16a34a 0%, #0b6b34 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .ps-stat span {
+        display: block;
+        margin-top: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--ps-muted);
+      }
+
+      /* ---------- Generic section ---------- */
+      .ps-section {
+        padding: 74px 0;
+      }
+
+      .ps-section--tight {
+        padding: 54px 0;
+      }
+
+      .ps-section--paper {
+        background: #fff;
+        border-top: 1px solid var(--ps-line);
+        border-bottom: 1px solid var(--ps-line);
+      }
+
+      .ps-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 7px 14px;
+        border-radius: 999px;
+        background: rgba(22, 163, 74, 0.1);
+        color: var(--ps-green-deep);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .ps-h2 {
+        margin: 16px 0 0;
+        font-size: clamp(1.75rem, 3.2vw, 2.6rem);
+        font-weight: 850;
+        line-height: 1.14;
+        letter-spacing: -0.02em;
+      }
+
+      .ps-lead {
+        margin: 16px 0 0;
+        font-size: 1.06rem;
+        line-height: 1.8;
+        color: var(--ps-muted);
+      }
+
+      .ps-body p {
+        margin: 0 0 18px;
+        font-size: 1.06rem;
+        line-height: 1.85;
+        color: #3b4a5c;
+      }
+
+      .ps-body p:last-child {
+        margin-bottom: 0;
+      }
+
+      .ps-body strong {
+        color: var(--ps-ink);
+        font-weight: 700;
+      }
+
+      /* ---------- Story split ---------- */
+      .ps-split {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+        gap: 46px;
+        /* Stretch, not centre: these photos are 16:9 while the copy beside
+           them runs 600-770px tall, so centring parked half the difference
+           as a hole above the photo. The figure now fills the row instead. */
+        align-items: stretch;
+      }
+
+      /* The flip only reorders, so the wider track has to move with it,
+         otherwise the copy lands in the narrow column and grows taller. */
+      .ps-split--flip {
+        grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      }
+
+      .ps-split--flip .ps-split-media {
+        order: -1;
+      }
+
+      .ps-split-media {
+        display: flex;
+      }
+
+      .ps-figure {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+        border-radius: 24px;
+        overflow: hidden;
+        background: #e6efe9;
+        box-shadow: 0 24px 56px rgba(9, 46, 27, 0.16);
+      }
+
+      .ps-figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+        /* Takes whatever height is left after the caption, cropping rather
+           than leaving the column short. object-position is set per photo so
+           the subject survives the crop. */
+        flex: 1 1 auto;
+        min-height: 0;
+        object-fit: cover;
+      }
+
+      .ps-figure figcaption {
+        padding: 14px 18px 16px;
+        background: #fff;
+        font-size: 13.5px;
+        line-height: 1.55;
+        color: var(--ps-muted);
+      }
+
+      /* ---------- Pull quote ---------- */
+      .ps-pull {
+        position: relative;
+        margin: 34px 0;
+        padding: 26px 28px 26px 34px;
+        border-radius: 20px;
+        background: linear-gradient(
+          135deg,
+          rgba(22, 163, 74, 0.07),
+          rgba(163, 230, 53, 0.09)
+        );
+        border: 1px solid rgba(22, 163, 74, 0.16);
+      }
+
+      .ps-pull::before {
+        content: "";
+        position: absolute;
+        top: 22px;
+        bottom: 22px;
+        left: 0;
+        width: 4px;
+        border-radius: 0 4px 4px 0;
+        background: linear-gradient(180deg, #22c55e, #a3e635);
+      }
+
+      .ps-pull p {
+        margin: 0;
+        font-family: var(--ps-serif);
+        font-size: 1.22rem;
+        line-height: 1.7;
+        color: var(--ps-green-ink);
+      }
+
+      /* ---------- Tech / project cards ---------- */
+      .ps-grid {
+        display: grid;
+        gap: 18px;
+        margin-top: 34px;
+      }
+
+      .ps-grid--4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .ps-grid--3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .ps-card {
+        padding: 24px 22px;
+        border-radius: 20px;
+        background: #fff;
+        border: 1px solid var(--ps-line);
+        box-shadow: 0 12px 30px rgba(9, 46, 27, 0.06);
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+      }
+
+      .ps-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 44px rgba(9, 46, 27, 0.11);
+      }
+
+      .ps-card-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 13px;
+        margin-bottom: 14px;
+        font-size: 18px;
+        color: #fff;
+        background: linear-gradient(135deg, #22c55e, #0b6b34);
+      }
+
+      .ps-card h3 {
+        margin: 0 0 8px;
+        font-size: 1.06rem;
+        font-weight: 800;
+      }
+
+      .ps-card p {
+        margin: 0;
+        font-size: 14.5px;
+        line-height: 1.68;
+        color: var(--ps-muted);
+      }
+
+      .ps-project {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 18px;
+        border-radius: 16px;
+        background: #fff;
+        border: 1px solid var(--ps-line);
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+
+      .ps-project:hover {
+        transform: translateY(-3px);
+        border-color: rgba(22, 163, 74, 0.34);
+      }
+
+      .ps-project b {
+        flex: 0 0 34px;
+        width: 34px;
+        height: 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background: rgba(22, 163, 74, 0.11);
+        color: var(--ps-green-deep);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .ps-project span {
+        font-size: 15px;
+        font-weight: 650;
+      }
+
+      /* ---------- Timeline ---------- */
+      .ps-timeline {
+        position: relative;
+        margin: 38px 0 0;
+        padding: 0 0 0 34px;
+        list-style: none;
+      }
+
+      .ps-timeline::before {
+        content: "";
+        position: absolute;
+        top: 8px;
+        bottom: 8px;
+        left: 9px;
+        width: 2px;
+        background: linear-gradient(
+          180deg,
+          rgba(34, 197, 94, 0.5),
+          rgba(163, 230, 53, 0.28)
+        );
+      }
+
+      .ps-timeline li {
+        position: relative;
+        margin-bottom: 26px;
+      }
+
+      .ps-timeline li:last-child {
+        margin-bottom: 0;
+      }
+
+      .ps-timeline li::before {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: -34px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #fff;
+        border: 4px solid #22c55e;
+        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.14);
+      }
+
+      .ps-timeline h3 {
+        margin: 0 0 6px;
+        font-size: 1.08rem;
+        font-weight: 800;
+      }
+
+      .ps-timeline p {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.72;
+        color: var(--ps-muted);
+      }
+
+      /* ---------- Gallery ---------- */
+      .ps-gallery {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .ps-shot {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 18px;
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+        background: #e6efe9;
+        cursor: zoom-in;
+        box-shadow: 0 12px 28px rgba(9, 46, 27, 0.1);
+      }
+
+      /* The two storytelling frames earn double width */
+      .ps-shot--wide {
+        grid-column: span 2;
+        aspect-ratio: 8 / 3;
+      }
+
+      .ps-shot img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.45s ease;
+      }
+
+      .ps-shot:hover img {
+        transform: scale(1.05);
+      }
+
+      .ps-shot figcaption {
+        position: absolute;
+        inset: auto 0 0 0;
+        padding: 26px 16px 13px;
+        background: linear-gradient(
+          180deg,
+          rgba(4, 26, 15, 0) 0%,
+          rgba(4, 26, 15, 0.82) 100%
+        );
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        text-align: left;
+        line-height: 1.45;
+      }
+
+      /* ---------- Host / thanks ---------- */
+      .ps-host {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        margin-top: 34px;
+        padding: 24px 26px;
+        border-radius: 22px;
+        background: #fff;
+        border: 1px solid var(--ps-line);
+        box-shadow: 0 16px 40px rgba(9, 46, 27, 0.08);
+      }
+
+      .ps-host-mark {
+        flex: 0 0 88px;
+        width: 88px;
+        height: 88px;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid var(--ps-line);
+      }
+
+      .ps-host-mark img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .ps-host h3 {
+        margin: 0 0 6px;
+        font-size: 1.2rem;
+        font-weight: 850;
+      }
+
+      .ps-host p {
+        margin: 0;
+        font-size: 14.5px;
+        line-height: 1.68;
+        color: var(--ps-muted);
+      }
+
+      /* ---------- Closing ---------- */
+      .ps-closing {
+        padding: 84px 0 88px;
+        text-align: center;
+        color: #fff;
+        background: radial-gradient(
+            circle at 22% 18%,
+            rgba(163, 230, 53, 0.22),
+            transparent 42%
+          ),
+          linear-gradient(140deg, #0b6b34 0%, #06301a 100%);
+      }
+
+      .ps-closing blockquote {
+        margin: 0 auto;
+        max-width: 780px;
+        font-family: var(--ps-serif);
+        font-size: clamp(1.45rem, 3vw, 2.15rem);
+        font-weight: 650;
+        line-height: 1.42;
+      }
+
+      .ps-closing cite {
+        display: block;
+        margin-top: 22px;
+        font-family: "Inter", sans-serif;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      .ps-closing-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 34px;
+      }
+
+      /* ---------- Invite me to your campus ---------- */
+      .ps-invite {
+        position: relative;
+        padding: 96px 0 104px;
+        background: radial-gradient(
+            circle at 88% 6%,
+            rgba(22, 163, 74, 0.12),
+            transparent 46%
+          ),
+          radial-gradient(
+            circle at 6% 92%,
+            rgba(163, 230, 53, 0.16),
+            transparent 44%
+          ),
+          #f2f7f4;
+        border-top: 1px solid var(--ps-line);
+      }
+
+      /* ---------- Invite card (doorway to /invite/) ---------- */
+      .ps-invite-card {
+        display: grid;
+        grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+        align-items: stretch;
+        max-width: 1000px;
+        margin: 0 auto;
+        background: #fff;
+        border: 1px solid var(--ps-line);
+        border-radius: 26px;
+        overflow: hidden;
+        text-decoration: none;
+        color: inherit;
+        box-shadow: 0 24px 58px rgba(9, 46, 27, 0.12);
+        transition: transform 0.28s ease, box-shadow 0.28s ease,
+          border-color 0.28s ease;
+      }
+
+      .ps-invite-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(22, 163, 74, 0.36);
+        box-shadow: 0 34px 74px rgba(9, 46, 27, 0.18);
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .ps-invite-card-media {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        background: #06301a;
+      }
+
+      .ps-invite-card-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 20% center;
+        transition: transform 0.5s ease;
+      }
+
+      .ps-invite-card:hover .ps-invite-card-media img {
+        transform: scale(1.05);
+      }
+
+      .ps-invite-card-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          118deg,
+          rgba(6, 48, 26, 0.34) 0%,
+          rgba(6, 48, 26, 0.06) 70%
+        );
+      }
+
+      .ps-invite-card-badge {
+        position: absolute;
+        z-index: 1;
+        top: 18px;
+        left: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+        background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+        color: #fff;
+        font-size: 16px;
+        box-shadow: 0 12px 26px rgba(6, 48, 26, 0.4);
+      }
+
+      .ps-invite-card-body {
+        display: block;
+        padding: 34px 36px 32px;
+      }
+
+      .ps-invite-card-title {
+        display: block;
+        margin-top: 15px;
+        font-size: clamp(1.5rem, 2.5vw, 2.05rem);
+        font-weight: 850;
+        line-height: 1.16;
+        letter-spacing: -0.02em;
+      }
+
+      .ps-invite-card-copy {
+        display: block;
+        margin-top: 13px;
+        font-size: 15.2px;
+        line-height: 1.75;
+        color: var(--ps-muted);
+      }
+
+      .ps-invite-card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 20px;
+      }
+
+      .ps-invite-card-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 24px;
+        padding: 13px 22px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 700;
+        box-shadow: 0 14px 30px rgba(21, 128, 61, 0.36);
+        transition: gap 0.22s ease;
+      }
+
+      .ps-invite-card:hover .ps-invite-card-cta {
+        gap: 14px;
+      }
+
+      .ps-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 16px;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid var(--ps-line);
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #33465c;
+      }
+
+      .ps-chip i {
+        color: var(--ps-green);
+      }
+
+      /* ---------- Lightbox ---------- */
+      .ps-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+        background: rgba(4, 20, 12, 0.93);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+
+      .ps-lightbox.is-open {
+        display: flex;
+      }
+
+      .ps-lightbox img {
+        max-width: 100%;
+        max-height: 82vh;
+        border-radius: 16px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+      }
+
+      .ps-lightbox-caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 26px;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 14px;
+        padding: 0 32px;
+      }
+
+      .ps-lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 24px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      /* ---------- Reveal on scroll ---------- */
+      .ps-reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .ps-reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .ps-reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+
+        .ps-shot img,
+        .ps-card,
+        .ps-btn {
+          transition: none;
+        }
+      }
+
+      /* ---------- Responsive ---------- */
+      @media (max-width: 1023px) {
+        .ps-hero-inner {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+
+        .ps-hero h1 {
+          max-width: 20ch;
+        }
+
+        .ps-split {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+
+        .ps-split--flip .ps-split-media {
+          order: 0;
+        }
+
+        .ps-grid--4 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .ps-stats {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .ps-gallery {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .ps-shot--wide {
+          grid-column: span 2;
+        }
+
+        /* Photo above the copy rather than a squeezed side-by-side */
+        .ps-invite-card {
+          grid-template-columns: 1fr;
+        }
+
+        .ps-invite-card-media {
+          aspect-ratio: 16 / 7;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .ps-shell {
+          padding: 0 18px;
+        }
+
+        .ps-hero {
+          min-height: 0;
+          padding: 118px 0 80px;
+        }
+
+        .ps-video-facade,
+        .ps-video-live {
+          border-radius: 18px;
+        }
+
+        .ps-video-play {
+          width: 54px;
+          height: 54px;
+          font-size: 17px;
+        }
+
+        .ps-section {
+          padding: 56px 0;
+        }
+
+        .ps-grid--3,
+        .ps-grid--4 {
+          grid-template-columns: 1fr;
+        }
+
+        .ps-stats {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        /* Five stats over two columns leaves a hole, so the last one spans */
+        .ps-stat:last-child {
+          grid-column: span 2;
+        }
+
+        .ps-stats-wrap {
+          margin-top: -32px;
+        }
+
+        .ps-host {
+          flex-direction: column;
+          align-items: flex-start;
+          text-align: left;
+        }
+
+        .ps-timeline {
+          padding-left: 30px;
+        }
+
+        .ps-invite {
+          padding: 62px 0 70px;
+        }
+
+        .ps-invite-card-body {
+          padding: 26px 22px 24px;
+        }
+
+        .ps-invite-card-cta {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .ps-lightbox {
+          padding: 18px;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="ps-page">
+    <div id="desktop-nav-bar"></div>
+
+    <main>
+      <!-- ============ HERO ============ -->
+      <header class="ps-hero">
+        <div class="ps-hero-media">
+          <img
+            src="/images/project-space/crowd.jpg"
+            alt="Hundreds of Project Space participants filling the Aditya University amphitheatre"
+            width="1600"
+            height="922"
+          />
+        </div>
+        <div class="ps-shell ps-hero-inner">
+          <div>
+            <span class="ps-eyebrow">
+              <i class="fas fa-microphone-lines"></i>
+              Guest Speaker &middot; Jury Panel
+            </span>
+            <h1>
+              Project Space 7.0
+              <em>at Aditya University</em>
+            </h1>
+            <p class="ps-hero-lead">
+              Technical Hub invited me to Surampalem as a guest speaker and jury
+              panel member for Project Space Season 7. What I walked into was
+              not a tech fest with a stage and a schedule. It was an entire
+              campus that had moved into its own build for a week.
+            </p>
+            <div class="ps-hero-actions">
+              <a class="ps-btn ps-btn--primary" href="#story">
+                Read the full story <i class="fas fa-arrow-down"></i>
+              </a>
+              <a class="ps-btn ps-btn--ghost" href="#gallery">
+                <i class="fas fa-images"></i> See the photos
+              </a>
+            </div>
+          </div>
+
+          <div class="ps-hero-video" id="ps-hero-video">
+            <button
+              class="ps-video-facade"
+              type="button"
+              data-video="https://www.youtube.com/embed/13qRZ02oDHI?autoplay=1&amp;rel=0"
+              aria-label="Play the recorded session: Manoj Satishkumar as a guest speaker at Aditya University"
+            >
+              <img
+                src="/images/project-space/standee.jpg"
+                alt=""
+                width="1200"
+                height="675"
+              />
+              <span class="ps-video-play" aria-hidden="true">
+                <i class="fas fa-play"></i>
+              </span>
+              <span class="ps-video-label">
+                <b>Watch the session</b>
+                <em>Guest speaker at Aditya University &middot; Season 7</em>
+              </span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- ============ STAT BAND ============ -->
+      <div class="ps-stats-wrap">
+        <div class="ps-shell">
+          <div class="ps-stats ps-reveal">
+            <div class="ps-stat">
+              <b>700+</b><span>Participants</span>
+            </div>
+            <div class="ps-stat"><b>120+</b><span>Projects</span></div>
+            <div class="ps-stat"><b>5</b><span>Days, 24/7</span></div>
+            <div class="ps-stat"><b>20</b><span>Finalists</span></div>
+            <div class="ps-stat"><b>1</b><span>Event</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ THE INVITATION ============ -->
+      <section class="ps-section" id="story">
+        <div class="ps-shell">
+          <div class="ps-split">
+            <div class="ps-reveal">
+              <span class="ps-kicker">
+                <i class="fas fa-envelope-open-text"></i> The invitation
+              </span>
+              <h2 class="ps-h2">
+                A block on campus called Technical Hub asked me to come.
+              </h2>
+              <div class="ps-body" style="margin-top: 20px">
+                <p>
+                  The invitation came from <strong>Technical Hub</strong>, the
+                  wing at Aditya University that runs Project Space, and it was
+                  for two roles at once: give a talk to the participants, and
+                  sit on the <strong>jury panel</strong> that would judge their
+                  projects and declare the winners.
+                </p>
+                <p>
+                  I said yes quickly, and I am glad I did. Travelling out to
+                  Surampalem for it meant a full day away from everything else,
+                  and every hour of it was worth it.
+                </p>
+                <p>
+                  Season 7 ran under the banner
+                  <strong>&ldquo;Frontiers in Technology and Beyond&rdquo;</strong>,
+                  with the theme <em>Project Life Cycle</em> &mdash; the idea
+                  being that students should not just demo something that works,
+                  but carry an idea through the whole arc from problem to
+                  shipped product.
+                </p>
+              </div>
+            </div>
+            <div class="ps-split-media ps-reveal">
+              <figure class="ps-figure">
+                <!-- Anchored left of centre so the crop keeps the Project
+                     Space logo, Season 7 and the dates alongside him -->
+                <img
+                  src="/images/project-space/billboard.jpg"
+                  alt="Manoj Satishkumar standing beside the Project Space Season 7 billboard listing the invited speakers"
+                  loading="lazy"
+                  width="1500"
+                  height="905"
+                  style="object-position: 22% center"
+                />
+                <figcaption>
+                  The Season 7 billboard on campus &mdash; 23 to 28 June 2025,
+                  with the invited speakers from Walmart, LinkedIn, ServiceNow
+                  and more.
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ WHAT PROJECT SPACE IS ============ -->
+      <section class="ps-section ps-section--paper">
+        <div class="ps-shell">
+          <div class="ps-split ps-split--flip">
+            <div class="ps-reveal">
+              <span class="ps-kicker">
+                <i class="fas fa-bolt"></i> What it actually was
+              </span>
+              <h2 class="ps-h2">
+                Not a showcase. A week-long, 24/7 innovation sprint.
+              </h2>
+              <div class="ps-body" style="margin-top: 20px">
+                <p>
+                  Project Space was not another tech fest where teams turn up on
+                  the last day with a slide deck. Over
+                  <strong>700+ participants</strong> lived inside the campus and
+                  built <strong>120+ projects</strong> around the clock.
+                </p>
+                <p>
+                  Picture it: entire corridors turned into code labs. Students
+                  asleep next to whiteboards. Debugging until dawn.
+                  Collaboration spilling across departments that would normally
+                  never share a room. All of it driven by one thing &mdash; the
+                  urge to create.
+                </p>
+              </div>
+              <div class="ps-pull">
+                <p>
+                  &ldquo;They did not live, breathe, and build technology because
+                  a syllabus asked them to. They did it because they wanted to
+                  see the thing exist.&rdquo;
+                </p>
+              </div>
+            </div>
+            <div class="ps-split-media ps-reveal">
+              <figure class="ps-figure">
+                <!-- He stands at the far left of this frame, so the crop is
+                     anchored there to keep both him and the hall in shot -->
+                <img
+                  src="/images/project-space/keynote.jpg"
+                  alt="Manoj Satishkumar addressing a hall packed with Project Space participants"
+                  loading="lazy"
+                  width="1500"
+                  height="843"
+                  style="object-position: 20% center"
+                />
+                <figcaption>
+                  Talking to a hall full of participants &mdash; laptops open,
+                  projects still running in the background.
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TECHNOLOGIES ============ -->
+      <section class="ps-section">
+        <div class="ps-shell">
+          <div class="ps-reveal">
+            <span class="ps-kicker">
+              <i class="fas fa-layer-group"></i> The stack they reached for
+            </span>
+            <h2 class="ps-h2">
+              What made it special was the sheer spread of technology.
+            </h2>
+            <p class="ps-lead" style="max-width: 68ch">
+              Nobody handed these teams a template. They picked their own tools,
+              and the range was genuinely surprising for an undergraduate
+              cohort.
+            </p>
+          </div>
+
+          <div class="ps-grid ps-grid--4">
+            <article class="ps-card ps-reveal">
+              <span class="ps-card-icon"><i class="fab fa-react"></i></span>
+              <h3>App &amp; web</h3>
+              <p>
+                React, Flutter, Android and the web platform, used for genuinely
+                modern app development rather than course projects.
+              </p>
+            </article>
+            <article class="ps-card ps-reveal">
+              <span class="ps-card-icon"><i class="fas fa-robot"></i></span>
+              <h3>GenAI &amp; machine learning</h3>
+              <p>
+                Teams reaching for intelligent solutions, not as a buzzword but
+                as the actual mechanism their idea needed to work.
+              </p>
+            </article>
+            <article class="ps-card ps-reveal">
+              <span class="ps-card-icon"><i class="fas fa-microchip"></i></span>
+              <h3>VLSI &amp; embedded</h3>
+              <p>
+                Hardware-level innovation from students who wanted to build
+                closer to the metal than a web stack allows.
+              </p>
+            </article>
+            <article class="ps-card ps-reveal">
+              <span class="ps-card-icon"><i class="fas fa-cubes"></i></span>
+              <h3>Blended builds</h3>
+              <p>
+                The most interesting projects refused to stay in one lane,
+                blending software, hardware, design and purpose.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PROJECTS ============ -->
+      <section class="ps-section ps-section--paper">
+        <div class="ps-shell">
+          <div class="ps-reveal">
+            <span class="ps-kicker">
+              <i class="fas fa-lightbulb"></i> Projects that stayed with me
+            </span>
+            <h2 class="ps-h2">Eight I still remember by name.</h2>
+            <p class="ps-lead" style="max-width: 68ch">
+              Students as early as second year were pitching solutions for
+              campus fixing, AI-enhanced education, donating for causes and
+              more. These are a few that stuck.
+            </p>
+          </div>
+
+          <div class="ps-grid ps-grid--4" style="gap: 14px">
+            <div class="ps-project ps-reveal">
+              <b>01</b><span>Codepulse</span>
+            </div>
+            <div class="ps-project ps-reveal">
+              <b>02</b><span>Quick Docs</span>
+            </div>
+            <div class="ps-project ps-reveal">
+              <b>03</b><span>Flutterverse</span>
+            </div>
+            <div class="ps-project ps-reveal">
+              <b>04</b><span>Grow Hive</span>
+            </div>
+            <div class="ps-project ps-reveal">
+              <b>05</b><span>Tech Path</span>
+            </div>
+            <div class="ps-project ps-reveal">
+              <b>06</b><span>V-Bus Ticketing</span>
+            </div>
+            <div class="ps-project ps-reveal">
+              <b>07</b><span>CampusGeeks</span>
+            </div>
+            <div class="ps-project ps-reveal">
+              <b>08</b><span>Campus Fix</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MY ROLE ============ -->
+      <section class="ps-section">
+        <div class="ps-shell">
+          <div class="ps-split">
+            <div class="ps-reveal">
+              <span class="ps-kicker">
+                <i class="fas fa-user-check"></i> How the day went
+              </span>
+              <h2 class="ps-h2">Speaker in the morning, judge by afternoon.</h2>
+              <ol class="ps-timeline">
+                <li>
+                  <h3>The talk</h3>
+                  <p>
+                    I spoke to the participants about building with conviction,
+                    thinking beyond theory, and what strong engineering
+                    standards and long-term growth actually look like once you
+                    are inside a real company.
+                  </p>
+                </li>
+                <li>
+                  <h3>Walking the projects</h3>
+                  <p>
+                    Then the better part &mdash; going stall to stall. I saw
+                    their projects, asked them questions, and interacted with
+                    hundreds of students who were far more prepared to defend
+                    their design decisions than I expected.
+                  </p>
+                </li>
+                <li>
+                  <h3>The jury panel</h3>
+                  <p>
+                    I sat on the jury alongside other invited speakers from
+                    across the industry. Comparing notes with them between
+                    rounds was its own kind of value.
+                  </p>
+                </li>
+                <li>
+                  <h3>Choosing the winners</h3>
+                  <p>
+                    We picked the winners and runners-up from
+                    <strong>20 finalists</strong> narrowed out of 120+ projects.
+                    It was not an easy call. There was genuine brilliance across
+                    the board.
+                  </p>
+                </li>
+                <li>
+                  <h3>Handing over the prizes</h3>
+                  <p>
+                    I distributed the prizes on stage, and then they sent me
+                    home. A very good day by any measure.
+                  </p>
+                </li>
+              </ol>
+            </div>
+            <div class="ps-split-media ps-reveal">
+              <figure class="ps-figure">
+                <img
+                  src="/images/project-space/jury.jpg"
+                  alt="Manoj Satishkumar seated at the jury table in front of the participants"
+                  loading="lazy"
+                  width="1400"
+                  height="787"
+                  style="object-position: 42% center"
+                />
+                <figcaption>
+                  On the jury panel, with the participants watching from the
+                  stands.
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ WHERE THEY WENT ============ -->
+      <section class="ps-section ps-section--paper">
+        <div class="ps-shell ps-narrow ps-reveal" style="text-align: center">
+          <span class="ps-kicker">
+            <i class="fas fa-graduation-cap"></i> Where these students went
+          </span>
+          <h2 class="ps-h2">
+            Some of them are now interning at Google and Walmart.
+          </h2>
+          <p class="ps-lead">
+            This is the part I keep coming back to. A number of the students I
+            met that week were selected into internship programmes at
+            <strong style="color: var(--ps-ink)">Google</strong> and
+            <strong style="color: var(--ps-ink)">Walmart</strong>, and several
+            others have since been placed. The interaction I had with them and
+            with the wider team was, in hindsight, a look at people who were
+            already on their way.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ GALLERY ============ -->
+      <section class="ps-section" id="gallery">
+        <div class="ps-shell">
+          <div class="ps-reveal">
+            <span class="ps-kicker">
+              <i class="fas fa-camera-retro"></i> From the event
+            </span>
+            <h2 class="ps-h2">A week that looked like this.</h2>
+          </div>
+
+          <div class="ps-gallery">
+            <figure class="ps-shot ps-shot--wide ps-reveal" role="button" tabindex="0">
+              <img
+                src="/images/project-space/crowd.jpg"
+                alt="Project Space 7.0 participants filling the amphitheatre stands"
+                loading="lazy"
+              />
+              <figcaption>Project Space 7.0 &mdash; Project Life Cycle</figcaption>
+            </figure>
+            <figure class="ps-shot ps-reveal" role="button" tabindex="0">
+              <img
+                src="/images/project-space/winners.jpg"
+                alt="Prize distribution on the Technical Hub stage with the winning teams"
+                loading="lazy"
+              />
+              <figcaption>Handing over the prizes</figcaption>
+            </figure>
+            <figure class="ps-shot ps-reveal" role="button" tabindex="0">
+              <img
+                src="/images/project-space/mic.jpg"
+                alt="Manoj Satishkumar speaking into a microphone at Project Space"
+                loading="lazy"
+              />
+              <figcaption>The talk</figcaption>
+            </figure>
+            <figure class="ps-shot ps-reveal" role="button" tabindex="0">
+              <img
+                src="/images/project-space/students.jpg"
+                alt="Manoj Satishkumar with a group of Project Space participants"
+                loading="lazy"
+              />
+              <figcaption>With the builders</figcaption>
+            </figure>
+            <figure class="ps-shot ps-reveal" role="button" tabindex="0">
+              <img
+                src="/images/project-space/standee.jpg"
+                alt="Manoj Satishkumar beside his speaker standee at Aditya University"
+                loading="lazy"
+              />
+              <figcaption>Speaker standee on campus</figcaption>
+            </figure>
+            <figure class="ps-shot ps-shot--wide ps-reveal" role="button" tabindex="0">
+              <img
+                src="/images/project-space/keynote.jpg"
+                alt="A hall packed with Project Space participants during the talk"
+                loading="lazy"
+              />
+              <figcaption>A full hall, laptops still open</figcaption>
+            </figure>
+          </div>
+
+          <div style="margin-top: 26px">
+            <a
+              class="ps-btn ps-btn--outline"
+              href="/albums/view.html?album=adithya-university"
+            >
+              <i class="fas fa-images"></i> Open the full photo album
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ THANK YOU ============ -->
+      <!-- The recording used to sit here; it now leads the hero. -->
+      <section class="ps-section ps-section--tight ps-section--paper">
+        <div class="ps-shell">
+          <div class="ps-host ps-reveal" style="margin-top: 0">
+            <div class="ps-host-mark">
+              <img
+                src="/images/adithya-university.jpeg"
+                alt="Aditya University logo"
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <h3>Thank you, Technical Hub and Aditya University</h3>
+              <p>
+                For creating a space where innovation, learning and mentorship
+                genuinely thrive &mdash; and to the 700+ participants, I learned
+                just as much from you as you did from me. Congratulations again
+                to everyone who took part in Project Space Season 7.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CLOSING ============ -->
+      <section class="ps-closing">
+        <div class="ps-shell">
+          <blockquote class="ps-reveal">
+            &ldquo;Events like this are not showcases, they are launchpads. This
+            is where curiosity meets courage, and theory meets execution. The
+            future of tech is in passionate hands &mdash; I have seen it with my
+            own eyes.&rdquo;
+            <cite>Manoj Satishkumar</cite>
+          </blockquote>
+          <div class="ps-closing-actions ps-reveal">
+            <a class="ps-btn ps-btn--primary" href="/#tech-talks">
+              <i class="fas fa-arrow-left"></i> Back to Tech Talks
+            </a>
+            <a class="ps-btn ps-btn--ghost" href="/job-referral/">
+              <i class="fas fa-handshake"></i> Ask for a referral
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ INVITE ME TO YOUR CAMPUS ============ -->
+      <!-- The full pitch, topic list and invitation form live on /invite/.
+           This card is the doorway to it. -->
+      <section class="ps-invite" id="invite">
+        <div class="ps-shell">
+          <a class="ps-invite-card ps-reveal" href="/invite/">
+            <span class="ps-invite-card-media" aria-hidden="true">
+              <img
+                src="/images/project-space/keynote.jpg"
+                alt=""
+                loading="lazy"
+                width="1500"
+                height="843"
+              />
+              <span class="ps-invite-card-badge">
+                <i class="fas fa-school-flag"></i>
+              </span>
+            </span>
+
+            <span class="ps-invite-card-body">
+              <span class="ps-kicker">
+                <i class="fas fa-school-flag"></i> For colleges and universities
+              </span>
+              <span class="ps-invite-card-title">
+                Want me at your campus next?
+              </span>
+              <span class="ps-invite-card-copy">
+                Tech fest, placement drive, induction week or project showcase
+                &mdash; I am happy to come and speak, on campus or online.
+                Talks on interview preparation, industry insights, life after
+                graduation and the climb from junior engineer to architect.
+              </span>
+              <span class="ps-invite-card-tags">
+                <span class="ps-chip"><i class="fas fa-microphone"></i> Keynote</span>
+                <span class="ps-chip">
+                  <i class="fas fa-chalkboard-user"></i> Guest lecture
+                </span>
+                <span class="ps-chip">
+                  <i class="fas fa-gavel"></i> Jury panel
+                </span>
+                <span class="ps-chip">
+                  <i class="fas fa-video"></i> Online
+                </span>
+              </span>
+              <span class="ps-invite-card-cta">
+                Send an invitation <i class="fas fa-arrow-right"></i>
+              </span>
+            </span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <!-- Lightbox for the gallery -->
+    <div class="ps-lightbox" id="ps-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+      <button class="ps-lightbox-close" id="ps-lightbox-close" aria-label="Close photo viewer">
+        <i class="fas fa-times"></i>
+      </button>
+      <img id="ps-lightbox-img" src="" alt="" />
+      <p class="ps-lightbox-caption" id="ps-lightbox-caption"></p>
+    </div>
+
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script>
+      $(function () {
+        $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
+        $("#footer").load("/components/footer.html");
+      });
+
+      // Reveal sections as they scroll into view
+      (function () {
+        var targets = document.querySelectorAll(".ps-reveal");
+        if (!("IntersectionObserver" in window)) {
+          targets.forEach(function (el) {
+            el.classList.add("is-visible");
+          });
+          return;
+        }
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+        );
+        targets.forEach(function (el) {
+          observer.observe(el);
+        });
+      })();
+
+      // Years of experience, computed so the copy never goes stale
+      (function () {
+        var start = new Date(2013, 6, 1);
+        var today = new Date();
+        var years = today.getFullYear() - start.getFullYear();
+        if (
+          today.getMonth() < start.getMonth() ||
+          (today.getMonth() === start.getMonth() &&
+            today.getDate() < start.getDate())
+        ) {
+          years -= 1;
+        }
+        document
+          .querySelectorAll(".js-experience-years")
+          .forEach(function (node) {
+            node.textContent = years;
+          });
+      })();
+
+      // Hero video: swap the poster facade for the real player on click
+      (function () {
+        var holder = document.getElementById("ps-hero-video");
+        if (!holder) return;
+        var facade = holder.querySelector(".ps-video-facade");
+        if (!facade) return;
+
+        facade.addEventListener("click", function () {
+          // The URL is a constant baked into the markup, never user-supplied.
+          var src = facade.getAttribute("data-video");
+          var frame = document.createElement("iframe");
+          frame.setAttribute("src", src);
+          frame.setAttribute(
+            "title",
+            "Manoj Satishkumar as a guest speaker at Aditya University, Project Space Season 7"
+          );
+          frame.setAttribute(
+            "allow",
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          );
+          frame.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+          frame.setAttribute("allowfullscreen", "");
+
+          var live = document.createElement("div");
+          live.className = "ps-video-live";
+          live.appendChild(frame);
+
+          holder.replaceChild(live, facade);
+        });
+      })();
+
+      // Gallery lightbox
+      (function () {
+        var box = document.getElementById("ps-lightbox");
+        var boxImg = document.getElementById("ps-lightbox-img");
+        var boxCap = document.getElementById("ps-lightbox-caption");
+        var closeBtn = document.getElementById("ps-lightbox-close");
+        var lastFocused = null;
+
+        function open(shot) {
+          var img = shot.querySelector("img");
+          var cap = shot.querySelector("figcaption");
+          if (!img) return;
+          lastFocused = shot;
+          boxImg.src = img.getAttribute("src");
+          boxImg.alt = img.getAttribute("alt") || "";
+          boxCap.textContent = cap ? cap.textContent.trim() : "";
+          box.classList.add("is-open");
+          document.body.style.overflow = "hidden";
+          closeBtn.focus();
+        }
+
+        function close() {
+          box.classList.remove("is-open");
+          document.body.style.overflow = "";
+          boxImg.src = "";
+          if (lastFocused) lastFocused.focus();
+        }
+
+        document.querySelectorAll(".ps-shot").forEach(function (shot) {
+          shot.addEventListener("click", function () {
+            open(shot);
+          });
+          shot.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              open(shot);
+            }
+          });
+        });
+
+        closeBtn.addEventListener("click", close);
+        box.addEventListener("click", function (event) {
+          if (event.target === box) close();
+        });
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape" && box.classList.contains("is-open")) {
+            close();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Project Space Thumbnail Generator</title>
+    <!--
+      Social share card for /project-space/ at the standard 1200x630 OG size.
+      Regenerate with:  node project-space/generate-thumbnail.js
+      Output:           images/project-space/thumbnail.jpg
+      Icons are inline SVG on purpose, so rendering never depends on an icon font.
+    -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Source+Serif+4:ital,opsz,wght@1,8..60,600;1,8..60,700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #052715;
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      .thumbnail {
+        position: relative;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #06301a;
+      }
+
+      /* The page hero photo, carried over so the card and the page match */
+      .thumbnail > .bg {
+        position: absolute;
+        inset: 0;
+      }
+
+      .bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Sits low enough to show the packed stands rather than the treeline */
+        object-position: center 56%;
+        /* The wash below flattens the photo, so lift it back up first */
+        filter: saturate(1.22) brightness(1.14) contrast(1.04);
+      }
+
+      /* Three stacked washes: a horizontal one that buys legibility for the
+         copy on the left, a green tint that keeps the event's colour, and a
+         lime glow so the dark left half is not a flat slab. */
+      .wash {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 46% 60% at 4% 8%,
+            rgba(163, 230, 53, 0.16),
+            transparent 70%
+          ),
+          linear-gradient(
+            96deg,
+            rgba(3, 24, 13, 0.93) 0%,
+            rgba(3, 24, 13, 0.85) 40%,
+            rgba(3, 24, 13, 0.44) 66%,
+            rgba(3, 24, 13, 0.5) 100%
+          ),
+          linear-gradient(
+            160deg,
+            rgba(11, 107, 52, 0.4) 0%,
+            rgba(4, 34, 19, 0.28) 60%
+          );
+      }
+
+      .top-rule {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 4;
+        height: 7px;
+        background: linear-gradient(
+          to right,
+          #15803d 0%,
+          #22c55e 44%,
+          #a3e635 78%,
+          #fbbf24 100%
+        );
+      }
+
+      .content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        height: 100%;
+        padding: 56px 62px 92px;
+      }
+
+      /* ---------- Left column ---------- */
+      .copy {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        padding: 11px 19px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.13);
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        color: #eafce9;
+        font-size: 16px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .kicker svg {
+        width: 18px;
+        height: 18px;
+        stroke: #bef264;
+        stroke-width: 2.4;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .headline {
+        margin: 24px 0 0;
+        max-width: 620px;
+        color: #fff;
+        font-size: 72px;
+        font-weight: 900;
+        line-height: 1.02;
+        letter-spacing: -0.038em;
+      }
+
+      /* Serif italic accent, the same device the page hero uses */
+      .headline em {
+        display: block;
+        margin-top: 8px;
+        font-family: "Source Serif 4", Georgia, serif;
+        font-size: 54px;
+        font-style: italic;
+        font-weight: 600;
+        letter-spacing: -0.018em;
+        /* Angled so the ramp runs across the line rather than restarting */
+        background: linear-gradient(104deg, #bef264 0%, #4ade80 62%, #22c55e 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        /* Descenders on the italic need a little room below the cap box */
+        line-height: 1.2;
+        padding-bottom: 2px;
+      }
+
+      .subhead {
+        margin: 22px 0 0;
+        max-width: 648px;
+        color: rgba(233, 245, 236, 0.82);
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 1.48;
+      }
+
+      .facts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 30px;
+      }
+
+      .fact {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 11px 17px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1.5px solid rgba(255, 255, 255, 0.24);
+        color: #f2fbf3;
+        font-size: 17.5px;
+        font-weight: 700;
+      }
+
+      .fact b {
+        color: #bef264;
+        font-weight: 900;
+      }
+
+      .fact svg {
+        width: 18px;
+        height: 18px;
+        stroke: #86efac;
+        stroke-width: 2.4;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      /* ---------- Right column ---------- */
+      .portrait {
+        position: relative;
+        flex: 0 0 322px;
+        width: 322px;
+      }
+
+      .portrait::before {
+        content: "";
+        position: absolute;
+        inset: -14% -12% 2%;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(163, 230, 53, 0.3),
+          rgba(34, 197, 94, 0.16) 54%,
+          transparent 72%
+        );
+      }
+
+      .frame {
+        position: relative;
+        padding: 8px;
+        border-radius: 38px;
+        background: linear-gradient(
+          150deg,
+          #a3e635 0%,
+          #22c55e 46%,
+          #0b6b34 100%
+        );
+        box-shadow:
+          0 30px 64px rgba(2, 20, 11, 0.55),
+          0 10px 22px rgba(2, 20, 11, 0.34);
+      }
+
+      .frame img {
+        display: block;
+        width: 100%;
+        height: 306px;
+        object-fit: cover;
+        /* Keeps the speaker's head in the crop, he stands right of centre */
+        object-position: 56% 16%;
+        border-radius: 31px;
+        background: #e9f2ec;
+      }
+
+      .plate {
+        position: relative;
+        margin: -32px 12px 0;
+        padding: 14px 19px;
+        border-radius: 21px;
+        background: #fff;
+        box-shadow: 0 22px 44px rgba(2, 20, 11, 0.45);
+      }
+
+      .plate-label {
+        display: block;
+        margin-bottom: 4px;
+        color: #7d9a86;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .plate-name {
+        display: block;
+        color: #0f1b2a;
+        font-size: 20.5px;
+        font-weight: 800;
+        line-height: 1.16;
+      }
+
+      .plate-role {
+        display: block;
+        margin-top: 3px;
+        color: #5a6b7f;
+        font-size: 13.5px;
+        font-weight: 500;
+        line-height: 1.35;
+      }
+
+      /* ---------- Footer strip ---------- */
+      .footer {
+        position: absolute;
+        bottom: 28px;
+        left: 62px;
+        right: 62px;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .url {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        font-size: 17px;
+        font-weight: 600;
+      }
+
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #22c55e, #15803d);
+        color: #fff;
+        font-size: 12.5px;
+        font-weight: 900;
+        letter-spacing: 0.02em;
+      }
+
+      .url-text {
+        color: rgba(226, 242, 230, 0.72);
+      }
+
+      .url-path {
+        color: #bef264;
+        font-weight: 800;
+      }
+
+      .host {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: rgba(226, 242, 230, 0.72);
+        font-size: 15.5px;
+        font-weight: 600;
+      }
+
+      .host svg {
+        width: 19px;
+        height: 19px;
+        stroke: #86efac;
+        stroke-width: 2.2;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="thumbnail">
+      <div class="bg">
+        <img src="../images/project-space/crowd.jpg" alt="" />
+      </div>
+      <div class="wash"></div>
+      <div class="top-rule"></div>
+
+      <div class="content">
+        <div class="copy">
+          <span class="kicker">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="9" y="2.4" width="6" height="11.2" rx="3" />
+              <path d="M5.5 11.4a6.5 6.5 0 0 0 13 0" />
+              <path d="M12 17.9v3.7M8.6 21.6h6.8" />
+            </svg>
+            Guest Speaker &middot; Jury Panel
+          </span>
+
+          <h1 class="headline">
+            Project Space 7.0
+            <em>at Aditya University</em>
+          </h1>
+
+          <p class="subhead">
+            The week an entire campus moved into its own build. I spoke, judged
+            the finals and handed over the prizes.
+          </p>
+
+          <div class="facts">
+            <span class="fact">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M16.5 20.5v-1.6a3.6 3.6 0 0 0-3.6-3.6H5.9a3.6 3.6 0 0 0-3.6 3.6v1.6" />
+                <circle cx="9.4" cy="7.9" r="3.6" />
+                <path d="M21.7 20.5v-1.6a3.6 3.6 0 0 0-2.7-3.5" />
+                <path d="M15.4 4.5a3.6 3.6 0 0 1 0 6.9" />
+              </svg>
+              <b>700+</b> participants
+            </span>
+            <span class="fact">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6.5h16M4 12h16M4 17.5h10" />
+              </svg>
+              <b>120+</b> projects
+            </span>
+            <span class="fact">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3.2 14.7 9l6.3.7-4.7 4.3 1.3 6.2-5.6-3.2-5.6 3.2 1.3-6.2L3 9.7 9.3 9z" />
+              </svg>
+              <b>20</b> finalists
+            </span>
+          </div>
+        </div>
+
+        <div class="portrait">
+          <div class="frame">
+            <img
+              src="../images/project-space/mic.jpg"
+              alt="Manoj Satishkumar speaking at Project Space"
+            />
+          </div>
+          <div class="plate">
+            <span class="plate-label">Guest speaker</span>
+            <span class="plate-name">Manoj Satishkumar</span>
+            <span class="plate-role">Software Architect, Disney</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span class="url">
+          <span class="brand-mark">MSK</span>
+          <span>
+            <span class="url-text">manojsatishkumar.com</span
+            ><span class="url-path">/project-space</span>
+          </span>
+        </span>
+        <span class="host">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M2.6 9.4 12 4.6l9.4 4.8L12 14.2z" />
+            <path d="M6.2 11.4v5.1c0 1.6 2.6 2.9 5.8 2.9s5.8-1.3 5.8-2.9v-5.1" />
+          </svg>
+          Hosted by Technical Hub
+        </span>
+      </div>
+    </div>
+  </body>
+</html>

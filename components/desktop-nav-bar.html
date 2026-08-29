@@ -22,8 +22,8 @@
       <span class="menu-label">Blog</span>
     </a>
 
-    <a class="menu-item menu-item-link" href="/quotes/">
-      <span class="menu-label">Quotes</span>
+    <a class="menu-item menu-item-link" href="/project-space/">
+      <span class="menu-label">Talks</span>
     </a>
 
     <a class="menu-item menu-item-link" href="/albums/">
@@ -59,6 +59,7 @@
         <a href="https://topmate.io/manoj_satishkumar" target="_blank">Mock Interviews</a>
         <div class="menu-divider"></div>
         <a href="/job-referral/">Job Referral</a>
+        <a href="/invite/">Invite me to speak</a>
       </div>
     </div>
 
@@ -255,9 +256,9 @@
       <i class="fas fa-newspaper"></i>
       <span>Blog</span>
     </a>
-    <a href="/quotes/" class="mobile-menu-link" onclick="closeMobileMenu()">
-      <i class="fas fa-quote-right"></i>
-      <span>Quotes</span>
+    <a href="/project-space/" class="mobile-menu-link" onclick="closeMobileMenu()">
+      <i class="fas fa-microphone-lines"></i>
+      <span>Talks</span>
     </a>
     <a href="/albums/" class="mobile-menu-link" onclick="closeMobileMenu()">
       <i class="fas fa-images"></i>
@@ -318,6 +319,10 @@
         <a href="/job-referral/" class="mobile-submenu-link" onclick="closeMobileMenu()">
           <i class="fas fa-handshake"></i>
           Job Referral
+        </a>
+        <a href="/invite/" class="mobile-submenu-link" onclick="closeMobileMenu()">
+          <i class="fas fa-school-flag"></i>
+          Invite me to speak
         </a>
       </div>
     </div>
@@ -1070,6 +1075,19 @@
     .menubar-timer {
       padding: 7px 11px;
       font-size: 12px;
+    }
+  }
+
+  /* Below ~1160px the row of links plus the location and experience chips no
+     longer fit, and the chips get clipped off the right edge. Drop the brand
+     wordmark first: the avatar beside it is the same link home. */
+  @media (min-width: 1024px) and (max-width: 1199px) {
+    .menu-brand {
+      display: none;
+    }
+
+    .menu-label {
+      padding: 9px 9px;
     }
   }
 

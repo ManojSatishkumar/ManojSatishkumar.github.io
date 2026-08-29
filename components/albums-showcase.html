@@ -115,17 +115,73 @@
     transform: rotate(5deg);
   }
 
-  .albums-showcase-cover {
+  /* The skeleton lives on this wrapper rather than on the img, because a
+     pending img paints its own alt text and broken glyph on top and Chrome
+     ignores any attempt to style that away. */
+  .albums-showcase-slot {
     position: relative;
     z-index: 1;
+    display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    overflow: hidden;
     border-radius: 26px;
     border: 8px solid #ffffff;
     box-shadow: 0 16px 28px rgba(113, 95, 67, 0.14);
+    /* Tiled, travelling exactly one tile per cycle, so the highlight sweeps
+       at a steady pace and never leaves the box bare. */
+    background: linear-gradient(
+        100deg,
+        #e5e8ef 0%,
+        #e5e8ef 32%,
+        #fbfcfe 50%,
+        #e5e8ef 68%,
+        #e5e8ef 100%
+      )
+      0 0 / 300% 100%;
+    animation: albums-showcase-shimmer 1.3s linear infinite;
+  }
+
+  .albums-showcase-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .albums-showcase-slot.is-loaded {
     background: #ffffff;
+    animation: none;
+  }
+
+  .albums-showcase-slot.is-loaded .albums-showcase-cover {
+    opacity: 1;
+  }
+
+  .albums-showcase-slot.is-failed {
+    background: #f1f2f6;
+    animation: none;
+  }
+
+  @keyframes albums-showcase-shimmer {
+    from {
+      background-position: 75% 0;
+    }
+    to {
+      background-position: -75% 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .albums-showcase-slot {
+      animation: none;
+    }
+
+    .albums-showcase-cover {
+      transition: none;
+    }
   }
 
   .albums-showcase-name {
@@ -231,11 +287,13 @@
 
     const cards = albums
       .map((album) => {
-        const cover = album.images[0];
+        const cover = window.albumPhotoSrc(album.images[0]);
         return `
           <a class="albums-showcase-card" href="/albums/view.html?album=${encodeURIComponent(album.slug)}" aria-label="Open ${album.title} album">
             <div class="albums-showcase-stack">
-              <img class="albums-showcase-cover" src="${cover}" alt="${album.title} album cover" loading="lazy" />
+              <span class="albums-showcase-slot">
+                <img class="albums-showcase-cover" src="${cover}" alt="${album.title} album cover" loading="lazy" decoding="async" />
+              </span>
             </div>
             <div class="albums-showcase-name">${album.title}</div>
             <div class="albums-showcase-count">${album.images.length} photos</div>
@@ -246,5 +304,36 @@
       .join("");
 
     grid.innerHTML = cards;
+
+    grid.querySelectorAll(".albums-showcase-slot").forEach((slot) => {
+      const img = slot.querySelector("img");
+      if (!img) return;
+
+      const reveal = () => slot.classList.add("is-loaded");
+      const fail = () => slot.classList.add("is-failed");
+
+      // These covers are 12 megapixels and up, so `load` fires well before
+      // Chrome can paint them. decode() resolves when the frame is actually
+      // paintable, which keeps the shimmer up instead of swapping it for a
+      // blank box.
+      const settle = () => {
+        if (typeof img.decode === "function") {
+          img.decode().then(reveal, reveal);
+        } else {
+          reveal();
+        }
+      };
+
+      // A cached cover can finish before this runs, and its load event would
+      // never fire again, leaving the shimmer running forever.
+      if (img.complete) {
+        if (img.naturalWidth) settle();
+        else fail();
+        return;
+      }
+
+      img.addEventListener("load", settle, { once: true });
+      img.addEventListener("error", fail, { once: true });
+    });
   })();
 </script>
