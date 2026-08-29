@@ -82,7 +82,9 @@
           linear-gradient(180deg, #f8f3e9 0%, #f2ecdf 45%, #ece5d9 100%);
         color: var(--ink);
         font-family: "Poppins", "Segoe UI", sans-serif;
-        padding: 84px 18px 48px;
+        /* Top padding clears the fixed menubar. Side gutters come from
+           .page-shell so the footer can run full width. */
+        padding: 84px 0 0;
       }
 
       .page-shell {
@@ -973,7 +975,7 @@
 
       @media (max-width: 640px) {
         body {
-          padding: 72px 10px 24px;
+          padding-top: 72px;
         }
 
         .hero h1 {

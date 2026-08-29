@@ -54,15 +54,16 @@
           <header class="experience-card__head">
             <div class="experience-card__identity">
               <h2 class="company-name">
-                <a href="https://en.wikipedia.org/wiki/The_Walt_Disney_Company" target="_blank" rel="noopener">Disney</a>
+                <a href="https://en.wikipedia.org/wiki/The_Walt_Disney_Company" target="_blank" rel="noopener">Walt Disney</a>
               </h2>
               <p class="industry">Media &amp; Entertainment</p>
             </div>
             <img
-              src="/images/disney-logo.png"
+              src="/images/logos/companies/disney.png"
               alt="The Walt Disney Company"
               class="company-logo"
-              onerror="this.style.display='none'"
+              width="1500"
+              height="1000"
             />
           </header>
           <ul class="role-list">
@@ -108,6 +109,7 @@
           <div class="experience-links">
             <a class="experience-album-link" href="/walmart-journey/">My Walmart Journey</a>
             <a class="experience-album-link" href="/walmart-us-visit/">US store visit experience</a>
+            <a class="experience-album-link" href="/walmart-last-day/">Last working day</a>
             <a class="experience-album-link" href="/albums/view.html?album=walmart">View photo album</a>
           </div>
         </div>
@@ -368,6 +370,13 @@
     height: 30px;
   }
 
+  /* The Disney mark is a stacked castle-over-wordmark lockup rather than a
+     near-square badge, so it needs extra height to stay legible. */
+  .experience-card--disney .company-logo {
+    height: 52px;
+    max-width: 130px;
+  }
+
   .experience-card--grl .company-logo {
     filter: brightness(1.03) contrast(1.02);
   }
@@ -504,6 +513,29 @@
     .experience-card--featured .company-logo {
       height: 46px;
       max-width: 120px;
+    }
+
+    /* The featured identity column is only ~266px wide, so a logo sitting in
+       the header would force "Walt Disney" onto two lines. Lift it out of the
+       flow and pin it to the card's own top-right corner instead. */
+    .experience-card--disney.experience-card--featured .company-logo {
+      position: absolute;
+      top: 16px;
+      right: 22px;
+      /* An absolutely positioned image ignores `bottom` once a width is set
+         (its intrinsic ratio wins), so the box is sized explicitly against
+         the card and `contain` scales the lockup to fill it undistorted. */
+      width: 232px;
+      height: calc(100% - 32px);
+      max-width: none;
+      margin-left: 0;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    /* Reserve that area so the story text never runs under the logo. */
+    .experience-card--disney.experience-card--featured .experience-card__body {
+      padding-right: 258px;
     }
 
     .experience-card--featured .description {

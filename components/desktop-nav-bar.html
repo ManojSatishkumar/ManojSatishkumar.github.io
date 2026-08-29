@@ -1,3 +1,7 @@
+<div class="scroll-progress" aria-hidden="true">
+  <span class="scroll-progress__fill" id="scroll-progress-fill"></span>
+</div>
+
 <nav class="macos-menubar">
   <!-- Apple-style logo -->
   <a class="menubar-logo" href="/">
@@ -29,7 +33,7 @@
     <div class="menu-item">
       <span class="menu-label">Courses</span>
       <div class="menu-dropdown menu-dropdown-wide">
-        <a href="https://www.udemy.com/course/msk-frontend-system-design-interview-guidance/?referralCode=F21AB3412B4B123F5611" target="_blank">Complete Interview Preparation Kit</a>
+        <a href="https://www.udemy.com/course/msk-frontend-system-design-interview-guidance/?referralCode=F21AB3412B4B123F5611" target="_blank">Interview Preparation Kit</a>
         <div class="menu-divider"></div>
         <a href="https://www.udemy.com/course/designing-scalable-frontend-systems/?referralCode=8B2D2910F7EA2FABB17F" target="_blank">Frontend System Design</a>
         <a href="https://www.udemy.com/course/msk-javascript-bootcamp/?referralCode=FD0B655E3F12E8610717" target="_blank">JavaScript Bootcamp</a>
@@ -54,8 +58,7 @@
         <a href="https://topmate.io/manoj_satishkumar" target="_blank">Resume Review</a>
         <a href="https://topmate.io/manoj_satishkumar" target="_blank">Mock Interviews</a>
         <div class="menu-divider"></div>
-        <a href="https://topmate.io/manoj_satishkumar" target="_blank">Career Guidance</a>
-        <a href="https://topmate.io/manoj_satishkumar" target="_blank">Job Referral</a>
+        <a href="/job-referral/">Job Referral</a>
       </div>
     </div>
 
@@ -312,11 +315,7 @@
           <i class="fas fa-comments"></i>
           Mock Interviews
         </a>
-        <a href="https://topmate.io/manoj_satishkumar" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
-          <i class="fas fa-compass"></i>
-          Career Guidance
-        </a>
-        <a href="https://topmate.io/manoj_satishkumar" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
+        <a href="/job-referral/" class="mobile-submenu-link" onclick="closeMobileMenu()">
           <i class="fas fa-handshake"></i>
           Job Referral
         </a>
@@ -357,15 +356,44 @@
       box-shadow 0.25s ease, background 0.25s ease;
   }
 
-  /* Gradient accent line along the top edge */
-  .macos-menubar::before {
-    content: "";
-    position: absolute;
+  /* The gradient accent line that used to live on this edge is now the
+     scroll-progress bar below. It is a sibling rather than a child so it
+     stays put when the menubar slides away on downward scroll. */
+
+  /* Reading-progress line pinned to the very top of the viewport */
+  .scroll-progress {
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #60a5fa 0%, #a855f7 50%, #fbbf24 100%);
+    z-index: 1001;
+    /* A washed-out copy of the fill, so the accent edge still reads as
+       colourful at the top of the page where progress is zero. */
+    background: linear-gradient(
+      90deg,
+      rgba(96, 165, 250, 0.22) 0%,
+      rgba(168, 85, 247, 0.22) 50%,
+      rgba(251, 191, 36, 0.22) 100%
+    );
+    pointer-events: none;
+  }
+
+  .scroll-progress__fill {
+    display: block;
+    width: 0;
+    height: 100%;
+    /* Sizing the gradient to the viewport rather than the element keeps the
+       colour ramp anchored, so the fill reveals it instead of squeezing it. */
+    background-image: linear-gradient(
+      90deg,
+      #60a5fa 0%,
+      #a855f7 50%,
+      #fbbf24 100%
+    );
+    background-size: 100vw 100%;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.45);
   }
 
   .macos-menubar.scrolled {
@@ -1009,7 +1037,8 @@
 
   /* Hide on mobile */
   @media (max-width: 1023px) {
-    .macos-menubar {
+    .macos-menubar,
+    .scroll-progress {
       display: none;
     }
   }
@@ -1401,11 +1430,23 @@
       });
     });
 
+    const progressFill = document.getElementById('scroll-progress-fill');
+
+    const syncScrollProgress = function(y) {
+      if (!progressFill) return;
+      const doc = document.documentElement;
+      const scrollable = doc.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? Math.min(y / scrollable, 1) : 0;
+      progressFill.style.width = (ratio * 100).toFixed(2) + '%';
+    };
+
     const syncMenubarScrollState = function() {
       ticking = false;
       const y = Math.max(window.scrollY, 0);
 
       if (menubar) menubar.classList.toggle('scrolled', y > 12);
+      // Runs before the jitter threshold below so the line tracks every pixel
+      syncScrollProgress(y);
 
       const diff = y - lastY;
       // Let small movements accumulate instead of resetting the reference point
@@ -1419,13 +1460,22 @@
       lastY = y;
     };
 
-    syncMenubarScrollState();
-    window.addEventListener('scroll', function() {
+    const requestSync = function() {
       if (!ticking) {
         ticking = true;
         window.requestAnimationFrame(syncMenubarScrollState);
       }
-    }, { passive: true });
+    };
+
+    syncMenubarScrollState();
+    window.addEventListener('scroll', requestSync, { passive: true });
+    window.addEventListener('resize', requestSync);
+
+    // Sections are lazy-loaded, so the scrollable height keeps growing after
+    // first paint. Recompute the ratio whenever the document changes size.
+    if (window.ResizeObserver) {
+      new ResizeObserver(requestSync).observe(document.body);
+    }
   }, 100);
 
   // Show dropdown on hover - use setTimeout to ensure DOM is ready after jQuery .load()
