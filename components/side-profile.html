@@ -107,92 +107,6 @@
       opacity: 1;
     }
   }
-  .social-links a {
-    display: inline-block;
-    margin: 0 6px 12px 6px;
-    font-size: 1.5rem;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    line-height: 44px;
-    color: #fff;
-    background: #007bff;
-    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    vertical-align: middle;
-  }
-  .social-links a.linkedin {
-    background: #0077b5;
-  }
-  .social-links a.youtube {
-    background: #ff0000;
-  }
-  .social-links a.topmate {
-    background: #17a2b8;
-  }
-  .social-links a.udemy {
-    background: #a435f0;
-  }
-  .social-links a.twitter {
-    background: #1da1f2;
-  }
-  .social-links a.email {
-    background: #28a745;
-  }
-  .social-links a:hover {
-    transform: scale(1.15) rotate(-6deg);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    background: #343a40;
-  }
-
-  /* Tooltip styles */
-  .social-links a {
-    position: relative;
-  }
-
-  .social-links a::before {
-    content: attr(title);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-8px);
-    background: #343a40;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s, transform 0.3s;
-    z-index: 1000;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      sans-serif;
-  }
-
-  .social-links a::after {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(2px);
-    border: 6px solid transparent;
-    border-top-color: #343a40;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s, transform 0.3s;
-    z-index: 1000;
-  }
-
-  .social-links a:hover::before {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-12px);
-  }
-
-  .social-links a:hover::after {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-2px);
-  }
   .wow {
     animation: fadeInUp 1s;
   }
@@ -253,6 +167,47 @@
   .profile-inline-link:hover .profile-detail-link {
     color: #1f2f66;
     border-bottom-color: #1f2f66;
+  }
+
+  .profile-resume-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 26px;
+    padding: 12px 18px;
+    border: 2px solid #764ba2;
+    border-radius: 14px;
+    background: transparent;
+    color: #764ba2;
+    font-size: 1.02rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .profile-resume-btn i {
+    font-size: 1.05rem;
+  }
+
+  .profile-resume-btn:hover {
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(102, 78, 162, 0.3);
+  }
+
+  .profile-resume-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 14px rgba(102, 78, 162, 0.26);
   }
 
   .visa-modal-overlay {
@@ -1056,7 +1011,7 @@
       <div style="text-align: left">
         <h1
           style="
-            font-size: 2rem;
+            font-size: 1.7rem;
             font-weight: bold;
             color: black;
             margin-bottom: 0.5rem;
@@ -1076,7 +1031,7 @@
           Software Architect
         </h5>
         <h6 style="font-size: 1rem; font-weight: 400; color: #6c757d">
-          🏢 The Walt Disney Company
+          Walt Disney
         </h6>
         <hr />
         <div style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem">
@@ -1090,10 +1045,6 @@
         <div style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem">
           <i class="fas fa-users-cog" style="color: #8b5cf6; width: 25px"></i>
           Technical Mentor
-        </div>
-        <div style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem">
-          <i class="fas fa-lightbulb" style="color: #f59e0b; width: 25px"></i>
-          Problem Solver
         </div>
         <a
           class="profile-inline-link"
@@ -1134,91 +1085,14 @@
           <i class="fas fa-handshake" style="color: #6c83ff; width: 25px"></i>
           <span class="profile-detail-link">Ask for a referral</span>
         </a>
-      </div>
-    </div>
-    <hr />
-    <div>
-      <div class="social-links" style="margin-top: 18px">
+
         <a
-          href="mailto:88manojs@gmail.com"
-          class="email"
-          title="Email"
-          target="_blank"
+          class="profile-resume-btn"
+          href="/job-referral/"
+          aria-label="Ask Manoj Satishkumar for a referral"
         >
-          <i class="fas fa-envelope"></i>
-        </a>
-        <a
-          href="https://www.linkedin.com/in/manojsatishkumar/"
-          class="linkedin"
-          title="LinkedIn"
-          target="_blank"
-        >
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a
-          href="https://www.youtube.com/@ManojSatishkumar"
-          class="youtube"
-          title="YouTube"
-          target="_blank"
-        >
-          <i class="fab fa-youtube"></i>
-        </a>
-        <a
-          href="https://topmate.io/manoj_satishkumar"
-          class="topmate"
-          title="Topmate"
-          target="_blank"
-        >
-          <i class="fas fa-user-tie"></i>
-        </a>
-        <a
-          href="https://www.udemy.com/user/manoj79/"
-          class="udemy"
-          title="Udemy"
-          target="_blank"
-        >
-          <i class="fas fa-briefcase"></i>
-        </a>
-        <a
-          href="https://github.com/ManojSatishkumar"
-          class="github"
-          title="GitHub"
-          target="_blank"
-          style="background: #000"
-        >
-          <i class="fab fa-github"></i>
-        </a>
-        <a
-          href="https://twitter.com/MSK_Web_Manoj"
-          class="twitter"
-          title="Twitter"
-          target="_blank"
-        >
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a
-          href="/blog/"
-          class="articles"
-          title="Articles"
-          style="background: #17a2b8"
-        >
-          <i class="fas fa-newspaper"></i>
-        </a>
-        <a
-          href="/apps/index.html"
-          class="apps"
-          title="Apps"
-          style="background: #ff9800"
-        >
-          <i class="fab fa-app-store-ios"></i>
-        </a>
-        <a
-          href="/q-n-a/q-n-a-with-manoj.html"
-          class="faqs"
-          title="FAQs"
-          style="background: #6c757d"
-        >
-          <i class="fas fa-question-circle"></i>
+          <i class="fas fa-handshake"></i>
+          Ask a referral
         </a>
       </div>
     </div>

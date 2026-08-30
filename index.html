@@ -138,7 +138,7 @@
           display: none !important;
         }
         body {
-          padding-bottom: 100px;
+          padding-bottom: 0;
         }
       }
       .main-pill {
@@ -154,24 +154,24 @@
         font-weight: 500;
       }
 
-      /* macOS Dock Style Navigation - horizontal rail under the app bar */
+      /* macOS Dock Style Navigation - horizontal rail pinned to the viewport bottom */
       .nav-bar-fixed {
         position: fixed !important;
-        top: 64px !important;
-        bottom: auto !important;
+        top: auto !important;
+        bottom: 0 !important;
         left: 0 !important;
         right: 0 !important;
         width: 100% !important;
         transform: translateY(0) !important;
         padding: 5px 20px !important;
+        padding-bottom: calc(5px + env(safe-area-inset-bottom)) !important;
         border-radius: 0 !important;
         border: none !important;
-        border-bottom: 1px solid rgba(15, 23, 42, 0.07) !important;
+        border-top: 1px solid rgba(15, 23, 42, 0.07) !important;
         background-color: rgba(255, 255, 255, 0.72) !important;
         backdrop-filter: saturate(200%) blur(18px) !important;
         -webkit-backdrop-filter: saturate(200%) blur(18px) !important;
-        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06) !important;
-        /* Sits under the app bar so it slides away behind it */
+        box-shadow: 0 -6px 18px rgba(15, 23, 42, 0.06) !important;
         z-index: 999 !important;
         will-change: transform;
         transition:
@@ -179,10 +179,11 @@
           opacity 0.4s ease !important;
       }
 
-      /* The rail stays on screen the whole time. When the app bar slides away it
-         moves up into that slot, so it never leaves a gap under the viewport top */
-      .nav-bar-fixed.rail-docked {
-        transform: translateY(-64px) !important;
+      /* Drops off the bottom edge while scrolling down, mirroring the mobile bar */
+      .nav-bar-fixed.rail-hidden {
+        transform: translateY(105%) !important;
+        box-shadow: none !important;
+        pointer-events: none !important;
       }
 
       .nav-bar-fixed .dock-container {
@@ -256,10 +257,10 @@
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
       }
 
-      /* Dock Tooltip - drops below the horizontal rail */
+      /* Dock Tooltip - rises above the horizontal rail */
       .dock-tooltip {
         position: absolute;
-        top: calc(100% + 12px);
+        bottom: calc(100% + 12px);
         left: 50%;
         transform: translateX(-50%);
         background: white;
@@ -277,11 +278,11 @@
         width: 220px;
       }
 
-      /* Invisible bridge so the tooltip survives the gap under the item */
+      /* Invisible bridge so the tooltip survives the gap above the item */
       .dock-tooltip::before {
         content: "";
         position: absolute;
-        top: -14px;
+        bottom: -14px;
         left: 0;
         right: 0;
         height: 14px;
@@ -297,13 +298,13 @@
       .dock-tooltip::after {
         content: "";
         position: absolute;
-        top: -16px;
+        bottom: -16px;
         left: 50%;
         transform: translateX(-50%);
         border-width: 8px;
         border-style: solid;
-        border-color: transparent transparent white transparent;
-        filter: drop-shadow(0 -2px 2px rgba(0, 0, 0, 0.08));
+        border-color: white transparent transparent transparent;
+        filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.08));
       }
 
       .dock-tooltip h4 {
@@ -471,11 +472,12 @@
         }
       }
 
-      /* Where the rail is visible it stacks under the 64px app bar, so the page
-         needs room for both. Outranks the app bar's own body padding rule. */
+      /* The fixed dock rail overlaps the viewport bottom. Rather than padding the
+         body (which left a blank gap under the footer), the footer carries the
+         clearance itself so its gradient fills the space behind the rail. */
       @media only screen and (min-width: 1366px) {
-        html body {
-          padding-top: 124px !important;
+        #footer footer {
+          padding-bottom: calc(96px + env(safe-area-inset-bottom)) !important;
         }
       }
 
@@ -514,11 +516,11 @@
         opacity: 1;
       }
 
-      /* Sub-nav rail - stays tucked behind the app bar until the load
-         animation runs. Uses a pre-state class rather than a keyframe because
-         the rail's own transform is !important and would outrank an animation */
+      /* Sub-nav rail - stays below the bottom edge until the load animation
+         runs. Uses a pre-state class rather than a keyframe because the rail's
+         own transform is !important and would outrank an animation */
       .nav-bar-fixed:not(.slide-in) {
-        transform: translateY(calc(-100% - 72px)) !important;
+        transform: translateY(120%) !important;
         opacity: 0 !important;
       }
 
@@ -534,20 +536,6 @@
 
       .chatbot-widget.slide-in {
         right: 24px !important;
-        opacity: 1 !important;
-      }
-
-      /* Scroll Indicator - slides from left bottom */
-      .scroll-indicator-wrapper {
-        left: -100px !important;
-        opacity: 0 !important;
-        transition:
-          left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
-          opacity 0.4s ease !important;
-      }
-
-      .scroll-indicator-wrapper.slide-in {
-        left: 30px !important;
         opacity: 1 !important;
       }
 
@@ -628,14 +616,6 @@
         width: 74%;
         border-radius: 999px;
         margin-bottom: 16px;
-      }
-
-      .intro-skeleton-kicker {
-        width: 320px;
-        max-width: 56%;
-        height: 42px;
-        border-radius: 999px;
-        margin-bottom: 24px;
       }
 
       .intro-skeleton-heading {
@@ -747,7 +727,6 @@
         }
 
         .intro-skeleton-heading,
-        .intro-skeleton-kicker,
         .intro-skeleton-pill,
         .intro-skeleton-avatars,
         .intro-skeleton-brand {
@@ -980,7 +959,6 @@
           </div>
 
           <div class="intro-skeleton-main">
-            <div class="intro-skeleton-kicker intro-skeleton-shimmer"></div>
             <div class="intro-skeleton-heading intro-skeleton-shimmer"></div>
 
             <div class="intro-skeleton-panel">
@@ -1148,9 +1126,10 @@
       }
 
       // Height of whatever fixed bars are stacked at the top right now, so a
-      // jumped-to section doesn't land underneath them
+      // jumped-to section doesn't land underneath them. The dock rail is
+      // excluded because it sits at the bottom of the viewport.
       function getStickyHeaderOffset() {
-        return [".macos-menubar", ".nav-bar-fixed"].reduce((total, selector) => {
+        return [".macos-menubar"].reduce((total, selector) => {
           const bar = document.querySelector(selector);
           if (!bar || getComputedStyle(bar).display === "none") {
             return total;
@@ -1289,7 +1268,7 @@
           }
         }, 200);
 
-        // Left dock slides in
+        // Bottom dock rail slides up
         setTimeout(function () {
           const navBarFixed = document.querySelector(".nav-bar-fixed");
           if (navBarFixed) {
@@ -1304,16 +1283,6 @@
             chatbotWidget.classList.add("slide-in");
           }
         }, 750);
-
-        // Scroll indicator slides in
-        setTimeout(function () {
-          const scrollWrapper = document.querySelector(
-            ".scroll-indicator-wrapper",
-          );
-          if (scrollWrapper) {
-            scrollWrapper.classList.add("slide-in");
-          }
-        }, 900);
       });
     </script>
 
@@ -1377,130 +1346,6 @@
       </div>
     </div>
 
-    <!-- Scroll Indicator -->
-    <div class="scroll-indicator-wrapper">
-      <span class="scroll-indicator-label">Scroll</span>
-      <div
-        id="scroll-indicator"
-        class="scroll-indicator"
-        onclick="handleScrollIndicatorClick()"
-      >
-        <div class="scroll-arrow-down">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M12 5v14M5 12l7 7 7-7" />
-          </svg>
-        </div>
-        <div class="scroll-arrow-up">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M12 19V5M5 12l7-7 7 7" />
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    <style>
-      /* Scroll Indicator Styles */
-      .scroll-indicator-wrapper {
-        position: fixed;
-        bottom: 30px;
-        left: 30px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
-        z-index: 999;
-      }
-
-      .scroll-indicator-label {
-        font-size: 10px;
-        font-weight: 500;
-        color: #666;
-        white-space: nowrap;
-        letter-spacing: 0.2px;
-      }
-
-      .scroll-indicator {
-        width: 44px;
-        height: 44px;
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-      }
-
-      .scroll-indicator:hover {
-        background: rgba(255, 255, 255, 1);
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-        transform: scale(1.05);
-      }
-
-      .scroll-arrow-down,
-      .scroll-arrow-up {
-        position: absolute;
-        color: #333;
-        transition: all 0.3s ease;
-      }
-
-      .scroll-arrow-down {
-        opacity: 1;
-        animation: bounceDown 1.5s ease-in-out infinite;
-      }
-
-      .scroll-arrow-up {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-
-      .scroll-indicator.at-bottom .scroll-arrow-down {
-        opacity: 0;
-        transform: scale(0.8);
-        animation: none;
-      }
-
-      .scroll-indicator.at-bottom .scroll-arrow-up {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      @keyframes bounceDown {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(4px);
-        }
-      }
-
-      /* Hide on mobile to avoid conflict with mobile nav */
-      @media (max-width: 1024px) {
-        .scroll-indicator-wrapper {
-          display: none;
-        }
-      }
-    </style>
-
     <style>
       /* Chatbot Widget Styles */
       .chatbot-widget {
@@ -1525,6 +1370,18 @@
         }
 
         .chatbot-widget.nav-hidden {
+          bottom: 24px;
+        }
+      }
+
+      /* Ride above the dock rail, and drop back down with it as it hides */
+      @media (min-width: 1366px) {
+        .chatbot-widget {
+          bottom: calc(74px + env(safe-area-inset-bottom) + 16px);
+          transition: bottom 0.38s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        body:has(.nav-bar-fixed.rail-hidden) .chatbot-widget {
           bottom: 24px;
         }
       }
@@ -1897,36 +1754,6 @@
         }
       });
 
-      // Scroll Indicator functions
-      function handleScrollIndicatorClick() {
-        const indicator = document.getElementById("scroll-indicator");
-        if (indicator.classList.contains("at-bottom")) {
-          // Scroll to top
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        } else {
-          // Scroll down by viewport height
-          window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
-        }
-      }
-
-      function updateScrollIndicator() {
-        const indicator = document.getElementById("scroll-indicator");
-        if (!indicator) return;
-
-        const scrollTop = window.scrollY;
-        const windowHeight = window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight;
-
-        // Check if near bottom (within 100px)
-        if (scrollTop + windowHeight >= documentHeight - 100) {
-          indicator.classList.add("at-bottom");
-        } else {
-          indicator.classList.remove("at-bottom");
-        }
-      }
-
-      window.addEventListener("scroll", updateScrollIndicator);
-      window.addEventListener("load", updateScrollIndicator);
     </script>
   </body>
 </html>

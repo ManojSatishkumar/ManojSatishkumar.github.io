@@ -24,24 +24,8 @@
     margin-bottom: 20px;
   }
 
-  .intro-kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 14px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.66);
-    border: 1px solid rgba(213, 221, 243, 0.9);
-    color: #5b6acb;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    box-shadow: 0 12px 30px rgba(108, 125, 180, 0.08);
-  }
-
   .intro-title {
-    margin: 14px 0 0;
+    margin: 0;
     font-family: "Poppins", sans-serif;
     background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f64f59 100%);
     -webkit-background-clip: text;
@@ -54,7 +38,8 @@
   }
 
   .intro-lead-card,
-  .intro-role-card,
+  .intro-journey-card,
+  .intro-edu-card,
   .intro-quote-card {
     position: relative;
     border-radius: 22px;
@@ -181,175 +166,143 @@
     text-decoration: none;
   }
 
-  .intro-role-card {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 26px 28px;
-    margin-bottom: 22px;
+  /* Career journey on the left; education + philosophy stacked on the right */
+  .intro-duo {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+    align-items: stretch;
+    gap: 22px;
   }
 
-  .intro-role-card::after {
+  .intro-side {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    min-width: 0;
+  }
+
+  .intro-journey-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 24px 24px 22px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .intro-journey-card::after {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background:
-      radial-gradient(
-        circle at top right,
-        rgba(0, 113, 206, 0.08),
-        transparent 22%
-      ),
-      radial-gradient(
-        circle at bottom left,
-        rgba(255, 198, 70, 0.08),
-        transparent 20%
-      );
+    background: radial-gradient(
+      circle at top right,
+      rgba(0, 99, 229, 0.09),
+      transparent 26%
+    );
   }
 
-  .intro-role-top {
+  .intro-card-label {
     position: relative;
     z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    margin-bottom: 18px;
-  }
-
-  .intro-role-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .intro-role-brand img {
-    width: 38px;
-    height: 38px;
-    object-fit: contain;
-  }
-
-  .intro-role-company {
-    margin: 0;
-    color: #0071ce;
-    font-size: 1.22rem;
+    margin-bottom: 16px;
+    font-size: 0.78rem;
     font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #6b7280;
   }
 
-  .intro-role-tag {
-    flex-shrink: 0;
-    display: inline-flex;
+  .intro-journey {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .intro-journey__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 12px;
+    padding-bottom: 14px;
+  }
+
+  .intro-journey__item:last-child {
+    padding-bottom: 0;
+  }
+
+  /* Rail joining one logo to the next */
+  .intro-journey__item:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    top: 34px;
+    bottom: 0;
+    left: 15px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(
+      180deg,
+      rgba(129, 145, 194, 0.75),
+      rgba(148, 163, 208, 0.28)
+    );
+  }
+
+  .intro-journey__logo {
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    border-radius: 10px;
+    object-fit: contain;
+    background: #ffffff;
+    border: 1px solid rgba(214, 223, 246, 0.95);
+    box-shadow: 0 6px 14px rgba(95, 112, 163, 0.1);
+  }
+
+  .intro-journey__item--current .intro-journey__logo {
+    border-color: rgba(0, 99, 229, 0.35);
+    box-shadow: 0 8px 18px rgba(0, 99, 229, 0.16);
+  }
+
+  .intro-journey__company {
+    display: flex;
     align-items: center;
-    padding: 7px 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: #111827;
+    font-size: 0.96rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .intro-journey__role {
+    color: #64748b;
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .intro-journey__now {
+    padding: 3px 8px;
     border-radius: 999px;
     background: #e8f5e9;
     color: #2e7d32;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 
-  .intro-role-tag--past {
-    background: #eef1f6;
-    color: #64748b;
-  }
-
-  .intro-role-card--current {
-    background: linear-gradient(
-      135deg,
-      rgba(240, 247, 255, 0.96) 0%,
-      rgba(248, 250, 255, 0.98) 100%
-    );
-    border-color: rgba(0, 99, 229, 0.22);
-  }
-
-  .intro-role-card--current::after {
-    background:
-      radial-gradient(
-        circle at top right,
-        rgba(0, 99, 229, 0.12),
-        transparent 24%
-      ),
-      radial-gradient(
-        circle at bottom left,
-        rgba(113, 89, 226, 0.1),
-        transparent 22%
-      );
-  }
-
-  .intro-role-company--disney {
-    color: #0063e5;
-  }
-
-  .intro-role-meta {
-    position: relative;
-    z-index: 1;
-    margin: -8px 0 14px;
+  .intro-journey__years {
+    padding-top: 2px;
     color: #475569;
-    font-size: 0.92rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: 0.01em;
+    white-space: nowrap;
   }
 
-  .intro-role-copy--compact {
-    margin-bottom: 0;
-    font-size: 1rem;
-  }
-
-  .intro-role-copy {
-    position: relative;
-    z-index: 1;
-    margin: 0 0 18px;
-    font-size: 1.04rem;
-    line-height: 1.82;
-    color: #1f2937;
-  }
-
-  .intro-achievement-box {
-    position: relative;
-    z-index: 1;
-    padding: 18px 18px 16px;
-    border-radius: 18px;
-    background: linear-gradient(135deg, #f8fafc 0%, #f5f7fb 100%);
-    border: 1px solid rgba(224, 229, 241, 0.95);
-  }
-
-  .intro-achievement-label {
-    margin-bottom: 8px;
-    font-size: 0.78rem;
-    color: #6b7280;
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    font-weight: 700;
-  }
-
-  .intro-achievement-copy {
-    margin: 0;
-    font-size: 0.97rem;
-    line-height: 1.72;
-    color: #374151;
-  }
-
-  .intro-chip-highlight {
-    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
-    padding: 2px 10px;
-    border-radius: 999px;
-    font-weight: 600;
-    color: #5e35b1;
-    cursor: pointer;
-    border-bottom: 2px dashed #5e35b1;
-  }
-
-  .intro-role-links {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 16px;
-  }
-
-  .intro-role-links .intro-store-visit-link {
-    margin-top: 0;
+  .intro-journey-card .intro-store-visit-link {
+    align-self: flex-start;
+    margin-top: 20px;
   }
 
   .intro-store-visit-link {
@@ -388,16 +341,137 @@
     text-decoration: none;
   }
 
-  .intro-quote-card {
+  .intro-edu-card {
     background: rgba(255, 255, 255, 0.9);
-    padding: 22px 24px;
+    padding: 24px 24px 22px;
+  }
+
+  .intro-edu-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at top right,
+      rgba(118, 75, 162, 0.08),
+      transparent 26%
+    );
+  }
+
+  .intro-edu {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .intro-edu__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 12px;
+    padding-bottom: 14px;
+  }
+
+  .intro-edu__item:last-child {
+    padding-bottom: 0;
+  }
+
+  .intro-edu__item:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    top: 34px;
+    bottom: 0;
+    left: 15px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(
+      180deg,
+      rgba(129, 145, 194, 0.75),
+      rgba(148, 163, 208, 0.28)
+    );
+  }
+
+  .intro-edu-card .intro-edu__icon {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #eef1ff 0%, #f5edff 100%);
+    border: 1px solid rgba(214, 223, 246, 0.95);
+    box-shadow: 0 6px 14px rgba(95, 112, 163, 0.1);
+    color: #764ba2;
+    font-size: 0.85rem;
+    line-height: 1;
+  }
+
+  .intro-edu__title {
+    color: #111827;
+    font-size: 0.96rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .intro-edu__school {
+    color: #64748b;
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .intro-edu__year {
+    padding-top: 2px;
+    color: #475569;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .intro-quote-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    padding: 28px 26px;
+    background: linear-gradient(
+      135deg,
+      rgba(249, 251, 255, 0.95),
+      rgba(241, 245, 255, 0.98)
+    );
+  }
+
+  .intro-quote-mark {
+    margin-bottom: 10px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 4.2rem;
+    line-height: 0.6;
+    color: rgba(118, 75, 162, 0.26);
   }
 
   .intro-quote-text {
     margin: 0;
     color: #1f2937;
-    font-size: 1.03rem;
-    line-height: 1.8;
+    font-size: 1.1rem;
+    line-height: 1.85;
+  }
+
+  .intro-quote-author {
+    margin-top: 18px;
+    color: #64748b;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* Two columns get cramped once the panel drops below its desktop width */
+  @media (max-width: 991px) {
+    .intro-duo {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 18px;
+    }
   }
 
   .profile-card {
@@ -413,46 +487,6 @@
     width: 220px;
     border-radius: 50%;
     margin-bottom: 16px;
-  }
-  .social-links a {
-    display: inline-block;
-    margin: 0 6px 12px 6px;
-    font-size: 1.5rem;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    line-height: 44px;
-    color: #fff;
-    background: #007bff;
-    transition:
-      transform 0.2s,
-      box-shadow 0.2s,
-      background 0.2s;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    vertical-align: middle;
-  }
-  .social-links a.linkedin {
-    background: #0077b5;
-  }
-  .social-links a.youtube {
-    background: #ff0000;
-  }
-  .social-links a.topmate {
-    background: #17a2b8;
-  }
-  .social-links a.udemy {
-    background: #a435f0;
-  }
-  .social-links a.twitter {
-    background: #1da1f2;
-  }
-  .social-links a.email {
-    background: #28a745;
-  }
-  .social-links a:hover {
-    transform: scale(1.15) rotate(-6deg);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    background: #343a40;
   }
   .wow {
     animation: fadeInUp 1s;
@@ -475,13 +509,8 @@
       padding-top: 12px;
     }
 
-    .intro-role-top {
-      align-items: flex-start;
-      flex-direction: column;
-    }
-
     .intro-lead-card,
-    .intro-role-card,
+    .intro-journey-card,
     .intro-quote-card {
       border-radius: 18px;
     }
@@ -541,9 +570,6 @@
       >
         <!-- Section Header -->
         <div class="intro-header">
-          <span class="intro-kicker"
-            >Frontend Architecture • Platform Scale</span
-          >
           <h2 class="intro-title">Let me introduce myself...</h2>
         </div>
 
@@ -618,61 +644,135 @@
           </div>
         </div>
 
-        <!-- Walmart Experience & Key Achievement -->
-        <div class="intro-role-card">
-          <div class="intro-role-top">
-            <div class="intro-role-brand">
-              <img src="/images/walmart-logo.png" alt="Walmart" />
-              <strong class="intro-role-company">Walmart Global Tech</strong>
+        <!-- Career journey & philosophy -->
+        <div class="intro-duo">
+          <div class="intro-journey-card">
+            <div class="intro-card-label">Career journey</div>
+            <ol class="intro-journey">
+              <li class="intro-journey__item intro-journey__item--current">
+                <img
+                  class="intro-journey__logo"
+                  src="/images/disney/mickey.png"
+                  alt=""
+                />
+                <div>
+                  <div class="intro-journey__company">
+                    Walt Disney
+                    <span class="intro-journey__now">Now</span>
+                  </div>
+                  <div class="intro-journey__role">Software Architect</div>
+                </div>
+                <span class="intro-journey__years">Since 2026</span>
+              </li>
+              <li class="intro-journey__item">
+                <img
+                  class="intro-journey__logo"
+                  src="/images/walmart-logo.png"
+                  alt=""
+                />
+                <div>
+                  <div class="intro-journey__company">Walmart</div>
+                  <div class="intro-journey__role">Staff Software Engineer</div>
+                </div>
+                <span class="intro-journey__years">2022 &ndash; 2026</span>
+              </li>
+              <li class="intro-journey__item">
+                <img
+                  class="intro-journey__logo"
+                  src="/images/paypal-icon.png"
+                  alt=""
+                />
+                <div>
+                  <div class="intro-journey__company">PayPal</div>
+                  <div class="intro-journey__role">
+                    Member of Technical Staff
+                  </div>
+                </div>
+                <span class="intro-journey__years">2021 &ndash; 2022</span>
+              </li>
+              <li class="intro-journey__item">
+                <img
+                  class="intro-journey__logo"
+                  src="/images/walmart-logo.png"
+                  alt=""
+                />
+                <div>
+                  <div class="intro-journey__company">Walmart</div>
+                  <div class="intro-journey__role">
+                    Senior Software Engineer
+                  </div>
+                </div>
+                <span class="intro-journey__years">2019 &ndash; 2021</span>
+              </li>
+              <li class="intro-journey__item">
+                <img
+                  class="intro-journey__logo"
+                  src="/images/cerner-logo.png"
+                  alt=""
+                />
+                <div>
+                  <div class="intro-journey__company">Cerner</div>
+                  <div class="intro-journey__role">Technical Team Lead</div>
+                </div>
+                <span class="intro-journey__years">2015 &ndash; 2019</span>
+              </li>
+              <li class="intro-journey__item">
+                <img
+                  class="intro-journey__logo"
+                  src="/images/grl-logo.png"
+                  alt=""
+                />
+                <div>
+                  <div class="intro-journey__company">GRL Labs</div>
+                  <div class="intro-journey__role">Software Engineer</div>
+                </div>
+                <span class="intro-journey__years">2013 &ndash; 2015</span>
+              </li>
+            </ol>
+            <a
+              class="intro-store-visit-link"
+              href="#experience"
+              onclick="
+                if (typeof animateScroll === 'function') {
+                  event.preventDefault();
+                  animateScroll('experience');
+                }
+              "
+              >Full experience</a
+            >
+          </div>
+
+          <div class="intro-side">
+            <!-- Education -->
+            <div class="intro-edu-card">
+              <div class="intro-card-label">Education</div>
+              <ul class="intro-edu">
+                <li class="intro-edu__item">
+                  <i class="fa-solid fa-graduation-cap intro-edu__icon"></i>
+                  <div>
+                    <div class="intro-edu__title">B.E. Electronics</div>
+                    <div class="intro-edu__school">BITM College · Bellary</div>
+                  </div>
+                  <span class="intro-edu__year">2013</span>
+                </li>
+              </ul>
             </div>
-            <span class="intro-role-tag intro-role-tag--past">Achievement</span>
-          </div>
 
-          <p class="intro-role-copy">
-            I led frontend engineering for a
-            <strong>mission-critical global communications platform</strong>
-            powering
-            <span style="color: #d32f2f; font-weight: 700">70+ million</span>
-            daily communications across
-            <strong>Email, SMS, WhatsApp, Push, Voice,</strong> and
-            <strong>In-App notifications</strong>.
-          </p>
-
-          <div class="intro-achievement-box">
-            <div class="intro-achievement-label">🚀 Key Achievement</div>
-            <p class="intro-achievement-copy">
-              As the <strong>founding engineer & architect</strong>, I built a
-              <span onclick="openPortalModal()" class="intro-chip-highlight"
-                >No-Code Template Builder</span
-              >
-              from scratch and it is now used by
-              <strong>200+ teams</strong> across Walmart's global operations
-              (US, Canada, Mexico) empowering
-              <strong
-                >Order Lifecycle, Marketing, Health & Wellness, Last
-                Mile,</strong
-              >
-              and <strong>Security</strong> teams.
-            </p>
+            <!-- Philosophy -->
+            <div class="intro-quote-card">
+              <div class="intro-quote-mark" aria-hidden="true">&ldquo;</div>
+              <p class="intro-quote-text">
+                <em
+                  >I believe in building platforms that
+                  <strong>multiply impact</strong>, scaling systems that
+                  <strong>serve millions</strong>, and leading with
+                  <strong>empathy, clarity, and high engineering standards</strong
+                  >.</em
+                >
+              </p>
+              <div class="intro-quote-author">&mdash; Manoj Satishkumar</div>
+            </div>
           </div>
-          <div class="intro-role-links">
-            <a class="intro-store-visit-link" href="/walmart-journey/"
-              >Read More</a
-            >
-          </div>
-        </div>
-
-        <!-- Philosophy -->
-        <div class="intro-quote-card">
-          <p class="intro-quote-text">
-            <em
-              >"I believe in building platforms that
-              <strong>multiply impact</strong>, scaling systems that
-              <strong>serve millions</strong>, and leading with
-              <strong>empathy, clarity, and high engineering standards</strong
-              >."</em
-            >
-          </p>
         </div>
       </div>
     </div>

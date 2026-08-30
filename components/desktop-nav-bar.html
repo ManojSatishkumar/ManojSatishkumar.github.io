@@ -1409,8 +1409,8 @@
     const mobilebar = document.querySelector('.mobile-navbar');
     // Mobile bottom bar hides too; its own CSS sends it down rather than up
     const bottomNav = document.querySelector('.mobile-bottom-nav');
-    // The section rail is never hidden. It docks upward into the menubar's slot
-    // instead, so it stays reachable without leaving a gap where the menubar was
+    // The section rail sits at the bottom of the viewport and slides off the
+    // bottom edge, so it needs its own class rather than the shared one
     const sectionRail = document.querySelector('.nav-bar-fixed');
 
     const bars = [menubar, mobilebar, bottomNav].filter(Boolean);
@@ -1426,11 +1426,11 @@
       bars.forEach(function(bar) {
         bar.classList.toggle('nav-hidden', hide);
       });
-      if (sectionRail) sectionRail.classList.toggle('rail-docked', hide);
+      if (sectionRail) sectionRail.classList.toggle('rail-hidden', hide);
     };
 
-    // Only the bars that actually hide pin on hover. The rail is deliberately
-    // excluded: pointing at it should not drag the menubar back onto the page
+    // The rail is deliberately excluded from hover pinning: pointing at it
+    // should not drag the menubar back onto the page
     bars.forEach(function(bar) {
       bar.addEventListener('mouseenter', function() {
         pinned = true;
