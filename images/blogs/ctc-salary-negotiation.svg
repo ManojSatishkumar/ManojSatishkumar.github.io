@@ -1,50 +1,117 @@
-<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="'Poppins', 'Segoe UI', Arial, sans-serif">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0c4a1f"/>
-      <stop offset="50%" style="stop-color:#166534"/>
-      <stop offset="100%" style="stop-color:#0c4a1f"/>
+    <!-- Base background gradient -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#03110b"/>
+      <stop offset="0.5" stop-color="#062b1c"/>
+      <stop offset="1" stop-color="#02150f"/>
     </linearGradient>
+    <!-- Radial glows -->
+    <radialGradient id="glowGreen" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#22c55e" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#22c55e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowTeal" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#2dd4bf" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Title highlight gradient -->
+    <linearGradient id="hl" x1="75" y1="300" x2="620" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#86efac"/>
+      <stop offset="0.5" stop-color="#4ade80"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+    <!-- Bar gradients -->
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4ade80"/>
+      <stop offset="1" stop-color="#15803d"/>
+    </linearGradient>
+    <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fde047"/>
+      <stop offset="1" stop-color="#eab308"/>
+    </linearGradient>
+    <!-- Dot grid -->
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.5" fill="#ffffff" fill-opacity="0.05"/>
+    </pattern>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="16" stdDeviation="22" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
   </defs>
-  
+
   <!-- Background -->
   <rect width="1200" height="630" fill="url(#bg)"/>
-  
-  <!-- Decorative circles -->
-  <circle cx="850" cy="500" r="200" fill="none" stroke="rgba(34,197,94,0.15)" stroke-width="1"/>
-  <circle cx="900" cy="450" r="280" fill="none" stroke="rgba(34,197,94,0.1)" stroke-width="1"/>
-  <circle cx="950" cy="550" r="120" fill="rgba(34,197,94,0.08)"/>
-  
-  <!-- Large decorative rupee symbol on the right -->
-  <text x="820" y="380" font-family="Arial, sans-serif" font-size="300" font-weight="700" fill="rgba(34,197,94,0.12)">₹</text>
-  
-  <!-- Three dots decoration -->
-  <circle cx="1100" cy="60" r="4" fill="rgba(255,255,255,0.3)"/>
-  <circle cx="1120" cy="60" r="4" fill="rgba(255,255,255,0.3)"/>
-  <circle cx="1140" cy="60" r="4" fill="rgba(255,255,255,0.3)"/>
-  
-  <!-- CAREER Badge -->
-  <rect x="60" y="55" width="130" height="50" rx="4" fill="#0c4a1f" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-  <text x="125" y="90" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="3">CAREER</text>
-  
-  <!-- Tagline -->
-  <text x="75" y="175" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="rgba(134,239,172,0.9)" letter-spacing="4">COMPLETE NEGOTIATION GUIDE</text>
-  
-  <!-- Main Title Line 1 -->
-  <text x="75" y="250" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#ffffff">CTC SALARY</text>
-  
-  <!-- Main Title Line 2 - Highlighted -->
-  <text x="75" y="340" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="rgba(134,239,172,1)">NEGOTIATION</text>
-  
-  <!-- Main Title Line 3 -->
-  <text x="75" y="430" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#ffffff">GUIDE</text>
-  
-  <!-- Underline accent -->
-  <rect x="75" y="455" width="120" height="5" rx="2" fill="rgba(134,239,172,0.8)"/>
-  
-  <!-- MSK Branding -->
-  <rect x="60" y="540" width="50" height="30" rx="15" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-  <text x="85" y="562" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="rgba(255,255,255,0.5)" text-anchor="middle">MSK</text>
-  <text x="125" y="562" font-family="Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.4)">manojsatishkumar.com</text>
-</svg>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <ellipse cx="1040" cy="120" rx="460" ry="360" fill="url(#glowGreen)"/>
+  <ellipse cx="120" cy="640" rx="420" ry="320" fill="url(#glowTeal)"/>
 
+  <!-- Top hairline -->
+  <rect x="0" y="0" width="1200" height="6" fill="url(#hl)"/>
+
+  <!-- Corner dots -->
+  <g fill="#ffffff" fill-opacity="0.35">
+    <circle cx="1112" cy="56" r="4"/>
+    <circle cx="1132" cy="56" r="4"/>
+    <circle cx="1152" cy="56" r="4"/>
+  </g>
+
+  <!-- ===================== RIGHT VISUAL: growth chart ===================== -->
+  <g transform="translate(770,150)" filter="url(#soft)">
+    <!-- Glass panel -->
+    <rect x="0" y="0" width="360" height="360" rx="28" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.12"/>
+    <!-- baseline -->
+    <line x1="34" y1="300" x2="326" y2="300" stroke="#ffffff" stroke-opacity="0.15" stroke-width="2"/>
+
+    <!-- ascending bars -->
+    <rect x="52"  y="228" width="46" height="72"  rx="10" fill="url(#bar)" fill-opacity="0.55"/>
+    <rect x="120" y="180" width="46" height="120" rx="10" fill="url(#bar)" fill-opacity="0.7"/>
+    <rect x="188" y="128" width="46" height="172" rx="10" fill="url(#bar)" fill-opacity="0.85"/>
+    <rect x="256" y="74"  width="46" height="226" rx="10" fill="url(#bar)"/>
+
+    <!-- trend arrow -->
+    <polyline points="60,236 135,196 205,150 285,92" fill="none" stroke="#eafff1" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="285,92 262,96 280,116" fill="#eafff1"/>
+
+    <!-- rupee coin badge -->
+    <g transform="translate(279,60)">
+      <circle r="34" fill="url(#coin)"/>
+      <circle r="34" fill="none" stroke="#ffffff" stroke-opacity="0.6" stroke-width="2"/>
+      <text x="0" y="15" font-size="42" font-weight="700" fill="#7c4a03" text-anchor="middle">&#8377;</text>
+    </g>
+  </g>
+
+  <!-- ===================== LEFT TEXT ===================== -->
+  <!-- Badge pill -->
+  <g>
+    <rect x="75" y="70" width="216" height="46" rx="23" fill="#ffffff" fill-opacity="0.08" stroke="#4ade80" stroke-opacity="0.5"/>
+    <circle cx="102" cy="93" r="6" fill="#4ade80"/>
+    <text x="120" y="99" font-size="18" font-weight="600" fill="#d1fae5" letter-spacing="2">CAREER · SALARY</text>
+  </g>
+
+  <!-- Tagline -->
+  <text x="77" y="176" font-size="17" font-weight="600" fill="#86efac" letter-spacing="4">THE COMPLETE NEGOTIATION PLAYBOOK</text>
+
+  <!-- Title -->
+  <text x="72" y="262" font-size="80" font-weight="700" fill="#ffffff" letter-spacing="-1">CTC Salary</text>
+  <text x="72" y="352" font-size="80" font-weight="700" fill="url(#hl)" letter-spacing="-1">Negotiation</text>
+  <text x="72" y="442" font-size="80" font-weight="700" fill="#ffffff" letter-spacing="-1">Guide</text>
+
+  <!-- Accent underline -->
+  <rect x="75" y="466" width="140" height="6" rx="3" fill="url(#hl)"/>
+
+  <!-- Meta chips -->
+  <g>
+    <rect x="75" y="500" width="150" height="40" rx="20" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12"/>
+    <text x="150" y="526" font-size="16" font-weight="600" fill="#d1fae5" text-anchor="middle">12 min read</text>
+
+    <rect x="237" y="500" width="410" height="40" rx="20" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12"/>
+    <text x="442" y="526" font-size="16" font-weight="500" fill="#a7f3d0" text-anchor="middle">Basic · HRA · PF · Gratuity · RSU · ESOP</text>
+  </g>
+
+  <!-- Branding -->
+  <g transform="translate(75,580)">
+    <rect x="0" y="-2" width="52" height="30" rx="15" fill="none" stroke="#ffffff" stroke-opacity="0.35"/>
+    <text x="26" y="19" font-size="14" font-weight="700" fill="#ffffff" fill-opacity="0.7" text-anchor="middle">MSK</text>
+    <text x="66" y="19" font-size="15" font-weight="500" fill="#ffffff" fill-opacity="0.55">manojsatishkumar.com</text>
+  </g>
+</svg>
