@@ -939,40 +939,6 @@
         </div>
         <div
           class="dock-item"
-          onclick="animateScroll('tech-talks')"
-          data-section="tech-talks"
-        >
-          <div class="icon-wrapper">
-            <i class="icon ion-mic-a"></i>
-          </div>
-          <span>Tech Talks</span>
-          <div class="dock-tooltip">
-            <h4>Tech Talks</h4>
-            <p>
-              Speaking engagements, jury panels, and builder-community events
-              where I share ideas and learn from innovators.
-            </p>
-          </div>
-        </div>
-        <div
-          class="dock-item"
-          onclick="animateScroll('albums-showcase')"
-          data-section="albums-showcase"
-        >
-          <div class="icon-wrapper">
-            <i class="icon ion-images"></i>
-          </div>
-          <span>Albums</span>
-          <div class="dock-tooltip">
-            <h4>Albums</h4>
-            <p>
-              A curated photo library of work memories, campus moments, awards,
-              and milestones across my journey.
-            </p>
-          </div>
-        </div>
-        <div
-          class="dock-item"
           onclick="animateScroll('msk-testimony')"
           data-section="msk-testimony"
         >
@@ -1072,9 +1038,8 @@
       id="education"
       class="text-left"
     ></div>
-    <div id="tech-talks" class="text-left"></div>
-    <div id="albums-showcase" class="text-left"></div>
     <div id="msk-testimony"></div>
+    <div id="blog-articles"></div>
     <div
       id="mock-interview-ad"
       class="text-left"
@@ -1235,9 +1200,12 @@
         deferSectionLoad("#achievements", "/components/achievements.html");
         deferSectionLoad("#patent", "/components/patent.html");
         deferSectionLoad("#education", "/components/education.html");
-        deferSectionLoad("#tech-talks", "/components/speaking-feature.html");
-        deferSectionLoad("#albums-showcase", "/components/albums-showcase.html");
         deferSectionLoad("#msk-testimony", "/components/testimony.html");
+        deferSectionLoad(
+          "#blog-articles",
+          "/components/blog-articles-grid.html",
+          function () {},
+        );
         // $("#mock-interview-ad").load("/components/mock-interview-ad.html");
         deferSectionLoad("#footer", "/components/footer.html");
 
@@ -1252,10 +1220,6 @@
             "achievements",
             "patent",
             "education",
-            "tech-talks",
-            "albums-showcase",
-            "courses",
-            "blog",
             "msk-testimony",
           ];
 
