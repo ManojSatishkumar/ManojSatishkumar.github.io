@@ -1409,9 +1409,6 @@
     const mobilebar = document.querySelector('.mobile-navbar');
     // Mobile bottom bar hides too; its own CSS sends it down rather than up
     const bottomNav = document.querySelector('.mobile-bottom-nav');
-    // The section rail sits at the bottom of the viewport and slides off the
-    // bottom edge, so it needs its own class rather than the shared one
-    const sectionRail = document.querySelector('.nav-bar-fixed');
 
     const bars = [menubar, mobilebar, bottomNav].filter(Boolean);
     if (!bars.length) return;
@@ -1426,7 +1423,6 @@
       bars.forEach(function(bar) {
         bar.classList.toggle('nav-hidden', hide);
       });
-      if (sectionRail) sectionRail.classList.toggle('rail-hidden', hide);
     };
 
     // The rail is deliberately excluded from hover pinning: pointing at it

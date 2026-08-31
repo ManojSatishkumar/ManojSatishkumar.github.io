@@ -154,24 +154,22 @@
         font-weight: 500;
       }
 
-      /* macOS Dock Style Navigation - horizontal rail pinned to the viewport bottom */
+      /* macOS Dock Style Navigation - vertical rail floating on the right edge */
       .nav-bar-fixed {
         position: fixed !important;
-        top: auto !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        width: 100% !important;
-        transform: translateY(0) !important;
-        padding: 5px 20px !important;
-        padding-bottom: calc(5px + env(safe-area-inset-bottom)) !important;
-        border-radius: 0 !important;
-        border: none !important;
-        border-top: 1px solid rgba(15, 23, 42, 0.07) !important;
+        top: 50% !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: 14px !important;
+        width: auto !important;
+        transform: translate(0, -50%) !important;
+        padding: 10px 8px !important;
+        border-radius: 22px !important;
+        border: 1px solid rgba(15, 23, 42, 0.07) !important;
         background-color: rgba(255, 255, 255, 0.72) !important;
         backdrop-filter: saturate(200%) blur(18px) !important;
         -webkit-backdrop-filter: saturate(200%) blur(18px) !important;
-        box-shadow: 0 -6px 18px rgba(15, 23, 42, 0.06) !important;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12) !important;
         z-index: 999 !important;
         will-change: transform;
         transition:
@@ -179,19 +177,19 @@
           opacity 0.4s ease !important;
       }
 
-      /* Drops off the bottom edge while scrolling down, mirroring the mobile bar */
+      /* Slides off the right edge while scrolling down */
       .nav-bar-fixed.rail-hidden {
-        transform: translateY(105%) !important;
+        transform: translate(140%, -50%) !important;
         box-shadow: none !important;
         pointer-events: none !important;
       }
 
       .nav-bar-fixed .dock-container {
         display: flex !important;
-        flex-direction: row !important;
+        flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        gap: 4px !important;
+        gap: 0 !important;
         padding: 0 !important;
       }
 
@@ -200,23 +198,23 @@
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        padding: 3px 8px !important;
+        padding: 3px 10px !important;
         margin: 0 !important;
         cursor: pointer !important;
         transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
         position: relative !important;
-        border-radius: 8px !important;
+        border-radius: 12px !important;
       }
 
       /* macOS style rounded rectangle icon */
       .nav-bar-fixed .dock-item .icon-wrapper {
-        width: 28px !important;
-        height: 28px !important;
-        border-radius: 8px !important;
+        width: 42px !important;
+        height: 42px !important;
+        border-radius: 12px !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        margin-bottom: 2px !important;
+        margin-bottom: 3px !important;
         transition: all 0.2s ease !important;
         position: relative !important;
         background: rgba(0, 0, 0, 0.04) !important;
@@ -227,7 +225,7 @@
       }
 
       .nav-bar-fixed .dock-item i {
-        font-size: 17px !important;
+        font-size: 24px !important;
         color: #555 !important;
         transition: all 0.2s ease !important;
       }
@@ -257,12 +255,14 @@
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
       }
 
-      /* Dock Tooltip - rises above the horizontal rail */
+      /* Dock Tooltip - opens to the left of the vertical rail */
       .dock-tooltip {
         position: absolute;
-        bottom: calc(100% + 12px);
-        left: 50%;
-        transform: translateX(-50%);
+        right: calc(100% + 14px);
+        left: auto;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
         background: white;
         border-radius: 12px;
         padding: 14px 18px;
@@ -278,14 +278,15 @@
         width: 220px;
       }
 
-      /* Invisible bridge so the tooltip survives the gap above the item */
+      /* Invisible bridge so the tooltip survives the gap beside the item */
       .dock-tooltip::before {
         content: "";
         position: absolute;
-        bottom: -14px;
-        left: 0;
-        right: 0;
-        height: 14px;
+        right: -14px;
+        left: auto;
+        top: 0;
+        bottom: 0;
+        width: 14px;
         background: transparent;
       }
 
@@ -298,13 +299,14 @@
       .dock-tooltip::after {
         content: "";
         position: absolute;
-        bottom: -16px;
-        left: 50%;
-        transform: translateX(-50%);
+        right: -16px;
+        left: auto;
+        top: 50%;
+        transform: translateY(-50%);
         border-width: 8px;
         border-style: solid;
-        border-color: white transparent transparent transparent;
-        filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.08));
+        border-color: transparent transparent transparent white;
+        filter: drop-shadow(2px 0 2px rgba(0, 0, 0, 0.08));
       }
 
       .dock-tooltip h4 {
@@ -472,15 +474,6 @@
         }
       }
 
-      /* The fixed dock rail overlaps the viewport bottom. Rather than padding the
-         body (which left a blank gap under the footer), the footer carries the
-         clearance itself so its gradient fills the space behind the rail. */
-      @media only screen and (min-width: 1366px) {
-        #footer footer {
-          padding-bottom: calc(96px + env(safe-area-inset-bottom)) !important;
-        }
-      }
-
       /* ===== Navigation Slide-in Animations ===== */
 
       /* Top Menu Bar - slides from top */
@@ -516,11 +509,11 @@
         opacity: 1;
       }
 
-      /* Sub-nav rail - stays below the bottom edge until the load animation
+      /* Sub-nav rail - stays off the right edge until the load animation
          runs. Uses a pre-state class rather than a keyframe because the rail's
          own transform is !important and would outrank an animation */
       .nav-bar-fixed:not(.slide-in) {
-        transform: translateY(120%) !important;
+        transform: translate(140%, -50%) !important;
         opacity: 0 !important;
       }
 
@@ -1268,7 +1261,7 @@
           }
         }, 200);
 
-        // Bottom dock rail slides up
+        // Right-side dock rail slides in
         setTimeout(function () {
           const navBarFixed = document.querySelector(".nav-bar-fixed");
           if (navBarFixed) {
@@ -1374,14 +1367,10 @@
         }
       }
 
-      /* Ride above the dock rail, and drop back down with it as it hides */
+      /* Rail now lives on the right edge (vertically centered), so the chatbot
+         bubble can sit at its normal bottom-right position. */
       @media (min-width: 1366px) {
         .chatbot-widget {
-          bottom: calc(74px + env(safe-area-inset-bottom) + 16px);
-          transition: bottom 0.38s cubic-bezier(0.22, 0.61, 0.36, 1);
-        }
-
-        body:has(.nav-bar-fixed.rail-hidden) .chatbot-widget {
           bottom: 24px;
         }
       }
