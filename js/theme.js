@@ -15,8 +15,34 @@
     }
   }
 
+  // Matches --dm-bg in /css/dark-mode.css
+  var DARK_THEME_COLOR = "#0b1120";
+
+  // An installed PWA's title bar (and mobile browser toolbars) take their
+  // color from this tag and repaint live when it changes; the manifest's
+  // theme_color is only the fallback when the tag is absent.
+  function syncThemeColorMeta(theme) {
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.setAttribute("name", "theme-color");
+      document.head.appendChild(meta);
+    }
+    if (!meta.hasAttribute("data-light-color")) {
+      meta.setAttribute(
+        "data-light-color",
+        meta.getAttribute("content") || "#ffffff",
+      );
+    }
+    meta.setAttribute(
+      "content",
+      theme === "dark" ? DARK_THEME_COLOR : meta.getAttribute("data-light-color"),
+    );
+  }
+
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
+    syncThemeColorMeta(theme);
     window.syncThemeToggles();
   }
 
@@ -36,10 +62,7 @@
     applyTheme(next);
   };
 
-  root.setAttribute(
-    "data-theme",
-    readStoredTheme() || (media.matches ? "dark" : "light"),
-  );
+  applyTheme(readStoredTheme() || (media.matches ? "dark" : "light"));
 
   // Follow the OS setting live until the visitor picks a theme themselves
   if (media.addEventListener) {
