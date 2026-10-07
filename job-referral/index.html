@@ -1161,6 +1161,239 @@
         }
       }
     </style>
+    <style>
+      /* Dark theme overrides (theme set by /js/theme.js) */
+      html[data-theme="dark"] {
+        color-scheme: dark;
+        --jr-ink: var(--dm-heading);
+        --jr-ink-soft: var(--dm-text);
+        --jr-muted: var(--dm-text-muted);
+        --jr-accent: var(--dm-violet);
+        --jr-accent-soft: rgba(129, 140, 248, 0.16);
+        --jr-line: rgba(148, 163, 184, 0.18);
+        --jr-paper: rgba(19, 28, 46, 0.86);
+        --jr-shadow: 0 24px 60px rgba(0, 0, 0, 0.35),
+          0 10px 24px rgba(0, 0, 0, 0.25);
+      }
+
+      /* [lang] lifts this above dark-mode.css's body rule, which loads later */
+      html[data-theme="dark"][lang] body {
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(96, 165, 250, 0.08),
+            transparent 32%
+          ),
+          radial-gradient(
+            circle at bottom right,
+            rgba(251, 146, 60, 0.05),
+            transparent 34%
+          ),
+          linear-gradient(180deg, var(--dm-bg) 0%, var(--dm-bg-alt) 100%);
+      }
+
+      html[data-theme="dark"] .jr-shell {
+        color: var(--jr-ink);
+      }
+
+      html[data-theme="dark"] .jr-hero h1 {
+        background-image: var(--dm-heading-gradient);
+      }
+
+      html[data-theme="dark"] .jr-pill {
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .jr-portrait-frame {
+        box-shadow:
+          0 30px 66px rgba(0, 0, 0, 0.45),
+          0 10px 24px rgba(0, 0, 0, 0.3);
+      }
+
+      html[data-theme="dark"] .jr-portrait-frame img {
+        background: var(--dm-surface-2);
+      }
+
+      html[data-theme="dark"] .jr-portrait-plate {
+        background: rgba(19, 28, 46, 0.92);
+        border-color: var(--dm-border-strong);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      }
+
+      html[data-theme="dark"] .jr-does li::before,
+      html[data-theme="dark"] .jr-does h3 i {
+        color: #4ade80;
+      }
+
+      html[data-theme="dark"] .jr-doesnt li::before,
+      html[data-theme="dark"] .jr-doesnt h3 i {
+        color: #f87171;
+      }
+
+      html[data-theme="dark"] .jr-where-badge.direct {
+        background: rgba(74, 222, 128, 0.14);
+        color: #86efac;
+      }
+
+      html[data-theme="dark"] .jr-where-badge.warm {
+        background: rgba(251, 191, 36, 0.14);
+        color: #fcd34d;
+      }
+
+      html[data-theme="dark"] .jr-where-badge.none {
+        background: rgba(148, 163, 184, 0.14);
+        color: var(--dm-text-muted);
+      }
+
+      html[data-theme="dark"] .jr-progress-track {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      html[data-theme="dark"] .jr-check {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      html[data-theme="dark"] .jr-check:hover {
+        border-color: rgba(165, 180, 252, 0.5);
+      }
+
+      html[data-theme="dark"] .jr-check:focus-visible {
+        outline-color: rgba(165, 180, 252, 0.5);
+      }
+
+      html[data-theme="dark"] .jr-check-box {
+        border-color: #475569;
+      }
+
+      html[data-theme="dark"] .jr-check[aria-pressed="true"] {
+        border-color: rgba(74, 222, 128, 0.4);
+        background: rgba(74, 222, 128, 0.08);
+      }
+
+      html[data-theme="dark"] .jr-field label {
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .jr-field input {
+        border-color: var(--dm-border-strong);
+        background: var(--dm-bg-alt);
+        color: var(--dm-heading);
+      }
+
+      html[data-theme="dark"] .jr-field input::placeholder {
+        color: #7b8aa3;
+        opacity: 1;
+      }
+
+      html[data-theme="dark"] .jr-field input:focus {
+        border-color: rgba(165, 180, 252, 0.7);
+        box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.22);
+      }
+
+      /* The light design is a dark pill on a light card, so invert it */
+      html[data-theme="dark"] .jr-copy-btn {
+        background: #e2e8f0;
+        color: #0f172a;
+      }
+
+      html[data-theme="dark"] .jr-copy-btn:hover {
+        background: #ffffff;
+      }
+
+      html[data-theme="dark"] .jr-copy-btn.copied {
+        background: #2f9e63;
+        color: #ffffff;
+      }
+
+      html[data-theme="dark"] .jr-output {
+        background: var(--dm-bg-alt);
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .jr-cta {
+        background:
+          radial-gradient(
+            ellipse 70% 60% at 50% 0%,
+            rgba(160, 108, 255, 0.16),
+            transparent 70%
+          ),
+          linear-gradient(
+            160deg,
+            rgba(19, 28, 46, 0.94) 0%,
+            rgba(30, 24, 44, 0.94) 100%
+          );
+      }
+
+      html[data-theme="dark"] .jr-cta-badge {
+        box-shadow:
+          0 18px 34px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      }
+
+      html[data-theme="dark"] .jr-btn-primary {
+        box-shadow:
+          0 14px 30px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      }
+
+      html[data-theme="dark"] .jr-btn-primary:hover,
+      html[data-theme="dark"] .jr-btn-primary:focus {
+        box-shadow:
+          0 20px 40px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      }
+
+      html[data-theme="dark"] .jr-btn-ghost {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: var(--dm-border-strong);
+        color: var(--dm-text);
+        box-shadow: none;
+      }
+
+      html[data-theme="dark"] .jr-btn-ghost:hover,
+      html[data-theme="dark"] .jr-btn-ghost:focus {
+        color: var(--dm-heading);
+        border-color: rgba(165, 180, 252, 0.5);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      html[data-theme="dark"] .jr-icon-btn {
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--dm-text-muted);
+      }
+
+      html[data-theme="dark"] .jr-icon-btn:hover {
+        color: var(--jr-accent);
+        border-color: rgba(165, 180, 252, 0.5);
+      }
+
+      html[data-theme="dark"] .jr-icon-btn.copied {
+        color: #4ade80;
+        border-color: rgba(74, 222, 128, 0.5);
+        background: rgba(74, 222, 128, 0.1);
+      }
+
+      html[data-theme="dark"] .jr-channel-note {
+        background: rgba(255, 255, 255, 0.03);
+        border-color: var(--dm-border);
+      }
+
+      html[data-theme="dark"] .jr-channel-icon {
+        background: rgba(129, 140, 248, 0.16);
+      }
+
+      html[data-theme="dark"] .jr-cta-rule {
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(148, 163, 184, 0.35),
+          transparent
+        );
+      }
+    </style>
+    <script src="/js/theme.js"></script>
+    <link href="/css/dark-mode.css" rel="stylesheet" />
   </head>
   <body>
     <div id="desktop-nav-bar"></div>

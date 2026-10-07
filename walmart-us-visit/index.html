@@ -906,6 +906,165 @@
       }
     }
     </style>
+    <style>
+      /* Dark theme overrides (theme set by /js/theme.js) */
+      html[data-theme="dark"] {
+        --ink: var(--dm-heading);
+        --muted: var(--dm-text-muted);
+        --line: var(--dm-border);
+        --paper: var(--dm-surface);
+      }
+
+      /* :root raises specificity above the body rule in dark-mode.css,
+         which loads after this block */
+      html[data-theme="dark"]:root body {
+        background: linear-gradient(
+          180deg,
+          #0d1a2e 0%,
+          var(--dm-bg) 28%,
+          #0b1318 72%,
+          var(--dm-bg) 100%
+        );
+      }
+
+      html[data-theme="dark"] .visit-hero {
+        background: linear-gradient(135deg, #005bb0, #003a75 62%, #1f6a03);
+      }
+
+      html[data-theme="dark"] .visit-hero::after {
+        background: linear-gradient(
+          90deg,
+          var(--wm-yellow),
+          #fff2bd,
+          var(--wm-yellow)
+        );
+      }
+
+      html[data-theme="dark"] .hero-photo {
+        border-color: var(--dm-border-strong);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+      }
+
+      html[data-theme="dark"] .hero-author {
+        background: rgba(19, 28, 46, 0.96);
+        border-top-color: var(--dm-border);
+      }
+
+      html[data-theme="dark"] .hero-author img {
+        border-color: var(--dm-surface-2);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+      }
+
+      html[data-theme="dark"] .hero-author-label,
+      html[data-theme="dark"] .stores-heading {
+        color: var(--dm-accent);
+      }
+
+      html[data-theme="dark"] .hero-author-name {
+        color: var(--dm-heading);
+      }
+
+      html[data-theme="dark"] .hero-author-note {
+        color: var(--dm-text-muted);
+      }
+
+      html[data-theme="dark"] .intro-panel,
+      html[data-theme="dark"] .visit-moment,
+      html[data-theme="dark"] .reflection-panel {
+        box-shadow: var(--dm-shadow);
+      }
+
+      html[data-theme="dark"] .intro-panel p,
+      html[data-theme="dark"] .moment-copy p,
+      html[data-theme="dark"] .reflection-panel p {
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .stores-list {
+        background: var(--dm-bg-alt);
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .stores-list a {
+        color: var(--dm-accent);
+        background: var(--dm-surface-2);
+        border-color: var(--dm-border-strong);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+
+      html[data-theme="dark"] .stores-list a::before {
+        color: var(--dm-accent);
+      }
+
+      html[data-theme="dark"] .stores-list a::after {
+        color: var(--dm-text-muted);
+      }
+
+      html[data-theme="dark"] .stores-list a:hover {
+        color: var(--dm-accent-strong);
+        border-color: var(--dm-accent);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+      }
+
+      html[data-theme="dark"] .stores-list a:hover::after {
+        color: var(--dm-accent-strong);
+      }
+
+      html[data-theme="dark"] .section-kicker span {
+        background: rgba(255, 194, 32, 0.14);
+        color: #fcd34d;
+      }
+
+      html[data-theme="dark"] .visit-moment {
+        background: rgba(19, 28, 46, 0.86);
+      }
+
+      html[data-theme="dark"] .moment-media {
+        background: var(--dm-surface-2);
+      }
+
+      html[data-theme="dark"] .moment-media figcaption {
+        color: var(--dm-text-muted);
+        background: var(--dm-surface-2);
+      }
+
+      html[data-theme="dark"] .quote-note {
+        border-left-color: var(--dm-accent);
+        background: rgba(96, 165, 250, 0.1);
+        color: var(--dm-accent-strong);
+      }
+
+      html[data-theme="dark"] .takeaway {
+        background: linear-gradient(135deg, #005bb0, #1f6a03);
+        box-shadow: var(--dm-shadow);
+      }
+
+      html[data-theme="dark"] .reflection-panel {
+        background: var(--dm-surface);
+      }
+
+      html[data-theme="dark"] .share-strip a {
+        color: var(--dm-accent);
+        background: var(--dm-surface);
+      }
+
+      html[data-theme="dark"] .share-strip a:hover {
+        background: var(--wm-blue);
+        color: #ffffff;
+      }
+
+      html[data-theme="dark"] .photo-modal-close {
+        background: var(--dm-surface-2);
+        color: var(--dm-heading);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      html[data-theme="dark"] .back-to-top {
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+      }
+    </style>
+    <script src="/js/theme.js"></script>
+    <link href="/css/dark-mode.css" rel="stylesheet" />
   </head>
 
   <body>

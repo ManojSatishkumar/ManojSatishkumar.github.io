@@ -1245,6 +1245,190 @@
         }
       }
     </style>
+    <style>
+      /* Dark theme overrides (theme set by /js/theme.js) */
+      html[data-theme="dark"] {
+        --ps-green-deep: #4ade80;
+        --ps-green-ink: #bbf7d0;
+        --ps-ink: var(--dm-heading);
+        --ps-muted: var(--dm-text-muted);
+        --ps-line: var(--dm-border);
+      }
+
+      html[data-theme="dark"] .ps-page {
+        background: var(--dm-bg);
+      }
+
+      html[data-theme="dark"] .ps-page main {
+        color: var(--ps-ink);
+      }
+
+      /* The shared stylesheet gives every h2 a near-black colour */
+      html[data-theme="dark"] .ps-h2 {
+        color: var(--ps-ink);
+      }
+
+      /* --ps-ink is a light text colour in dark mode, so the solid button
+         needs its own dark fill */
+      html[data-theme="dark"] .ps-btn--solid {
+        background: var(--dm-surface-2);
+        border-color: var(--dm-border-strong);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      html[data-theme="dark"] .ps-btn--outline {
+        background: var(--dm-surface);
+        border-color: var(--dm-border-strong);
+      }
+
+      html[data-theme="dark"] .ps-btn--outline:hover {
+        border-color: rgba(74, 222, 128, 0.45);
+      }
+
+      html[data-theme="dark"] .ps-btn--outline.is-copied {
+        background: var(--ps-green);
+        border-color: var(--ps-green);
+        color: #fff;
+      }
+
+      html[data-theme="dark"] .ps-btn--primary {
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      html[data-theme="dark"] .ps-stats {
+        box-shadow: 0 26px 60px rgba(0, 0, 0, 0.45);
+      }
+
+      html[data-theme="dark"] .ps-stat {
+        background: var(--dm-surface);
+      }
+
+      html[data-theme="dark"] .ps-stat b {
+        background: linear-gradient(135deg, #4ade80 0%, #a3e635 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+
+      html[data-theme="dark"] .ps-section--paper {
+        background: var(--dm-bg-alt);
+      }
+
+      html[data-theme="dark"] .ps-kicker {
+        background: rgba(74, 222, 128, 0.12);
+      }
+
+      html[data-theme="dark"] .ps-body p {
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .ps-figure {
+        background: var(--dm-surface-2);
+        box-shadow: var(--dm-shadow);
+      }
+
+      html[data-theme="dark"] .ps-figure figcaption {
+        background: var(--dm-surface);
+      }
+
+      html[data-theme="dark"] .ps-pull {
+        background: linear-gradient(
+          135deg,
+          rgba(34, 197, 94, 0.1),
+          rgba(163, 230, 53, 0.06)
+        );
+        border-color: rgba(74, 222, 128, 0.22);
+      }
+
+      html[data-theme="dark"] .ps-card {
+        background: var(--dm-surface);
+        box-shadow: var(--dm-shadow);
+      }
+
+      html[data-theme="dark"] .ps-card:hover {
+        box-shadow: 0 20px 44px rgba(0, 0, 0, 0.5);
+      }
+
+      html[data-theme="dark"] .ps-project {
+        background: var(--dm-surface);
+      }
+
+      html[data-theme="dark"] .ps-project:hover {
+        border-color: rgba(74, 222, 128, 0.4);
+      }
+
+      html[data-theme="dark"] .ps-project b {
+        background: rgba(74, 222, 128, 0.14);
+      }
+
+      /* Dot centres are filled with the section background to look hollow */
+      html[data-theme="dark"] .ps-timeline li::before {
+        background: var(--dm-bg);
+        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+      }
+
+      html[data-theme="dark"] .ps-shot {
+        background: var(--dm-surface-2);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+      }
+
+      html[data-theme="dark"] .ps-host {
+        background: var(--dm-surface);
+        box-shadow: var(--dm-shadow);
+      }
+
+      /* The university logo is a JPEG on white, so its tile stays white */
+      html[data-theme="dark"] .ps-host-mark {
+        border-color: var(--dm-border-strong);
+      }
+
+      html[data-theme="dark"] .ps-closing {
+        background: radial-gradient(
+            circle at 22% 18%,
+            rgba(163, 230, 53, 0.14),
+            transparent 42%
+          ),
+          linear-gradient(140deg, #08502a 0%, #04210f 100%);
+      }
+
+      html[data-theme="dark"] .ps-invite {
+        background: radial-gradient(
+            circle at 88% 6%,
+            rgba(34, 197, 94, 0.1),
+            transparent 46%
+          ),
+          radial-gradient(
+            circle at 6% 92%,
+            rgba(163, 230, 53, 0.08),
+            transparent 44%
+          ),
+          var(--dm-bg-alt);
+      }
+
+      html[data-theme="dark"] .ps-invite-card {
+        background: var(--dm-surface);
+        box-shadow: 0 24px 58px rgba(0, 0, 0, 0.45);
+      }
+
+      html[data-theme="dark"] .ps-invite-card:hover {
+        border-color: rgba(74, 222, 128, 0.4);
+        box-shadow: 0 34px 74px rgba(0, 0, 0, 0.55);
+      }
+
+      html[data-theme="dark"] .ps-invite-card-cta {
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      html[data-theme="dark"] .ps-chip {
+        background: var(--dm-surface-2);
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .ps-chip i {
+        color: #4ade80;
+      }
+    </style>
+    <script src="/js/theme.js"></script>
+    <link href="/css/dark-mode.css" rel="stylesheet" />
   </head>
 
   <body class="ps-page">

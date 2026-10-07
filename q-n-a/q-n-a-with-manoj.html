@@ -522,6 +522,41 @@
       }
     }
   </style>
+  <script src="/js/theme.js"></script>
+  <link href="/css/dark-mode.css" rel="stylesheet" />
+  <style>
+    /* :root[...] rather than html[...] so these outrank the blog defaults
+       that /css/dark-mode.css assigns to the same variables */
+    :root[data-theme="dark"] {
+      --color-surface-2: var(--dm-surface-2);
+      --color-surface-3: #26334d;
+      --color-accent: #818cf8;
+      --color-accent-2: #22d3ee;
+      --color-accent-3: #f472b6;
+      --color-card: var(--dm-surface);
+      --color-card-border: var(--dm-border);
+      --color-card-divider: var(--dm-border);
+    }
+
+    html[data-theme="dark"] body::after {
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    }
+
+    html[data-theme="dark"] .faq-heading .gradient {
+      background-image: linear-gradient(135deg, #818cf8 0%, #22d3ee 50%, #f472b6 100%);
+    }
+
+    html[data-theme="dark"] .faq-toolbar,
+    html[data-theme="dark"] .faq-item {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    html[data-theme="dark"] .category-btn.active {
+      background: linear-gradient(135deg, rgba(129, 140, 248, 0.2), rgba(34, 211, 238, 0.12));
+    }
+  </style>
 </head>
 
 <body>

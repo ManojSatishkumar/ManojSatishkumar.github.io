@@ -959,6 +959,163 @@
         }
       }
     </style>
+    <style>
+      /* Dark theme overrides (theme set by /js/theme.js) */
+      html[data-theme="dark"] {
+        --iv-ink: var(--dm-heading);
+        --iv-muted: var(--dm-text-muted);
+        --iv-line: var(--dm-border);
+        --iv-green-deep: #4ade80;
+      }
+
+      /* body.iv-page outranks dark-mode.css's `body` rule, which loads later */
+      html[data-theme="dark"] body.iv-page {
+        color: var(--iv-ink);
+        background: var(--dm-bg);
+      }
+
+      html[data-theme="dark"] .iv-btn--primary {
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+      }
+
+      html[data-theme="dark"] .iv-btn--outline {
+        background: var(--dm-surface-2);
+        border-color: var(--dm-border-strong);
+        color: var(--dm-heading);
+      }
+
+      html[data-theme="dark"] .iv-btn--outline:hover {
+        color: var(--iv-green-deep);
+        border-color: rgba(74, 222, 128, 0.45);
+      }
+
+      html[data-theme="dark"] .iv-btn--outline.is-copied {
+        background: var(--iv-green);
+        border-color: var(--iv-green);
+        color: #fff;
+      }
+
+      html[data-theme="dark"] .iv-band {
+        box-shadow: 0 26px 60px rgba(0, 0, 0, 0.45);
+      }
+
+      html[data-theme="dark"] .iv-band-cell {
+        background: var(--dm-surface);
+      }
+
+      html[data-theme="dark"] .iv-band-cell b {
+        background: linear-gradient(135deg, #86efac 0%, #22c55e 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+
+      html[data-theme="dark"] .iv-section--paper {
+        background: var(--dm-bg-alt);
+      }
+
+      html[data-theme="dark"] .iv-kicker {
+        background: rgba(74, 222, 128, 0.12);
+      }
+
+      html[data-theme="dark"] .iv-talk {
+        background: var(--dm-surface);
+        box-shadow: var(--dm-shadow);
+      }
+
+      html[data-theme="dark"] .iv-talk:hover {
+        border-color: rgba(74, 222, 128, 0.35);
+        box-shadow: 0 22px 48px rgba(0, 0, 0, 0.5);
+      }
+
+      html[data-theme="dark"] .iv-talk-icon {
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+      }
+
+      html[data-theme="dark"] .iv-chip {
+        background: var(--dm-surface);
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .iv-chip i,
+      html[data-theme="dark"] .iv-proof-list i {
+        color: #4ade80;
+      }
+
+      html[data-theme="dark"] .iv-step {
+        background: var(--dm-surface);
+      }
+
+      html[data-theme="dark"] .iv-step::before {
+        background: rgba(74, 222, 128, 0.14);
+      }
+
+      html[data-theme="dark"] .iv-proof-figure {
+        box-shadow: 0 22px 52px rgba(0, 0, 0, 0.45);
+      }
+
+      html[data-theme="dark"] .iv-proof-list li {
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .iv-panel {
+        background: var(--dm-surface);
+        box-shadow: 0 22px 56px rgba(0, 0, 0, 0.45);
+      }
+
+      html[data-theme="dark"] .iv-field label {
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .iv-field input,
+      html[data-theme="dark"] .iv-field select,
+      html[data-theme="dark"] .iv-field textarea {
+        background-color: var(--dm-bg-alt);
+        border-color: var(--dm-border-strong);
+      }
+
+      html[data-theme="dark"] .iv-field select,
+      html[data-theme="dark"] .iv-field select:focus {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2394a3b8' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        background-size: 11px;
+      }
+
+      html[data-theme="dark"] .iv-field input:focus,
+      html[data-theme="dark"] .iv-field select:focus,
+      html[data-theme="dark"] .iv-field textarea:focus {
+        background-color: var(--dm-bg);
+        border-color: rgba(74, 222, 128, 0.55);
+        box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.16);
+      }
+
+      html[data-theme="dark"] .iv-field input::placeholder,
+      html[data-theme="dark"] .iv-field textarea::placeholder {
+        color: #64748b;
+      }
+
+      html[data-theme="dark"] .iv-copy-btn {
+        background: rgba(74, 222, 128, 0.1);
+        border-color: rgba(74, 222, 128, 0.28);
+      }
+
+      html[data-theme="dark"] .iv-copy-btn:hover {
+        background: rgba(74, 222, 128, 0.18);
+      }
+
+      html[data-theme="dark"] .iv-copy-btn.is-copied {
+        background: var(--iv-green);
+        border-color: var(--iv-green);
+        color: #fff;
+      }
+
+      html[data-theme="dark"] .iv-out {
+        color: var(--dm-text);
+        background: var(--dm-bg-alt);
+      }
+    </style>
+    <script src="/js/theme.js"></script>
+    <link href="/css/dark-mode.css" rel="stylesheet" />
   </head>
 
   <body class="iv-page">

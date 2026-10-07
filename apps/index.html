@@ -55,6 +55,30 @@
             }
         }
     </style>
+    <style>
+        /* Dark theme overrides (theme set by /js/theme.js) */
+        html[data-theme="dark"] .container [style*="-webkit-background-clip: text"] {
+            background-image: var(--dm-heading-gradient) !important;
+        }
+
+        html[data-theme="dark"] hr {
+            border-top-color: var(--dm-border);
+        }
+
+        html[data-theme="dark"] #blogger a[style*="color:black"] {
+            color: var(--dm-heading) !important;
+        }
+
+        html[data-theme="dark"] #blogger a[style*="color:black"]:hover {
+            color: var(--dm-accent-strong) !important;
+        }
+
+        html[data-theme="dark"] #blogger img[style*="border"] {
+            border-color: var(--dm-border-strong) !important;
+        }
+    </style>
+    <script src="/js/theme.js"></script>
+    <link href="/css/dark-mode.css" rel="stylesheet" />
 </head>
 
 <body>

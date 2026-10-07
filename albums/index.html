@@ -314,6 +314,72 @@
         }
       }
     </style>
+    <style>
+      /* Dark theme overrides (theme set by /js/theme.js) */
+      html[data-theme="dark"] {
+        color-scheme: dark;
+        --page: var(--dm-bg);
+        --paper: rgba(19, 28, 46, 0.82);
+        --paper-strong: #222e45;
+        --line: var(--dm-border);
+        --ink: var(--dm-heading);
+        --muted: var(--dm-text-muted);
+        --shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+      }
+
+      /* The extra :root outranks dark-mode.css's `body` rule, which loads
+         after this block */
+      html[data-theme="dark"]:root body {
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 12% 10%, rgba(245, 158, 11, 0.07), transparent 20%),
+          radial-gradient(circle at 88% 16%, rgba(59, 130, 246, 0.1), transparent 18%),
+          radial-gradient(circle at 78% 82%, rgba(16, 185, 129, 0.07), transparent 22%),
+          linear-gradient(180deg, #0b1120 0%, #0d1424 48%, #0e1628 100%);
+      }
+
+      html[data-theme="dark"] .albums-panel {
+        border-color: var(--dm-border);
+      }
+
+      html[data-theme="dark"] .album-card:focus-visible {
+        outline-color: rgba(96, 165, 250, 0.6);
+      }
+
+      html[data-theme="dark"] .stack-slot,
+      html[data-theme="dark"] .stack-doc {
+        box-shadow:
+          0 18px 30px rgba(0, 0, 0, 0.4),
+          0 4px 10px rgba(0, 0, 0, 0.25);
+      }
+
+      /* Scoped to the pending state so the loaded/failed rules still win */
+      html[data-theme="dark"] .stack-slot:not(.is-loaded):not(.is-failed) {
+        background-image: linear-gradient(
+          100deg,
+          #1b263b 0%,
+          #1b263b 32%,
+          #2a3852 50%,
+          #1b263b 68%,
+          #1b263b 100%
+        );
+      }
+
+      html[data-theme="dark"] .stack-slot.is-failed {
+        background: var(--dm-surface-2);
+      }
+
+      html[data-theme="dark"] .stack-doc {
+        background: linear-gradient(180deg, #1e2a40, #172236);
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .album-count {
+        color: #7d8ca3;
+      }
+    </style>
+    <script src="/js/theme.js"></script>
+    <link href="/css/dark-mode.css" rel="stylesheet" />
   </head>
   <body>
     <div id="desktop-nav-bar"></div>

@@ -823,6 +823,125 @@
         }
       }
     </style>
+
+    <style>
+      /* Dark theme overrides (theme set by /js/theme.js) */
+      html[data-theme="dark"] {
+        --i18n-ink: var(--dm-heading);
+        --i18n-muted: var(--dm-text-muted);
+        --i18n-line: var(--dm-border);
+        --i18n-paper: var(--dm-surface);
+        --i18n-soft: var(--dm-bg-alt);
+      }
+
+      html[data-theme="dark"] .section:nth-of-type(even) {
+        background: rgba(19, 28, 46, 0.55);
+      }
+
+      html[data-theme="dark"] .section-eyebrow {
+        color: var(--dm-accent);
+        background: rgba(96, 165, 250, 0.12);
+        border-color: rgba(96, 165, 250, 0.26);
+      }
+
+      /* style.css paints every h2 #292929 */
+      html[data-theme="dark"] .section-title,
+      html[data-theme="dark"] .feature-panel h2,
+      html[data-theme="dark"] .story-card h2,
+      html[data-theme="dark"] .story-card h3,
+      html[data-theme="dark"] .decision-card h3,
+      html[data-theme="dark"] .contribution-card h3,
+      html[data-theme="dark"] .principle-card h3,
+      html[data-theme="dark"] .flow-node h3 {
+        color: var(--dm-heading);
+      }
+
+      /* style.css paints every p #999999 */
+      html[data-theme="dark"] .article-copy,
+      html[data-theme="dark"] .article-copy p {
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .flow-node p {
+        color: var(--dm-text-muted);
+      }
+
+      html[data-theme="dark"] .metric-card,
+      html[data-theme="dark"] .decision-card,
+      html[data-theme="dark"] .contribution-card,
+      html[data-theme="dark"] .story-card,
+      html[data-theme="dark"] .principle-card {
+        box-shadow: var(--dm-shadow);
+      }
+
+      html[data-theme="dark"] .metric-card strong {
+        color: var(--dm-accent);
+      }
+
+      html[data-theme="dark"] .feature-panel {
+        background: var(--dm-surface);
+        box-shadow: var(--dm-shadow);
+      }
+
+      html[data-theme="dark"] .flow-node {
+        background: var(--dm-surface-2);
+        border-color: var(--dm-border);
+      }
+
+      html[data-theme="dark"] .flow-arrow {
+        color: #2dd4bf;
+      }
+
+      html[data-theme="dark"] .decision-label {
+        color: #fca5a5;
+        background: rgba(240, 107, 95, 0.14);
+      }
+
+      html[data-theme="dark"] .selected .decision-label {
+        color: #5eead4;
+        background: rgba(45, 212, 191, 0.14);
+      }
+
+      html[data-theme="dark"] .system-map {
+        border: 1px solid var(--dm-border);
+        box-shadow: 0 24px 58px rgba(0, 0, 0, 0.45);
+      }
+
+      html[data-theme="dark"] .translation-widget {
+        background: rgba(11, 17, 32, 0.92);
+        border: 1px solid var(--dm-border-strong);
+      }
+
+      html[data-theme="dark"] .language-tabs span {
+        color: var(--dm-text-muted);
+        background: rgba(255, 255, 255, 0.07);
+      }
+
+      html[data-theme="dark"] .language-tabs span.active {
+        color: #ffffff;
+        background: var(--i18n-blue);
+      }
+
+      html[data-theme="dark"] .preview-block {
+        background: var(--dm-surface-2);
+        border-color: var(--dm-border);
+      }
+
+      html[data-theme="dark"] .preview-line {
+        background: linear-gradient(90deg, #475569, #334155);
+      }
+
+      html[data-theme="dark"] .placeholder-chip {
+        color: #5eead4;
+        background: rgba(45, 212, 191, 0.14);
+      }
+
+      html[data-theme="dark"] .button-primary {
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.4);
+      }
+    </style>
+    <script src="/js/theme.js"></script>
+    <link href="/css/dark-mode.css" rel="stylesheet" />
   </head>
 
   <body>

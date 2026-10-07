@@ -1,0 +1,1207 @@
+/*-----------------------------------------------------------------------------------*/
+/*  Dark theme
+/*
+/*  Every rule is gated on html[data-theme="dark"], set by /js/theme.js in the
+/*  <head> of every page with the top bar. Components inject their own <style> blocks after this
+/*  file, so the html[...] prefix is what lets these rules outrank them; rules
+/*  that fight inline style="" attributes or the dock's !important declarations
+/*  need !important as well.
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  --dm-bg: #0b1120;
+  --dm-bg-alt: #0e1628;
+  --dm-surface: #131c2e;
+  --dm-surface-2: #1b263b;
+  --dm-border: rgba(148, 163, 184, 0.16);
+  --dm-border-strong: rgba(148, 163, 184, 0.28);
+  --dm-heading: #f1f5f9;
+  --dm-text: #cbd5e1;
+  --dm-text-muted: #94a3b8;
+  --dm-accent: #60a5fa;
+  --dm-accent-strong: #93c5fd;
+  --dm-violet: #a5b4fc;
+  --dm-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --dm-heading-gradient: linear-gradient(to right, #7f8cff 0%, #ff6b6b 100%);
+
+  /* Blog posts, the blog index and the FAQ page theme themselves from these
+     :root variables */
+  --color-bg: var(--dm-bg);
+  --color-surface: var(--dm-surface);
+  --color-text: #e2e8f0;
+  --color-text-muted: var(--dm-text-muted);
+  --color-accent: #38bdf8;
+  --color-accent-hover: #7dd3fc;
+  --color-border: var(--dm-border);
+  --color-highlight: rgba(245, 158, 11, 0.12);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.45);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.5);
+
+  /* Bootstrap 4 and 5 are both loaded later by components */
+  --bs-body-bg: var(--dm-bg);
+  --bs-body-color: var(--dm-text);
+  --bs-heading-color: var(--dm-heading);
+  --bs-border-color: var(--dm-border);
+  --bs-link-color-rgb: 96, 165, 250;
+  --bs-link-hover-color-rgb: 147, 197, 253;
+}
+
+/* Pages that want a different dark body background must use this same
+   selector in a <style> placed after the dark-mode.css <link> */
+html[data-theme="dark"] body {
+  background: var(--dm-bg);
+  color: var(--dm-text);
+}
+
+/* style.css paints h2, h4 and links near-black. :where() keeps these at plain
+   element specificity, so they only replace that default and any component's
+   own class rule still wins. */
+:where(html[data-theme="dark"]) :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--dm-heading);
+}
+
+:where(html[data-theme="dark"]) a {
+  color: var(--dm-accent);
+}
+
+html[data-theme="dark"] hr {
+  border-top-color: var(--dm-border);
+}
+
+/* Section wrappers in index.html carry light inline backgrounds */
+html[data-theme="dark"] #experience,
+html[data-theme="dark"] #projects,
+html[data-theme="dark"] #skill-set,
+html[data-theme="dark"] #achievements,
+html[data-theme="dark"] #education,
+html[data-theme="dark"] #footer {
+  background-color: transparent !important;
+}
+
+/* Portfolio section headings are blue-to-red inline gradients; the dark blue
+   end is unreadable on a dark background. Only the image is swapped so the
+   inline background-clip: text still applies. */
+html[data-theme="dark"] :is(#experience, #projects, #skill-set, #achievements, #patent, #education) [style*="-webkit-background-clip: text"],
+html[data-theme="dark"] #msk-testimony .gradient-text {
+  background-image: var(--dm-heading-gradient) !important;
+}
+
+/* Portfolio section intro paragraphs */
+html[data-theme="dark"] :is(#projects, #skill-set, #achievements, #patent, #education, #msk-testimony) p[style*="color: #555"] {
+  color: var(--dm-text-muted) !important;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Blog post template - colors mostly come from the :root vars above; these
+/*  callouts are the shared pieces with hardcoded pastel backgrounds
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] .article-prose .tip-box {
+  background: rgba(34, 197, 94, 0.1);
+}
+
+html[data-theme="dark"] .article-prose .warning-box {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+html[data-theme="dark"] .article-prose .info-box {
+  background: rgba(59, 130, 246, 0.12);
+}
+
+html[data-theme="dark"] .article-prose .question-box {
+  background: rgba(245, 158, 11, 0.12);
+}
+
+html[data-theme="dark"] .article-prose .salary-table tr:hover {
+  background: rgba(56, 189, 248, 0.06);
+}
+
+/* Mock interview ad (components/mock-interview-ad.html) */
+html[data-theme="dark"] .mock-interview-ad {
+  --mock-ad-bg: linear-gradient(135deg, rgba(14, 165, 233, 0.16) 0%, rgba(14, 165, 233, 0.08) 50%, rgba(245, 158, 11, 0.1) 100%);
+  --mock-ad-surface: var(--dm-surface-2);
+  --mock-ad-border: rgba(56, 189, 248, 0.25);
+  --mock-ad-text: var(--dm-heading);
+  --mock-ad-text-muted: var(--dm-text-muted);
+  --mock-ad-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Navigation: menubar, dock rail, mobile bars
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] .macos-menubar {
+  background: rgba(11, 17, 32, 0.78);
+  border-bottom-color: var(--dm-border);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+html[data-theme="dark"] .macos-menubar.scrolled {
+  background: rgba(11, 17, 32, 0.92);
+}
+
+html[data-theme="dark"] .menubar-logo img {
+  border-color: var(--dm-bg);
+}
+
+html[data-theme="dark"] .menu-label {
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .menu-item:first-child .menu-label,
+html[data-theme="dark"] .menu-brand:hover .menu-label {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .menu-item:not(.active):not(.menu-brand):hover .menu-label {
+  background: rgba(129, 140, 248, 0.16);
+  color: var(--dm-violet);
+}
+
+html[data-theme="dark"] .menu-dropdown,
+html[data-theme="dark"] .experience-dropdown,
+html[data-theme="dark"] .location-dropdown {
+  background: rgba(19, 28, 46, 0.98);
+  border-color: var(--dm-border-strong);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .menu-dropdown a {
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .menu-dropdown a:hover {
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .menu-divider,
+html[data-theme="dark"] .location-info-divider {
+  background: var(--dm-border);
+}
+
+html[data-theme="dark"] .menubar-timer,
+html[data-theme="dark"] .menubar-location,
+html[data-theme="dark"] .theme-toggle {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--dm-border);
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .menubar-timer:hover,
+html[data-theme="dark"] .menubar-location:hover,
+html[data-theme="dark"] .theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(165, 180, 252, 0.4);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .theme-toggle:hover {
+  color: #fbbf24;
+}
+
+html[data-theme="dark"] .menubar-timer span:not(.timer-suffix):not(.timer-divider),
+html[data-theme="dark"] .location-text {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .menubar-timer .timer-suffix {
+  color: #64748b;
+}
+
+html[data-theme="dark"] .location-icon {
+  color: var(--dm-violet);
+}
+
+/* Experience dropdown */
+html[data-theme="dark"] .experience-dropdown .exp-dropdown-header,
+html[data-theme="dark"] .experience-dropdown .exp-total-time,
+html[data-theme="dark"] .location-dropdown-header {
+  border-color: var(--dm-border);
+}
+
+html[data-theme="dark"] .experience-dropdown .exp-title,
+html[data-theme="dark"] .location-city {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .experience-dropdown .exp-stat-card {
+  background: var(--dm-surface-2);
+  border-color: var(--dm-border);
+}
+
+html[data-theme="dark"] .experience-dropdown .exp-stat-value,
+html[data-theme="dark"] .experience-dropdown .exp-milestone-text,
+html[data-theme="dark"] .experience-dropdown .exp-total-value,
+html[data-theme="dark"] .location-time,
+html[data-theme="dark"] .location-info-value {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .experience-dropdown .exp-subtitle,
+html[data-theme="dark"] .experience-dropdown .exp-stat-label,
+html[data-theme="dark"] .experience-dropdown .exp-progress-label,
+html[data-theme="dark"] .experience-dropdown .exp-progress-years,
+html[data-theme="dark"] .experience-dropdown .exp-milestone-year,
+html[data-theme="dark"] .experience-dropdown .exp-total-label,
+html[data-theme="dark"] .experience-dropdown .exp-total-sub,
+html[data-theme="dark"] .location-timezone,
+html[data-theme="dark"] .location-date,
+html[data-theme="dark"] .location-info-label,
+html[data-theme="dark"] .location-info-title,
+html[data-theme="dark"] .location-info-value.closed {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .experience-dropdown .exp-progress-bar {
+  background: #334155;
+}
+
+html[data-theme="dark"] .experience-dropdown .exp-milestones,
+html[data-theme="dark"] .location-info {
+  background: var(--dm-surface-2);
+  border-color: var(--dm-border);
+}
+
+html[data-theme="dark"] .experience-dropdown .exp-milestone:not(:last-child)::after,
+html[data-theme="dark"] .experience-dropdown .exp-milestone-dot {
+  background: #475569;
+}
+
+html[data-theme="dark"] .experience-dropdown .exp-milestone.current .exp-milestone-dot {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+html[data-theme="dark"] .location-info-row:not(:last-child) {
+  border-bottom-color: var(--dm-border);
+}
+
+/* Mobile navbar and drawer */
+html[data-theme="dark"] .mobile-navbar {
+  background: rgba(11, 17, 32, 0.95);
+  border-bottom-color: var(--dm-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .mobile-navbar .theme-toggle {
+  background: transparent;
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .mobile-navbar .theme-toggle:hover,
+html[data-theme="dark"] .mobile-navbar-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .hamburger-line {
+  background: var(--dm-text);
+}
+
+html[data-theme="dark"] .mobile-menu-overlay {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+html[data-theme="dark"] .mobile-menu-drawer {
+  background: var(--dm-surface);
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.5);
+}
+
+html[data-theme="dark"] .mobile-menu-link,
+html[data-theme="dark"] .mobile-menu-expand-trigger {
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .mobile-menu-link i,
+html[data-theme="dark"] .mobile-menu-chevron {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .mobile-menu-link:hover,
+html[data-theme="dark"] .mobile-menu-link:hover i,
+html[data-theme="dark"] .mobile-menu-expand-trigger:hover,
+html[data-theme="dark"] .mobile-submenu-link:hover {
+  color: #38bdf8;
+}
+
+html[data-theme="dark"] .mobile-menu-link.active {
+  color: var(--dm-accent-strong);
+}
+
+html[data-theme="dark"] .mobile-menu-expandable {
+  border-bottom-color: var(--dm-border);
+}
+
+html[data-theme="dark"] .mobile-menu-submenu {
+  background: var(--dm-bg-alt);
+}
+
+html[data-theme="dark"] .mobile-submenu-link {
+  color: var(--dm-text);
+  border-bottom-color: var(--dm-border);
+}
+
+/* Dock rail (its light styles are !important) */
+html[data-theme="dark"] .nav-bar-fixed {
+  background-color: rgba(19, 28, 46, 0.78) !important;
+  border-color: var(--dm-border) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+}
+
+html[data-theme="dark"] .nav-bar-fixed .dock-item .icon-wrapper {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+html[data-theme="dark"] .nav-bar-fixed .dock-item:hover .icon-wrapper {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+html[data-theme="dark"] .nav-bar-fixed .dock-item i,
+html[data-theme="dark"] .nav-bar-fixed .dock-item span {
+  color: var(--dm-text) !important;
+}
+
+html[data-theme="dark"] .nav-bar-fixed .dock-item.active i {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .dock-tooltip {
+  background: var(--dm-surface);
+  border-color: var(--dm-border-strong);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+html[data-theme="dark"] .dock-tooltip::after {
+  border-color: transparent transparent transparent var(--dm-surface);
+}
+
+html[data-theme="dark"] .dock-tooltip h4 {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .dock-tooltip p,
+html[data-theme="dark"] .nav-bar-fixed .dock-tooltip span {
+  color: var(--dm-text-muted) !important;
+}
+
+html[data-theme="dark"] .mobile-bottom-nav {
+  background-color: rgba(11, 17, 32, 0.96);
+  border-top-color: var(--dm-border);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .mobile-bottom-nav .nav-item {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .mobile-bottom-nav .nav-item.active,
+html[data-theme="dark"] .mobile-bottom-nav .nav-item.active i,
+html[data-theme="dark"] .mobile-bottom-nav .nav-item.active span,
+html[data-theme="dark"] .mobile-bottom-nav .nav-item:hover {
+  color: var(--dm-accent);
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Intro loading skeleton (index.html)
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] .intro-skeleton-card,
+html[data-theme="dark"] .intro-skeleton-panel {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  box-shadow: var(--dm-shadow);
+}
+
+html[data-theme="dark"] .intro-skeleton-box {
+  background: var(--dm-surface-2);
+  border-color: var(--dm-border);
+}
+
+html[data-theme="dark"] .intro-skeleton-divider {
+  background: var(--dm-border);
+}
+
+html[data-theme="dark"] .intro-skeleton-shimmer {
+  background-image: linear-gradient(90deg, #1b263b 0%, #26334d 40%, #1b263b 100%);
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Introduction (components/introduction.html)
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] .intro-title {
+  background-image: linear-gradient(90deg, #8ea2ff 0%, #b98cff 50%, #ff7a85 100%);
+}
+
+html[data-theme="dark"] .intro-lead-card,
+html[data-theme="dark"] .intro-journey-card,
+html[data-theme="dark"] .intro-edu-card,
+html[data-theme="dark"] .intro-quote-card {
+  border-color: var(--dm-border);
+  box-shadow: var(--dm-shadow);
+}
+
+html[data-theme="dark"] .intro-lead-card,
+html[data-theme="dark"] .intro-quote-card {
+  background: linear-gradient(135deg, #151f35 0%, #121a2c 100%);
+}
+
+html[data-theme="dark"] .intro-journey-card,
+html[data-theme="dark"] .intro-edu-card {
+  background: var(--dm-surface);
+}
+
+html[data-theme="dark"] .intro-lead-text,
+html[data-theme="dark"] .intro-quote-text {
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .intro-lead-text strong,
+html[data-theme="dark"] .intro-quote-text strong {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .intro-link-highlight {
+  color: var(--dm-violet);
+  border-bottom-color: var(--dm-violet);
+}
+
+html[data-theme="dark"] .intro-link-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--dm-border-strong);
+  color: var(--dm-accent);
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .intro-link-pill:hover {
+  border-color: rgba(96, 165, 250, 0.5);
+  color: var(--dm-accent-strong);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="dark"] .intro-avatar {
+  border-color: var(--dm-bg);
+  background: var(--dm-surface-2);
+}
+
+html[data-theme="dark"] .intro-card-label,
+html[data-theme="dark"] .intro-journey__role,
+html[data-theme="dark"] .intro-edu__school,
+html[data-theme="dark"] .intro-quote-author {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .intro-journey__company,
+html[data-theme="dark"] .intro-edu__title {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .intro-journey__years,
+html[data-theme="dark"] .intro-edu__year {
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .intro-journey__now {
+  background: rgba(74, 222, 128, 0.14);
+  color: #86efac;
+}
+
+/* Logos stay on their white tiles so dark marks remain legible */
+html[data-theme="dark"] .intro-journey__logo {
+  border-color: var(--dm-border);
+}
+
+html[data-theme="dark"] .intro-store-visit-link {
+  background: var(--dm-surface-2);
+  border-color: rgba(96, 165, 250, 0.3);
+  color: var(--dm-accent);
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .intro-store-visit-link:hover {
+  border-color: rgba(96, 165, 250, 0.55);
+  color: var(--dm-accent-strong);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="dark"] .intro-edu-card .intro-edu__icon {
+  background: rgba(167, 139, 250, 0.14);
+  border-color: var(--dm-border);
+  color: #c4b5fd;
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .intro-quote-mark {
+  color: rgba(196, 181, 253, 0.35);
+}
+
+/* Experience and portal modals */
+html[data-theme="dark"] .exp-modal,
+html[data-theme="dark"] .portal-modal {
+  background: linear-gradient(180deg, #172036 0%, #111a2c 100%);
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.6),
+    0 0 0 1px var(--dm-border);
+}
+
+html[data-theme="dark"] .exp-close-btn,
+html[data-theme="dark"] .portal-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .exp-close-btn:hover,
+html[data-theme="dark"] .portal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .exp-modal-content .exp-title,
+html[data-theme="dark"] .exp-modal-content .exp-stat-value,
+html[data-theme="dark"] .exp-modal-content .exp-milestone-text,
+html[data-theme="dark"] .exp-modal-content .exp-total-value,
+html[data-theme="dark"] .portal-modal-title,
+html[data-theme="dark"] .features-title {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .exp-modal-content .exp-subtitle,
+html[data-theme="dark"] .exp-modal-content .exp-stat-label,
+html[data-theme="dark"] .exp-modal-content .exp-progress-label,
+html[data-theme="dark"] .exp-modal-content .exp-progress-years,
+html[data-theme="dark"] .exp-modal-content .exp-milestone-year,
+html[data-theme="dark"] .exp-modal-content .exp-total-label,
+html[data-theme="dark"] .exp-modal-content .exp-total-sub,
+html[data-theme="dark"] .portal-modal-subtitle,
+html[data-theme="dark"] .portal-modal-stats .stat,
+html[data-theme="dark"] .feature-item::before {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .exp-modal-content .exp-stat-card,
+html[data-theme="dark"] .exp-modal-content .exp-milestones {
+  background: var(--dm-surface-2);
+  box-shadow: 0 0 0 1px var(--dm-border);
+}
+
+html[data-theme="dark"] .exp-modal-content .exp-progress-bar,
+html[data-theme="dark"] .exp-modal-content .exp-milestone:not(:last-child)::after {
+  background: #334155;
+}
+
+html[data-theme="dark"] .exp-modal-content .exp-milestone-dot {
+  background: #475569;
+}
+
+html[data-theme="dark"] .exp-modal-content .exp-milestone.current .exp-milestone-dot {
+  background: #667eea;
+}
+
+html[data-theme="dark"] .exp-modal-content .exp-total-time,
+html[data-theme="dark"] .portal-modal-stats {
+  border-top-color: var(--dm-border);
+}
+
+html[data-theme="dark"] .portal-modal-desc,
+html[data-theme="dark"] .feature-item {
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .features-title {
+  border-bottom-color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .portal-divider {
+  background: var(--dm-border);
+}
+
+html[data-theme="dark"] .portal-modal-stats .stat strong {
+  color: #b39ddb;
+}
+
+/* The template-builder mockup intentionally stays light: it depicts an
+   email being edited, which renders on a white canvas. */
+
+/*-----------------------------------------------------------------------------------*/
+/*  Side profile card and its modals (components/side-profile.html)
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] .profile-card {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  box-shadow: var(--dm-shadow);
+}
+
+html[data-theme="dark"] .profile-img {
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .profile-card hr {
+  background: var(--dm-border);
+}
+
+html[data-theme="dark"] .profile-card h1 {
+  color: var(--dm-heading) !important;
+}
+
+html[data-theme="dark"] .profile-card h5 {
+  color: var(--dm-text) !important;
+}
+
+html[data-theme="dark"] .profile-card h6 {
+  color: var(--dm-text-muted) !important;
+}
+
+html[data-theme="dark"] .profile-card div[style*="color"],
+html[data-theme="dark"] .profile-detail-button,
+html[data-theme="dark"] .profile-inline-link {
+  color: var(--dm-text) !important;
+}
+
+html[data-theme="dark"] .profile-detail-link,
+html[data-theme="dark"] .profile-detail-button:hover .profile-detail-link,
+html[data-theme="dark"] .profile-inline-link:hover .profile-detail-link {
+  color: var(--dm-violet);
+  border-bottom-color: var(--dm-violet);
+}
+
+html[data-theme="dark"] .profile-detail-button:hover .profile-detail-link,
+html[data-theme="dark"] .profile-inline-link:hover .profile-detail-link {
+  color: #c7d2fe;
+  border-bottom-color: #c7d2fe;
+}
+
+html[data-theme="dark"] .profile-card .fa-passport {
+  color: #8b8ad6 !important;
+}
+
+html[data-theme="dark"] .city-modal,
+html[data-theme="dark"] .visa-modal {
+  background:
+    radial-gradient(circle at top right, rgba(212, 40, 73, 0.14), transparent 24%),
+    radial-gradient(circle at bottom left, rgba(57, 92, 175, 0.18), transparent 28%),
+    linear-gradient(145deg, #141d31 0%, #0f1727 100%);
+  border-color: var(--dm-border-strong);
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.6);
+}
+
+html[data-theme="dark"] .city-modal {
+  background:
+    radial-gradient(circle at top right, rgba(255, 163, 77, 0.12), transparent 22%),
+    radial-gradient(circle at bottom left, rgba(31, 136, 61, 0.12), transparent 26%),
+    linear-gradient(145deg, #141d31 0%, #0f1727 100%);
+}
+
+/* The white sheen overlays would wash the dark cards out */
+html[data-theme="dark"] .visa-modal::before,
+html[data-theme="dark"] .city-card::before {
+  display: none;
+}
+
+html[data-theme="dark"] .city-card,
+html[data-theme="dark"] .visa-card {
+  background: var(--dm-surface);
+  border-color: var(--dm-border-strong);
+}
+
+html[data-theme="dark"] .city-close-btn,
+html[data-theme="dark"] .visa-close-btn {
+  background: var(--dm-surface-2);
+  color: var(--dm-text);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .city-close-btn:hover,
+html[data-theme="dark"] .visa-close-btn:hover {
+  background: #26334d;
+}
+
+html[data-theme="dark"] .city-title,
+html[data-theme="dark"] .city-highlight-value,
+html[data-theme="dark"] .city-metric-value,
+html[data-theme="dark"] .visa-title,
+html[data-theme="dark"] .visa-field-value,
+html[data-theme="dark"] .visa-trip-year {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .city-subtitle,
+html[data-theme="dark"] .city-panel-copy,
+html[data-theme="dark"] .visa-subtitle {
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .city-panel-title,
+html[data-theme="dark"] .city-highlight-copy,
+html[data-theme="dark"] .city-metric-label,
+html[data-theme="dark"] .city-metric-note,
+html[data-theme="dark"] .visa-photo-label,
+html[data-theme="dark"] .visa-field-label,
+html[data-theme="dark"] .visa-note,
+html[data-theme="dark"] .visa-travel-history-title,
+html[data-theme="dark"] .visa-trip-copy {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .city-kicker {
+  color: #fb923c;
+}
+
+html[data-theme="dark"] .visa-header-kicker {
+  color: #fb7185;
+}
+
+html[data-theme="dark"] .city-badge,
+html[data-theme="dark"] .visa-seal {
+  background: var(--dm-surface-2);
+  border-color: var(--dm-border-strong);
+  box-shadow: none;
+  color: var(--dm-accent-strong);
+}
+
+html[data-theme="dark"] .city-panel,
+html[data-theme="dark"] .city-metrics,
+html[data-theme="dark"] .city-highlights,
+html[data-theme="dark"] .city-highlight-card,
+html[data-theme="dark"] .city-metric-card,
+html[data-theme="dark"] .visa-field,
+html[data-theme="dark"] .visa-travel-history,
+html[data-theme="dark"] .visa-trip-card {
+  background: var(--dm-surface-2);
+  border-color: var(--dm-border);
+}
+
+html[data-theme="dark"] .city-highlights,
+html[data-theme="dark"] .city-metrics,
+html[data-theme="dark"] .visa-travel-history {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+html[data-theme="dark"] .visa-card::after {
+  color: rgba(165, 180, 252, 0.08);
+}
+
+html[data-theme="dark"] .visa-photo {
+  border-color: var(--dm-border-strong);
+  background: var(--dm-surface-2);
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .visa-photo-label {
+  background: var(--dm-surface-2);
+}
+
+html[data-theme="dark"] .visa-footer {
+  border-top-color: var(--dm-border-strong);
+}
+
+html[data-theme="dark"] .visa-status {
+  background: rgba(74, 222, 128, 0.14);
+  color: #86efac;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Experience (components/experience.html)
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] .experience-section {
+  background:
+    radial-gradient(circle at top left, rgba(250, 204, 21, 0.06), transparent 24%),
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.08), transparent 28%),
+    linear-gradient(135deg, #0d1424 0%, var(--dm-bg) 100%);
+}
+
+html[data-theme="dark"] .experience-intro {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .experience-timer {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+}
+
+html[data-theme="dark"] .timer-unit span:first-child {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .timer-unit-label {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .timer-separator {
+  color: #475569;
+}
+
+html[data-theme="dark"] .experience-card {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  box-shadow: var(--dm-shadow);
+}
+
+html[data-theme="dark"] .experience-card:hover {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+}
+
+/* Brand accents brightened so dots, chips and links stay readable */
+html[data-theme="dark"] .experience-card--disney {
+  --accent: #4d9bff;
+  --accent-soft: rgba(77, 155, 255, 0.2);
+}
+
+html[data-theme="dark"] .experience-card--walmart {
+  --accent: #4aa8ff;
+  --accent-soft: rgba(74, 168, 255, 0.2);
+}
+
+html[data-theme="dark"] .experience-card--paypal {
+  --accent: #6b9bff;
+  --accent-soft: rgba(107, 155, 255, 0.2);
+}
+
+html[data-theme="dark"] .experience-card--cerner {
+  --accent: #2dd4bf;
+  --accent-soft: rgba(45, 212, 191, 0.2);
+}
+
+html[data-theme="dark"] .experience-card--grl {
+  --accent: #94a3b8;
+  --accent-soft: rgba(148, 163, 184, 0.2);
+}
+
+html[data-theme="dark"] .experience-section .company-name a,
+html[data-theme="dark"] .experience-section .role {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .experience-section .industry,
+html[data-theme="dark"] .experience-section .duration {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .experience-section .description {
+  color: var(--dm-text);
+  border-top-color: var(--dm-border);
+}
+
+html[data-theme="dark"] .experience-card--featured .experience-card__main {
+  border-right-color: var(--dm-border);
+}
+
+/* Both marks are dark on a transparent background */
+html[data-theme="dark"] .experience-card--disney .company-logo {
+  filter: invert(1);
+}
+
+html[data-theme="dark"] .experience-card--grl .company-logo {
+  filter: brightness(0) invert(0.9);
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Projects (components/projects.html)
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] .projects-section {
+  background: var(--dm-bg-alt);
+}
+
+html[data-theme="dark"] .project-card {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  box-shadow: var(--dm-shadow) !important;
+}
+
+html[data-theme="dark"] .project-card.modal-trigger:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5) !important;
+}
+
+html[data-theme="dark"] .project-title,
+html[data-theme="dark"] .project-read-more {
+  color: var(--dm-accent);
+}
+
+html[data-theme="dark"] .project-read-more:hover {
+  color: var(--dm-accent-strong);
+}
+
+html[data-theme="dark"] .project-icon {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .project-number {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .project-company,
+html[data-theme="dark"] .project-description {
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .project-location {
+  color: var(--dm-text-muted);
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Skill set (components/skill-set.html)
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] .skill-section {
+  background: linear-gradient(135deg, var(--dm-bg) 0%, #111a2e 100%);
+}
+
+html[data-theme="dark"] .skill-card {
+  background: var(--dm-surface);
+  box-shadow: var(--dm-shadow);
+  border: 1px solid var(--dm-border);
+}
+
+html[data-theme="dark"] .skill-header {
+  color: var(--dm-accent);
+}
+
+html[data-theme="dark"] .skill-list li {
+  color: var(--dm-text);
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Awards (components/achievements.html)
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] .achievements-section {
+  background: var(--dm-bg);
+}
+
+html[data-theme="dark"] .achievement-card {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  box-shadow: var(--dm-shadow);
+}
+
+html[data-theme="dark"] .achievement-title {
+  color: var(--dm-accent);
+}
+
+html[data-theme="dark"] .achievement-card .company-name {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .achievement-date,
+html[data-theme="dark"] .achievement-card .company-location {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .achievement-description {
+  color: var(--dm-text);
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Patent (components/patent.html)
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] .patent-section {
+  background: var(--dm-bg);
+}
+
+html[data-theme="dark"] .patent-card {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  box-shadow: var(--dm-shadow);
+}
+
+html[data-theme="dark"] .patent-title {
+  color: var(--dm-accent);
+}
+
+html[data-theme="dark"] .patent-badge {
+  background: var(--dm-surface-2);
+  border-color: var(--dm-border);
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .patent-company,
+html[data-theme="dark"] .patent-company i,
+html[data-theme="dark"] .highlight-content p {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .patent-description {
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .highlight-icon {
+  background: rgba(96, 165, 250, 0.12);
+}
+
+html[data-theme="dark"] .highlight-icon i {
+  color: var(--dm-accent-strong);
+}
+
+html[data-theme="dark"] .highlight-content h4 {
+  color: var(--dm-heading);
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Education (components/education.html)
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] .edu-section {
+  background: linear-gradient(135deg, var(--dm-bg-alt) 0%, #111a2e 100%);
+}
+
+html[data-theme="dark"] .edu-card {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  box-shadow: var(--dm-shadow);
+}
+
+html[data-theme="dark"] .edu-level {
+  color: var(--dm-accent);
+}
+
+html[data-theme="dark"] .edu-school {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .edu-major,
+html[data-theme="dark"] .edu-accomplishments ul {
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .edu-year,
+html[data-theme="dark"] .edu-location {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .edu-accomplishments {
+  border-top-color: var(--dm-border);
+}
+
+html[data-theme="dark"] .edu-accomplishments li::marker {
+  color: var(--dm-accent);
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Testimony (components/testimony.html)
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] .testimony-card {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  box-shadow: var(--dm-shadow);
+}
+
+html[data-theme="dark"] .testimony-card::before {
+  color: #334155;
+}
+
+html[data-theme="dark"] .testimony-card .profile-image {
+  border-color: #334155;
+}
+
+html[data-theme="dark"] .testimony-card .profile-info h3 {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .testimony-card .role {
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .testimony-card .company {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .testimony-card .linkedin-link {
+  color: #4fa3e0;
+}
+
+html[data-theme="dark"] .testimony-text {
+  background-color: transparent;
+}
+
+html[data-theme="dark"] .testimony-text,
+html[data-theme="dark"] .testimony-text p {
+  color: var(--dm-text);
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Blog articles (components/blog-articles-grid.html) - already themed by vars
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] #blog-articles {
+  --color-bg: var(--dm-bg-alt);
+  --color-surface: var(--dm-surface);
+  --color-text: var(--dm-heading);
+  --color-text-muted: var(--dm-text-muted);
+  --color-accent: #38bdf8;
+  --color-accent-hover: #7dd3fc;
+  --color-border: var(--dm-border);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Footer (components/footer.html) - styled almost entirely inline
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] #footer footer {
+  background: var(--dm-surface) !important;
+  color: var(--dm-text) !important;
+  border-top: 1px solid var(--dm-border);
+}
+
+html[data-theme="dark"] #footer footer h1 {
+  color: var(--dm-heading) !important;
+}
+
+html[data-theme="dark"] #footer .footer-col h3 {
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] #footer footer div[style*="color"],
+html[data-theme="dark"] #footer footer a[style*="color"],
+html[data-theme="dark"] #footer footer span[style*="color"],
+html[data-theme="dark"] #footer .footer-col ul li a {
+  color: var(--dm-text-muted) !important;
+}
+
+html[data-theme="dark"] #footer .footer-col ul li a:hover {
+  color: var(--dm-accent) !important;
+}
+
+html[data-theme="dark"] #footer footer div[style*="border-top"] {
+  border-top-color: var(--dm-border) !important;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*  Chatbot widget (index.html)
+/*-----------------------------------------------------------------------------------*/
+
+html[data-theme="dark"] .chatbot-popup {
+  background: var(--dm-surface);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55);
+}
+
+html[data-theme="dark"] .chatbot-popup::after {
+  border-top-color: var(--dm-surface);
+}
+
+html[data-theme="dark"] .message-bubble,
+html[data-theme="dark"] .typing-indicator {
+  background: var(--dm-surface-2);
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .chatbot-actions {
+  border-top-color: var(--dm-border);
+}

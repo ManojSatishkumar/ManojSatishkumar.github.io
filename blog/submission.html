@@ -27,6 +27,26 @@
       }
     }
   </style>
+  <style>
+    /* Dark theme overrides (theme set by /js/theme.js) */
+    html[data-theme="dark"] .container h1[style*="color: black"] {
+      color: var(--dm-heading) !important;
+    }
+
+    html[data-theme="dark"] #banner h2 {
+      color: var(--dm-heading);
+    }
+
+    html[data-theme="dark"] #banner p[style*="color: black"] {
+      color: var(--dm-text) !important;
+    }
+
+    html[data-theme="dark"] #banner hr {
+      border-top-color: var(--dm-border);
+    }
+  </style>
+  <script src="/js/theme.js"></script>
+  <link href="/css/dark-mode.css" rel="stylesheet" />
 </head>
 
 <body>

@@ -873,6 +873,127 @@
         }
       }
     </style>
+    <style>
+      /* Dark theme overrides (theme set by /js/theme.js) */
+      /* --wm-blue-deep stays navy: it is also the text colour on the yellow
+         buttons, so dark-navy headings are brightened per selector instead */
+      html[data-theme="dark"] {
+        --ink: var(--dm-heading);
+        --muted: var(--dm-text-muted);
+        --paper: var(--dm-surface);
+        --line: rgba(96, 165, 250, 0.18);
+      }
+
+      /* [lang] lifts this above dark-mode.css's body rule, which loads later */
+      html[data-theme="dark"][lang] body {
+        background:
+          linear-gradient(
+            135deg,
+            rgba(0, 113, 206, 0.12) 0 25%,
+            transparent 25% 100%
+          ),
+          linear-gradient(
+            45deg,
+            transparent 0 82%,
+            rgba(255, 194, 32, 0.06) 82% 100%
+          ),
+          linear-gradient(180deg, #0a1426 0%, var(--dm-bg) 42%, #0f1422 100%);
+      }
+
+      html[data-theme="dark"] .rail-card {
+        background: rgba(19, 28, 46, 0.82);
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+      }
+
+      html[data-theme="dark"] .rail-card i {
+        color: #4aa8ff;
+      }
+
+      html[data-theme="dark"] .rail-card h2,
+      html[data-theme="dark"] .rail-card h3 {
+        color: var(--dm-heading);
+      }
+
+      html[data-theme="dark"] .letter-paper {
+        border-color: rgba(96, 165, 250, 0.18);
+        background:
+          linear-gradient(
+            90deg,
+            rgba(96, 165, 250, 0.05) 0 1px,
+            transparent 1px 100%
+          ),
+          linear-gradient(180deg, rgba(255, 194, 32, 0.07), transparent 190px),
+          var(--paper);
+        background-size:
+          32px 32px,
+          auto,
+          auto;
+        box-shadow:
+          0 28px 70px rgba(0, 0, 0, 0.4),
+          inset 0 0 0 10px rgba(255, 255, 255, 0.02);
+      }
+
+      html[data-theme="dark"] .letter-pill {
+        border-color: rgba(96, 165, 250, 0.22);
+        background: var(--dm-surface-2);
+        color: var(--dm-accent-strong);
+      }
+
+      html[data-theme="dark"] .letter-paper h2 {
+        color: var(--dm-heading);
+      }
+
+      html[data-theme="dark"] .letter-paper p {
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .letter-paper strong {
+        color: var(--dm-accent-strong);
+      }
+
+      html[data-theme="dark"] .gratitude-item {
+        border-color: rgba(96, 165, 250, 0.16);
+        background: var(--dm-surface-2);
+      }
+
+      html[data-theme="dark"] .gratitude-item span {
+        background: rgba(255, 194, 32, 0.14);
+        color: var(--wm-yellow);
+      }
+
+      html[data-theme="dark"] .memory-photo {
+        border-color: rgba(96, 165, 250, 0.14);
+        background: var(--dm-surface-2);
+        box-shadow: 0 18px 38px rgba(0, 0, 0, 0.4);
+      }
+
+      html[data-theme="dark"] .signature-block {
+        border-top-color: var(--dm-border-strong);
+      }
+
+      html[data-theme="dark"] .signature-block img {
+        border-color: var(--dm-surface-2);
+        box-shadow: 0 12px 26px rgba(0, 0, 0, 0.4);
+      }
+
+      html[data-theme="dark"] .quote-card {
+        box-shadow: 0 26px 66px rgba(0, 0, 0, 0.45);
+      }
+
+      html[data-theme="dark"] .back-to-top {
+        box-shadow: 0 16px 38px rgba(0, 0, 0, 0.45);
+      }
+
+      @media (max-width: 700px) {
+        html[data-theme="dark"] .letter-paper {
+          box-shadow:
+            0 18px 44px rgba(0, 0, 0, 0.4),
+            inset 0 0 0 7px rgba(255, 255, 255, 0.02);
+        }
+      }
+    </style>
+    <script src="/js/theme.js"></script>
+    <link href="/css/dark-mode.css" rel="stylesheet" />
   </head>
 
   <body>

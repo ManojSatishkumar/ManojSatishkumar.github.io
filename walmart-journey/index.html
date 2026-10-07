@@ -1158,6 +1158,285 @@
         }
       }
     </style>
+    <style>
+      /* Dark theme overrides (theme set by /js/theme.js) */
+      html[data-theme="dark"] {
+        --ink: var(--dm-heading);
+        --muted: var(--dm-text-muted);
+        --line: var(--dm-border);
+        --wm-blue-deep: var(--dm-heading);
+      }
+
+      /* :root raises specificity above the body rule in dark-mode.css,
+         which loads after this block */
+      html[data-theme="dark"]:root body {
+        background:
+          radial-gradient(
+            circle at 12% 8%,
+            rgba(255, 194, 32, 0.07),
+            transparent 26%
+          ),
+          radial-gradient(
+            circle at 88% 18%,
+            rgba(0, 113, 206, 0.14),
+            transparent 30%
+          ),
+          linear-gradient(
+            180deg,
+            #0d172a 0%,
+            var(--dm-bg) 38%,
+            #0e1322 72%,
+            var(--dm-bg) 100%
+          );
+      }
+
+      html[data-theme="dark"] .hero {
+        background:
+          linear-gradient(
+            110deg,
+            rgba(0, 86, 168, 0.97),
+            rgba(4, 38, 78, 0.97) 54%,
+            rgba(176, 128, 12, 0.9)
+          ),
+          url("/images/walmart/IMG_7505 copy.jpg") center/cover;
+      }
+
+      html[data-theme="dark"] .hero::before {
+        background:
+          radial-gradient(
+            circle at 76% 18%,
+            rgba(255, 255, 255, 0.12),
+            transparent 19%
+          ),
+          linear-gradient(90deg, rgba(0, 20, 45, 0.6), rgba(0, 50, 100, 0.2));
+      }
+
+      html[data-theme="dark"] .hero::after {
+        background: repeating-linear-gradient(
+          90deg,
+          var(--wm-yellow) 0 36px,
+          var(--dm-bg) 36px 48px,
+          var(--wm-blue) 48px 84px
+        );
+      }
+
+      html[data-theme="dark"] .journey-button--primary {
+        box-shadow: 0 20px 42px rgba(0, 0, 0, 0.4);
+      }
+
+      html[data-theme="dark"] .hero-card {
+        background: rgba(19, 28, 46, 0.9);
+        border-color: var(--dm-border-strong);
+        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.5);
+      }
+
+      html[data-theme="dark"] .hero-card h2,
+      html[data-theme="dark"] .section-title {
+        color: var(--dm-heading);
+      }
+
+      html[data-theme="dark"] .hero-portrait {
+        border-color: var(--dm-surface-2);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+      }
+
+      html[data-theme="dark"] .hero-portrait:hover {
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55);
+      }
+
+      html[data-theme="dark"] .hero-fact {
+        background: linear-gradient(
+          135deg,
+          rgba(0, 113, 206, 0.16),
+          rgba(255, 194, 32, 0.08)
+        );
+        border-color: rgba(96, 165, 250, 0.2);
+      }
+
+      html[data-theme="dark"] .hero-fact strong {
+        color: var(--dm-accent-strong);
+      }
+
+      html[data-theme="dark"] .hero-fact span {
+        color: var(--dm-text-muted);
+      }
+
+      html[data-theme="dark"] .section-eyebrow {
+        background: rgba(96, 165, 250, 0.12);
+        color: var(--dm-accent-strong);
+        border-color: rgba(96, 165, 250, 0.26);
+      }
+
+      html[data-theme="dark"] .metric-card {
+        background: var(--dm-surface);
+        box-shadow: var(--dm-shadow);
+      }
+
+      html[data-theme="dark"] .metric-card strong,
+      html[data-theme="dark"] .capability-card i,
+      html[data-theme="dark"] .timeline-year,
+      html[data-theme="dark"] .team-story-badge i {
+        color: var(--dm-accent);
+      }
+
+      html[data-theme="dark"] .metric-card span {
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .story-card,
+      html[data-theme="dark"] .feature-panel,
+      html[data-theme="dark"] .timeline-panel,
+      html[data-theme="dark"] .recognition-panel {
+        background: rgba(19, 28, 46, 0.88);
+      }
+
+      html[data-theme="dark"] .story-card,
+      html[data-theme="dark"] .feature-panel,
+      html[data-theme="dark"] .timeline-panel,
+      html[data-theme="dark"] .visit-panel,
+      html[data-theme="dark"] .recognition-panel {
+        box-shadow: var(--dm-shadow);
+      }
+
+      /* .visit-panel keeps its own white-on-blue copy */
+      html[data-theme="dark"] .story-card p,
+      html[data-theme="dark"] .feature-panel p,
+      html[data-theme="dark"] .timeline-panel p,
+      html[data-theme="dark"] .recognition-panel p,
+      html[data-theme="dark"] .article-copy p,
+      html[data-theme="dark"] .team-story-content p {
+        color: var(--dm-text);
+      }
+
+      html[data-theme="dark"] .timeline-panel .timeline-item p {
+        color: var(--dm-text-muted);
+      }
+
+      html[data-theme="dark"] .story-image:hover {
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+      }
+
+      html[data-theme="dark"] .article-copy p {
+        background: var(--dm-surface);
+        border-color: var(--dm-border);
+      }
+
+      html[data-theme="dark"] .builder-section {
+        background:
+          radial-gradient(
+            circle at 18% 14%,
+            rgba(255, 194, 32, 0.08),
+            transparent 24%
+          ),
+          linear-gradient(135deg, #0d1a30, var(--dm-bg-alt) 46%, #15151c);
+      }
+
+      html[data-theme="dark"] .builder-visual {
+        background: linear-gradient(135deg, #005bb0, #003a75);
+      }
+
+      html[data-theme="dark"] .builder-window {
+        background: #0f172a;
+      }
+
+      html[data-theme="dark"] .builder-topbar {
+        background: var(--dm-surface-2);
+      }
+
+      html[data-theme="dark"] .builder-sidebar,
+      html[data-theme="dark"] .builder-canvas {
+        background: var(--dm-surface);
+        border-color: var(--dm-border);
+      }
+
+      html[data-theme="dark"] .builder-line {
+        background: linear-gradient(
+          90deg,
+          rgba(96, 165, 250, 0.4),
+          rgba(255, 194, 32, 0.32)
+        );
+      }
+
+      html[data-theme="dark"] .builder-block {
+        background: var(--dm-surface-2);
+        border-color: var(--dm-border);
+      }
+
+      html[data-theme="dark"] .capability-card {
+        background: var(--dm-surface);
+      }
+
+      html[data-theme="dark"] .timeline-item {
+        background: linear-gradient(
+          135deg,
+          var(--dm-surface-2),
+          rgba(0, 113, 206, 0.1)
+        );
+        border-color: var(--dm-border);
+      }
+
+      html[data-theme="dark"] .award-card {
+        background: var(--dm-surface);
+        border-color: var(--dm-border);
+        box-shadow: var(--dm-shadow);
+      }
+
+      html[data-theme="dark"] .award-card:hover {
+        box-shadow: 0 24px 56px rgba(0, 0, 0, 0.5);
+      }
+
+      html[data-theme="dark"] .visit-panel {
+        background:
+          linear-gradient(
+            135deg,
+            rgba(0, 86, 168, 0.94),
+            rgba(4, 38, 78, 0.96)
+          ),
+          url("/images/walmart-us-visit/01.jpeg") center/cover;
+        border-color: var(--dm-border-strong);
+      }
+
+      html[data-theme="dark"] .photo-strip img {
+        border-color: var(--dm-surface);
+        box-shadow: var(--dm-shadow);
+      }
+
+      html[data-theme="dark"] .photo-strip img:hover {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+      }
+
+      html[data-theme="dark"] .closing-card {
+        background:
+          radial-gradient(
+            circle at 15% 12%,
+            rgba(255, 194, 32, 0.1),
+            transparent 28%
+          ),
+          linear-gradient(135deg, var(--dm-surface), #10203a);
+        box-shadow: var(--dm-shadow);
+      }
+
+      html[data-theme="dark"] .team-section-card {
+        background: linear-gradient(135deg, var(--dm-surface), #10203a);
+        box-shadow: var(--dm-shadow);
+      }
+
+      html[data-theme="dark"] .team-story-badge {
+        background: linear-gradient(
+          135deg,
+          rgba(96, 165, 250, 0.14),
+          rgba(255, 194, 32, 0.1)
+        );
+        border-color: rgba(96, 165, 250, 0.28);
+        color: var(--dm-accent-strong);
+      }
+
+      html[data-theme="dark"] .back-to-top {
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+      }
+    </style>
+    <script src="/js/theme.js"></script>
+    <link href="/css/dark-mode.css" rel="stylesheet" />
   </head>
 
   <body>

@@ -83,6 +83,23 @@
 
   <!-- Right side items container -->
   <div class="menubar-right-items">
+    <button
+      type="button"
+      class="theme-toggle"
+      aria-label="Dark mode"
+      aria-pressed="false"
+      title="Toggle dark mode"
+      onclick="toggleTheme()"
+    >
+      <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+      <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="5"></circle>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+      </svg>
+    </button>
+
     <!-- Location Indicator -->
     <div class="menubar-location-container">
       <div class="menubar-location">
@@ -228,11 +245,29 @@
     <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="mobile-navbar-avatar">
     <span class="mobile-navbar-name">Manoj Satishkumar</span>
   </a>
-  <button class="mobile-navbar-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
-    <span class="hamburger-line"></span>
-    <span class="hamburger-line"></span>
-    <span class="hamburger-line"></span>
-  </button>
+  <div class="mobile-navbar-actions">
+    <button
+      type="button"
+      class="theme-toggle"
+      aria-label="Dark mode"
+      aria-pressed="false"
+      title="Toggle dark mode"
+      onclick="toggleTheme()"
+    >
+      <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+      <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="5"></circle>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+      </svg>
+    </button>
+    <button class="mobile-navbar-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
 </nav>
 
 <!-- Mobile Menu Overlay -->
@@ -891,6 +926,55 @@
     gap: 10px;
   }
 
+  /* /js/theme.js sets data-theme and defines toggleTheme(); a page that
+     forgets to load it gets no toggle rather than a dead button */
+  .theme-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    color: #475569;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, color 0.18s ease;
+  }
+
+  html[data-theme] .theme-toggle {
+    display: inline-flex;
+  }
+
+  .theme-toggle:hover {
+    background: #ffffff;
+    border-color: rgba(99, 102, 241, 0.35);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.14);
+    color: #4f46e5;
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid #6366f1;
+    outline-offset: 2px;
+  }
+
+  .theme-toggle svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  /* Shows the theme a click switches to */
+  .theme-toggle__sun,
+  html[data-theme="dark"] .theme-toggle__moon {
+    display: none;
+  }
+
+  html[data-theme="dark"] .theme-toggle__sun {
+    display: block;
+  }
+
   /* Location Indicator */
   .menubar-location-container {
     position: relative;
@@ -1141,6 +1225,30 @@
     background-clip: text;
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
     letter-spacing: -0.02em;
+  }
+
+  .mobile-navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .mobile-navbar .theme-toggle {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    color: #1a1a2e;
+  }
+
+  .mobile-navbar .theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.05);
+    box-shadow: none;
+  }
+
+  .mobile-navbar .theme-toggle svg {
+    width: 20px;
+    height: 20px;
   }
 
   .mobile-navbar-toggle {
@@ -1683,4 +1791,6 @@
   }
 
   updateActiveMenuItem();
+
+  if (window.syncThemeToggles) window.syncThemeToggles();
 </script>
