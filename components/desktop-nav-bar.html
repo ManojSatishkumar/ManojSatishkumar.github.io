@@ -10,9 +10,9 @@
 
   <!-- Menu Items -->
   <div class="menubar-items">
-    <div class="menu-item menu-brand">
+    <a class="menu-item menu-brand" href="/">
       <span class="menu-label">Manoj Satishkumar</span>
-    </div>
+    </a>
 
     <a class="menu-item menu-item-link" href="/">
       <span class="menu-label">Portfolio</span>
@@ -462,9 +462,7 @@
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    padding: 3px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #60a5fa 0%, #a855f7 55%, #fbbf24 100%);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
@@ -479,7 +477,6 @@
     border-radius: 50%;
     display: block;
     object-fit: cover;
-    border: 2px solid #ffffff;
   }
 
   .menubar-items {
@@ -524,10 +521,26 @@
     color: #4f46e5;
   }
 
-  /* The brand is a static label, so it gets no hover affordance */
+  /* The brand links home like the avatar beside it, but keeps the look of a
+     wordmark rather than a nav pill */
+  .menu-brand,
+  .menu-brand:hover {
+    text-decoration: none;
+  }
+
+  /* Same gradient wordmark as .mobile-navbar-name. Repeated on :hover because
+     the generic .menu-item:hover rule would otherwise paint the pill over it.
+     content-box origin spans the gradient over the text, not the padding. */
+  .menu-brand .menu-label,
   .menu-brand:hover .menu-label {
-    background: transparent;
-    color: #0f172a;
+    cursor: pointer;
+    padding-left: 0;
+    background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #ec4899 100%);
+    background-origin: content-box;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 
   /* Dropdown parents get a caret */

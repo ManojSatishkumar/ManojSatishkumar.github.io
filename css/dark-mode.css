@@ -150,10 +150,6 @@ html[data-theme="dark"] .macos-menubar.scrolled {
   background: rgba(11, 17, 32, 0.92);
 }
 
-html[data-theme="dark"] .menubar-logo img {
-  border-color: var(--dm-bg);
-}
-
 html[data-theme="dark"] .menu-label {
   color: var(--dm-text);
 }
