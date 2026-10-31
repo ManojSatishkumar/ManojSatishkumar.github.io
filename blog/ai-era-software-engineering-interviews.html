@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>If AI Can Write the Code, What Exactly Are We Evaluating in Software Engineering Interviews? | Manoj's Blog</title>
+    <meta name="description" content="AI can now build React apps, APIs and tests. So why do software engineering interviews still measure how fast candidates write code from scratch? Five skills we should evaluate instead, and what an AI-era interview could look like." />
+    <meta name="keywords" content="Software Engineering Interviews, AI, Coding Interviews, DSA, System Design, Code Review, Debugging, ChatGPT, Claude, GitHub Copilot, Cursor, Hiring, Frontend Engineering, Manoj Satishkumar" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://manojsatishkumar.com/blog/ai-era-software-engineering-interviews.html" />
+    <meta name="author" content="Manoj Satishkumar" />
+    <meta name="publisher" content="Manoj Satishkumar" />
+    <meta property="og:title" content="If AI Can Write the Code, What Exactly Are We Evaluating in Software Engineering Interviews?" />
+    <meta property="og:description" content="AI has changed the economics of writing code. Our interviews should change what they measure: problem decomposition, architecture, code review, debugging and effective use of AI." />
+    <meta property="og:url" content="https://manojsatishkumar.com/blog/ai-era-software-engineering-interviews.html" />
+    <meta property="og:site_name" content="manojsatishkumar.com" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://manojsatishkumar.com/images/blogs/ai-era-interviews.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="article:author" content="https://manojsatishkumar.com" />
+    <meta property="article:publisher" content="https://manojsatishkumar.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="If AI Can Write the Code, What Exactly Are We Evaluating in Software Engineering Interviews?" />
+    <meta name="twitter:description" content="Are we hiring engineers or code generators? Five skills AI-era interviews should measure instead of coding speed." />
+    <meta name="twitter:site" content="@MSK_Web_Manoj" />
+    <meta name="twitter:image" content="https://manojsatishkumar.com/images/blogs/ai-era-interviews.png" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "If AI Can Write the Code, What Exactly Are We Evaluating in Software Engineering Interviews?",
+        "image": "https://manojsatishkumar.com/images/blogs/ai-era-interviews.png",
+        "author": { "@type": "Person", "name": "Manoj Satishkumar" },
+        "publisher": { "@type": "Organization", "name": "manojsatishkumar.com", "logo": { "@type": "ImageObject", "url": "https://manojsatishkumar.com/images/thumbnail.jpg" } },
+        "datePublished": "2026-10-31",
+        "dateModified": "2026-10-31",
+        "description": "AI can now build React apps, APIs and tests. So why do software engineering interviews still measure how fast candidates write code from scratch? Five skills we should evaluate instead."
+    }
+    </script>
+
+    <link rel="shortcut icon" href="/images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        :root { --color-bg: #faf9f7; --color-surface: #ffffff; --color-text: #1a1a2e; --color-text-muted: #64748b; --color-accent: #0ea5e9; --color-accent-hover: #0284c7; --color-border: #e2e8f0; --font-display: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif; --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif; --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1); --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; } html { scroll-behavior: smooth; }
+        body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .nav-spacer { height: 80px; }
+        .blog-layout { display: grid; grid-template-columns: 350px 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+        .author-sidebar { position: sticky; top: 100px; height: fit-content; }
+        .article-container { min-width: 0; }
+        .article-content { background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--color-border); overflow: hidden; animation: fadeInUp 0.6s ease-out; }
+        .article-hero { width: 100%; aspect-ratio: 1200/630; object-fit: cover; display: block; }
+        .article-body { padding: 40px; }
+        .article-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--color-border); }
+        .article-category { display: inline-block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-accent); background: rgba(14, 165, 233, 0.1); padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
+        .article-title { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.02em; }
+        .article-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; color: var(--color-text-muted); font-size: 0.9rem; }
+        .article-meta-item { display: flex; align-items: center; gap: 6px; }
+        .article-prose { font-family: var(--font-display); font-size: 1.15rem; line-height: 1.85; }
+        .article-prose p { margin-bottom: 1.4em; }
+        .article-prose strong { font-weight: 600; }
+        .article-prose em { font-style: italic; }
+        .article-prose a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+        .article-prose h2 { font-family: var(--font-sans); font-size: 1.9rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; margin: 0 0 0.8em; color: var(--color-text); }
+        .share-strip { display: flex; align-items: center; gap: 12px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--color-border); }
+        .share-strip-label { font-size: 0.875rem; font-weight: 600; color: var(--color-text-muted); }
+        .share-strip a { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--color-bg); color: var(--color-text-muted); border: 1px solid var(--color-border); transition: all 0.2s; }
+        .share-strip a:hover { background: var(--color-accent); color: white; border-color: var(--color-accent); }
+        @media (max-width: 900px) { .blog-layout { grid-template-columns: 1fr; padding: 20px 16px; gap: 0; } .author-sidebar { display: none; } .nav-spacer { height: 60px; } .article-body { padding: 24px; } .article-title { font-size: 1.75rem; } .article-prose { font-size: 1.05rem; } .article-prose h2 { font-size: 1.5rem; } }
+        @media (max-width: 480px) { .article-body { padding: 20px 16px; } .article-title { font-size: 1.5rem; } .article-prose { font-size: 1rem; } .share-strip { flex-wrap: wrap; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .reading-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #22d3ee, #8b5cf6, #ec4899); z-index: 9999; }
+        .back-to-top { position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; border-radius: 50%; background: var(--color-accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: var(--shadow-lg); opacity: 0; visibility: hidden; transition: all 0.3s; cursor: pointer; z-index: 100; border: none; }
+        .back-to-top.visible { opacity: 1; visibility: visible; }
+    </style>
+
+    <style>
+        /* ================= Article-specific design ================= */
+        :root {
+            --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+            --ink-strong: #0f172a;
+            --c-sky: #0284c7;
+            --c-violet: #7c3aed;
+            --c-amber: #b45309;
+            --c-rose: #e11d48;
+            --c-emerald: #059669;
+            --code-bg: #0b1224;
+            --grad-brand: linear-gradient(90deg, #0ea5e9 0%, #8b5cf6 55%, #ec4899 100%);
+        }
+
+        html[data-theme="dark"] {
+            --ink-strong: #f1f5f9;
+            --c-sky: #38bdf8;
+            --c-violet: #a78bfa;
+            --c-amber: #fbbf24;
+            --c-rose: #fb7185;
+            --c-emerald: #34d399;
+            --code-bg: #070c1a;
+            --grad-brand: linear-gradient(90deg, #38bdf8 0%, #a78bfa 55%, #f472b6 100%);
+        }
+
+        .title-hl { background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        /* Sections */
+        .article-prose section { margin-top: 3.4em; }
+        .section-kicker { display: inline-flex; align-items: center; gap: 0.6em; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-violet); margin-bottom: 0.7em; }
+        .section-kicker::before { content: ""; width: 26px; height: 2px; background: var(--grad-brand); border-radius: 2px; }
+
+        /* Opening */
+        .article-prose .lede { font-size: 1.3rem; line-height: 1.75; color: var(--ink-strong); }
+        .article-prose .lede::first-letter { font-family: var(--font-serif); float: left; font-size: 4.6em; line-height: 0.8; font-weight: 700; margin: 0.06em 0.12em 0 0; background: linear-gradient(135deg, #0ea5e9, #8b5cf6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .article-prose .punchline { font-family: var(--font-serif); font-style: italic; font-weight: 600; font-size: clamp(1.6rem, 3.2vw, 2.25rem); line-height: 1.3; text-align: center; margin: 1.4em 0 1.6em; color: var(--ink-strong); }
+        .punchline span { background: linear-gradient(transparent 60%, rgba(236, 72, 153, 0.25) 60%); padding: 0 0.1em; }
+
+        .tldr { border: 1px solid var(--color-border); border-radius: 18px; padding: 1.4em 1.6em; margin: 0 0 1em; background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), rgba(139, 92, 246, 0.08)); }
+        .tldr-label { display: flex; align-items: center; gap: 0.5em; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-violet); margin-bottom: 0.9em; }
+        .article-prose .tldr ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75em; }
+        .article-prose .tldr li { display: flex; gap: 0.8em; margin: 0; font-size: 1rem; line-height: 1.6; }
+        .tldr li i { color: var(--c-sky); margin-top: 0.32em; }
+
+        /* The inherited playbook */
+        .article-prose .playbook { list-style: none; padding: 0; margin: 1.4em 0 1.8em; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; }
+        .article-prose .playbook li { position: relative; margin: 0; padding: 1.1em 1.1em 1.2em; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); box-shadow: var(--shadow-md); font-size: 0.95rem; line-height: 1.5; }
+        .tile-icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; margin-bottom: 0.8em; font-size: 1.1rem; color: #fff; }
+        .tile-num { position: absolute; top: 12px; right: 14px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text-muted); }
+        .g-sky { background: linear-gradient(135deg, #38bdf8, #0284c7); }
+        .g-violet { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+        .g-amber { background: linear-gradient(135deg, #fbbf24, #d97706); }
+        .g-rose { background: linear-gradient(135deg, #fb7185, #e11d48); }
+        .g-emerald { background: linear-gradient(135deg, #34d399, #059669); }
+        .g-slate { background: linear-gradient(135deg, #94a3b8, #475569); }
+
+        .statement { font-family: var(--font-sans); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.02em; line-height: 1.25; margin: 0.4em 0 0; color: var(--ink-strong); }
+        .statement span { background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        /* AI tools and console */
+        .tool-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: -0.4em 0 1.6em; }
+        .tool-chip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--color-border); background: var(--color-surface); font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: var(--ink-strong); }
+        .tool-chip i { color: var(--c-violet); }
+
+        .ai-console { margin: 1.8em 0; border-radius: 18px; overflow: hidden; background: var(--code-bg); border: 1px solid rgba(148, 163, 184, 0.18); box-shadow: 0 24px 50px rgba(15, 23, 42, 0.25); }
+        .console-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: rgba(255, 255, 255, 0.04); border-bottom: 1px solid rgba(148, 163, 184, 0.14); }
+        .console-bar .dot { width: 11px; height: 11px; border-radius: 50%; }
+        .dot.r { background: #f87171; } .dot.y { background: #fbbf24; } .dot.g { background: #34d399; }
+        .console-title { margin-left: auto; margin-right: auto; font-family: var(--font-mono); font-size: 0.78rem; color: #94a3b8; }
+        .console-body { padding: 1.3em 1.5em 1.5em; font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.7; }
+        .console-prompt { color: #e2e8f0; margin-bottom: 1em; }
+        .console-prompt .sign { color: #22d3ee; font-weight: 700; margin-right: 0.5em; }
+        .console-status { color: #a78bfa; font-size: 0.8rem; margin-bottom: 0.6em; }
+        .article-prose .console-output { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.35em 1.6em; }
+        .article-prose .console-output li { margin: 0; color: #cbd5e1; display: flex; gap: 0.7em; }
+        .console-output li i { color: #34d399; margin-top: 0.35em; font-size: 0.8em; }
+
+        .time-shift { margin: 1.8em 0; padding: 1.3em 1.5em; border-radius: 18px; border: 1px solid var(--color-border); background: var(--color-surface); }
+        .ts-caption { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 1em; }
+        .ts-row { display: grid; grid-template-columns: 190px 1fr auto; align-items: center; gap: 14px; margin-top: 0.7em; font-size: 0.95rem; }
+        .ts-label { font-weight: 600; color: var(--ink-strong); }
+        .ts-bar { height: 14px; border-radius: 999px; background: rgba(148, 163, 184, 0.18); overflow: hidden; }
+        .ts-fill { display: block; height: 100%; border-radius: inherit; transform-origin: left; }
+        .ts-fill--before { width: 100%; background: linear-gradient(90deg, #94a3b8, #64748b); }
+        .ts-fill--after { width: 12%; background: linear-gradient(90deg, #22d3ee, #8b5cf6); }
+        .ts-value { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; color: var(--c-violet); white-space: nowrap; }
+
+        .caveat { margin: 1.8em 0; padding: 1.4em 1.5em; border-radius: 18px; border: 1px solid rgba(244, 63, 94, 0.25); background: linear-gradient(135deg, rgba(244, 63, 94, 0.07), rgba(245, 158, 11, 0.07)); }
+        .article-prose .caveat p { margin: 0 0 0.9em; }
+        .caveat-title { display: flex; align-items: center; gap: 0.6em; font-weight: 700; color: var(--c-rose); }
+        .failure-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .failure-chip { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 10px; background: var(--color-surface); border: 1px solid var(--color-border); font-size: 0.88rem; font-weight: 500; }
+        .failure-chip i { color: var(--c-rose); }
+
+        .big-question { position: relative; overflow: hidden; margin: 2em 0 0; padding: 2em 2em 2.2em; border-radius: 22px; background: radial-gradient(circle at 85% 20%, rgba(139, 92, 246, 0.45), transparent 45%), radial-gradient(circle at 10% 100%, rgba(34, 211, 238, 0.3), transparent 45%), linear-gradient(135deg, #0b1224, #1e1b4b); color: #f8fafc; box-shadow: 0 24px 50px rgba(15, 23, 42, 0.25); }
+        .big-question::after { content: "?"; position: absolute; right: 0.15em; bottom: -0.25em; font-family: var(--font-serif); font-size: 11rem; font-weight: 700; line-height: 1; color: rgba(255, 255, 255, 0.07); }
+        .bq-label { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #67e8f9; margin-bottom: 0.8em; }
+        .article-prose .big-question p { position: relative; z-index: 1; margin: 0; font-family: var(--font-serif); font-size: clamp(1.3rem, 2.6vw, 1.7rem); line-height: 1.45; font-weight: 500; }
+
+        /* Candidates */
+        .candidates { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: 14px; margin: 1.8em 0; }
+        .candidate { border-radius: 20px; padding: 1.4em 1.4em 1.5em; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); }
+        .candidate--b { border-color: rgba(139, 92, 246, 0.45); background: linear-gradient(180deg, rgba(139, 92, 246, 0.08), transparent 40%), var(--color-surface); }
+        .candidate-head { display: flex; align-items: center; gap: 0.8em; margin-bottom: 1em; }
+        .candidate-avatar { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; color: #fff; flex-shrink: 0; }
+        .candidate-name { font-weight: 800; font-size: 1.1rem; line-height: 1.2; color: var(--ink-strong); }
+        .candidate-tag { font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text-muted); letter-spacing: 0.04em; }
+        .article-prose .candidate ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6em; }
+        .article-prose .candidate li { margin: 0; display: flex; gap: 0.7em; font-size: 0.96rem; line-height: 1.5; }
+        .candidate--a li i { color: var(--color-text-muted); margin-top: 0.3em; }
+        .candidate--b li i { color: var(--c-violet); margin-top: 0.3em; }
+        .vs { align-self: center; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; color: #fff; background: var(--grad-brand); box-shadow: 0 10px 24px rgba(139, 92, 246, 0.35); }
+
+        .team-question { display: flex; align-items: center; gap: 1em; margin: 1.6em 0; padding: 1.1em 1.4em; border-radius: 16px; border: 2px dashed rgba(139, 92, 246, 0.45); font-weight: 700; font-size: 1.15rem; color: var(--ink-strong); }
+        .team-question i { font-size: 1.5rem; color: var(--c-violet); }
+
+        .pullquote { position: relative; margin: 2em 0; padding: 0.4em 0 0.4em 1.2em; border-left: 5px solid transparent; border-image: linear-gradient(180deg, #22d3ee, #8b5cf6, #ec4899) 1; }
+        .article-prose .pullquote p { margin: 0; font-family: var(--font-serif); font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 600; font-style: italic; line-height: 1.35; color: var(--ink-strong); }
+        .pullquote i { display: block; margin-bottom: 0.3em; font-size: 1.4rem; color: var(--c-violet); opacity: 0.7; }
+
+        /* The five pillars */
+        .pillar { --pillar: var(--c-sky); position: relative; margin: 1.6em 0; padding: 1.6em 1.6em 1.5em; border-radius: 22px; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); overflow: hidden; }
+        .pillar::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 5px; background: var(--pillar); }
+        .pillar--violet { --pillar: var(--c-violet); }
+        .pillar--amber { --pillar: var(--c-amber); }
+        .pillar--rose { --pillar: var(--c-rose); }
+        .pillar--emerald { --pillar: var(--c-emerald); }
+        .pillar-head { display: flex; align-items: center; gap: 0.9em; margin-bottom: 0.9em; }
+        .pillar-num { font-family: var(--font-mono); font-size: 2.4rem; font-weight: 700; line-height: 1; color: var(--pillar); opacity: 0.9; }
+        .pillar-icon { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; color: #fff; font-size: 1.15rem; flex-shrink: 0; }
+        .article-prose .pillar-title { margin: 0; font-family: var(--font-sans); font-size: 1.3rem; font-weight: 800; line-height: 1.25; color: var(--ink-strong); }
+        .article-prose .pillar p { margin-bottom: 0.9em; }
+        .article-prose .pillar p:last-child { margin-bottom: 0; }
+        .insight { display: flex; gap: 0.8em; align-items: flex-start; margin-top: 1em; padding: 0.9em 1.1em; border-radius: 14px; background: rgba(148, 163, 184, 0.1); font-size: 0.98rem; line-height: 1.6; }
+        .insight i { color: var(--pillar); margin-top: 0.3em; }
+        .concept-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0.4em 0 1em; }
+        .concept-chip { padding: 5px 12px; border-radius: 999px; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; color: var(--pillar); background: color-mix(in srgb, var(--pillar) 12%, transparent); border: 1px solid color-mix(in srgb, var(--pillar) 30%, transparent); }
+
+        /* Pull request review mock */
+        .pr-review { margin: 1.4em 0 1.2em; border-radius: 18px; overflow: hidden; border: 1px solid rgba(148, 163, 184, 0.22); background: var(--code-bg); box-shadow: 0 24px 50px rgba(15, 23, 42, 0.22); }
+        .pr-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid rgba(148, 163, 184, 0.16); background: rgba(255, 255, 255, 0.03); }
+        .pr-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: #16a34a; color: #fff; font-size: 0.75rem; font-weight: 700; }
+        .pr-title { font-family: var(--font-mono); font-size: 0.86rem; font-weight: 600; color: #e2e8f0; }
+        .pr-author { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; color: #a78bfa; }
+        /* Ligatures would draw => as a single arrow glyph, which misleads in a code-review exercise */
+        .pr-code, .console-body { font-variant-ligatures: none; }
+        .pr-code { padding: 14px 0; font-family: var(--font-mono); font-size: 0.84rem; line-height: 1.75; color: #e2e8f0; overflow-x: auto; }
+        /* Lines share the width of the longest one, so highlights still span it when scrolled sideways */
+        .pr-lines { width: max-content; min-width: 100%; }
+        .cl { display: block; position: relative; white-space: pre; padding: 0 18px 0 68px; min-height: 1.75em; }
+        .cl::before { content: attr(data-ln); position: absolute; left: 0; width: 28px; text-align: right; color: #475569; }
+        .tk-k { color: #c084fc; } .tk-f { color: #67e8f9; } .tk-s { color: #86efac; } .tk-t { color: #f9a8d4; } .tk-a { color: #fcd34d; } .tk-p { color: #94a3b8; }
+        /* Flags live in the gutter so they never cover code on narrow screens */
+        .cl[data-flag]::after { content: attr(data-flag); position: absolute; left: 36px; top: 0.25em; width: 20px; height: 20px; border-radius: 50%; display: none; place-items: center; font-size: 0.7rem; font-weight: 700; color: #0b1224; background: #fbbf24; }
+        .pr-review.revealed .cl[data-flag] { background: rgba(251, 191, 36, 0.1); box-shadow: inset 3px 0 0 #fbbf24; }
+        .pr-review.revealed .cl[data-flag]::after { display: grid; }
+        .pr-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-top: 1px solid rgba(148, 163, 184, 0.16); }
+        .pr-hint { font-size: 0.86rem; color: #94a3b8; }
+        .pr-reveal { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border: none; border-radius: 999px; background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #1c1917; font-family: var(--font-sans); font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+        .pr-reveal:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35); }
+        .pr-reveal:focus-visible { outline: 2px solid #fbbf24; outline-offset: 3px; }
+        .pr-comments { display: none; gap: 10px; padding: 0 16px 16px; }
+        .pr-review.revealed .pr-comments { display: grid; }
+        .pr-comment { display: grid; grid-template-columns: 26px 1fr; gap: 10px; padding: 12px 14px; border-radius: 12px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(251, 191, 36, 0.25); font-size: 0.88rem; line-height: 1.55; color: #cbd5e1; }
+        .pr-comment-num { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: #fbbf24; color: #0b1224; font-size: 0.72rem; font-weight: 700; font-family: var(--font-mono); }
+        .pr-comment strong { color: #f8fafc; }
+        .pr-comment code { font-family: var(--font-mono); font-size: 0.86em; color: #fcd34d; background: rgba(251, 191, 36, 0.1); padding: 1px 5px; border-radius: 5px; }
+        .pr-verdict { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.35); color: #fecdd3; font-weight: 700; font-size: 0.9rem; }
+        .figure-note { margin: 0 0 1.2em; font-size: 0.85rem; color: var(--color-text-muted); text-align: center; }
+
+        .article-prose .review-checklist { list-style: none; padding: 0; margin: 0.6em 0 1em; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 8px 16px; }
+        .article-prose .review-checklist li { margin: 0; display: flex; gap: 0.7em; font-size: 0.98rem; line-height: 1.5; }
+        .review-checklist li i { color: var(--c-amber); margin-top: 0.3em; }
+
+        /* Debugging */
+        .bug-board { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 1em 0 1.1em; }
+        .bug-card { display: flex; flex-direction: column; gap: 8px; padding: 0.9em 1em; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--c-rose) 30%, transparent); background: color-mix(in srgb, var(--c-rose) 7%, transparent); font-size: 0.92rem; font-weight: 600; line-height: 1.35; color: var(--ink-strong); }
+        .bug-card i { font-size: 1.1rem; color: var(--c-rose); }
+        .steps-inline { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 1em; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; }
+        .steps-inline span { padding: 6px 12px; border-radius: 10px; background: rgba(148, 163, 184, 0.14); color: var(--ink-strong); }
+        .steps-inline i { color: var(--color-text-muted); font-size: 0.75rem; }
+
+        /* Effective use of AI */
+        .ai-flow { display: flex; flex-wrap: wrap; gap: 8px; margin: 1em 0 1.2em; }
+        .ai-flow-step { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 12px; background: color-mix(in srgb, var(--c-emerald) 10%, transparent); border: 1px solid color-mix(in srgb, var(--c-emerald) 30%, transparent); font-size: 0.9rem; font-weight: 600; color: var(--ink-strong); }
+        .ai-flow-step i { color: var(--c-emerald); }
+        .ai-flow-arrow { align-self: center; color: var(--color-text-muted); font-size: 0.8rem; }
+        .trust-callout { display: flex; align-items: center; gap: 1em; margin: 0.6em 0 1em; padding: 1em 1.2em; border-radius: 16px; background: linear-gradient(135deg, rgba(244, 63, 94, 0.1), rgba(139, 92, 246, 0.1)); font-weight: 700; font-size: 1.08rem; line-height: 1.45; color: var(--ink-strong); }
+        .trust-callout i { font-size: 1.6rem; color: var(--c-rose); }
+        .trust-callout em { font-style: normal; color: var(--c-rose); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; }
+
+        /* Fundamentals */
+        .absolutely { font-family: var(--font-serif); font-size: clamp(2.6rem, 6vw, 4rem); font-weight: 700; line-height: 1; margin: 0.1em 0 0.35em; background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+        .fundamentals { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 1em 0 1.6em; }
+        .fundamental { display: flex; align-items: center; gap: 12px; padding: 0.9em 1em; border-radius: 14px; border: 1px solid var(--color-border); background: var(--color-surface); font-size: 0.95rem; font-weight: 500; line-height: 1.4; }
+        .fundamental i { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; flex-shrink: 0; color: #fff; font-size: 0.95rem; }
+        .not-equal { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; margin: 1.6em 0; }
+        .ne-pill { padding: 12px 20px; border-radius: 14px; font-weight: 700; font-size: 1.02rem; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); }
+        .ne-pill i { margin-right: 8px; }
+        .ne-pill--code i { color: var(--color-text-muted); }
+        .ne-pill--eng { border-color: rgba(139, 92, 246, 0.45); }
+        .ne-pill--eng i { color: var(--c-violet); }
+        .ne-sign { font-family: var(--font-serif); font-size: 2.4rem; font-weight: 700; line-height: 1; color: var(--c-rose); }
+
+        /* AI-era interview flow */
+        .article-prose .interview-flow { list-style: none; padding: 0; margin: 1.4em 0 1.8em; position: relative; counter-reset: step; }
+        .interview-flow::before { content: ""; position: absolute; left: 23px; top: 10px; bottom: 10px; width: 2px; background: linear-gradient(180deg, #22d3ee, #8b5cf6, #ec4899); opacity: 0.6; }
+        .article-prose .interview-flow li { position: relative; display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start; margin: 0 0 1em; counter-increment: step; }
+        .flow-icon { position: relative; z-index: 1; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--color-surface); border: 2px solid rgba(139, 92, 246, 0.5); color: var(--c-violet); font-size: 1rem; box-shadow: var(--shadow-md); }
+        .flow-text { padding-top: 0.35em; font-size: 1rem; line-height: 1.55; }
+        .flow-step { display: block; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+        .flow-step::before { content: "Step " counter(step) " / "; }
+
+        .table-wrap { margin: 1.8em 0; overflow-x: auto; border-radius: 18px; border: 1px solid var(--color-border); box-shadow: var(--shadow-md); }
+        .compare { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 0.95rem; line-height: 1.5; background: var(--color-surface); }
+        .compare th, .compare td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--color-border); }
+        .compare thead th { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase; }
+        .compare thead th:nth-child(2) { color: var(--color-text-muted); background: rgba(148, 163, 184, 0.1); }
+        .compare thead th:nth-child(3) { color: #fff; background: linear-gradient(135deg, #0ea5e9, #8b5cf6); }
+        .compare tbody th { font-weight: 700; color: var(--ink-strong); white-space: nowrap; }
+        .compare td:nth-child(3) { background: rgba(139, 92, 246, 0.06); font-weight: 500; }
+        .compare tbody tr:last-child th, .compare tbody tr:last-child td { border-bottom: none; }
+        .compare td i { margin-right: 6px; }
+        .compare .old i { color: var(--color-text-muted); }
+        .compare .new i { color: var(--c-emerald); }
+
+        .judgment-reveal { text-align: center; margin: 1.6em 0 0.4em; }
+        .article-prose .judgment-reveal p { margin: 0 0 0.3em; font-size: 1.05rem; color: var(--color-text-muted); }
+        .judgment-word { font-family: var(--font-serif); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; font-style: italic; line-height: 1.1; background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+
+        /* Abstraction ladder */
+        .ladder { display: grid; grid-template-columns: repeat(3, 1fr); align-items: end; gap: 12px; margin: 1.8em 0; }
+        .rung { border-radius: 18px; padding: 1.1em 1.1em 1.2em; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); }
+        .rung:nth-child(1) { min-height: 190px; }
+        .rung:nth-child(2) { min-height: 230px; }
+        .rung--now { min-height: 270px; color: #f8fafc; border-color: transparent; background: radial-gradient(circle at 80% 0%, rgba(236, 72, 153, 0.4), transparent 50%), linear-gradient(160deg, #1e1b4b, #0b1224); }
+        .rung-era { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+        .rung--now .rung-era { color: #67e8f9; }
+        .rung i { display: block; font-size: 1.5rem; margin: 0.6em 0 0.5em; color: var(--c-violet); }
+        .rung--now i { color: #f9a8d4; }
+        .rung-what { font-weight: 800; font-size: 1.02rem; line-height: 1.3; color: var(--ink-strong); }
+        .rung--now .rung-what { color: #fff; }
+        .rung-then { margin-top: 0.6em; font-size: 0.9rem; line-height: 1.5; color: var(--color-text-muted); }
+        .rung--now .rung-then { color: #cbd5e1; }
+
+        .future-traits { display: flex; flex-wrap: wrap; gap: 10px; margin: 1em 0 1.6em; }
+        .trait { display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: 999px; font-size: 0.92rem; font-weight: 600; color: var(--ink-strong); background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--shadow-md); }
+        .trait i { color: var(--c-sky); }
+
+        .manifesto { position: relative; overflow: hidden; margin: 2em 0; padding: 2.2em 2em; border-radius: 24px; text-align: center; color: #f8fafc; background: radial-gradient(circle at 15% 15%, rgba(34, 211, 238, 0.35), transparent 40%), radial-gradient(circle at 90% 90%, rgba(236, 72, 153, 0.35), transparent 45%), linear-gradient(135deg, #0b1224, #1e1b4b 60%, #0b1224); box-shadow: 0 28px 60px rgba(15, 23, 42, 0.3); }
+        .article-prose .manifesto p { margin: 0; font-family: var(--font-serif); font-size: clamp(1.35rem, 2.8vw, 1.85rem); font-weight: 500; line-height: 1.45; }
+        .manifesto strong { font-weight: 700; color: #67e8f9; }
+        .manifesto em { font-style: italic; color: #f9a8d4; }
+
+        /* Discussion */
+        .discussion { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 1.2em 0 1.6em; }
+        .q-card { position: relative; padding: 1.2em 1.2em 1.3em; border-radius: 18px; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); font-size: 1rem; font-weight: 600; line-height: 1.5; color: var(--ink-strong); }
+        .q-num { display: inline-block; margin-bottom: 0.6em; padding: 3px 10px; border-radius: 8px; font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #fff; }
+        .final-q { margin: 1.6em 0 0; padding: 1.8em; border-radius: 22px; text-align: center; border: 2px solid transparent; background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box, var(--grad-brand) border-box; }
+        .article-prose .final-q p { margin: 0 0 1.1em; font-family: var(--font-serif); font-size: clamp(1.3rem, 2.6vw, 1.7rem); font-weight: 600; line-height: 1.4; color: var(--ink-strong); }
+        .cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .article-prose .cta { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 999px; font-size: 0.95rem; font-weight: 700; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+        .article-prose .cta:hover { transform: translateY(-2px); }
+        .article-prose .cta--primary { background: #0a66c2; color: #fff; box-shadow: 0 10px 24px rgba(10, 102, 194, 0.3); }
+        .article-prose .cta--ghost { background: transparent; color: var(--ink-strong); border: 1px solid var(--color-border); }
+
+        /* Scroll reveal: only hides content when JS has confirmed it can show it again */
+        .js-reveal .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .js-reveal .reveal.in-view { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .js-reveal .reveal { opacity: 1; transform: none; transition: none; } }
+
+        @media (max-width: 760px) {
+            .candidates { grid-template-columns: 1fr; }
+            .vs { justify-self: center; }
+            .ladder { grid-template-columns: 1fr; }
+            .rung:nth-child(n) { min-height: 0; }
+            .ts-row { grid-template-columns: 1fr auto; }
+            .ts-label { grid-column: 1 / -1; }
+            .pillar { padding: 1.3em 1.2em 1.2em; }
+            .pillar-num { font-size: 1.8rem; }
+            .big-question, .manifesto { padding: 1.6em 1.3em; }
+        }
+
+        /* A sideways-scrolling table would hide the AI-era column, so each row becomes a card */
+        @media (max-width: 600px) {
+            .table-wrap { overflow: visible; }
+            .compare { min-width: 0; }
+            .compare thead { display: none; }
+            .compare tr { display: block; padding: 14px 16px; border-bottom: 1px solid var(--color-border); }
+            .compare tbody tr:last-child { border-bottom: none; }
+            .compare tbody th, .compare td { display: block; padding: 0; border: none; white-space: normal; }
+            .compare tbody th { margin-bottom: 8px; }
+            .compare td::before { content: attr(data-label); display: block; margin-bottom: 2px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
+            .compare td.new { margin-top: 10px; padding: 8px 10px; border-radius: 10px; }
+            .compare td.new::before { color: var(--c-violet); }
+        }
+
+        /* Dark theme: surfaces and text come from the shared vars; these are the
+           pieces with light-only tints */
+        html[data-theme="dark"] .playbook li,
+        html[data-theme="dark"] .candidate,
+        html[data-theme="dark"] .pillar,
+        html[data-theme="dark"] .rung,
+        html[data-theme="dark"] .q-card,
+        html[data-theme="dark"] .trait,
+        html[data-theme="dark"] .ne-pill { box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35); }
+        html[data-theme="dark"] .candidate--b { background: linear-gradient(180deg, rgba(167, 139, 250, 0.12), transparent 45%), var(--color-surface); }
+        html[data-theme="dark"] .compare td:nth-child(3) { background: rgba(167, 139, 250, 0.08); }
+        html[data-theme="dark"] .ai-console,
+        html[data-theme="dark"] .pr-review { box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5); }
+        html[data-theme="dark"] .punchline span { background: linear-gradient(transparent 60%, rgba(244, 114, 182, 0.3) 60%); }
+    </style>
+    <script src="/js/theme.js"></script>
+    <link href="/css/dark-mode.css" rel="stylesheet" />
+    <script>
+        if ("IntersectionObserver" in window) document.documentElement.classList.add("js-reveal");
+    </script>
+</head>
+
+<body>
+    <div class="reading-progress" id="reading-progress"></div>
+    <div id="desktop-nav-bar"></div>
+    <div class="nav-spacer"></div>
+
+    <div class="blog-layout">
+        <aside class="author-sidebar" id="author-sidebar"></aside>
+
+        <main class="article-container">
+            <article class="article-content">
+                <img src="/images/blogs/ai-era-interviews.svg" alt="A timed classic interview round with a binary-tree puzzle solved from memory, giving way through AI to AI-generated code under review, with an interview scorecard that crosses out typing speed and ticks problem framing, architecture, code review and AI judgment." class="article-hero">
+
+                <div class="article-body">
+                    <header class="article-header">
+                        <span class="article-category">Interviews</span>
+                        <h1 class="article-title">If AI Can Write the Code, <span class="title-hl">What Exactly Are We Evaluating</span> in Software Engineering Interviews?</h1>
+                        <div class="article-meta">
+                            <div class="article-meta-item"><i class="fas fa-user"></i><span>Manoj Satishkumar</span></div>
+                            <div class="article-meta-item"><i class="fas fa-clock"></i><span>9 min read</span></div>
+                            <div class="article-meta-item"><i class="fas fa-calendar"></i><span>31 Oct 2026</span></div>
+                        </div>
+                    </header>
+
+                    <div class="article-prose">
+
+                        <p class="lede">It's 2026. AI can generate React applications, write complex JavaScript, build APIs, create test cases, debug code and even suggest architectural decisions. Yet, many software engineering interviews continue to evaluate candidates primarily on how well they can write code from scratch.</p>
+
+                        <p class="punchline"><span>Something about this doesn't add up.</span></p>
+
+                        <div class="tldr reveal">
+                            <div class="tldr-label"><i class="fas fa-bolt"></i> The short version</div>
+                            <ul>
+                                <li><i class="fas fa-arrow-right"></i><span>AI has changed the economics of writing code, but not the need to judge it.</span></li>
+                                <li><i class="fas fa-arrow-right"></i><span>Keep coding rounds, but change what they measure: decomposition, design, review, debugging and effective use of AI.</span></li>
+                                <li><i class="fas fa-arrow-right"></i><span>The best engineers may not write the most code in 60 minutes. They own the outcome.</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- ============ The playbook ============ -->
+                        <section>
+                            <div class="section-kicker">The familiar playbook</div>
+                            <h2>How we've been interviewing engineers for years</h2>
+
+                            <p>For years, the software engineering interview process has followed a fairly predictable pattern. We ask candidates to:</p>
+
+                            <ul class="playbook">
+                                <li class="reveal"><span class="tile-num">01</span><span class="tile-icon g-sky"><i class="fas fa-diagram-project" aria-hidden="true"></i></span>Solve data structures and algorithms problems.</li>
+                                <li class="reveal"><span class="tile-num">02</span><span class="tile-icon g-amber"><i class="fab fa-js" aria-hidden="true"></i></span>Implement JavaScript functions from scratch.</li>
+                                <li class="reveal"><span class="tile-num">03</span><span class="tile-icon g-violet"><i class="fas fa-cubes" aria-hidden="true"></i></span>Build UI components within a fixed time.</li>
+                                <li class="reveal"><span class="tile-num">04</span><span class="tile-icon g-emerald"><i class="fas fa-clone" aria-hidden="true"></i></span>Reproduce familiar coding patterns without external assistance.</li>
+                                <li class="reveal"><span class="tile-num">05</span><span class="tile-icon g-rose"><i class="fas fa-stopwatch" aria-hidden="true"></i></span>Demonstrate how quickly they can translate a problem into working code.</li>
+                            </ul>
+
+                            <p>These exercises made sense when writing code was one of the most time-consuming and valuable parts of software development.</p>
+
+                            <p class="statement">But <span>the world has changed.</span></p>
+                        </section>
+
+                        <!-- ============ Economics of code ============ -->
+                        <section>
+                            <div class="section-kicker">The shift</div>
+                            <h2>AI has changed the economics of writing code</h2>
+
+                            <p>Today, tools like ChatGPT, Claude, GitHub Copilot and Cursor can generate substantial amounts of production-quality code.</p>
+
+                            <div class="tool-chips" aria-label="AI coding tools">
+                                <span class="tool-chip"><i class="fas fa-comments" aria-hidden="true"></i>ChatGPT</span>
+                                <span class="tool-chip"><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>Claude</span>
+                                <span class="tool-chip"><i class="fab fa-github" aria-hidden="true"></i>GitHub Copilot</span>
+                                <span class="tool-chip"><i class="fas fa-arrow-pointer" aria-hidden="true"></i>Cursor</span>
+                            </div>
+
+                            <figure class="ai-console reveal">
+                                <div class="console-bar">
+                                    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                                    <span class="console-title">ai-assistant</span>
+                                </div>
+                                <div class="console-body">
+                                    <div class="console-prompt"><span class="sign">&gt;</span>Give an AI tool a reasonably detailed requirement, and it can:</div>
+                                    <div class="console-status">&#10022; generating&hellip;</div>
+                                    <ul class="console-output">
+                                        <li><i class="fas fa-check"></i><span>Build a React component with reusable abstractions.</span></li>
+                                        <li><i class="fas fa-check"></i><span>Implement complex UI interactions.</span></li>
+                                        <li><i class="fas fa-check"></i><span>Generate responsive CSS.</span></li>
+                                        <li><i class="fas fa-check"></i><span>Integrate REST APIs.</span></li>
+                                        <li><i class="fas fa-check"></i><span>Write unit and integration tests.</span></li>
+                                        <li><i class="fas fa-check"></i><span>Identify bugs and suggest fixes.</span></li>
+                                        <li><i class="fas fa-check"></i><span>Refactor existing code.</span></li>
+                                        <li><i class="fas fa-check"></i><span>Explain unfamiliar codebases.</span></li>
+                                    </ul>
+                                </div>
+                            </figure>
+
+                            <div class="time-shift reveal" role="img" aria-label="Work that took hours of manual implementation can sometimes be done in minutes with AI">
+                                <div class="ts-caption">Same task, different economics</div>
+                                <div class="ts-row">
+                                    <span class="ts-label">Manual implementation</span>
+                                    <div class="ts-bar"><span class="ts-fill ts-fill--before"></span></div>
+                                    <span class="ts-value">hours</span>
+                                </div>
+                                <div class="ts-row">
+                                    <span class="ts-label">With an AI assistant</span>
+                                    <div class="ts-bar"><span class="ts-fill ts-fill--after"></span></div>
+                                    <span class="ts-value">sometimes minutes</span>
+                                </div>
+                            </div>
+
+                            <p>What previously required hours of manual implementation can sometimes be accomplished in minutes.</p>
+
+                            <div class="caveat reveal">
+                                <p class="caveat-title"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i>Of course, AI-generated code isn't always correct.</p>
+                                <div class="failure-chips">
+                                    <span class="failure-chip"><i class="fas fa-bug" aria-hidden="true"></i>Introduces bugs</span>
+                                    <span class="failure-chip"><i class="fas fa-ruler-combined" aria-hidden="true"></i>Overlooks edge cases</span>
+                                    <span class="failure-chip"><i class="fas fa-sitemap" aria-hidden="true"></i>Makes poor architectural choices</span>
+                                    <span class="failure-chip"><i class="fas fa-mask" aria-hidden="true"></i>Looks convincing, fails under real-world conditions</span>
+                                </div>
+                            </div>
+
+                            <p>But that's precisely where the interesting question begins.</p>
+
+                            <div class="big-question reveal">
+                                <div class="bq-label">The question</div>
+                                <p>If writing code is becoming increasingly automated, why are we still treating the ability to write code independently as the primary measure of engineering capability?</p>
+                            </div>
+                        </section>
+
+                        <!-- ============ Candidates ============ -->
+                        <section>
+                            <div class="section-kicker">A thought experiment</div>
+                            <h2>Are our interviews measuring the right skills?</h2>
+
+                            <p>Imagine two candidates interviewing for a senior frontend engineering position.</p>
+
+                            <div class="candidates">
+                                <div class="candidate candidate--a reveal">
+                                    <div class="candidate-head">
+                                        <span class="candidate-avatar g-slate">A</span>
+                                        <div>
+                                            <div class="candidate-name">Candidate A</div>
+                                            <div class="candidate-tag">aces the classic coding round</div>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <li><i class="fas fa-puzzle-piece"></i><span>Solves JavaScript puzzles quickly.</span></li>
+                                        <li><i class="fas fa-brain"></i><span>Remembers language internals.</span></li>
+                                        <li><i class="fas fa-code"></i><span>Can implement common algorithms from memory.</span></li>
+                                        <li><i class="fas fa-keyboard"></i><span>Writes code without using AI.</span></li>
+                                    </ul>
+                                </div>
+
+                                <div class="vs" aria-hidden="true">VS</div>
+
+                                <div class="candidate candidate--b reveal">
+                                    <div class="candidate-head">
+                                        <span class="candidate-avatar g-violet">B</span>
+                                        <div>
+                                            <div class="candidate-name">Candidate B</div>
+                                            <div class="candidate-tag">engineers the whole solution</div>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <li><i class="fas fa-layer-group"></i><span>Understands JavaScript deeply.</span></li>
+                                        <li><i class="fas fa-route"></i><span>Can break down ambiguous product requirements.</span></li>
+                                        <li><i class="fas fa-sitemap"></i><span>Designs scalable frontend architecture.</span></li>
+                                        <li><i class="fas fa-wand-magic-sparkles"></i><span>Uses AI effectively to accelerate implementation.</span></li>
+                                        <li><i class="fas fa-magnifying-glass"></i><span>Reviews AI-generated code critically.</span></li>
+                                        <li><i class="fas fa-gauge-high"></i><span>Identifies performance bottlenecks and architectural weaknesses.</span></li>
+                                        <li><i class="fas fa-user-check"></i><span>Understands trade-offs and takes ownership of the final solution.</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="team-question reveal"><i class="fas fa-people-group" aria-hidden="true"></i><span>Who would you rather have on your engineering team?</span></div>
+
+                            <p>This isn't an argument that coding fundamentals no longer matter. Candidate B needs to understand code just as deeply, perhaps even more deeply.</p>
+
+                            <p>But there's a difference between understanding code and being evaluated primarily on how quickly you can produce it.</p>
+
+                            <blockquote class="pullquote reveal">
+                                <i class="fas fa-quote-left" aria-hidden="true"></i>
+                                <p>We may be confusing coding proficiency with engineering capability.</p>
+                            </blockquote>
+                        </section>
+
+                        <!-- ============ Five areas ============ -->
+                        <section>
+                            <div class="section-kicker">What to measure</div>
+                            <h2>What should we evaluate instead?</h2>
+
+                            <p>I believe the interview process needs to evolve. Rather than eliminating coding rounds, we should change what those rounds measure.</p>
+
+                            <p>Here are <strong>five areas</strong> I believe deserve much greater attention.</p>
+
+                            <!-- 1 -->
+                            <div class="pillar reveal">
+                                <div class="pillar-head">
+                                    <span class="pillar-num">01</span>
+                                    <span class="pillar-icon g-sky"><i class="fas fa-puzzle-piece" aria-hidden="true"></i></span>
+                                    <h3 class="pillar-title">Problem understanding and decomposition</h3>
+                                </div>
+                                <p>Can the candidate take an ambiguous requirement and turn it into a well-defined engineering problem?</p>
+                                <p>Can they identify missing requirements, edge cases, constraints and dependencies?</p>
+                                <div class="concept-chips">
+                                    <span class="concept-chip">missing requirements</span>
+                                    <span class="concept-chip">edge cases</span>
+                                    <span class="concept-chip">constraints</span>
+                                    <span class="concept-chip">dependencies</span>
+                                </div>
+                                <div class="insight"><i class="fas fa-lightbulb" aria-hidden="true"></i><span>AI can generate implementations, but the quality of the output depends heavily on the quality of the problem being defined.</span></div>
+                            </div>
+
+                            <!-- 2 -->
+                            <div class="pillar pillar--violet reveal">
+                                <div class="pillar-head">
+                                    <span class="pillar-num">02</span>
+                                    <span class="pillar-icon g-violet"><i class="fas fa-sitemap" aria-hidden="true"></i></span>
+                                    <h3 class="pillar-title">System design and architectural thinking</h3>
+                                </div>
+                                <p>Can the candidate design a scalable application? Can they reason about:</p>
+                                <div class="concept-chips">
+                                    <span class="concept-chip">component boundaries</span>
+                                    <span class="concept-chip">state management</span>
+                                    <span class="concept-chip">data flow</span>
+                                    <span class="concept-chip">caching</span>
+                                    <span class="concept-chip">performance</span>
+                                    <span class="concept-chip">maintainability</span>
+                                </div>
+                                <p>Can they explain <strong>why</strong> they chose one architecture over another?</p>
+                                <div class="insight"><i class="fas fa-lightbulb" aria-hidden="true"></i><span>These decisions have consequences that go far beyond writing a component.</span></div>
+                            </div>
+
+                            <!-- 3 -->
+                            <div class="pillar pillar--amber reveal">
+                                <div class="pillar-head">
+                                    <span class="pillar-num">03</span>
+                                    <span class="pillar-icon g-amber"><i class="fas fa-code-pull-request" aria-hidden="true"></i></span>
+                                    <h3 class="pillar-title">Code review and engineering judgment</h3>
+                                </div>
+                                <p>Instead of asking candidates to write everything from scratch, give them an AI-generated implementation. Try it yourself:</p>
+
+                                <figure class="pr-review" id="pr-review">
+                                    <div class="pr-head">
+                                        <span class="pr-badge"><i class="fas fa-code-pull-request" aria-hidden="true"></i>Open</span>
+                                        <span class="pr-title">feat: show user search results</span>
+                                        <span class="pr-author"><i class="fas fa-robot" aria-hidden="true"></i>generated by an AI assistant</span>
+                                    </div>
+                                    <div class="pr-code" role="region" aria-label="AI-generated React component under review" tabindex="0">
+                                        <div class="pr-lines">
+                                        <span class="cl" data-ln="1"><span class="tk-k">function</span> <span class="tk-f">UserResults</span>({ query }) {</span>
+                                        <span class="cl" data-ln="2">  <span class="tk-k">const</span> [users, setUsers] = <span class="tk-f">useState</span>([]);</span>
+                                        <span class="cl" data-ln="3"></span>
+                                        <span class="cl" data-ln="4">  <span class="tk-f">useEffect</span>(() =&gt; {</span>
+                                        <span class="cl" data-ln="5" data-flag="1">    <span class="tk-f">fetch</span>(<span class="tk-s">`/api/users?q=${query}`</span>)</span>
+                                        <span class="cl" data-ln="6" data-flag="2">      .<span class="tk-f">then</span>((res) =&gt; res.<span class="tk-f">json</span>())</span>
+                                        <span class="cl" data-ln="7">      .<span class="tk-f">then</span>((data) =&gt; <span class="tk-f">setUsers</span>(data));</span>
+                                        <span class="cl" data-ln="8">  }, [query]);</span>
+                                        <span class="cl" data-ln="9"></span>
+                                        <span class="cl" data-ln="10">  <span class="tk-k">return</span> users.<span class="tk-f">map</span>((user) =&gt; (</span>
+                                        <span class="cl" data-ln="11" data-flag="3">    <span class="tk-p">&lt;</span><span class="tk-t">div</span> <span class="tk-a">className</span>=<span class="tk-s">"user-card"</span><span class="tk-p">&gt;</span></span>
+                                        <span class="cl" data-ln="12">      <span class="tk-p">&lt;</span><span class="tk-t">h3</span><span class="tk-p">&gt;</span>{user.name}<span class="tk-p">&lt;/</span><span class="tk-t">h3</span><span class="tk-p">&gt;</span></span>
+                                        <span class="cl" data-ln="13" data-flag="4">      <span class="tk-p">&lt;</span><span class="tk-t">p</span> <span class="tk-a">dangerouslySetInnerHTML</span>={{ __html: user.bio }} <span class="tk-p">/&gt;</span></span>
+                                        <span class="cl" data-ln="14">    <span class="tk-p">&lt;/</span><span class="tk-t">div</span><span class="tk-p">&gt;</span></span>
+                                        <span class="cl" data-ln="15">  ));</span>
+                                        <span class="cl" data-ln="16">}</span>
+                                        </div>
+                                    </div>
+                                    <div class="pr-footer">
+                                        <span class="pr-hint"><i class="fas fa-eye" aria-hidden="true"></i> Looks fine at a glance. Would you approve it?</span>
+                                        <button type="button" class="pr-reveal" aria-expanded="false" aria-controls="pr-comments" data-pr-reveal><i class="fas fa-magnifying-glass" aria-hidden="true"></i><span>Reveal the review</span></button>
+                                    </div>
+                                    <div class="pr-comments" id="pr-comments">
+                                        <div class="pr-comment"><span class="pr-comment-num">1</span><span><strong>Race condition, line 5.</strong> Every keystroke fires a request with no debounce or <code>AbortController</code>, so a slow, older response can overwrite a newer one.</span></div>
+                                        <div class="pr-comment"><span class="pr-comment-num">2</span><span><strong>Missing edge cases, line 6.</strong> <code>res.ok</code> is never checked, and there is no loading, error or empty state.</span></div>
+                                        <div class="pr-comment"><span class="pr-comment-num">3</span><span><strong>Maintainability, line 11.</strong> List items have no <code>key</code>, so React can't track them reliably between renders.</span></div>
+                                        <div class="pr-comment"><span class="pr-comment-num">4</span><span><strong>Security, line 13.</strong> Rendering a user-supplied bio with <code>dangerouslySetInnerHTML</code> opens the door to XSS.</span></div>
+                                        <div class="pr-verdict"><i class="fas fa-circle-xmark" aria-hidden="true"></i>Verdict: request changes</div>
+                                    </div>
+                                </figure>
+                                <p class="figure-note">An illustrative AI-generated snippet. The interesting signal is what the candidate notices.</p>
+
+                                <p>Then ask them:</p>
+                                <ul class="review-checklist">
+                                    <li><i class="far fa-square-check"></i><span>What is wrong with this implementation?</span></li>
+                                    <li><i class="far fa-square-check"></i><span>What edge cases are missing?</span></li>
+                                    <li><i class="far fa-square-check"></i><span>Are there performance issues?</span></li>
+                                    <li><i class="far fa-square-check"></i><span>Is the code maintainable?</span></li>
+                                    <li><i class="far fa-square-check"></i><span>Are there security concerns?</span></li>
+                                    <li><i class="far fa-square-check"></i><span>Would you approve this pull request?</span></li>
+                                </ul>
+                                <div class="insight"><i class="fas fa-lightbulb" aria-hidden="true"></i><span>The ability to critically evaluate code is becoming just as important as the ability to produce it.</span></div>
+                            </div>
+
+                            <!-- 4 -->
+                            <div class="pillar pillar--rose reveal">
+                                <div class="pillar-head">
+                                    <span class="pillar-num">04</span>
+                                    <span class="pillar-icon g-rose"><i class="fas fa-bug" aria-hidden="true"></i></span>
+                                    <h3 class="pillar-title">Debugging and problem-solving</h3>
+                                </div>
+                                <p>Give candidates an application with real-world issues. Perhaps it has:</p>
+                                <div class="bug-board">
+                                    <div class="bug-card"><i class="fas fa-rotate" aria-hidden="true"></i>Unnecessary React re-renders</div>
+                                    <div class="bug-card"><i class="fas fa-memory" aria-hidden="true"></i>Memory leaks</div>
+                                    <div class="bug-card"><i class="fas fa-shuffle" aria-hidden="true"></i>Race conditions</div>
+                                    <div class="bug-card"><i class="fas fa-plug-circle-xmark" aria-hidden="true"></i>Broken API handling</div>
+                                    <div class="bug-card"><i class="fas fa-hourglass-half" aria-hidden="true"></i>Poor loading performance</div>
+                                </div>
+                                <p>Can they investigate the problem, identify its root cause and fix it?</p>
+                                <div class="steps-inline" aria-label="Investigate, find the root cause, fix">
+                                    <span>investigate</span><i class="fas fa-chevron-right" aria-hidden="true"></i><span>root cause</span><i class="fas fa-chevron-right" aria-hidden="true"></i><span>fix</span>
+                                </div>
+                                <div class="insight"><i class="fas fa-lightbulb" aria-hidden="true"></i><span>This is much closer to the work engineers actually do.</span></div>
+                            </div>
+
+                            <!-- 5 -->
+                            <div class="pillar pillar--emerald reveal">
+                                <div class="pillar-head">
+                                    <span class="pillar-num">05</span>
+                                    <span class="pillar-icon g-emerald"><i class="fas fa-robot" aria-hidden="true"></i></span>
+                                    <h3 class="pillar-title">Effective use of AI</h3>
+                                </div>
+                                <p>Can candidates use AI as an engineering tool rather than blindly accepting everything it generates? Can they:</p>
+                                <div class="ai-flow">
+                                    <span class="ai-flow-step"><i class="fas fa-folder-open" aria-hidden="true"></i>Provide context</span>
+                                    <i class="fas fa-arrow-right ai-flow-arrow" aria-hidden="true"></i>
+                                    <span class="ai-flow-step"><i class="fas fa-message" aria-hidden="true"></i>Formulate good prompts</span>
+                                    <i class="fas fa-arrow-right ai-flow-arrow" aria-hidden="true"></i>
+                                    <span class="ai-flow-step"><i class="fas fa-scale-balanced" aria-hidden="true"></i>Evaluate suggestions</span>
+                                    <i class="fas fa-arrow-right ai-flow-arrow" aria-hidden="true"></i>
+                                    <span class="ai-flow-step"><i class="fas fa-vial" aria-hidden="true"></i>Validate implementations</span>
+                                    <i class="fas fa-arrow-right ai-flow-arrow" aria-hidden="true"></i>
+                                    <span class="ai-flow-step"><i class="fas fa-arrows-rotate" aria-hidden="true"></i>Iterate</span>
+                                </div>
+                                <div class="trust-callout"><i class="fas fa-user-shield" aria-hidden="true"></i><span>More importantly, do they know when <em>NOT</em> to trust AI?</span></div>
+                                <div class="insight"><i class="fas fa-lightbulb" aria-hidden="true"></i><span>AI proficiency should increasingly become part of engineering proficiency.</span></div>
+                            </div>
+                        </section>
+
+                        <!-- ============ Fundamentals ============ -->
+                        <section>
+                            <div class="section-kicker">The fair objection</div>
+                            <h2>But shouldn't engineers still know how to code?</h2>
+
+                            <p class="absolutely">Absolutely.</p>
+
+                            <p>This is an important distinction. I'm not suggesting that software engineers should stop learning JavaScript, Python, Java or other programming languages.</p>
+
+                            <p>Understanding fundamentals is essential to:</p>
+
+                            <div class="fundamentals">
+                                <div class="fundamental reveal"><i class="fas fa-circle-xmark g-rose" aria-hidden="true"></i>Recognize incorrect implementations.</div>
+                                <div class="fundamental reveal"><i class="fas fa-bug-slash g-amber" aria-hidden="true"></i>Debug complex issues.</div>
+                                <div class="fundamental reveal"><i class="fas fa-gauge-high g-sky" aria-hidden="true"></i>Understand performance characteristics.</div>
+                                <div class="fundamental reveal"><i class="fas fa-sitemap g-violet" aria-hidden="true"></i>Evaluate architectural decisions.</div>
+                                <div class="fundamental reveal"><i class="fas fa-shield-halved g-emerald" aria-hidden="true"></i>Identify security vulnerabilities.</div>
+                                <div class="fundamental reveal"><i class="fas fa-server g-slate" aria-hidden="true"></i>Take responsibility for software running in production.</div>
+                            </div>
+
+                            <blockquote class="pullquote reveal">
+                                <i class="fas fa-quote-left" aria-hidden="true"></i>
+                                <p>You cannot effectively review code you don't understand.</p>
+                            </blockquote>
+
+                            <p>However, there is a difference between being able to write code and being able to engineer software.</p>
+
+                            <div class="not-equal reveal" role="img" aria-label="Writing code is not the same as engineering software">
+                                <span class="ne-pill ne-pill--code"><i class="fas fa-keyboard" aria-hidden="true"></i>Writing code</span>
+                                <span class="ne-sign" aria-hidden="true">&ne;</span>
+                                <span class="ne-pill ne-pill--eng"><i class="fas fa-compass-drafting" aria-hidden="true"></i>Engineering software</span>
+                            </div>
+
+                            <p>We should continue testing coding fundamentals, but perhaps stop treating coding speed and memorized implementation patterns as proxies for overall engineering ability.</p>
+                        </section>
+
+                        <!-- ============ AI-era interview ============ -->
+                        <section>
+                            <div class="section-kicker">A new format</div>
+                            <h2>What would an AI-era engineering interview look like?</h2>
+
+                            <p>Imagine a different interview format. A candidate receives a realistic product requirement and access to an AI coding assistant. They are asked to:</p>
+
+                            <ol class="interview-flow">
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-circle-question" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Clarify</span>Understand the requirement and clarify ambiguities.</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-sitemap" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Architect</span>Propose an architecture and explain their decisions.</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Accelerate</span>Use AI to accelerate implementation.</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-magnifying-glass" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Review</span>Review the generated code and identify potential issues.</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-vial" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Test</span>Write or improve tests.</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-bug" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Debug</span>Debug unexpected failures.</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-scale-balanced" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Trade-offs</span>Explain performance, scalability and maintainability trade-offs.</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-person-chalkboard" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Defend</span>Present the final solution and defend their decisions.</span></li>
+                            </ol>
+
+                            <p>The interviewer evaluates not just the final code, but the candidate's <strong>reasoning throughout the process</strong>.</p>
+
+                            <div class="table-wrap reveal">
+                                <table class="compare">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"><span class="sr-only">Aspect</span></th>
+                                            <th scope="col">Traditional coding round</th>
+                                            <th scope="col">AI-era engineering round</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Starting point</th>
+                                            <td class="old" data-label="Traditional round"><i class="fas fa-puzzle-piece"></i>A well-defined puzzle or familiar pattern</td>
+                                            <td class="new" data-label="AI-era round"><i class="fas fa-check"></i>A realistic, ambiguous product requirement</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">AI assistance</th>
+                                            <td class="old" data-label="Traditional round"><i class="fas fa-ban"></i>No external assistance</td>
+                                            <td class="new" data-label="AI-era round"><i class="fas fa-check"></i>An AI coding assistant, like on the job</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">The code</th>
+                                            <td class="old" data-label="Traditional round"><i class="fas fa-stopwatch"></i>Written from scratch, against the clock</td>
+                                            <td class="new" data-label="AI-era round"><i class="fas fa-check"></i>Generated, reviewed, tested and improved</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Debugging</th>
+                                            <td class="old" data-label="Traditional round"><i class="fas fa-minus"></i>Rarely part of the round</td>
+                                            <td class="new" data-label="AI-era round"><i class="fas fa-check"></i>Unexpected failures to investigate</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Main signal</th>
+                                            <td class="old" data-label="Traditional round"><i class="fas fa-gauge"></i>Coding speed and memorized patterns</td>
+                                            <td class="new" data-label="AI-era round"><i class="fas fa-check"></i>Reasoning, trade-offs and ownership</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Evaluated on</th>
+                                            <td class="old" data-label="Traditional round"><i class="fas fa-file-code"></i>The final code</td>
+                                            <td class="new" data-label="AI-era round"><i class="fas fa-check"></i>The final solution and the reasoning behind it</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <p>This would help us understand how someone actually works in a modern engineering environment.</p>
+
+                            <div class="judgment-reveal reveal">
+                                <p>It would also reveal something that traditional coding rounds often struggle to measure:</p>
+                                <span class="judgment-word">engineering judgment.</span>
+                            </div>
+
+                            <div id="mock-interview-ad"></div>
+                        </section>
+
+                        <!-- ============ Bigger question ============ -->
+                        <section>
+                            <div class="section-kicker">The bigger question</div>
+                            <h2>Are we hiring engineers or code generators?</h2>
+
+                            <p>For decades, the ability to translate requirements into code was a central part of a software engineer's job. That skill remains important, but the tools available to engineers have changed dramatically.</p>
+
+                            <div class="ladder">
+                                <div class="rung reveal">
+                                    <span class="rung-era">Then</span>
+                                    <i class="fas fa-microchip" aria-hidden="true"></i>
+                                    <div class="rung-what">Compilers became better</div>
+                                    <div class="rung-then">We didn't stop hiring engineers.</div>
+                                </div>
+                                <div class="rung reveal">
+                                    <span class="rung-era">Later</span>
+                                    <i class="fas fa-layer-group" aria-hidden="true"></i>
+                                    <div class="rung-what">Frameworks abstracted away low-level implementation details</div>
+                                    <div class="rung-then">We didn't stop expecting engineering fundamentals.</div>
+                                </div>
+                                <div class="rung rung--now reveal">
+                                    <span class="rung-era">Now</span>
+                                    <i class="fas fa-robot" aria-hidden="true"></i>
+                                    <div class="rung-what">AI is abstracting away an increasing amount of code production</div>
+                                    <div class="rung-then">Perhaps it's time to make a similar shift in how we evaluate talent.</div>
+                                </div>
+                            </div>
+
+                            <p>The most valuable engineers of the future may not necessarily be the ones who can write the most code in 60 minutes. They may be the ones who can:</p>
+
+                            <div class="future-traits">
+                                <span class="trait reveal"><i class="fas fa-magnifying-glass-chart" aria-hidden="true"></i>Understand the problem</span>
+                                <span class="trait reveal"><i class="fas fa-signs-post" aria-hidden="true"></i>Make the right decisions</span>
+                                <span class="trait reveal"><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>Use AI effectively</span>
+                                <span class="trait reveal"><i class="fas fa-eye" aria-hidden="true"></i>Identify what AI gets wrong</span>
+                                <span class="trait reveal"><i class="fas fa-flag-checkered" aria-hidden="true"></i>Take ownership of the outcome</span>
+                            </div>
+
+                            <div class="manifesto reveal">
+                                <p>Maybe it's time we stopped optimizing engineering interviews for the ability to write code <em>without AI</em>, and started evaluating the ability to <strong>build great software with AI</strong>.</p>
+                            </div>
+                        </section>
+
+                        <!-- ============ Discussion ============ -->
+                        <section>
+                            <div class="section-kicker">Your turn</div>
+                            <h2>I'd love to hear your perspective</h2>
+
+                            <p>If you were redesigning the software engineering interview process today:</p>
+
+                            <div class="discussion">
+                                <div class="q-card reveal"><span class="q-num g-sky">Q1</span><br>Would you still have traditional DSA and coding rounds?</div>
+                                <div class="q-card reveal"><span class="q-num g-violet">Q2</span><br>Would you allow candidates to use ChatGPT, Claude or Cursor during interviews?</div>
+                                <div class="q-card reveal"><span class="q-num g-amber">Q3</span><br>Should code review, debugging and system design carry more weight than coding speed?</div>
+                                <div class="q-card reveal"><span class="q-num g-rose">Q4</span><br>How would you distinguish a genuinely strong engineer from someone who simply knows how to prompt AI?</div>
+                            </div>
+
+                            <div class="final-q reveal">
+                                <p>Are our engineering interviews evolving as fast as the tools engineers use every day?</p>
+                                <div class="cta-row">
+                                    <a class="cta cta--primary" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://manojsatishkumar.com/blog/ai-era-software-engineering-interviews.html" target="_blank" rel="noopener"><i class="fab fa-linkedin-in" aria-hidden="true"></i>Share your take on LinkedIn</a>
+                                    <a class="cta cta--ghost" href="mailto:88manojs@gmail.com?subject=AI-era%20engineering%20interviews"><i class="fas fa-envelope" aria-hidden="true"></i>Email me your thoughts</a>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="share-strip">
+                        <span class="share-strip-label">Share this article:</span>
+                        <a href="https://twitter.com/intent/tweet?url=https://manojsatishkumar.com/blog/ai-era-software-engineering-interviews.html" target="_blank" rel="noopener" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://manojsatishkumar.com/blog/ai-era-software-engineering-interviews.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://manojsatishkumar.com/blog/ai-era-software-engineering-interviews.html" target="_blank" rel="noopener" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://api.whatsapp.com/send?text=https://manojsatishkumar.com/blog/ai-era-software-engineering-interviews.html" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <div id="footer"></div>
+    <button class="back-to-top" id="back-to-top" onclick="scrollToTop()" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        $(function () { $("#desktop-nav-bar").load("/components/desktop-nav-bar.html"); $("#footer").load("/components/footer.html"); $("#author-sidebar").load("/components/side-profile.html"); $("#mock-interview-ad").load("/components/mock-interview-ad.html"); });
+        window.addEventListener('scroll', function() { const article = document.querySelector('.article-content'); const progressBar = document.getElementById('reading-progress'); const backToTop = document.getElementById('back-to-top'); if (article) { const scrollY = window.scrollY; const articleTop = article.offsetTop; const articleHeight = article.offsetHeight; const progress = Math.min(100, Math.max(0, ((scrollY - articleTop + window.innerHeight) / articleHeight) * 100)); progressBar.style.width = progress + '%'; } backToTop.classList.toggle('visible', window.scrollY > 500); });
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        document.querySelectorAll('[data-pr-reveal]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var pr = btn.closest('.pr-review');
+                var open = pr.classList.toggle('revealed');
+                btn.setAttribute('aria-expanded', String(open));
+                btn.querySelector('span').textContent = open ? 'Hide the review' : 'Reveal the review';
+            });
+        });
+
+        if ('IntersectionObserver' in window) {
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('in-view');
+                    revealObserver.unobserve(entry.target);
+                });
+            }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+            document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
+        }
+    </script>
+</body>
+
+</html>
