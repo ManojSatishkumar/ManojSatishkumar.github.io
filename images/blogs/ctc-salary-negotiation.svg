@@ -1,117 +1,166 @@
-<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="'Poppins', 'Segoe UI', Arial, sans-serif">
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="'Poppins', 'Segoe UI', Helvetica, Arial, sans-serif">
   <defs>
-    <!-- Base background gradient -->
     <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#03110b"/>
-      <stop offset="0.5" stop-color="#062b1c"/>
-      <stop offset="1" stop-color="#02150f"/>
+      <stop offset="0" stop-color="#070b1a"/>
+      <stop offset="0.55" stop-color="#121a3d"/>
+      <stop offset="1" stop-color="#081022"/>
     </linearGradient>
-    <!-- Radial glows -->
-    <radialGradient id="glowGreen" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#22c55e" stop-opacity="0.55"/>
-      <stop offset="1" stop-color="#22c55e" stop-opacity="0"/>
+    <radialGradient id="glowCyan" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glowTeal" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#2dd4bf" stop-opacity="0.4"/>
-      <stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/>
+    <radialGradient id="glowViolet" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
     </radialGradient>
-    <!-- Title highlight gradient -->
-    <linearGradient id="hl" x1="75" y1="300" x2="620" y2="360" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#86efac"/>
-      <stop offset="0.5" stop-color="#4ade80"/>
-      <stop offset="1" stop-color="#34d399"/>
+    <linearGradient id="arrow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#ec4899"/>
     </linearGradient>
-    <!-- Bar gradients -->
-    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#4ade80"/>
-      <stop offset="1" stop-color="#15803d"/>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#f472b6"/>
     </linearGradient>
-    <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fde047"/>
-      <stop offset="1" stop-color="#eab308"/>
+    <linearGradient id="you" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#7c3aed"/>
     </linearGradient>
-    <!-- Dot grid -->
-    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
-      <circle cx="1.5" cy="1.5" r="1.5" fill="#ffffff" fill-opacity="0.05"/>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" stroke="#ffffff" stroke-opacity="0.035"/>
     </pattern>
-    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
-      <feDropShadow dx="0" dy="16" stdDeviation="22" flood-color="#000000" flood-opacity="0.45"/>
+    <clipPath id="barClip">
+      <rect x="90" y="316" width="360" height="18" rx="9"/>
+    </clipPath>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000000" flood-opacity="0.5"/>
     </filter>
   </defs>
 
-  <!-- Background -->
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#dots)"/>
-  <ellipse cx="1040" cy="120" rx="460" ry="360" fill="url(#glowGreen)"/>
-  <ellipse cx="120" cy="640" rx="420" ry="320" fill="url(#glowTeal)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <ellipse cx="980" cy="160" rx="420" ry="320" fill="url(#glowViolet)"/>
+  <ellipse cx="160" cy="620" rx="420" ry="300" fill="url(#glowCyan)"/>
+  <rect x="0" y="0" width="1200" height="6" fill="url(#topbar)"/>
 
-  <!-- Top hairline -->
-  <rect x="0" y="0" width="1200" height="6" fill="url(#hl)"/>
+  <!-- ===================== LEFT: the first offer and its CTC breakup ===================== -->
+  <g opacity="0.82">
+    <rect x="60" y="140" width="420" height="350" rx="24" fill="#ffffff" fill-opacity="0.035" stroke="#cbd5e1" stroke-opacity="0.28" stroke-width="1.5" stroke-dasharray="7 7"/>
 
-  <!-- Corner dots -->
-  <g fill="#ffffff" fill-opacity="0.35">
-    <circle cx="1112" cy="56" r="4"/>
-    <circle cx="1132" cy="56" r="4"/>
-    <circle cx="1152" cy="56" r="4"/>
-  </g>
+    <text x="90" y="182" font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="13" font-weight="700" letter-spacing="2.4" fill="#94a3b8">OFFER LETTER</text>
+    <rect x="340" y="162" width="110" height="28" rx="14" stroke="#fbbf24" stroke-opacity="0.8" stroke-width="1.5"/>
+    <text x="395" y="181" text-anchor="middle" font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="11" font-weight="700" letter-spacing="1.2" fill="#fbbf24">FIRST OFFER</text>
 
-  <!-- ===================== RIGHT VISUAL: growth chart ===================== -->
-  <g transform="translate(770,150)" filter="url(#soft)">
-    <!-- Glass panel -->
-    <rect x="0" y="0" width="360" height="360" rx="28" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.12"/>
-    <!-- baseline -->
-    <line x1="34" y1="300" x2="326" y2="300" stroke="#ffffff" stroke-opacity="0.15" stroke-width="2"/>
+    <line x1="90" y1="206" x2="450" y2="206" stroke="#ffffff" stroke-opacity="0.1"/>
 
-    <!-- ascending bars -->
-    <rect x="52"  y="228" width="46" height="72"  rx="10" fill="url(#bar)" fill-opacity="0.55"/>
-    <rect x="120" y="180" width="46" height="120" rx="10" fill="url(#bar)" fill-opacity="0.7"/>
-    <rect x="188" y="128" width="46" height="172" rx="10" fill="url(#bar)" fill-opacity="0.85"/>
-    <rect x="256" y="74"  width="46" height="226" rx="10" fill="url(#bar)"/>
+    <text x="90" y="240" font-size="14" font-weight="500" fill="#94a3b8">Annual cost to company</text>
+    <text x="88" y="292" font-size="46" font-weight="800" letter-spacing="-1" fill="#f8fafc">&#8377;18,00,000</text>
 
-    <!-- trend arrow -->
-    <polyline points="60,236 135,196 205,150 285,92" fill="none" stroke="#eafff1" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-    <polygon points="285,92 262,96 280,116" fill="#eafff1"/>
-
-    <!-- rupee coin badge -->
-    <g transform="translate(279,60)">
-      <circle r="34" fill="url(#coin)"/>
-      <circle r="34" fill="none" stroke="#ffffff" stroke-opacity="0.6" stroke-width="2"/>
-      <text x="0" y="15" font-size="42" font-weight="700" fill="#7c4a03" text-anchor="middle">&#8377;</text>
+    <!-- stacked breakup bar: basic 40, HRA 20, special 13, bonus 13, PF + gratuity 7, stock + others 7 -->
+    <g clip-path="url(#barClip)">
+      <rect x="90" y="316" width="142" height="18" fill="#38bdf8"/>
+      <rect x="234" y="316" width="70" height="18" fill="#a78bfa"/>
+      <rect x="306" y="316" width="45" height="18" fill="#f472b6"/>
+      <rect x="353" y="316" width="45" height="18" fill="#fbbf24"/>
+      <rect x="400" y="316" width="23" height="18" fill="#34d399"/>
+      <rect x="425" y="316" width="25" height="18" fill="#64748b"/>
     </g>
+
+    <g font-size="14">
+      <circle cx="96" cy="370" r="5" fill="#38bdf8"/>
+      <text x="110" y="375" fill="#cbd5e1">Basic <tspan font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="13" fill="#94a3b8">40%</tspan></text>
+      <circle cx="96" cy="398" r="5" fill="#a78bfa"/>
+      <text x="110" y="403" fill="#cbd5e1">HRA <tspan font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="13" fill="#94a3b8">20%</tspan></text>
+      <circle cx="96" cy="426" r="5" fill="#f472b6"/>
+      <text x="110" y="431" fill="#cbd5e1">Special allowance <tspan font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="13" fill="#94a3b8">13%</tspan></text>
+
+      <circle cx="286" cy="370" r="5" fill="#fbbf24"/>
+      <text x="300" y="375" fill="#cbd5e1">Bonus <tspan font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="13" fill="#94a3b8">13%</tspan></text>
+      <circle cx="286" cy="398" r="5" fill="#34d399"/>
+      <text x="300" y="403" fill="#cbd5e1">PF + gratuity <tspan font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="13" fill="#94a3b8">7%</tspan></text>
+      <circle cx="286" cy="426" r="5" fill="#64748b"/>
+      <text x="300" y="431" fill="#cbd5e1">Stock + others <tspan font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="13" fill="#94a3b8">7%</tspan></text>
+    </g>
+
+    <text x="90" y="466" font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="15" fill="#94a3b8"><tspan fill="#67e8f9">ctc</tspan> !== <tspan fill="#67e8f9">inHand</tspan> <tspan fill="#64748b">// read the breakup</tspan></text>
   </g>
 
-  <!-- ===================== LEFT TEXT ===================== -->
-  <!-- Badge pill -->
-  <g>
-    <rect x="75" y="70" width="216" height="46" rx="23" fill="#ffffff" fill-opacity="0.08" stroke="#4ade80" stroke-opacity="0.5"/>
-    <circle cx="102" cy="93" r="6" fill="#4ade80"/>
-    <text x="120" y="99" font-size="18" font-weight="600" fill="#d1fae5" letter-spacing="2">CAREER · SALARY</text>
+  <!-- ===================== The negotiation ===================== -->
+  <path d="M492 316C556 316 584 248 652 244" stroke="url(#arrow)" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"/>
+  <path d="M648 232L668 243L648 256Z" fill="#a78bfa"/>
+  <g filter="url(#soft)">
+    <circle cx="566" cy="286" r="28" fill="url(#arrow)"/>
+    <text x="566" y="295" text-anchor="middle" font-size="25" font-weight="800" fill="#ffffff">&#8377;</text>
+  </g>
+  <g fill="#f9a8d4">
+    <path d="M604 254l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/>
+    <path d="M532 322l2 4.5 4.5 2-4.5 2-2 4.5-2-4.5-4.5-2 4.5-2z" fill="#67e8f9"/>
   </g>
 
-  <!-- Tagline -->
-  <text x="77" y="176" font-size="17" font-weight="600" fill="#86efac" letter-spacing="4">THE COMPLETE NEGOTIATION PLAYBOOK</text>
-
-  <!-- Title -->
-  <text x="72" y="262" font-size="80" font-weight="700" fill="#ffffff" letter-spacing="-1">CTC Salary</text>
-  <text x="72" y="352" font-size="80" font-weight="700" fill="url(#hl)" letter-spacing="-1">Negotiation</text>
-  <text x="72" y="442" font-size="80" font-weight="700" fill="#ffffff" letter-spacing="-1">Guide</text>
-
-  <!-- Accent underline -->
-  <rect x="75" y="466" width="140" height="6" rx="3" fill="url(#hl)"/>
-
-  <!-- Meta chips -->
-  <g>
-    <rect x="75" y="500" width="150" height="40" rx="20" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12"/>
-    <text x="150" y="526" font-size="16" font-weight="600" fill="#d1fae5" text-anchor="middle">12 min read</text>
-
-    <rect x="237" y="500" width="410" height="40" rx="20" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12"/>
-    <text x="442" y="526" font-size="16" font-weight="500" fill="#a7f3d0" text-anchor="middle">Basic · HRA · PF · Gratuity · RSU · ESOP</text>
+  <!-- ===================== RIGHT: offer chat ===================== -->
+  <g filter="url(#soft)">
+    <rect x="680" y="92" width="450" height="300" rx="20" fill="#0b1224" stroke="#ffffff" stroke-opacity="0.12"/>
+    <path d="M680 112a20 20 0 0 1 20-20h410a20 20 0 0 1 20 20v28H680z" fill="#ffffff" fill-opacity="0.05"/>
+    <circle cx="704" cy="116" r="6" fill="#f87171"/>
+    <circle cx="724" cy="116" r="6" fill="#fbbf24"/>
+    <circle cx="744" cy="116" r="6" fill="#34d399"/>
+    <text x="905" y="121" text-anchor="middle" font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="13" fill="#94a3b8">offer-discussion &#8212; HR</text>
   </g>
 
-  <!-- Branding -->
-  <g transform="translate(75,580)">
-    <rect x="0" y="-2" width="52" height="30" rx="15" fill="none" stroke="#ffffff" stroke-opacity="0.35"/>
-    <text x="26" y="19" font-size="14" font-weight="700" fill="#ffffff" fill-opacity="0.7" text-anchor="middle">MSK</text>
-    <text x="66" y="19" font-size="15" font-weight="500" fill="#ffffff" fill-opacity="0.55">manojsatishkumar.com</text>
+  <g font-size="14">
+    <rect x="700" y="154" width="300" height="50" rx="14" fill="#1e293b"/>
+    <text x="716" y="173" font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="11" font-weight="700" letter-spacing="1.2" fill="#67e8f9">HR</text>
+    <text x="716" y="193" fill="#e2e8f0">Your offer: &#8377;18,00,000 CTC per annum.</text>
+
+    <rect x="782" y="216" width="328" height="72" rx="14" fill="url(#you)"/>
+    <text x="798" y="235" font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="11" font-weight="700" letter-spacing="1.2" fill="#e0f2fe">YOU</text>
+    <text x="798" y="256" fill="#ffffff">Could we explore the base salary,</text>
+    <text x="798" y="276" fill="#ffffff">performance bonus and stock options?</text>
+
+    <rect x="700" y="300" width="330" height="72" rx="14" fill="#1e293b"/>
+    <rect x="700" y="300" width="3" height="72" rx="1.5" fill="#34d399"/>
+    <text x="716" y="319" font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="11" font-weight="700" letter-spacing="1.2" fill="#67e8f9">HR</text>
+    <text x="716" y="340" fill="#e2e8f0">Base is fixed, but we can raise the</text>
+    <text x="716" y="360" fill="#e2e8f0"><tspan fill="#86efac" font-weight="600">bonus</tspan> and add <tspan fill="#86efac" font-weight="600">stock options</tspan>.</text>
+  </g>
+
+  <!-- ===================== Timing tip ===================== -->
+  <g filter="url(#soft)">
+    <rect x="640" y="414" width="272" height="96" rx="16" fill="#151d36" stroke="#fbbf24" stroke-opacity="0.45"/>
+    <circle cx="672" cy="446" r="16" fill="#fbbf24" fill-opacity="0.18"/>
+    <text x="672" y="452" text-anchor="middle" font-size="16" font-weight="800" fill="#fbbf24">!</text>
+    <text x="700" y="444" font-size="14" font-weight="700" fill="#fbbf24">Tip &#183; timing</text>
+    <text x="700" y="468" font-size="13" fill="#e2e8f0">Negotiate once the formal</text>
+    <text x="700" y="488" font-size="13" fill="#e2e8f0">offer is in hand.</text>
+  </g>
+
+  <!-- ===================== Scorecard ===================== -->
+  <g filter="url(#soft)" transform="translate(0,28)">
+    <rect x="930" y="352" width="222" height="226" rx="18" fill="#f8fafc"/>
+    <text x="952" y="386" font-size="11" font-weight="800" letter-spacing="1.8" fill="#64748b">NEGOTIATION PLAN</text>
+    <line x1="952" y1="400" x2="1130" y2="400" stroke="#e2e8f0"/>
+    <g font-size="14" font-weight="600">
+      <circle cx="962" cy="424" r="9" fill="#e2e8f0"/>
+      <path d="M958 420l8 8M966 420l-8 8" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+      <text x="980" y="429" fill="#94a3b8">Accept first offer</text>
+      <line x1="980" y1="424" x2="1094" y2="424" stroke="#94a3b8" stroke-width="1.5"/>
+
+      <circle cx="962" cy="456" r="9" fill="#22c55e"/>
+      <path d="M957.5 456l3 3 6-6" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="980" y="461" fill="#0f172a">Market research</text>
+
+      <circle cx="962" cy="488" r="9" fill="#22c55e"/>
+      <path d="M957.5 488l3 3 6-6" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="980" y="493" fill="#0f172a">Bonus &amp; stock</text>
+
+      <circle cx="962" cy="520" r="9" fill="#22c55e"/>
+      <path d="M957.5 520l3 3 6-6" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="980" y="525" fill="#0f172a">Flexible work</text>
+
+      <circle cx="962" cy="552" r="9" fill="#8b5cf6"/>
+      <path d="M957.5 552l3 3 6-6" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="980" y="557" fill="#0f172a">Bottom line set</text>
+    </g>
   </g>
 </svg>

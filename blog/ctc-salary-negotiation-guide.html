@@ -36,15 +36,15 @@
         "author": { "@type": "Person", "name": "Manoj Satishkumar" },
         "publisher": { "@type": "Organization", "name": "manojsatishkumar.com", "logo": { "@type": "ImageObject", "url": "https://manojsatishkumar.com/images/thumbnail.jpg" } },
         "datePublished": "2026-01-04",
-        "dateModified": "2026-01-04",
+        "dateModified": "2026-10-31",
         "description": "Comprehensive guide on negotiating your CTC (Cost to Company) salary in product-based companies. Understand salary components and negotiate effectively."
     }
     </script>
-    
+
     <link rel="shortcut icon" href="/images/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -55,81 +55,316 @@
         .nav-spacer { height: 80px; }
         .blog-layout { display: grid; grid-template-columns: 350px 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
         .author-sidebar { position: sticky; top: 100px; height: fit-content; }
-        .author-card { background: var(--color-surface); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-md); border: 1px solid var(--color-border); }
-        .author-avatar { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; display: block; border: 3px solid var(--color-border); }
-        .author-name { font-size: 1.25rem; font-weight: 700; text-align: center; margin-bottom: 4px; }
-        .author-title { font-size: 0.875rem; color: var(--color-text-muted); text-align: center; margin-bottom: 4px; }
-        .author-company { font-size: 0.8rem; color: var(--color-text-muted); text-align: center; margin-bottom: 16px; }
-        .author-stats { display: flex; flex-direction: column; gap: 8px; padding: 16px 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); margin-bottom: 16px; }
-        .author-stat { display: flex; align-items: center; gap: 10px; font-size: 0.875rem; color: var(--color-text-muted); }
-        .author-stat i { width: 20px; text-align: center; }
-        .author-social { display: flex; justify-content: center; gap: 8px; }
-        .author-social a { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.9rem; transition: transform 0.2s; }
-        .author-social a:hover { transform: translateY(-2px); }
-        .author-social .linkedin { background: #0077b5; } .author-social .youtube { background: #ff0000; } .author-social .twitter { background: #1da1f2; } .author-social .github { background: #333; } .author-social .email { background: #10b981; }
         .article-container { min-width: 0; }
         .article-content { background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--color-border); overflow: hidden; animation: fadeInUp 0.6s ease-out; }
-        .article-hero { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+        .article-hero { width: 100%; aspect-ratio: 1200/630; object-fit: cover; display: block; }
         .article-body { padding: 40px; }
         .article-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--color-border); }
         .article-category { display: inline-block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-accent); background: rgba(14, 165, 233, 0.1); padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
-        .article-title { font-family: var(--font-display); font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 16px; }
-        .article-meta { display: flex; align-items: center; gap: 16px; color: var(--color-text-muted); font-size: 0.9rem; }
+        .article-title { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.02em; }
+        .article-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; color: var(--color-text-muted); font-size: 0.9rem; }
         .article-meta-item { display: flex; align-items: center; gap: 6px; }
-        .article-prose { font-family: var(--font-display); font-size: 1.2rem; line-height: 1.85; }
-        .article-prose p { margin-bottom: 1.5em; }
+        .article-prose { font-family: var(--font-display); font-size: 1.15rem; line-height: 1.85; }
+        .article-prose p { margin-bottom: 1.4em; }
         .article-prose strong { font-weight: 600; }
         .article-prose em { font-style: italic; }
         .article-prose a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
-        .article-prose h2 { font-family: var(--font-sans); font-size: 1.75rem; font-weight: 700; margin: 2.5em 0 1em; color: var(--color-text); border-bottom: 2px solid var(--color-border); padding-bottom: 0.5em; }
-        .article-prose h3 { font-family: var(--font-sans); font-size: 1.4rem; font-weight: 700; margin: 2em 0 0.75em; color: var(--color-text); }
-        .article-prose h4 { font-family: var(--font-sans); font-size: 1.2rem; font-weight: 700; margin: 1.5em 0 0.5em; color: var(--color-accent); }
-        .article-prose ul, .article-prose ol { margin-bottom: 1.5em; padding-left: 1.5em; }
-        .article-prose li { margin-bottom: 0.75em; }
-        .article-prose .intro-box { background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(14, 165, 233, 0.03) 100%); border: 1px solid rgba(14, 165, 233, 0.2); padding: 1.5em; border-radius: var(--radius-md); margin-bottom: 2em; }
-        .article-prose .tip-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left: 4px solid #22c55e; padding: 1.5em; border-radius: var(--radius-md); margin: 2em 0; }
-        .article-prose .warning-box { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border-left: 4px solid #ef4444; padding: 1.5em; border-radius: var(--radius-md); margin: 2em 0; }
-        .article-prose .info-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-left: 4px solid #3b82f6; padding: 1.5em; border-radius: var(--radius-md); margin: 2em 0; }
-        .article-prose .salary-table { width: 100%; border-collapse: collapse; margin: 2em 0; font-family: var(--font-sans); font-size: 1rem; }
-        .article-prose .salary-table th, .article-prose .salary-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--color-border); }
-        .article-prose .salary-table th { background: var(--color-bg); font-weight: 600; color: var(--color-text); }
-        .article-prose .salary-table tr:hover { background: rgba(14, 165, 233, 0.03); }
-        .article-prose .salary-table .amount { font-weight: 600; color: #166534; }
-        .article-prose .conversation-box { background: var(--color-bg); border-radius: var(--radius-md); padding: 1.5em; margin: 2em 0; border: 1px solid var(--color-border); }
-        .article-prose .conversation-box .speaker { font-weight: 700; color: var(--color-accent); margin-bottom: 0.5em; display: block; }
-        .article-prose .conversation-box .dialogue { font-style: italic; margin-bottom: 1em; padding-left: 1em; border-left: 3px solid var(--color-border); }
-        .article-prose .component-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5em; margin: 1.5em 0; box-shadow: var(--shadow-md); }
-        .article-prose .component-card h4 { margin-top: 0; border-left: 4px solid #166534; padding-left: 0.75em; color: #166534; }
-        .article-prose .conclusion { background: linear-gradient(135deg, rgba(22, 101, 52, 0.08) 0%, rgba(22, 101, 52, 0.03) 100%); border: 1px solid rgba(22, 101, 52, 0.2); padding: 2em; border-radius: var(--radius-md); margin-top: 2em; }
+        .article-prose h2 { font-family: var(--font-sans); font-size: 1.9rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; margin: 0 0 0.8em; color: var(--color-text); }
         .share-strip { display: flex; align-items: center; gap: 12px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--color-border); }
         .share-strip-label { font-size: 0.875rem; font-weight: 600; color: var(--color-text-muted); }
         .share-strip a { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--color-bg); color: var(--color-text-muted); border: 1px solid var(--color-border); transition: all 0.2s; }
         .share-strip a:hover { background: var(--color-accent); color: white; border-color: var(--color-accent); }
-        .mobile-author { display: none; background: var(--color-surface); border-radius: var(--radius-md); margin-bottom: 24px; border: 1px solid var(--color-border); overflow: hidden; }
-        .mobile-author-header { display: flex; align-items: center; gap: 12px; padding: 16px; cursor: pointer; }
-        .mobile-author-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
-        .mobile-author-info { flex: 1; } .mobile-author-name { font-weight: 600; font-size: 0.95rem; } .mobile-author-title { font-size: 0.8rem; color: var(--color-text-muted); }
-        .mobile-author-toggle { width: 32px; height: 32px; border-radius: 50%; background: var(--color-bg); display: flex; align-items: center; justify-content: center; transition: transform 0.3s; }
-        .mobile-author.expanded .mobile-author-toggle { transform: rotate(180deg); }
-        .mobile-author-details { max-height: 0; overflow: hidden; transition: max-height 0.3s; }
-        .mobile-author.expanded .mobile-author-details { max-height: 400px; }
-        .mobile-author-details-inner { padding: 0 16px 16px; }
-        .mobile-author-social { display: flex; gap: 8px; margin-top: 12px; }
-        .mobile-author-social a { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.8rem; }
-        @media (max-width: 900px) { .blog-layout { grid-template-columns: 1fr; padding: 20px 16px; gap: 0; } .author-sidebar { display: none; } .mobile-author { display: block; } .nav-spacer { height: 60px; } .article-body { padding: 24px; } .article-title { font-size: 1.75rem; } .article-prose { font-size: 1.1rem; } .article-prose h2 { font-size: 1.5rem; } .article-prose h3 { font-size: 1.25rem; } .article-prose .salary-table { font-size: 0.9rem; } .article-prose .salary-table th, .article-prose .salary-table td { padding: 8px 10px; } }
+        @media (max-width: 900px) { .blog-layout { grid-template-columns: 1fr; padding: 20px 16px; gap: 0; } .author-sidebar { display: none; } .nav-spacer { height: 60px; } .article-body { padding: 24px; } .article-title { font-size: 1.75rem; } .article-prose { font-size: 1.05rem; } .article-prose h2 { font-size: 1.5rem; } }
         @media (max-width: 480px) { .article-body { padding: 20px 16px; } .article-title { font-size: 1.5rem; } .article-prose { font-size: 1rem; } .share-strip { flex-wrap: wrap; } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .reading-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #166534, #22c55e); z-index: 9999; }
-        .back-to-top { position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; border-radius: 50%; background: #166534; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: var(--shadow-lg); opacity: 0; visibility: hidden; transition: all 0.3s; cursor: pointer; z-index: 100; border: none; }
+        .reading-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #22d3ee, #8b5cf6, #ec4899); z-index: 9999; }
+        .back-to-top { position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; border-radius: 50%; background: var(--color-accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: var(--shadow-lg); opacity: 0; visibility: hidden; transition: all 0.3s; cursor: pointer; z-index: 100; border: none; }
         .back-to-top.visible { opacity: 1; visibility: visible; }
+    </style>
+
+    <style>
+        /* ================= Article-specific design ================= */
+        :root {
+            --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+            --ink-strong: #0f172a;
+            --c-sky: #0284c7;
+            --c-violet: #7c3aed;
+            --c-amber: #b45309;
+            --c-rose: #e11d48;
+            --c-emerald: #059669;
+            --grad-brand: linear-gradient(90deg, #0ea5e9 0%, #8b5cf6 55%, #ec4899 100%);
+            --grad-fixed: linear-gradient(90deg, #0ea5e9, #8b5cf6);
+            --grad-retire: linear-gradient(90deg, #10b981, #34d399);
+            --grad-variable: linear-gradient(90deg, #f59e0b, #ec4899);
+        }
+
+        html[data-theme="dark"] {
+            --ink-strong: #f1f5f9;
+            --c-sky: #38bdf8;
+            --c-violet: #a78bfa;
+            --c-amber: #fbbf24;
+            --c-rose: #fb7185;
+            --c-emerald: #34d399;
+            --grad-brand: linear-gradient(90deg, #38bdf8 0%, #a78bfa 55%, #f472b6 100%);
+        }
+
+        .title-hl { background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        /* Sections */
+        .article-prose section { margin-top: 3.4em; }
+        .section-kicker { display: inline-flex; align-items: center; gap: 0.6em; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-violet); margin-bottom: 0.7em; }
+        .section-kicker::before { content: ""; width: 26px; height: 2px; background: var(--grad-brand); border-radius: 2px; }
+
+        /* Opening */
+        .article-prose .lede { font-size: 1.3rem; line-height: 1.75; color: var(--ink-strong); }
+        .article-prose .lede::first-letter { font-family: var(--font-serif); float: left; font-size: 4.6em; line-height: 0.8; font-weight: 700; margin: 0.06em 0.12em 0 0; background: linear-gradient(135deg, #0ea5e9, #8b5cf6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        .tldr { border: 1px solid var(--color-border); border-radius: 18px; padding: 1.4em 1.6em; margin: 0 0 1em; background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), rgba(139, 92, 246, 0.08)); }
+        .tldr-label { display: flex; align-items: center; gap: 0.5em; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-violet); margin-bottom: 0.9em; }
+        .article-prose .tldr ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75em; }
+        .article-prose .tldr li { display: flex; gap: 0.8em; margin: 0; font-size: 1rem; line-height: 1.6; }
+        .tldr li i { color: var(--c-sky); margin-top: 0.32em; }
+
+        .tile-icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; font-size: 1.1rem; color: #fff; flex-shrink: 0; }
+        .g-sky { background: linear-gradient(135deg, #38bdf8, #0284c7); }
+        .g-violet { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+        .g-amber { background: linear-gradient(135deg, #fbbf24, #d97706); }
+        .g-rose { background: linear-gradient(135deg, #fb7185, #e11d48); }
+        .g-emerald { background: linear-gradient(135deg, #34d399, #059669); }
+        .g-slate { background: linear-gradient(135deg, #94a3b8, #475569); }
+        .g-indigo { background: linear-gradient(135deg, #818cf8, #4f46e5); }
+        .g-pink { background: linear-gradient(135deg, #f472b6, #db2777); }
+
+        .statement { font-family: var(--font-sans); font-weight: 800; font-size: clamp(1.4rem, 2.8vw, 1.85rem); letter-spacing: -0.02em; line-height: 1.25; margin: 0.4em 0 0; color: var(--ink-strong); }
+        .statement span { background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        /* CTC equation */
+        .ctc-equation { display: grid; grid-template-columns: 1.1fr auto 1fr auto 1fr auto 1fr; align-items: stretch; gap: 10px; margin: 1.6em 0 1.8em; }
+        .eq-total { display: flex; flex-direction: column; justify-content: center; padding: 1em; border-radius: 18px; color: #f8fafc; background: radial-gradient(circle at 80% 0%, rgba(236, 72, 153, 0.4), transparent 55%), linear-gradient(160deg, #1e1b4b, #0b1224); box-shadow: 0 16px 34px rgba(15, 23, 42, 0.25); }
+        .eq-label { font-family: var(--font-mono); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.35; color: #67e8f9; }
+        .eq-big { font-family: var(--font-serif); font-size: 2.3rem; font-weight: 700; line-height: 1.1; }
+        .eq-op { align-self: center; font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; line-height: 1; color: var(--c-violet); }
+        .eq-part { display: flex; flex-direction: column; gap: 0.25em; padding: 1em 0.9em; border-radius: 18px; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); font-size: 0.84rem; line-height: 1.45; color: var(--color-text-muted); }
+        .eq-part strong { font-size: 0.95rem; line-height: 1.3; color: var(--ink-strong); }
+        .eq-part .tile-icon { width: 38px; height: 38px; font-size: 1rem; margin-bottom: 0.45em; }
+
+        /* Component tiles */
+        .article-prose .comp-tiles { list-style: none; padding: 0; margin: 1.4em 0 0.6em; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+        .article-prose .comp-tiles li { position: relative; display: grid; grid-template-columns: 42px 1fr; gap: 14px; align-items: start; margin: 0; padding: 1em 1.1em; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); box-shadow: var(--shadow-md); font-size: 0.92rem; line-height: 1.5; color: var(--color-text-muted); }
+        .tile-name { display: block; margin-bottom: 0.15em; padding-right: 1.6em; font-size: 0.98rem; font-weight: 700; line-height: 1.3; color: var(--ink-strong); }
+        .tile-num { position: absolute; top: 10px; right: 12px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted); }
+
+        /* Research */
+        .remember { margin: 1.4em 0 0.6em; padding: 1.4em 1.4em 1.5em; border-radius: 20px; border: 1px solid color-mix(in srgb, var(--c-emerald) 30%, transparent); background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(14, 165, 233, 0.07)); }
+        .remember-label { display: flex; align-items: center; gap: 0.5em; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-emerald); margin-bottom: 0.9em; }
+        .tool-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 1.1em; }
+        .tool-chip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--color-border); background: var(--color-surface); font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: var(--ink-strong); }
+        .tool-chip i { color: var(--c-emerald); }
+        .fundamentals { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+        .fundamentals--two { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin: 1em 0 1.6em; }
+        .fundamental { display: flex; align-items: flex-start; gap: 12px; padding: 0.9em 1em; border-radius: 14px; border: 1px solid var(--color-border); background: var(--color-surface); font-size: 0.95rem; font-weight: 500; line-height: 1.5; color: var(--ink-strong); }
+        .fundamental > i { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; flex-shrink: 0; color: #fff; font-size: 0.95rem; }
+
+        /* Timing flow */
+        .article-prose .flow { list-style: none; padding: 0; margin: 1.4em 0 1.4em; position: relative; counter-reset: step; }
+        .flow::before { content: ""; position: absolute; left: 23px; top: 10px; bottom: 10px; width: 2px; background: linear-gradient(180deg, #22d3ee, #8b5cf6, #ec4899); opacity: 0.6; }
+        .article-prose .flow li { position: relative; display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start; margin: 0 0 1em; counter-increment: step; }
+        .flow-icon { position: relative; z-index: 1; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--color-surface); border: 2px solid rgba(139, 92, 246, 0.5); color: var(--c-violet); font-size: 1rem; box-shadow: var(--shadow-md); }
+        .flow-text { padding-top: 0.35em; font-size: 1rem; line-height: 1.55; }
+        .flow-step { display: block; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+        .flow-step::before { content: "Step " counter(step) " / "; }
+
+        /* Beyond the base */
+        .levers { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 1.2em 0 1.4em; }
+        .lever { padding: 1.2em 1.2em 1.3em; border-radius: 20px; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); }
+        .lever--money { border-color: rgba(245, 158, 11, 0.45); background: linear-gradient(180deg, rgba(245, 158, 11, 0.08), transparent 45%), var(--color-surface); }
+        .lever--perks { border-color: rgba(139, 92, 246, 0.45); background: linear-gradient(180deg, rgba(139, 92, 246, 0.08), transparent 45%), var(--color-surface); }
+        .lever-head { display: flex; align-items: center; gap: 0.8em; margin-bottom: 0.9em; }
+        .lever-title { font-weight: 800; font-size: 1.05rem; line-height: 1.2; color: var(--ink-strong); }
+        .lever-tag { font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text-muted); letter-spacing: 0.04em; }
+        .lever-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .lever-chip { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 10px; background: var(--color-surface); border: 1px solid var(--color-border); font-size: 0.88rem; font-weight: 600; line-height: 1.35; color: var(--ink-strong); }
+        .lever--money .lever-chip i { color: var(--c-amber); }
+        .lever--perks .lever-chip i { color: var(--c-violet); }
+        .insight { display: flex; gap: 0.8em; align-items: flex-start; margin: 1em 0; padding: 0.9em 1.1em; border-radius: 14px; background: rgba(148, 163, 184, 0.1); font-size: 0.98rem; line-height: 1.6; }
+        .insight i { color: var(--c-amber); margin-top: 0.3em; }
+
+        /* Sample breakup */
+        .ctc-hero { position: relative; overflow: hidden; margin: 1.6em 0; padding: 1.8em 1.8em 1.6em; border-radius: 24px; color: #f8fafc; background: radial-gradient(circle at 88% 12%, rgba(139, 92, 246, 0.45), transparent 45%), radial-gradient(circle at 8% 100%, rgba(34, 211, 238, 0.28), transparent 45%), linear-gradient(135deg, #0b1224, #1e1b4b); box-shadow: 0 24px 50px rgba(15, 23, 42, 0.25); }
+        .ctc-hero::after { content: "\20B9"; position: absolute; right: 0.2em; top: -0.12em; font-family: var(--font-sans); font-size: 10rem; font-weight: 700; line-height: 1; color: rgba(255, 255, 255, 0.06); }
+        .ctc-hero-label { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #67e8f9; }
+        .ctc-amount { position: relative; z-index: 1; margin: 0.15em 0 0.9em; font-family: var(--font-sans); font-size: clamp(2.2rem, 5.5vw, 3.2rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+        .ctc-amount small { margin-left: 0.4em; font-size: 0.32em; font-weight: 500; letter-spacing: 0; color: #cbd5e1; }
+        .ctc-bar { display: flex; gap: 3px; height: 18px; border-radius: 999px; overflow: hidden; background: rgba(255, 255, 255, 0.08); }
+        .ctc-seg { display: block; height: 100%; }
+        .ctc-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-top: 1.2em; }
+        .ctc-group { padding: 0.8em 0.9em; border-radius: 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .ctc-group-name { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 600; line-height: 1.3; color: #e2e8f0; }
+        .ctc-group-sum { margin-top: 0.3em; font-family: var(--font-mono); font-size: 1.05rem; font-weight: 700; color: #fff; }
+        .ctc-group-sum span { margin-left: 0.4em; font-size: 0.78rem; font-weight: 600; color: #94a3b8; }
+        .ctc-group-of { margin-top: 0.15em; font-size: 0.76rem; line-height: 1.4; color: #94a3b8; }
+        .sw { width: 12px; height: 12px; border-radius: 4px; flex-shrink: 0; display: inline-block; }
+        .sw--fixed { background: var(--grad-fixed); }
+        .sw--retire { background: var(--grad-retire); }
+        .sw--variable { background: var(--grad-variable); }
+
+        .table-wrap { margin: 1.6em 0; overflow-x: auto; border-radius: 18px; border: 1px solid var(--color-border); box-shadow: var(--shadow-md); }
+        .ctc-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; line-height: 1.5; background: var(--color-surface); }
+        .ctc-table th, .ctc-table td { padding: 13px 16px; text-align: left; vertical-align: middle; border-bottom: 1px solid var(--color-border); }
+        .ctc-table thead th { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; color: var(--c-violet); background: rgba(139, 92, 246, 0.1); }
+        .ctc-table tbody th { font-weight: 600; color: var(--ink-strong); white-space: nowrap; }
+        .ctc-table tbody th .sw { margin-right: 10px; vertical-align: -1px; }
+        .ctc-table tbody tr:hover { background: rgba(14, 165, 233, 0.04); }
+        .ctc-table .amount { font-family: var(--font-mono); font-weight: 700; color: var(--c-emerald); white-space: nowrap; }
+        .ctc-table .note { color: var(--color-text-muted); }
+        .ctc-table tfoot th, .ctc-table tfoot td { border-bottom: none; font-weight: 800; color: var(--ink-strong); background: rgba(139, 92, 246, 0.07); }
+        .ctc-table tfoot .amount { color: var(--c-violet); }
+
+        /* Each component */
+        .comp-grid { display: grid; gap: 16px; margin: 1.4em 0; }
+        .comp { --pillar: var(--c-sky); position: relative; padding: 1.5em 1.6em 1.4em; border-radius: 22px; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); overflow: hidden; }
+        .comp::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 5px; background: var(--pillar); }
+        .comp--violet { --pillar: var(--c-violet); }
+        .comp--amber { --pillar: var(--c-amber); }
+        .comp--rose { --pillar: var(--c-rose); }
+        .comp--emerald { --pillar: var(--c-emerald); }
+        .comp--slate { --pillar: #64748b; }
+        .comp-head { display: flex; align-items: center; gap: 0.85em; margin-bottom: 0.8em; padding-right: 2em; }
+        .article-prose .comp-title { margin: 0; font-family: var(--font-sans); font-size: 1.12rem; font-weight: 800; line-height: 1.25; color: var(--ink-strong); }
+        .comp-amount { display: inline-block; margin-top: 0.2em; font-family: var(--font-mono); font-size: 0.86rem; font-weight: 700; color: var(--pillar); }
+        .comp-num { position: absolute; top: 14px; right: 16px; font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; line-height: 1; color: var(--pillar); opacity: 0.35; }
+        .article-prose .comp p { margin: 0 0 0.9em; font-size: 0.98rem; line-height: 1.7; }
+        .concept-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .concept-chip { padding: 4px 11px; border-radius: 999px; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600; color: var(--pillar); background: color-mix(in srgb, var(--pillar) 12%, transparent); border: 1px solid color-mix(in srgb, var(--pillar) 30%, transparent); }
+
+        .ripple { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0.2em 0 1em; padding: 1em; border-radius: 16px; background: color-mix(in srgb, var(--c-sky) 7%, transparent); border: 1px dashed color-mix(in srgb, var(--c-sky) 40%, transparent); }
+        .ripple-src { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 12px; color: #fff; background: linear-gradient(135deg, #38bdf8, #0284c7); font-family: var(--font-mono); font-size: 0.86rem; font-weight: 700; }
+        .ripple > i { color: var(--color-text-muted); }
+        .ripple-out { display: flex; flex-wrap: wrap; gap: 8px; }
+        .ripple-item { padding: 8px 12px; border-radius: 12px; background: var(--color-surface); border: 1px solid var(--color-border); font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; line-height: 1.35; color: var(--ink-strong); }
+        .ripple-item b { color: var(--c-sky); }
+
+        /* RSUs vs ESOPs */
+        .candidates { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: 14px; margin: 1.6em 0; }
+        .candidate { border-radius: 20px; padding: 1.4em 1.4em 1.5em; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); }
+        .candidate--rsu { border-color: rgba(14, 165, 233, 0.45); background: linear-gradient(180deg, rgba(14, 165, 233, 0.08), transparent 40%), var(--color-surface); }
+        .candidate--esop { border-color: rgba(139, 92, 246, 0.45); background: linear-gradient(180deg, rgba(139, 92, 246, 0.08), transparent 40%), var(--color-surface); }
+        .candidate-head { display: flex; align-items: center; gap: 0.8em; margin-bottom: 0.9em; }
+        .candidate-avatar { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; font-size: 1.2rem; color: #fff; flex-shrink: 0; }
+        .article-prose .candidate-name { margin: 0; font-family: var(--font-sans); font-weight: 800; font-size: 1.2rem; line-height: 1.2; color: var(--ink-strong); }
+        .candidate-tag { font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text-muted); letter-spacing: 0.04em; }
+        .article-prose .candidate p { margin: 0 0 1em; font-size: 0.96rem; line-height: 1.65; }
+        .feature-label { margin-bottom: 0.6em; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+        .article-prose .candidate ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.7em; }
+        .article-prose .candidate li { margin: 0; display: grid; grid-template-columns: 18px 1fr; gap: 0.7em; font-size: 0.94rem; line-height: 1.5; }
+        .candidate li strong { color: var(--ink-strong); }
+        .candidate--rsu li i { color: var(--c-sky); margin-top: 0.3em; }
+        .candidate--esop li i { color: var(--c-violet); margin-top: 0.3em; }
+        .vs { align-self: center; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; color: #fff; background: var(--grad-brand); box-shadow: 0 10px 24px rgba(139, 92, 246, 0.35); }
+
+        /* The conversation */
+        .chat { margin: 1.6em 0 1.2em; border-radius: 22px; overflow: hidden; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: 0 24px 50px rgba(15, 23, 42, 0.12); }
+        .chat-bar { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--color-border); background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), rgba(139, 92, 246, 0.08)); }
+        .chat-avatar { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 1rem; flex-shrink: 0; }
+        .chat-name { font-weight: 700; font-size: 0.98rem; line-height: 1.2; color: var(--ink-strong); }
+        .chat-status { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.74rem; color: var(--color-text-muted); }
+        .chat-status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+        .chat-bar > i { margin-left: auto; color: var(--color-text-muted); }
+        .chat-body { display: flex; flex-direction: column; gap: 14px; padding: 1.4em 1.2em 1.3em; background-image: radial-gradient(rgba(148, 163, 184, 0.2) 1px, transparent 1px); background-size: 18px 18px; }
+        .msg { max-width: 84%; padding: 0.75em 1.05em 0.85em; border-radius: 18px; font-size: 0.98rem; line-height: 1.6; }
+        .article-prose .msg p { margin: 0; }
+        .msg-who { display: block; margin-bottom: 0.2em; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+        .msg--you { align-self: flex-end; color: #fff; background: linear-gradient(135deg, #0ea5e9, #7c3aed); border-bottom-right-radius: 6px; box-shadow: 0 10px 24px rgba(124, 58, 237, 0.25); }
+        .msg--you .msg-who { color: #e0f2fe; }
+        .msg--you strong { padding: 0 0.3em; border-radius: 6px; background: rgba(255, 255, 255, 0.2); font-weight: 700; }
+        .msg--hr { align-self: flex-start; color: var(--ink-strong); background: var(--color-surface); border: 1px solid var(--color-border); border-bottom-left-radius: 6px; box-shadow: var(--shadow-md); }
+        .msg--hr .msg-who { color: var(--c-violet); }
+        .chat-outcome { align-self: center; display: inline-flex; align-items: center; gap: 8px; margin-top: 0.3em; padding: 8px 14px; border-radius: 999px; background: color-mix(in srgb, var(--c-emerald) 12%, var(--color-surface)); border: 1px solid color-mix(in srgb, var(--c-emerald) 30%, transparent); font-size: 0.85rem; font-weight: 600; line-height: 1.4; color: var(--ink-strong); }
+        .chat-outcome i { color: var(--c-emerald); }
+
+        /* Tips */
+        .phrases { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 1em 0 1.6em; }
+        .phrase { position: relative; padding: 1.1em 1.3em 1.2em; border-radius: 18px; border: 2px solid transparent; background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box, var(--grad-brand) border-box; font-family: var(--font-serif); font-size: 1.22rem; font-style: italic; font-weight: 600; line-height: 1.4; color: var(--ink-strong); }
+        .phrase i { display: block; margin-bottom: 0.35em; font-size: 1rem; color: var(--c-violet); opacity: 0.7; }
+        .walk-away { display: flex; align-items: center; gap: 1em; margin: 1.6em 0 1em; padding: 1em 1.2em; border-radius: 16px; background: linear-gradient(135deg, rgba(244, 63, 94, 0.1), rgba(139, 92, 246, 0.1)); font-weight: 700; font-size: 1.05rem; line-height: 1.5; color: var(--ink-strong); }
+        .walk-away i { font-size: 1.6rem; color: var(--c-rose); }
+        .walk-away em { font-style: normal; color: var(--c-rose); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; }
+        .email-card { margin: 1em 0 0.4em; border-radius: 18px; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); overflow: hidden; }
+        .email-head { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--color-border); background: rgba(148, 163, 184, 0.08); }
+        .email-head .tile-icon { width: 36px; height: 36px; font-size: 0.95rem; border-radius: 10px; }
+        .email-meta { font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.5; color: var(--color-text-muted); }
+        .email-meta b { color: var(--ink-strong); }
+        .email-when { margin-left: auto; padding: 3px 10px; border-radius: 999px; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-emerald); background: color-mix(in srgb, var(--c-emerald) 12%, transparent); white-space: nowrap; }
+        .article-prose .email-card p { margin: 0; padding: 1em 1.2em 1.1em; font-size: 1rem; line-height: 1.65; }
+
+        /* Wrapping up */
+        .future-traits { display: flex; flex-wrap: wrap; gap: 10px; margin: 0.4em 0 1.6em; }
+        .trait { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; font-size: 0.9rem; font-weight: 600; color: var(--ink-strong); background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--shadow-md); }
+        .trait i { color: var(--c-sky); }
+        .manifesto { position: relative; overflow: hidden; margin: 2em 0; padding: 2.2em 2em; border-radius: 24px; text-align: center; color: #f8fafc; background: radial-gradient(circle at 15% 15%, rgba(34, 211, 238, 0.35), transparent 40%), radial-gradient(circle at 90% 90%, rgba(236, 72, 153, 0.35), transparent 45%), linear-gradient(135deg, #0b1224, #1e1b4b 60%, #0b1224); box-shadow: 0 28px 60px rgba(15, 23, 42, 0.3); }
+        .article-prose .manifesto p { margin: 0; font-family: var(--font-serif); font-size: clamp(1.3rem, 2.6vw, 1.7rem); font-weight: 500; line-height: 1.45; }
+        .manifesto strong { font-weight: 700; color: #67e8f9; }
+        .manifesto em { font-style: italic; color: #f9a8d4; }
+        .sign-off { text-align: center; margin: 1.4em 0 0.4em; }
+        .sign-off-word { font-family: var(--font-serif); font-size: clamp(2.2rem, 5.5vw, 3.4rem); font-weight: 700; font-style: italic; line-height: 1.1; background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+        .final-q { margin: 1.6em 0 0; padding: 1.8em; border-radius: 22px; text-align: center; border: 2px solid transparent; background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box, var(--grad-brand) border-box; }
+        .article-prose .final-q p { margin: 0 0 1.1em; font-family: var(--font-serif); font-size: clamp(1.3rem, 2.6vw, 1.6rem); font-weight: 600; line-height: 1.4; color: var(--ink-strong); }
+        .cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .article-prose .cta { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 999px; font-size: 0.95rem; font-weight: 700; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+        .article-prose .cta:hover { transform: translateY(-2px); }
+        .article-prose .cta--primary { background: #0a66c2; color: #fff; box-shadow: 0 10px 24px rgba(10, 102, 194, 0.3); }
+        .article-prose .cta--ghost { background: transparent; color: var(--ink-strong); border: 1px solid var(--color-border); }
+
+        /* Scroll reveal: only hides content when JS has confirmed it can show it again */
+        .js-reveal .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .js-reveal .reveal.in-view { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .js-reveal .reveal { opacity: 1; transform: none; transition: none; } }
+
+        @media (max-width: 760px) {
+            .ctc-equation { grid-template-columns: 1fr; gap: 6px; }
+            .eq-op { justify-self: center; }
+            .eq-total { flex-direction: row; align-items: baseline; justify-content: space-between; gap: 1em; }
+            .eq-part { display: grid; grid-template-columns: 38px 1fr; column-gap: 12px; align-items: center; padding: 0.8em 0.9em; }
+            .eq-part .tile-icon { grid-row: span 2; margin: 0; }
+            .candidates { grid-template-columns: 1fr; }
+            .vs { justify-self: center; }
+            .ctc-hero, .manifesto { padding: 1.6em 1.3em; }
+            .msg { max-width: 92%; }
+        }
+
+        /* A sideways-scrolling table would hide the notes, so each row becomes a card */
+        @media (max-width: 600px) {
+            .table-wrap { overflow: visible; }
+            .ctc-table thead { display: none; }
+            .ctc-table tr { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 12px 14px; border-bottom: 1px solid var(--color-border); }
+            .ctc-table tbody th, .ctc-table td, .ctc-table tfoot th { display: block; padding: 0; border: none; white-space: normal; }
+            .ctc-table .note { grid-column: 1 / -1; font-size: 0.86rem; padding-left: 22px; }
+            .ctc-table tfoot tr { border-bottom: none; background: rgba(139, 92, 246, 0.07); }
+            .ctc-table tfoot th, .ctc-table tfoot td { background: none; }
+        }
+
+        /* Dark theme: surfaces and text come from the shared vars; these are the
+           pieces with light-only tints */
+        html[data-theme="dark"] .comp-tiles li,
+        html[data-theme="dark"] .eq-part,
+        html[data-theme="dark"] .lever,
+        html[data-theme="dark"] .comp,
+        html[data-theme="dark"] .candidate,
+        html[data-theme="dark"] .msg--hr,
+        html[data-theme="dark"] .email-card,
+        html[data-theme="dark"] .trait { box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35); }
+        html[data-theme="dark"] .chat,
+        html[data-theme="dark"] .ctc-hero { box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5); }
+        html[data-theme="dark"] .candidate--rsu { background: linear-gradient(180deg, rgba(56, 189, 248, 0.12), transparent 45%), var(--color-surface); }
+        html[data-theme="dark"] .candidate--esop { background: linear-gradient(180deg, rgba(167, 139, 250, 0.12), transparent 45%), var(--color-surface); }
+        html[data-theme="dark"] .ctc-table tbody tr:hover { background: rgba(56, 189, 248, 0.06); }
     </style>
     <script src="/js/theme.js"></script>
     <link href="/css/dark-mode.css" rel="stylesheet" />
-    <style>
-        html[data-theme="dark"] .article-prose .salary-table .amount { color: #4ade80; }
-        html[data-theme="dark"] .article-prose .component-card h4 { color: #4ade80; border-left-color: #22c55e; }
-        html[data-theme="dark"] .article-prose .conclusion { background: rgba(34, 197, 94, 0.08); border-color: rgba(74, 222, 128, 0.25); }
-    </style>
+    <script>
+        if ("IntersectionObserver" in window) document.documentElement.classList.add("js-reveal");
+    </script>
 </head>
 
 <body>
@@ -142,240 +377,483 @@
 
         <main class="article-container">
             <article class="article-content">
-                <img src="/images/blogs/ctc-salary-negotiation.svg" alt="CTC Salary Negotiation Guide" class="article-hero">
-                
+                <img src="/images/blogs/ctc-salary-negotiation.svg" alt="An offer letter showing a ₹18,00,000 CTC split into basic, HRA, special allowance, bonus, PF and gratuity, leading into a chat with HR about the base salary, bonus and stock options, next to a negotiation plan that crosses out accepting the first offer and ticks market research, bonus and stock, flexible work and a set bottom line." class="article-hero">
+
                 <div class="article-body">
                     <header class="article-header">
                         <span class="article-category">Career</span>
-                        <h1 class="article-title">CTC Salary Negotiation Guide</h1>
+                        <h1 class="article-title">CTC Salary <span class="title-hl">Negotiation</span> Guide</h1>
                         <div class="article-meta">
                             <div class="article-meta-item"><i class="fas fa-user"></i><span>Manoj Satishkumar</span></div>
-                            <div class="article-meta-item"><i class="fas fa-clock"></i><span>15 min read</span></div>
+                            <div class="article-meta-item"><i class="fas fa-clock"></i><span>11 min read</span></div>
+                            <div class="article-meta-item"><i class="fas fa-calendar"></i><span>4 Jan 2026</span></div>
                         </div>
                     </header>
 
                     <div class="article-prose">
-                        
-                        <div class="intro-box">
-                            <p>Negotiating your salary can be one of the most daunting parts of the job application process, but it is crucial to ensure you are fairly compensated for your skills and experience. This is particularly important in product-based companies where the compensation packages can be quite complex.</p>
+
+                        <p class="lede">Negotiating your salary can be one of the most daunting parts of the job application process, but it is crucial to ensure you are fairly compensated for your skills and experience. This is particularly important in product-based companies where the compensation packages can be quite complex.</p>
+
+                        <div class="tldr reveal">
+                            <div class="tldr-label"><i class="fas fa-bolt"></i> The short version</div>
+                            <ul>
+                                <li><i class="fas fa-arrow-right"></i><span>CTC is everything the company spends on you in a year, not just what lands in your account every month.</span></li>
+                                <li><i class="fas fa-arrow-right"></i><span>Know every component. Basic salary is the base for HRA, PF and gratuity.</span></li>
+                                <li><i class="fas fa-arrow-right"></i><span>Negotiate once the formal offer is in hand, backed by market data and specific achievements.</span></li>
+                                <li><i class="fas fa-arrow-right"></i><span>If the base is fixed, push on bonuses, stock options and perks instead.</span></li>
+                            </ul>
                         </div>
 
-                        <p><strong>Cost to Company (CTC)</strong> is the total amount a company spends on an employee in a year. It includes direct benefits (like salary, bonus, and allowances), indirect benefits (like insurance and other perks), and savings contributions (like provident fund and gratuity). Understanding these components is crucial for effective negotiation.</p>
+                        <!-- ============ What is CTC ============ -->
+                        <section>
+                            <div class="section-kicker">The basics</div>
+                            <h2>What exactly is CTC?</h2>
 
-                        <h2>Components of CTC</h2>
+                            <p><strong>Cost to Company (CTC)</strong> is the total amount a company spends on an employee in a year. It includes direct benefits (like salary, bonus, and allowances), indirect benefits (like insurance and other perks), and savings contributions (like provident fund and gratuity).</p>
 
-                        <ul>
-                            <li><strong>Basic Salary:</strong> The core part of your salary.</li>
-                            <li><strong>House Rent Allowance (HRA).</strong></li>
-                            <li><strong>Special Allowance:</strong> Additional compensation, often flexible and can vary.</li>
-                            <li><strong>Conveyance Allowance:</strong> Transport-related expenses.</li>
-                            <li><strong>Medical Allowance:</strong> Reimbursement for medical expenses.</li>
-                            <li><strong>Leave Travel Allowance (LTA):</strong> For travel expenses while on leave.</li>
-                            <li><strong>Provident Fund (PF):</strong> A retirement savings scheme, typically 12% of basic salary.</li>
-                            <li><strong>Gratuity:</strong> A lump sum paid at the end of employment, usually a percentage of basic salary.</li>
-                            <li><strong>Performance Bonus:</strong> Linked to your performance and company profits.</li>
-                            <li><strong>Stock Options:</strong> Equity in the company, often offered by product-based companies.</li>
-                        </ul>
+                            <div class="ctc-equation reveal" role="img" aria-label="CTC equals direct benefits plus indirect benefits plus savings contributions">
+                                <div class="eq-total"><span class="eq-label">Cost to Company</span><span class="eq-big">CTC</span></div>
+                                <span class="eq-op" aria-hidden="true">=</span>
+                                <div class="eq-part"><span class="tile-icon g-sky"><i class="fas fa-money-bill-wave" aria-hidden="true"></i></span><strong>Direct benefits</strong>salary, bonus, allowances</div>
+                                <span class="eq-op" aria-hidden="true">+</span>
+                                <div class="eq-part"><span class="tile-icon g-violet"><i class="fas fa-shield-heart" aria-hidden="true"></i></span><strong>Indirect benefits</strong>insurance and other perks</div>
+                                <span class="eq-op" aria-hidden="true">+</span>
+                                <div class="eq-part"><span class="tile-icon g-emerald"><i class="fas fa-piggy-bank" aria-hidden="true"></i></span><strong>Savings contributions</strong>provident fund, gratuity</div>
+                            </div>
 
-                        <h2>Always Remember</h2>
+                            <p class="statement">Understanding these components is <span>crucial for effective negotiation.</span></p>
+                        </section>
 
-                        <div class="tip-box">
-                            <p>Use websites like <strong>Glassdoor</strong>, <strong>PayScale</strong>, and <strong>LinkedIn</strong> to understand the market rate for your role and experience. Learn about the company's financial health, culture, and typical compensation packages. Evaluate your skills, experience, and the unique value you bring to the company.</p>
-                        </div>
+                        <!-- ============ Components ============ -->
+                        <section>
+                            <div class="section-kicker">The building blocks</div>
+                            <h2>Components of CTC</h2>
 
-                        <p>It's best to negotiate after you have a formal offer in hand. Show excitement about the role and the company before discussing compensation. Clearly articulate why you deserve a higher salary. Use specific examples of your achievements and how they align with the company's goals. Use market data and any competing offers to justify your request.</p>
+                            <ul class="comp-tiles">
+                                <li class="reveal"><span class="tile-num">01</span><span class="tile-icon g-sky"><i class="fas fa-wallet" aria-hidden="true"></i></span><span><strong class="tile-name">Basic Salary</strong>The core part of your salary.</span></li>
+                                <li class="reveal"><span class="tile-num">02</span><span class="tile-icon g-violet"><i class="fas fa-house" aria-hidden="true"></i></span><span><strong class="tile-name">House Rent Allowance (HRA)</strong>Helps cover your rental expenses.</span></li>
+                                <li class="reveal"><span class="tile-num">03</span><span class="tile-icon g-indigo"><i class="fas fa-sliders" aria-hidden="true"></i></span><span><strong class="tile-name">Special Allowance</strong>Additional compensation, often flexible and can vary.</span></li>
+                                <li class="reveal"><span class="tile-num">04</span><span class="tile-icon g-slate"><i class="fas fa-car-side" aria-hidden="true"></i></span><span><strong class="tile-name">Conveyance Allowance</strong>Transport-related expenses.</span></li>
+                                <li class="reveal"><span class="tile-num">05</span><span class="tile-icon g-rose"><i class="fas fa-kit-medical" aria-hidden="true"></i></span><span><strong class="tile-name">Medical Allowance</strong>Reimbursement for medical expenses.</span></li>
+                                <li class="reveal"><span class="tile-num">06</span><span class="tile-icon g-sky"><i class="fas fa-plane-departure" aria-hidden="true"></i></span><span><strong class="tile-name">Leave Travel Allowance (LTA)</strong>For travel expenses while on leave.</span></li>
+                                <li class="reveal"><span class="tile-num">07</span><span class="tile-icon g-emerald"><i class="fas fa-piggy-bank" aria-hidden="true"></i></span><span><strong class="tile-name">Provident Fund (PF)</strong>A retirement savings scheme, typically 12% of basic salary.</span></li>
+                                <li class="reveal"><span class="tile-num">08</span><span class="tile-icon g-emerald"><i class="fas fa-award" aria-hidden="true"></i></span><span><strong class="tile-name">Gratuity</strong>A lump sum paid at the end of employment, usually a percentage of basic salary.</span></li>
+                                <li class="reveal"><span class="tile-num">09</span><span class="tile-icon g-amber"><i class="fas fa-trophy" aria-hidden="true"></i></span><span><strong class="tile-name">Performance Bonus</strong>Linked to your performance and company profits.</span></li>
+                                <li class="reveal"><span class="tile-num">10</span><span class="tile-icon g-pink"><i class="fas fa-chart-line" aria-hidden="true"></i></span><span><strong class="tile-name">Stock Options</strong>Equity in the company, often offered by product-based companies.</span></li>
+                            </ul>
+                        </section>
 
-                        <h3>Become a Member</h3>
+                        <!-- ============ Always remember ============ -->
+                        <section>
+                            <div class="section-kicker">Before you negotiate</div>
+                            <h2>Always remember</h2>
 
-                        <p>Negotiate other components like bonuses, allowances, and stock options. Sometimes, companies are more flexible with these elements than with the base salary. Consider negotiating for additional perks like flexible working hours, work-from-home days, health insurance, and professional development opportunities.</p>
+                            <div class="remember reveal">
+                                <div class="remember-label"><i class="fas fa-magnifying-glass-chart" aria-hidden="true"></i> Do your homework</div>
+                                <div class="tool-chips" aria-label="Salary research websites">
+                                    <span class="tool-chip"><i class="fas fa-building" aria-hidden="true"></i>Glassdoor</span>
+                                    <span class="tool-chip"><i class="fas fa-scale-balanced" aria-hidden="true"></i>PayScale</span>
+                                    <span class="tool-chip"><i class="fab fa-linkedin" aria-hidden="true"></i>LinkedIn</span>
+                                </div>
+                                <div class="fundamentals">
+                                    <div class="fundamental"><i class="fas fa-chart-column g-sky" aria-hidden="true"></i><span>Use websites like Glassdoor, PayScale, and LinkedIn to understand the market rate for your role and experience.</span></div>
+                                    <div class="fundamental"><i class="fas fa-building-columns g-violet" aria-hidden="true"></i><span>Learn about the company's financial health, culture, and typical compensation packages.</span></div>
+                                    <div class="fundamental"><i class="fas fa-user-tie g-emerald" aria-hidden="true"></i><span>Evaluate your skills, experience, and the unique value you bring to the company.</span></div>
+                                </div>
+                            </div>
+                        </section>
 
-                        <h2>Sample Salary Breakup</h2>
+                        <!-- ============ Timing ============ -->
+                        <section>
+                            <div class="section-kicker">Timing</div>
+                            <h2>When and how to make your case</h2>
 
-                        <p>Let's assume you're negotiating for a software engineer position with a CTC of <strong>₹18,00,000 per annum</strong>.</p>
+                            <ol class="flow">
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-file-signature" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Wait for the offer</span>It's best to negotiate after you have a formal offer in hand.</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-face-smile" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Show enthusiasm</span>Show excitement about the role and the company before discussing compensation.</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-bullhorn" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">State your value</span>Clearly articulate why you deserve a higher salary.</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-list-check" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Bring evidence</span>Use specific examples of your achievements and how they align with the company's goals.</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-scale-unbalanced-flip" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Use leverage</span>Use market data and any competing offers to justify your request.</span></li>
+                            </ol>
+                        </section>
 
-                        <h3>Breakdown</h3>
+                        <!-- ============ Beyond the base ============ -->
+                        <section>
+                            <div class="section-kicker">Widen the pie</div>
+                            <h2>Negotiate beyond the base salary</h2>
 
-                        <table class="salary-table">
-                            <thead>
-                                <tr>
-                                    <th>Component</th>
-                                    <th>Amount (Annual)</th>
-                                    <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Basic Salary</td>
-                                    <td class="amount">₹7,20,000</td>
-                                    <td>40% of CTC</td>
-                                </tr>
-                                <tr>
-                                    <td>HRA</td>
-                                    <td class="amount">₹3,60,000</td>
-                                    <td>50% of Basic Salary</td>
-                                </tr>
-                                <tr>
-                                    <td>Special Allowance</td>
-                                    <td class="amount">₹2,40,000</td>
-                                    <td>Flexible component</td>
-                                </tr>
-                                <tr>
-                                    <td>Conveyance Allowance</td>
-                                    <td class="amount">₹19,200</td>
-                                    <td>Transport expenses</td>
-                                </tr>
-                                <tr>
-                                    <td>Medical Allowance</td>
-                                    <td class="amount">₹15,000</td>
-                                    <td>Tax-exempt up to limit</td>
-                                </tr>
-                                <tr>
-                                    <td>LTA</td>
-                                    <td class="amount">₹30,000</td>
-                                    <td>Travel expenses</td>
-                                </tr>
-                                <tr>
-                                    <td>Provident Fund (PF)</td>
-                                    <td class="amount">₹86,400</td>
-                                    <td>12% of Basic Salary</td>
-                                </tr>
-                                <tr>
-                                    <td>Gratuity</td>
-                                    <td class="amount">₹34,615</td>
-                                    <td>4.81% of Basic Salary</td>
-                                </tr>
-                                <tr>
-                                    <td>Performance Bonus</td>
-                                    <td class="amount">₹2,40,000</td>
-                                    <td>Variable, performance-linked</td>
-                                </tr>
-                                <tr>
-                                    <td>Stock Options</td>
-                                    <td class="amount">₹60,000</td>
-                                    <td>Variable based on company policy</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <div class="levers">
+                                <div class="lever lever--money reveal">
+                                    <div class="lever-head">
+                                        <span class="tile-icon g-amber"><i class="fas fa-coins" aria-hidden="true"></i></span>
+                                        <div>
+                                            <div class="lever-title">Other components</div>
+                                            <div class="lever-tag">beyond the base salary</div>
+                                        </div>
+                                    </div>
+                                    <div class="lever-chips">
+                                        <span class="lever-chip"><i class="fas fa-trophy" aria-hidden="true"></i>Bonuses</span>
+                                        <span class="lever-chip"><i class="fas fa-sliders" aria-hidden="true"></i>Allowances</span>
+                                        <span class="lever-chip"><i class="fas fa-chart-line" aria-hidden="true"></i>Stock options</span>
+                                    </div>
+                                </div>
+                                <div class="lever lever--perks reveal">
+                                    <div class="lever-head">
+                                        <span class="tile-icon g-violet"><i class="fas fa-gift" aria-hidden="true"></i></span>
+                                        <div>
+                                            <div class="lever-title">Additional perks</div>
+                                            <div class="lever-tag">worth asking for too</div>
+                                        </div>
+                                    </div>
+                                    <div class="lever-chips">
+                                        <span class="lever-chip"><i class="fas fa-clock" aria-hidden="true"></i>Flexible working hours</span>
+                                        <span class="lever-chip"><i class="fas fa-laptop-house" aria-hidden="true"></i>Work-from-home days</span>
+                                        <span class="lever-chip"><i class="fas fa-heart-pulse" aria-hidden="true"></i>Health insurance</span>
+                                        <span class="lever-chip"><i class="fas fa-graduation-cap" aria-hidden="true"></i>Professional development</span>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <h2>Understanding Each Component</h2>
+                            <div class="insight reveal"><i class="fas fa-lightbulb" aria-hidden="true"></i><span>Sometimes, companies are more flexible with these elements than with the base salary.</span></div>
+                        </section>
 
-                        <div class="component-card">
-                            <h4>Basic Salary: ₹7,20,000 (40% of CTC)</h4>
-                            <p>The basic salary forms the foundation of your compensation package, representing 40% of the total Cost to Company (CTC) in this case. It is the fixed portion of your salary that is paid out every month and serves as the base for calculating various other components such as House Rent Allowance (HRA), Provident Fund (PF), and Gratuity. Basic salary is also fully taxable, and it is a crucial part of your overall compensation, as it impacts your retirement benefits and other allowances.</p>
-                        </div>
+                        <!-- ============ Sample breakup ============ -->
+                        <section>
+                            <div class="section-kicker">Show me the numbers</div>
+                            <h2>Sample salary breakup</h2>
 
-                        <div class="component-card">
-                            <h4>HRA: ₹3,60,000 (50% of Basic Salary)</h4>
-                            <p>House Rent Allowance (HRA) is provided to cover your rental expenses. It is calculated as a percentage of your basic salary, typically ranging between 40% to 50%. In this example, HRA amounts to 50% of the basic salary, which is ₹3,60,000. HRA is partially exempt from tax under certain conditions, such as if you are renting accommodation and can provide rental receipts. This allowance is particularly beneficial in urban areas where housing costs are high.</p>
-                        </div>
+                            <p>Let's assume you're negotiating for a software engineer position with a CTC of <strong>₹18,00,000 per annum</strong>.</p>
 
-                        <div class="component-card">
-                            <h4>Special Allowance: ₹2,40,000</h4>
-                            <p>Special Allowance is a flexible component of your salary that is designed to boost your overall compensation package. Unlike HRA or basic salary, it does not have a specific purpose and is fully taxable. Companies often use special allowances to make their offers more competitive without complicating the tax structure too much. It provides extra take-home pay but does not directly contribute to retirement benefits or other statutory calculations.</p>
-                        </div>
+                            <div class="ctc-hero reveal">
+                                <div class="ctc-hero-label">Sample offer &middot; Software engineer</div>
+                                <div class="ctc-amount">₹18,00,000<small>per annum</small></div>
+                                <div class="ctc-bar" role="img" aria-label="Fixed pay is 76.6% of the CTC, retirement savings 6.7% and variable pay and equity 16.7%">
+                                    <span class="ctc-seg" style="width: 40%; background: #0ea5e9;" title="Basic salary"></span>
+                                    <span class="ctc-seg" style="width: 20%; background: #6366f1;" title="HRA"></span>
+                                    <span class="ctc-seg" style="width: 13.04%; background: #8b5cf6;" title="Special allowance"></span>
+                                    <span class="ctc-seg" style="width: 3.57%; background: #c4b5fd;" title="Conveyance, medical and LTA"></span>
+                                    <span class="ctc-seg" style="width: 4.8%; background: #10b981;" title="Provident fund"></span>
+                                    <span class="ctc-seg" style="width: 1.92%; background: #34d399;" title="Gratuity"></span>
+                                    <span class="ctc-seg" style="width: 13.33%; background: #f59e0b;" title="Performance bonus"></span>
+                                    <span class="ctc-seg" style="width: 3.33%; background: #ec4899;" title="Stock options"></span>
+                                </div>
+                                <div class="ctc-groups">
+                                    <div class="ctc-group">
+                                        <div class="ctc-group-name"><span class="sw sw--fixed"></span>Fixed pay</div>
+                                        <div class="ctc-group-sum">₹13,78,985<span>76.6%</span></div>
+                                        <div class="ctc-group-of">Basic, HRA, special allowance, conveyance, medical, LTA</div>
+                                    </div>
+                                    <div class="ctc-group">
+                                        <div class="ctc-group-name"><span class="sw sw--retire"></span>Retirement savings</div>
+                                        <div class="ctc-group-sum">₹1,21,015<span>6.7%</span></div>
+                                        <div class="ctc-group-of">Provident fund, gratuity</div>
+                                    </div>
+                                    <div class="ctc-group">
+                                        <div class="ctc-group-name"><span class="sw sw--variable"></span>Variable pay &amp; equity</div>
+                                        <div class="ctc-group-sum">₹3,00,000<span>16.7%</span></div>
+                                        <div class="ctc-group-of">Performance bonus, stock options</div>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="component-card">
-                            <h4>Conveyance Allowance: ₹19,200</h4>
-                            <p>Conveyance Allowance is provided to cover transportation expenses for commuting to and from the workplace. In this example, the allowance is set at ₹19,200 annually. This allowance is partially tax-exempt up to a specified limit, making it a tax-efficient way to cover travel expenses. It helps employees manage daily travel costs without dipping into their net salary.</p>
-                        </div>
+                            <div class="table-wrap reveal">
+                                <table class="ctc-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Component</th>
+                                            <th scope="col">Amount (annual)</th>
+                                            <th scope="col">Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><th scope="row"><span class="sw sw--fixed"></span>Basic Salary</th><td class="amount">₹7,20,000</td><td class="note">40% of CTC</td></tr>
+                                        <tr><th scope="row"><span class="sw sw--fixed"></span>HRA</th><td class="amount">₹3,60,000</td><td class="note">50% of Basic Salary</td></tr>
+                                        <tr><th scope="row"><span class="sw sw--fixed"></span>Special Allowance</th><td class="amount">₹2,34,785</td><td class="note">Flexible component that balances the CTC</td></tr>
+                                        <tr><th scope="row"><span class="sw sw--fixed"></span>Conveyance Allowance</th><td class="amount">₹19,200</td><td class="note">Transport expenses</td></tr>
+                                        <tr><th scope="row"><span class="sw sw--fixed"></span>Medical Allowance</th><td class="amount">₹15,000</td><td class="note">Tax-exempt up to limit</td></tr>
+                                        <tr><th scope="row"><span class="sw sw--fixed"></span>LTA</th><td class="amount">₹30,000</td><td class="note">Travel expenses</td></tr>
+                                        <tr><th scope="row"><span class="sw sw--retire"></span>Provident Fund (PF)</th><td class="amount">₹86,400</td><td class="note">12% of Basic Salary</td></tr>
+                                        <tr><th scope="row"><span class="sw sw--retire"></span>Gratuity</th><td class="amount">₹34,615</td><td class="note">4.81% of Basic Salary</td></tr>
+                                        <tr><th scope="row"><span class="sw sw--variable"></span>Performance Bonus</th><td class="amount">₹2,40,000</td><td class="note">Variable, performance-linked</td></tr>
+                                        <tr><th scope="row"><span class="sw sw--variable"></span>Stock Options</th><td class="amount">₹60,000</td><td class="note">Variable based on company policy</td></tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr><th scope="row">Total CTC</th><td class="amount">₹18,00,000</td><td class="note">Per annum</td></tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </section>
 
-                        <div class="component-card">
-                            <h4>Medical Allowance: ₹15,000</h4>
-                            <p>Medical Allowance is provided to cover medical expenses incurred by the employee and their dependents. In this package, it is set at ₹15,000 per year. This allowance is tax-exempt up to ₹15,000, provided you submit medical bills as proof of expenditure. It's a valuable component of the salary package, ensuring that healthcare costs do not become a financial burden.</p>
-                        </div>
+                        <!-- ============ Each component ============ -->
+                        <section>
+                            <div class="section-kicker">Line by line</div>
+                            <h2>Understanding each component</h2>
 
-                        <div class="component-card">
-                            <h4>Leave Travel Allowance (LTA): ₹30,000</h4>
-                            <p>Leave Travel Allowance (LTA) is a benefit that covers travel expenses incurred during leave taken by the employee. In this example, it amounts to ₹30,000 per year. LTA is tax-exempt under certain conditions, such as travel within India and submission of travel-related expenses. This allowance encourages employees to take vacations, contributing to their overall well-being and job satisfaction.</p>
-                        </div>
+                            <div class="comp-grid">
+                                <div class="comp reveal">
+                                    <span class="comp-num">01</span>
+                                    <div class="comp-head">
+                                        <span class="tile-icon g-sky"><i class="fas fa-wallet" aria-hidden="true"></i></span>
+                                        <div><h3 class="comp-title">Basic Salary</h3><span class="comp-amount">₹7,20,000 &middot; 40% of CTC</span></div>
+                                    </div>
+                                    <p>The basic salary forms the foundation of your compensation package, representing 40% of the total Cost to Company (CTC) in this case. It is the fixed portion of your salary that is paid out every month and serves as the base for calculating various other components such as House Rent Allowance (HRA), Provident Fund (PF), and Gratuity.</p>
+                                    <div class="ripple" role="img" aria-label="Basic salary of ₹7,20,000 drives HRA at 50%, PF at 12% and gratuity at 4.81%">
+                                        <span class="ripple-src"><i class="fas fa-wallet" aria-hidden="true"></i>Basic ₹7,20,000</span>
+                                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                        <div class="ripple-out">
+                                            <span class="ripple-item"><b>HRA</b> 50% &middot; ₹3,60,000</span>
+                                            <span class="ripple-item"><b>PF</b> 12% &middot; ₹86,400</span>
+                                            <span class="ripple-item"><b>Gratuity</b> 4.81% &middot; ₹34,615</span>
+                                        </div>
+                                    </div>
+                                    <p>Basic salary is also fully taxable, and it is a crucial part of your overall compensation, as it impacts your retirement benefits and other allowances.</p>
+                                    <div class="concept-chips"><span class="concept-chip">fixed, paid monthly</span><span class="concept-chip">fully taxable</span><span class="concept-chip">drives HRA, PF &amp; gratuity</span></div>
+                                </div>
 
-                        <div class="component-card">
-                            <h4>Provident Fund (PF): ₹86,400 (12% of Basic Salary)</h4>
-                            <p>Provident Fund (PF) is a retirement benefit scheme in which both the employee and employer contribute a fixed percentage of the basic salary. In this case, 12% of the basic salary, which is ₹86,400, is contributed to the PF account annually. PF contributions are tax-exempt, and the accumulated amount, along with interest, provides financial security upon retirement or during emergencies.</p>
-                        </div>
+                                <div class="comp comp--violet reveal">
+                                    <span class="comp-num">02</span>
+                                    <div class="comp-head">
+                                        <span class="tile-icon g-violet"><i class="fas fa-house" aria-hidden="true"></i></span>
+                                        <div><h3 class="comp-title">HRA</h3><span class="comp-amount">₹3,60,000 &middot; 50% of basic</span></div>
+                                    </div>
+                                    <p>House Rent Allowance (HRA) is provided to cover your rental expenses. It is calculated as a percentage of your basic salary, typically ranging between 40% to 50%. In this example, HRA amounts to 50% of the basic salary, which is ₹3,60,000. HRA is partially exempt from tax under certain conditions, such as if you are renting accommodation and can provide rental receipts. This allowance is particularly beneficial in urban areas where housing costs are high.</p>
+                                    <div class="concept-chips"><span class="concept-chip">40&ndash;50% of basic</span><span class="concept-chip">partially tax-exempt</span><span class="concept-chip">rent receipts</span></div>
+                                </div>
 
-                        <div class="component-card">
-                            <h4>Gratuity: ₹34,615 (4.81% of Basic Salary)</h4>
-                            <p>Gratuity is a lump sum payment made to employees as a token of appreciation for their long-term service to the company. It is calculated as a percentage of the basic salary, here set at 4.81%, amounting to ₹34,615 per year. Gratuity becomes payable upon resignation, retirement, or termination after a minimum of five years of service. It is partially tax-exempt, depending on the amount received and other factors.</p>
-                        </div>
+                                <div class="comp comp--violet reveal">
+                                    <span class="comp-num">03</span>
+                                    <div class="comp-head">
+                                        <span class="tile-icon g-indigo"><i class="fas fa-sliders" aria-hidden="true"></i></span>
+                                        <div><h3 class="comp-title">Special Allowance</h3><span class="comp-amount">₹2,34,785</span></div>
+                                    </div>
+                                    <p>Special Allowance is a flexible component of your salary that is designed to boost your overall compensation package. Unlike HRA or basic salary, it does not have a specific purpose and is fully taxable. Companies often use special allowances to make their offers more competitive without complicating the tax structure too much. It provides extra take-home pay but does not directly contribute to retirement benefits or other statutory calculations.</p>
+                                    <div class="concept-chips"><span class="concept-chip">flexible</span><span class="concept-chip">fully taxable</span><span class="concept-chip">no retirement impact</span></div>
+                                </div>
 
-                        <div class="component-card">
-                            <h4>Performance Bonus: ₹2,40,000</h4>
-                            <p>The Performance Bonus is a variable component of the salary that is linked to the employee's and the company's performance. In this package, it is set at ₹2,40,000 annually. This bonus incentivizes employees to achieve their targets and contribute to the company's success. It is typically paid out annually or semi-annually and is fully taxable as part of the gross income.</p>
-                        </div>
+                                <div class="comp comp--slate reveal">
+                                    <span class="comp-num">04</span>
+                                    <div class="comp-head">
+                                        <span class="tile-icon g-slate"><i class="fas fa-car-side" aria-hidden="true"></i></span>
+                                        <div><h3 class="comp-title">Conveyance Allowance</h3><span class="comp-amount">₹19,200</span></div>
+                                    </div>
+                                    <p>Conveyance Allowance is provided to cover transportation expenses for commuting to and from the workplace. In this example, the allowance is set at ₹19,200 annually. This allowance is partially tax-exempt up to a specified limit, making it a tax-efficient way to cover travel expenses. It helps employees manage daily travel costs without dipping into their net salary.</p>
+                                    <div class="concept-chips"><span class="concept-chip">daily commute</span><span class="concept-chip">partially tax-exempt</span></div>
+                                </div>
 
-                        <div class="component-card">
-                            <h4>Stock Options: ₹60,000 (Variable based on company policy)</h4>
-                            <p>Stock Options provide employees the opportunity to purchase company shares at a predetermined price after a specified period. In this example, the value of the stock options is estimated at ₹60,000 annually, though this can vary. Stock options align employees' interests with those of the company, fostering a sense of ownership and potentially offering significant financial rewards if the company performs well. The taxation of stock options depends on the holding period and the difference between the exercise price and the market price at the time of sale.</p>
-                        </div>
+                                <div class="comp comp--rose reveal">
+                                    <span class="comp-num">05</span>
+                                    <div class="comp-head">
+                                        <span class="tile-icon g-rose"><i class="fas fa-kit-medical" aria-hidden="true"></i></span>
+                                        <div><h3 class="comp-title">Medical Allowance</h3><span class="comp-amount">₹15,000</span></div>
+                                    </div>
+                                    <p>Medical Allowance is provided to cover medical expenses incurred by the employee and their dependents. In this package, it is set at ₹15,000 per year. This allowance is tax-exempt up to ₹15,000, provided you submit medical bills as proof of expenditure. It's a valuable component of the salary package, ensuring that healthcare costs do not become a financial burden.</p>
+                                    <div class="concept-chips"><span class="concept-chip">you &amp; dependents</span><span class="concept-chip">medical bills as proof</span></div>
+                                </div>
 
-                        <h2>Restricted Stock Units (RSUs)</h2>
+                                <div class="comp reveal">
+                                    <span class="comp-num">06</span>
+                                    <div class="comp-head">
+                                        <span class="tile-icon g-sky"><i class="fas fa-plane-departure" aria-hidden="true"></i></span>
+                                        <div><h3 class="comp-title">Leave Travel Allowance</h3><span class="comp-amount">₹30,000</span></div>
+                                    </div>
+                                    <p>Leave Travel Allowance (LTA) is a benefit that covers travel expenses incurred during leave taken by the employee. In this example, it amounts to ₹30,000 per year. LTA is tax-exempt under certain conditions, such as travel within India and submission of travel-related expenses. This allowance encourages employees to take vacations, contributing to their overall well-being and job satisfaction.</p>
+                                    <div class="concept-chips"><span class="concept-chip">travel within India</span><span class="concept-chip">submit expenses</span></div>
+                                </div>
 
-                        <p>RSUs are company shares granted to employees as part of their compensation, but they come with vesting conditions. Unlike stock options, RSUs do not require the employee to purchase shares; instead, they receive them outright upon vesting.</p>
+                                <div class="comp comp--emerald reveal">
+                                    <span class="comp-num">07</span>
+                                    <div class="comp-head">
+                                        <span class="tile-icon g-emerald"><i class="fas fa-piggy-bank" aria-hidden="true"></i></span>
+                                        <div><h3 class="comp-title">Provident Fund (PF)</h3><span class="comp-amount">₹86,400 &middot; 12% of basic</span></div>
+                                    </div>
+                                    <p>Provident Fund (PF) is a retirement benefit scheme in which both the employee and employer contribute a fixed percentage of the basic salary. In this case, 12% of the basic salary, which is ₹86,400, is contributed to the PF account annually. PF contributions are tax-exempt, and the accumulated amount, along with interest, provides financial security upon retirement or during emergencies.</p>
+                                    <div class="concept-chips"><span class="concept-chip">employee + employer</span><span class="concept-chip">earns interest</span></div>
+                                </div>
 
-                        <h3>Key Features</h3>
+                                <div class="comp comp--emerald reveal">
+                                    <span class="comp-num">08</span>
+                                    <div class="comp-head">
+                                        <span class="tile-icon g-emerald"><i class="fas fa-award" aria-hidden="true"></i></span>
+                                        <div><h3 class="comp-title">Gratuity</h3><span class="comp-amount">₹34,615 &middot; 4.81% of basic</span></div>
+                                    </div>
+                                    <p>Gratuity is a lump sum payment made to employees as a token of appreciation for their long-term service to the company. It is calculated as a percentage of the basic salary, here set at 4.81%, amounting to ₹34,615 per year. Gratuity becomes payable upon resignation, retirement, or termination after a minimum of five years of service. It is partially tax-exempt, depending on the amount received and other factors.</p>
+                                    <div class="concept-chips"><span class="concept-chip">5+ years of service</span><span class="concept-chip">lump sum</span></div>
+                                </div>
 
-                        <ul>
-                            <li><strong>Grant:</strong> Employees are granted a specific number of RSUs.</li>
-                            <li><strong>Vesting:</strong> RSUs vest over a period or upon meeting certain conditions.</li>
-                            <li><strong>Delivery:</strong> Once vested, the employee receives actual shares.</li>
-                            <li><strong>Taxation:</strong> RSUs are taxed as ordinary income upon vesting, based on the market value of the shares at that time.</li>
-                        </ul>
+                                <div class="comp comp--amber reveal">
+                                    <span class="comp-num">09</span>
+                                    <div class="comp-head">
+                                        <span class="tile-icon g-amber"><i class="fas fa-trophy" aria-hidden="true"></i></span>
+                                        <div><h3 class="comp-title">Performance Bonus</h3><span class="comp-amount">₹2,40,000</span></div>
+                                    </div>
+                                    <p>The Performance Bonus is a variable component of the salary that is linked to the employee's and the company's performance. In this package, it is set at ₹2,40,000 annually. This bonus incentivizes employees to achieve their targets and contribute to the company's success. It is typically paid out annually or semi-annually and is fully taxable as part of the gross income.</p>
+                                    <div class="concept-chips"><span class="concept-chip">variable</span><span class="concept-chip">annual / semi-annual</span><span class="concept-chip">fully taxable</span></div>
+                                </div>
 
-                        <h2>Employee Stock Ownership Plans (ESOPs)</h2>
+                                <div class="comp comp--rose reveal">
+                                    <span class="comp-num">10</span>
+                                    <div class="comp-head">
+                                        <span class="tile-icon g-pink"><i class="fas fa-chart-line" aria-hidden="true"></i></span>
+                                        <div><h3 class="comp-title">Stock Options</h3><span class="comp-amount">₹60,000 &middot; variable based on company policy</span></div>
+                                    </div>
+                                    <p>Stock Options provide employees the opportunity to purchase company shares at a predetermined price after a specified period. In this example, the value of the stock options is estimated at ₹60,000 annually, though this can vary. Stock options align employees' interests with those of the company, fostering a sense of ownership and potentially offering significant financial rewards if the company performs well. The taxation of stock options depends on the holding period and the difference between the exercise price and the market price at the time of sale.</p>
+                                    <div class="concept-chips"><span class="concept-chip">predetermined price</span><span class="concept-chip">sense of ownership</span><span class="concept-chip">taxed on the gain</span></div>
+                                </div>
+                            </div>
+                        </section>
 
-                        <p>ESOPs are employee benefit plans that provide workers with ownership interest in the company. ESOPs are often used as a corporate finance strategy and can align the interests of employees with those of shareholders.</p>
+                        <!-- ============ RSUs vs ESOPs ============ -->
+                        <section>
+                            <div class="section-kicker">Equity</div>
+                            <h2>RSUs vs ESOPs</h2>
 
-                        <h3>Key Features</h3>
+                            <div class="candidates">
+                                <div class="candidate candidate--rsu reveal">
+                                    <div class="candidate-head">
+                                        <span class="candidate-avatar g-sky"><i class="fas fa-gift" aria-hidden="true"></i></span>
+                                        <div>
+                                            <h3 class="candidate-name">RSUs</h3>
+                                            <div class="candidate-tag">Restricted Stock Units</div>
+                                        </div>
+                                    </div>
+                                    <p>RSUs are company shares granted to employees as part of their compensation, but they come with vesting conditions. Unlike stock options, RSUs do not require the employee to purchase shares; instead, they receive them outright upon vesting.</p>
+                                    <div class="feature-label">Key features</div>
+                                    <ul>
+                                        <li><i class="fas fa-hand-holding" aria-hidden="true"></i><span><strong>Grant:</strong> Employees are granted a specific number of RSUs.</span></li>
+                                        <li><i class="fas fa-hourglass-half" aria-hidden="true"></i><span><strong>Vesting:</strong> RSUs vest over a period or upon meeting certain conditions.</span></li>
+                                        <li><i class="fas fa-box-open" aria-hidden="true"></i><span><strong>Delivery:</strong> Once vested, the employee receives actual shares.</span></li>
+                                        <li><i class="fas fa-receipt" aria-hidden="true"></i><span><strong>Taxation:</strong> RSUs are taxed as ordinary income upon vesting, based on the market value of the shares at that time.</span></li>
+                                    </ul>
+                                </div>
 
-                        <ul>
-                            <li><strong>Ownership:</strong> ESOPs allocate shares to employees, which are held in an ESOP trust.</li>
-                            <li><strong>Vesting:</strong> Employees gradually earn ownership of the shares over time.</li>
-                            <li><strong>Tax Benefits:</strong> ESOPs offer significant tax advantages to both the company and the employees.</li>
-                            <li><strong>Payout:</strong> Employees receive the value of their shares when they leave the company, either in cash or shares.</li>
-                        </ul>
+                                <div class="vs" aria-hidden="true">VS</div>
 
-                        <h2>The Conversation</h2>
+                                <div class="candidate candidate--esop reveal">
+                                    <div class="candidate-head">
+                                        <span class="candidate-avatar g-violet"><i class="fas fa-people-group" aria-hidden="true"></i></span>
+                                        <div>
+                                            <h3 class="candidate-name">ESOPs</h3>
+                                            <div class="candidate-tag">Employee Stock Ownership Plans</div>
+                                        </div>
+                                    </div>
+                                    <p>ESOPs are employee benefit plans that provide workers with ownership interest in the company. ESOPs are often used as a corporate finance strategy and can align the interests of employees with those of shareholders.</p>
+                                    <div class="feature-label">Key features</div>
+                                    <ul>
+                                        <li><i class="fas fa-landmark" aria-hidden="true"></i><span><strong>Ownership:</strong> ESOPs allocate shares to employees, which are held in an ESOP trust.</span></li>
+                                        <li><i class="fas fa-hourglass-half" aria-hidden="true"></i><span><strong>Vesting:</strong> Employees gradually earn ownership of the shares over time.</span></li>
+                                        <li><i class="fas fa-percent" aria-hidden="true"></i><span><strong>Tax Benefits:</strong> ESOPs offer significant tax advantages to both the company and the employees.</span></li>
+                                        <li><i class="fas fa-right-from-bracket" aria-hidden="true"></i><span><strong>Payout:</strong> Employees receive the value of their shares when they leave the company, either in cash or shares.</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
 
-                        <div class="conversation-box">
-                            <span class="speaker">You:</span>
-                            <p class="dialogue">"Thank you for the offer. I'm very excited about the opportunity to work with [Company Name]. Based on my research and the value I believe I can bring to the team, I was hoping to discuss the compensation package. For a role with my experience and the current market standards, I was expecting a CTC around ₹20,00,000. Could we explore adjustments to the base salary or other components like the performance bonus and stock options?"</p>
-                            
-                            <span class="speaker">HR:</span>
-                            <p class="dialogue">"We appreciate your enthusiasm and the value you bring. The base salary is somewhat fixed, but we can consider increasing the performance bonus and providing additional stock options."</p>
-                            
-                            <span class="speaker">You:</span>
-                            <p class="dialogue">"That sounds great. I'm also interested in discussing flexible work arrangements and professional development opportunities, which are very important to me."</p>
-                            
-                            <span class="speaker">HR:</span>
-                            <p class="dialogue">"We can definitely explore those options. Let's finalize the numbers and other perks that align with your expectations."</p>
-                        </div>
+                        <!-- ============ The conversation ============ -->
+                        <section>
+                            <div class="section-kicker">Role play</div>
+                            <h2>The conversation</h2>
 
-                        <div id="mock-interview-ad"></div>
+                            <figure class="chat">
+                                <div class="chat-bar">
+                                    <span class="chat-avatar g-violet"><i class="fas fa-user-tie" aria-hidden="true"></i></span>
+                                    <div>
+                                        <div class="chat-name">HR &middot; [Company Name]</div>
+                                        <div class="chat-status">Offer discussion</div>
+                                    </div>
+                                    <i class="fas fa-phone" aria-hidden="true"></i>
+                                </div>
+                                <div class="chat-body">
+                                    <div class="msg msg--you reveal"><span class="msg-who">You</span><p>Thank you for the offer. I'm very excited about the opportunity to work with [Company Name]. Based on my research and the value I believe I can bring to the team, I was hoping to discuss the compensation package. For a role with my experience and the current market standards, I was expecting a CTC around <strong>₹20,00,000</strong>. Could we explore adjustments to the base salary or other components like the performance bonus and stock options?</p></div>
+                                    <div class="msg msg--hr reveal"><span class="msg-who">HR</span><p>We appreciate your enthusiasm and the value you bring. The base salary is somewhat fixed, but we can consider increasing the performance bonus and providing additional stock options.</p></div>
+                                    <div class="msg msg--you reveal"><span class="msg-who">You</span><p>That sounds great. I'm also interested in discussing flexible work arrangements and professional development opportunities, which are very important to me.</p></div>
+                                    <div class="msg msg--hr reveal"><span class="msg-who">HR</span><p>We can definitely explore those options. Let's finalize the numbers and other perks that align with your expectations.</p></div>
+                                    <div class="chat-outcome reveal"><i class="fas fa-circle-check" aria-hidden="true"></i>Higher bonus, more stock options and flexible work on the table</div>
+                                </div>
+                            </figure>
 
-                        <h2>Tips for Successful Negotiation</h2>
+                            <div id="mock-interview-ad"></div>
+                        </section>
 
-                        <div class="info-box">
-                            <p>Maintain a professional demeanor throughout the conversation. Thank HR for their time and express your excitement about the opportunity. Frame the negotiation as a collaborative effort to find a mutually beneficial agreement. Phrases like <em>"Perhaps we can find a middle ground on…"</em> or <em>"I'm flexible on X, but I'd really like to see Y…"</em> can be helpful. Don't be afraid to ask clarifying questions about the offer or the company's compensation structure.</p>
-                        </div>
+                        <!-- ============ Tips ============ -->
+                        <section>
+                            <div class="section-kicker">Playbook</div>
+                            <h2>Tips for successful negotiation</h2>
 
-                        <p>While you should always aim for a positive outcome, know your bottom line and be prepared to walk away if the offer doesn't meet your minimum requirements. After the conversation, send a thank-you email to HR reiterating your key points and your continued interest in the position.</p>
+                            <div class="fundamentals fundamentals--two">
+                                <div class="fundamental reveal"><i class="fas fa-user-tie g-sky" aria-hidden="true"></i><span>Maintain a professional demeanor throughout the conversation.</span></div>
+                                <div class="fundamental reveal"><i class="fas fa-hands-clapping g-amber" aria-hidden="true"></i><span>Thank HR for their time and express your excitement about the opportunity.</span></div>
+                                <div class="fundamental reveal"><i class="fas fa-handshake g-violet" aria-hidden="true"></i><span>Frame the negotiation as a collaborative effort to find a mutually beneficial agreement.</span></div>
+                                <div class="fundamental reveal"><i class="fas fa-circle-question g-emerald" aria-hidden="true"></i><span>Don't be afraid to ask clarifying questions about the offer or the company's compensation structure.</span></div>
+                            </div>
 
-                        <div class="conclusion">
-                            <p>Negotiating your Cost to Company (CTC) is a crucial step in securing a compensation package that reflects your worth and meets your financial needs. Understanding the different components of your CTC — such as basic salary, HRA, special allowance, conveyance allowance, medical allowance, LTA, provident fund, gratuity, performance bonus, and stock options — enables you to evaluate and negotiate effectively. Each component has its own tax implications and benefits, and knowing these can help you make informed decisions during the negotiation process.</p>
-                            
-                            <p>By approaching your CTC negotiation with confidence and thorough research, you can ensure that you receive a package that not only provides financial stability but also rewards your contributions to the company. Remember, a well-negotiated CTC not only boosts your immediate income but also enhances your long-term financial security through benefits like provident fund, gratuity, and stock options.</p>
-                            
-                            <p><strong>All the best.</strong></p>
-                        </div>
+                            <p>Phrases like these can be helpful:</p>
+
+                            <div class="phrases">
+                                <div class="phrase reveal"><i class="fas fa-quote-left" aria-hidden="true"></i>Perhaps we can find a middle ground on&hellip;</div>
+                                <div class="phrase reveal"><i class="fas fa-quote-left" aria-hidden="true"></i>I'm flexible on X, but I'd really like to see Y&hellip;</div>
+                            </div>
+
+                            <div class="walk-away reveal"><i class="fas fa-door-open" aria-hidden="true"></i><span>While you should always aim for a positive outcome, know your bottom line and be prepared to <em>walk away</em> if the offer doesn't meet your minimum requirements.</span></div>
+
+                            <div class="email-card reveal">
+                                <div class="email-head">
+                                    <span class="tile-icon g-emerald"><i class="fas fa-envelope-open-text" aria-hidden="true"></i></span>
+                                    <div>
+                                        <div class="email-meta"><b>To:</b> HR</div>
+                                        <div class="email-meta"><b>Subject:</b> Thank you</div>
+                                    </div>
+                                    <span class="email-when">After the call</span>
+                                </div>
+                                <p>After the conversation, send a thank-you email to HR reiterating your key points and your continued interest in the position.</p>
+                            </div>
+                        </section>
+
+                        <!-- ============ Conclusion ============ -->
+                        <section>
+                            <div class="section-kicker">Wrapping up</div>
+                            <h2>Bringing it all together</h2>
+
+                            <p>Negotiating your Cost to Company (CTC) is a crucial step in securing a compensation package that reflects your worth and meets your financial needs. Understanding the different components of your CTC enables you to evaluate and negotiate effectively:</p>
+
+                            <div class="future-traits">
+                                <span class="trait reveal"><i class="fas fa-wallet" aria-hidden="true"></i>Basic salary</span>
+                                <span class="trait reveal"><i class="fas fa-house" aria-hidden="true"></i>HRA</span>
+                                <span class="trait reveal"><i class="fas fa-sliders" aria-hidden="true"></i>Special allowance</span>
+                                <span class="trait reveal"><i class="fas fa-car-side" aria-hidden="true"></i>Conveyance allowance</span>
+                                <span class="trait reveal"><i class="fas fa-kit-medical" aria-hidden="true"></i>Medical allowance</span>
+                                <span class="trait reveal"><i class="fas fa-plane-departure" aria-hidden="true"></i>LTA</span>
+                                <span class="trait reveal"><i class="fas fa-piggy-bank" aria-hidden="true"></i>Provident fund</span>
+                                <span class="trait reveal"><i class="fas fa-award" aria-hidden="true"></i>Gratuity</span>
+                                <span class="trait reveal"><i class="fas fa-trophy" aria-hidden="true"></i>Performance bonus</span>
+                                <span class="trait reveal"><i class="fas fa-chart-line" aria-hidden="true"></i>Stock options</span>
+                            </div>
+
+                            <p>Each component has its own tax implications and benefits, and knowing these can help you make informed decisions during the negotiation process.</p>
+
+                            <p>By approaching your CTC negotiation with confidence and thorough research, you can ensure that you receive a package that not only provides financial stability but also rewards your contributions to the company.</p>
+
+                            <div class="manifesto reveal">
+                                <p>Remember, a well-negotiated CTC not only boosts your <strong>immediate income</strong> but also enhances your <em>long-term financial security</em> through benefits like provident fund, gratuity, and stock options.</p>
+                            </div>
+
+                            <div class="sign-off reveal"><span class="sign-off-word">All the best.</span></div>
+
+                            <div class="final-q reveal">
+                                <p>Know someone weighing an offer right now? Send this their way.</p>
+                                <div class="cta-row">
+                                    <a class="cta cta--primary" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://manojsatishkumar.com/blog/ctc-salary-negotiation-guide.html" target="_blank" rel="noopener"><i class="fab fa-linkedin-in" aria-hidden="true"></i>Share on LinkedIn</a>
+                                    <a class="cta cta--ghost" href="https://api.whatsapp.com/send?text=https://manojsatishkumar.com/blog/ctc-salary-negotiation-guide.html" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i>Send on WhatsApp</a>
+                                </div>
+                            </div>
+                        </section>
                     </div>
 
                     <div class="share-strip">
                         <span class="share-strip-label">Share this article:</span>
-                        <a href="https://twitter.com/intent/tweet?url=https://manojsatishkumar.com/blog/ctc-salary-negotiation-guide.html" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://manojsatishkumar.com/blog/ctc-salary-negotiation-guide.html" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://manojsatishkumar.com/blog/ctc-salary-negotiation-guide.html" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://api.whatsapp.com/send?text=https://manojsatishkumar.com/blog/ctc-salary-negotiation-guide.html" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://twitter.com/intent/tweet?url=https://manojsatishkumar.com/blog/ctc-salary-negotiation-guide.html" target="_blank" rel="noopener" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://manojsatishkumar.com/blog/ctc-salary-negotiation-guide.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://manojsatishkumar.com/blog/ctc-salary-negotiation-guide.html" target="_blank" rel="noopener" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://api.whatsapp.com/send?text=https://manojsatishkumar.com/blog/ctc-salary-negotiation-guide.html" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </article>
@@ -383,19 +861,28 @@
     </div>
 
     <div id="footer"></div>
-    <button class="back-to-top" id="back-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+    <button class="back-to-top" id="back-to-top" onclick="scrollToTop()" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
     <script src="/lib/jquery/jquery.min.js"></script>
     <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/main.js"></script>
     <script>
         $(function () { $("#desktop-nav-bar").load("/components/desktop-nav-bar.html"); $("#footer").load("/components/footer.html"); $("#author-sidebar").load("/components/side-profile.html"); $("#mock-interview-ad").load("/components/mock-interview-ad.html"); });
-        function toggleMobileAuthor() { document.getElementById('mobile-author').classList.toggle('expanded'); }
         window.addEventListener('scroll', function() { const article = document.querySelector('.article-content'); const progressBar = document.getElementById('reading-progress'); const backToTop = document.getElementById('back-to-top'); if (article) { const scrollY = window.scrollY; const articleTop = article.offsetTop; const articleHeight = article.offsetHeight; const progress = Math.min(100, Math.max(0, ((scrollY - articleTop + window.innerHeight) / articleHeight) * 100)); progressBar.style.width = progress + '%'; } backToTop.classList.toggle('visible', window.scrollY > 500); });
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
         document.addEventListener('contextmenu', e => e.preventDefault());
+
+        if ('IntersectionObserver' in window) {
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('in-view');
+                    revealObserver.unobserve(entry.target);
+                });
+            }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+            document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
+        }
     </script>
 </body>
 
 </html>
-
