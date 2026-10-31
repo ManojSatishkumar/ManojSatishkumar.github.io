@@ -1,0 +1,178 @@
+/*-----------------------------------------------------------------------------------*/
+/*  "More articles" rail - third column on blog article pages
+/*
+/*  Pages opt in with <div class="blog-layout has-rail">; /js/articles-rail.js
+/*  builds the rail from /components/blog-articles-grid.html and removes
+/*  .has-rail again if the list can't be loaded. The .has-rail selectors are
+/*  what let these rules outrank each page's inline .blog-layout styles.
+/*-----------------------------------------------------------------------------------*/
+
+.articles-rail { display: none; }
+
+@media (min-width: 1240px) {
+  .blog-layout.has-rail {
+    grid-template-columns: minmax(260px, 300px) minmax(0, 1fr) minmax(260px, 310px);
+    gap: 32px;
+    max-width: 1640px;
+  }
+
+  .blog-layout.has-rail > .articles-rail {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 100px;
+    max-height: calc(100vh - 196px);
+    background: var(--color-surface, #fff);
+    border: 1px solid var(--color-border, #e2e8f0);
+    border-radius: var(--radius-lg, 20px);
+    box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+    overflow: hidden;
+    animation: rail-in 0.5s ease-out;
+  }
+
+  .blog-layout.has-rail > .articles-rail[hidden] { display: none; }
+}
+
+@media (min-width: 1240px) and (max-width: 1439px) {
+  .blog-layout.has-rail { grid-template-columns: 250px minmax(0, 1fr) 270px; gap: 24px; }
+  .articles-rail .rail-item { grid-template-columns: 84px minmax(0, 1fr); gap: 10px; }
+}
+
+.articles-rail .rail-head { padding: 20px 20px 14px; border-bottom: 1px solid var(--color-border, #e2e8f0); }
+
+.articles-rail .rail-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent, #0ea5e9);
+}
+
+.articles-rail .rail-kicker::before {
+  content: "";
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #0ea5e9, #8b5cf6, #ec4899);
+}
+
+.articles-rail .rail-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 6px; }
+
+.articles-rail .rail-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: var(--color-text, #1a1a2e);
+  margin: 0;
+}
+
+.articles-rail .rail-count { font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted, #64748b); white-space: nowrap; }
+
+.articles-rail .rail-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border, #e2e8f0) transparent;
+  flex: 1;
+  min-height: 0;
+}
+
+.articles-rail .rail-list li { margin: 0; padding: 0; }
+
+.articles-rail .rail-item {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+  border-radius: var(--radius-md, 12px);
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.articles-rail .rail-item:hover,
+.articles-rail .rail-item:focus-visible { background: rgba(14, 165, 233, 0.08); transform: translateX(2px); text-decoration: none; color: inherit; }
+
+.articles-rail .rail-item:focus-visible { outline: 2px solid var(--color-accent, #0ea5e9); outline-offset: -2px; }
+
+.articles-rail .rail-thumb {
+  position: relative;
+  display: block;
+  aspect-ratio: 1200 / 630;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--color-border, #e2e8f0);
+}
+
+.articles-rail .rail-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s ease; }
+.articles-rail .rail-item:hover .rail-thumb img { transform: scale(1.06); }
+
+.articles-rail .rail-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+
+.articles-rail .rail-meta {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted, #64748b);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.articles-rail .rail-name {
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-text, #1a1a2e);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s ease;
+}
+
+.articles-rail .rail-item:hover .rail-name { color: var(--color-accent, #0ea5e9); }
+
+.articles-rail .rail-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 12px 12px;
+  padding: 11px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(90deg, #0ea5e9, #8b5cf6);
+  text-decoration: none;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.articles-rail .rail-all:hover { color: #fff; text-decoration: none; filter: brightness(1.08); transform: translateY(-1px); }
+.articles-rail .rail-all i { transition: transform 0.2s ease; }
+.articles-rail .rail-all:hover i { transform: translateX(3px); }
+
+@keyframes rail-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-layout.has-rail > .articles-rail { animation: none; }
+  .articles-rail .rail-item,
+  .articles-rail .rail-thumb img,
+  .articles-rail .rail-all,
+  .articles-rail .rail-all i { transition: none; }
+}
