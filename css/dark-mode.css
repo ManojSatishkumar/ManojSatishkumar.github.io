@@ -124,16 +124,6 @@ html[data-theme="dark"] .article-prose .salary-table tr:hover {
   background: rgba(56, 189, 248, 0.06);
 }
 
-/* Mock interview ad (components/mock-interview-ad.html) */
-html[data-theme="dark"] .mock-interview-ad {
-  --mock-ad-bg: linear-gradient(135deg, rgba(14, 165, 233, 0.16) 0%, rgba(14, 165, 233, 0.08) 50%, rgba(245, 158, 11, 0.1) 100%);
-  --mock-ad-surface: var(--dm-surface-2);
-  --mock-ad-border: rgba(56, 189, 248, 0.25);
-  --mock-ad-text: var(--dm-heading);
-  --mock-ad-text-muted: var(--dm-text-muted);
-  --mock-ad-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-}
-
 /*-----------------------------------------------------------------------------------*/
 /*  Navigation: menubar, dock rail, mobile bars
 /*-----------------------------------------------------------------------------------*/

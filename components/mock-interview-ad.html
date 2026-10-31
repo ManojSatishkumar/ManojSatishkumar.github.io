@@ -2,154 +2,284 @@
   Mock Interview Ad – embed in blog posts:
   1. Add where you want the ad: <div id="mock-interview-ad"></div>
   2. In your page script: $("#mock-interview-ad").load("/components/mock-interview-ad.html");
-  Requires: Font Awesome (e.g. cdnjs.cloudflare.com/ajax/libs/font-awesome/6.x) for icons.
+  Optional: give the container data-mock-headline="..." (HTML allowed) to replace the default headline.
+  Requires: Font Awesome 6 and Poppins, which every article already loads.
 -->
-<div class="mock-interview-ad" role="complementary" aria-label="Mock interview booking">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet" />
+<aside class="mock-interview-ad" aria-labelledby="mia-title">
   <style>
+    /* Every rule is scoped two classes deep so article styles like `.article-prose p` can't leak in */
     .mock-interview-ad {
-      --mock-ad-bg: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #fef3c7 100%);
-      --mock-ad-surface: #ffffff;
-      --mock-ad-border: rgba(14, 165, 233, 0.25);
-      --mock-ad-accent: #0ea5e9;
-      --mock-ad-accent-hover: #0284c7;
-      --mock-ad-text: #1e293b;
-      --mock-ad-text-muted: #64748b;
-      --mock-ad-radius: 14px;
-      --mock-ad-shadow: 0 4px 14px rgba(14, 165, 233, 0.12);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --mia-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+      --mia-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+      position: relative;
+      isolation: isolate;
       box-sizing: border-box;
       max-width: 100%;
-      margin: 2em 0;
+      margin: 3.4em 0 1.2em;
+      padding: 2.1em 2em 1.8em;
+      border-radius: 26px;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      text-align: left;
+      color: #e2e8f0;
+      background:
+        radial-gradient(circle at 92% 0%, rgba(236, 72, 153, 0.35), transparent 40%),
+        radial-gradient(circle at 0% 100%, rgba(34, 211, 238, 0.26), transparent 45%),
+        linear-gradient(140deg, #0b1224 0%, #1e1b4b 62%, #0b1224 100%);
+      box-shadow: 0 30px 60px rgba(15, 23, 42, 0.3);
     }
     .mock-interview-ad *,
     .mock-interview-ad *::before,
     .mock-interview-ad *::after { box-sizing: border-box; }
-    .mock-interview-ad__card {
-      background: var(--mock-ad-surface);
-      border: 1px solid var(--mock-ad-border);
-      border-radius: var(--mock-ad-radius);
-      box-shadow: var(--mock-ad-shadow);
-      overflow: hidden;
-      display: grid;
-      gap: 0;
+    .mock-interview-ad::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      padding: 1px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.65), rgba(139, 92, 246, 0.25), rgba(236, 72, 153, 0.65));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
     }
-    .mock-interview-ad__banner {
-      background: var(--mock-ad-bg);
-      padding: 1.25rem 1.5rem;
+    html[data-theme="dark"] .mock-interview-ad { box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55); }
+
+    .mock-interview-ad .mia-notif {
+      position: absolute;
+      top: -24px;
+      right: 26px;
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 10px;
+      padding: 9px 16px 9px 9px;
+      border-radius: 16px;
+      background: #f8fafc;
+      color: #0f172a;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+      transform: rotate(2.5deg);
+      transition: transform 0.3s;
     }
-    .mock-interview-ad__avatar {
-      width: 80px;
-      height: 80px;
-      min-width: 80px;
-      border-radius: 14px;
-      object-fit: cover;
-      border: 2px solid var(--mock-ad-border);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    .mock-interview-ad:hover .mia-notif { transform: rotate(0deg) translateY(-3px); }
+    .mock-interview-ad .mia-notif-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 0.85rem;
+      color: #fff;
+      background: #22c55e;
+      animation: mia-ring-pulse 2.2s infinite;
     }
-    .mock-interview-ad__headline {
-      margin: 0;
-      font-size: 1.2rem;
+    .mock-interview-ad .mia-notif-icon i { animation: mia-ring-wiggle 2.2s infinite; }
+    .mock-interview-ad .mia-notif b { display: block; font-size: 0.84rem; font-weight: 800; line-height: 1.25; color: #0f172a; }
+    .mock-interview-ad .mia-notif small { display: block; font-size: 0.74rem; line-height: 1.3; color: #64748b; }
+    @keyframes mia-ring-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); }
+      70% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+    @keyframes mia-ring-wiggle {
+      0%, 55%, 100% { transform: rotate(0); }
+      60% { transform: rotate(-16deg); }
+      65% { transform: rotate(14deg); }
+      70% { transform: rotate(-10deg); }
+      75% { transform: rotate(8deg); }
+      80% { transform: rotate(0); }
+    }
+
+    .mock-interview-ad .mia-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6em;
+      font-family: var(--mia-mono);
+      font-size: 0.72rem;
       font-weight: 700;
-      color: var(--mock-ad-text);
-      line-height: 1.3;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #67e8f9;
     }
-    .mock-interview-ad__body {
-      padding: 1.25rem 1.5rem;
+    .mock-interview-ad .mia-kicker::before { content: ""; width: 26px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, #22d3ee, #f472b6); }
+    .mock-interview-ad .mia-title {
+      margin: 0.55em 0 0.5em;
+      padding: 0;
+      border: 0;
+      font-family: var(--mia-serif);
+      font-size: clamp(1.55rem, 3.2vw, 2.1rem);
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.25;
+      color: #fff;
     }
-    .mock-interview-ad__copy {
-      margin: 0 0 1rem 0;
-      font-size: 0.95rem;
-      line-height: 1.55;
-      color: var(--mock-ad-text-muted);
+    .mock-interview-ad .mia-title em {
+      font-style: italic;
+      background: linear-gradient(90deg, #67e8f9, #c4b5fd, #f9a8d4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
-    .mock-interview-ad__list {
-      margin: 0 0 1.25rem 0;
-      padding-left: 1.25rem;
+    .mock-interview-ad .mia-copy { max-width: 34em; margin: 0 0 1.4em; font-size: 1.02rem; line-height: 1.65; color: #cbd5e1; }
+    .mock-interview-ad .mia-copy strong { font-weight: 600; color: #fff; }
+
+    .mock-interview-ad .mia-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 10px;
+    }
+    .mock-interview-ad .mia-list li {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin: 0;
+      padding: 1em 1em 1.05em;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      font-size: 0.86rem;
+      line-height: 1.45;
+      color: #94a3b8;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+    }
+    .mock-interview-ad .mia-list li::before { content: none; }
+    .mock-interview-ad .mia-list li:hover { transform: translateY(-2px); background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); }
+    .mock-interview-ad .mia-list i {
+      width: 34px;
+      height: 34px;
+      margin-bottom: 0.5em;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
       font-size: 0.9rem;
-      color: var(--mock-ad-text-muted);
-      line-height: 1.6;
+      color: #fff;
     }
-    .mock-interview-ad__list li { margin-bottom: 0.35rem; }
-    .mock-interview-ad__cta {
+    .mock-interview-ad .mia-i-sky { background: linear-gradient(135deg, #38bdf8, #0284c7); }
+    .mock-interview-ad .mia-i-violet { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+    .mock-interview-ad .mia-i-pink { background: linear-gradient(135deg, #f472b6, #db2777); }
+    .mock-interview-ad .mia-list b { font-size: 0.96rem; font-weight: 700; line-height: 1.3; color: #fff; }
+
+    .mock-interview-ad .mia-foot {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 1.5em;
+      padding-top: 1.3em;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .mock-interview-ad .mia-host { display: flex; align-items: center; gap: 12px; }
+    .mock-interview-ad .mia-host img {
+      width: 46px;
+      height: 46px;
+      max-width: none;
+      margin: 0;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid transparent;
+      background: linear-gradient(#0b1224, #0b1224) padding-box, linear-gradient(135deg, #22d3ee, #8b5cf6, #ec4899) border-box;
+      box-shadow: none;
+    }
+    .mock-interview-ad .mia-host b { display: block; font-size: 0.95rem; font-weight: 600; line-height: 1.25; color: #fff; }
+    .mock-interview-ad .mia-host small { display: block; font-size: 0.78rem; line-height: 1.3; color: #94a3b8; }
+
+    .mock-interview-ad .mia-cta {
+      position: relative;
+      overflow: hidden;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      background: var(--mock-ad-accent);
-      color: #fff !important;
-      text-decoration: none !important;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s ease, transform 0.15s ease;
-      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.35);
+      gap: 10px;
+      padding: 14px 26px;
+      border: 0;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #fff;
+      text-decoration: none;
+      background: linear-gradient(135deg, #0ea5e9, #8b5cf6 55%, #ec4899);
+      box-shadow: 0 14px 30px rgba(139, 92, 246, 0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .mock-interview-ad__cta:hover {
-      background: var(--mock-ad-accent-hover);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+    .mock-interview-ad .mia-cta::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -60%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.7s ease;
     }
-    .mock-interview-ad__cta:focus {
-      outline: 2px solid var(--mock-ad-accent);
-      outline-offset: 2px;
+    .mock-interview-ad .mia-cta:hover,
+    .mock-interview-ad .mia-cta:focus { color: #fff; text-decoration: none; }
+    .mock-interview-ad .mia-cta:hover { transform: translateY(-2px); box-shadow: 0 18px 38px rgba(139, 92, 246, 0.6); }
+    .mock-interview-ad .mia-cta:hover::after { left: 130%; }
+    .mock-interview-ad .mia-cta:focus-visible { outline: 3px solid #67e8f9; outline-offset: 3px; }
+    .mock-interview-ad .mia-arrow { transition: transform 0.2s; }
+    .mock-interview-ad .mia-cta:hover .mia-arrow { transform: translateX(4px); }
+    .mock-interview-ad .mia-sr {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
-    @media (min-width: 560px) {
-      .mock-interview-ad__card {
-        grid-template-columns: 1fr auto;
-        align-items: stretch;
-      }
-      .mock-interview-ad__banner {
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        padding: 1.5rem;
-        min-width: 200px;
-      }
-      .mock-interview-ad__headline { font-size: 1.1rem; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mock-interview-ad .mia-notif-icon,
+      .mock-interview-ad .mia-notif-icon i { animation: none; }
+      .mock-interview-ad .mia-cta::after { display: none; }
     }
-    @media (max-width: 400px) {
-      .mock-interview-ad__banner { padding: 1rem 1.25rem; }
-      .mock-interview-ad__body { padding: 1rem 1.25rem; }
-      .mock-interview-ad__headline { font-size: 1.05rem; }
-      .mock-interview-ad__cta { width: 100%; }
+    @media (max-width: 600px) {
+      .mock-interview-ad { margin-top: 2.6em; padding: 1.5em 1.3em 1.4em; }
+      .mock-interview-ad .mia-notif { position: static; width: fit-content; margin: 0 0 1.1em; transform: none; }
+      .mock-interview-ad:hover .mia-notif { transform: none; }
+      .mock-interview-ad .mia-list li { display: grid; grid-template-columns: 34px 1fr; column-gap: 12px; row-gap: 0; align-items: center; padding: 0.8em 0.9em; }
+      .mock-interview-ad .mia-list i { grid-row: span 2; margin: 0; }
+      .mock-interview-ad .mia-foot { flex-direction: column; align-items: stretch; }
+      .mock-interview-ad .mia-cta { width: 100%; padding: 14px 18px; white-space: nowrap; }
     }
   </style>
-  <div class="mock-interview-ad__card">
-    <div class="mock-interview-ad__banner">
-      <img
-        src="/images/me_circle.png"
-        alt="Manoj Satishkumar"
-        class="mock-interview-ad__avatar"
-        width="80"
-        height="80"
-        loading="lazy"
-      />
-      <h3 class="mock-interview-ad__headline">Practice interview</h3>
-    </div>
-    <div class="mock-interview-ad__body">
-      <p class="mock-interview-ad__copy">
-        Book a <strong>Mock Interview</strong> with me and get actionable feedback to improve your confidence and answers.
-      </p>
-      <ul class="mock-interview-ad__list">
-        <li>Realistic interview simulation (behavioral &amp; technical)</li>
-        <li>Personalized feedback and tips</li>
-        <li>Flexible slots — choose a time that works for you</li>
-      </ul>
-      <a
-        href="https://topmate.io/manoj_satishkumar"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="mock-interview-ad__cta"
-      >
-        <i class="fas fa-calendar-check" aria-hidden="true"></i>
-        Book a Mock Interview
-      </a>
-    </div>
+
+  <div class="mia-notif" aria-hidden="true">
+    <span class="mia-notif-icon"><i class="fas fa-phone"></i></span>
+    <span><b>Incoming call &middot; HR</b><small>Interview discussion</small></span>
   </div>
-</div>
+  <div class="mia-kicker">Your next step</div>
+  <h3 class="mia-title" id="mia-title">The interview call is coming.<br /><em>Be ready</em> for it.</h3>
+  <p class="mia-copy">Book a <strong>mock interview</strong> with me and get actionable feedback to improve your confidence and answers.</p>
+  <ul class="mia-list">
+    <li><i class="fas fa-user-tie mia-i-sky" aria-hidden="true"></i><b>Realistic simulation</b>Behavioral &amp; technical rounds</li>
+    <li><i class="fas fa-comment-dots mia-i-violet" aria-hidden="true"></i><b>Personalized feedback</b>Tips you can act on right away</li>
+    <li><i class="fas fa-calendar-days mia-i-pink" aria-hidden="true"></i><b>Flexible slots</b>Choose a time that works for you</li>
+  </ul>
+  <div class="mia-foot">
+    <div class="mia-host">
+      <img src="/images/me_circle.png" alt="" width="46" height="46" loading="lazy" />
+      <span><b>Manoj Satishkumar</b><small>Your interviewer &middot; 1:1 session</small></span>
+    </div>
+    <a class="mia-cta" href="https://topmate.io/manoj_satishkumar" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-calendar-check" aria-hidden="true"></i>Book a mock interview<i class="fas fa-arrow-right mia-arrow" aria-hidden="true"></i><span class="mia-sr"> (opens in a new tab)</span>
+    </a>
+  </div>
+</aside>
+<script>
+  document.querySelectorAll("[data-mock-headline]").forEach(function (host) {
+    var title = host.querySelector(".mia-title");
+    if (title) title.innerHTML = host.getAttribute("data-mock-headline");
+  });
+</script>
