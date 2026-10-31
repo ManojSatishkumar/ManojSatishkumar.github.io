@@ -1,111 +1,153 @@
-<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="'Poppins', 'Segoe UI', Arial, sans-serif">
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="'Poppins', 'Segoe UI', Helvetica, Arial, sans-serif">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#040d1a"/>
-      <stop offset="0.5" stop-color="#0a2540"/>
-      <stop offset="1" stop-color="#03101f"/>
+      <stop offset="0" stop-color="#070b1a"/>
+      <stop offset="0.6" stop-color="#0f1736"/>
+      <stop offset="1" stop-color="#081022"/>
     </linearGradient>
-    <radialGradient id="glowCyan" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.5"/>
-      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    <!-- the crowd: identical CVs -->
+    <pattern id="crowd" x="-18" y="-26" width="108" height="132" patternUnits="userSpaceOnUse">
+      <rect x="11" y="11" width="86" height="110" rx="10" fill="#ffffff" fill-opacity="0.035" stroke="#ffffff" stroke-opacity="0.07"/>
+      <g fill="#ffffff" fill-opacity="0.09">
+        <circle cx="33" cy="36" r="10"/>
+        <rect x="50" y="29" width="38" height="5" rx="2.5"/>
+        <rect x="50" y="39" width="26" height="5" rx="2.5"/>
+        <rect x="22" y="62" width="64" height="5" rx="2.5"/>
+        <rect x="22" y="74" width="52" height="5" rx="2.5"/>
+        <rect x="22" y="86" width="58" height="5" rx="2.5"/>
+        <rect x="22" y="98" width="38" height="5" rx="2.5"/>
+      </g>
+    </pattern>
+    <linearGradient id="veil" x1="0" y1="0" x2="760" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#070b1a" stop-opacity="0.94"/>
+      <stop offset="0.6" stop-color="#070b1a" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#070b1a" stop-opacity="0.15"/>
+    </linearGradient>
+    <radialGradient id="spot" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#0ea5e9" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#0ea5e9" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glowBlue" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#3b82f6" stop-opacity="0.45"/>
-      <stop offset="1" stop-color="#3b82f6" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="hl" x1="75" y1="300" x2="620" y2="360" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#7dd3fc"/>
-      <stop offset="0.5" stop-color="#38bdf8"/>
-      <stop offset="1" stop-color="#22d3ee"/>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="title" x1="60" y1="0" x2="400" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.55" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#f472b6"/>
     </linearGradient>
     <linearGradient id="topbar" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#38bdf8"/>
-      <stop offset="1" stop-color="#818cf8"/>
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#f472b6"/>
     </linearGradient>
-    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
-      <circle cx="1.5" cy="1.5" r="1.5" fill="#ffffff" fill-opacity="0.05"/>
-    </pattern>
-    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
-      <feDropShadow dx="0" dy="16" stdDeviation="22" flood-color="#000000" flood-opacity="0.5"/>
+    <linearGradient id="t1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#0284c7"/></linearGradient>
+    <linearGradient id="t2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
+    <linearGradient id="t3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f472b6"/><stop offset="1" stop-color="#db2777"/></linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000000" flood-opacity="0.55"/>
     </filter>
   </defs>
 
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#dots)"/>
-  <ellipse cx="1050" cy="130" rx="470" ry="360" fill="url(#glowCyan)"/>
-  <ellipse cx="120" cy="640" rx="420" ry="320" fill="url(#glowBlue)"/>
-  <rect x="0" y="0" width="1200" height="6" fill="url(#topbar)"/>
+  <rect width="1200" height="630" fill="url(#crowd)"/>
+  <ellipse cx="870" cy="300" rx="430" ry="330" fill="url(#spot)"/>
+  <rect width="1200" height="630" fill="url(#veil)"/>
 
-  <g fill="#ffffff" fill-opacity="0.35">
-    <circle cx="1112" cy="56" r="4"/>
-    <circle cx="1132" cy="56" r="4"/>
-    <circle cx="1152" cy="56" r="4"/>
-  </g>
-
-  <!-- ===================== RIGHT VISUAL: browser mockup ===================== -->
-  <g transform="translate(742,150)" filter="url(#soft)">
-    <rect x="0" y="0" width="410" height="300" rx="18" fill="#0b1b30" stroke="#ffffff" stroke-opacity="0.14"/>
-    <!-- title bar -->
-    <rect x="0" y="0" width="410" height="42" rx="18" fill="#12233b"/>
-    <rect x="0" y="24" width="410" height="18" fill="#12233b"/>
-    <circle cx="26" cy="21" r="6" fill="#ff5f57"/>
-    <circle cx="48" cy="21" r="6" fill="#febc2e"/>
-    <circle cx="70" cy="21" r="6" fill="#28c840"/>
-    <rect x="120" y="12" width="230" height="18" rx="9" fill="#ffffff" fill-opacity="0.08"/>
-    <!-- content: sidebar avatar -->
-    <circle cx="70" cy="110" r="30" fill="none" stroke="#38bdf8" stroke-width="3"/>
-    <circle cx="70" cy="104" r="11" fill="#38bdf8" fill-opacity="0.9"/>
-    <path d="M 52 130 a 18 15 0 0 1 36 0 Z" fill="#38bdf8" fill-opacity="0.9"/>
-    <rect x="40" y="152" width="60" height="9" rx="4" fill="#ffffff" fill-opacity="0.22"/>
-    <rect x="40" y="168" width="42" height="8" rx="4" fill="#ffffff" fill-opacity="0.14"/>
-    <!-- headline bars -->
-    <rect x="130" y="72" width="230" height="16" rx="6" fill="#ffffff" fill-opacity="0.22"/>
-    <rect x="130" y="98" width="180" height="12" rx="6" fill="#ffffff" fill-opacity="0.14"/>
-    <rect x="130" y="118" width="205" height="12" rx="6" fill="#ffffff" fill-opacity="0.14"/>
-    <!-- project cards -->
-    <rect x="130" y="152" width="70" height="60" rx="10" fill="#38bdf8" fill-opacity="0.9"/>
-    <rect x="210" y="152" width="70" height="60" rx="10" fill="#818cf8" fill-opacity="0.9"/>
-    <rect x="290" y="152" width="70" height="60" rx="10" fill="#22d3ee" fill-opacity="0.9"/>
-    <!-- footer line -->
-    <rect x="40" y="240" width="320" height="10" rx="5" fill="#ffffff" fill-opacity="0.1"/>
-  </g>
-
-  <!-- floating tech badges -->
+  <!-- ===================== The one that stands out ===================== -->
   <g filter="url(#soft)">
-    <rect x="726" y="118" width="52" height="40" rx="10" fill="#e34f26"/>
-    <text x="752" y="144" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">H5</text>
-    <rect x="1080" y="404" width="60" height="40" rx="10" fill="#1572b6"/>
-    <text x="1110" y="430" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">CSS</text>
-    <rect x="700" y="410" width="52" height="40" rx="10" fill="#f7df1e"/>
-    <text x="726" y="436" font-size="16" font-weight="700" fill="#1a1a1a" text-anchor="middle">JS</text>
+    <rect x="618" y="98" width="504" height="364" rx="22" fill="url(#brand)"/>
+    <rect x="620" y="100" width="500" height="360" rx="20" fill="#0b1224"/>
+  </g>
+  <path d="M620 120a20 20 0 0 1 20-20h460a20 20 0 0 1 20 20v26H620z" fill="#ffffff" fill-opacity="0.05"/>
+  <circle cx="644" cy="123" r="6" fill="#f87171"/>
+  <circle cx="664" cy="123" r="6" fill="#fbbf24"/>
+  <circle cx="684" cy="123" r="6" fill="#34d399"/>
+  <rect x="712" y="111" width="300" height="24" rx="12" fill="#ffffff" fill-opacity="0.07"/>
+  <!-- padlock -->
+  <rect x="727" y="122" width="11" height="8" rx="1.5" fill="#34d399"/>
+  <path d="M729.5 122v-2.5a3 3 0 0 1 6 0v2.5" stroke="#34d399" stroke-width="1.8"/>
+  <text x="746" y="129" font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="13" fill="#e2e8f0"><tspan fill="#34d399">https://</tspan>yourname.com</text>
+
+  <!-- portfolio page -->
+  <circle cx="686" cy="204" r="34" fill="url(#brand)"/>
+  <circle cx="686" cy="196" r="11" fill="#ffffff" fill-opacity="0.9"/>
+  <path d="M666 224a20 16 0 0 1 40 0" fill="#ffffff" fill-opacity="0.9"/>
+  <text x="738" y="198" font-size="24" font-weight="800" fill="#ffffff">Your Name</text>
+  <text x="738" y="223" font-size="14" fill="#94a3b8">Software Engineer &#183; Builder</text>
+
+  <rect x="652" y="256" width="96" height="30" rx="15" fill="#0a66c2"/>
+  <text x="700" y="276" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">LinkedIn</text>
+  <rect x="758" y="256" width="84" height="30" rx="15" stroke="#ffffff" stroke-opacity="0.25"/>
+  <text x="800" y="276" text-anchor="middle" font-size="13" font-weight="600" fill="#cbd5e1">GitHub</text>
+  <rect x="852" y="256" width="84" height="30" rx="15" stroke="#ffffff" stroke-opacity="0.25"/>
+  <text x="894" y="276" text-anchor="middle" font-size="13" font-weight="600" fill="#cbd5e1">Resume</text>
+
+  <rect x="652" y="306" width="140" height="92" rx="14" fill="url(#t1)"/>
+  <rect x="804" y="306" width="140" height="92" rx="14" fill="url(#t2)"/>
+  <rect x="956" y="306" width="140" height="92" rx="14" fill="url(#t3)"/>
+  <g fill="#ffffff" fill-opacity="0.75">
+    <rect x="666" y="372" width="70" height="7" rx="3.5"/>
+    <rect x="818" y="372" width="84" height="7" rx="3.5"/>
+    <rect x="970" y="372" width="60" height="7" rx="3.5"/>
+  </g>
+  <g fill="#ffffff" fill-opacity="0.35">
+    <rect x="666" y="384" width="44" height="5" rx="2.5"/>
+    <rect x="818" y="384" width="56" height="5" rx="2.5"/>
+    <rect x="970" y="384" width="40" height="5" rx="2.5"/>
+  </g>
+  <rect x="652" y="420" width="444" height="8" rx="4" fill="#ffffff" fill-opacity="0.08"/>
+
+  <!-- recruiter's cursor on LinkedIn -->
+  <path d="M730 270l0 26 7-6 5 11 5-2-5-11 9-1z" fill="#ffffff" stroke="#0b1224" stroke-width="1.5" stroke-linejoin="round"/>
+
+  <!-- ===================== Notifications ===================== -->
+  <g filter="url(#soft)">
+    <rect x="548" y="430" width="286" height="66" rx="16" fill="#151d36" stroke="#a78bfa" stroke-opacity="0.45"/>
+  </g>
+  <circle cx="582" cy="463" r="17" fill="#8b5cf6" fill-opacity="0.22"/>
+  <path d="M572 463c3-5 6.5-7.5 10-7.5s7 2.5 10 7.5c-3 5-6.5 7.5-10 7.5s-7-2.5-10-7.5z" stroke="#c4b5fd" stroke-width="2"/>
+  <circle cx="582" cy="463" r="3" fill="#c4b5fd"/>
+  <text x="610" y="458" font-size="14" font-weight="700" fill="#ffffff">Recruiter viewed your</text>
+  <text x="610" y="478" font-size="14" font-weight="700" fill="#ffffff">portfolio <tspan font-weight="500" fill="#94a3b8">&#183; just now</tspan></text>
+
+  <g filter="url(#soft)">
+    <rect x="886" y="430" width="252" height="66" rx="16" fill="#f8fafc"/>
+  </g>
+  <circle cx="920" cy="463" r="17" fill="#22c55e"/>
+  <path d="M913.5 457.5c0 7 5 12 12 12l2.5-3.5-4-2.5-2 2c-2.5-1-4.5-3-5.5-5.5l2-2-2.5-4z" fill="#ffffff"/>
+  <text x="948" y="458" font-size="14" font-weight="800" fill="#0f172a">Incoming call &#183; HR</text>
+  <text x="948" y="478" font-size="13" font-weight="500" fill="#64748b">Interview discussion</text>
+
+  <!-- ===================== Title ===================== -->
+  <rect x="64" y="60" width="276" height="36" rx="18" fill="#ffffff" fill-opacity="0.06" stroke="#22d3ee" stroke-opacity="0.5"/>
+  <circle cx="86" cy="78" r="5" fill="#22d3ee"/>
+  <text x="100" y="83" font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="13" font-weight="700" letter-spacing="2" fill="#cffafe">CAREER &#183; PERSONAL BRAND</text>
+
+  <text x="60" y="186" font-size="64" font-weight="800" letter-spacing="-1.5" fill="#ffffff">Build your</text>
+  <text x="60" y="258" font-size="64" font-weight="800" letter-spacing="-1.5" fill="url(#title)">portfolio</text>
+  <text x="60" y="330" font-size="64" font-weight="800" letter-spacing="-1.5" fill="#ffffff">website</text>
+
+  <text x="64" y="384" font-size="21" font-weight="500" fill="#cbd5e1">Separate yourself from the crowd.</text>
+
+  <g font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="12" font-weight="700" fill="#e2e8f0">
+    <rect x="64" y="414" width="90" height="30" rx="15" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.14"/>
+    <text x="109" y="433" text-anchor="middle">domain</text>
+    <rect x="164" y="414" width="128" height="30" rx="15" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.14"/>
+    <text x="228" y="433" text-anchor="middle">github pages</text>
+    <rect x="302" y="414" width="80" height="30" rx="15" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.14"/>
+    <text x="342" y="433" text-anchor="middle">https</text>
+    <rect x="392" y="414" width="102" height="30" rx="15" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.14"/>
+    <text x="443" y="433" text-anchor="middle">linkedin</text>
   </g>
 
-  <!-- ===================== LEFT TEXT ===================== -->
-  <g>
-    <rect x="75" y="70" width="182" height="46" rx="23" fill="#ffffff" fill-opacity="0.08" stroke="#38bdf8" stroke-opacity="0.55"/>
-    <circle cx="102" cy="93" r="6" fill="#38bdf8"/>
-    <text x="120" y="99" font-size="18" font-weight="600" fill="#e0f2fe" letter-spacing="2">CAREER &#183; WEB</text>
+  <g transform="translate(64,560)">
+    <rect x="0" y="0" width="52" height="30" rx="15" stroke="#ffffff" stroke-opacity="0.35"/>
+    <text x="26" y="20" font-size="13" font-weight="700" fill="#ffffff" fill-opacity="0.75" text-anchor="middle">MSK</text>
+    <text x="66" y="20" font-size="15" font-weight="500" fill="#ffffff" fill-opacity="0.6">manojsatishkumar.com</text>
   </g>
 
-  <text x="77" y="176" font-size="17" font-weight="600" fill="#7dd3fc" letter-spacing="4">STEP-BY-STEP BUILD GUIDE</text>
-
-  <text x="72" y="262" font-size="80" font-weight="700" fill="#ffffff" letter-spacing="-1">Build Your</text>
-  <text x="72" y="352" font-size="80" font-weight="700" fill="url(#hl)" letter-spacing="-1">Portfolio</text>
-  <text x="72" y="442" font-size="80" font-weight="700" fill="#ffffff" letter-spacing="-1">Website</text>
-
-  <rect x="75" y="466" width="140" height="6" rx="3" fill="url(#hl)"/>
-
-  <g>
-    <rect x="75" y="500" width="140" height="40" rx="20" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12"/>
-    <text x="145" y="526" font-size="16" font-weight="600" fill="#e0f2fe" text-anchor="middle">8 min read</text>
-
-    <rect x="227" y="500" width="330" height="40" rx="20" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12"/>
-    <text x="392" y="526" font-size="16" font-weight="500" fill="#bae6fd" text-anchor="middle">HTML &#183; CSS &#183; JS &#183; Deploy</text>
-  </g>
-
-  <g transform="translate(75,580)">
-    <rect x="0" y="-2" width="52" height="30" rx="15" fill="none" stroke="#ffffff" stroke-opacity="0.35"/>
-    <text x="26" y="19" font-size="14" font-weight="700" fill="#ffffff" fill-opacity="0.7" text-anchor="middle">MSK</text>
-    <text x="66" y="19" font-size="15" font-weight="500" fill="#ffffff" fill-opacity="0.55">manojsatishkumar.com</text>
-  </g>
+  <rect width="1200" height="6" fill="url(#topbar)"/>
 </svg>

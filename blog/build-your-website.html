@@ -33,777 +33,780 @@
         "@type": "BlogPosting",
         "headline": "Build Your Online Portfolio Website",
         "image": "https://manojsatishkumar.com/images/blogs/build-your-website.png",
-        "author": {
-        "@type": "Person",
-        "name": "Manoj Satishkumar"
-        },
-        "publisher": {
-        "@type": "Organization",
-        "name": "manojsatishkumar.com",
-        "logo": {
-            "@type": "ImageObject",
-            "url": "https://manojsatishkumar.com/images/thumbnail.jpg"
-        }
-        },
+        "author": { "@type": "Person", "name": "Manoj Satishkumar" },
+        "publisher": { "@type": "Organization", "name": "manojsatishkumar.com", "logo": { "@type": "ImageObject", "url": "https://manojsatishkumar.com/images/thumbnail.jpg" } },
         "datePublished": "2024-01-01",
-        "dateModified": "2024-01-01",
+        "dateModified": "2026-11-01",
         "description": "Step-by-step guide to building your online portfolio website. Tips, tools, and best practices by Manoj Satishkumar for developers and professionals.",
         "mainEntityOfPage": "https://manojsatishkumar.com/blog/build-your-website.html"
     }
     </script>
-    
-    <!-- Favicon -->
+
     <link rel="shortcut icon" href="/images/favicon.png" />
-    
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-    
-    <!-- Bootstrap -->
     <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
     <style>
+        :root { --color-bg: #faf9f7; --color-surface: #ffffff; --color-text: #1a1a2e; --color-text-muted: #64748b; --color-accent: #0ea5e9; --color-accent-hover: #0284c7; --color-border: #e2e8f0; --font-display: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif; --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif; --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1); --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; } html { scroll-behavior: smooth; }
+        body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .nav-spacer { height: 80px; }
+        .blog-layout { display: grid; grid-template-columns: 350px 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+        .author-sidebar { position: sticky; top: 100px; height: fit-content; }
+        .article-container { min-width: 0; }
+        .article-content { background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--color-border); overflow: hidden; animation: fadeInUp 0.6s ease-out; }
+        .article-hero { width: 100%; aspect-ratio: 1200/630; object-fit: cover; display: block; }
+        .article-body { padding: 40px; }
+        .article-header { margin-bottom: 32px; padding-bottom: 26px; border-bottom: 1px solid var(--color-border); }
+        .article-category { display: inline-block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-accent); background: rgba(14, 165, 233, 0.1); padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
+        .article-title { font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; line-height: 1.15; margin-bottom: 14px; letter-spacing: -0.025em; }
+        .article-prose { font-family: var(--font-display); font-size: 1.15rem; line-height: 1.85; }
+        .article-prose p { margin-bottom: 1.4em; }
+        .article-prose strong { font-weight: 600; }
+        .article-prose em { font-style: italic; }
+        .article-prose a { color: var(--color-accent); text-decoration: underline; text-decoration-color: rgba(14, 165, 233, 0.35); text-underline-offset: 3px; transition: color 0.2s, text-decoration-color 0.2s; }
+        .article-prose a:hover { color: var(--color-accent-hover); text-decoration-color: currentColor; }
+        .article-prose h2 { font-family: var(--font-sans); font-size: 1.9rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; margin: 0 0 0.8em; color: var(--color-text); }
+        .share-strip { display: flex; align-items: center; gap: 12px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--color-border); }
+        .share-strip-label { font-size: 0.875rem; font-weight: 600; color: var(--color-text-muted); }
+        .share-strip a { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--color-bg); color: var(--color-text-muted); border: 1px solid var(--color-border); transition: all 0.2s; }
+        .share-strip a:hover { background: var(--color-accent); color: white; border-color: var(--color-accent); transform: translateY(-2px); }
+        @media (max-width: 900px) { .blog-layout { grid-template-columns: 1fr; padding: 20px 16px; gap: 0; } .author-sidebar { display: none; } .nav-spacer { height: 60px; } .article-body { padding: 28px 24px; } .article-title { font-size: 2rem; } .article-prose { font-size: 1.06rem; } .article-prose h2 { font-size: 1.55rem; } }
+        @media (max-width: 480px) { .article-body { padding: 22px 18px; } .article-title { font-size: 1.65rem; } .article-prose { font-size: 1.02rem; line-height: 1.8; } .share-strip { flex-wrap: wrap; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .reading-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #22d3ee, #8b5cf6, #ec4899); transform: scaleX(0); transform-origin: left; z-index: 9999; }
+        .back-to-top { position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; border-radius: 50%; background: var(--color-accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: var(--shadow-lg); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background 0.2s; cursor: pointer; z-index: 100; border: none; }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: none; }
+        .back-to-top:hover { background: var(--color-accent-hover); transform: translateY(-3px); }
+        .back-to-top:focus-visible { outline: 3px solid rgba(14, 165, 233, 0.45); outline-offset: 3px; }
+    </style>
+
+    <style>
+        /* ================= Article-specific design ================= */
         :root {
-            --color-bg: #faf9f7;
-            --color-surface: #ffffff;
-            --color-text: #1a1a2e;
-            --color-text-muted: #64748b;
-            --color-accent: #0ea5e9;
-            --color-accent-hover: #0284c7;
-            --color-border: #e2e8f0;
-            --color-highlight: #fef3c7;
-            --font-display: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 20px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            background: var(--color-bg);
-            color: var(--color-text);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Navigation Spacer */
-        .nav-spacer {
-            height: 80px;
-        }
-
-        /* Main Layout */
-        .blog-layout {
-            display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 24px;
-        }
-
-        /* Author Sidebar */
-        .author-sidebar {
-            position: sticky;
-            top: 100px;
-            height: fit-content;
-        }
-
-        .author-card {
-            background: var(--color-surface);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--color-border);
-        }
-
-        .author-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 16px;
-            display: block;
-            border: 3px solid var(--color-border);
-        }
-
-        .author-name {
-            font-family: var(--font-sans);
-            font-size: 1.25rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 4px;
-        }
-
-        .author-title {
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-            text-align: center;
-            margin-bottom: 4px;
-        }
-
-        .author-company {
-            font-size: 0.8rem;
-            color: var(--color-text-muted);
-            text-align: center;
-            margin-bottom: 16px;
-        }
-
-        .author-stats {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            padding: 16px 0;
-            border-top: 1px solid var(--color-border);
-            border-bottom: 1px solid var(--color-border);
-            margin-bottom: 16px;
-        }
-
-        .author-stat {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-        }
-
-        .author-stat i {
-            width: 20px;
-            text-align: center;
-        }
-
-        .author-stat.highlight {
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(14, 165, 233, 0.05));
-            padding: 8px 10px;
-            border-radius: var(--radius-sm);
-            margin: 0 -10px;
-        }
-
-        .author-stat.highlight a {
-            color: var(--color-accent);
-            font-weight: 500;
-            text-decoration: none;
-        }
-
-        .author-social {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .author-social a {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 0.9rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .author-social a:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .author-social .linkedin { background: #0077b5; }
-        .author-social .youtube { background: #ff0000; }
-        .author-social .twitter { background: #1da1f2; }
-        .author-social .github { background: #333; }
-        .author-social .email { background: #10b981; }
-
-        /* Article Content */
-        .article-container {
-            min-width: 0;
-        }
-
-        .article-content {
-            background: var(--color-surface);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--color-border);
-            overflow: hidden;
-        }
-
-        .article-hero {
-            width: 100%;
-            aspect-ratio: 16/9;
-            object-fit: cover;
-        }
-
-        .article-body {
-            padding: 40px;
-        }
-
-        .article-header {
-            margin-bottom: 32px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .article-category {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--color-accent);
-            background: rgba(14, 165, 233, 0.1);
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-bottom: 16px;
-        }
-
-        .article-title {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            font-weight: 600;
-            line-height: 1.2;
-            margin-bottom: 16px;
-            color: var(--color-text);
-        }
-
-        .article-meta {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            color: var(--color-text-muted);
-            font-size: 0.9rem;
-        }
-
-        .article-meta-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* Article Prose */
-        .article-prose {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            line-height: 1.85;
-            color: var(--color-text);
-        }
-
-        .article-prose p {
-            margin-bottom: 1.5em;
-        }
-
-        .article-prose strong {
-            font-weight: 600;
-            color: var(--color-text);
-        }
-
-        .article-prose em {
-            font-style: italic;
-        }
-
-        .article-prose a {
-            color: var(--color-accent);
-            text-decoration: underline;
-            text-decoration-color: rgba(14, 165, 233, 0.3);
-            text-underline-offset: 3px;
-            transition: text-decoration-color 0.2s;
-        }
-
-        .article-prose a:hover {
-            text-decoration-color: var(--color-accent);
-        }
-
-        .article-prose h4 {
-            font-family: var(--font-sans);
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 2em 0 1em;
-            color: var(--color-text);
-        }
-
-        .article-prose ol {
-            margin: 1.5em 0;
-            padding-left: 0;
-            counter-reset: step-counter;
-            list-style: none;
-        }
-
-        .article-prose ol li {
-            position: relative;
-            padding-left: 3.5rem;
-            margin-bottom: 1.5em;
-            counter-increment: step-counter;
-        }
-
-        .article-prose ol li::before {
-            content: counter(step-counter);
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 2.25rem;
-            height: 2.25rem;
-            background: linear-gradient(135deg, var(--color-accent) 0%, #0284c7 100%);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-sans);
-            font-size: 0.9rem;
-            font-weight: 700;
-        }
-
-        .article-prose .highlight-box {
-            background: var(--color-highlight);
-            border-left: 4px solid #f59e0b;
-            padding: 1.5em;
-            margin: 2em 0;
-            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-            font-style: italic;
-        }
-
-        .article-prose .conclusion {
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(14, 165, 233, 0.02) 100%);
-            border: 1px solid rgba(14, 165, 233, 0.2);
-            padding: 2em;
-            border-radius: var(--radius-md);
-            margin-top: 2em;
-        }
-
-        /* Share Strip */
-        .share-strip {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 40px;
-            padding-top: 24px;
-            border-top: 1px solid var(--color-border);
-        }
-
-        .share-strip-label {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--color-text-muted);
-        }
-
-        .share-strip a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--color-bg);
-            color: var(--color-text-muted);
-            transition: all 0.2s;
-            border: 1px solid var(--color-border);
-        }
-
-        .share-strip a:hover {
-            background: var(--color-accent);
-            color: white;
-            border-color: var(--color-accent);
-        }
-
-        /* Mobile Author Card (Collapsible) */
-        .mobile-author {
-            display: none;
-            background: var(--color-surface);
-            border-radius: var(--radius-md);
-            margin-bottom: 24px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--color-border);
-            overflow: hidden;
-        }
-
-        .mobile-author-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .mobile-author-header:hover {
-            background: var(--color-bg);
-        }
-
-        .mobile-author-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .mobile-author-info {
-            flex: 1;
-        }
-
-        .mobile-author-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .mobile-author-title {
-            font-size: 0.8rem;
-            color: var(--color-text-muted);
-        }
-
-        .mobile-author-toggle {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--color-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s;
-        }
-
-        .mobile-author.expanded .mobile-author-toggle {
-            transform: rotate(180deg);
-        }
-
-        .mobile-author-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-
-        .mobile-author.expanded .mobile-author-details {
-            max-height: 400px;
-        }
-
-        .mobile-author-details-inner {
-            padding: 0 16px 16px;
-        }
-
-        .mobile-author-social {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 12px;
-        }
-
-        .mobile-author-social a {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 0.8rem;
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 900px) {
-            .blog-layout {
-                grid-template-columns: 1fr;
-                padding: 20px 16px;
-                gap: 0;
-            }
-
-            .author-sidebar {
-                display: none;
-            }
-
-            .mobile-author {
-                display: block;
-            }
-
-            .nav-spacer {
-                height: 60px;
-            }
-
-            .article-body {
-                padding: 24px;
-            }
-
-            .article-title {
-                font-size: 1.75rem;
-            }
-
-            .article-prose {
-                font-size: 1.1rem;
-            }
-
-            .article-prose ol li {
-                padding-left: 3rem;
-            }
-
-            .article-prose ol li::before {
-                width: 2rem;
-                height: 2rem;
-                font-size: 0.8rem;
-            }
-
-            .article-meta {
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .article-body {
-                padding: 20px 16px;
-            }
-
-            .article-title {
-                font-size: 1.5rem;
-            }
-
-            .article-prose {
-                font-size: 1rem;
-            }
-
-            .share-strip {
-                flex-wrap: wrap;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .article-content {
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        .author-card {
-            animation: fadeInUp 0.6s ease-out 0.2s both;
-        }
-
-        /* Progress Bar */
-        .reading-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--color-accent), #6366f1);
-            z-index: 9999;
-            transition: width 0.1s;
-        }
-
-        /* Back to top */
-        .back-to-top {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--color-accent);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: var(--shadow-lg);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            cursor: pointer;
-            z-index: 100;
-            border: none;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-4px);
-            background: var(--color-accent-hover);
-        }
+            --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+            --ink-strong: #0f172a;
+            --c-sky: #0284c7;
+            --c-violet: #7c3aed;
+            --c-amber: #b45309;
+            --c-rose: #e11d48;
+            --c-emerald: #059669;
+            --grad-brand: linear-gradient(90deg, #0ea5e9 0%, #8b5cf6 55%, #ec4899 100%);
+            --night: linear-gradient(135deg, #0b1224, #1e1b4b);
+        }
+
+        html[data-theme="dark"] {
+            --ink-strong: #f1f5f9;
+            --c-sky: #38bdf8;
+            --c-violet: #a78bfa;
+            --c-amber: #fbbf24;
+            --c-rose: #fb7185;
+            --c-emerald: #34d399;
+            --grad-brand: linear-gradient(90deg, #38bdf8 0%, #a78bfa 55%, #f472b6 100%);
+        }
+
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+        .title-hl { background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        /* Header */
+        .standfirst { margin: 0 0 1.4em; max-width: 36em; font-family: var(--font-serif); font-size: 1.32rem; font-weight: 500; line-height: 1.5; color: var(--color-text-muted); }
+        .byline { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px; font-size: 0.88rem; color: var(--color-text-muted); }
+        .byline-author { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; color: var(--ink-strong); text-decoration: none; transition: color 0.2s; }
+        .byline-author:hover { color: var(--color-accent); }
+        .byline-author img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid transparent; background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box, var(--grad-brand) border-box; }
+        .byline-item { display: inline-flex; align-items: center; gap: 6px; }
+        .byline-item::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: currentColor; opacity: 0.5; margin-right: 6px; }
+
+        /* Sections */
+        .article-prose section { margin-top: 3.4em; }
+        .section-kicker { display: inline-flex; align-items: center; gap: 0.6em; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-violet); margin-bottom: 0.7em; }
+        .section-kicker::before { content: ""; width: 26px; height: 2px; background: var(--grad-brand); border-radius: 2px; }
+
+        .tile-icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; font-size: 1.1rem; color: #fff; flex-shrink: 0; }
+        .g-sky { background: linear-gradient(135deg, #38bdf8, #0284c7); }
+        .g-violet { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+        .g-amber { background: linear-gradient(135deg, #fbbf24, #d97706); }
+        .g-emerald { background: linear-gradient(135deg, #34d399, #059669); }
+        .g-slate { background: linear-gradient(135deg, #94a3b8, #475569); }
+
+        /* Opening */
+        .article-prose .lede { font-size: 1.32rem; line-height: 1.7; color: var(--ink-strong); }
+        .article-prose .lede::first-letter { font-family: var(--font-serif); float: left; font-size: 4.6em; line-height: 0.8; font-weight: 700; margin: 0.06em 0.12em 0 0; background: linear-gradient(135deg, #0ea5e9, #8b5cf6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        .crowd { margin: 2em 0; padding: 1.8em 1.8em 1.7em; border-radius: 24px; color: #f8fafc; background: radial-gradient(circle at 62% 45%, rgba(139, 92, 246, 0.4), transparent 42%), var(--night); box-shadow: 0 24px 50px rgba(15, 23, 42, 0.25); }
+        .crowd-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px 8px; justify-items: center; margin-bottom: 1.5em; }
+        .crowd-grid i { font-size: 1.15rem; color: rgba(148, 163, 184, 0.32); }
+        .crowd-grid .you { position: relative; width: 34px; height: 34px; margin: -6px 0; border-radius: 50%; display: grid; place-items: center; font-size: 0.95rem; color: #fff; background: linear-gradient(135deg, #22d3ee, #8b5cf6, #ec4899); box-shadow: 0 0 0 6px rgba(139, 92, 246, 0.22), 0 0 30px rgba(236, 72, 153, 0.55); }
+        .article-prose .crowd-caption { margin: 0; text-align: center; font-family: var(--font-serif); font-size: clamp(1.35rem, 2.8vw, 1.85rem); font-style: italic; font-weight: 600; line-height: 1.35; }
+        .crowd-caption span { background: linear-gradient(90deg, #67e8f9, #f9a8d4); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        .shift { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: stretch; margin: 1.6em 0; }
+        .shift-card { padding: 1.3em 1.3em 1.4em; border-radius: 20px; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); }
+        .shift-card--after { border-color: rgba(139, 92, 246, 0.45); background: linear-gradient(180deg, rgba(139, 92, 246, 0.09), transparent 55%), var(--color-surface); }
+        .shift-label { display: flex; align-items: center; gap: 8px; margin-bottom: 0.7em; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-text-muted); }
+        .shift-card--after .shift-label { color: var(--c-violet); }
+        .shift-head { margin-bottom: 0.4em; font-weight: 800; font-size: 1.08rem; line-height: 1.3; color: var(--ink-strong); }
+        .article-prose .shift-card p { margin: 0; font-size: 0.98rem; line-height: 1.6; }
+        .shift-arrow { align-self: center; display: grid; place-items: center; gap: 4px; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
+        .shift-arrow i { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 0.9rem; background: var(--grad-brand); box-shadow: 0 10px 24px rgba(139, 92, 246, 0.35); }
+
+        .pullquote { position: relative; margin: 2em 0; padding: 0.4em 0 0.4em 1.2em; border-left: 5px solid transparent; border-image: linear-gradient(180deg, #22d3ee, #8b5cf6, #ec4899) 1; }
+        .article-prose .pullquote p { margin: 0; font-family: var(--font-serif); font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 600; font-style: italic; line-height: 1.35; color: var(--ink-strong); }
+        .pullquote i { display: block; margin-bottom: 0.3em; font-size: 1.4rem; color: var(--c-violet); opacity: 0.7; }
+        .pullquote cite { display: block; margin-top: 0.6em; font-family: var(--font-mono); font-size: 0.74rem; font-style: normal; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+
+        .takeaways { margin: 2em 0 0; padding: 1.4em 1.6em; border-radius: 18px; border: 1px solid var(--color-border); background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), rgba(139, 92, 246, 0.08)); }
+        .takeaways-label { display: flex; align-items: center; gap: 0.5em; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-violet); margin-bottom: 0.9em; }
+        .article-prose .takeaways ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75em; }
+        .article-prose .takeaways li { display: flex; gap: 0.8em; margin: 0; font-size: 1rem; line-height: 1.6; }
+        .takeaways li i { color: var(--c-sky); margin-top: 0.32em; }
+
+        /* Table of contents */
+        .toc { margin: 1.4em 0 0.4em; border-radius: 22px; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); overflow: hidden; }
+        .toc-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0.95em 1.4em; border-bottom: 1px solid var(--color-border); background: linear-gradient(135deg, rgba(14, 165, 233, 0.07), rgba(139, 92, 246, 0.07)); }
+        .toc-label { display: flex; align-items: center; gap: 0.5em; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-violet); }
+        .toc-meta { font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text-muted); }
+        .toc-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+        .toc-phase { padding: 1.1em 1.4em 1.2em; border-bottom: 1px solid var(--color-border); }
+        .toc-phase:nth-child(odd) { border-right: 1px solid var(--color-border); }
+        .toc-phase:nth-last-child(-n+2) { border-bottom: none; }
+        .toc-phase-name { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5em; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+        .toc-phase-name::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--dot); }
+        .toc-phase--sky { --dot: #0ea5e9; }
+        .toc-phase--violet { --dot: #8b5cf6; }
+        .toc-phase--emerald { --dot: #10b981; }
+        .toc-phase--amber { --dot: #f59e0b; }
+        .article-prose .toc ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; }
+        .article-prose .toc li { margin: 0; }
+        .article-prose .toc a { display: grid; grid-template-columns: 28px 1fr; gap: 8px; align-items: baseline; margin: 0 -10px; padding: 6px 10px; border-radius: 10px; font-size: 0.95rem; font-weight: 500; line-height: 1.4; color: var(--ink-strong); text-decoration: none; transition: background 0.2s, color 0.2s, transform 0.2s; }
+        .article-prose .toc a:hover { background: rgba(139, 92, 246, 0.08); color: var(--c-violet); transform: translateX(3px); }
+        .article-prose .toc a.is-active { background: rgba(139, 92, 246, 0.12); color: var(--c-violet); }
+        .article-prose .toc a:focus-visible { outline: 2px solid var(--c-violet); outline-offset: 1px; }
+        .toc-num { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--color-text-muted); }
+        .toc a:hover .toc-num, .toc a.is-active .toc-num { color: var(--c-violet); }
+        .toc-foot { display: block; padding: 0.8em 1.4em; border-top: 1px solid var(--color-border); }
+
+        /* Phase dividers */
+        .phase { display: flex; align-items: baseline; gap: 14px; margin: 3em 0 1.3em; }
+        .phase:first-of-type { margin-top: 2.4em; }
+        .phase-num { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap; color: var(--tone); }
+        .phase-title { font-family: var(--font-serif); font-size: 1.55rem; font-style: italic; font-weight: 600; line-height: 1.2; white-space: nowrap; color: var(--ink-strong); }
+        .phase::after { content: ""; flex: 1; height: 1px; align-self: center; background: linear-gradient(90deg, var(--color-border), transparent); }
+
+        /* Steps */
+        .step { --tone: var(--c-sky); position: relative; display: grid; grid-template-columns: 64px 1fr; gap: 18px; margin: 0 0 1.4em; padding: 1.6em 1.6em 1.5em 1.3em; border-radius: 22px; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); scroll-margin-top: 100px; transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s; }
+        .step:hover { border-color: color-mix(in srgb, var(--tone) 45%, transparent); box-shadow: 0 18px 38px rgba(15, 23, 42, 0.1); }
+        .step--violet, .phase--violet { --tone: var(--c-violet); }
+        .step--emerald, .phase--emerald { --tone: var(--c-emerald); }
+        .step--amber, .phase--amber { --tone: var(--c-amber); }
+        .phase--sky { --tone: var(--c-sky); }
+        .step-rail { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .step-num { font-family: var(--font-serif); font-size: 2.8rem; font-weight: 700; line-height: 0.9; color: var(--tone); }
+        .step-rail .tile-icon { box-shadow: 0 8px 18px color-mix(in srgb, var(--tone) 30%, transparent); }
+        .article-prose .step-title { margin: 0.1em 0 0.25em; font-family: var(--font-sans); font-size: 1.3rem; font-weight: 800; letter-spacing: -0.01em; line-height: 1.25; color: var(--ink-strong); }
+        .step-tag { display: inline-block; margin-bottom: 0.8em; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tone); }
+        .article-prose .step p { margin-bottom: 0.9em; font-size: 1.04rem; line-height: 1.75; }
+        .article-prose .step p:last-child { margin-bottom: 0; }
+        .article-prose .step .pullquote { margin: 1.6em 0 0.2em; }
+        .article-prose .step .pullquote p { font-size: clamp(1.25rem, 2.4vw, 1.55rem); line-height: 1.4; }
+        .step-visual { margin: 1em 0; }
+
+        /* Step visuals */
+        .article-prose .link-card { display: flex; align-items: center; gap: 14px; padding: 0.9em 1.1em; border-radius: 16px; border: 1px solid var(--color-border); background: var(--color-bg); color: var(--ink-strong); text-decoration: none; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; }
+        .article-prose .link-card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--tone) 50%, transparent); box-shadow: var(--shadow-md); color: var(--ink-strong); }
+        .link-card-logo { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; flex-shrink: 0; font-size: 0.8rem; font-weight: 800; color: #fff; background: var(--grad-brand); }
+        .link-card-title { display: block; font-family: var(--font-mono); font-size: 0.92rem; font-weight: 700; line-height: 1.3; }
+        .link-card-sub { display: block; font-size: 0.85rem; line-height: 1.4; color: var(--color-text-muted); }
+        .link-card > i { margin-left: auto; color: var(--tone); }
+
+        .domain-search { padding: 1em; border-radius: 16px; border: 1px solid var(--color-border); background: var(--color-bg); }
+        .ds-input { display: flex; align-items: center; gap: 10px; padding: 0.7em 1em; border-radius: 12px; border: 2px solid color-mix(in srgb, var(--tone) 45%, transparent); background: var(--color-surface); font-family: var(--font-mono); font-size: 0.95rem; color: var(--ink-strong); }
+        .ds-input i { color: var(--color-text-muted); }
+        .ds-tld { color: var(--tone); font-weight: 700; margin-left: -10px; }
+        .ds-caret { width: 2px; height: 1.1em; margin-left: -8px; background: var(--tone); animation: caret 1.1s steps(1) infinite; }
+        @keyframes caret { 50% { opacity: 0; } }
+        .ds-result { display: flex; align-items: center; gap: 10px; margin-top: 0.7em; padding: 0.6em 0.9em; border-radius: 12px; background: color-mix(in srgb, var(--c-emerald) 10%, transparent); font-size: 0.92rem; color: var(--ink-strong); }
+        .ds-result > i { color: var(--c-emerald); }
+        .ds-result b { font-family: var(--font-mono); font-weight: 700; }
+        .ds-btn { margin-left: auto; padding: 4px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; color: #fff; background: var(--c-emerald); }
+
+        .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--color-border); background: var(--color-surface); font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: var(--ink-strong); }
+        .chip i { color: var(--tone); }
+
+        .flow-row { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; }
+        .flow-node { flex: 1 1 96px; min-width: 0; display: flex; flex-direction: column; gap: 2px; padding: 0.75em 0.9em; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--tone) 30%, transparent); background: color-mix(in srgb, var(--tone) 7%, transparent); }
+        .flow-node small { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tone); }
+        .flow-node span { font-size: 0.9rem; font-weight: 600; line-height: 1.35; color: var(--ink-strong); }
+        .flow-arrow { align-self: center; color: var(--color-text-muted); font-size: 0.8rem; }
+
+        .url-compare { display: grid; gap: 8px; }
+        .url-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding: 0.7em 1em; border-radius: 12px; font-family: var(--font-mono); font-size: 0.9rem; color: var(--ink-strong); }
+        .url-bar--bad { background: color-mix(in srgb, var(--c-rose) 8%, transparent); border: 1px solid color-mix(in srgb, var(--c-rose) 30%, transparent); }
+        .url-bar--good { background: color-mix(in srgb, var(--c-emerald) 9%, transparent); border: 1px solid color-mix(in srgb, var(--c-emerald) 35%, transparent); }
+        .url-bar--bad > i { color: var(--c-rose); }
+        .url-bar--good > i { color: var(--c-emerald); }
+        .url-bar--bad .scheme { color: var(--c-rose); text-decoration: line-through; }
+        .url-bar--good .scheme { color: var(--c-emerald); font-weight: 700; }
+        .url-note { margin-left: auto; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; }
+        .url-bar--bad .url-note { color: var(--c-rose); }
+        .url-bar--good .url-note { color: var(--c-emerald); }
+
+        .proof { display: grid; grid-template-columns: 1fr auto 1fr auto 1.1fr; align-items: stretch; gap: 8px; }
+        .proof-item { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 0.8em 0.9em; border-radius: 14px; border: 1px solid var(--color-border); background: var(--color-bg); font-size: 0.88rem; font-weight: 600; line-height: 1.3; color: var(--ink-strong); }
+        .proof-item i { color: var(--tone); font-size: 1.05rem; }
+        .proof-item--total { color: #fff; border-color: transparent; background: linear-gradient(135deg, #10b981, #0284c7); }
+        .proof-item--total i { color: #fff; }
+        .proof-op { align-self: center; font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; color: var(--color-text-muted); }
+
+        .loop { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: 10px; }
+        .loop-node { padding: 0.9em 1em; border-radius: 16px; border: 1px solid var(--color-border); background: var(--color-bg); }
+        .loop-node small { display: block; margin-bottom: 0.35em; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
+        .loop-node strong { display: flex; align-items: center; gap: 8px; margin-bottom: 0.2em; font-size: 0.98rem; color: var(--ink-strong); }
+        .loop-node span { font-size: 0.86rem; line-height: 1.45; color: var(--color-text-muted); }
+        .loop-node .fa-linkedin { color: #0a66c2; }
+        .loop-node .fa-globe { color: var(--c-violet); }
+        .loop-arrows { align-self: center; display: grid; gap: 6px; color: var(--tone); }
+        .loop-result { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--ink-strong); }
+        .loop-result span { padding: 5px 11px; border-radius: 999px; background: color-mix(in srgb, var(--tone) 10%, transparent); }
+        .loop-result i { color: var(--color-text-muted); font-size: 0.7rem; }
+
+        .cv-wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: center; }
+        .cv { padding: 1.1em 1.2em 1.2em; border-radius: 14px; background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12); transform: rotate(-1.5deg); }
+        .cv-name { height: 12px; width: 55%; border-radius: 6px; background: #0f172a; margin-bottom: 8px; }
+        .cv-link { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 12px; padding: 4px 10px; border-radius: 8px; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: #6d28d9; background: #ede9fe; box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2); }
+        .cv-line { height: 7px; border-radius: 4px; background: #e2e8f0; margin-top: 7px; }
+        .cv-line:nth-child(4) { width: 92%; } .cv-line:nth-child(5) { width: 78%; } .cv-line:nth-child(6) { width: 86%; } .cv-line:nth-child(7) { width: 60%; }
+        .stat { text-align: center; }
+        .stat-num { font-family: var(--font-serif); font-size: clamp(3rem, 7vw, 4.2rem); font-weight: 700; line-height: 1; background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+        .stat-label { margin-top: 0.3em; font-size: 0.92rem; font-weight: 500; line-height: 1.4; color: var(--ink-strong); }
+
+        .why-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .why-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 12px; font-size: 0.9rem; font-weight: 600; color: var(--ink-strong); background: color-mix(in srgb, var(--tone) 9%, transparent); border: 1px solid color-mix(in srgb, var(--tone) 28%, transparent); }
+        .why-chip i { color: var(--tone); }
+        .insight { display: flex; gap: 0.8em; align-items: flex-start; margin-top: 1em; padding: 0.85em 1.05em; border-radius: 14px; background: rgba(148, 163, 184, 0.1); font-size: 0.98rem; line-height: 1.6; }
+        .insight i { color: var(--tone); margin-top: 0.3em; }
+
+        /* Closing */
+        .apple { position: relative; overflow: hidden; margin: 1.8em 0; padding: 1.8em 1.9em; border-radius: 24px; color: #f8fafc; background: radial-gradient(circle at 85% 15%, rgba(236, 72, 153, 0.35), transparent 45%), radial-gradient(circle at 10% 100%, rgba(34, 211, 238, 0.28), transparent 45%), var(--night); box-shadow: 0 24px 50px rgba(15, 23, 42, 0.25); }
+        .apple::after { content: "\f179"; font-family: "Font Awesome 6 Brands"; position: absolute; right: 0.3em; bottom: -0.15em; font-size: 9rem; line-height: 1; color: rgba(255, 255, 255, 0.06); }
+        .apple-label { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #67e8f9; margin-bottom: 0.8em; }
+        .article-prose .apple p { position: relative; z-index: 1; margin: 0 0 0.9em; font-size: 1.05rem; line-height: 1.7; color: #cbd5e1; }
+        .article-prose .apple .apple-line { margin: 0; font-family: var(--font-serif); font-size: clamp(1.4rem, 2.8vw, 1.9rem); font-weight: 600; font-style: italic; line-height: 1.3; color: #fff; }
+        .manifesto { position: relative; overflow: hidden; margin: 2em 0; padding: 2.2em 2em; border-radius: 24px; text-align: center; border: 2px solid transparent; background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box, var(--grad-brand) border-box; }
+        .article-prose .manifesto p { margin: 0; font-family: var(--font-serif); font-size: clamp(1.35rem, 2.8vw, 1.8rem); font-weight: 500; line-height: 1.45; color: var(--ink-strong); }
+        .manifesto strong { font-weight: 700; background: linear-gradient(transparent 62%, rgba(139, 92, 246, 0.25) 62%); }
+        .sign-off { display: flex; align-items: center; justify-content: center; gap: 0.35em; margin: 1.6em 0 0.4em; }
+        .sign-off-word { font-family: var(--font-serif); font-size: clamp(2.4rem, 6vw, 3.6rem); font-weight: 700; font-style: italic; line-height: 1.1; background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .sign-off i { font-size: clamp(1.8rem, 4vw, 2.6rem); color: #ec4899; transform: rotate(-12deg); }
+        .final-q { margin: 1.6em 0 0; padding: 1.8em; border-radius: 22px; text-align: center; color: #f8fafc; background: var(--night); }
+        .article-prose .final-q p { margin: 0 0 1.1em; font-family: var(--font-serif); font-size: clamp(1.3rem, 2.6vw, 1.6rem); font-weight: 600; line-height: 1.4; }
+        .cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .article-prose .cta { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 999px; font-size: 0.95rem; font-weight: 700; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s, background 0.2s; }
+        .article-prose .cta:hover { transform: translateY(-2px); }
+        .article-prose .cta--primary { background: #0a66c2; color: #fff; box-shadow: 0 10px 24px rgba(10, 102, 194, 0.35); }
+        .article-prose .cta--primary:hover { color: #fff; background: #0958a8; }
+        .article-prose .cta--ghost { color: #f8fafc; border: 1px solid rgba(255, 255, 255, 0.25); }
+        .article-prose .cta--ghost:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
+
+        /* Scroll reveal: only hides content when JS has confirmed it can show it again */
+        .js-reveal .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .js-reveal .reveal.in-view { opacity: 1; transform: none; }
+        .js-reveal .step.reveal { transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.25s, box-shadow 0.25s; }
+        .step:focus, #closing:focus { outline: none; }
+        @media (prefers-reduced-motion: reduce) {
+            .js-reveal .reveal { opacity: 1; transform: none; transition: none; }
+            .ds-caret { animation: none; }
+        }
+
+        @media (max-width: 760px) {
+            .shift { grid-template-columns: 1fr; }
+            .shift-arrow { grid-auto-flow: column; justify-content: center; }
+            .shift-arrow i { transform: rotate(90deg); }
+            .toc-grid { grid-template-columns: 1fr; }
+            .toc-phase:nth-child(odd) { border-right: none; }
+            .toc-phase:nth-last-child(2) { border-bottom: 1px solid var(--color-border); }
+            .proof { grid-template-columns: 1fr; }
+            .proof-op { justify-self: center; line-height: 1; }
+            .loop { grid-template-columns: 1fr; }
+            .loop-arrows { justify-self: center; grid-auto-flow: column; }
+            .loop-arrows i { transform: rotate(90deg); }
+            .cv-wrap { grid-template-columns: 1fr; }
+            .crowd, .apple, .manifesto { padding: 1.5em 1.3em; }
+        }
+
+        @media (max-width: 600px) {
+            .standfirst { font-size: 1.15rem; }
+            .byline-author { flex-basis: 100%; }
+            .byline-author + .byline-item::before { display: none; }
+            .crowd-grid { grid-template-columns: repeat(8, 1fr); }
+            .crowd-grid i:nth-child(n+25) { display: none; }
+            .step { grid-template-columns: 1fr; gap: 6px; padding: 1.3em 1.2em 1.2em; }
+            .step-rail { flex-direction: row; justify-content: space-between; }
+            .step-num { font-size: 2.3rem; }
+            .phase { flex-wrap: wrap; gap: 4px 12px; margin-top: 2.4em; }
+            .phase-title { white-space: normal; font-size: 1.35rem; }
+            .phase::after { display: none; }
+            .url-note { margin-left: 0; width: 100%; }
+            .toc-head { flex-direction: column; align-items: flex-start; gap: 4px; }
+        }
+
+        /* Dark theme: surfaces and text come from the shared vars; these are the
+           pieces with light-only tints */
+        html[data-theme="dark"] .shift-card,
+        html[data-theme="dark"] .toc,
+        html[data-theme="dark"] .step { box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35); }
+        html[data-theme="dark"] .step:hover { box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45); }
+        html[data-theme="dark"] .crowd,
+        html[data-theme="dark"] .apple { box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5); }
+        html[data-theme="dark"] .final-q { border: 1px solid rgba(255, 255, 255, 0.08); }
     </style>
     <script src="/js/theme.js"></script>
     <link href="/css/dark-mode.css" rel="stylesheet" />
+    <script>
+        if ("IntersectionObserver" in window) document.documentElement.classList.add("js-reveal");
+    </script>
 </head>
 
 <body>
-    <!-- Reading Progress Bar -->
-    <div class="reading-progress" id="reading-progress"></div>
-
-    <!-- Navigation -->
+    <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
     <div id="desktop-nav-bar"></div>
-    
     <div class="nav-spacer"></div>
 
-    <!-- Main Blog Layout -->
     <div class="blog-layout">
-        <!-- Author Sidebar (Desktop) -->
         <aside class="author-sidebar" id="author-sidebar"></aside>
 
-        <!-- Article Content -->
         <main class="article-container">
             <article class="article-content">
-                <img src="/images/blogs/build-your-website.svg" alt="Build Your Online Portfolio Website" class="article-hero">
-                
+                <img src="/images/blogs/build-your-website.svg" alt="A wall of identical, faded CVs with one glowing portfolio website at https://yourname.com standing out. A recruiter's cursor hovers over its LinkedIn link, with notifications saying a recruiter viewed the portfolio and HR is calling for an interview discussion." class="article-hero">
+
                 <div class="article-body">
                     <header class="article-header">
                         <span class="article-category">Career Development</span>
-                        <h1 class="article-title">Let's Build Your Online Portfolio Website</h1>
-                        <div class="article-meta">
-                            <div class="article-meta-item">
-                                <i class="fas fa-user"></i>
-                                <a href="https://manojsatishkumar.com/">Manoj Satishkumar</a>
-                            </div>
-                            <div class="article-meta-item">
-                                <i class="fas fa-clock"></i>
-                                <span>8 min read</span>
-                            </div>
+                        <h1 class="article-title">Let's Build Your <span class="title-hl">Online Portfolio</span> Website</h1>
+                        <p class="standfirst">Ten practical steps, from buying your domain to asking for a referral, to help recruiters find you and call you.</p>
+                        <div class="byline">
+                            <a class="byline-author" href="https://manojsatishkumar.com/"><img src="/images/me_circle.png" alt="" width="38" height="38">Manoj Satishkumar</a>
+                            <span class="byline-item">1 Jan 2024</span>
+                            <span class="byline-item">7 min read</span>
+                            <span class="byline-item">10 steps</span>
                         </div>
                     </header>
 
                     <div class="article-prose">
-                        <p>If you don't have an <strong>online portfolio website</strong> yet, <strong>now</strong> is the time to create one.</p>
-                        
-                        <p>Trust me, your <strong>portfolio website</strong> will play a <strong>major role</strong> in your career advancement and to bring <strong>new opportunities</strong> to you. In this world where there are tons of software engineers graduating from colleges, it can become <strong>hard</strong> for the companies to reach out to the ones who really fit the roles and perform responsibilities.</p>
-                        
-                        <div class="highlight-box">
-                            <em>So you must <strong>separate</strong> yourself from the crowd and be <strong>unique</strong>.</em>
-                        </div>
-                        
-                        <p>This is my <strong>personal experience</strong>. I did not have an online portfolio website in the <strong>starting stages</strong> of my career and I did not get many interview calls. But after I made it and deployed it, I was <strong>surprised</strong> at how many HRs thought I will <strong>fit a role</strong> in their company.</p>
-                        
-                        <p><strong><em>If it has worked for me, it will work for you too.</em></strong></p>
 
-                        <h4>Let's get started:</h4>
+                        <p class="lede">If you don't have an online portfolio website yet, <strong>now</strong> is the time to create one.</p>
 
-                        <ol>
-                            <li>
-                                <p>Go to my <a href="https://manojsatishkumar.com/" target="_blank" rel="noopener noreferrer"><strong>Portfolio website</strong></a> and have a birds-eye view of all the sections & details I have put there.</p>
-                            </li>
-                            <li>
-                                <p>Visit the <a href="https://in.godaddy.com/" target="_blank" rel="noopener noreferrer"><strong>Godaddy website</strong></a> and buy a custom domain that matches your name. You can find YouTube tutorials that can help you with this step.</p>
-                            </li>
-                            <li>
-                                <p>Signup to <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><strong>Github</strong></a> and create your portfolio website code repository with plain HTML, CSS and JS. You can refer to the <a href="https://github.com/ManojSatishkumar/ManojSatishkumar.github.io" target="_blank" rel="noopener noreferrer"><strong>source code</strong></a> of my portfolio if you want. It is publicly available.</p>
-                            </li>
-                            <li>
-                                <p>Enable <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer"><strong>GitHub Pages</strong></a> in your repository settings and set up your DNS server records in <strong>Godaddy</strong> to point to your git repo. Read <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site" target="_blank" rel="noopener noreferrer"><strong>this documentation</strong></a> from Github. You can also watch my <a href="https://youtu.be/1cyKbLapc10?list=PLyYcl2GkJ13hyfUfkyitPobPbpOS5Dnon" target="_blank" rel="noopener noreferrer"><strong>Youtube video</strong></a> for reference.</p>
-                            </li>
-                            <li>
-                                <p>Make sure you enable <a href="https://en.wikipedia.org/wiki/HTTPS" target="_blank" rel="noopener noreferrer"><strong>https://</strong></a> on your website. This is necessary because the recruiters and interviewers will try to check your portfolio website on their <strong>office provided laptops</strong>. If your website is missing <a href="https://www.kaspersky.com/resource-center/definitions/what-is-a-ssl-certificate" target="_blank" rel="noopener noreferrer"><strong>SSL Certificate</strong></a>, it will be blocked in their <a href="https://en.wikipedia.org/wiki/Virtual_private_network" target="_blank" rel="noopener noreferrer"><strong>VPN</strong></a>.</p>
-                            </li>
-                            <li>
-                                <p>Ask some of your colleagues to give you <a href="https://www.linkedin.com/help/linkedin/answer/90/recommendations-overview?lang=en" target="_blank" rel="noopener noreferrer"><strong>Recommendations</strong></a> and <a href="https://www.linkedin.com/help/linkedin/answer/31888/skill-endorsements-overview?lang=en" target="_blank" rel="noopener noreferrer"><strong>Skill endorsements</strong></a> on Linkedin. They act as <strong>social proof</strong> that what you have put on your <a href="https://in.indeed.com/career-advice/resumes-cover-letters/what-is-a-cv" target="_blank" rel="noopener noreferrer"><strong>CV</strong></a> is probably <strong>legitimate</strong> information.</p>
-                            </li>
-                            <li>
-                                <p>On the <strong>homepage</strong> of your portfolio, add links to all the <strong>social media</strong> profiles. <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer"><strong>LinkedIn</strong></a> should be the <strong>first link</strong> in that list. The HRs should be <strong>encouraged</strong> to click on your LinkedIn profile when they visit your website. On the other hand, make sure you add your <strong>website link</strong> to <a href="https://www.linkedin.com/help/linkedin/answer/117363/featured-section-on-your-profile-faqs?lang=en" target="_blank" rel="noopener noreferrer"><strong>LinkedIn's featured section</strong></a>. With these <strong>connected links</strong>, you will navigate the HR recruiter to different places online and generate <strong>curiosity</strong> in you and they will <strong>feel like</strong> giving you a phone call for further discussion. You can always refer to <a href="https://www.linkedin.com/in/manojsatishkumar/" target="_blank" rel="noopener noreferrer"><strong>My LinkedIn profile</strong></a> for reference. Stay active on Linkedin.</p>
-                            </li>
-                            <li>
-                                <p>Update your <a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme" target="_blank" rel="noopener noreferrer"><strong>Github profile readme</strong></a> and showcase all your skills over there. This is not for HR but this is for the <a href="https://en.wikipedia.org/wiki/Team_leader" target="_blank" rel="noopener noreferrer"><strong>Team leads</strong></a> and <strong>Technical interviewers</strong> because once they receive your profile after initial screening is done by HR, they will most likely click on your <strong>GitHub link</strong> present in your <strong>CV</strong> to see what projects you have done. One of my friends, <a href="https://www.linkedin.com/in/spanion/" target="_blank" rel="noopener noreferrer"><strong>Ankit</strong></a> has created an excellent <a href="https://github.com/AKAspanion" target="_blank" rel="noopener noreferrer"><strong>readme file</strong></a>. You can refer to it if interested. Also, read <a href="https://aboutmonica.com/blog/how-to-create-a-github-profile-readme#why-readmes" target="_blank" rel="noopener noreferrer"><strong>this blog post</strong></a> for reference on how to do it.</p>
-                            </li>
-                            <li>
-                                <p>Once you are done setting up your portfolio website, please prepare a good looking <strong>Resume / CV</strong> and include your website link on the <strong>top</strong>. When the HR receives your CV through some communication media, he/she should <strong>feel like clicking</strong> on your website link. So please <strong>highlight</strong> it and move the link to the top. Once they land on your website. You have gained <strong>50% more chances</strong> to receive a phone call for discussion.</p>
-                            </li>
-                            <li>
-                                <p>Don't hesitate to ask your friends, Linkedin connections for a <strong>job referral</strong>. It is incredibly effective. Some of the <strong>best opportunities</strong> I got in my life is through job referral. This is because, if a company receives your profile through an <strong>existing</strong> employee, it <strong>saves their time</strong> in hunting for a fresh candidate and they will have an <strong>established trust</strong> that you are legit. <strong>Trust</strong> plays a major role in recruitment because as much as you need a job in a <strong>good company</strong>, the company needs a good candidate like <strong>you</strong>.</p>
-                            </li>
-                        </ol>
+                        <p>Trust me, your portfolio website will play a <strong>major role</strong> in your career advancement and to bring new opportunities to you. In this world where there are tons of software engineers graduating from colleges, it can become hard for the companies to reach out to the ones who really fit the roles and perform responsibilities.</p>
 
-                        <div id="mock-interview-ad"></div>
+                        <figure class="crowd reveal">
+                            <div class="crowd-grid" aria-hidden="true">
+                                <i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i>
+                                <i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user you"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i>
+                                <i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i><i class="fas fa-user"></i>
+                            </div>
+                            <figcaption><p class="crowd-caption">So you must <span>separate</span> yourself from the crowd and be <span>unique</span>.</p></figcaption>
+                        </figure>
 
-                        <div class="conclusion">
-                            <p>There are a lot of <strong>qualified</strong> and <strong>talented</strong> engineers out there but <strong>only a few</strong> of them make it to the <strong>top</strong>. One of the <strong>distinguishing factors</strong> in their career boost is how well they are able to <strong>present themselves</strong> to the external <strong>world</strong>. Think about this, the world's most valuable company <strong>Apple</strong> is incredibly successful because of the way they present their products. From package unboxing to greeting, everything matters.</p>
-                            
-                            <p>We, <strong>humans</strong>, tend to give our attention to things that are <strong>well crafted</strong>. We are <strong>artists</strong> after all. We value <strong>creativity</strong> and this is what <strong>separates</strong> us from the <strong>rest of the species</strong> on this <strong>planet</strong>. The same rule applies to your <strong>portfolio</strong>. Please give <strong>extreme attention to detail</strong>, describe yourself in a <strong>professional way</strong> and it should be <strong>interesting</strong> to read as well. Trust me, the more time you spend <strong>fine-tuning</strong> your online portfolio, the more it will be <strong>beneficial</strong> to you in the long run in your amazing career. I have experienced this happening to me <strong>over and over again</strong>. So I'm pretty confident this applies <strong>universally</strong>.</p>
-                            
-                            <p><strong><em>Good luck!</em></strong> 🚀</p>
-                        </div>
+                        <!-- ============ Personal story ============ -->
+                        <section>
+                            <div class="section-kicker">A personal story</div>
+                            <h2>What changed for me</h2>
+
+                            <p>This is my personal experience.</p>
+
+                            <div class="shift">
+                                <div class="shift-card reveal">
+                                    <div class="shift-label"><i class="fas fa-phone-slash" aria-hidden="true"></i>Before</div>
+                                    <div class="shift-head">No portfolio website</div>
+                                    <p>I did not have an online portfolio website in the starting stages of my career and I did not get many interview calls.</p>
+                                </div>
+                                <div class="shift-arrow" aria-hidden="true"><i class="fas fa-arrow-right"></i>deployed</div>
+                                <div class="shift-card shift-card--after reveal">
+                                    <div class="shift-label"><i class="fas fa-phone-volume" aria-hidden="true"></i>After</div>
+                                    <div class="shift-head">Portfolio live</div>
+                                    <p>But after I made it and deployed it, I was surprised at how many HRs thought I will fit a role in their company.</p>
+                                </div>
+                            </div>
+
+                            <blockquote class="pullquote reveal">
+                                <i class="fas fa-quote-left" aria-hidden="true"></i>
+                                <p>If it has worked for me, it will work for you too.</p>
+                            </blockquote>
+
+                            <div class="takeaways reveal">
+                                <div class="takeaways-label"><i class="fas fa-bolt" aria-hidden="true"></i> Key takeaways</div>
+                                <ul>
+                                    <li><i class="fas fa-arrow-right" aria-hidden="true"></i><span>A portfolio website makes it easier for companies to find you and see that you fit the role.</span></li>
+                                    <li><i class="fas fa-arrow-right" aria-hidden="true"></i><span>A custom domain, GitHub Pages and HTTPS get it live, and make sure it opens on a recruiter's office laptop.</span></li>
+                                    <li><i class="fas fa-arrow-right" aria-hidden="true"></i><span>Connect your website, LinkedIn, GitHub README and CV, so each one leads to the next.</span></li>
+                                    <li><i class="fas fa-arrow-right" aria-hidden="true"></i><span>Put the link at the top of your CV, and don't hesitate to ask for referrals.</span></li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <!-- ============ The playbook ============ -->
+                        <section>
+                            <div class="section-kicker">The playbook</div>
+                            <h2>Let's get started</h2>
+
+                            <nav class="toc reveal" aria-label="Steps in this guide">
+                                <div class="toc-head">
+                                    <span class="toc-label"><i class="fas fa-list-ol" aria-hidden="true"></i> In this guide</span>
+                                    <span class="toc-meta">10 steps &middot; 4 phases</span>
+                                </div>
+                                <div class="toc-grid">
+                                    <div class="toc-phase toc-phase--sky">
+                                        <div class="toc-phase-name">01 &middot; Plan</div>
+                                        <ol>
+                                            <li><a href="#step-1"><span class="toc-num">01</span>Study a reference portfolio</a></li>
+                                        </ol>
+                                    </div>
+                                    <div class="toc-phase toc-phase--violet">
+                                        <div class="toc-phase-name">02 &middot; Build &amp; ship</div>
+                                        <ol>
+                                            <li><a href="#step-2"><span class="toc-num">02</span>Buy a custom domain</a></li>
+                                            <li><a href="#step-3"><span class="toc-num">03</span>Create your code repository</a></li>
+                                            <li><a href="#step-4"><span class="toc-num">04</span>Publish with GitHub Pages</a></li>
+                                            <li><a href="#step-5"><span class="toc-num">05</span>Enable HTTPS</a></li>
+                                        </ol>
+                                    </div>
+                                    <div class="toc-phase toc-phase--emerald">
+                                        <div class="toc-phase-name">03 &middot; Build trust</div>
+                                        <ol>
+                                            <li><a href="#step-6"><span class="toc-num">06</span>Collect recommendations</a></li>
+                                            <li><a href="#step-7"><span class="toc-num">07</span>Connect your links</a></li>
+                                            <li><a href="#step-8"><span class="toc-num">08</span>Polish your GitHub README</a></li>
+                                        </ol>
+                                    </div>
+                                    <div class="toc-phase toc-phase--amber">
+                                        <div class="toc-phase-name">04 &middot; Get noticed</div>
+                                        <ol>
+                                            <li><a href="#step-9"><span class="toc-num">09</span>Put the link on top of your CV</a></li>
+                                            <li><a href="#step-10"><span class="toc-num">10</span>Ask for job referrals</a></li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="toc-foot">
+                                    <ol>
+                                        <li><a href="#closing"><span class="toc-num"><i class="fas fa-feather-pointed" aria-hidden="true"></i></span>The closing thought</a></li>
+                                    </ol>
+                                </div>
+                            </nav>
+
+                            <!-- Phase 1 -->
+                            <div class="phase phase--sky"><span class="phase-num">Phase 01</span><span class="phase-title">Plan</span></div>
+
+                            <div class="step reveal" id="step-1">
+                                <div class="step-rail"><span class="step-num">01</span><span class="tile-icon g-sky"><i class="fas fa-binoculars" aria-hidden="true"></i></span></div>
+                                <div class="step-body">
+                                    <h3 class="step-title">Study a reference portfolio</h3>
+                                    <span class="step-tag">Get the bird's-eye view</span>
+                                    <p>Go to my <a href="https://manojsatishkumar.com/" target="_blank" rel="noopener noreferrer">portfolio website</a> and have a birds-eye view of all the sections &amp; details I have put there.</p>
+                                    <div class="step-visual">
+                                        <a class="link-card" href="https://manojsatishkumar.com/" target="_blank" rel="noopener noreferrer">
+                                            <span class="link-card-logo">MSK</span>
+                                            <span><span class="link-card-title">manojsatishkumar.com</span><span class="link-card-sub">Open the reference portfolio</span></span>
+                                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phase 2 -->
+                            <div class="phase phase--violet"><span class="phase-num">Phase 02</span><span class="phase-title">Build &amp; ship</span></div>
+
+                            <div class="step step--violet reveal" id="step-2">
+                                <div class="step-rail"><span class="step-num">02</span><span class="tile-icon g-violet"><i class="fas fa-globe" aria-hidden="true"></i></span></div>
+                                <div class="step-body">
+                                    <h3 class="step-title">Buy a custom domain</h3>
+                                    <span class="step-tag">One that matches your name</span>
+                                    <p>Visit the <a href="https://in.godaddy.com/" target="_blank" rel="noopener noreferrer">GoDaddy website</a> and buy a custom domain that matches your name. You can find YouTube tutorials that can help you with this step.</p>
+                                    <div class="step-visual domain-search" role="img" aria-label="A domain search showing that yourname.com is available">
+                                        <div class="ds-input"><i class="fas fa-magnifying-glass" aria-hidden="true"></i><span>yourname</span><span class="ds-tld">.com</span><span class="ds-caret"></span></div>
+                                        <div class="ds-result"><i class="fas fa-circle-check" aria-hidden="true"></i><span><b>yourname.com</b> is available</span><span class="ds-btn">Buy</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step step--violet reveal" id="step-3">
+                                <div class="step-rail"><span class="step-num">03</span><span class="tile-icon g-violet"><i class="fab fa-github" aria-hidden="true"></i></span></div>
+                                <div class="step-body">
+                                    <h3 class="step-title">Create your code repository on GitHub</h3>
+                                    <span class="step-tag">Plain HTML, CSS and JS</span>
+                                    <p>Sign up to <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a> and create your portfolio website code repository with plain HTML, CSS and JS. You can refer to the <a href="https://github.com/ManojSatishkumar/ManojSatishkumar.github.io" target="_blank" rel="noopener noreferrer">source code</a> of my portfolio if you want. It is publicly available.</p>
+                                    <div class="step-visual chips" aria-label="Tech stack">
+                                        <span class="chip"><i class="fab fa-html5" aria-hidden="true"></i>HTML</span>
+                                        <span class="chip"><i class="fab fa-css3-alt" aria-hidden="true"></i>CSS</span>
+                                        <span class="chip"><i class="fab fa-js" aria-hidden="true"></i>JavaScript</span>
+                                        <span class="chip"><i class="fas fa-lock-open" aria-hidden="true"></i>my source code is public</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step step--violet reveal" id="step-4">
+                                <div class="step-rail"><span class="step-num">04</span><span class="tile-icon g-violet"><i class="fas fa-rocket" aria-hidden="true"></i></span></div>
+                                <div class="step-body">
+                                    <h3 class="step-title">Publish with GitHub Pages and point your DNS</h3>
+                                    <span class="step-tag">Domain to repo</span>
+                                    <p>Enable <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a> in your repository settings and set up your DNS server records in GoDaddy to point to your git repo. Read <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site" target="_blank" rel="noopener noreferrer">this documentation</a> from GitHub. You can also watch my <a href="https://youtu.be/1cyKbLapc10?list=PLyYcl2GkJ13hyfUfkyitPobPbpOS5Dnon" target="_blank" rel="noopener noreferrer">YouTube video</a> for reference.</p>
+                                    <div class="step-visual flow-row" role="img" aria-label="Enable GitHub Pages, point GoDaddy DNS records to the repo, and your domain goes live">
+                                        <div class="flow-node"><small>GitHub</small><span>Enable Pages in repo settings</span></div>
+                                        <i class="fas fa-arrow-right flow-arrow" aria-hidden="true"></i>
+                                        <div class="flow-node"><small>GoDaddy</small><span>DNS records point to your repo</span></div>
+                                        <i class="fas fa-arrow-right flow-arrow" aria-hidden="true"></i>
+                                        <div class="flow-node"><small>Live</small><span>yourname.com</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step step--violet reveal" id="step-5">
+                                <div class="step-rail"><span class="step-num">05</span><span class="tile-icon g-violet"><i class="fas fa-lock" aria-hidden="true"></i></span></div>
+                                <div class="step-body">
+                                    <h3 class="step-title">Enable HTTPS</h3>
+                                    <span class="step-tag">Don't get blocked</span>
+                                    <p>Make sure you enable <a href="https://en.wikipedia.org/wiki/HTTPS" target="_blank" rel="noopener noreferrer">https://</a> on your website. This is necessary because the recruiters and interviewers will try to check your portfolio website on their <strong>office provided laptops</strong>. If your website is missing an <a href="https://www.kaspersky.com/resource-center/definitions/what-is-a-ssl-certificate" target="_blank" rel="noopener noreferrer">SSL certificate</a>, it will be blocked in their <a href="https://en.wikipedia.org/wiki/Virtual_private_network" target="_blank" rel="noopener noreferrer">VPN</a>.</p>
+                                    <div class="step-visual url-compare" role="img" aria-label="Without HTTPS the site is blocked on an office VPN; with HTTPS it opens">
+                                        <div class="url-bar url-bar--bad"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i><span><span class="scheme">http://</span>yourname.com</span><span class="url-note">Blocked on the office VPN</span></div>
+                                        <div class="url-bar url-bar--good"><i class="fas fa-lock" aria-hidden="true"></i><span><span class="scheme">https://</span>yourname.com</span><span class="url-note">Opens on office laptops</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phase 3 -->
+                            <div class="phase phase--emerald"><span class="phase-num">Phase 03</span><span class="phase-title">Build trust</span></div>
+
+                            <div class="step step--emerald reveal" id="step-6">
+                                <div class="step-rail"><span class="step-num">06</span><span class="tile-icon g-emerald"><i class="fas fa-thumbs-up" aria-hidden="true"></i></span></div>
+                                <div class="step-body">
+                                    <h3 class="step-title">Collect recommendations and endorsements</h3>
+                                    <span class="step-tag">Social proof</span>
+                                    <p>Ask some of your colleagues to give you <a href="https://www.linkedin.com/help/linkedin/answer/90/recommendations-overview?lang=en" target="_blank" rel="noopener noreferrer">recommendations</a> and <a href="https://www.linkedin.com/help/linkedin/answer/31888/skill-endorsements-overview?lang=en" target="_blank" rel="noopener noreferrer">skill endorsements</a> on LinkedIn. They act as social proof that what you have put on your <a href="https://in.indeed.com/career-advice/resumes-cover-letters/what-is-a-cv" target="_blank" rel="noopener noreferrer">CV</a> is probably legitimate information.</p>
+                                    <div class="step-visual proof" role="img" aria-label="Recommendations plus skill endorsements equal social proof">
+                                        <div class="proof-item"><i class="fas fa-comment-dots" aria-hidden="true"></i>Recommendations</div>
+                                        <span class="proof-op" aria-hidden="true">+</span>
+                                        <div class="proof-item"><i class="fas fa-award" aria-hidden="true"></i>Skill endorsements</div>
+                                        <span class="proof-op" aria-hidden="true">=</span>
+                                        <div class="proof-item proof-item--total"><i class="fas fa-shield-halved" aria-hidden="true"></i>Social proof that your CV is legit</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step step--emerald reveal" id="step-7">
+                                <div class="step-rail"><span class="step-num">07</span><span class="tile-icon g-emerald"><i class="fas fa-link" aria-hidden="true"></i></span></div>
+                                <div class="step-body">
+                                    <h3 class="step-title">Connect your links, LinkedIn first</h3>
+                                    <span class="step-tag">Lead the recruiter around</span>
+                                    <p>On the homepage of your portfolio, add links to all the social media profiles. <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a> should be the <strong>first link</strong> in that list. The HRs should be encouraged to click on your LinkedIn profile when they visit your website. On the other hand, make sure you add your website link to <a href="https://www.linkedin.com/help/linkedin/answer/117363/featured-section-on-your-profile-faqs?lang=en" target="_blank" rel="noopener noreferrer">LinkedIn's featured section</a>.</p>
+                                    <div class="step-visual">
+                                        <div class="loop" role="img" aria-label="Your website links to LinkedIn first, and LinkedIn's featured section links back to your website">
+                                            <div class="loop-node"><small>Your website</small><strong><i class="fas fa-globe" aria-hidden="true"></i>Homepage</strong><span>Social links, with LinkedIn first</span></div>
+                                            <div class="loop-arrows" aria-hidden="true"><i class="fas fa-arrow-right"></i><i class="fas fa-arrow-left"></i></div>
+                                            <div class="loop-node"><small>LinkedIn</small><strong><i class="fab fa-linkedin" aria-hidden="true"></i>Featured section</strong><span>Your website link</span></div>
+                                        </div>
+                                        <div class="loop-result" aria-hidden="true"><span>connected links</span><i class="fas fa-arrow-right"></i><span>curiosity</span><i class="fas fa-arrow-right"></i><span>a phone call</span></div>
+                                    </div>
+                                    <p>With these connected links, you will navigate the HR recruiter to different places online and generate curiosity in you and they will feel like giving you a phone call for further discussion. You can always refer to <a href="https://www.linkedin.com/in/manojsatishkumar/" target="_blank" rel="noopener noreferrer">my LinkedIn profile</a> for reference.</p>
+                                    <div class="insight"><i class="fab fa-linkedin" aria-hidden="true"></i><span>Stay active on LinkedIn.</span></div>
+                                </div>
+                            </div>
+
+                            <div class="step step--emerald reveal" id="step-8">
+                                <div class="step-rail"><span class="step-num">08</span><span class="tile-icon g-emerald"><i class="fas fa-file-code" aria-hidden="true"></i></span></div>
+                                <div class="step-body">
+                                    <h3 class="step-title">Polish your GitHub profile README</h3>
+                                    <span class="step-tag">For team leads &amp; technical interviewers</span>
+                                    <p>Update your <a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme" target="_blank" rel="noopener noreferrer">GitHub profile README</a> and showcase all your skills over there. This is not for HR but this is for the <a href="https://en.wikipedia.org/wiki/Team_leader" target="_blank" rel="noopener noreferrer">team leads</a> and technical interviewers because once they receive your profile after initial screening is done by HR, they will most likely click on your GitHub link present in your CV to see what projects you have done.</p>
+                                    <div class="step-visual flow-row" role="img" aria-label="HR screens your profile, a team lead receives it, clicks the GitHub link on your CV and looks at your projects">
+                                        <div class="flow-node"><small>HR</small><span>Initial screening</span></div>
+                                        <i class="fas fa-arrow-right flow-arrow" aria-hidden="true"></i>
+                                        <div class="flow-node"><small>Team lead</small><span>Receives your profile</span></div>
+                                        <i class="fas fa-arrow-right flow-arrow" aria-hidden="true"></i>
+                                        <div class="flow-node"><small>Your CV</small><span>Clicks your GitHub link</span></div>
+                                        <i class="fas fa-arrow-right flow-arrow" aria-hidden="true"></i>
+                                        <div class="flow-node"><small>GitHub</small><span>Sees your projects</span></div>
+                                    </div>
+                                    <p>One of my friends, <a href="https://www.linkedin.com/in/spanion/" target="_blank" rel="noopener noreferrer">Ankit</a>, has created an excellent <a href="https://github.com/AKAspanion" target="_blank" rel="noopener noreferrer">README file</a>. You can refer to it if interested. Also, read <a href="https://aboutmonica.com/blog/how-to-create-a-github-profile-readme#why-readmes" target="_blank" rel="noopener noreferrer">this blog post</a> for reference on how to do it.</p>
+                                </div>
+                            </div>
+
+                            <!-- Phase 4 -->
+                            <div class="phase phase--amber"><span class="phase-num">Phase 04</span><span class="phase-title">Get noticed</span></div>
+
+                            <div class="step step--amber reveal" id="step-9">
+                                <div class="step-rail"><span class="step-num">09</span><span class="tile-icon g-amber"><i class="fas fa-file-lines" aria-hidden="true"></i></span></div>
+                                <div class="step-body">
+                                    <h3 class="step-title">Put your website link at the top of your CV</h3>
+                                    <span class="step-tag">Make them want to click</span>
+                                    <p>Once you are done setting up your portfolio website, please prepare a good looking resume / CV and include your website link on the <strong>top</strong>. When the HR receives your CV through some communication media, he/she should feel like clicking on your website link. So please highlight it and move the link to the top.</p>
+                                    <div class="step-visual cv-wrap">
+                                        <div class="cv" role="img" aria-label="A CV with the website link highlighted at the top">
+                                            <div class="cv-name"></div>
+                                            <span class="cv-link"><i class="fas fa-link" aria-hidden="true"></i>yourname.com</span>
+                                            <div class="cv-line"></div>
+                                            <div class="cv-line"></div>
+                                            <div class="cv-line"></div>
+                                            <div class="cv-line"></div>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="stat-num">50%</span>
+                                            <div class="stat-label">Once they land on your website, you have gained 50% more chances to receive a phone call for discussion.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step step--amber reveal" id="step-10">
+                                <div class="step-rail"><span class="step-num">10</span><span class="tile-icon g-amber"><i class="fas fa-handshake" aria-hidden="true"></i></span></div>
+                                <div class="step-body">
+                                    <h3 class="step-title">Ask for job referrals</h3>
+                                    <span class="step-tag">Incredibly effective</span>
+                                    <p>Don't hesitate to ask your friends and LinkedIn connections for a job referral. It is incredibly effective. Some of the best opportunities I got in my life came through job referrals. This is because, if a company receives your profile through an existing employee, it saves their time in hunting for a fresh candidate and they will have an established trust that you are legit.</p>
+                                    <div class="step-visual why-chips">
+                                        <span class="why-chip"><i class="fas fa-user-check" aria-hidden="true"></i>Comes through an existing employee</span>
+                                        <span class="why-chip"><i class="fas fa-stopwatch" aria-hidden="true"></i>Saves their hiring time</span>
+                                        <span class="why-chip"><i class="fas fa-shield-heart" aria-hidden="true"></i>Established trust</span>
+                                    </div>
+                                    <blockquote class="pullquote">
+                                        <i class="fas fa-quote-left" aria-hidden="true"></i>
+                                        <p>Trust plays a major role in recruitment because as much as you need a job in a good company, the company needs a good candidate like you.</p>
+                                    </blockquote>
+                                </div>
+                            </div>
+
+                            <div id="mock-interview-ad"></div>
+                        </section>
+
+                        <!-- ============ Closing ============ -->
+                        <section id="closing">
+                            <div class="section-kicker">The closing thought</div>
+                            <h2>How you present yourself matters</h2>
+
+                            <p>There are a lot of qualified and talented engineers out there but only a few of them make it to the top. One of the distinguishing factors in their career boost is how well they are able to <strong>present themselves</strong> to the external world.</p>
+
+                            <div class="apple reveal">
+                                <div class="apple-label">Think about this</div>
+                                <p>The world's most valuable company, Apple, is incredibly successful because of the way they present their products.</p>
+                                <p class="apple-line">From package unboxing to greeting, everything matters.</p>
+                            </div>
+
+                            <p>We, humans, tend to give our attention to things that are well crafted. We are artists after all. We value creativity and this is what separates us from the rest of the species on this planet. The same rule applies to your portfolio.</p>
+
+                            <div class="manifesto reveal">
+                                <p>Please give <strong>extreme attention to detail</strong>, describe yourself in a professional way, and make it interesting to read as well.</p>
+                            </div>
+
+                            <p>Trust me, the more time you spend fine-tuning your online portfolio, the more it will be beneficial to you in the long run in your amazing career. I have experienced this happening to me over and over again. So I'm pretty confident this applies universally.</p>
+
+                            <div class="sign-off reveal"><span class="sign-off-word">Good luck!</span><i class="fas fa-rocket" aria-hidden="true"></i></div>
+
+                            <div class="final-q reveal">
+                                <p>Once your portfolio is live, show it to the world.</p>
+                                <div class="cta-row">
+                                    <a class="cta cta--primary" href="https://www.linkedin.com/in/manojsatishkumar/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i>Connect with me on LinkedIn</a>
+                                    <a class="cta cta--ghost" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://manojsatishkumar.com/blog/build-your-website.html" target="_blank" rel="noopener noreferrer"><i class="fas fa-share-nodes" aria-hidden="true"></i>Share this guide</a>
+                                </div>
+                            </div>
+                        </section>
                     </div>
 
-                    <!-- Share Strip -->
                     <div class="share-strip">
                         <span class="share-strip-label">Share this article:</span>
-                        <a href="https://twitter.com/intent/tweet?url=https://manojsatishkumar.com/blog/build-your-website.html&text=Build%20Your%20Online%20Portfolio%20Website" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://manojsatishkumar.com/blog/build-your-website.html" target="_blank" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://manojsatishkumar.com/blog/build-your-website.html" target="_blank" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://api.whatsapp.com/send?text=Build%20Your%20Online%20Portfolio%20Website%20https://manojsatishkumar.com/blog/build-your-website.html" target="_blank" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://twitter.com/intent/tweet?url=https://manojsatishkumar.com/blog/build-your-website.html&amp;text=Build%20Your%20Online%20Portfolio%20Website" target="_blank" rel="noopener" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://manojsatishkumar.com/blog/build-your-website.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://manojsatishkumar.com/blog/build-your-website.html" target="_blank" rel="noopener" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://api.whatsapp.com/send?text=Build%20Your%20Online%20Portfolio%20Website%20https://manojsatishkumar.com/blog/build-your-website.html" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </article>
-
         </main>
     </div>
 
-    <!-- Footer -->
     <div id="footer"></div>
+    <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="back-to-top" onclick="scrollToTop()">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Scripts -->
     <script src="/lib/jquery/jquery.min.js"></script>
     <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/main.js"></script>
     <script>
-        $(function () {
-            $("#desktop-nav-bar").load("/components/desktop-nav-bar.html");
-            $("#footer").load("/components/footer.html");
-            $("#author-sidebar").load("/components/side-profile.html");
-            $("#mock-interview-ad").load("/components/mock-interview-ad.html");
-        });
-
-        function toggleMobileAuthor() {
-            document.getElementById('mobile-author').classList.toggle('expanded');
-        }
-
-        window.addEventListener('scroll', function() {
-            const article = document.querySelector('.article-content');
-            const progressBar = document.getElementById('reading-progress');
-            const backToTop = document.getElementById('back-to-top');
-            
-            if (article) {
-                const scrollY = window.scrollY;
-                const articleTop = article.offsetTop;
-                const articleHeight = article.offsetHeight;
-                const progress = Math.min(100, Math.max(0, 
-                    ((scrollY - articleTop + window.innerHeight) / articleHeight) * 100
-                ));
-                progressBar.style.width = progress + '%';
-            }
-
-            backToTop.classList.toggle('visible', window.scrollY > 500);
-        });
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
+        $(function () { $("#desktop-nav-bar").load("/components/desktop-nav-bar.html"); $("#footer").load("/components/footer.html"); $("#author-sidebar").load("/components/side-profile.html"); $("#mock-interview-ad").load("/components/mock-interview-ad.html"); });
         document.addEventListener('contextmenu', e => e.preventDefault());
+
+        (function () {
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var article = document.querySelector('.article-content');
+            var progressBar = document.getElementById('reading-progress');
+            var backToTop = document.getElementById('back-to-top');
+            var ticking = false;
+
+            function update() {
+                var rect = article.getBoundingClientRect();
+                var total = article.offsetHeight - window.innerHeight;
+                var progress = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 1;
+                progressBar.style.transform = 'scaleX(' + progress + ')';
+                backToTop.classList.toggle('visible', window.scrollY > 600);
+                ticking = false;
+            }
+            window.addEventListener('scroll', function () {
+                if (!ticking) { ticking = true; requestAnimationFrame(update); }
+            }, { passive: true });
+            window.addEventListener('resize', update);
+            update();
+
+            backToTop.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+            });
+
+            var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a[href^="#"]'));
+            tocLinks.forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    var target = document.getElementById(link.getAttribute('href').slice(1));
+                    if (!target) return;
+                    e.preventDefault();
+                    // main.js binds a jQuery scroll to every "#" link that fights this scroll and sets the hash to "undefined"
+                    e.stopImmediatePropagation();
+                    var style = getComputedStyle(target);
+                    // Unrevealed steps are still shifted by the reveal transform, which would offset the landing spot
+                    var shift = style.transform && style.transform !== 'none' ? new DOMMatrix(style.transform).m42 : 0;
+                    var top = target.getBoundingClientRect().top + window.scrollY - shift - (parseFloat(style.scrollMarginTop) || 0);
+                    window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });
+                    history.replaceState(null, '', '#' + target.id);
+                    target.setAttribute('tabindex', '-1');
+                    target.focus({ preventScroll: true });
+                });
+            });
+
+            if ('IntersectionObserver' in window) {
+                var byId = {};
+                tocLinks.forEach(function (link) { byId[link.getAttribute('href').slice(1)] = link; });
+                var spy = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (!entry.isIntersecting) return;
+                        tocLinks.forEach(function (l) { l.classList.remove('is-active'); });
+                        var active = byId[entry.target.id];
+                        if (active) active.classList.add('is-active');
+                    });
+                }, { rootMargin: '-30% 0px -60% 0px' });
+                Object.keys(byId).forEach(function (id) {
+                    var el = document.getElementById(id);
+                    if (el) spy.observe(el);
+                });
+
+                var revealObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (!entry.isIntersecting) return;
+                        entry.target.classList.add('in-view');
+                        revealObserver.unobserve(entry.target);
+                    });
+                }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+                document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
+            }
+        })();
     </script>
 </body>
 
