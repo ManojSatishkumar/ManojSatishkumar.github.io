@@ -1,95 +1,145 @@
-<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="'Poppins', 'Segoe UI', Arial, sans-serif">
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="'Poppins', 'Segoe UI', Helvetica, Arial, sans-serif">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#0b0920"/>
-      <stop offset="0.5" stop-color="#231c56"/>
-      <stop offset="1" stop-color="#0c0a26"/>
+      <stop offset="0" stop-color="#0a0a1f"/>
+      <stop offset="0.55" stop-color="#17123a"/>
+      <stop offset="1" stop-color="#0a1024"/>
     </linearGradient>
     <radialGradient id="glowViolet" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.55"/>
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.38"/>
       <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glowIndigo" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#6366f1" stop-opacity="0.4"/>
-      <stop offset="1" stop-color="#6366f1" stop-opacity="0"/>
+    <radialGradient id="glowRose" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f43f5e" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#f43f5e" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="hl" x1="75" y1="300" x2="620" y2="360" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#c4b5fd"/>
-      <stop offset="0.5" stop-color="#a78bfa"/>
-      <stop offset="1" stop-color="#818cf8"/>
+    <linearGradient id="title" x1="60" y1="0" x2="420" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fb7185"/>
+      <stop offset="0.5" stop-color="#f472b6"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="node" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#ec4899"/>
     </linearGradient>
     <linearGradient id="topbar" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#a78bfa"/>
+      <stop offset="0" stop-color="#fb7185"/>
+      <stop offset="0.5" stop-color="#a78bfa"/>
       <stop offset="1" stop-color="#22d3ee"/>
     </linearGradient>
-    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
-      <circle cx="1.5" cy="1.5" r="1.5" fill="#ffffff" fill-opacity="0.05"/>
-    </pattern>
-    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
-      <feDropShadow dx="0" dy="16" stdDeviation="22" flood-color="#000000" flood-opacity="0.45"/>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000000" flood-opacity="0.5"/>
     </filter>
   </defs>
 
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#dots)"/>
-  <ellipse cx="1040" cy="120" rx="460" ry="360" fill="url(#glowViolet)"/>
-  <ellipse cx="120" cy="640" rx="420" ry="320" fill="url(#glowIndigo)"/>
-  <rect x="0" y="0" width="1200" height="6" fill="url(#topbar)"/>
+  <ellipse cx="980" cy="300" rx="420" ry="340" fill="url(#glowViolet)"/>
+  <ellipse cx="200" cy="520" rx="360" ry="260" fill="url(#glowRose)"/>
 
-  <g fill="#ffffff" fill-opacity="0.35">
-    <circle cx="1112" cy="56" r="4"/>
-    <circle cx="1132" cy="56" r="4"/>
-    <circle cx="1152" cy="56" r="4"/>
+  <!-- topographic contours: navigating the options -->
+  <g stroke="#c4b5fd" stroke-opacity="0.07" stroke-width="1.5" transform="rotate(-12 960 320)">
+    <ellipse cx="960" cy="320" rx="150" ry="90"/>
+    <ellipse cx="960" cy="320" rx="240" ry="150"/>
+    <ellipse cx="960" cy="320" rx="330" ry="210"/>
+    <ellipse cx="960" cy="320" rx="420" ry="270"/>
+    <ellipse cx="960" cy="320" rx="510" ry="330"/>
   </g>
 
-  <!-- ===================== RIGHT VISUAL: recovery / comeback curve ===================== -->
-  <g transform="translate(770,150)" filter="url(#soft)">
-    <rect x="0" y="0" width="360" height="360" rx="28" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.12"/>
-    <line x1="34" y1="300" x2="326" y2="300" stroke="#ffffff" stroke-opacity="0.15" stroke-width="2"/>
+  <!-- ===================== Title ===================== -->
+  <rect x="64" y="52" width="176" height="36" rx="18" fill="#ffffff" fill-opacity="0.06" stroke="#fb7185" stroke-opacity="0.55"/>
+  <circle cx="86" cy="70" r="5" fill="#fb7185"/>
+  <text x="100" y="75" font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="13" font-weight="700" letter-spacing="2" fill="#ffe4e6">CAREER &#183; PIP</text>
 
-    <!-- dip-then-recover path -->
-    <polyline points="46,120 110,196 165,244 225,168 300,72" fill="none" stroke="#c4b5fd" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-    <!-- low point (the PIP) -->
-    <circle cx="165" cy="244" r="10" fill="#f87171"/>
-    <circle cx="165" cy="244" r="18" fill="none" stroke="#f87171" stroke-opacity="0.4" stroke-width="2"/>
-    <text x="165" y="292" font-size="15" font-weight="600" fill="#fca5a5" text-anchor="middle">PIP</text>
-    <!-- arrowhead up -->
-    <polygon points="300,72 277,78 296,96" fill="#c4b5fd"/>
+  <text x="60" y="146" font-size="48" font-weight="800" letter-spacing="-1.2" fill="#ffffff">What to do when</text>
+  <text x="60" y="208" font-size="58" font-weight="800" letter-spacing="-1.5" fill="url(#title)">put on a PIP</text>
 
-    <!-- success flag / check badge -->
-    <g transform="translate(300,58)">
-      <circle r="30" fill="#22c55e"/>
-      <circle r="30" fill="none" stroke="#ffffff" stroke-opacity="0.6" stroke-width="2"/>
-      <path d="M -13 1 L -4 11 L 14 -10" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- ===================== The formal notice ===================== -->
+  <g transform="rotate(-5 235 435)" filter="url(#soft)">
+    <rect x="80" y="290" width="310" height="290" rx="16" fill="#f8fafc"/>
+    <text x="104" y="324" font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="10.5" font-weight="700" letter-spacing="1.3" fill="#64748b">PERFORMANCE IMPROVEMENT PLAN</text>
+    <line x1="104" y1="338" x2="366" y2="338" stroke="#e2e8f0"/>
+    <text x="104" y="368" font-size="20" font-weight="800" fill="#0f172a">Formal notice</text>
+
+    <text x="104" y="398" font-size="12" font-weight="600" fill="#64748b">Areas to improve</text>
+    <rect x="104" y="408" width="236" height="8" rx="4" fill="#e2e8f0"/>
+    <rect x="104" y="422" width="180" height="8" rx="4" fill="#e2e8f0"/>
+
+    <text x="104" y="456" font-size="12" font-weight="600" fill="#64748b">Timeframe</text>
+    <rect x="104" y="466" width="120" height="8" rx="4" fill="#c7d2fe"/>
+
+    <text x="104" y="498" font-size="12" font-weight="600" fill="#64748b">If goals are not met</text>
+    <rect x="104" y="508" width="206" height="8" rx="4" fill="#fecdd3"/>
+
+    <path d="M108 548c10-14 18-14 20-2s8 10 16-6 14-8 14 2 10 6 22-4" stroke="#1e3a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="104" y1="556" x2="270" y2="556" stroke="#94a3b8" stroke-dasharray="4 4"/>
+    <text x="104" y="572" font-size="11" font-weight="500" fill="#94a3b8">Employee signature</text>
+
+    <g transform="rotate(14 332 362)">
+      <rect x="284" y="344" width="96" height="36" rx="6" stroke="#e11d48" stroke-width="3" fill="#ffffff" fill-opacity="0.6"/>
+      <text x="332" y="369" text-anchor="middle" font-size="17" font-weight="800" letter-spacing="1.5" fill="#e11d48">ON PIP</text>
     </g>
   </g>
 
-  <!-- ===================== LEFT TEXT ===================== -->
+  <!-- ===================== Start: the 1:1 ===================== -->
+  <path d="M396 432H452" stroke="#c4b5fd" stroke-opacity="0.6" stroke-width="2" stroke-dasharray="3 6" stroke-linecap="round"/>
+  <text x="478" y="384" text-anchor="middle" font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="10.5" font-weight="700" letter-spacing="1.4" fill="#c4b5fd">START WITH A 1:1</text>
+
+  <!-- ===================== Four paths ===================== -->
+  <g stroke-linecap="round" fill="none">
+    <path d="M500 432C620 432 610 138 740 138" stroke="#34d399" stroke-opacity="0.18" stroke-width="12"/>
+    <path d="M500 432C620 432 610 256 740 256" stroke="#38bdf8" stroke-opacity="0.18" stroke-width="12"/>
+    <path d="M500 432C620 432 610 374 740 374" stroke="#a78bfa" stroke-opacity="0.18" stroke-width="12"/>
+    <path d="M500 432C620 432 610 492 740 492" stroke="#fbbf24" stroke-opacity="0.22" stroke-width="12"/>
+    <path d="M500 432C620 432 610 138 740 138" stroke="#34d399" stroke-width="3.5"/>
+    <path d="M500 432C620 432 610 256 740 256" stroke="#38bdf8" stroke-width="3.5"/>
+    <path d="M500 432C620 432 610 374 740 374" stroke="#a78bfa" stroke-width="3.5"/>
+    <path d="M500 432C620 432 610 492 740 492" stroke="#fbbf24" stroke-width="3.5"/>
+  </g>
+
+  <g filter="url(#soft)">
+    <circle cx="478" cy="432" r="26" fill="url(#node)"/>
+    <text x="478" y="437" text-anchor="middle" font-size="13" font-weight="800" letter-spacing="0.5" fill="#ffffff">YOU</text>
+  </g>
+
+  <!-- ===================== Option cards ===================== -->
+  <g filter="url(#soft)">
+    <rect x="740" y="96" width="410" height="84" rx="18" fill="#111a33" stroke="#34d399" stroke-opacity="0.55"/>
+    <rect x="740" y="214" width="410" height="84" rx="18" fill="#111a33" stroke="#38bdf8" stroke-opacity="0.55"/>
+    <rect x="740" y="332" width="410" height="84" rx="18" fill="#111a33" stroke="#a78bfa" stroke-opacity="0.55"/>
+    <rect x="740" y="450" width="410" height="84" rx="18" fill="#1a1630" stroke="#fbbf24" stroke-opacity="0.9" stroke-width="2"/>
+  </g>
+
+  <g font-weight="800" font-size="16" text-anchor="middle" fill="#0b1224">
+    <circle cx="776" cy="138" r="18" fill="#34d399"/><text x="776" y="144">1</text>
+    <circle cx="776" cy="256" r="18" fill="#38bdf8"/><text x="776" y="262">2</text>
+    <circle cx="776" cy="374" r="18" fill="#a78bfa"/><text x="776" y="380">3</text>
+    <circle cx="776" cy="492" r="18" fill="#fbbf24"/><text x="776" y="498">4</text>
+  </g>
+
   <g>
-    <rect x="75" y="70" width="216" height="46" rx="23" fill="#ffffff" fill-opacity="0.08" stroke="#a78bfa" stroke-opacity="0.55"/>
-    <circle cx="102" cy="93" r="6" fill="#a78bfa"/>
-    <text x="120" y="99" font-size="18" font-weight="600" fill="#ede9fe" letter-spacing="2">CAREER · GROWTH</text>
+    <text x="808" y="133" font-size="20" font-weight="700" fill="#ffffff">Clear the PIP and stay</text>
+    <text x="808" y="157" font-size="14" fill="#94a3b8">Work hard, stay at least 1 more year</text>
+
+    <text x="808" y="251" font-size="20" font-weight="700" fill="#ffffff">Clear the PIP, then IJP</text>
+    <text x="808" y="275" font-size="14" fill="#94a3b8">Find a better team internally</text>
+
+    <text x="808" y="369" font-size="20" font-weight="700" fill="#ffffff">Clear the PIP, then switch</text>
+    <text x="808" y="393" font-size="14" fill="#94a3b8">Use the time to prepare for outside</text>
+
+    <text x="808" y="487" font-size="20" font-weight="700" fill="#ffffff">Resign and start searching</text>
+    <text x="808" y="511" font-size="14" fill="#fde68a">If the PIP feels unfair</text>
   </g>
 
-  <text x="77" y="176" font-size="17" font-weight="600" fill="#c4b5fd" letter-spacing="4">THE COMPLETE SURVIVAL GUIDE</text>
+  <rect x="1012" y="438" width="126" height="24" rx="12" fill="#fbbf24"/>
+  <text x="1075" y="454" text-anchor="middle" font-family="Menlo, 'SF Mono', Consolas, monospace" font-size="10.5" font-weight="700" letter-spacing="1" fill="#1c1917">&#9733; RECOMMENDED</text>
 
-  <text x="72" y="262" font-size="80" font-weight="700" fill="#ffffff" letter-spacing="-1">What To Do</text>
-  <text x="72" y="352" font-size="80" font-weight="700" fill="#ffffff" letter-spacing="-1">When Put</text>
-  <text x="72" y="442" font-size="80" font-weight="700" fill="url(#hl)" letter-spacing="-1">On a PIP</text>
-
-  <rect x="75" y="466" width="140" height="6" rx="3" fill="url(#hl)"/>
-
-  <g>
-    <rect x="75" y="500" width="150" height="40" rx="20" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12"/>
-    <text x="150" y="526" font-size="16" font-weight="600" fill="#ede9fe" text-anchor="middle">12 min read</text>
-
-    <rect x="237" y="500" width="360" height="40" rx="20" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12"/>
-    <text x="417" y="526" font-size="16" font-weight="500" fill="#ddd6fe" text-anchor="middle">Assess · Plan · Deliver · Decide</text>
+  <!-- Branding -->
+  <g transform="translate(1150,568)" text-anchor="end">
+    <text x="0" y="20" font-size="15" font-weight="500" fill="#ffffff" fill-opacity="0.6">manojsatishkumar.com</text>
+    <rect x="-226" y="0" width="52" height="30" rx="15" stroke="#ffffff" stroke-opacity="0.35"/>
+    <text x="-200" y="20" font-size="13" font-weight="700" fill="#ffffff" fill-opacity="0.75" text-anchor="middle">MSK</text>
   </g>
 
-  <g transform="translate(75,580)">
-    <rect x="0" y="-2" width="52" height="30" rx="15" fill="none" stroke="#ffffff" stroke-opacity="0.35"/>
-    <text x="26" y="19" font-size="14" font-weight="700" fill="#ffffff" fill-opacity="0.7" text-anchor="middle">MSK</text>
-    <text x="66" y="19" font-size="15" font-weight="500" fill="#ffffff" fill-opacity="0.55">manojsatishkumar.com</text>
-  </g>
+  <rect width="1200" height="6" fill="url(#topbar)"/>
 </svg>

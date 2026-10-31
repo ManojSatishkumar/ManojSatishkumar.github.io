@@ -36,15 +36,15 @@
         "author": { "@type": "Person", "name": "Manoj Satishkumar" },
         "publisher": { "@type": "Organization", "name": "manojsatishkumar.com", "logo": { "@type": "ImageObject", "url": "https://manojsatishkumar.com/images/thumbnail.jpg" } },
         "datePublished": "2026-01-04",
-        "dateModified": "2026-01-04",
+        "dateModified": "2026-11-01",
         "description": "Comprehensive guide on what to do when your manager puts you on a Performance Improvement Plan (PIP). Understand your options, the official process, and make the best career decision."
     }
     </script>
-    
+
     <link rel="shortcut icon" href="/images/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -55,72 +55,277 @@
         .nav-spacer { height: 80px; }
         .blog-layout { display: grid; grid-template-columns: 350px 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
         .author-sidebar { position: sticky; top: 100px; height: fit-content; }
-        .author-card { background: var(--color-surface); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-md); border: 1px solid var(--color-border); }
-        .author-avatar { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; display: block; border: 3px solid var(--color-border); }
-        .author-name { font-size: 1.25rem; font-weight: 700; text-align: center; margin-bottom: 4px; }
-        .author-title { font-size: 0.875rem; color: var(--color-text-muted); text-align: center; margin-bottom: 4px; }
-        .author-company { font-size: 0.8rem; color: var(--color-text-muted); text-align: center; margin-bottom: 16px; }
-        .author-stats { display: flex; flex-direction: column; gap: 8px; padding: 16px 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); margin-bottom: 16px; }
-        .author-stat { display: flex; align-items: center; gap: 10px; font-size: 0.875rem; color: var(--color-text-muted); }
-        .author-stat i { width: 20px; text-align: center; }
-        .author-social { display: flex; justify-content: center; gap: 8px; }
-        .author-social a { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.9rem; transition: transform 0.2s; }
-        .author-social a:hover { transform: translateY(-2px); }
-        .author-social .linkedin { background: #0077b5; } .author-social .youtube { background: #ff0000; } .author-social .twitter { background: #1da1f2; } .author-social .github { background: #333; } .author-social .email { background: #10b981; }
         .article-container { min-width: 0; }
         .article-content { background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--color-border); overflow: hidden; animation: fadeInUp 0.6s ease-out; }
-        .article-hero { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+        .article-hero { width: 100%; aspect-ratio: 1200/630; object-fit: cover; display: block; }
         .article-body { padding: 40px; }
         .article-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--color-border); }
         .article-category { display: inline-block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-accent); background: rgba(14, 165, 233, 0.1); padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
-        .article-title { font-family: var(--font-display); font-size: 2.5rem; font-weight: 600; line-height: 1.2; margin-bottom: 16px; }
-        .article-meta { display: flex; align-items: center; gap: 16px; color: var(--color-text-muted); font-size: 0.9rem; }
+        .article-title { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.02em; }
+        .article-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; color: var(--color-text-muted); font-size: 0.9rem; }
         .article-meta-item { display: flex; align-items: center; gap: 6px; }
-        .article-prose { font-family: var(--font-display); font-size: 1.2rem; line-height: 1.85; }
-        .article-prose p { margin-bottom: 1.5em; }
+        .article-prose { font-family: var(--font-display); font-size: 1.15rem; line-height: 1.85; }
+        .article-prose p { margin-bottom: 1.4em; }
         .article-prose strong { font-weight: 600; }
         .article-prose em { font-style: italic; }
         .article-prose a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
-        .article-prose h2 { font-family: var(--font-sans); font-size: 1.75rem; font-weight: 700; margin: 2.5em 0 1em; color: var(--color-text); border-bottom: 2px solid var(--color-border); padding-bottom: 0.5em; }
-        .article-prose h3 { font-family: var(--font-sans); font-size: 1.4rem; font-weight: 700; margin: 2em 0 0.75em; color: var(--color-text); }
-        .article-prose h4 { font-family: var(--font-sans); font-size: 1.2rem; font-weight: 700; margin: 1.5em 0 0.5em; color: var(--color-accent); }
-        .article-prose ul, .article-prose ol { margin-bottom: 1.5em; padding-left: 1.5em; }
-        .article-prose li { margin-bottom: 0.75em; }
-        .article-prose .question-box { background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%); border-left: 4px solid #f59e0b; padding: 1.5em; border-radius: var(--radius-md); margin-bottom: 2em; }
-        .article-prose .question-box p { margin-bottom: 0.5em; font-style: italic; }
-        .article-prose .intro-box { background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(14, 165, 233, 0.03) 100%); border: 1px solid rgba(14, 165, 233, 0.2); padding: 1.5em; border-radius: var(--radius-md); margin-bottom: 2em; }
-        .article-prose .warning-box { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border-left: 4px solid #ef4444; padding: 1.5em; border-radius: var(--radius-md); margin: 2em 0; }
-        .article-prose .tip-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left: 4px solid #22c55e; padding: 1.5em; border-radius: var(--radius-md); margin: 2em 0; }
-        .article-prose .option-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5em; margin: 1.5em 0; box-shadow: var(--shadow-md); }
-        .article-prose .option-card h4 { margin-top: 0; border-left: 4px solid var(--color-accent); padding-left: 0.75em; }
-        .article-prose .process-step { display: flex; gap: 1em; margin-bottom: 1em; align-items: flex-start; }
-        .article-prose .process-step-num { background: var(--color-accent); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 700; flex-shrink: 0; font-family: var(--font-sans); }
-        .article-prose .process-step-content { flex: 1; }
-        .article-prose .conclusion { background: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(14, 165, 233, 0.02) 100%); border: 1px solid rgba(14, 165, 233, 0.2); padding: 2em; border-radius: var(--radius-md); margin-top: 2em; }
+        .article-prose h2 { font-family: var(--font-sans); font-size: 1.9rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; margin: 0 0 0.8em; color: var(--color-text); }
         .share-strip { display: flex; align-items: center; gap: 12px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--color-border); }
         .share-strip-label { font-size: 0.875rem; font-weight: 600; color: var(--color-text-muted); }
         .share-strip a { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--color-bg); color: var(--color-text-muted); border: 1px solid var(--color-border); transition: all 0.2s; }
         .share-strip a:hover { background: var(--color-accent); color: white; border-color: var(--color-accent); }
-        .mobile-author { display: none; background: var(--color-surface); border-radius: var(--radius-md); margin-bottom: 24px; border: 1px solid var(--color-border); overflow: hidden; }
-        .mobile-author-header { display: flex; align-items: center; gap: 12px; padding: 16px; cursor: pointer; }
-        .mobile-author-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
-        .mobile-author-info { flex: 1; } .mobile-author-name { font-weight: 600; font-size: 0.95rem; } .mobile-author-title { font-size: 0.8rem; color: var(--color-text-muted); }
-        .mobile-author-toggle { width: 32px; height: 32px; border-radius: 50%; background: var(--color-bg); display: flex; align-items: center; justify-content: center; transition: transform 0.3s; }
-        .mobile-author.expanded .mobile-author-toggle { transform: rotate(180deg); }
-        .mobile-author-details { max-height: 0; overflow: hidden; transition: max-height 0.3s; }
-        .mobile-author.expanded .mobile-author-details { max-height: 400px; }
-        .mobile-author-details-inner { padding: 0 16px 16px; }
-        .mobile-author-social { display: flex; gap: 8px; margin-top: 12px; }
-        .mobile-author-social a { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.8rem; }
-        @media (max-width: 900px) { .blog-layout { grid-template-columns: 1fr; padding: 20px 16px; gap: 0; } .author-sidebar { display: none; } .mobile-author { display: block; } .nav-spacer { height: 60px; } .article-body { padding: 24px; } .article-title { font-size: 1.75rem; } .article-prose { font-size: 1.1rem; } .article-prose h2 { font-size: 1.5rem; } .article-prose h3 { font-size: 1.25rem; } }
+        @media (max-width: 900px) { .blog-layout { grid-template-columns: 1fr; padding: 20px 16px; gap: 0; } .author-sidebar { display: none; } .nav-spacer { height: 60px; } .article-body { padding: 24px; } .article-title { font-size: 1.75rem; } .article-prose { font-size: 1.05rem; } .article-prose h2 { font-size: 1.5rem; } }
         @media (max-width: 480px) { .article-body { padding: 20px 16px; } .article-title { font-size: 1.5rem; } .article-prose { font-size: 1rem; } .share-strip { flex-wrap: wrap; } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .reading-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, var(--color-accent), #6366f1); z-index: 9999; }
+        .reading-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #fb7185, #8b5cf6, #22d3ee); z-index: 9999; }
         .back-to-top { position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; border-radius: 50%; background: var(--color-accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: var(--shadow-lg); opacity: 0; visibility: hidden; transition: all 0.3s; cursor: pointer; z-index: 100; border: none; }
         .back-to-top.visible { opacity: 1; visibility: visible; }
     </style>
+
+    <style>
+        /* ================= Article-specific design ================= */
+        :root {
+            --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+            --ink-strong: #0f172a;
+            --c-sky: #0284c7;
+            --c-violet: #7c3aed;
+            --c-amber: #b45309;
+            --c-rose: #e11d48;
+            --c-emerald: #059669;
+            --grad-brand: linear-gradient(90deg, #0ea5e9 0%, #8b5cf6 55%, #ec4899 100%);
+            --grad-alert: linear-gradient(90deg, #fb7185 0%, #f472b6 50%, #a78bfa 100%);
+        }
+
+        html[data-theme="dark"] {
+            --ink-strong: #f1f5f9;
+            --c-sky: #38bdf8;
+            --c-violet: #a78bfa;
+            --c-amber: #fbbf24;
+            --c-rose: #fb7185;
+            --c-emerald: #34d399;
+            --grad-brand: linear-gradient(90deg, #38bdf8 0%, #a78bfa 55%, #f472b6 100%);
+        }
+
+        .title-hl { background: var(--grad-alert); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        /* Sections */
+        .article-prose section { margin-top: 3.4em; }
+        .section-kicker { display: inline-flex; align-items: center; gap: 0.6em; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-violet); margin-bottom: 0.7em; }
+        .section-kicker::before { content: ""; width: 26px; height: 2px; background: var(--grad-brand); border-radius: 2px; }
+
+        .tile-icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; font-size: 1.1rem; color: #fff; flex-shrink: 0; }
+        .g-sky { background: linear-gradient(135deg, #38bdf8, #0284c7); }
+        .g-violet { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+        .g-amber { background: linear-gradient(135deg, #fbbf24, #d97706); }
+        .g-rose { background: linear-gradient(135deg, #fb7185, #e11d48); }
+        .g-emerald { background: linear-gradient(135deg, #34d399, #059669); }
+        .g-slate { background: linear-gradient(135deg, #94a3b8, #475569); }
+
+        /* Opening */
+        .ask-card { margin: 0 0 2.2em; padding: 1.3em 1.5em 1.5em; border-radius: 20px; border: 1px solid rgba(245, 158, 11, 0.35); background: linear-gradient(135deg, rgba(245, 158, 11, 0.09), rgba(244, 63, 94, 0.06)); }
+        .ask-head { display: flex; align-items: center; gap: 12px; margin-bottom: 0.9em; }
+        .ask-head .tile-icon { width: 40px; height: 40px; border-radius: 50%; font-size: 0.95rem; }
+        .ask-name { font-weight: 700; font-size: 0.98rem; line-height: 1.2; color: var(--ink-strong); }
+        .ask-tag { font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text-muted); }
+        .ask-head > i { margin-left: auto; font-size: 1.3rem; color: var(--c-amber); opacity: 0.7; }
+        .article-prose .ask-card p { margin: 0; font-family: var(--font-serif); font-size: clamp(1.15rem, 2.2vw, 1.35rem); font-style: italic; font-weight: 500; line-height: 1.55; color: var(--ink-strong); }
+        .ask-card strong { font-weight: 700; color: var(--c-rose); }
+
+        .article-prose .salutation { margin-bottom: 0.6em; font-family: var(--font-serif); font-size: 1.45rem; font-style: italic; font-weight: 600; color: var(--c-violet); }
+        .article-prose .lede { font-size: 1.3rem; line-height: 1.75; color: var(--ink-strong); }
+        .article-prose .lede::first-letter { font-family: var(--font-serif); float: left; font-size: 4.6em; line-height: 0.8; font-weight: 700; margin: 0.06em 0.12em 0 0; background: linear-gradient(135deg, #fb7185, #8b5cf6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .article-prose .punchline { font-family: var(--font-serif); font-style: italic; font-weight: 600; font-size: clamp(1.35rem, 2.7vw, 1.8rem); line-height: 1.4; text-align: center; margin: 1.2em 0 1.6em; color: var(--ink-strong); }
+        .punchline span { background: linear-gradient(transparent 60%, rgba(244, 63, 94, 0.25) 60%); padding: 0 0.1em; }
+
+        .tldr { border: 1px solid var(--color-border); border-radius: 18px; padding: 1.4em 1.6em; margin: 0 0 1em; background: linear-gradient(135deg, rgba(244, 63, 94, 0.07), rgba(139, 92, 246, 0.08)); }
+        .tldr-label { display: flex; align-items: center; gap: 0.5em; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-violet); margin-bottom: 0.9em; }
+        .article-prose .tldr ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75em; }
+        .article-prose .tldr li { display: flex; gap: 0.8em; margin: 0; font-size: 1rem; line-height: 1.6; }
+        .tldr li i { color: var(--c-rose); margin-top: 0.32em; }
+
+        /* The 1:1 */
+        .invite { display: grid; grid-template-columns: 112px 1fr; margin: 1.6em 0; border-radius: 20px; overflow: hidden; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); }
+        .invite-date { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3em; color: #fff; background: radial-gradient(circle at 70% 10%, rgba(236, 72, 153, 0.45), transparent 55%), linear-gradient(160deg, #7c3aed, #1e1b4b); }
+        .invite-big { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; line-height: 1; }
+        .invite-date i { font-size: 1rem; opacity: 0.8; }
+        .invite-body { padding: 1.1em 1.3em 1.2em; }
+        .invite-title { font-weight: 800; font-size: 1.08rem; line-height: 1.3; color: var(--ink-strong); }
+        .invite-sub { margin: 0.2em 0 0.7em; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+        .article-prose .invite ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5em; }
+        .article-prose .invite li { margin: 0; display: grid; grid-template-columns: 20px 1fr; gap: 0.6em; font-size: 0.98rem; line-height: 1.5; }
+        .invite li i { color: var(--c-violet); margin-top: 0.3em; }
+
+        .statement { font-family: var(--font-sans); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.02em; line-height: 1.25; margin: 0.4em 0 0; color: var(--ink-strong); }
+        .statement span { background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        /* The official process */
+        .article-prose .flow { list-style: none; padding: 0; margin: 1.4em 0 1.2em; position: relative; counter-reset: step; }
+        .flow::before { content: ""; position: absolute; left: 23px; top: 10px; bottom: 10px; width: 2px; background: linear-gradient(180deg, #fbbf24, #8b5cf6, #22d3ee); opacity: 0.6; }
+        .article-prose .flow li { position: relative; display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start; margin: 0 0 1em; counter-increment: step; }
+        .article-prose .flow li.flow-phase { display: block; counter-increment: none; margin: 1.4em 0 0.9em 64px; }
+        .article-prose .flow li.flow-phase:first-child { margin-top: 0; }
+        .phase-chip { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 999px; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; }
+        .flow-icon { position: relative; z-index: 1; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--color-surface); border: 2px solid rgba(139, 92, 246, 0.5); color: var(--c-violet); font-size: 1rem; box-shadow: var(--shadow-md); }
+        .flow-text { padding-top: 0.35em; font-size: 1rem; line-height: 1.6; }
+        .flow-step { display: block; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+        .flow-step::before { content: "Step " counter(step) " / "; }
+        .flow-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.5em; }
+        .flow-tag { padding: 3px 10px; border-radius: 999px; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; color: var(--c-violet); background: color-mix(in srgb, var(--c-violet) 10%, transparent); border: 1px solid color-mix(in srgb, var(--c-violet) 28%, transparent); }
+
+        .outcome { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin: 0.6em 0 1.8em; }
+        .outcome-card { position: relative; padding: 1.2em 1.3em 1.3em; border-radius: 20px; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); }
+        .outcome--win { border-color: color-mix(in srgb, var(--c-emerald) 45%, transparent); background: linear-gradient(180deg, rgba(16, 185, 129, 0.09), transparent 50%), var(--color-surface); }
+        .outcome--lose { border-color: color-mix(in srgb, var(--c-rose) 45%, transparent); background: linear-gradient(180deg, rgba(244, 63, 94, 0.08), transparent 50%), var(--color-surface); }
+        .outcome-head { display: flex; align-items: center; gap: 10px; margin-bottom: 0.6em; }
+        .outcome-head i { font-size: 1.5rem; }
+        .outcome--win .outcome-head i { color: var(--c-emerald); }
+        .outcome--lose .outcome-head i { color: var(--c-rose); }
+        .outcome-step { display: block; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+        .outcome-title { font-weight: 800; font-size: 1.1rem; line-height: 1.2; color: var(--ink-strong); }
+        .article-prose .outcome-card p { margin: 0 0 0.8em; font-size: 0.97rem; line-height: 1.6; }
+        .article-prose .outcome-card p:last-child { margin-bottom: 0; }
+        .failure-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .failure-chip { display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px; border-radius: 10px; background: var(--color-surface); border: 1px solid var(--color-border); font-size: 0.85rem; font-weight: 600; line-height: 1.35; }
+        .failure-chip i { color: var(--c-rose); }
+
+        .alert { position: relative; overflow: hidden; margin: 1.8em 0; padding: 1.6em 1.7em 1.7em; border-radius: 22px; color: #f8fafc; background: radial-gradient(circle at 90% 10%, rgba(244, 63, 94, 0.45), transparent 45%), radial-gradient(circle at 0% 100%, rgba(139, 92, 246, 0.35), transparent 45%), linear-gradient(135deg, #0b1224, #2a1033); box-shadow: 0 24px 50px rgba(15, 23, 42, 0.25); }
+        .alert::after { content: "!"; position: absolute; right: 0.25em; bottom: -0.2em; font-family: var(--font-serif); font-size: 10rem; font-weight: 700; line-height: 1; color: rgba(255, 255, 255, 0.06); }
+        .alert-label { display: flex; align-items: center; gap: 0.5em; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #fda4af; margin-bottom: 0.7em; }
+        .article-prose .alert p { position: relative; z-index: 1; margin: 0; font-size: 1.05rem; line-height: 1.7; color: #e2e8f0; }
+
+        .pullquote { position: relative; margin: 2em 0 1.2em; padding: 0.4em 0 0.4em 1.2em; border-left: 5px solid transparent; border-image: linear-gradient(180deg, #fb7185, #8b5cf6, #22d3ee) 1; }
+        .article-prose .pullquote p { margin: 0; font-family: var(--font-serif); font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 600; font-style: italic; line-height: 1.35; color: var(--ink-strong); }
+        .pullquote i { display: block; margin-bottom: 0.3em; font-size: 1.4rem; color: var(--c-violet); opacity: 0.7; }
+
+        /* Why */
+        .reasons { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: 14px; margin: 1.6em 0; }
+        .reason { padding: 1.4em 1.4em 1.4em; border-radius: 20px; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); }
+        .reason--growth { --pillar: var(--c-emerald); border-color: color-mix(in srgb, var(--c-emerald) 45%, transparent); background: linear-gradient(180deg, rgba(16, 185, 129, 0.08), transparent 40%), var(--color-surface); }
+        .reason--paper { --pillar: var(--c-rose); border-color: color-mix(in srgb, var(--c-rose) 45%, transparent); background: linear-gradient(180deg, rgba(244, 63, 94, 0.07), transparent 40%), var(--color-surface); }
+        .reason-head { display: flex; align-items: center; gap: 0.8em; margin-bottom: 0.9em; }
+        .reason-num { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+        .article-prose .reason-title { margin: 0; font-family: var(--font-sans); font-size: 1.12rem; font-weight: 800; line-height: 1.25; color: var(--ink-strong); }
+        .article-prose .reason p { margin: 0 0 1em; font-size: 0.97rem; line-height: 1.65; }
+        .or-badge { align-self: center; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-serif); font-style: italic; font-weight: 700; font-size: 1.05rem; color: #fff; background: var(--grad-alert); box-shadow: 0 10px 24px rgba(244, 63, 94, 0.3); }
+
+        /* Options */
+        .opt-map { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin: 1.2em 0 2em; }
+        .article-prose .opt-tile { --pillar: var(--c-emerald); position: relative; display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: center; padding: 0.9em 1em; border-radius: 16px; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); text-decoration: none; color: var(--ink-strong); font-size: 0.95rem; font-weight: 600; line-height: 1.35; transition: transform 0.2s, border-color 0.2s; }
+        .article-prose .opt-tile:hover { transform: translateY(-2px); border-color: var(--pillar); }
+        .opt-num { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-mono); font-weight: 700; color: #fff; }
+        .opt-tile small { display: block; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
+        .article-prose .opt-tile--sky { --pillar: var(--c-sky); }
+        .article-prose .opt-tile--violet { --pillar: var(--c-violet); }
+        .article-prose .opt-tile--pick { --pillar: var(--c-amber); border-color: rgba(245, 158, 11, 0.55); }
+        .opt-tile--pick small { color: var(--c-amber); }
+
+        .pillar { --pillar: var(--c-emerald); position: relative; margin: 1.6em 0; padding: 1.6em 1.6em 1.5em; border-radius: 22px; border: 1px solid var(--color-border); background: var(--color-surface); box-shadow: var(--shadow-md); overflow: hidden; scroll-margin-top: 100px; }
+        .pillar::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 5px; background: var(--pillar); }
+        .pillar--sky { --pillar: var(--c-sky); }
+        .pillar--violet { --pillar: var(--c-violet); }
+        .pillar--amber { --pillar: var(--c-amber); }
+        .pillar--pick { border: 2px solid transparent; background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box, linear-gradient(135deg, #fbbf24, #f472b6, #a78bfa) border-box; }
+        .pillar-head { display: flex; align-items: center; gap: 0.9em; margin-bottom: 0.9em; }
+        .pillar-num { font-family: var(--font-mono); font-size: 2.4rem; font-weight: 700; line-height: 1; color: var(--pillar); opacity: 0.9; }
+        .pillar-icon { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; color: #fff; font-size: 1.15rem; flex-shrink: 0; }
+        .article-prose .pillar-title { margin: 0; font-family: var(--font-sans); font-size: 1.3rem; font-weight: 800; line-height: 1.25; color: var(--ink-strong); }
+        .pick-badge { position: absolute; top: 14px; right: 16px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px; border-radius: 999px; background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #1c1917; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+        .pillar--pick .pillar-head { padding-right: 9em; }
+        .choose-if { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 1em; }
+        .choose-label { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); margin-right: 2px; }
+        .concept-chip { padding: 4px 11px; border-radius: 999px; font-family: var(--font-mono); font-size: 0.76rem; font-weight: 600; line-height: 1.4; color: var(--pillar); background: color-mix(in srgb, var(--pillar) 12%, transparent); border: 1px solid color-mix(in srgb, var(--pillar) 30%, transparent); }
+        .concept-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .article-prose .pillar p { margin-bottom: 0.9em; font-size: 1.05rem; }
+        .insight { display: flex; gap: 0.8em; align-items: flex-start; margin-top: 1em; padding: 0.9em 1.1em; border-radius: 14px; background: rgba(148, 163, 184, 0.1); font-size: 0.98rem; line-height: 1.6; }
+        .insight i { color: var(--pillar); margin-top: 0.3em; }
+        .insight--risk { background: color-mix(in srgb, var(--c-rose) 8%, transparent); }
+        .insight--risk i { color: var(--c-rose); }
+
+        .letter-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 0.4em 0 1em; }
+        .letter { display: flex; gap: 12px; align-items: flex-start; padding: 0.9em 1em; border-radius: 14px; border: 1px solid var(--color-border); font-size: 0.92rem; line-height: 1.45; }
+        .letter i { font-size: 1.5rem; margin-top: 0.1em; }
+        .letter strong { display: block; color: var(--ink-strong); }
+        .letter span { color: var(--color-text-muted); }
+        .letter--ok { background: color-mix(in srgb, var(--c-emerald) 8%, transparent); border-color: color-mix(in srgb, var(--c-emerald) 30%, transparent); }
+        .letter--ok i { color: var(--c-emerald); }
+        .letter--bad { background: color-mix(in srgb, var(--c-rose) 8%, transparent); border-color: color-mix(in srgb, var(--c-rose) 30%, transparent); }
+        .letter--bad i { color: var(--c-rose); }
+
+        .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 10px; margin: 0.4em 0 1.1em; }
+        .benefit { display: flex; flex-direction: column; gap: 8px; padding: 0.9em 1em; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--c-amber) 30%, transparent); background: color-mix(in srgb, var(--c-amber) 7%, transparent); font-size: 0.9rem; font-weight: 600; line-height: 1.35; color: var(--ink-strong); }
+        .benefit i { font-size: 1.1rem; color: var(--c-amber); }
+
+        .table-wrap { margin: 1.8em 0; overflow-x: auto; border-radius: 18px; border: 1px solid var(--color-border); box-shadow: var(--shadow-md); }
+        .compare { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 0.95rem; line-height: 1.5; background: var(--color-surface); }
+        .compare th, .compare td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--color-border); }
+        .compare thead th { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-violet); background: rgba(139, 92, 246, 0.1); }
+        .compare tbody th { width: 32%; font-weight: 700; color: var(--ink-strong); }
+        .opt-label { display: flex; align-items: center; gap: 10px; }
+        .compare tbody th .opt-num { width: 26px; height: 26px; flex-shrink: 0; font-size: 0.78rem; }
+        .compare td i { margin-right: 6px; }
+        .compare .fit i { color: var(--c-emerald); }
+        .compare .risk i { color: var(--c-rose); }
+        .compare tbody tr:last-child th, .compare tbody tr:last-child td { border-bottom: none; }
+
+        /* Wrapping up */
+        .manifesto { position: relative; overflow: hidden; margin: 2em 0; padding: 2.2em 2em; border-radius: 24px; text-align: center; color: #f8fafc; background: radial-gradient(circle at 15% 15%, rgba(244, 63, 94, 0.32), transparent 40%), radial-gradient(circle at 90% 90%, rgba(34, 211, 238, 0.3), transparent 45%), linear-gradient(135deg, #0b1224, #1e1b4b 60%, #0b1224); box-shadow: 0 28px 60px rgba(15, 23, 42, 0.3); }
+        .article-prose .manifesto p { margin: 0; font-family: var(--font-serif); font-size: clamp(1.35rem, 2.8vw, 1.85rem); font-weight: 500; line-height: 1.45; }
+        .manifesto strong { font-weight: 700; color: #fda4af; }
+        .manifesto em { font-style: italic; color: #67e8f9; }
+        .final-q { margin: 1.6em 0 0; padding: 1.8em; border-radius: 22px; text-align: center; border: 2px solid transparent; background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box, var(--grad-brand) border-box; }
+        .article-prose .final-q p { margin: 0 0 1.1em; font-family: var(--font-serif); font-size: clamp(1.3rem, 2.6vw, 1.6rem); font-weight: 600; line-height: 1.4; color: var(--ink-strong); }
+        .cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .article-prose .cta { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 999px; font-size: 0.95rem; font-weight: 700; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+        .article-prose .cta:hover { transform: translateY(-2px); }
+        .article-prose .cta--primary { background: #0a66c2; color: #fff; box-shadow: 0 10px 24px rgba(10, 102, 194, 0.3); }
+        .article-prose .cta--ghost { background: transparent; color: var(--ink-strong); border: 1px solid var(--color-border); }
+
+        /* Scroll reveal: only hides content when JS has confirmed it can show it again */
+        .js-reveal .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .js-reveal .reveal.in-view { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .js-reveal .reveal { opacity: 1; transform: none; transition: none; } }
+
+        @media (max-width: 760px) {
+            .reasons { grid-template-columns: 1fr; }
+            .or-badge { justify-self: center; }
+            .invite { grid-template-columns: 1fr; }
+            .invite-date { flex-direction: row; padding: 0.8em; gap: 0.6em; }
+            .invite-big { font-size: 1.6rem; }
+            .pillar { padding: 1.3em 1.2em 1.2em; }
+            .pillar-num { font-size: 1.8rem; }
+            .pillar--pick .pillar-head { padding-right: 0; padding-top: 1.6em; }
+            .alert, .manifesto { padding: 1.6em 1.3em; }
+        }
+
+        /* A sideways-scrolling table would hide the risk column, so each row becomes a card */
+        @media (max-width: 600px) {
+            .table-wrap { overflow: visible; }
+            .compare { min-width: 0; }
+            .compare thead { display: none; }
+            .compare tr { display: block; padding: 14px 16px; border-bottom: 1px solid var(--color-border); }
+            .compare tbody tr:last-child { border-bottom: none; }
+            .compare tbody th, .compare td { display: block; padding: 0; border: none; }
+            .compare tbody th { margin-bottom: 8px; }
+            .compare td + td { margin-top: 8px; }
+            .compare td::before { content: attr(data-label); display: block; margin-bottom: 2px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
+        }
+
+        /* Dark theme: surfaces and text come from the shared vars; these are the
+           pieces with light-only tints */
+        html[data-theme="dark"] .invite,
+        html[data-theme="dark"] .outcome-card,
+        html[data-theme="dark"] .reason,
+        html[data-theme="dark"] .opt-tile,
+        html[data-theme="dark"] .pillar { box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35); }
+        html[data-theme="dark"] .alert { box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5); }
+        html[data-theme="dark"] .punchline span { background: linear-gradient(transparent 60%, rgba(251, 113, 133, 0.3) 60%); }
+    </style>
     <script src="/js/theme.js"></script>
     <link href="/css/dark-mode.css" rel="stylesheet" />
+    <script>
+        if ("IntersectionObserver" in window) document.documentElement.classList.add("js-reveal");
+    </script>
 </head>
 
 <body>
@@ -133,143 +338,290 @@
 
         <main class="article-container">
             <article class="article-content">
-                <img src="/images/blogs/pip-guide.svg" alt="What To Do When Put On PIP" class="article-hero">
-                
+                <img src="/images/blogs/pip-guide.svg" alt="A formal performance improvement plan notice stamped ON PIP leads to a node marked You, which starts with a 1:1 and branches into four paths: clear the PIP and stay, clear the PIP then move teams through IJP, clear the PIP then switch companies, and resign and start searching, which is marked recommended." class="article-hero">
+
                 <div class="article-body">
                     <header class="article-header">
                         <span class="article-category">Career</span>
-                        <h1 class="article-title">What To Do When Put On PIP (Performance Improvement Plan)</h1>
+                        <h1 class="article-title">What To Do When Put On <span class="title-hl">PIP</span> (Performance Improvement Plan)</h1>
                         <div class="article-meta">
                             <div class="article-meta-item"><i class="fas fa-user"></i><span>Manoj Satishkumar</span></div>
-                            <div class="article-meta-item"><i class="fas fa-clock"></i><span>12 min read</span></div>
+                            <div class="article-meta-item"><i class="fas fa-clock"></i><span>8 min read</span></div>
+                            <div class="article-meta-item"><i class="fas fa-calendar"></i><span>4 Jan 2026</span></div>
                         </div>
                     </header>
 
                     <div class="article-prose">
-                        
-                        <div class="question-box">
-                            <p><strong>Question:</strong></p>
-                            <p>My manager has decided to put me in PIP (Performance Improvement Plan) inspite of me working hard. I am told that I will be given a different project for regular assessment. What shall I do? Will I get terminated?</p>
+
+                        <div class="ask-card reveal">
+                            <div class="ask-head">
+                                <span class="tile-icon g-amber"><i class="fas fa-user" aria-hidden="true"></i></span>
+                                <div>
+                                    <div class="ask-name">A reader asks</div>
+                                    <div class="ask-tag">question</div>
+                                </div>
+                                <i class="fas fa-envelope-open-text" aria-hidden="true"></i>
+                            </div>
+                            <p>My manager has decided to put me in PIP (Performance Improvement Plan) inspite of me working hard. I am told that I will be given a different project for regular assessment. What shall I do? <strong>Will I get terminated?</strong></p>
                         </div>
 
-                        <div class="intro-box">
-                            <p><strong>Dear candidate,</strong></p>
-                            <p>Being put on a Performance Improvement Plan (PIP) can be stressful and confusing. While being on a PIP doesn't necessarily mean termination, it is definitely a red flag in your career if you don't tackle it wisely.</p>
+                        <p class="salutation">Dear candidate,</p>
+
+                        <p class="lede">Being put on a Performance Improvement Plan (PIP) can be stressful and confusing.</p>
+
+                        <p class="punchline">While being on a PIP doesn't necessarily mean termination, it is definitely a red flag in your career <span>if you don't tackle it wisely.</span></p>
+
+                        <div class="tldr reveal">
+                            <div class="tldr-label"><i class="fas fa-bolt"></i> The short version</div>
+                            <ul>
+                                <li><i class="fas fa-arrow-right"></i><span>First, ask your manager for a 1:1 and see if the PIP can be delayed or exempted.</span></li>
+                                <li><i class="fas fa-arrow-right"></i><span>Know how the PIP process works, and keep seeking feedback all the way through.</span></li>
+                                <li><i class="fas fa-arrow-right"></i><span>Understand why you were put on it: genuine concern for your improvement, or documentation for termination.</span></li>
+                                <li><i class="fas fa-arrow-right"></i><span>Then pick one of four paths: clear it and stay, clear it and move teams, clear it and switch companies, or resign and search.</span></li>
+                            </ul>
                         </div>
 
-                        <p>Before taking any action, schedule a 1:1 with your manager and get to know about the decision being taken and if there is a way it can be delayed or exempted. It depends on how much you and your manager are in sync and if your manager is ok with giving you a second chance. If your manager has made up his/her mind then you have to think about the next steps. Just give a try asking for it. If they don't agree, then proceed reading below:</p>
+                        <!-- ============ The 1:1 ============ -->
+                        <section>
+                            <div class="section-kicker">Before anything else</div>
+                            <h2>Start with a 1:1</h2>
 
-                        <p><em>Let's begin…</em></p>
+                            <p>Before taking any action, schedule a 1:1 with your manager and get to know about the decision being taken and if there is a way it can be delayed or exempted.</p>
 
-                        <h2>The PIP Official Process</h2>
+                            <div class="invite reveal">
+                                <div class="invite-date"><span class="invite-big">1:1</span><i class="fas fa-calendar-check" aria-hidden="true"></i></div>
+                                <div class="invite-body">
+                                    <div class="invite-title">You &amp; your manager</div>
+                                    <div class="invite-sub">Agenda</div>
+                                    <ul>
+                                        <li><i class="far fa-square-check"></i><span>Understand the decision being taken.</span></li>
+                                        <li><i class="far fa-square-check"></i><span>Ask if there is a way it can be delayed or exempted.</span></li>
+                                        <li><i class="far fa-square-check"></i><span>See if your manager is ok with giving you a second chance.</span></li>
+                                    </ul>
+                                </div>
+                            </div>
 
-                        <div class="process-step">
-                            <span class="process-step-num">1</span>
-                            <div class="process-step-content">Your manager likely starts by discussing your performance concerns with you informally. They should provide specific examples and explain how your performance falls short of expectations.</div>
-                        </div>
+                            <p>It depends on how much you and your manager are in sync and if your manager is ok with giving you a second chance. If your manager has made up his/her mind then you have to think about the next steps. Just give a try asking for it. If they don't agree, then proceed reading below:</p>
 
-                        <div class="process-step">
-                            <span class="process-step-num">2</span>
-                            <div class="process-step-content">After this initial discussion, your manager may officially document their concerns in a formal performance improvement notice or memo. This document should outline the specific areas of performance needing improvement, the expected timeframe for improvement, and the potential consequences of failing to meet those expectations.</div>
-                        </div>
+                            <p class="statement">Let's <span>begin&hellip;</span></p>
+                        </section>
 
-                        <div class="process-step">
-                            <span class="process-step-num">3</span>
-                            <div class="process-step-content">Your manager might involve HR in this stage to ensure the process adheres to company policies and legal regulations.</div>
-                        </div>
+                        <!-- ============ The official process ============ -->
+                        <section>
+                            <div class="section-kicker">How it works</div>
+                            <h2>The PIP official process</h2>
 
-                        <div class="process-step">
-                            <span class="process-step-num">4</span>
-                            <div class="process-step-content">You, your manager, and potentially HR collaborate to develop a formal PIP document.</div>
-                        </div>
+                            <ol class="flow">
+                                <li class="flow-phase"><span class="phase-chip g-amber"><i class="fas fa-comment-dots" aria-hidden="true"></i>The warning</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-comments" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Informal talk</span>Your manager likely starts by discussing your performance concerns with you informally. They should provide specific examples and explain how your performance falls short of expectations.</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-file-lines" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Formal notice</span>After this initial discussion, your manager may officially document their concerns in a formal performance improvement notice or memo. This document should outline the specific areas of performance needing improvement, the expected timeframe for improvement, and the potential consequences of failing to meet those expectations.<span class="flow-tags"><span class="flow-tag">areas to improve</span><span class="flow-tag">timeframe</span><span class="flow-tag">consequences</span></span></span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-user-shield" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">HR joins</span>Your manager might involve HR in this stage to ensure the process adheres to company policies and legal regulations.</span></li>
 
-                        <div class="process-step">
-                            <span class="process-step-num">5</span>
-                            <div class="process-step-content">You should have the opportunity to review the PIP and ask questions. You can potentially negotiate certain aspects of the plan. Eventually, you'll be expected to sign the PIP, indicating your understanding and agreement with its terms.</div>
-                        </div>
+                                <li class="flow-phase"><span class="phase-chip g-violet"><i class="fas fa-file-signature" aria-hidden="true"></i>The plan</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-people-group" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Draft the PIP</span>You, your manager, and potentially HR collaborate to develop a formal PIP document.</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-pen-nib" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Review &amp; sign</span>You should have the opportunity to review the PIP and ask questions. You can potentially negotiate certain aspects of the plan. Eventually, you'll be expected to sign the PIP, indicating your understanding and agreement with its terms.<span class="flow-tags"><span class="flow-tag">ask questions</span><span class="flow-tag">negotiable</span></span></span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-hands-holding-circle" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Support</span>You may be offered additional resources or support, such as training, mentorship, or coaching, to help you achieve your goals.<span class="flow-tags"><span class="flow-tag">training</span><span class="flow-tag">mentorship</span><span class="flow-tag">coaching</span></span></span></li>
 
-                        <div class="process-step">
-                            <span class="process-step-num">6</span>
-                            <div class="process-step-content">You may be offered additional resources or support, such as training, mentorship, or coaching, to help you achieve your goals.</div>
-                        </div>
+                                <li class="flow-phase"><span class="phase-chip g-sky"><i class="fas fa-chart-line" aria-hidden="true"></i>The tracking</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-calendar-days" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Check-ins</span>Regular meetings with your manager, and possibly HR, will be held to track your progress, discuss challenges, and provide feedback.</span></li>
+                                <li class="reveal"><span class="flow-icon"><i class="fas fa-scale-balanced" aria-hidden="true"></i></span><span class="flow-text"><span class="flow-step">Assessment</span>Your performance against the defined goals will be regularly assessed, and the plan might be adjusted as needed.</span></li>
+                            </ol>
 
-                        <div class="process-step">
-                            <span class="process-step-num">7</span>
-                            <div class="process-step-content">Regular meetings with your manager, and possibly HR, will be held to track your progress, discuss challenges, and provide feedback.</div>
-                        </div>
+                            <div class="outcome">
+                                <div class="outcome-card outcome--win reveal">
+                                    <div class="outcome-head"><i class="fas fa-circle-check" aria-hidden="true"></i><div><span class="outcome-step">Step 9 / Outcome</span><div class="outcome-title">Goals met</div></div></div>
+                                    <p>If you achieve the stated goals within the specified timeframe, the PIP is considered successful, and no further action is taken.</p>
+                                </div>
+                                <div class="outcome-card outcome--lose reveal">
+                                    <div class="outcome-head"><i class="fas fa-circle-xmark" aria-hidden="true"></i><div><span class="outcome-step">Step 10 / Outcome</span><div class="outcome-title">Goals not met</div></div></div>
+                                    <p>If you don't meet the agreed-upon goals, depending on the severity of the performance issues and the company's policies, potential consequences might include:</p>
+                                    <div class="failure-chips">
+                                        <span class="failure-chip"><i class="fas fa-chalkboard-user" aria-hidden="true"></i>Additional training</span>
+                                        <span class="failure-chip"><i class="fas fa-rotate" aria-hidden="true"></i>Further PIPs</span>
+                                        <span class="failure-chip"><i class="fas fa-door-closed" aria-hidden="true"></i>Termination of employment</span>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="process-step">
-                            <span class="process-step-num">8</span>
-                            <div class="process-step-content">Your performance against the defined goals will be regularly assessed, and the plan might be adjusted as needed.</div>
-                        </div>
+                            <div class="alert reveal">
+                                <div class="alert-label"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> Always remember</div>
+                                <p>Your manager has the full rights to terminate you even in the midway of your performance improvement plan if he/she finds that you are not improving or not meeting the expectations. So be careful and always reach out to your manager if their expectations are being met on a periodic basis.</p>
+                            </div>
 
-                        <div class="process-step">
-                            <span class="process-step-num">9</span>
-                            <div class="process-step-content">If you achieve the stated goals within the specified timeframe, the PIP is considered successful, and no further action is taken.</div>
-                        </div>
+                            <blockquote class="pullquote reveal">
+                                <i class="fas fa-quote-left" aria-hidden="true"></i>
+                                <p>Continuously seeking feedback is the key for a safe success.</p>
+                            </blockquote>
+                        </section>
 
-                        <div class="process-step">
-                            <span class="process-step-num">10</span>
-                            <div class="process-step-content">If you don't meet the agreed-upon goals, depending on the severity of the performance issues and the company's policies, potential consequences might include additional training, further PIPs, or termination of employment.</div>
-                        </div>
+                        <!-- ============ Why ============ -->
+                        <section>
+                            <div class="section-kicker">Read the room</div>
+                            <h2>Why did your manager put you on PIP?</h2>
 
-                        <div class="warning-box">
-                            <p><strong>Always remember:</strong></p>
-                            <p>Your manager has the full rights to terminate you even in the midway of your performance improvement plan if he/she finds that you are not improving or not meeting the expectations. So be careful and always reach out to your manager if their expectations are being met on a periodic basis. <strong>Continuously seeking feedback is the key for a safe success.</strong></p>
-                        </div>
+                            <p>There are several reasons why your manager might put you on a Performance Improvement Plan (PIP), and their intentions can vary. Here are the 2 reasons:</p>
 
-                        <h2>Why Did Your Manager Put You on PIP?</h2>
+                            <div class="reasons">
+                                <div class="reason reason--growth reveal">
+                                    <div class="reason-head">
+                                        <span class="tile-icon g-emerald"><i class="fas fa-seedling" aria-hidden="true"></i></span>
+                                        <div><span class="reason-num">Reason 1</span><h3 class="reason-title">Genuine concern for your improvement</h3></div>
+                                    </div>
+                                    <p>This is often the most positive reason. Your manager may genuinely believe that you have the potential to succeed but need additional support and guidance to reach it. The PIP serves as a structured way to provide that support and track your progress. Sometimes, a PIP can be used as a wake-up call for you as performance has become complacent or stagnant. The structured plan and potential consequences can motivate you to refocus and put in more effort.</p>
+                                    <div class="concept-chips"><span class="concept-chip">support &amp; guidance</span><span class="concept-chip">structured plan</span><span class="concept-chip">wake-up call</span></div>
+                                </div>
 
-                        <p>There are several reasons why your manager might put you on a Performance Improvement Plan (PIP), and their intentions can vary. Here are the 2 reasons:</p>
+                                <div class="or-badge" aria-hidden="true">or</div>
 
-                        <h3>Reason 1: Genuine concern for your improvement</h3>
+                                <div class="reason reason--paper reveal">
+                                    <div class="reason-head">
+                                        <span class="tile-icon g-rose"><i class="fas fa-folder-open" aria-hidden="true"></i></span>
+                                        <div><span class="reason-num">Reason 2</span><h3 class="reason-title">Facilitate documentation for termination</h3></div>
+                                    </div>
+                                    <p>If termination is ultimately planned, the PIP creates a documented record of performance issues and attempts at improvement, which can be helpful in legal proceedings or severance negotiations. This is one of the ways managers (unfortunately) get rid of under performing employees in corporate world.</p>
+                                    <div class="concept-chips"><span class="concept-chip">documented record</span><span class="concept-chip">legal proceedings</span><span class="concept-chip">severance</span></div>
+                                </div>
+                            </div>
+                        </section>
 
-                        <p>This is often the most positive reason. Your manager may genuinely believe that you have the potential to succeed but need additional support and guidance to reach it. The PIP serves as a structured way to provide that support and track your progress. Sometimes, a PIP can be used as a wake-up call for you as performance has become complacent or stagnant. The structured plan and potential consequences can motivate you to refocus and put in more effort.</p>
+                        <!-- ============ Options ============ -->
+                        <section>
+                            <div class="section-kicker">Your move</div>
+                            <h2>So now what? Your 4 options</h2>
 
-                        <h3>Reason 2: Facilitate documentation for termination</h3>
+                            <p>You basically have 4 options at hand:</p>
 
-                        <p>If termination is ultimately planned, the PIP creates a documented record of performance issues and attempts at improvement, which can be helpful in legal proceedings or severance negotiations. This is one of the ways managers (unfortunately) get rid of under performing employees in corporate world.</p>
+                            <div class="opt-map">
+                                <a class="opt-tile reveal" href="#option-1"><span class="opt-num g-emerald">1</span><span><small>Stay</small>Clear the PIP by working hard</span></a>
+                                <a class="opt-tile opt-tile--sky reveal" href="#option-2"><span class="opt-num g-sky">2</span><span><small>Move teams</small>Clear the PIP, then IJP</span></a>
+                                <a class="opt-tile opt-tile--violet reveal" href="#option-3"><span class="opt-num g-violet">3</span><span><small>Prepare, then leave</small>Clear the PIP, then switch company</span></a>
+                                <a class="opt-tile opt-tile--pick reveal" href="#option-4"><span class="opt-num g-amber">4</span><span><small>&#9733; Recommended</small>Resign and start searching</span></a>
+                            </div>
 
-                        <h2>So Now What? Your 4 Options</h2>
+                            <!-- 1 -->
+                            <div class="pillar reveal" id="option-1">
+                                <div class="pillar-head">
+                                    <span class="pillar-num">01</span>
+                                    <span class="pillar-icon g-emerald"><i class="fas fa-dumbbell" aria-hidden="true"></i></span>
+                                    <h3 class="pillar-title">Accept the challenge and clear the PIP by working hard</h3>
+                                </div>
+                                <div class="choose-if"><span class="choose-label">Choose this if</span><span class="concept-chip">you genuinely need improvement</span><span class="concept-chip">you want to stay 1+ more year</span></div>
+                                <p>Choose this option if you genuinely believe you need improvement in the areas outlined in the PIP and you want to stay in the current company for atleast 1 more year. This may require significant effort and dedication to meet the PIP goals.</p>
+                                <div class="insight insight--risk"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i><span>Please be careful because failure could result in termination.</span></div>
+                            </div>
 
-                        <p>You basically have 4 options at hand:</p>
+                            <!-- 2 -->
+                            <div class="pillar pillar--sky reveal" id="option-2">
+                                <div class="pillar-head">
+                                    <span class="pillar-num">02</span>
+                                    <span class="pillar-icon g-sky"><i class="fas fa-people-arrows" aria-hidden="true"></i></span>
+                                    <h3 class="pillar-title">Clear the PIP, then change the team via IJP</h3>
+                                </div>
+                                <div class="choose-if"><span class="choose-label">Choose this if</span><span class="concept-chip">you value the company</span><span class="concept-chip">just your team is bad</span></div>
+                                <p>Choose this option if you value the company but just your team is bad. You need to find the right team during your PIP period and you can aggressively apply for IJP (Internal Job Posting) once you clear PIP but the interviews might be hard as you will be treated as a low performing candidate by other teams. They will scrutinize you.</p>
+                                <div class="insight insight--risk"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i><span>So keep in mind, success in the PIP doesn't guarantee a successful transfer.</span></div>
+                            </div>
 
-                        <div class="option-card">
-                            <h4>Option 1: Accept the challenge and clear the PIP by working hard</h4>
-                            <p>Choose this option if you genuinely believe you need improvement in the areas outlined in the PIP and you want to stay in the current company for atleast 1 more year. This may require significant effort and dedication to meet the PIP goals. Please be careful because failure could result in termination.</p>
-                        </div>
+                            <!-- 3 -->
+                            <div class="pillar pillar--violet reveal" id="option-3">
+                                <div class="pillar-head">
+                                    <span class="pillar-num">03</span>
+                                    <span class="pillar-icon g-violet"><i class="fas fa-book-open-reader" aria-hidden="true"></i></span>
+                                    <h3 class="pillar-title">Clear the PIP, then switch the company (job change)</h3>
+                                </div>
+                                <div class="choose-if"><span class="choose-label">Choose this if</span><span class="concept-chip">you need more preparation time</span><span class="concept-chip">you can't get a job right away</span></div>
+                                <p>Choose this option if you believe you need more preparation time to start cracking companies outside. If you just don't feel you can get a job right away, then PIP period will give you time to prepare. Just note that you will be under scrutiny during PIP. So you may have sleepless nights.</p>
+                                <div class="letter-split">
+                                    <div class="letter letter--ok"><i class="fas fa-file-circle-check" aria-hidden="true"></i><div><strong>Clear the PIP</strong><span>The company will not mention anything about PIP in the relieving letter.</span></div></div>
+                                    <div class="letter letter--bad"><i class="fas fa-file-circle-xmark" aria-hidden="true"></i><div><strong>Fail the PIP</strong><span>They will mention it and won't even give you a notice period to serve. It will be an immediate termination.</span></div></div>
+                                </div>
+                                <div class="insight insight--risk"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i><span>A failed PIP will cause issues to your job switch in the future.</span></div>
+                            </div>
 
-                        <div class="option-card">
-                            <h4>Option 2: Clear the PIP, then change the team via IJP</h4>
-                            <p>Choose this option if you value the company but just your team is bad. You need to find the right team during your PIP period and you can aggressively apply for IJP (Internal Job Posting) once you clear PIP but the interviews might be hard as you will be treated as a low performing candidate by other teams. They will scrutinize you. So keep in mind, success in the PIP doesn't guarantee a successful transfer.</p>
-                        </div>
+                            <!-- 4 -->
+                            <div class="pillar pillar--amber pillar--pick reveal" id="option-4">
+                                <span class="pick-badge"><i class="fas fa-star" aria-hidden="true"></i>I recommend this</span>
+                                <div class="pillar-head">
+                                    <span class="pillar-num">04</span>
+                                    <span class="pillar-icon g-amber"><i class="fas fa-door-open" aria-hidden="true"></i></span>
+                                    <h3 class="pillar-title">Immediately resign and start searching for another job</h3>
+                                </div>
+                                <div class="choose-if"><span class="choose-label">Choose this if</span><span class="concept-chip">the PIP feels unfair</span><span class="concept-chip">the goals are unrealistic</span><span class="concept-chip">you have a financial backup</span></div>
+                                <p>I typically recommend this option. Because the world is vast and you may be a better fit somewhere else. Especially if you believe the PIP is unfair or the goals are unrealistic. And if you have financial backup and confidence that you will get a job outside during the notice period, I would say it's a good option.</p>
+                                <div class="benefits">
+                                    <div class="benefit reveal"><i class="fas fa-spa" aria-hidden="true"></i>Instantly improve your well-being</div>
+                                    <div class="benefit reveal"><i class="fas fa-compass" aria-hidden="true"></i>Opportunities aligned with your goals</div>
+                                    <div class="benefit reveal"><i class="fas fa-arrow-trend-up" aria-hidden="true"></i>A better pay raise</div>
+                                    <div class="benefit reveal"><i class="fas fa-users-viewfinder" aria-hidden="true"></i>Diverse perspectives</div>
+                                </div>
+                                <p>If your current role is causing excessive stress, anxiety, or dissatisfaction, leaving can instantly improve your well-being because sometimes, the work environment itself contributes to performance issues. Leaving removes immediate triggers, fostering personal and professional growth in a healthier setting.</p>
+                                <p>Searching for a new job allows you to explore opportunities better aligned with your interests and career goals. You might also get a better pay raise than staying in the current company. While the PIP offers specific feedback, seeking diverse perspectives through interviews and networking expands your learning beyond its limitations.</p>
+                            </div>
 
-                        <div class="option-card">
-                            <h4>Option 3: Clear the PIP, then switch the company (job change)</h4>
-                            <p>Choose this option if you believe you need more preparation time to start cracking companies outside. If you just don't feel you can get a job right away, then PIP period will give you time to prepare. Just note that you will be under scrutiny during PIP. So you may have sleepless nights. Once you clear PIP, the company will not mention anything about PIP in the relieving letter. But if you fail PIP, they will mention it and wont even give you a notice period to serve. It will be an immediate termination. So it will cause issues to your job switch in the future.</p>
-                        </div>
+                            <div class="table-wrap reveal">
+                                <table class="compare">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Option</th>
+                                            <th scope="col">Choose it if</th>
+                                            <th scope="col">Watch out for</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row"><span class="opt-label"><span class="opt-num g-emerald">1</span>Clear the PIP and stay</span></th>
+                                            <td class="fit" data-label="Choose it if"><i class="fas fa-check"></i>You need improvement and want to stay 1+ more year</td>
+                                            <td class="risk" data-label="Watch out for"><i class="fas fa-triangle-exclamation"></i>Failure could result in termination</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><span class="opt-label"><span class="opt-num g-sky">2</span>Clear the PIP, then IJP</span></th>
+                                            <td class="fit" data-label="Choose it if"><i class="fas fa-check"></i>You value the company, but your team is bad</td>
+                                            <td class="risk" data-label="Watch out for"><i class="fas fa-triangle-exclamation"></i>Other teams will scrutinize you; transfer isn't guaranteed</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><span class="opt-label"><span class="opt-num g-violet">3</span>Clear the PIP, then switch</span></th>
+                                            <td class="fit" data-label="Choose it if"><i class="fas fa-check"></i>You need more time to prepare for outside interviews</td>
+                                            <td class="risk" data-label="Watch out for"><i class="fas fa-triangle-exclamation"></i>Failing means immediate termination, noted in the relieving letter</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><span class="opt-label"><span class="opt-num g-amber">4</span>Resign and search</span></th>
+                                            <td class="fit" data-label="Choose it if"><i class="fas fa-check"></i>The PIP is unfair or the goals are unrealistic</td>
+                                            <td class="risk" data-label="Watch out for"><i class="fas fa-triangle-exclamation"></i>You need a financial backup and confidence of a job within your notice period</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                        <div class="option-card">
-                            <h4>Option 4: Immediately resign and start searching for another job</h4>
-                            <p>I typically recommend this option. Because the world is vast and you may be a better fit somewhere else. Especially if you believe the PIP is unfair or the goals are unrealistic. And if you have financial backup and confidence that you will get a job outside during the notice period, I would say it's a good option.</p>
-                            <p>If your current role is causing excessive stress, anxiety, or dissatisfaction, leaving can instantly improve your well-being because sometimes, the work environment itself contributes to performance issues. Leaving removes immediate triggers, fostering personal and professional growth in a healthier setting.</p>
-                            <p>Searching for a new job allows you to explore opportunities better aligned with your interests and career goals. You might also get a better pay raise than staying in the current company. While the PIP offers specific feedback, seeking diverse perspectives through interviews and networking expands your learning beyond its limitations.</p>
-                        </div>
+                            <div id="mock-interview-ad"></div>
+                        </section>
 
-                        <div id="mock-interview-ad"></div>
+                        <!-- ============ Conclusion ============ -->
+                        <section>
+                            <div class="section-kicker">Wrapping up</div>
+                            <h2>Make the call that's right for you</h2>
 
-                        <div class="conclusion">
-                            <p><strong>Ultimately, the choice depends on your unique circumstances and priorities.</strong></p>
+                            <div class="manifesto reveal">
+                                <p><strong>Ultimately, the choice depends on your unique circumstances and priorities.</strong></p>
+                            </div>
+
                             <p>Weigh the potential gains and risks meticulously, seek guidance if needed, and prioritize informed decision-making for a successful future.</p>
-                        </div>
+
+                            <div class="final-q reveal">
+                                <p>Know someone going through a PIP right now? Send this their way.</p>
+                                <div class="cta-row">
+                                    <a class="cta cta--primary" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://manojsatishkumar.com/blog/what-to-do-when-put-on-pip.html" target="_blank" rel="noopener"><i class="fab fa-linkedin-in" aria-hidden="true"></i>Share on LinkedIn</a>
+                                    <a class="cta cta--ghost" href="https://api.whatsapp.com/send?text=https://manojsatishkumar.com/blog/what-to-do-when-put-on-pip.html" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i>Send on WhatsApp</a>
+                                </div>
+                            </div>
+                        </section>
                     </div>
 
                     <div class="share-strip">
                         <span class="share-strip-label">Share this article:</span>
-                        <a href="https://twitter.com/intent/tweet?url=https://manojsatishkumar.com/blog/what-to-do-when-put-on-pip.html" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://manojsatishkumar.com/blog/what-to-do-when-put-on-pip.html" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://manojsatishkumar.com/blog/what-to-do-when-put-on-pip.html" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://api.whatsapp.com/send?text=https://manojsatishkumar.com/blog/what-to-do-when-put-on-pip.html" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://twitter.com/intent/tweet?url=https://manojsatishkumar.com/blog/what-to-do-when-put-on-pip.html" target="_blank" rel="noopener" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://manojsatishkumar.com/blog/what-to-do-when-put-on-pip.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://manojsatishkumar.com/blog/what-to-do-when-put-on-pip.html" target="_blank" rel="noopener" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://api.whatsapp.com/send?text=https://manojsatishkumar.com/blog/what-to-do-when-put-on-pip.html" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </article>
@@ -277,19 +629,28 @@
     </div>
 
     <div id="footer"></div>
-    <button class="back-to-top" id="back-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+    <button class="back-to-top" id="back-to-top" onclick="scrollToTop()" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
     <script src="/lib/jquery/jquery.min.js"></script>
     <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/main.js"></script>
     <script>
         $(function () { $("#desktop-nav-bar").load("/components/desktop-nav-bar.html"); $("#footer").load("/components/footer.html"); $("#author-sidebar").load("/components/side-profile.html"); $("#mock-interview-ad").load("/components/mock-interview-ad.html"); });
-        function toggleMobileAuthor() { document.getElementById('mobile-author').classList.toggle('expanded'); }
         window.addEventListener('scroll', function() { const article = document.querySelector('.article-content'); const progressBar = document.getElementById('reading-progress'); const backToTop = document.getElementById('back-to-top'); if (article) { const scrollY = window.scrollY; const articleTop = article.offsetTop; const articleHeight = article.offsetHeight; const progress = Math.min(100, Math.max(0, ((scrollY - articleTop + window.innerHeight) / articleHeight) * 100)); progressBar.style.width = progress + '%'; } backToTop.classList.toggle('visible', window.scrollY > 500); });
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
         document.addEventListener('contextmenu', e => e.preventDefault());
+
+        if ('IntersectionObserver' in window) {
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('in-view');
+                    revealObserver.unobserve(entry.target);
+                });
+            }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+            document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
+        }
     </script>
 </body>
 
 </html>
-
