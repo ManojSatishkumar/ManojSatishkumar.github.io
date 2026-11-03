@@ -111,6 +111,89 @@
   .intro-lead-slide--community {
     --tone: 10, 102, 194;
   }
+  .intro-lead-slide--foundations {
+    --tone: 124, 58, 237;
+  }
+  .intro-lead-slide--fintech {
+    --tone: 0, 61, 145;
+  }
+  .intro-lead-slide--health {
+    --tone: 225, 29, 72;
+  }
+  .intro-lead-slide--semis {
+    --tone: 8, 145, 178;
+  }
+
+  /* Company slides: the story on the left, the company on the right */
+  .intro-lead-slide--company {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 128px;
+    grid-template-rows: auto 1fr auto;
+    column-gap: 24px;
+  }
+
+  .intro-lead-slide--company > .intro-lead-eyebrow {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  .intro-lead-slide--company > .intro-lead-text {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .intro-lead-slide--company > .intro-link-row {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .intro-lead-brand {
+    grid-column: 2;
+    grid-row: 2 / 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding-left: 24px;
+    border-left: 1px solid rgba(148, 163, 184, 0.3);
+    text-align: center;
+  }
+
+  .intro-lead-brand__logo {
+    display: block;
+    box-sizing: border-box;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 4px;
+    padding: 11px;
+    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid rgba(214, 223, 246, 0.95);
+    box-shadow: 0 10px 24px rgba(var(--tone), 0.16);
+  }
+
+  .intro-lead-brand__logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .intro-lead-brand__name {
+    color: #111827;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .intro-lead-brand__years {
+    color: #64748b;
+    font-size: 0.74rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
 
   /* Arrows and dots sit in the top-right corner, level with the eyebrow */
   .intro-lead-nav {
@@ -125,7 +208,7 @@
 
   .intro-lead-slide .intro-lead-eyebrow {
     align-self: flex-start;
-    margin-right: 168px;
+    margin-right: 196px;
   }
 
   .intro-lead-nav__btn {
@@ -163,13 +246,13 @@
   .intro-lead-dots {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
   }
 
   .intro-lead-dot {
     position: relative;
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     padding: 0;
     border: 0;
     border-radius: 999px;
@@ -186,7 +269,7 @@
   }
 
   .intro-lead-dot.is-active {
-    width: 24px;
+    width: 20px;
     background: rgba(79, 70, 229, 0.22);
   }
 
@@ -344,7 +427,7 @@
   }
 
   /* Once the panel narrows, the controls move under the slides, centred */
-  @media (max-width: 991px) {
+  @media (max-width: 1199px) {
     .intro-lead-nav {
       position: static;
       order: 2;
@@ -361,6 +444,32 @@
     .intro-lead-cta:focus,
     .intro-lead-slide .intro-link-pill {
       margin-left: 0;
+    }
+  }
+
+  /* Too narrow for a side column: the company becomes a row under the
+     eyebrow */
+  @media (max-width: 991px) {
+    .intro-lead-slide--company {
+      display: flex;
+    }
+
+    .intro-lead-brand {
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+      padding-left: 0;
+      border-left: 0;
+      text-align: left;
+    }
+
+    .intro-lead-brand__logo {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 0;
+      padding: 6px;
+      border-radius: 10px;
     }
   }
 
@@ -847,8 +956,8 @@
 
   .intro-testimonial__avatar {
     flex: none;
-    width: 44px;
-    height: 44px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #ffffff;
@@ -1045,12 +1154,11 @@
           </div>
 
           <div class="intro-lead-slides" aria-live="off">
-            <!-- 1. Who I am -->
+            <!-- Who I am -->
             <div
               class="intro-lead-slide is-active"
               role="group"
               aria-roledescription="slide"
-              aria-label="1 of 7"
             >
               <div class="intro-lead-eyebrow">
                 <span class="intro-lead-eyebrow__dot" aria-hidden="true"></span>
@@ -1100,16 +1208,22 @@
               </div>
             </div>
 
-            <!-- 2. Walmart template platform -->
+            <!-- Walmart template platform -->
             <div
-              class="intro-lead-slide intro-lead-slide--scale"
+              class="intro-lead-slide intro-lead-slide--company intro-lead-slide--scale"
               role="group"
               aria-roledescription="slide"
-              aria-label="2 of 7"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-solid fa-tower-broadcast" aria-hidden="true"></i>
-                Platform at retail scale &middot; Walmart
+                Platform at retail scale
+              </div>
+              <div class="intro-lead-brand">
+                <span class="intro-lead-brand__logo"
+                  ><img src="/images/walmart-logo.png" alt=""
+                /></span>
+                <span class="intro-lead-brand__name">Walmart</span>
+                <span class="intro-lead-brand__years">2019 &ndash; 2026</span>
               </div>
               <p class="intro-lead-text">
                 Built the
@@ -1133,12 +1247,175 @@
               </div>
             </div>
 
-            <!-- 3. Patent -->
+            <!-- PayPal -->
+            <div
+              class="intro-lead-slide intro-lead-slide--company intro-lead-slide--fintech"
+              role="group"
+              aria-roledescription="slide"
+            >
+              <div class="intro-lead-eyebrow">
+                <i class="fa-solid fa-credit-card" aria-hidden="true"></i>
+                Fintech &middot; Merchant onboarding
+              </div>
+              <div class="intro-lead-brand">
+                <span class="intro-lead-brand__logo"
+                  ><img src="/images/paypal-icon.png" alt=""
+                /></span>
+                <span class="intro-lead-brand__name">PayPal</span>
+                <span class="intro-lead-brand__years">2021 &ndash; 2022</span>
+              </div>
+              <p class="intro-lead-text">
+                Rebuilt
+                <strong class="intro-lead-accent">merchant onboarding</strong>
+                for PayPal's global business customers, with React
+                micro-frontends and
+                <strong class="intro-lead-accent">streamlined KYC verification</strong>.
+              </p>
+              <div class="intro-link-row">
+                <ul class="intro-lead-stats">
+                  <li><strong>12K+</strong><span>sign-ups a day</span></li>
+                  <li><strong>3 min</strong><span>onboarding, down from 15</span></li>
+                </ul>
+                <a
+                  class="intro-lead-cta"
+                  href="#experience"
+                  onclick="
+                    if (typeof animateScroll === 'function') {
+                      event.preventDefault();
+                      animateScroll('experience');
+                    }
+                  "
+                  >My experience
+                  <i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+
+            <!-- Cerner -->
+            <div
+              class="intro-lead-slide intro-lead-slide--company intro-lead-slide--health"
+              role="group"
+              aria-roledescription="slide"
+            >
+              <div class="intro-lead-eyebrow">
+                <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
+                Healthcare &middot; Patient care
+              </div>
+              <div class="intro-lead-brand">
+                <span class="intro-lead-brand__logo"
+                  ><img src="/images/cerner-logo.png" alt=""
+                /></span>
+                <span class="intro-lead-brand__name">Cerner</span>
+                <span class="intro-lead-brand__years">2015 &ndash; 2019</span>
+              </div>
+              <p class="intro-lead-text">
+                Led the team behind
+                <strong class="intro-lead-accent">vitals charting apps</strong>
+                that nurses in US hospitals rely on, with real-time
+                <strong class="intro-lead-accent">HL7 FHIR</strong> sync for
+                patient care.
+              </p>
+              <div class="intro-link-row">
+                <ul class="intro-lead-stats">
+                  <li><strong>8</strong><span>engineers led</span></li>
+                  <li><strong>99.9%</strong><span>uptime</span></li>
+                  <li><strong>40%</strong><span>faster charting</span></li>
+                </ul>
+                <a class="intro-lead-cta" href="/albums/view.html?album=cerner"
+                  >Cerner album
+                  <i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+
+            <!-- GRL Labs -->
+            <div
+              class="intro-lead-slide intro-lead-slide--company intro-lead-slide--semis"
+              role="group"
+              aria-roledescription="slide"
+            >
+              <div class="intro-lead-eyebrow">
+                <i class="fa-solid fa-microchip" aria-hidden="true"></i>
+                Semiconductor validation
+              </div>
+              <div class="intro-lead-brand">
+                <span class="intro-lead-brand__logo"
+                  ><img src="/images/grl-logo.png" alt=""
+                /></span>
+                <span class="intro-lead-brand__name">GRL Labs</span>
+                <span class="intro-lead-brand__years">2013 &ndash; 2015</span>
+              </div>
+              <p class="intro-lead-text">
+                Built automated validation suites for
+                <strong class="intro-lead-accent">SAS, SATA, USB 3.0 and PCIe</strong>,
+                used by <strong>Intel, Samsung, Seagate and Micron</strong> to
+                certify their products.
+              </p>
+              <div class="intro-link-row">
+                <ul class="intro-lead-stats">
+                  <li><strong>500+</strong><span>commands</span></li>
+                  <li><strong>99.8%</strong><span>coverage</span></li>
+                  <li><strong>80%</strong><span>less manual QA</span></li>
+                </ul>
+                <a
+                  class="intro-lead-cta"
+                  href="#projects"
+                  onclick="
+                    if (typeof animateScroll === 'function') {
+                      event.preventDefault();
+                      animateScroll('projects');
+                    }
+                  "
+                  >See the projects
+                  <i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+
+            <!-- Shared foundations -->
+            <div
+              class="intro-lead-slide intro-lead-slide--foundations"
+              role="group"
+              aria-roledescription="slide"
+            >
+              <div class="intro-lead-eyebrow">
+                <i class="fa-solid fa-cubes" aria-hidden="true"></i>
+                Design systems &middot; Shared foundations
+              </div>
+              <p class="intro-lead-text">
+                I build the
+                <strong class="intro-lead-accent"
+                  >foundations other teams build on</strong
+                >: component libraries, multi-tenant architecture and
+                <strong>shared UI standards</strong> adopted across Walmart and
+                Cerner.
+              </p>
+              <div class="intro-link-row">
+                <ul class="intro-lead-stats">
+                  <li><strong>75%</strong><span>faster template builds</span></li>
+                  <li><strong>60%</strong><span>less duplication</span></li>
+                  <li><strong>100+</strong><span>apps standardized</span></li>
+                </ul>
+                <a
+                  class="intro-lead-cta"
+                  href="#projects"
+                  onclick="
+                    if (typeof animateScroll === 'function') {
+                      event.preventDefault();
+                      animateScroll('projects');
+                    }
+                  "
+                  >See the projects
+                  <i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+
+            <!-- Patent -->
             <div
               class="intro-lead-slide intro-lead-slide--patent"
               role="group"
               aria-roledescription="slide"
-              aria-label="3 of 7"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
@@ -1172,12 +1449,11 @@
               </div>
             </div>
 
-            <!-- 4. Awards -->
+            <!-- Awards -->
             <div
               class="intro-lead-slide intro-lead-slide--awards"
               role="group"
               aria-roledescription="slide"
-              aria-label="4 of 7"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-solid fa-trophy" aria-hidden="true"></i>
@@ -1210,12 +1486,11 @@
               </div>
             </div>
 
-            <!-- 5. Speaking -->
+            <!-- Speaking -->
             <div
               class="intro-lead-slide intro-lead-slide--stage"
               role="group"
               aria-roledescription="slide"
-              aria-label="5 of 7"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-solid fa-microphone-lines" aria-hidden="true"></i>
@@ -1258,12 +1533,11 @@
               </div>
             </div>
 
-            <!-- 6. Teaching -->
+            <!-- Teaching -->
             <div
               class="intro-lead-slide intro-lead-slide--learn"
               role="group"
               aria-roledescription="slide"
-              aria-label="6 of 7"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
@@ -1292,12 +1566,11 @@
               </div>
             </div>
 
-            <!-- 7. LinkedIn community -->
+            <!-- LinkedIn community -->
             <div
               class="intro-lead-slide intro-lead-slide--community"
               role="group"
               aria-roledescription="slide"
-              aria-label="7 of 7"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
@@ -2390,6 +2663,10 @@
     const dotsBox = card.querySelector(".intro-lead-dots");
     const live = card.querySelector(".intro-lead-slides");
     let current = 0;
+
+    slides.forEach(function (slide, i) {
+      slide.setAttribute("aria-label", i + 1 + " of " + slides.length);
+    });
 
     const dots = slides.map(function (_, i) {
       const dot = document.createElement("button");

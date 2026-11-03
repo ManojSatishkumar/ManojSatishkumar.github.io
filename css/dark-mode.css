@@ -476,6 +476,40 @@ html[data-theme="dark"] .intro-lead-slide--learn {
 html[data-theme="dark"] .intro-lead-slide--community {
   --tone: 112, 181, 249;
 }
+html[data-theme="dark"] .intro-lead-slide--foundations {
+  --tone: 196, 181, 253;
+}
+html[data-theme="dark"] .intro-lead-slide--fintech {
+  --tone: 129, 161, 255;
+}
+html[data-theme="dark"] .intro-lead-slide--health {
+  --tone: 251, 113, 133;
+}
+html[data-theme="dark"] .intro-lead-slide--semis {
+  --tone: 34, 211, 238;
+}
+
+html[data-theme="dark"] .intro-lead-brand {
+  border-left-color: var(--dm-border-strong);
+}
+
+html[data-theme="dark"] .intro-lead-brand__logo {
+  background: var(--dm-surface-2);
+  border-color: var(--dm-border);
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .intro-lead-brand__logo img[src*="grl"] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html[data-theme="dark"] .intro-lead-brand__name {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .intro-lead-brand__years {
+  color: var(--dm-text-muted);
+}
 
 html[data-theme="dark"] .intro-lead-nav__btn {
   background: var(--dm-surface-2);
