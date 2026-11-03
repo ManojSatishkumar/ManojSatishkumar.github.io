@@ -33,35 +33,72 @@
     overflow: hidden;
   }
 
+  /* ---------- Hero statement card ---------- */
   .intro-lead-card {
-    background:
-      linear-gradient(
-        135deg,
-        rgba(249, 251, 255, 0.95),
-        rgba(241, 245, 255, 0.98)
-      ),
-      linear-gradient(
-        120deg,
-        rgba(255, 255, 255, 0.7),
-        rgba(245, 247, 255, 0.9)
-      );
-    padding: 26px 28px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 22px 28px 22px;
     margin-bottom: 24px;
   }
 
-  .intro-lead-card::before {
-    content: "";
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 6px;
-    background: linear-gradient(180deg, #667eea, #8a63ff, #f58565);
+  @media (prefers-reduced-motion: no-preference) {
+    .intro-lead-eyebrow__dot {
+      animation: leadPulse 2.4s ease-out infinite;
+    }
+  }
+
+  @keyframes leadPulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5);
+    }
+    70%,
+    100% {
+      box-shadow: 0 0 0 7px rgba(139, 92, 246, 0);
+    }
+  }
+
+  .intro-lead-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 5px 12px 5px 10px;
+    border-radius: 999px;
+    background: rgba(102, 126, 234, 0.1);
+    color: #4f46e5;
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .intro-lead-eyebrow__dot {
+    flex: none;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #f64f59);
   }
 
   .intro-lead-text {
     margin: 0;
-    font-size: 1.16rem;
-    line-height: 1.76;
+    font-size: 1.24rem;
+    line-height: 1.7;
+    letter-spacing: -0.005em;
     color: #1f2937;
+  }
+
+  .intro-lead-years {
+    font-weight: 800;
+  }
+
+  .intro-lead-accent {
+    font-weight: 700;
+    background: linear-gradient(90deg, #4f46e5, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
   }
 
   .intro-link-row {
@@ -73,51 +110,70 @@
     gap: 12px;
   }
 
-  .intro-link-pill {
+  /* LinkedIn-blue in both themes */
+  .intro-link-pill,
+  .intro-link-pill:hover,
+  .intro-link-pill:focus {
     display: inline-flex;
     align-items: center;
-    padding: 10px 14px;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 0;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.86);
-    border: 1px solid rgba(196, 206, 236, 0.95);
-    color: #0a66c2;
+    background: linear-gradient(135deg, #0a66c2 0%, #0b7ad6 100%);
+    color: #ffffff;
     text-decoration: none;
     font-size: 0.92rem;
-    font-weight: 700;
-    box-shadow: 0 10px 24px rgba(95, 112, 163, 0.08);
+    font-weight: 600;
+    box-shadow: 0 10px 24px rgba(10, 102, 194, 0.28);
     transition:
       transform 0.2s ease,
-      box-shadow 0.2s ease,
-      border-color 0.2s ease;
+      box-shadow 0.2s ease;
+  }
+
+  .intro-link-pill i {
+    font-size: 1.05rem;
+  }
+
+  .intro-link-pill strong {
+    font-weight: 800;
   }
 
   .intro-link-pill:hover {
     transform: translateY(-2px);
-    box-shadow: 0 14px 28px rgba(95, 112, 163, 0.14);
-    border-color: rgba(10, 102, 194, 0.28);
-    color: #0a66c2;
-    text-decoration: none;
+    box-shadow: 0 16px 30px rgba(10, 102, 194, 0.36);
   }
 
   .intro-avatar-stack {
     display: flex;
     align-items: center;
     margin-left: auto;
-    padding-left: 14px;
+    padding: 0 0 0 14px;
     border: 0;
     background: transparent;
     cursor: pointer;
   }
 
+  .intro-avatar-faces {
+    display: flex;
+    align-items: center;
+  }
+
   .intro-avatar {
-    width: 40px;
-    height: 40px;
-    margin-left: -10px;
+    width: 34px;
+    height: 34px;
+    margin-left: -9px;
     border-radius: 50%;
     border: 1.5px solid #5f6778;
     object-fit: cover;
     box-shadow: 0 10px 20px rgba(95, 112, 163, 0.12);
     background: #f6f8ff;
+    transition: margin-left 0.25s ease;
+  }
+
+  /* The faces fan out a little on hover */
+  .intro-avatar-stack:hover .intro-avatar:not(:first-child) {
+    margin-left: -4px;
   }
 
   .intro-avatar-stack .intro-avatar:first-child {
@@ -707,9 +763,13 @@
       >
         <!-- Hero Statement -->
         <div class="intro-lead-card">
+          <div class="intro-lead-eyebrow">
+            <span class="intro-lead-eyebrow__dot" aria-hidden="true"></span>
+            Frontend Architecture &middot; Platform Engineering
+          </div>
           <p class="intro-lead-text">
             <strong
-              class="intro-link-highlight"
+              class="intro-link-highlight intro-lead-years"
               role="button"
               tabindex="0"
               onclick="openExpModal()"
@@ -722,9 +782,13 @@
               ><span class="js-experience-years">13</span> years</strong
             >
             of crafting
-            <strong>highly scalable, multi-tenant frontend systems</strong> at
-            massive global scale. I architect world-class web platforms that
-            power <strong>exceptional user experiences</strong> for millions.
+            <strong class="intro-lead-accent"
+              >highly scalable, multi-tenant frontend systems</strong
+            >
+            at massive global scale. I architect world-class web platforms that
+            power
+            <strong class="intro-lead-accent">exceptional user experiences</strong>
+            for millions.
           </p>
           <div class="intro-link-row">
             <a
@@ -732,8 +796,10 @@
               href="https://www.linkedin.com/in/manojsatishkumar/"
               target="_blank"
               rel="noopener"
+              aria-label="69,000+ followers on LinkedIn"
             >
-              69,000+ followers on LinkedIn
+              <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+              <span><strong>69,000+</strong> followers</span>
             </a>
             <button
               type="button"
@@ -747,6 +813,7 @@
                 }
               "
             >
+              <span class="intro-avatar-faces">
               <img
                 class="intro-avatar"
                 src="/images/people/shreyas.png"
@@ -782,6 +849,7 @@
                 src="/images/people/harshita.jpg"
                 alt="Harshita"
               />
+              </span>
             </button>
           </div>
         </div>

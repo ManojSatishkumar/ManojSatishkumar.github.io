@@ -439,9 +439,21 @@ html[data-theme="dark"] .intro-quote-card {
   box-shadow: var(--dm-shadow);
 }
 
-html[data-theme="dark"] .intro-lead-card,
 html[data-theme="dark"] .intro-quote-card {
   background: linear-gradient(135deg, #151f35 0%, #121a2c 100%);
+}
+
+html[data-theme="dark"] .intro-lead-card {
+  background: var(--dm-surface);
+}
+
+html[data-theme="dark"] .intro-lead-eyebrow {
+  background: rgba(165, 180, 252, 0.12);
+  color: var(--dm-violet);
+}
+
+html[data-theme="dark"] .intro-lead-accent {
+  background-image: linear-gradient(90deg, #8ea2ff, #c084fc, #f472b6);
 }
 
 html[data-theme="dark"] .intro-journey-card,
@@ -462,19 +474,6 @@ html[data-theme="dark"] .intro-quote-text strong {
 html[data-theme="dark"] .intro-link-highlight {
   color: var(--dm-violet);
   border-bottom-color: var(--dm-violet);
-}
-
-html[data-theme="dark"] .intro-link-pill {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--dm-border-strong);
-  color: var(--dm-accent);
-  box-shadow: none;
-}
-
-html[data-theme="dark"] .intro-link-pill:hover {
-  border-color: rgba(96, 165, 250, 0.5);
-  color: var(--dm-accent-strong);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
 
 html[data-theme="dark"] .intro-avatar {

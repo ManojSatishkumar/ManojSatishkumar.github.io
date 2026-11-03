@@ -164,7 +164,9 @@
         bottom: auto !important;
         left: 14px !important;
         right: auto !important;
-        width: auto !important;
+        /* Fixed so the section rail and the contact rail match, whatever
+           their longest label */
+        width: 80px !important;
         transform: translate(0, -50%) !important;
         padding: 10px 8px !important;
         border-radius: 22px !important;
@@ -201,7 +203,9 @@
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        padding: 3px 10px !important;
+        /* Full rail width, so every tooltip starts just past the rail's edge */
+        align-self: stretch !important;
+        padding: 3px 0 !important;
         margin: 0 !important;
         cursor: pointer !important;
         transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
