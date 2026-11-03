@@ -503,6 +503,15 @@ html[data-theme="dark"] .intro-lead-brand__logo img[src*="grl"] {
   filter: invert(1) hue-rotate(180deg);
 }
 
+html[data-theme="dark"] .intro-lead-brand__logo--icon {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--tone), 0.18),
+    rgba(var(--tone), 0.06)
+  );
+  border-color: rgba(var(--tone), 0.3);
+}
+
 html[data-theme="dark"] .intro-lead-brand__name {
   color: var(--dm-heading);
 }

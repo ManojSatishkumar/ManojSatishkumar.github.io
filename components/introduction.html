@@ -124,26 +124,28 @@
     --tone: 8, 145, 178;
   }
 
-  /* Company slides: the story on the left, the company on the right */
-  .intro-lead-slide--company {
+  /* The story on the left; the company or topic badge on the right */
+  .intro-lead-slide--split {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 128px;
     grid-template-rows: auto 1fr auto;
     column-gap: 24px;
   }
 
-  .intro-lead-slide--company > .intro-lead-eyebrow {
+  /* The arrows and dots overhang the left column only slightly */
+  .intro-lead-slide.intro-lead-slide--split > .intro-lead-eyebrow {
     grid-column: 1;
     grid-row: 1;
     justify-self: start;
+    margin-right: 40px;
   }
 
-  .intro-lead-slide--company > .intro-lead-text {
+  .intro-lead-slide--split > .intro-lead-text {
     grid-column: 1;
     grid-row: 2;
   }
 
-  .intro-lead-slide--company > .intro-link-row {
+  .intro-lead-slide--split > .intro-link-row {
     grid-column: 1;
     grid-row: 3;
   }
@@ -179,6 +181,20 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+
+  .intro-lead-brand__logo--icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      135deg,
+      rgba(var(--tone), 0.14),
+      rgba(var(--tone), 0.05)
+    );
+    border-color: rgba(var(--tone), 0.24);
+    color: rgb(var(--tone));
+    font-size: 1.6rem;
   }
 
   .intro-lead-brand__name {
@@ -326,7 +342,7 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
-    padding: 0 18px;
+    padding: 0 16px;
     border-left: 1px solid rgba(148, 163, 184, 0.35);
   }
 
@@ -385,10 +401,6 @@
     transform: translateX(3px);
   }
 
-  .intro-lead-slide .intro-link-pill {
-    margin-left: auto;
-  }
-
   /* Event photos, tilted like a small stack of prints */
   .intro-lead-photos {
     display: flex;
@@ -441,16 +453,15 @@
 
     .intro-lead-cta,
     .intro-lead-cta:hover,
-    .intro-lead-cta:focus,
-    .intro-lead-slide .intro-link-pill {
+    .intro-lead-cta:focus {
       margin-left: 0;
     }
   }
 
-  /* Too narrow for a side column: the company becomes a row under the
+  /* Too narrow for a side column: the badge becomes a row under the
      eyebrow */
-  @media (max-width: 991px) {
-    .intro-lead-slide--company {
+  @media (max-width: 1199px) {
+    .intro-lead-slide--split {
       display: flex;
     }
 
@@ -470,6 +481,10 @@
       margin-bottom: 0;
       padding: 6px;
       border-radius: 10px;
+    }
+
+    .intro-lead-brand__logo--icon {
+      font-size: 1rem;
     }
   }
 
@@ -509,7 +524,7 @@
 
   .intro-lead-text {
     margin: 0;
-    font-size: 1.24rem;
+    font-size: 1.14rem;
     line-height: 1.7;
     letter-spacing: -0.005em;
     color: #1f2937;
@@ -535,36 +550,6 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-  }
-
-  /* LinkedIn-blue in both themes */
-  .intro-link-pill,
-  .intro-link-pill:hover,
-  .intro-link-pill:focus {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    border: 0;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #0a66c2 0%, #0b7ad6 100%);
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 0.92rem;
-    font-weight: 600;
-    box-shadow: 0 10px 24px rgba(10, 102, 194, 0.28);
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .intro-link-pill i {
-    font-size: 1.05rem;
-  }
-
-  .intro-link-pill:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 16px 30px rgba(10, 102, 194, 0.36);
   }
 
   .intro-link-highlight {
@@ -1156,13 +1141,20 @@
           <div class="intro-lead-slides" aria-live="off">
             <!-- Who I am -->
             <div
-              class="intro-lead-slide is-active"
+              class="intro-lead-slide intro-lead-slide--split is-active"
               role="group"
               aria-roledescription="slide"
             >
               <div class="intro-lead-eyebrow">
                 <span class="intro-lead-eyebrow__dot" aria-hidden="true"></span>
                 Frontend Architecture &middot; Platform Engineering
+              </div>
+              <div class="intro-lead-brand">
+                <span class="intro-lead-brand__logo intro-lead-brand__logo--icon"
+                  ><i class="fa-solid fa-sitemap" aria-hidden="true"></i
+                ></span>
+                <span class="intro-lead-brand__name">Architect</span>
+                <span class="intro-lead-brand__years">Web platforms</span>
               </div>
               <p class="intro-lead-text">
                 <strong
@@ -1210,7 +1202,7 @@
 
             <!-- Walmart template platform -->
             <div
-              class="intro-lead-slide intro-lead-slide--company intro-lead-slide--scale"
+              class="intro-lead-slide intro-lead-slide--split intro-lead-slide--scale"
               role="group"
               aria-roledescription="slide"
             >
@@ -1249,7 +1241,7 @@
 
             <!-- PayPal -->
             <div
-              class="intro-lead-slide intro-lead-slide--company intro-lead-slide--fintech"
+              class="intro-lead-slide intro-lead-slide--split intro-lead-slide--fintech"
               role="group"
               aria-roledescription="slide"
             >
@@ -1293,7 +1285,7 @@
 
             <!-- Cerner -->
             <div
-              class="intro-lead-slide intro-lead-slide--company intro-lead-slide--health"
+              class="intro-lead-slide intro-lead-slide--split intro-lead-slide--health"
               role="group"
               aria-roledescription="slide"
             >
@@ -1330,7 +1322,7 @@
 
             <!-- GRL Labs -->
             <div
-              class="intro-lead-slide intro-lead-slide--company intro-lead-slide--semis"
+              class="intro-lead-slide intro-lead-slide--split intro-lead-slide--semis"
               role="group"
               aria-roledescription="slide"
             >
@@ -1374,7 +1366,7 @@
 
             <!-- Shared foundations -->
             <div
-              class="intro-lead-slide intro-lead-slide--foundations"
+              class="intro-lead-slide intro-lead-slide--split intro-lead-slide--foundations"
               role="group"
               aria-roledescription="slide"
             >
@@ -1382,19 +1374,26 @@
                 <i class="fa-solid fa-cubes" aria-hidden="true"></i>
                 Design systems &middot; Shared foundations
               </div>
+              <div class="intro-lead-brand">
+                <span class="intro-lead-brand__logo intro-lead-brand__logo--icon"
+                  ><i class="fa-solid fa-cubes" aria-hidden="true"></i
+                ></span>
+                <span class="intro-lead-brand__name">Design systems</span>
+                <span class="intro-lead-brand__years">Built for reuse</span>
+              </div>
               <p class="intro-lead-text">
                 I build the
                 <strong class="intro-lead-accent"
                   >foundations other teams build on</strong
                 >: component libraries, multi-tenant architecture and
-                <strong>shared UI standards</strong> adopted across Walmart and
-                Cerner.
+                <strong>shared UI standards</strong> that help every team ship
+                faster.
               </p>
               <div class="intro-link-row">
                 <ul class="intro-lead-stats">
-                  <li><strong>75%</strong><span>faster template builds</span></li>
+                  <li><strong>75%</strong><span>faster builds</span></li>
                   <li><strong>60%</strong><span>less duplication</span></li>
-                  <li><strong>100+</strong><span>apps standardized</span></li>
+                  <li><strong>100+</strong><span>apps unified</span></li>
                 </ul>
                 <a
                   class="intro-lead-cta"
@@ -1413,13 +1412,20 @@
 
             <!-- Patent -->
             <div
-              class="intro-lead-slide intro-lead-slide--patent"
+              class="intro-lead-slide intro-lead-slide--split intro-lead-slide--patent"
               role="group"
               aria-roledescription="slide"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
-                Published patent &middot; Cerner
+                Published patent &middot; Healthcare
+              </div>
+              <div class="intro-lead-brand">
+                <span class="intro-lead-brand__logo intro-lead-brand__logo--icon"
+                  ><i class="fa-solid fa-lightbulb" aria-hidden="true"></i
+                ></span>
+                <span class="intro-lead-brand__name">Patent</span>
+                <span class="intro-lead-brand__years">Health tech</span>
               </div>
               <p class="intro-lead-text">
                 Patented the
@@ -1451,13 +1457,20 @@
 
             <!-- Awards -->
             <div
-              class="intro-lead-slide intro-lead-slide--awards"
+              class="intro-lead-slide intro-lead-slide--split intro-lead-slide--awards"
               role="group"
               aria-roledescription="slide"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-solid fa-trophy" aria-hidden="true"></i>
                 Awards &amp; recognition
+              </div>
+              <div class="intro-lead-brand">
+                <span class="intro-lead-brand__logo intro-lead-brand__logo--icon"
+                  ><i class="fa-solid fa-trophy" aria-hidden="true"></i
+                ></span>
+                <span class="intro-lead-brand__name">Awards</span>
+                <span class="intro-lead-brand__years">2016 &ndash; 2025</span>
               </div>
               <p class="intro-lead-text">
                 <strong class="intro-lead-accent">Hackathon champion</strong> at
@@ -1488,13 +1501,20 @@
 
             <!-- Speaking -->
             <div
-              class="intro-lead-slide intro-lead-slide--stage"
+              class="intro-lead-slide intro-lead-slide--split intro-lead-slide--stage"
               role="group"
               aria-roledescription="slide"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-solid fa-microphone-lines" aria-hidden="true"></i>
                 Speaker &amp; jury
+              </div>
+              <div class="intro-lead-brand">
+                <span class="intro-lead-brand__logo intro-lead-brand__logo--icon"
+                  ><i class="fa-solid fa-microphone-lines" aria-hidden="true"></i
+                ></span>
+                <span class="intro-lead-brand__name">Speaker</span>
+                <span class="intro-lead-brand__years">Jury &middot; DevCon</span>
               </div>
               <p class="intro-lead-text">
                 Guest speaker and jury at
@@ -1535,13 +1555,20 @@
 
             <!-- Teaching -->
             <div
-              class="intro-lead-slide intro-lead-slide--learn"
+              class="intro-lead-slide intro-lead-slide--split intro-lead-slide--learn"
               role="group"
               aria-roledescription="slide"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
                 Courses &amp; teaching
+              </div>
+              <div class="intro-lead-brand">
+                <span class="intro-lead-brand__logo intro-lead-brand__logo--icon"
+                  ><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i
+                ></span>
+                <span class="intro-lead-brand__name">Instructor</span>
+                <span class="intro-lead-brand__years">On Udemy</span>
               </div>
               <p class="intro-lead-text">
                 Teaching what I build: courses on
@@ -1568,13 +1595,20 @@
 
             <!-- LinkedIn community -->
             <div
-              class="intro-lead-slide intro-lead-slide--community"
+              class="intro-lead-slide intro-lead-slide--split intro-lead-slide--community"
               role="group"
               aria-roledescription="slide"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
                 Community &middot; LinkedIn
+              </div>
+              <div class="intro-lead-brand">
+                <span class="intro-lead-brand__logo intro-lead-brand__logo--icon"
+                  ><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i
+                ></span>
+                <span class="intro-lead-brand__name">LinkedIn</span>
+                <span class="intro-lead-brand__years">Creator</span>
               </div>
               <p class="intro-lead-text">
                 Sharing
@@ -1590,14 +1624,13 @@
                   <li><strong>17</strong><span>testimonials</span></li>
                 </ul>
                 <a
-                  class="intro-link-pill"
+                  class="intro-lead-cta"
                   href="https://www.linkedin.com/in/manojsatishkumar/"
                   target="_blank"
                   rel="noopener"
-                >
-                  <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-                  Follow on LinkedIn
-                </a>
+                  >Follow on LinkedIn
+                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i
+                ></a>
               </div>
             </div>
           </div>
