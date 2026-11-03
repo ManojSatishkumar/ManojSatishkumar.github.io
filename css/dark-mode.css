@@ -1030,96 +1030,52 @@ html[data-theme="dark"] .visa-status {
 /*  Experience (components/experience.html)
 /*-----------------------------------------------------------------------------------*/
 
-html[data-theme="dark"] .experience-section {
+html[data-theme="dark"] .xp {
+  --xp-ink: var(--dm-heading);
+  --xp-text: var(--dm-text);
+  --xp-muted: var(--dm-text-muted);
+  --xp-line: var(--dm-border);
+  --xp-line-strong: var(--dm-border-strong);
+  --xp-surface: var(--dm-surface);
+  --xp-halo: var(--dm-bg);
   background:
-    radial-gradient(circle at top left, rgba(250, 204, 21, 0.06), transparent 24%),
-    radial-gradient(circle at top right, rgba(56, 189, 248, 0.08), transparent 28%),
-    linear-gradient(135deg, #0d1424 0%, var(--dm-bg) 100%);
+    radial-gradient(900px 420px at 0% 0%, rgba(129, 140, 248, 0.08), transparent 60%),
+    radial-gradient(800px 400px at 100% 6%, rgba(236, 72, 153, 0.06), transparent 60%),
+    var(--dm-bg);
 }
 
-html[data-theme="dark"] .experience-intro {
-  color: var(--dm-text-muted);
-}
-
-html[data-theme="dark"] .experience-timer {
-  background: var(--dm-surface);
-  border-color: var(--dm-border);
-}
-
-html[data-theme="dark"] .timer-unit span:first-child {
-  color: var(--dm-heading);
-}
-
-html[data-theme="dark"] .timer-unit-label {
-  color: var(--dm-text-muted);
-}
-
-html[data-theme="dark"] .timer-separator {
-  color: #475569;
-}
-
-html[data-theme="dark"] .experience-card {
-  background: var(--dm-surface);
-  border-color: var(--dm-border);
+html[data-theme="dark"] .xp-overview,
+html[data-theme="dark"] .xp-card {
   box-shadow: var(--dm-shadow);
 }
 
-html[data-theme="dark"] .experience-card:hover {
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+html[data-theme="dark"] .xp-stats strong {
+  background-image: linear-gradient(120deg, #a5b4fc 0%, #c084fc 60%, #f472b6 100%);
 }
 
-/* Brand accents brightened so dots, chips and links stay readable */
-html[data-theme="dark"] .experience-card--disney {
-  --accent: #4d9bff;
-  --accent-soft: rgba(77, 155, 255, 0.2);
+/* Brand accents brightened so metrics, chips and links stay readable */
+html[data-theme="dark"] .xp-chapter--disney {
+  --brand: 165, 180, 252;
 }
 
-html[data-theme="dark"] .experience-card--walmart {
-  --accent: #4aa8ff;
-  --accent-soft: rgba(74, 168, 255, 0.2);
+html[data-theme="dark"] .xp-chapter--walmart {
+  --brand: 96, 165, 250;
 }
 
-html[data-theme="dark"] .experience-card--paypal {
-  --accent: #6b9bff;
-  --accent-soft: rgba(107, 155, 255, 0.2);
+html[data-theme="dark"] .xp-chapter--paypal {
+  --brand: 129, 161, 255;
 }
 
-html[data-theme="dark"] .experience-card--cerner {
-  --accent: #2dd4bf;
-  --accent-soft: rgba(45, 212, 191, 0.2);
+html[data-theme="dark"] .xp-chapter--cerner {
+  --brand: 45, 212, 191;
 }
 
-html[data-theme="dark"] .experience-card--grl {
-  --accent: #94a3b8;
-  --accent-soft: rgba(148, 163, 184, 0.2);
+html[data-theme="dark"] .xp-chapter--grl {
+  --brand: 148, 163, 184;
 }
 
-html[data-theme="dark"] .experience-section .company-name a,
-html[data-theme="dark"] .experience-section .role {
-  color: var(--dm-heading);
-}
-
-html[data-theme="dark"] .experience-section .industry,
-html[data-theme="dark"] .experience-section .duration {
-  color: var(--dm-text-muted);
-}
-
-html[data-theme="dark"] .experience-section .description {
-  color: var(--dm-text);
-  border-top-color: var(--dm-border);
-}
-
-html[data-theme="dark"] .experience-card--featured .experience-card__main {
-  border-right-color: var(--dm-border);
-}
-
-/* Both marks are dark on a transparent background */
-html[data-theme="dark"] .experience-card--disney .company-logo {
-  filter: invert(1);
-}
-
-html[data-theme="dark"] .experience-card--grl .company-logo {
-  filter: brightness(0) invert(0.9);
+html[data-theme="dark"] .xp-chapter--disney .xp-card {
+  border-color: rgba(165, 180, 252, 0.16);
 }
 
 /*-----------------------------------------------------------------------------------*/

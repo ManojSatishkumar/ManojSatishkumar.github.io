@@ -1,703 +1,1489 @@
-<section class="experience-section">
+<section class="xp" aria-labelledby="xp-heading">
   <div class="container">
-    <div class="experience-header text-center">
-      <div
+    <header class="xp-header text-center">
+      <h2
+        id="xp-heading"
+        class="xp-heading"
         style="
-          font-size: 50px;
-          font-weight: bold;
-          background: #121fcf;
-          background: -webkit-linear-gradient(
-            to right,
-            #121fcf 0%,
-            #cf1512 100%
-          );
-          background: -moz-linear-gradient(
-            to right,
-            #121fcf 0%,
-            #cf1512 100%
-          );
           background: linear-gradient(to right, #121fcf 0%, #cf1512 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         "
       >
         Experience
-      </div>
-      <p class="experience-intro">
-        Over <span class="js-experience-years">12</span> years of building production-grade frontend systems at industry giants like Disney, Walmart, and Cerner, where I've architected scalable platforms serving millions of users, led cross-functional teams, and championed engineering excellence across the stack.
+      </h2>
+      <p class="xp-intro">
+        Over <span class="js-experience-years">13</span> years of building
+        production-grade frontend systems at industry giants like Disney,
+        Walmart, and Cerner, where I've architected scalable platforms serving
+        millions of users, led cross-functional teams, and championed
+        engineering excellence across the stack.
       </p>
+    </header>
 
-      <!-- Experience Timer -->
-      <div class="experience-timer">
-        <div class="timer-display">
-          <div class="timer-unit">
-            <span id="exp-years">00</span>
-            <span class="timer-unit-label">Years</span>
-          </div>
-          <div class="timer-separator">:</div>
-          <div class="timer-unit">
-            <span id="exp-months">00</span>
-            <span class="timer-unit-label">Months</span>
-          </div>
-          <div class="timer-separator">:</div>
-          <div class="timer-unit">
-            <span id="exp-days">00</span>
-            <span class="timer-unit-label">Days</span>
-          </div>
-        </div>
+    <div class="xp-overview">
+      <ul class="xp-stats">
+        <li>
+          <strong
+            ><span class="js-xp-years">13</span><small>yrs</small>
+            <span class="js-xp-months">4</span><small>mos</small></strong
+          >
+          <span>In the industry</span>
+        </li>
+        <li><strong>5</strong><span>Companies</span></li>
+        <li><strong>5</strong><span>Industries</span></li>
+        <li><strong>8</strong><span>Roles held</span></li>
+      </ul>
+
+      <div class="xp-span-label">
+        <span>Career timeline</span>
+        <span class="xp-span-hint">Tap a company to jump to it</span>
+      </div>
+      <div class="xp-span">
+        <a class="xp-span__seg xp-span__seg--grl" href="#xp-grl" style="--years: 2; --i: 0" title="GRL Labs · 2013 – 2015">
+          <span class="xp-span__name">GRL Labs</span>
+          <span class="xp-span__year">2013</span>
+        </a>
+        <a class="xp-span__seg xp-span__seg--cerner" href="#xp-cerner" style="--years: 4; --i: 1" title="Cerner · 2015 – 2019">
+          <span class="xp-span__name">Cerner</span>
+          <span class="xp-span__year">2015</span>
+        </a>
+        <a class="xp-span__seg xp-span__seg--walmart" href="#xp-walmart" style="--years: 2; --i: 2" title="Walmart · 2019 – 2021">
+          <span class="xp-span__name">Walmart</span>
+          <span class="xp-span__year">2019</span>
+        </a>
+        <a class="xp-span__seg xp-span__seg--paypal xp-span__seg--narrow" href="#xp-paypal" style="--years: 1; --i: 3" title="PayPal · 2021 – 2022">
+          <span class="xp-span__name">PayPal</span>
+          <span class="xp-span__year xp-span__year--minor">2021</span>
+        </a>
+        <a class="xp-span__seg xp-span__seg--walmart" href="#xp-walmart" style="--years: 4; --i: 4" title="Walmart · 2022 – 2026">
+          <span class="xp-span__name">Walmart</span>
+          <span class="xp-span__year">2022</span>
+        </a>
+        <a class="xp-span__seg xp-span__seg--disney xp-span__seg--narrow js-xp-disney-seg" href="#xp-disney" style="--years: 0.85; --i: 5" title="Walt Disney · 2026 – Now">
+          <span class="xp-span__name">Disney</span>
+          <span class="xp-span__year xp-span__year--minor">2026</span>
+          <span class="xp-span__year xp-span__year--end">Now</span>
+        </a>
       </div>
     </div>
 
-    <div class="experience-grid">
-      <article class="experience-card experience-card--disney experience-card--featured">
-        <div class="experience-card__main">
-          <header class="experience-card__head">
-            <div class="experience-card__identity">
-              <h2 class="company-name">
-                <a href="https://en.wikipedia.org/wiki/The_Walt_Disney_Company" target="_blank" rel="noopener">Walt Disney</a>
-              </h2>
-              <p class="industry">Media &amp; Entertainment</p>
-            </div>
-            <img
-              src="/images/logos/companies/disney.png"
-              alt="The Walt Disney Company"
-              class="company-logo"
-              width="1500"
-              height="1000"
-            />
-          </header>
-          <ul class="role-list">
-            <li class="role-item">
-              <span class="role">Software Architect</span>
-              <span class="duration">2026 &ndash; Present <span class="role-chip">Current</span></span>
-            </li>
-          </ul>
+    <ol class="xp-timeline">
+      <!-- Walt Disney -->
+      <li class="xp-chapter xp-chapter--disney" id="xp-disney">
+        <div class="xp-when">
+          <span class="xp-when__range">2026 &ndash; Now</span>
+          <span class="xp-when__len xp-when__len--live">Current role</span>
         </div>
-        <div class="experience-card__body">
-          <p class="description">
-            Setting frontend technical direction as a Software Architect & shaping system design, platform foundations, and engineering standards for products built at global scale.
-          </p>
+        <div class="xp-node" aria-hidden="true">
+          <img src="/images/disney/mickey.png" alt="" loading="lazy" />
         </div>
-      </article>
+        <article class="xp-card">
+          <img
+            class="xp-card__mark"
+            src="/images/logos/companies/disney.png"
+            alt=""
+            loading="lazy"
+          />
+          <div class="xp-card__content">
+            <header class="xp-card__head">
+              <div>
+                <h3 class="xp-card__title">
+                  <a href="https://en.wikipedia.org/wiki/The_Walt_Disney_Company" target="_blank" rel="noopener"
+                    >Walt Disney</a
+                  >
+                  <span class="xp-live"><span class="xp-live__dot"></span>Now</span>
+                </h3>
+                <p class="xp-card__meta">
+                  <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+                  Media &amp; Entertainment
+                </p>
+              </div>
+            </header>
+            <p class="xp-card__desc">
+              Setting <strong>frontend technical direction</strong> as a
+              Software Architect &mdash; shaping system design, platform
+              foundations and engineering standards for products built at
+              <strong>global scale</strong>.
+            </p>
+            <ul class="xp-focus">
+              <li>
+                <i class="fa-solid fa-sitemap" aria-hidden="true"></i>
+                <strong>System design</strong>
+                <span>Architecture for global products</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                <strong>Platform foundations</strong>
+                <span>Building blocks teams reuse</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                <strong>Engineering standards</strong>
+                <span>A shared quality bar</span>
+              </li>
+            </ul>
+            <ol class="xp-path" aria-label="Roles at Walt Disney">
+              <li class="xp-step is-latest">
+                <strong>Software Architect</strong>
+                <span>2026 &ndash; Present</span>
+              </li>
+            </ol>
+          </div>
+        </article>
+      </li>
 
-      <article class="experience-card experience-card--walmart">
-        <div class="experience-card__main">
-          <header class="experience-card__head">
-            <div class="experience-card__identity">
-              <h2 class="company-name">
+      <!-- Walmart -->
+      <li class="xp-chapter xp-chapter--walmart" id="xp-walmart">
+        <div class="xp-when">
+          <span class="xp-when__range">2019 &ndash; 2026</span>
+          <span class="xp-when__len">6 yrs &middot; 2 stints</span>
+        </div>
+        <div class="xp-node" aria-hidden="true">
+          <img src="/images/walmart-logo.png" alt="" loading="lazy" />
+        </div>
+        <article class="xp-card">
+          <header class="xp-card__head">
+            <div>
+              <h3 class="xp-card__title">
                 <a href="https://en.wikipedia.org/wiki/Walmart" target="_blank" rel="noopener">Walmart</a>
-              </h2>
-              <p class="industry">E-Commerce</p>
+              </h3>
+              <p class="xp-card__meta">
+                <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                E-Commerce
+              </p>
             </div>
-            <img src="/images/walmart-logo.png" alt="Walmart" class="company-logo" />
+            <span class="xp-card__badge"
+              ><span class="xp-card__years">2019 &ndash; 2026 &middot; </span>6 yrs</span
+            >
           </header>
-          <ul class="role-list">
-            <li class="role-item">
-              <span class="role">Staff Software Engineer</span>
-              <span class="duration">2022 &ndash; 2026</span>
-            </li>
-            <li class="role-item">
-              <span class="role">Senior Software Engineer</span>
-              <span class="duration">2019 &ndash; 2021</span>
-            </li>
-          </ul>
-        </div>
-        <div class="experience-card__body">
-          <p class="description">
-            Architected and built a no-code, multi-tenant template builder portal powering 70M+ daily communications across Email, SMS, Push, WhatsApp &amp; In-App channels.
+          <p class="xp-card__desc">
+            Architected a <strong>no-code, multi-tenant template builder</strong>
+            from scratch, now powering customer communications across Email,
+            SMS, Push, WhatsApp &amp; In-App for <strong>200+ internal teams</strong>.
           </p>
-          <div class="experience-links">
-            <a class="experience-album-link" href="/walmart-journey/">My Walmart Journey</a>
-            <a class="experience-album-link" href="/walmart-us-visit/">US store visit experience</a>
-            <a class="experience-album-link" href="/walmart-last-day/">Last working day</a>
-            <a class="experience-album-link" href="/albums/view.html?album=walmart">View photo album</a>
+          <ul class="xp-metrics">
+            <li><strong>70M+</strong><span>messages a day</span></li>
+            <li><strong>10K+</strong><span>templates created</span></li>
+            <li><strong>200+</strong><span>teams onboarded</span></li>
+          </ul>
+          <ol class="xp-path" aria-label="Roles at Walmart">
+            <li class="xp-step">
+              <strong>Senior Software Engineer</strong>
+              <span>2019 &ndash; 2021</span>
+            </li>
+            <li class="xp-step is-latest">
+              <strong>Staff Software Engineer</strong>
+              <span>2022 &ndash; 2026 <em class="xp-step__tag">Rejoined</em></span>
+            </li>
+          </ol>
+          <div class="xp-links">
+            <a class="xp-link" href="/walmart-journey/"
+              ><i class="fa-solid fa-route" aria-hidden="true"></i>My Walmart journey</a
+            >
+            <a class="xp-link" href="/walmart-us-visit/"
+              ><i class="fa-solid fa-plane" aria-hidden="true"></i>US store visit</a
+            >
+            <a class="xp-link" href="/walmart-last-day/"
+              ><i class="fa-solid fa-hand" aria-hidden="true"></i>Last working day</a
+            >
+            <a class="xp-link" href="/albums/view.html?album=walmart"
+              ><i class="fa-solid fa-images" aria-hidden="true"></i>Photo album</a
+            >
           </div>
-        </div>
-      </article>
+        </article>
+      </li>
 
-      <article class="experience-card experience-card--paypal">
-        <div class="experience-card__main">
-          <header class="experience-card__head">
-            <div class="experience-card__identity">
-              <h2 class="company-name">
+      <!-- PayPal -->
+      <li class="xp-chapter xp-chapter--paypal" id="xp-paypal">
+        <div class="xp-when">
+          <span class="xp-when__range">2021 &ndash; 2022</span>
+          <span class="xp-when__len">1 yr</span>
+        </div>
+        <div class="xp-node" aria-hidden="true">
+          <img src="/images/paypal-icon.png" alt="" loading="lazy" />
+        </div>
+        <article class="xp-card">
+          <header class="xp-card__head">
+            <div>
+              <h3 class="xp-card__title">
                 <a href="https://en.wikipedia.org/wiki/PayPal" target="_blank" rel="noopener">PayPal</a>
-              </h2>
-              <p class="industry">Fintech</p>
+              </h3>
+              <p class="xp-card__meta">
+                <i class="fa-solid fa-credit-card" aria-hidden="true"></i>
+                Fintech
+              </p>
             </div>
-            <img src="/images/paypal-icon.png" alt="PayPal" class="company-logo company-logo--paypal" />
+            <span class="xp-card__badge"
+              ><span class="xp-card__years">2021 &ndash; 2022 &middot; </span>1 yr</span
+            >
           </header>
-          <ul class="role-list">
-            <li class="role-item">
-              <span class="role">Member of Technical Staff</span>
-              <span class="duration">2021 &ndash; 2022</span>
-            </li>
-          </ul>
-        </div>
-        <div class="experience-card__body">
-          <p class="description">
-            Built next-gen merchant onboarding experience for PayPal's global business customers. Developed React-based micro-frontends with internationalization support for 25+ countries and streamlined KYC verification flows.
+          <p class="xp-card__desc">
+            Rebuilt <strong>merchant onboarding</strong> for PayPal's global
+            business customers with React micro-frontends, internationalisation
+            and <strong>streamlined KYC verification</strong>.
           </p>
-        </div>
-      </article>
+          <ul class="xp-metrics">
+            <li><strong>12K+</strong><span>sign-ups a day</span></li>
+            <li><strong>3 min</strong><span>onboarding, down from 15</span></li>
+            <li><strong>25+</strong><span>countries supported</span></li>
+          </ul>
+          <ol class="xp-path" aria-label="Roles at PayPal">
+            <li class="xp-step is-latest">
+              <strong>Member of Technical Staff</strong>
+              <span>2021 &ndash; 2022</span>
+            </li>
+          </ol>
+        </article>
+      </li>
 
-      <article class="experience-card experience-card--cerner">
-        <div class="experience-card__main">
-          <header class="experience-card__head">
-            <div class="experience-card__identity">
-              <h2 class="company-name">
+      <!-- Cerner -->
+      <li class="xp-chapter xp-chapter--cerner" id="xp-cerner">
+        <div class="xp-when">
+          <span class="xp-when__range">2015 &ndash; 2019</span>
+          <span class="xp-when__len">4 yrs &middot; 2 promotions</span>
+        </div>
+        <div class="xp-node" aria-hidden="true">
+          <img src="/images/cerner-logo.png" alt="" loading="lazy" />
+        </div>
+        <article class="xp-card">
+          <header class="xp-card__head">
+            <div>
+              <h3 class="xp-card__title">
                 <a href="https://en.wikipedia.org/wiki/Cerner" target="_blank" rel="noopener">Cerner</a>
-              </h2>
-              <p class="industry">Healthcare</p>
+              </h3>
+              <p class="xp-card__meta">
+                <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
+                Healthcare
+              </p>
             </div>
-            <img src="/images/cerner-logo.png" alt="Cerner" class="company-logo" />
+            <span class="xp-card__badge"
+              ><span class="xp-card__years">2015 &ndash; 2019 &middot; </span>4 yrs</span
+            >
           </header>
-          <ul class="role-list">
-            <li class="role-item">
-              <span class="role">Technical Team Lead</span>
-              <span class="duration">2018 &ndash; 2019</span>
-            </li>
-            <li class="role-item">
-              <span class="role">Senior Software Engineer</span>
-              <span class="duration">2017 &ndash; 2018</span>
-            </li>
-            <li class="role-item">
-              <span class="role">Software Engineer</span>
-              <span class="duration">2015 &ndash; 2017</span>
-            </li>
-          </ul>
-        </div>
-        <div class="experience-card__body">
-          <p class="description">
-            Led a team of 8 developers building mission-critical medical vitals charting applications for nurses in 3 US hospitals. Implemented real-time data sync with HL7 FHIR standards and achieved 99.9% uptime for patient care systems.
+          <p class="xp-card__desc">
+            Led the team behind <strong>mission-critical vitals charting</strong>
+            apps used by nurses in 3 US hospitals, with real-time
+            <strong>HL7 FHIR</strong> sync for patient care.
           </p>
-          <div class="experience-links">
-            <a class="experience-album-link" href="/albums/view.html?album=cerner">View photo album</a>
+          <ul class="xp-metrics">
+            <li><strong>8</strong><span>engineers led</span></li>
+            <li><strong>99.9%</strong><span>uptime</span></li>
+            <li><strong>40%</strong><span>faster charting</span></li>
+          </ul>
+          <ol class="xp-path" aria-label="Roles at Cerner">
+            <li class="xp-step">
+              <strong>Software Engineer</strong>
+              <span>2015 &ndash; 2017</span>
+            </li>
+            <li class="xp-step">
+              <strong>Senior Software Engineer</strong>
+              <span>2017 &ndash; 2018</span>
+            </li>
+            <li class="xp-step is-latest">
+              <strong>Technical Team Lead</strong>
+              <span>2018 &ndash; 2019</span>
+            </li>
+          </ol>
+          <div class="xp-links">
+            <a class="xp-link" href="/albums/view.html?album=cerner"
+              ><i class="fa-solid fa-images" aria-hidden="true"></i>Photo album</a
+            >
           </div>
-        </div>
-      </article>
+        </article>
+      </li>
 
-      <article class="experience-card experience-card--grl">
-        <div class="experience-card__main">
-          <header class="experience-card__head">
-            <div class="experience-card__identity">
-              <h2 class="company-name">
+      <!-- GRL Labs -->
+      <li class="xp-chapter xp-chapter--grl" id="xp-grl">
+        <div class="xp-when">
+          <span class="xp-when__range">2013 &ndash; 2015</span>
+          <span class="xp-when__len">2 yrs &middot; Where it began</span>
+        </div>
+        <div class="xp-node" aria-hidden="true">
+          <img src="/images/grl-logo.png" alt="" loading="lazy" />
+        </div>
+        <article class="xp-card">
+          <header class="xp-card__head">
+            <div>
+              <h3 class="xp-card__title">
                 <a href="https://graniteriverlabs.com/" target="_blank" rel="noopener">GRL Labs</a>
-              </h2>
-              <p class="industry">Semiconductor</p>
+              </h3>
+              <p class="xp-card__meta">
+                <i class="fa-solid fa-microchip" aria-hidden="true"></i>
+                Semiconductor
+              </p>
             </div>
-            <img src="/images/grl-logo.png" alt="GRL Labs" class="company-logo" />
+            <span class="xp-card__badge"
+              ><span class="xp-card__years">2013 &ndash; 2015 &middot; </span>2 yrs</span
+            >
           </header>
-          <ul class="role-list">
-            <li class="role-item">
-              <span class="role">Software Engineer</span>
-              <span class="duration">2013 &ndash; 2015</span>
-            </li>
-          </ul>
-        </div>
-        <div class="experience-card__body">
-          <p class="description">
-            Developed high-speed SSD validation test suite software for Windows platform. Built automated testing frameworks for USB 3.0, SATA, and PCIe protocols used by major semiconductor manufacturers including Intel, Samsung, Seagate, and Micron.
+          <p class="xp-card__desc">
+            Built automated validation suites for
+            <strong>SAS, SATA, USB 3.0 and PCIe</strong>, used by
+            <strong>Intel, Samsung, Seagate and Micron</strong> to certify their
+            storage products.
           </p>
-        </div>
-      </article>
-    </div>
+          <ul class="xp-metrics">
+            <li><strong>500+</strong><span>protocol commands</span></li>
+            <li><strong>99.8%</strong><span>test coverage</span></li>
+            <li><strong>80%</strong><span>less manual QA</span></li>
+          </ul>
+          <ol class="xp-path" aria-label="Roles at GRL Labs">
+            <li class="xp-step is-latest">
+              <strong>Software Engineer</strong>
+              <span>2013 &ndash; 2015</span>
+            </li>
+          </ol>
+        </article>
+      </li>
+    </ol>
   </div>
 </section>
 
 <style>
-  .experience-section {
-    padding: 72px 0;
+  .xp {
+    --xp-ink: #0f172a;
+    --xp-text: #475569;
+    --xp-muted: #64748b;
+    --xp-line: rgba(15, 23, 42, 0.08);
+    --xp-line-strong: rgba(15, 23, 42, 0.12);
+    --xp-surface: rgba(255, 255, 255, 0.92);
+    --xp-halo: #f9faff;
+    position: relative;
+    padding: 80px 0 96px;
+    overflow: hidden;
     background:
-      radial-gradient(circle at top left, rgba(255, 225, 130, 0.2), transparent 24%),
-      radial-gradient(circle at top right, rgba(125, 211, 252, 0.18), transparent 28%),
-      linear-gradient(135deg, #fffef8 0%, #f7fbff 48%, #f3f8f6 100%);
+      radial-gradient(900px 420px at 0% 0%, rgba(99, 102, 241, 0.08), transparent 60%),
+      radial-gradient(800px 400px at 100% 6%, rgba(236, 72, 153, 0.06), transparent 60%),
+      linear-gradient(180deg, #f8faff 0%, #ffffff 100%);
     font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
-  .section-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 50px;
-    color: #2d3436;
-    position: relative;
+  .xp-heading {
     display: inline-block;
-  }
-
-  .section-title::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background: #007bff;
-    border-radius: 2px;
-  }
-
-  .experience-intro {
-    max-width: 800px;
-    margin: 20px auto 30px;
-    font-size: 16px;
-    line-height: 1.8;
-    color: #555;
-  }
-
-  .experience-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 22px;
-  }
-
-  .experience-card {
-    --accent: #64748b;
-    --accent-soft: rgba(100, 116, 139, 0.14);
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 24px 22px 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
-    border: 1px solid rgba(15, 23, 42, 0.08);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .experience-card::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-soft) 100%);
-    pointer-events: none;
-  }
-
-  .experience-card:hover {
-    box-shadow: 0 16px 32px rgba(15, 23, 42, 0.09);
-    border-color: var(--accent-soft);
-  }
-
-  .experience-card--featured {
-    grid-column: 1 / -1;
-  }
-
-  .experience-card--disney {
-    --accent: #0063e5;
-    --accent-soft: rgba(0, 99, 229, 0.16);
-  }
-
-  .experience-card--walmart {
-    --accent: #0071ce;
-    --accent-soft: rgba(0, 113, 206, 0.16);
-  }
-
-  .experience-card--paypal {
-    --accent: #003087;
-    --accent-soft: rgba(0, 48, 135, 0.16);
-  }
-
-  .experience-card--cerner {
-    --accent: #00a99d;
-    --accent-soft: rgba(0, 169, 157, 0.16);
-  }
-
-  .experience-card--grl {
-    --accent: #49556f;
-    --accent-soft: rgba(73, 85, 111, 0.16);
-  }
-
-  .experience-card__main {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .experience-card__body {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-
-  .experience-card__head {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .experience-card__identity {
-    min-width: 0;
-  }
-
-  .experience-section .company-name {
     margin: 0;
+    font-size: 50px;
+    font-weight: 700;
     line-height: 1.2;
   }
 
-  .experience-section .company-name a {
-    text-decoration: none;
-    color: #111111;
-    font-size: 1.35rem;
-    font-weight: 700;
-    transition: color 0.2s ease;
+  .xp-intro {
+    max-width: 800px;
+    margin: 16px auto 0;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--xp-text);
   }
 
-  .experience-section .company-name a:hover {
-    color: var(--accent);
+  /* ---------- Overview: headline stats + proportional career bar ---------- */
+
+  .xp-overview {
+    margin: 40px 0 64px;
+    padding: 28px 32px 48px;
+    border-radius: 22px;
+    background: var(--xp-surface);
+    border: 1px solid var(--xp-line);
+    box-shadow: 0 18px 40px -26px rgba(15, 23, 42, 0.22);
   }
 
-  .experience-section .industry {
-    margin: 4px 0 0;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #7c8698;
-  }
-
-  .company-logo {
-    margin-left: auto;
-    height: 34px;
-    width: auto;
-    max-width: 92px;
-    object-fit: contain;
-    flex-shrink: 0;
-    background: transparent;
-  }
-
-  .company-logo--paypal {
-    height: 30px;
-  }
-
-  /* The Disney mark is a stacked castle-over-wordmark lockup rather than a
-     near-square badge, so it needs extra height to stay legible. */
-  .experience-card--disney .company-logo {
-    height: 52px;
-    max-width: 130px;
-  }
-
-  .experience-card--grl .company-logo {
-    filter: brightness(1.03) contrast(1.02);
-  }
-
-  .role-list {
-    list-style: none;
-    margin: 0;
+  .xp-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0 0 28px;
     padding: 0;
+    list-style: none;
+  }
+
+  .xp-stats li {
+    padding: 0 24px;
+    border-left: 1px solid var(--xp-line);
+  }
+
+  .xp-stats li:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .xp-stats strong {
+    display: block;
+    font-size: 2.1rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(120deg, #4f46e5 0%, #a855f7 60%, #ec4899 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .xp-stats small {
+    margin: 0 6px 0 3px;
+    font-size: 0.5em;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .xp-stats li > span {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--xp-muted);
+  }
+
+  .xp-span-label {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--xp-muted);
   }
 
-  .role-item {
+  .xp-span-hint {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    opacity: 0.8;
+  }
+
+  .xp-span {
+    display: flex;
+    gap: 3px;
+    height: 44px;
+  }
+
+  .xp-span__seg {
+    --seg: linear-gradient(90deg, #64748b, #475569);
+    --seg-glow: 71, 85, 105;
+    flex: var(--years) 1 0;
+    min-width: 0;
     position: relative;
-    padding-left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    color: #fff !important;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
   }
 
-  .role-item::before {
+  .xp-span__seg:first-child {
+    border-radius: 14px 6px 6px 14px;
+  }
+
+  .xp-span__seg:last-child {
+    border-radius: 6px 14px 14px 6px;
+  }
+
+  .xp-span__seg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--seg);
+    transform-origin: left center;
+    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--i) * 0.12s);
+  }
+
+  .xp-span__seg:hover,
+  .xp-span__seg:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 22px -12px rgba(var(--seg-glow), 0.9);
+  }
+
+  .xp-span__name {
+    position: relative;
+    padding: 0 6px;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: opacity 0.4s ease calc(var(--i) * 0.12s + 0.35s);
+  }
+
+  .xp-span__year {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 10px);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--xp-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .xp-span__year::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 7px;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent);
+    top: -8px;
+    width: 1px;
+    height: 6px;
+    background: var(--xp-line-strong);
   }
 
-  .role-item:not(:last-child)::after {
+  .xp-span__year--end {
+    left: auto;
+    right: 0;
+    font-weight: 700;
+    color: var(--xp-ink);
+  }
+
+  .xp-span__year--end::before {
+    left: auto;
+    right: 0;
+  }
+
+  .xp-span__seg--grl {
+    --seg: linear-gradient(90deg, #64748b, #475569);
+    --seg-glow: 71, 85, 105;
+  }
+
+  .xp-span__seg--cerner {
+    --seg: linear-gradient(90deg, #14b8a6, #0d9488);
+    --seg-glow: 13, 148, 136;
+  }
+
+  .xp-span__seg--walmart {
+    --seg: linear-gradient(90deg, #1a8cf0, #0062b8);
+    --seg-glow: 0, 113, 206;
+  }
+
+  .xp-span__seg--paypal {
+    --seg: linear-gradient(90deg, #002c8a, #009cde);
+    --seg-glow: 0, 48, 135;
+  }
+
+  .xp-span__seg--disney {
+    --seg: linear-gradient(90deg, #4338ca, #9333ea 60%, #db2777);
+    --seg-glow: 124, 58, 237;
+  }
+
+  /* Light sweep marks the role that is still in progress */
+  .xp-span__seg--disney::after {
     content: "";
     position: absolute;
-    left: 3px;
-    top: 16px;
-    bottom: -10px;
-    width: 1px;
-    background: var(--accent-soft);
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(100deg, transparent 35%, rgba(255, 255, 255, 0.5) 50%, transparent 65%) no-repeat;
+    background-size: 300% 100%;
+    background-position: 100% 0;
+    animation: xpSweep 3.2s ease-in-out 1.4s infinite;
   }
 
-  .experience-section .role {
+  @keyframes xpSweep {
+    0% {
+      background-position: 100% 0;
+    }
+    60%,
+    100% {
+      background-position: 0% 0;
+    }
+  }
+
+  /* Bar grows in once the overview scrolls into view */
+  .xp.xp-js .xp-overview:not(.is-visible) .xp-span__seg::before {
+    transform: scaleX(0);
+  }
+
+  .xp.xp-js .xp-overview:not(.is-visible) .xp-span__name {
+    opacity: 0;
+  }
+
+  /* ---------- Timeline ---------- */
+
+  .xp-timeline {
+    --xp-when: 150px;
+    --xp-rail: 80px;
+    --xp-node: 56px;
+    --xp-fill: 0;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .xp-timeline::before,
+  .xp-timeline::after {
+    content: "";
+    position: absolute;
+    top: calc(var(--xp-node) / 2);
+    bottom: var(--xp-tail, 40px);
+    left: calc(var(--xp-when) + var(--xp-rail) / 2 - 1px);
+    width: 2px;
+    border-radius: 2px;
+  }
+
+  .xp-timeline::before {
+    background: var(--xp-line-strong);
+  }
+
+  .xp-timeline::after {
+    background: linear-gradient(180deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    transform-origin: top;
+    transform: scaleY(var(--xp-fill));
+  }
+
+  .xp-chapter {
+    --brand: 100, 116, 139;
+    display: grid;
+    grid-template-columns: var(--xp-when) var(--xp-rail) minmax(0, 1fr);
+    align-items: start;
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .xp-chapter + .xp-chapter {
+    margin-top: 28px;
+  }
+
+  .xp.xp-js .xp-chapter:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  .xp-chapter--disney {
+    --brand: 99, 102, 241;
+  }
+
+  .xp-chapter--walmart {
+    --brand: 0, 113, 206;
+  }
+
+  .xp-chapter--paypal {
+    --brand: 0, 61, 145;
+  }
+
+  .xp-chapter--cerner {
+    --brand: 13, 148, 136;
+  }
+
+  .xp-chapter--grl {
+    --brand: 71, 85, 105;
+  }
+
+  .xp-when {
+    padding: 8px 4px 0 0;
+    text-align: right;
+  }
+
+  .xp-when__range {
     display: block;
-    color: #101828;
-    font-size: 0.98rem;
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--xp-ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .xp-when__len {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--xp-muted);
+  }
+
+  .xp-when__len--live {
+    color: rgb(var(--brand));
+  }
+
+  .xp-node {
+    position: relative;
+    z-index: 1;
+    justify-self: center;
+    display: grid;
+    place-items: center;
+    width: var(--xp-node);
+    height: var(--xp-node);
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid rgba(var(--brand), 0.22);
+    box-shadow: 0 0 0 6px var(--xp-halo);
+    transition:
+      border-color 0.4s ease,
+      box-shadow 0.4s ease;
+  }
+
+  .xp-node img {
+    width: 56%;
+    height: 56%;
+    object-fit: contain;
+  }
+
+  .xp-chapter.is-reached .xp-node {
+    border-color: rgb(var(--brand));
+    box-shadow:
+      0 0 0 6px var(--xp-halo),
+      0 10px 22px -6px rgba(var(--brand), 0.5);
+  }
+
+  .xp-chapter--disney .xp-node::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 2px solid rgba(var(--brand), 0.6);
+    animation: xpPulse 2.4s ease-out infinite;
+  }
+
+  @keyframes xpPulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.9;
+    }
+    100% {
+      transform: scale(1.55);
+      opacity: 0;
+    }
+  }
+
+  /* ---------- Cards ---------- */
+
+  .xp-card {
+    position: relative;
+    overflow: hidden;
+    padding: 24px 28px;
+    border-radius: 20px;
+    background: var(--xp-surface);
+    border: 1px solid var(--xp-line);
+    box-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.04),
+      0 18px 36px -28px rgba(15, 23, 42, 0.28);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .xp-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(520px 220px at 0 0, rgba(var(--brand), 0.08), transparent 70%);
+    pointer-events: none;
+  }
+
+  .xp-card > * {
+    position: relative;
+  }
+
+  .xp-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(var(--brand), 0.28);
+    box-shadow: 0 26px 48px -30px rgba(var(--brand), 0.55);
+  }
+
+  .xp-chapter.is-flash .xp-card {
+    animation: xpFlash 1.4s ease;
+  }
+
+  @keyframes xpFlash {
+    0%,
+    100% {
+      box-shadow: 0 18px 36px -28px rgba(15, 23, 42, 0.28);
+    }
+    30% {
+      box-shadow:
+        0 0 0 3px rgba(var(--brand), 0.35),
+        0 26px 48px -30px rgba(var(--brand), 0.55);
+    }
+  }
+
+  .xp-card__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .xp-card__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    font-size: 1.45rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .xp-card__title a {
+    color: var(--xp-ink);
+    transition: color 0.2s ease;
+  }
+
+  .xp-card__title a:hover {
+    color: rgb(var(--brand));
+  }
+
+  .xp-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 5px 0 0;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--brand));
+  }
+
+  .xp-card__badge {
+    flex-shrink: 0;
+    margin-left: auto;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(var(--brand), 0.08);
+    border: 1px solid rgba(var(--brand), 0.18);
+    color: rgb(var(--brand));
+    font-size: 0.76rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .xp-card__years {
+    display: none;
+  }
+
+  .xp-card__desc {
+    margin: 14px 0 0;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--xp-text);
+  }
+
+  .xp-card__desc strong {
+    color: var(--xp-ink);
+    font-weight: 700;
+  }
+
+  .xp-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .xp-metrics li {
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: rgba(var(--brand), 0.05);
+    border: 1px solid rgba(var(--brand), 0.12);
+  }
+
+  .xp-metrics strong {
+    display: block;
+    font-size: 1.55rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: rgb(var(--brand));
+    font-variant-numeric: tabular-nums;
+  }
+
+  .xp-metrics span {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.8rem;
     font-weight: 600;
     line-height: 1.35;
-    margin: 0;
+    color: var(--xp-muted);
   }
 
-  .experience-section .duration {
-    display: block;
-    margin-top: 2px;
-    color: #667085;
-    font-size: 0.84rem;
-    font-weight: 500;
+  .xp-path {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    row-gap: 10px;
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .role-chip {
-    display: inline-block;
+  .xp-step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px 14px;
+    border-radius: 12px;
+    border: 1px dashed var(--xp-line-strong);
+  }
+
+  .xp-step + .xp-step {
+    margin-left: 30px;
+  }
+
+  .xp-step + .xp-step::before {
+    content: "\2192";
+    position: absolute;
+    top: 50%;
+    left: -30px;
+    width: 30px;
+    text-align: center;
+    transform: translateY(-50%);
+    font-weight: 700;
+    color: rgba(var(--brand), 0.65);
+  }
+
+  .xp-step strong {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--xp-ink);
+  }
+
+  .xp-step > span {
+    margin-top: 1px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--xp-muted);
+  }
+
+  .xp-step.is-latest {
+    border-style: solid;
+    border-color: rgba(var(--brand), 0.35);
+    background: rgba(var(--brand), 0.07);
+  }
+
+  .xp-step__tag {
     margin-left: 6px;
-    padding: 1px 8px;
+    padding: 1px 7px;
     border-radius: 999px;
-    background: var(--accent-soft);
-    color: var(--accent);
-    font-size: 0.7rem;
+    background: rgba(var(--brand), 0.14);
+    color: rgb(var(--brand));
+    font-size: 0.66rem;
+    font-style: normal;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    vertical-align: middle;
   }
 
-  .experience-section .description {
-    margin: 0;
-    padding-top: 16px;
-    border-top: 1px solid rgba(15, 23, 42, 0.07);
-    color: #46505f;
-    font-size: 0.94rem;
-    line-height: 1.65;
-  }
-
-  .experience-links {
-    margin-top: auto;
-    padding-top: 16px;
+  .xp-links {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--xp-line);
   }
 
-  .experience-album-link {
-    color: var(--accent);
-    font-size: 0.88rem;
+  .xp-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 13px;
+    border-radius: 999px;
+    background: rgba(var(--brand), 0.06);
+    border: 1px solid rgba(var(--brand), 0.16);
+    color: rgb(var(--brand)) !important;
+    font-size: 0.82rem;
     font-weight: 600;
-    text-decoration: none;
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .xp-link i {
+    font-size: 0.78rem;
+    opacity: 0.85;
+  }
+
+  .xp-link:hover {
+    background: rgba(var(--brand), 0.12);
+    transform: translateY(-1px);
+  }
+
+  /* ---------- Featured: current role ---------- */
+
+  .xp-chapter--disney .xp-card {
+    padding: 30px 32px;
+    color: #e2e8f0;
+    border-color: rgba(255, 255, 255, 0.06);
+    background:
+      radial-gradient(620px 280px at 100% 0%, rgba(168, 85, 247, 0.45), transparent 60%),
+      radial-gradient(520px 260px at 0% 110%, rgba(236, 72, 153, 0.28), transparent 60%),
+      linear-gradient(135deg, #0b1437 0%, #14297a 55%, #3b1a7a 100%);
+    box-shadow: 0 30px 60px -34px rgba(67, 56, 202, 0.75);
+  }
+
+  /* Faint star field */
+  .xp-chapter--disney .xp-card::before {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.55) 1px, transparent 1.6px);
+    background-size: 28px 28px;
+    -webkit-mask-image: linear-gradient(200deg, #000 0%, transparent 55%);
+    mask-image: linear-gradient(200deg, #000 0%, transparent 55%);
+    opacity: 0.55;
+  }
+
+  .xp-chapter--disney .xp-card:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 34px 64px -34px rgba(67, 56, 202, 0.9);
+  }
+
+  .xp-card__mark {
+    position: absolute !important;
+    top: 22px;
+    right: 34px;
+    width: 210px;
+    filter: invert(1);
+    opacity: 0.92;
+    pointer-events: none;
+  }
+
+  .xp-chapter--disney .xp-card__head,
+  .xp-chapter--disney .xp-card__desc {
+    padding-right: 250px;
+  }
+
+  .xp-chapter--disney .xp-card__title a {
+    color: #fff;
+  }
+
+  .xp-chapter--disney .xp-card__title a:hover {
+    color: #c7d2fe;
+  }
+
+  .xp-chapter--disney .xp-card__title {
+    font-size: 1.85rem;
+  }
+
+  .xp-chapter--disney .xp-card__meta {
+    color: #c4b5fd;
+  }
+
+  .xp-chapter--disney .xp-card__desc {
+    font-size: 1.04rem;
+    color: rgba(226, 232, 240, 0.88);
+  }
+
+  .xp-chapter--disney .xp-card__desc strong {
+    color: #fff;
+  }
+
+  .xp-live {
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(74, 222, 128, 0.14);
+    border: 1px solid rgba(74, 222, 128, 0.35);
+    color: #86efac;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
-  .experience-album-link::after {
-    content: "↗";
-    font-size: 0.9rem;
-    line-height: 1;
+  .xp-live__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+    animation: xpLive 2s ease-out infinite;
   }
 
-  .experience-album-link:hover {
-    color: var(--accent);
-    text-decoration: underline;
-  }
-
-  /* Featured card lays its identity and story side by side on wide screens */
-  @media (min-width: 1200px) {
-    .experience-card--featured {
-      flex-direction: row;
-      align-items: stretch;
-      gap: 34px;
-      padding: 28px;
+  @keyframes xpLive {
+    0% {
+      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
     }
-
-    .experience-card--featured .experience-card__main {
-      flex: 0 0 300px;
-      justify-content: center;
-      padding-right: 34px;
-      border-right: 1px solid rgba(15, 23, 42, 0.07);
-    }
-
-    .experience-card--featured .experience-card__body {
-      justify-content: center;
-    }
-
-    .experience-card--featured .company-name a {
-      font-size: 2rem;
-    }
-
-    .experience-card--featured .company-logo {
-      height: 46px;
-      max-width: 120px;
-    }
-
-    /* The featured identity column is only ~266px wide, so a logo sitting in
-       the header would force "Walt Disney" onto two lines. Lift it out of the
-       flow and pin it to the card's own top-right corner instead. */
-    .experience-card--disney.experience-card--featured .company-logo {
-      position: absolute;
-      top: 16px;
-      right: 22px;
-      /* An absolutely positioned image ignores `bottom` once a width is set
-         (its intrinsic ratio wins), so the box is sized explicitly against
-         the card and `contain` scales the lockup to fill it undistorted. */
-      width: 232px;
-      height: calc(100% - 32px);
-      max-width: none;
-      margin-left: 0;
-      object-fit: contain;
-      object-position: center;
-    }
-
-    /* Reserve that area so the story text never runs under the logo. */
-    .experience-card--disney.experience-card--featured .experience-card__body {
-      padding-right: 258px;
-    }
-
-    .experience-card--featured .description {
-      padding-top: 0;
-      border-top: none;
-      font-size: 1.02rem;
-      line-height: 1.75;
+    100% {
+      box-shadow: 0 0 0 7px rgba(74, 222, 128, 0);
     }
   }
+
+  .xp-focus {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .xp-focus li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 10px;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(4px);
+  }
+
+  .xp-focus i {
+    grid-row: span 2;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.35), rgba(236, 72, 153, 0.3));
+    color: #fff;
+    font-size: 0.85rem;
+  }
+
+  .xp-focus strong {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.25;
+  }
+
+  .xp-focus span {
+    font-size: 0.74rem;
+    color: rgba(226, 232, 240, 0.7);
+    line-height: 1.35;
+  }
+
+  .xp-chapter--disney .xp-step {
+    border-color: rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .xp-chapter--disney .xp-step strong {
+    color: #fff;
+  }
+
+  .xp-chapter--disney .xp-step > span {
+    color: rgba(226, 232, 240, 0.72);
+  }
+
+  /* ---------- Responsive ---------- */
 
   @media (max-width: 1199.98px) {
-    .experience-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .xp-card__mark {
+      top: 24px;
+      right: 28px;
+      width: 120px;
+    }
+
+    .xp-chapter--disney .xp-card__desc {
+      padding-right: 0;
+    }
+
+    .xp-chapter--disney .xp-card__head {
+      padding-right: 130px;
     }
   }
 
-  @media (max-width: 767.98px) {
-    .experience-section {
-      padding: 56px 0;
+  @media (max-width: 991.98px) {
+    .xp-timeline {
+      --xp-when: 0px;
+      --xp-rail: 60px;
+      --xp-node: 46px;
     }
 
-    .experience-grid {
-      gap: 18px;
+    .xp-chapter {
+      grid-template-columns: var(--xp-rail) minmax(0, 1fr);
     }
 
-    .section-title {
-      font-size: 2rem;
+    .xp-when {
+      display: none;
     }
-  }
 
-  @media (max-width: 575.98px) {
-    .experience-grid {
+    .xp-node {
+      justify-self: start;
+      margin-top: 10px;
+    }
+
+    .xp-timeline::before,
+    .xp-timeline::after {
+      top: calc(var(--xp-node) / 2 + 10px);
+      left: calc(var(--xp-node) / 2 - 1px);
+    }
+
+    .xp-card__years {
+      display: inline;
+    }
+
+    .xp-span__seg--narrow .xp-span__name {
+      display: none;
+    }
+
+    .xp-focus {
       grid-template-columns: minmax(0, 1fr);
     }
   }
 
-  /* Experience Timer Styles */
-  .experience-timer {
-    background: #f5f5f5;
-    border-radius: 14px;
-    padding: 16px 24px;
-    margin: 0 auto 36px;
-    width: fit-content;
-    border: 1px solid #e0e0e0;
-  }
-
-  .timer-label {
-    color: #666;
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 6px;
-  }
-
-  .timer-display {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .timer-unit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 70px;
-  }
-
-  .timer-unit span:first-child {
-    font-size: 42px;
-    font-weight: 700;
-    color: #333;
-    font-family: 'SF Mono', 'Fira Code', monospace;
-    line-height: 1;
-  }
-
-  .timer-unit-label {
-    font-size: 11px;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 6px;
-  }
-
-  .timer-separator {
-    font-size: 32px;
-    font-weight: 300;
-    color: #bbb;
-    margin-top: -12px;
-  }
-
-  @media (max-width: 600px) {
-    .timer-unit span:first-child {
-      font-size: 32px;
+  @media (max-width: 767.98px) {
+    .xp {
+      padding: 56px 0 64px;
     }
-    .timer-unit {
-      min-width: 55px;
+
+    .xp-heading {
+      font-size: 40px;
     }
-    .timer-separator {
-      font-size: 24px;
+
+    .xp-overview {
+      margin: 28px 0 44px;
+      padding: 22px 20px 44px;
     }
-    .experience-timer {
-      padding: 12px 18px;
+
+    .xp-stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 20px;
+    }
+
+    .xp-stats li:nth-child(3) {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .xp-stats strong {
+      font-size: 1.7rem;
+    }
+
+    .xp-span-hint {
+      display: none;
+    }
+
+    .xp-span__name {
+      display: none;
+    }
+
+    .xp-span__year--minor {
+      display: none;
+    }
+
+    .xp-card__head {
+      flex-wrap: wrap;
+    }
+
+    .xp-card__badge {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .xp-timeline {
+      --xp-rail: 46px;
+      --xp-node: 36px;
+    }
+
+    .xp-card,
+    .xp-chapter--disney .xp-card {
+      padding: 20px 18px;
+    }
+
+    .xp-card__title {
+      font-size: 1.25rem;
+    }
+
+    .xp-chapter--disney .xp-card__title {
+      font-size: 1.4rem;
+    }
+
+    .xp-card__mark {
+      display: none;
+    }
+
+    .xp-chapter--disney .xp-card__head {
+      padding-right: 0;
+    }
+
+    .xp-card__title {
+      flex-wrap: wrap;
+      row-gap: 6px;
+    }
+
+    .xp-metrics {
+      gap: 8px;
+    }
+
+    .xp-metrics li {
+      padding: 10px;
+    }
+
+    .xp-metrics strong {
+      font-size: 1.15rem;
+    }
+
+    .xp-metrics span {
+      font-size: 0.72rem;
+    }
+
+    .xp-path {
+      flex-direction: column;
+    }
+
+    .xp-step + .xp-step {
+      margin: 22px 0 0;
+    }
+
+    .xp-step + .xp-step::before {
+      content: "\2193";
+      top: -22px;
+      left: 14px;
+      width: auto;
+      transform: none;
+      line-height: 22px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .xp-chapter,
+    .xp-card,
+    .xp-span__seg,
+    .xp-span__seg::before,
+    .xp-span__name,
+    .xp-link {
+      transition: none;
+    }
+
+    .xp-span__seg--disney::after,
+    .xp-chapter--disney .xp-node::after,
+    .xp-live__dot {
+      animation: none;
+    }
+
+    .xp-chapter.is-flash .xp-card {
+      animation: none;
     }
   }
 </style>
 
 <script>
-  function updateExperienceTimer() {
-    const startDate = new Date('2013-07-01T00:00:00');
-    const now = new Date();
-    
-    let years = now.getFullYear() - startDate.getFullYear();
-    let months = now.getMonth() - startDate.getMonth();
-    let days = now.getDate() - startDate.getDate();
-    let hours = now.getHours() - startDate.getHours();
-    let minutes = now.getMinutes() - startDate.getMinutes();
-    let seconds = now.getSeconds() - startDate.getSeconds();
-    
-    // Adjust for negative values
-    if (seconds < 0) {
-      seconds += 60;
-      minutes--;
+  (function () {
+    var START = new Date(2013, 6, 1);
+    var root = document.querySelector(".xp");
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function pad(n) {
+      return String(n).padStart(2, "0");
     }
-    if (minutes < 0) {
-      minutes += 60;
-      hours--;
+
+    function elapsed(now) {
+      var years = now.getFullYear() - START.getFullYear();
+      var months = now.getMonth() - START.getMonth();
+      var days = now.getDate() - START.getDate();
+      if (days < 0) {
+        months--;
+        days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+      }
+      if (months < 0) {
+        months += 12;
+        years--;
+      }
+      return { years: years, months: months, days: days };
     }
-    if (hours < 0) {
-      hours += 24;
-      days--;
+
+    // Also drives the y/m/d counter in the desktop menubar.
+    function updateExperienceTimer() {
+      var t = elapsed(new Date());
+      var set = function (id, value) {
+        var node = document.getElementById(id);
+        if (node) node.textContent = value;
+      };
+      set("menubar-exp-years", pad(t.years));
+      set("menubar-exp-months", pad(t.months));
+      set("menubar-exp-days", pad(t.days));
+      document.querySelectorAll(".js-xp-years").forEach(function (n) {
+        n.textContent = t.years;
+      });
+      document.querySelectorAll(".js-xp-months").forEach(function (n) {
+        n.textContent = t.months;
+      });
     }
-    if (days < 0) {
-      months--;
-      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-      days += prevMonth.getDate();
+
+    updateExperienceTimer();
+    setInterval(updateExperienceTimer, 60000);
+
+    if (!root) return;
+
+    var disneySeg = root.querySelector(".js-xp-disney-seg");
+    if (disneySeg) {
+      var yearsIn = (Date.now() - new Date(2026, 0, 1).getTime()) / (365.25 * 864e5);
+      disneySeg.style.setProperty("--years", Math.max(0.6, yearsIn).toFixed(2));
     }
-    if (months < 0) {
-      months += 12;
-      years--;
+
+    root.querySelectorAll(".xp-span__seg").forEach(function (seg) {
+      seg.addEventListener("click", function (event) {
+        var target = document.querySelector(seg.getAttribute("href"));
+        if (!target) return;
+        event.preventDefault();
+        var offset = typeof getStickyHeaderOffset === "function" ? getStickyHeaderOffset() : 0;
+        window.scrollTo({
+          top: target.getBoundingClientRect().top + window.scrollY - offset - 24,
+          behavior: reduceMotion ? "auto" : "smooth",
+        });
+        target.classList.remove("is-flash");
+        void target.offsetWidth;
+        target.classList.add("is-flash");
+        setTimeout(function () {
+          target.classList.remove("is-flash");
+        }, 1500);
+      });
+    });
+
+    var timeline = root.querySelector(".xp-timeline");
+    var chapters = Array.prototype.slice.call(root.querySelectorAll(".xp-chapter"));
+
+    if (!reduceMotion && "IntersectionObserver" in window) {
+      root.classList.add("xp-js");
+      var revealer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              revealer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+      );
+      revealer.observe(root.querySelector(".xp-overview"));
+      chapters.forEach(function (chapter) {
+        revealer.observe(chapter);
+      });
     }
-    
-    // Update Experience section timer
-    const expYears = document.getElementById('exp-years');
-    const expMonths = document.getElementById('exp-months');
-    const expDays = document.getElementById('exp-days');
-    if (expYears) expYears.textContent = String(years).padStart(2, '0');
-    if (expMonths) expMonths.textContent = String(months).padStart(2, '0');
-    if (expDays) expDays.textContent = String(days).padStart(2, '0');
-    
-    // Update menubar timer if it exists
-    const menubarYears = document.getElementById('menubar-exp-years');
-    const menubarMonths = document.getElementById('menubar-exp-months');
-    const menubarDays = document.getElementById('menubar-exp-days');
-    if (menubarYears) menubarYears.textContent = String(years).padStart(2, '0');
-    if (menubarMonths) menubarMonths.textContent = String(months).padStart(2, '0');
-    if (menubarDays) menubarDays.textContent = String(days).padStart(2, '0');
-  }
-  
-  // Update immediately and then every second
-  updateExperienceTimer();
-  setInterval(updateExperienceTimer, 1000);
+
+    function nodeCenter(chapter) {
+      var box = chapter.querySelector(".xp-node").getBoundingClientRect();
+      return box.top + box.height / 2;
+    }
+
+    // Rail runs from the first logo to the last one, fills as the reader
+    // scrolls, and lights up each logo once it is passed.
+    var ticking = false;
+    function updateRail() {
+      ticking = false;
+      if (!timeline || !chapters.length) return;
+      var box = timeline.getBoundingClientRect();
+      var start = nodeCenter(chapters[0]);
+      var end = nodeCenter(chapters[chapters.length - 1]);
+      timeline.style.setProperty("--xp-tail", Math.round(box.bottom - end) + "px");
+
+      var line = window.innerHeight * 0.6;
+      var fill = end > start ? (line - start) / (end - start) : 0;
+      timeline.style.setProperty("--xp-fill", Math.min(1, Math.max(0, fill)).toFixed(3));
+      chapters.forEach(function (chapter) {
+        chapter.classList.toggle("is-reached", nodeCenter(chapter) < line);
+      });
+    }
+
+    function requestRail() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateRail);
+      }
+    }
+
+    window.addEventListener("scroll", requestRail, { passive: true });
+    window.addEventListener("resize", requestRail);
+    updateRail();
+  })();
 </script>
