@@ -1,13 +1,14 @@
+<!-- Display face for the wordmark; blog posts load the same family already -->
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,700&display=swap"
+/>
+
 <div class="scroll-progress" aria-hidden="true">
   <span class="scroll-progress__fill" id="scroll-progress-fill"></span>
 </div>
 
 <nav class="macos-menubar">
-  <!-- Apple-style logo -->
-  <a class="menubar-logo" href="/">
-    <img src="/images/me_circle.png" alt="Manoj" />
-  </a>
-
   <!-- Menu Items -->
   <div class="menubar-items">
     <a class="menu-item menu-brand" href="/">
@@ -242,7 +243,6 @@
 <!-- Mobile Navbar -->
 <nav class="mobile-navbar">
   <a href="/" class="mobile-navbar-brand">
-    <img src="/images/me_circle.png" alt="Manoj Satishkumar" class="mobile-navbar-avatar">
     <span class="mobile-navbar-name">Manoj Satishkumar</span>
   </a>
   <div class="mobile-navbar-actions">
@@ -450,27 +450,6 @@
     }
   }
 
-  .menubar-logo {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    border-radius: 50%;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .menubar-logo:hover {
-    transform: scale(1.06);
-    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.32);
-  }
-
-  .menubar-logo img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: block;
-    object-fit: cover;
-  }
-
   .menubar-items {
     display: flex;
     align-items: center;
@@ -513,26 +492,77 @@
     color: #4f46e5;
   }
 
-  /* The brand links home like the avatar beside it, but keeps the look of a
-     wordmark rather than a nav pill */
+  /* The brand links home but keeps the look of a wordmark, not a nav pill */
   .menu-brand,
   .menu-brand:hover {
     text-decoration: none;
   }
 
-  /* Same gradient wordmark as .mobile-navbar-name. Repeated on :hover because
-     the generic .menu-item:hover rule would otherwise paint the pill over it.
-     content-box origin spans the gradient over the text, not the padding. */
-  .menu-brand .menu-label,
-  .menu-brand:hover .menu-label {
+  /* Wordmark: italic display serif with a slowly drifting gradient, shared
+     with .mobile-navbar-name. The extra .macos-menubar/.menu-item weight
+     outranks the generic first-child and :hover label rules, including the
+     narrower-screen overrides further down. content-box origin spans the
+     gradient over the text, not the padding. */
+  .macos-menubar .menu-item.menu-brand .menu-label,
+  .mobile-navbar-name {
+    position: relative;
     cursor: pointer;
     padding-left: 0;
-    background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #ec4899 100%);
+    font-family: "Fraunces", Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 21px;
+    letter-spacing: -0.01em;
+    background: linear-gradient(
+      100deg,
+      #0ea5e9 0%,
+      #6366f1 30%,
+      #a855f7 50%,
+      #ec4899 70%,
+      #0ea5e9 100%
+    );
+    background-size: 200% 100%;
     background-origin: content-box;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .macos-menubar .menu-item.menu-brand .menu-label,
+    .mobile-navbar-name {
+      animation: brandDrift 8s ease-in-out infinite alternate;
+    }
+  }
+
+  @keyframes brandDrift {
+    from {
+      background-position: 0% 50%;
+    }
+    to {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* Gradient underline that draws in on hover; the label's right padding is
+     kept clear so the line matches the text width */
+  .menu-brand .menu-label::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 14px;
+    bottom: 5px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #0ea5e9, #a855f7, #ec4899);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.3s ease;
+  }
+
+  .menu-brand:hover .menu-label::after {
+    transform: scaleX(1);
   }
 
   /* Dropdown parents get a caret */
@@ -1173,16 +1203,23 @@
     }
   }
 
-  /* Below ~1160px the row of links plus the location and experience chips no
-     longer fit, and the chips get clipped off the right edge. Drop the brand
-     wordmark first: the avatar beside it is the same link home. */
+  /* Below ~1200px the links plus the location and experience chips no longer
+     fit beside the full-size wordmark, and the chips get clipped off the right
+     edge. The wordmark is the only link home, so it shrinks rather than
+     disappears, and the location chip goes first on the narrowest desktops. */
   @media (min-width: 1024px) and (max-width: 1199px) {
-    .menu-brand {
-      display: none;
+    .macos-menubar .menu-item.menu-brand .menu-label {
+      font-size: 17px;
     }
 
     .menu-label {
       padding: 9px 9px;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1149px) {
+    .menubar-location-container {
+      display: none;
     }
   }
 
@@ -1219,23 +1256,8 @@
     text-decoration: none;
   }
 
-  .mobile-navbar-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-
   .mobile-navbar-name {
-    font-size: 1.1rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #ec4899 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-    letter-spacing: -0.02em;
+    font-size: 1.3rem;
   }
 
   .mobile-navbar-actions {

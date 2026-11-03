@@ -369,6 +369,11 @@ html[data-theme="dark"] .dock-tooltip {
 }
 
 html[data-theme="dark"] .dock-tooltip::after {
+  border-color: transparent var(--dm-surface) transparent transparent;
+}
+
+/* The contact rail's tooltips open leftwards, so the arrow points right */
+html[data-theme="dark"] .contact-rail .dock-tooltip::after {
   border-color: transparent transparent transparent var(--dm-surface);
 }
 

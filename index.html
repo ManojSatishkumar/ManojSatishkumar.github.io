@@ -157,13 +157,13 @@
         font-weight: 500;
       }
 
-      /* macOS Dock Style Navigation - vertical rail floating on the right edge */
+      /* macOS Dock Style Navigation - vertical rail floating on the left edge */
       .nav-bar-fixed {
         position: fixed !important;
         top: 50% !important;
         bottom: auto !important;
-        left: auto !important;
-        right: 14px !important;
+        left: 14px !important;
+        right: auto !important;
         width: auto !important;
         transform: translate(0, -50%) !important;
         padding: 10px 8px !important;
@@ -180,9 +180,9 @@
           opacity 0.4s ease !important;
       }
 
-      /* Slides off the right edge while scrolling down */
+      /* Slides off the left edge while scrolling down */
       .nav-bar-fixed.rail-hidden {
-        transform: translate(140%, -50%) !important;
+        transform: translate(-140%, -50%) !important;
         box-shadow: none !important;
         pointer-events: none !important;
       }
@@ -258,11 +258,11 @@
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
       }
 
-      /* Dock Tooltip - opens to the left of the vertical rail */
+      /* Dock Tooltip - opens to the right of the vertical rail */
       .dock-tooltip {
         position: absolute;
-        right: calc(100% + 14px);
-        left: auto;
+        left: calc(100% + 14px);
+        right: auto;
         top: 50%;
         bottom: auto;
         transform: translateY(-50%);
@@ -285,8 +285,8 @@
       .dock-tooltip::before {
         content: "";
         position: absolute;
-        right: -14px;
-        left: auto;
+        left: -14px;
+        right: auto;
         top: 0;
         bottom: 0;
         width: 14px;
@@ -302,14 +302,14 @@
       .dock-tooltip::after {
         content: "";
         position: absolute;
-        right: -16px;
-        left: auto;
+        left: -16px;
+        right: auto;
         top: 50%;
         transform: translateY(-50%);
         border-width: 8px;
         border-style: solid;
-        border-color: transparent transparent transparent white;
-        filter: drop-shadow(2px 0 2px rgba(0, 0, 0, 0.08));
+        border-color: transparent white transparent transparent;
+        filter: drop-shadow(-2px 0 2px rgba(0, 0, 0, 0.08));
       }
 
       .dock-tooltip h4 {
@@ -326,6 +326,44 @@
         line-height: 1.5;
         color: #555;
         font-family: "Poppins", sans-serif;
+      }
+
+      /* Contact rail - the same dock mirrored onto the right edge. The extra
+         .contact-rail weight outranks the section rail's !important rules. */
+      .nav-bar-fixed.contact-rail {
+        left: auto !important;
+        right: 14px !important;
+      }
+
+      .nav-bar-fixed.contact-rail:not(.slide-in) {
+        transform: translate(140%, -50%) !important;
+      }
+
+      .contact-rail .dock-tooltip {
+        left: auto;
+        right: calc(100% + 14px);
+      }
+
+      .contact-rail .dock-tooltip::before {
+        left: auto;
+        right: -14px;
+      }
+
+      .contact-rail .dock-tooltip::after {
+        left: auto;
+        right: -16px;
+        border-color: transparent transparent transparent white;
+        filter: drop-shadow(2px 0 2px rgba(0, 0, 0, 0.08));
+      }
+
+      .contact-rail .dock-item:focus-visible {
+        outline: 2px solid #007aff;
+        outline-offset: 2px;
+      }
+
+      .contact-rail .dock-item:focus-visible .dock-tooltip {
+        opacity: 1;
+        visibility: visible;
       }
 
       /* Add this for rounded buttons */
@@ -512,11 +550,11 @@
         opacity: 1;
       }
 
-      /* Sub-nav rail - stays off the right edge until the load animation
+      /* Sub-nav rail - stays off the left edge until the load animation
          runs. Uses a pre-state class rather than a keyframe because the rail's
          own transform is !important and would outrank an animation */
       .nav-bar-fixed:not(.slide-in) {
-        transform: translate(140%, -50%) !important;
+        transform: translate(-140%, -50%) !important;
         opacity: 0 !important;
       }
 
@@ -932,6 +970,117 @@
       </div>
     </div>
 
+    <!-- Contact rail: social and contact links on the right edge. A div with
+         role="navigation" because style.css still hides every bare <nav>. -->
+    <div
+      class="nav-bar-fixed contact-rail"
+      role="navigation"
+      aria-label="Contact and social links"
+    >
+      <div class="dock-container">
+        <a
+          class="dock-item"
+          href="https://www.linkedin.com/in/manojsatishkumar/"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="icon-wrapper">
+            <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+          </div>
+          <span>LinkedIn</span>
+          <div class="dock-tooltip">
+            <h4>LinkedIn</h4>
+            <p>69,000+ followers. Career posts, tech insights and updates.</p>
+          </div>
+        </a>
+        <a
+          class="dock-item"
+          href="https://github.com/ManojSatishkumar"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="icon-wrapper">
+            <i class="fa-brands fa-github" aria-hidden="true"></i>
+          </div>
+          <span>GitHub</span>
+          <div class="dock-tooltip">
+            <h4>GitHub</h4>
+            <p>Code, experiments and the source of this website.</p>
+          </div>
+        </a>
+        <a
+          class="dock-item"
+          href="https://twitter.com/MSK_Web_Manoj"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="icon-wrapper">
+            <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+          </div>
+          <span>X</span>
+          <div class="dock-tooltip">
+            <h4>X (Twitter)</h4>
+            <p>@MSK_Web_Manoj</p>
+          </div>
+        </a>
+        <a
+          class="dock-item"
+          href="https://www.youtube.com/@ManojSatishkumar"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="icon-wrapper">
+            <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+          </div>
+          <span>YouTube</span>
+          <div class="dock-tooltip">
+            <h4>YouTube</h4>
+            <p>Talks, tutorials and career videos.</p>
+          </div>
+        </a>
+        <a
+          class="dock-item"
+          href="https://www.udemy.com/user/manoj79/"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="icon-wrapper">
+            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+          </div>
+          <span>Udemy</span>
+          <div class="dock-tooltip">
+            <h4>Udemy courses</h4>
+            <p>Frontend system design, JavaScript, TypeScript and React.</p>
+          </div>
+        </a>
+        <a
+          class="dock-item"
+          href="https://topmate.io/manoj_satishkumar"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="icon-wrapper">
+            <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+          </div>
+          <span>Topmate</span>
+          <div class="dock-tooltip">
+            <h4>Book a 1:1</h4>
+            <p>Mentorship, resume reviews and mock interviews on Topmate.</p>
+          </div>
+        </a>
+        <a class="dock-item" href="mailto:88manojs@gmail.com">
+          <div class="icon-wrapper">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+          </div>
+          <span>Email</span>
+          <div class="dock-tooltip">
+            <h4>Email</h4>
+            <p>88manojs@gmail.com</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
     <br />
     <br />
 
@@ -1264,12 +1413,11 @@
           }
         }, 200);
 
-        // Right-side dock rail slides in
+        // Section rail (left) and contact rail (right) slide in
         setTimeout(function () {
-          const navBarFixed = document.querySelector(".nav-bar-fixed");
-          if (navBarFixed) {
-            navBarFixed.classList.add("slide-in");
-          }
+          document.querySelectorAll(".nav-bar-fixed").forEach(function (rail) {
+            rail.classList.add("slide-in");
+          });
         }, 400);
 
         // Right chatbot widget slides in
@@ -1370,7 +1518,7 @@
         }
       }
 
-      /* Rail now lives on the right edge (vertically centered), so the chatbot
+      /* The rail lives on the left edge (vertically centered), so the chatbot
          bubble can sit at its normal bottom-right position. */
       @media (min-width: 1366px) {
         .chatbot-widget {

@@ -165,7 +165,6 @@
     border-bottom: 2px dashed #4a5bc7;
     text-decoration: none;
   }
-
   /* Career journey on the left; education + philosophy stacked on the right */
   .intro-duo {
     display: grid;
@@ -474,11 +473,17 @@
     }
   }
 
-  /* The shared sidebar's "Author" label and portfolio link only make sense
+  /* The shared sidebar's "The Author" label and portfolio link only make sense
      beside an article */
   #profile-card .profile-kicker,
   #profile-card .profile-cta-btn {
     display: none;
+  }
+
+  /* The sidebar's wrapper centers the card at its content width; here it
+     should fill the column, including the full-width column on phones */
+  #profile-card .profile-card {
+    align-self: stretch;
   }
 
   /* Here the card stretches to the intro's height, so it keeps the large
@@ -611,8 +616,18 @@
         <!-- Hero Statement -->
         <div class="intro-lead-card">
           <p class="intro-lead-text">
-            <strong onclick="openExpModal()" class="intro-link-highlight"
-              ><span class="js-experience-years">12</span> years</strong
+            <strong
+              class="intro-link-highlight"
+              role="button"
+              tabindex="0"
+              onclick="openExpModal()"
+              onkeydown="
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  openExpModal();
+                }
+              "
+              ><span class="js-experience-years">13</span> years</strong
             >
             of crafting
             <strong>highly scalable, multi-tenant frontend systems</strong> at
@@ -1742,7 +1757,6 @@
       }
     });
   });
-
   // Experience Modal functions
   function openExpModal() {
     document.getElementById("exp-modal-overlay").classList.add("show");
