@@ -464,6 +464,13 @@ html[data-theme="dark"] .home-profile {
   box-shadow: var(--dm-shadow);
 }
 
+html[data-theme="dark"] .home-profile__cover {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.16), transparent 38%),
+    radial-gradient(circle at 85% 80%, rgba(219, 39, 119, 0.5), transparent 45%),
+    linear-gradient(120deg, #3730a3 0%, #5b21b6 50%, #9d174d 100%);
+}
+
 html[data-theme="dark"] .home-profile__avatar::before {
   background:
     linear-gradient(160deg, #1e293b, #131c2e) padding-box,
