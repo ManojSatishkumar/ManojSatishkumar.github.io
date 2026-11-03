@@ -21,7 +21,7 @@
     flex-direction: column;
     position: sticky;
     top: 100px;
-    max-height: calc(100vh - 196px);
+    height: calc(100vh - 124px);
     background: var(--color-surface, #fff);
     border: 1px solid var(--color-border, #e2e8f0);
     border-radius: var(--radius-lg, 20px);
@@ -31,6 +31,10 @@
   }
 
   .blog-layout.has-rail > .articles-rail[hidden] { display: none; }
+
+  /* The rail runs to the bottom of the viewport, so the back-to-top button
+     moves to the left corner, below the shorter author card */
+  .blog-layout.has-rail ~ .back-to-top { right: auto; left: 24px; }
 }
 
 @media (min-width: 1240px) and (max-width: 1439px) {
