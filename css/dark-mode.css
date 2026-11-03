@@ -456,6 +456,64 @@ html[data-theme="dark"] .intro-lead-accent {
   background-image: linear-gradient(90deg, #8ea2ff, #c084fc, #f472b6);
 }
 
+/* Highlights slideshow: lighter tones read better on the dark surface */
+html[data-theme="dark"] .intro-lead-slide--scale {
+  --tone: 96, 165, 250;
+}
+html[data-theme="dark"] .intro-lead-slide--patent {
+  --tone: 45, 212, 191;
+}
+html[data-theme="dark"] .intro-lead-slide--awards {
+  --tone: 251, 191, 36;
+}
+html[data-theme="dark"] .intro-lead-slide--stage {
+  --tone: 244, 114, 182;
+}
+html[data-theme="dark"] .intro-lead-slide--learn {
+  --tone: 74, 222, 128;
+}
+
+html[data-theme="dark"] .intro-lead-nav__btn {
+  background: var(--dm-surface-2);
+  border-color: var(--dm-border-strong);
+  color: var(--dm-text);
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .intro-lead-nav__btn:hover {
+  color: var(--dm-violet);
+  border-color: rgba(165, 180, 252, 0.45);
+}
+
+html[data-theme="dark"] .intro-lead-dot {
+  background: rgba(148, 163, 184, 0.3);
+}
+
+html[data-theme="dark"] .intro-lead-dot.is-active {
+  background: rgba(165, 180, 252, 0.2);
+}
+
+html[data-theme="dark"] .intro-lead-dot.is-active::after {
+  background: linear-gradient(90deg, #8ea2ff, #c084fc);
+}
+
+html[data-theme="dark"] .intro-lead-stats li {
+  border-left-color: var(--dm-border-strong);
+}
+
+html[data-theme="dark"] .intro-lead-stats li:first-child {
+  border-left: 0;
+}
+
+html[data-theme="dark"] .intro-lead-stats span {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .intro-lead-photos img {
+  border-color: var(--dm-surface-2);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+}
+
 html[data-theme="dark"] .intro-journey-card,
 html[data-theme="dark"] .intro-edu-card {
   background: var(--dm-surface);

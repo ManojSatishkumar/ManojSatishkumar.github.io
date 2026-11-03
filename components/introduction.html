@@ -33,16 +33,326 @@
     overflow: hidden;
   }
 
-  /* ---------- Hero statement card ---------- */
+  /* ---------- Highlights slideshow ---------- */
   .intro-lead-card {
+    display: flex;
+    flex-direction: column;
     background: rgba(255, 255, 255, 0.9);
     padding: 22px 28px 22px;
     margin-bottom: 24px;
+    /* Each slide's tone colours its eyebrow, numbers and link */
+    --tone: 79, 70, 229;
   }
 
   @media (prefers-reduced-motion: no-preference) {
     .intro-lead-eyebrow__dot {
       animation: leadPulse 2.4s ease-out infinite;
+    }
+  }
+
+  /* All slides share one grid cell, so the card always takes the height of
+     the tallest slide and never jumps between them */
+  .intro-lead-slides {
+    display: grid;
+  }
+
+  .intro-lead-slide {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(28px);
+    transition:
+      opacity 0.45s ease,
+      transform 0.45s ease,
+      visibility 0s linear 0.45s;
+  }
+
+  .intro-lead-slide.is-before {
+    transform: translateX(-28px);
+  }
+
+  .intro-lead-slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  .intro-lead-slide > .intro-link-row {
+    margin-top: auto;
+    padding-top: 18px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro-lead-slide {
+      transform: none !important;
+      transition: none;
+    }
+  }
+
+  .intro-lead-slide--scale {
+    --tone: 0, 113, 206;
+  }
+  .intro-lead-slide--patent {
+    --tone: 13, 148, 136;
+  }
+  .intro-lead-slide--awards {
+    --tone: 217, 119, 6;
+  }
+  .intro-lead-slide--stage {
+    --tone: 219, 39, 119;
+  }
+  .intro-lead-slide--learn {
+    --tone: 22, 163, 74;
+  }
+
+  /* Arrows and dots sit in the top-right corner, level with the eyebrow */
+  .intro-lead-nav {
+    position: absolute;
+    top: 20px;
+    right: 22px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .intro-lead-slide .intro-lead-eyebrow {
+    align-self: flex-start;
+    margin-right: 168px;
+  }
+
+  .intro-lead-nav__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 1px solid rgba(214, 223, 246, 0.95);
+    border-radius: 50%;
+    background: #ffffff;
+    color: #475569;
+    font-size: 0.72rem;
+    box-shadow: 0 4px 10px rgba(95, 112, 163, 0.1);
+    cursor: pointer;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .intro-lead-nav__btn:hover {
+    color: #4f46e5;
+    border-color: rgba(79, 70, 229, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .intro-lead-nav__btn:focus-visible,
+  .intro-lead-dot:focus-visible {
+    outline: 2px solid #4f46e5;
+    outline-offset: 2px;
+  }
+
+  .intro-lead-dots {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .intro-lead-dot {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(100, 116, 139, 0.3);
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+      width 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  .intro-lead-dot:hover {
+    background: rgba(100, 116, 139, 0.5);
+  }
+
+  .intro-lead-dot.is-active {
+    width: 24px;
+    background: rgba(79, 70, 229, 0.22);
+  }
+
+  /* The active dot fills up while autoplay waits; the slide advances when
+     the fill finishes, so pausing the fill also pauses the slideshow */
+  .intro-lead-dot.is-active::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #667eea, #a855f7);
+  }
+
+  .intro-lead-card.is-playing .intro-lead-dot.is-active::after {
+    transform-origin: left center;
+    animation: leadProgress 8s linear forwards;
+  }
+
+  .intro-lead-card.is-playing:hover .intro-lead-dot::after,
+  .intro-lead-card.is-playing:focus-within .intro-lead-dot::after {
+    animation-play-state: paused;
+  }
+
+  @keyframes leadProgress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  .intro-lead-slide .intro-lead-eyebrow i {
+    font-size: 0.78rem;
+  }
+
+  .intro-lead-slide:not(:first-child) .intro-lead-eyebrow {
+    background: rgba(var(--tone), 0.1);
+    color: rgb(var(--tone));
+  }
+
+  /* Headline numbers under the statement, split by hairlines */
+  .intro-lead-stats {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .intro-lead-stats li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0 18px;
+    border-left: 1px solid rgba(148, 163, 184, 0.35);
+  }
+
+  .intro-lead-stats li:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .intro-lead-stats strong {
+    color: rgb(var(--tone));
+    font-size: 1.2rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .intro-lead-stats span {
+    color: #64748b;
+    font-size: 0.74rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .intro-lead-cta,
+  .intro-lead-cta:hover,
+  .intro-lead-cta:focus {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    padding: 9px 16px;
+    border: 1px solid rgba(var(--tone), 0.24);
+    border-radius: 999px;
+    background: rgba(var(--tone), 0.08);
+    color: rgb(var(--tone));
+    font-size: 0.88rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .intro-lead-cta:hover {
+    background: rgba(var(--tone), 0.15);
+    border-color: rgba(var(--tone), 0.4);
+  }
+
+  .intro-lead-cta i {
+    font-size: 0.78rem;
+    transition: transform 0.2s ease;
+  }
+
+  .intro-lead-cta:hover i {
+    transform: translateX(3px);
+  }
+
+  /* Event photos, tilted like a small stack of prints */
+  .intro-lead-photos {
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+  }
+
+  .intro-lead-photos img {
+    width: 66px;
+    height: 44px;
+    margin-left: -14px;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 8px 18px rgba(95, 112, 163, 0.2);
+    transition:
+      transform 0.3s ease,
+      margin-left 0.3s ease;
+  }
+
+  .intro-lead-photos img:first-child {
+    margin-left: 0;
+  }
+  .intro-lead-photos img:nth-child(odd) {
+    transform: rotate(-4deg);
+  }
+  .intro-lead-photos img:nth-child(even) {
+    transform: rotate(3deg);
+  }
+
+  .intro-lead-photos:hover img:not(:first-child) {
+    margin-left: -4px;
+  }
+  .intro-lead-photos:hover img {
+    transform: none;
+  }
+
+  /* Once the panel narrows, the controls move under the slides, centred */
+  @media (max-width: 991px) {
+    .intro-lead-nav {
+      position: static;
+      order: 2;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .intro-lead-slide .intro-lead-eyebrow {
+      margin-right: 0;
+    }
+
+    .intro-lead-cta,
+    .intro-lead-cta:hover,
+    .intro-lead-cta:focus {
+      margin-left: 0;
     }
   }
 
@@ -761,96 +1071,325 @@
       <div
         class="col-md-8 wow animate__animated animate__fadeInRight intro-panel"
       >
-        <!-- Hero Statement -->
-        <div class="intro-lead-card">
-          <div class="intro-lead-eyebrow">
-            <span class="intro-lead-eyebrow__dot" aria-hidden="true"></span>
-            Frontend Architecture &middot; Platform Engineering
-          </div>
-          <p class="intro-lead-text">
-            <strong
-              class="intro-link-highlight intro-lead-years"
-              role="button"
-              tabindex="0"
-              onclick="openExpModal()"
-              onkeydown="
-                if (event.key === 'Enter' || event.key === ' ') {
-                  event.preventDefault();
-                  openExpModal();
-                }
-              "
-              ><span class="js-experience-years">13</span> years</strong
-            >
-            of crafting
-            <strong class="intro-lead-accent"
-              >highly scalable, multi-tenant frontend systems</strong
-            >
-            at massive global scale. I architect world-class web platforms that
-            power
-            <strong class="intro-lead-accent">exceptional user experiences</strong>
-            for millions.
-          </p>
-          <div class="intro-link-row">
-            <a
-              class="intro-link-pill"
-              href="https://www.linkedin.com/in/manojsatishkumar/"
-              target="_blank"
-              rel="noopener"
-              aria-label="69,000+ followers on LinkedIn"
-            >
-              <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-              <span><strong>69,000+</strong> followers</span>
-            </a>
+        <!-- Highlights slideshow. The dots are built and the slides driven by
+             the script below; without it only the first slide shows. -->
+        <div
+          class="intro-lead-card"
+          id="intro-highlights"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Highlights"
+        >
+          <div class="intro-lead-nav">
             <button
               type="button"
-              class="intro-avatar-stack"
-              aria-label="Go to Testimony section"
-              onclick="
-                if (typeof animateScroll === 'function') {
-                  animateScroll('msk-testimony');
-                } else {
-                  window.location.hash = 'msk-testimony';
-                }
-              "
+              class="intro-lead-nav__btn"
+              data-step="-1"
+              aria-label="Previous highlight"
             >
-              <span class="intro-avatar-faces">
-              <img
-                class="intro-avatar"
-                src="/images/people/shreyas.png"
-                alt="Shreyas"
-              />
-              <img
-                class="intro-avatar"
-                src="/images/people/sharmee.jpg"
-                alt="Sharmee"
-              />
-              <img
-                class="intro-avatar"
-                src="/images/people/bala.jpg"
-                alt="Bala"
-              />
-              <img
-                class="intro-avatar"
-                src="/images/people/pooja.jpg"
-                alt="Pooja"
-              />
-              <img
-                class="intro-avatar"
-                src="/images/people/raja-sir.jpeg"
-                alt="Raja Sir"
-              />
-              <img
-                class="intro-avatar"
-                src="/images/people/aravind.jpg"
-                alt="Aravind"
-              />
-              <img
-                class="intro-avatar"
-                src="/images/people/harshita.jpg"
-                alt="Harshita"
-              />
-              </span>
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
             </button>
+            <div class="intro-lead-dots"></div>
+            <button
+              type="button"
+              class="intro-lead-nav__btn"
+              data-step="1"
+              aria-label="Next highlight"
+            >
+              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="intro-lead-slides" aria-live="off">
+            <!-- 1. Who I am -->
+            <div
+              class="intro-lead-slide is-active"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="1 of 6"
+            >
+              <div class="intro-lead-eyebrow">
+                <span class="intro-lead-eyebrow__dot" aria-hidden="true"></span>
+                Frontend Architecture &middot; Platform Engineering
+              </div>
+              <p class="intro-lead-text">
+                <strong
+                  class="intro-link-highlight intro-lead-years"
+                  role="button"
+                  tabindex="0"
+                  onclick="openExpModal()"
+                  onkeydown="
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      openExpModal();
+                    }
+                  "
+                  ><span class="js-experience-years">13</span> years</strong
+                >
+                of crafting
+                <strong class="intro-lead-accent"
+                  >highly scalable, multi-tenant frontend systems</strong
+                >
+                at massive global scale. I architect world-class web platforms that
+                power
+                <strong class="intro-lead-accent">exceptional user experiences</strong>
+                for millions.
+              </p>
+              <div class="intro-link-row">
+                <a
+                  class="intro-link-pill"
+                  href="https://www.linkedin.com/in/manojsatishkumar/"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="70,000+ followers on LinkedIn"
+                >
+                  <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                  <span><strong>70,000</strong> followers</span>
+                </a>
+                <button
+                  type="button"
+                  class="intro-avatar-stack"
+                  aria-label="Go to Testimony section"
+                  onclick="
+                    if (typeof animateScroll === 'function') {
+                      animateScroll('msk-testimony');
+                    } else {
+                      window.location.hash = 'msk-testimony';
+                    }
+                  "
+                >
+                  <span class="intro-avatar-faces">
+                  <img
+                    class="intro-avatar"
+                    src="/images/people/shreyas.png"
+                    alt="Shreyas"
+                  />
+                  <img
+                    class="intro-avatar"
+                    src="/images/people/sharmee.jpg"
+                    alt="Sharmee"
+                  />
+                  <img
+                    class="intro-avatar"
+                    src="/images/people/bala.jpg"
+                    alt="Bala"
+                  />
+                  <img
+                    class="intro-avatar"
+                    src="/images/people/pooja.jpg"
+                    alt="Pooja"
+                  />
+                  <img
+                    class="intro-avatar"
+                    src="/images/people/raja-sir.jpeg"
+                    alt="Raja Sir"
+                  />
+                  <img
+                    class="intro-avatar"
+                    src="/images/people/aravind.jpg"
+                    alt="Aravind"
+                  />
+                  <img
+                    class="intro-avatar"
+                    src="/images/people/harshita.jpg"
+                    alt="Harshita"
+                  />
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Walmart template platform -->
+            <div
+              class="intro-lead-slide intro-lead-slide--scale"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="2 of 6"
+            >
+              <div class="intro-lead-eyebrow">
+                <i class="fa-solid fa-tower-broadcast" aria-hidden="true"></i>
+                Platform at retail scale &middot; Walmart
+              </div>
+              <p class="intro-lead-text">
+                Built the
+                <strong class="intro-lead-accent">template platform</strong>
+                that <strong>200+ teams</strong> at Walmart use to design
+                customer messages across
+                <strong class="intro-lead-accent"
+                  >email, SMS, push and WhatsApp</strong
+                >.
+              </p>
+              <div class="intro-link-row">
+                <ul class="intro-lead-stats">
+                  <li><strong>70M+</strong><span>messages a day</span></li>
+                  <li><strong>10K+</strong><span>templates</span></li>
+                  <li><strong>6</strong><span>channels</span></li>
+                </ul>
+                <a class="intro-lead-cta" href="/walmart-journey/"
+                  >My Walmart journey
+                  <i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+
+            <!-- 3. Patent -->
+            <div
+              class="intro-lead-slide intro-lead-slide--patent"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="3 of 6"
+            >
+              <div class="intro-lead-eyebrow">
+                <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
+                Published patent &middot; Cerner
+              </div>
+              <p class="intro-lead-text">
+                Patented the
+                <strong class="intro-lead-accent">UMR Cloud Network</strong>: one
+                cloud medical record that
+                <strong>patients own for a lifetime</strong>, with healthcare apps
+                plugged in through
+                <strong class="intro-lead-accent">FHIR APIs</strong>.
+              </p>
+              <div class="intro-link-row">
+                <ul class="intro-lead-stats">
+                  <li><strong>#16/235,857</strong><span>patent application</span></li>
+                  <li><strong>FHIR</strong><span>healthcare standard</span></li>
+                </ul>
+                <a
+                  class="intro-lead-cta"
+                  href="#patent"
+                  onclick="
+                    if (typeof animateScroll === 'function') {
+                      event.preventDefault();
+                      animateScroll('patent');
+                    }
+                  "
+                  >Read about it
+                  <i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+
+            <!-- 4. Awards -->
+            <div
+              class="intro-lead-slide intro-lead-slide--awards"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="4 of 6"
+            >
+              <div class="intro-lead-eyebrow">
+                <i class="fa-solid fa-trophy" aria-hidden="true"></i>
+                Awards &amp; recognition
+              </div>
+              <p class="intro-lead-text">
+                <strong class="intro-lead-accent">Hackathon champion</strong> at
+                Walmart Global Tech in 2025, taking
+                <strong>1st place among 10+ teams</strong> with an
+                <strong class="intro-lead-accent">AI-powered event scheduler</strong>.
+              </p>
+              <div class="intro-link-row">
+                <ul class="intro-lead-stats">
+                  <li><strong>2&times;</strong><span>hackathon wins</span></li>
+                  <li><strong>4&times;</strong><span>Bravo awards</span></li>
+                  <li><strong>#18</strong><span>VTU state rank</span></li>
+                </ul>
+                <a
+                  class="intro-lead-cta"
+                  href="#achievements"
+                  onclick="
+                    if (typeof animateScroll === 'function') {
+                      event.preventDefault();
+                      animateScroll('achievements');
+                    }
+                  "
+                  >All awards
+                  <i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+
+            <!-- 5. Speaking -->
+            <div
+              class="intro-lead-slide intro-lead-slide--stage"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="5 of 6"
+            >
+              <div class="intro-lead-eyebrow">
+                <i class="fa-solid fa-microphone-lines" aria-hidden="true"></i>
+                Speaker &amp; jury
+              </div>
+              <p class="intro-lead-text">
+                Guest speaker and jury at
+                <strong class="intro-lead-accent">Project Space 7.0</strong>, where
+                <strong>700+ students</strong> built 120+ projects, and a two-time
+                <strong class="intro-lead-accent">DevCon presenter</strong> to 500+
+                developers.
+              </p>
+              <div class="intro-link-row">
+                <a class="intro-lead-photos" href="/project-space/" tabindex="-1">
+                  <img
+                    src="/images/project-space/thumbs/keynote.webp"
+                    alt="Delivering the keynote"
+                    loading="lazy"
+                  />
+                  <img
+                    src="/images/project-space/thumbs/crowd.webp"
+                    alt="Project Space 7.0 participants"
+                    loading="lazy"
+                  />
+                  <img
+                    src="/images/project-space/thumbs/jury.webp"
+                    alt="On the jury panel"
+                    loading="lazy"
+                  />
+                  <img
+                    src="/images/project-space/thumbs/winners.webp"
+                    alt="With the winning teams"
+                    loading="lazy"
+                  />
+                </a>
+                <a class="intro-lead-cta" href="/project-space/"
+                  >Inside Project Space
+                  <i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+
+            <!-- 6. Teaching -->
+            <div
+              class="intro-lead-slide intro-lead-slide--learn"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="6 of 6"
+            >
+              <div class="intro-lead-eyebrow">
+                <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+                Courses &amp; teaching
+              </div>
+              <p class="intro-lead-text">
+                Teaching what I build: courses on
+                <strong class="intro-lead-accent"
+                  >JavaScript, TypeScript, React and frontend system design</strong
+                >, plus an
+                <strong>interview preparation kit</strong>.
+              </p>
+              <div class="intro-link-row">
+                <ul class="intro-lead-stats">
+                  <li><strong>5</strong><span>courses</span></li>
+                  <li><strong>100+ hrs</strong><span>of video</span></li>
+                </ul>
+                <a
+                  class="intro-lead-cta"
+                  href="https://www.udemy.com/user/manoj79/"
+                  target="_blank"
+                  rel="noopener"
+                  >View on Udemy
+                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1903,6 +2442,91 @@
       }
     });
   });
+
+  // Highlights slideshow. Autoplay is timed by the CSS fill on the active
+  // dot (see .intro-lead-dot), which hover, focus and hidden tabs pause.
+  // Any manual navigation stops autoplay for good.
+  (function () {
+    const card = document.getElementById("intro-highlights");
+    if (!card) return;
+    const slides = Array.from(card.querySelectorAll(".intro-lead-slide"));
+    const dotsBox = card.querySelector(".intro-lead-dots");
+    const live = card.querySelector(".intro-lead-slides");
+    let current = 0;
+
+    const dots = slides.map(function (_, i) {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "intro-lead-dot";
+      dot.setAttribute("aria-label", "Show highlight " + (i + 1));
+      dot.addEventListener("click", function () {
+        go(i);
+      });
+      dotsBox.appendChild(dot);
+      return dot;
+    });
+
+    function show(i) {
+      current = (i + slides.length) % slides.length;
+      slides.forEach(function (slide, n) {
+        const active = n === current;
+        slide.classList.toggle("is-active", active);
+        slide.classList.toggle("is-before", n < current);
+        slide.setAttribute("aria-hidden", String(!active));
+        slide.inert = !active;
+      });
+      dots.forEach(function (dot, n) {
+        dot.classList.toggle("is-active", n === current);
+        dot.setAttribute("aria-current", String(n === current));
+      });
+    }
+
+    function go(i) {
+      card.classList.remove("is-playing");
+      live.setAttribute("aria-live", "polite");
+      show(i);
+    }
+
+    card.querySelectorAll(".intro-lead-nav__btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        go(current + Number(btn.dataset.step));
+      });
+    });
+
+    dotsBox.addEventListener("animationend", function (event) {
+      if (event.animationName === "leadProgress") show(current + 1);
+    });
+
+    card.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowLeft") go(current - 1);
+      if (event.key === "ArrowRight") go(current + 1);
+    });
+
+    let touchX = null;
+    let touchY = null;
+    card.addEventListener(
+      "touchstart",
+      function (event) {
+        touchX = event.touches[0].clientX;
+        touchY = event.touches[0].clientY;
+      },
+      { passive: true },
+    );
+    card.addEventListener("touchend", function (event) {
+      if (touchX === null) return;
+      const dx = event.changedTouches[0].clientX - touchX;
+      const dy = event.changedTouches[0].clientY - touchY;
+      touchX = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        go(current + (dx < 0 ? 1 : -1));
+      }
+    });
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      card.classList.add("is-playing");
+    }
+    show(0);
+  })();
 
   // Rotating testimonial card. Testimonials are read from the Testimony
   // section's own markup so there is a single list to maintain.
