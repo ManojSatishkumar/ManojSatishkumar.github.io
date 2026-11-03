@@ -457,6 +457,91 @@ html[data-theme="dark"] .intro-lead-accent {
   background-image: linear-gradient(90deg, #8ea2ff, #c084fc, #f472b6);
 }
 
+/* Homepage profile card */
+html[data-theme="dark"] .home-profile {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  box-shadow: var(--dm-shadow);
+}
+
+html[data-theme="dark"] .home-profile__cover {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.16), transparent 38%),
+    radial-gradient(circle at 85% 80%, rgba(219, 39, 119, 0.5), transparent 45%),
+    linear-gradient(120deg, #3730a3 0%, #5b21b6 50%, #9d174d 100%);
+}
+
+html[data-theme="dark"] .home-profile__avatar::before {
+  background:
+    linear-gradient(160deg, #1e293b, #131c2e) padding-box,
+    linear-gradient(135deg, #8ea2ff, #c084fc, #f472b6) border-box;
+}
+
+html[data-theme="dark"] .home-profile__name,
+html[data-theme="dark"] .home-profile__company,
+html[data-theme="dark"] .home-profile__fact-title {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .home-profile__company img {
+  filter: invert(1);
+}
+
+html[data-theme="dark"] .home-profile__role {
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] .home-profile__stats {
+  background: var(--dm-surface-2);
+  border-color: var(--dm-border);
+}
+
+html[data-theme="dark"] .home-profile__stats li + li {
+  border-left-color: var(--dm-border-strong);
+}
+
+html[data-theme="dark"] .home-profile__stats strong {
+  background-image: linear-gradient(90deg, #8ea2ff, #c084fc);
+}
+
+html[data-theme="dark"] .home-profile__stats li > span,
+html[data-theme="dark"] .home-profile__fact-sub {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .home-profile__fact--stage {
+  --tone: 251, 113, 133;
+}
+html[data-theme="dark"] .home-profile__fact--mentor {
+  --tone: 196, 181, 253;
+}
+html[data-theme="dark"] .home-profile__fact--city {
+  --tone: 96, 165, 250;
+}
+html[data-theme="dark"] .home-profile__fact--visa {
+  --tone: 45, 212, 191;
+}
+
+html[data-theme="dark"] .home-profile__fact:hover {
+  background: rgba(var(--tone), 0.1);
+}
+
+html[data-theme="dark"] .home-profile__fact-icon {
+  background: rgba(var(--tone), 0.14);
+}
+
+html[data-theme="dark"] .home-profile__btn--ghost,
+html[data-theme="dark"] .home-profile__btn--ghost:hover,
+html[data-theme="dark"] .home-profile__btn--ghost:focus {
+  border-color: rgba(165, 180, 252, 0.35);
+  background: rgba(165, 180, 252, 0.08);
+  color: var(--dm-violet);
+}
+
+html[data-theme="dark"] .home-profile__btn--ghost:hover {
+  background: rgba(165, 180, 252, 0.15);
+}
+
 /* Highlights slideshow: lighter tones read better on the dark surface */
 html[data-theme="dark"] .intro-lead-slide--scale {
   --tone: 96, 165, 250;

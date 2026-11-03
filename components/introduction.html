@@ -980,61 +980,318 @@
     }
   }
 
-  /* The shared sidebar's "The Author" label and portfolio link only make sense
-     beside an article */
-  #profile-card .profile-kicker,
-  #profile-card .profile-cta-btn {
-    display: none;
+  /* ---------- Profile card ----------
+     The homepage has its own card; components/side-profile.html is still
+     loaded (hidden) because it owns the city and visa modals. */
+  #profile-card > .wow {
+    display: none !important;
   }
 
-  /* The sidebar's wrapper centers the card at its content width; here it
-     should fill the column, including the full-width column on phones */
-  #profile-card .profile-card {
-    align-self: stretch;
-  }
-
-  /* Here the card stretches to the intro's height, so it keeps the large
-     stacked photo instead of the sidebar's compact header */
-  #profile-card .profile-header {
+  .home-profile-col {
+    display: flex;
     flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
   }
 
-  #profile-card .profile-img {
-    align-self: center;
-    width: 220px;
-    height: 220px;
-    border-width: 6px;
-  }
-
-  #profile-card .profile-name {
-    margin-bottom: 0.5rem;
-    font-size: 1.7rem;
-  }
-
-  #profile-card .profile-role {
-    font-size: 1.25rem;
-  }
-
-  #profile-card .profile-company {
-    font-size: 1rem;
-  }
-
-  .profile-card {
-    border-radius: 24px;
-    /* background: linear-gradient(135deg, #e3f0ff 0%, #f8fbff 100%); */
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-    padding: 20px 24px;
+  .home-profile {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    border: 1px solid rgba(214, 223, 246, 0.95);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow:
+      0 24px 50px rgba(95, 112, 163, 0.08),
+      0 8px 18px rgba(95, 112, 163, 0.06);
+    overflow: hidden;
     text-align: center;
-    transition: transform 0.3s;
   }
-  .profile-img {
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-    width: 220px;
+
+  .home-profile__cover {
+    position: relative;
+    height: 118px;
+    background:
+      radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.35), transparent 38%),
+      radial-gradient(circle at 85% 80%, rgba(246, 79, 89, 0.55), transparent 45%),
+      linear-gradient(120deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
+  }
+
+  /* Faint blueprint grid over the gradient */
+  .home-profile__cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+    background-size: 22px 22px;
+    -webkit-mask-image: linear-gradient(180deg, #000 20%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 20%, transparent 100%);
+  }
+
+  /* The cutout rises out of a gradient ring: the wrapper is taller than the
+     ring and only its bottom half is rounded, so the head clears the top */
+  .home-profile__avatar {
+    position: relative;
+    z-index: 1;
+    width: 164px;
+    height: 196px;
+    margin: -100px auto 0;
+    border-radius: 0 0 82px 82px;
+    overflow: hidden;
+  }
+
+  .home-profile__avatar::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 164px;
+    height: 164px;
+    box-sizing: border-box;
+    border: 4px solid transparent;
     border-radius: 50%;
-    margin-bottom: 16px;
+    background:
+      linear-gradient(160deg, #eef2ff, #e0e7ff) padding-box,
+      linear-gradient(135deg, #667eea, #a855f7, #f64f59) border-box;
   }
+
+  .home-profile__avatar img {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 186px;
+    height: auto;
+    transform: translateX(-50%);
+  }
+
+  .home-profile__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 14px 22px 22px;
+  }
+
+  .home-profile__name {
+    margin: 0;
+    color: #111827;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+
+  .home-profile__role {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 6px 0 0;
+    color: #475569;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .home-profile__company {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #111827;
+  }
+
+  .home-profile__company img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+
+  .home-profile__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 18px 0 0;
+    padding: 12px 4px;
+    list-style: none;
+    border: 1px solid rgba(214, 223, 246, 0.95);
+    border-radius: 16px;
+    background: linear-gradient(135deg, #f8faff, #f3f0ff);
+  }
+
+  .home-profile__stats li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .home-profile__stats li + li {
+    border-left: 1px solid rgba(148, 163, 184, 0.3);
+  }
+
+  .home-profile__stats strong {
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    background: linear-gradient(90deg, #4f46e5, #a855f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .home-profile__stats li > span {
+    color: #64748b;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  /* When the card is stretched to the intro's height, the spare room is
+     shared above and below the rows */
+  .home-profile__facts {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: auto 0 0;
+    padding: 14px 0 0;
+    list-style: none;
+    text-align: left;
+  }
+
+  /* Rows are links or buttons; both get the same look */
+  .home-profile__fact,
+  .home-profile__fact:hover,
+  .home-profile__fact:focus {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 7px 10px 7px 7px;
+    border: 0;
+    border-radius: 14px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .home-profile__fact:hover {
+    background: rgba(var(--tone), 0.07);
+  }
+
+  .home-profile__fact:focus-visible {
+    outline: 2px solid rgb(var(--tone));
+    outline-offset: 1px;
+  }
+
+  .home-profile__fact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    background: rgba(var(--tone), 0.11);
+    color: rgb(var(--tone));
+    font-size: 0.95rem;
+  }
+
+  .home-profile__fact-title {
+    display: block;
+    color: #111827;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .home-profile__fact-sub {
+    display: block;
+    color: #64748b;
+    font-size: 0.76rem;
+    line-height: 1.35;
+  }
+
+  .home-profile__fact-chevron {
+    color: #94a3b8;
+    font-size: 0.7rem;
+    transition:
+      transform 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .home-profile__fact:hover .home-profile__fact-chevron {
+    color: rgb(var(--tone));
+    transform: translateX(3px);
+  }
+
+  .home-profile__fact--stage {
+    --tone: 225, 29, 72;
+  }
+  .home-profile__fact--mentor {
+    --tone: 124, 58, 237;
+  }
+  .home-profile__fact--city {
+    --tone: 37, 99, 235;
+  }
+  .home-profile__fact--visa {
+    --tone: 13, 148, 136;
+  }
+
+  .home-profile__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 16px;
+  }
+
+  .home-profile__btn,
+  .home-profile__btn:hover,
+  .home-profile__btn:focus {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 12px;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .home-profile__btn--primary,
+  .home-profile__btn--primary:hover,
+  .home-profile__btn--primary:focus {
+    border: 0;
+    background: linear-gradient(135deg, #4f46e5, #a855f7);
+    color: #ffffff;
+    box-shadow: 0 10px 22px rgba(124, 58, 237, 0.28);
+  }
+
+  .home-profile__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(124, 58, 237, 0.36);
+  }
+
+  .home-profile__btn--ghost,
+  .home-profile__btn--ghost:hover,
+  .home-profile__btn--ghost:focus {
+    border: 1px solid rgba(79, 70, 229, 0.28);
+    background: rgba(79, 70, 229, 0.06);
+    color: #4f46e5;
+  }
+
+  .home-profile__btn--ghost:hover {
+    background: rgba(79, 70, 229, 0.12);
+  }
+
   .wow {
     animation: fadeInUp 1s;
   }
@@ -1066,8 +1323,8 @@
       justify-content: flex-start;
     }
 
-    .profile-card {
-      margin-bottom: 32px;
+    .home-profile {
+      margin-bottom: 24px;
     }
     .container {
       padding-left: 8px;
@@ -1103,7 +1360,152 @@
   <div class="container">
     <div class="row">
       <!-- Profile card -->
-      <div class="col-md-4" id="profile-card"></div>
+      <div class="col-md-4 home-profile-col">
+        <aside
+          class="home-profile wow animate__animated animate__fadeInLeft"
+          aria-label="About Manoj Satishkumar"
+        >
+          <div class="home-profile__cover" aria-hidden="true"></div>
+
+          <div class="home-profile__avatar">
+            <img
+              src="/images/me_cutout.webp"
+              width="652"
+              height="652"
+              alt="Manoj Satishkumar"
+            />
+          </div>
+
+          <div class="home-profile__body">
+            <h2 class="home-profile__name">Manoj Satishkumar</h2>
+            <p class="home-profile__role">
+              Software Architect
+              <span aria-hidden="true">&middot;</span>
+              <span class="home-profile__company">
+                <img src="/images/disney/mickey.png" alt="" />
+                Walt Disney
+              </span>
+            </p>
+
+            <ul class="home-profile__stats">
+              <li>
+                <strong><span class="js-experience-years">13</span>+</strong>
+                <span>years</span>
+              </li>
+              <li><strong>70K</strong><span>followers</span></li>
+              <li><strong>5</strong><span>companies</span></li>
+            </ul>
+
+            <ul class="home-profile__facts">
+              <li>
+                <a
+                  class="home-profile__fact home-profile__fact--stage"
+                  href="/project-space/"
+                >
+                  <span class="home-profile__fact-icon"
+                    ><i class="fa-solid fa-microphone-lines" aria-hidden="true"></i
+                  ></span>
+                  <span>
+                    <span class="home-profile__fact-title">Tech speaker</span>
+                    <span class="home-profile__fact-sub"
+                      >Keynotes, juries &amp; DevCon talks</span
+                    >
+                  </span>
+                  <i
+                    class="fa-solid fa-chevron-right home-profile__fact-chevron"
+                    aria-hidden="true"
+                  ></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="home-profile__fact home-profile__fact--mentor"
+                  href="https://topmate.io/manoj_satishkumar"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span class="home-profile__fact-icon"
+                    ><i class="fa-solid fa-user-graduate" aria-hidden="true"></i
+                  ></span>
+                  <span>
+                    <span class="home-profile__fact-title">Technical mentor</span>
+                    <span class="home-profile__fact-sub"
+                      >Mock interviews &amp; resume reviews</span
+                    >
+                  </span>
+                  <i
+                    class="fa-solid fa-chevron-right home-profile__fact-chevron"
+                    aria-hidden="true"
+                  ></i>
+                </a>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="home-profile__fact home-profile__fact--city"
+                  onclick="openCityModal()"
+                >
+                  <span class="home-profile__fact-icon"
+                    ><i class="fa-solid fa-location-dot" aria-hidden="true"></i
+                  ></span>
+                  <span>
+                    <span class="home-profile__fact-title">Bengaluru, India</span>
+                    <span class="home-profile__fact-sub"
+                      ><span class="js-home-clock">IST</span> local time</span
+                    >
+                  </span>
+                  <i
+                    class="fa-solid fa-chevron-right home-profile__fact-chevron"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="home-profile__fact home-profile__fact--visa"
+                  onclick="openVisaModal()"
+                >
+                  <span class="home-profile__fact-icon"
+                    ><i class="fa-solid fa-passport" aria-hidden="true"></i
+                  ></span>
+                  <span>
+                    <span class="home-profile__fact-title">US Visa B1/B2</span>
+                    <span class="home-profile__fact-sub"
+                      >Travel ready for US business</span
+                    >
+                  </span>
+                  <i
+                    class="fa-solid fa-chevron-right home-profile__fact-chevron"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              </li>
+            </ul>
+
+            <div class="home-profile__actions">
+              <a
+                class="home-profile__btn home-profile__btn--primary"
+                href="mailto:88manojs@gmail.com"
+                title="88manojs@gmail.com"
+              >
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                Email me
+              </a>
+              <a
+                class="home-profile__btn home-profile__btn--ghost"
+                href="/job-referral/"
+              >
+                <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+                Get a referral
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Hidden: loaded only for its city and visa modals -->
+        <div id="profile-card"></div>
+      </div>
 
       <!-- Introduction -->
       <div
@@ -2685,6 +3087,26 @@
       }
     });
   });
+
+  // Bengaluru local time on the profile card
+  (function () {
+    const clocks = document.querySelectorAll(".js-home-clock");
+    if (!clocks.length) return;
+    const format = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Asia/Kolkata",
+      hour: "numeric",
+      minute: "2-digit",
+    });
+    function tick() {
+      const time = format.format(new Date()) + " IST";
+      clocks.forEach(function (clock) {
+        clock.textContent = time;
+      });
+    }
+    clearInterval(window.homeProfileClock);
+    tick();
+    window.homeProfileClock = setInterval(tick, 30000);
+  })();
 
   // Highlights slideshow. Autoplay is timed by the CSS fill on the active
   // dot (see .intro-lead-dot), which hover, focus and hidden tabs pause.
