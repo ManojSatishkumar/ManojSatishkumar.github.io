@@ -1150,6 +1150,12 @@
     body {
       padding-top: 64px !important;
     }
+
+    /* Pages still carry a .nav-spacer for the mobile header; on desktop the
+       body padding above already clears the bar, so it would double the gap */
+    .nav-spacer {
+      display: none !important;
+    }
   }
 
   /* Tighten spacing where the full-size bar would overflow */
