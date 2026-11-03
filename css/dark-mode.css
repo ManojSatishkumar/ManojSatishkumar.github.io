@@ -1180,46 +1180,39 @@ html[data-theme="dark"] .achievement-description {
 /*  Patent (components/patent.html)
 /*-----------------------------------------------------------------------------------*/
 
-html[data-theme="dark"] .patent-section {
-  background: var(--dm-bg);
+html[data-theme="dark"] .pt {
+  --pt-ink: var(--dm-heading);
+  --pt-text: var(--dm-text);
+  --pt-muted: var(--dm-text-muted);
+  --pt-line: var(--dm-border);
+  --pt-surface: var(--dm-surface);
+  --pt-tone: 45, 212, 191;
+  --pt-tone-2: 165, 180, 252;
+  background:
+    radial-gradient(800px 380px at 100% 0%, rgba(45, 212, 191, 0.07), transparent 60%),
+    radial-gradient(700px 360px at 0% 100%, rgba(129, 140, 248, 0.07), transparent 60%),
+    var(--dm-bg);
 }
 
-html[data-theme="dark"] .patent-card {
-  background: var(--dm-surface);
-  border-color: var(--dm-border);
+html[data-theme="dark"] .pt-card,
+html[data-theme="dark"] .pt-block {
   box-shadow: var(--dm-shadow);
 }
 
-html[data-theme="dark"] .patent-title {
-  color: var(--dm-accent);
+html[data-theme="dark"] .pt-title {
+  background-image: linear-gradient(120deg, #5eead4 0%, #2dd4bf 35%, #a5b4fc 100%);
 }
 
-html[data-theme="dark"] .patent-badge {
-  background: var(--dm-surface-2);
-  border-color: var(--dm-border);
-  color: var(--dm-text);
+html[data-theme="dark"] .pt-compare__row--before {
+  --row: 251, 113, 133;
 }
 
-html[data-theme="dark"] .patent-company,
-html[data-theme="dark"] .patent-company i,
-html[data-theme="dark"] .highlight-content p {
-  color: var(--dm-text-muted);
+html[data-theme="dark"] .pt-compare__row--after {
+  --row: 45, 212, 191;
 }
 
-html[data-theme="dark"] .patent-description {
-  color: var(--dm-text);
-}
-
-html[data-theme="dark"] .highlight-icon {
-  background: rgba(96, 165, 250, 0.12);
-}
-
-html[data-theme="dark"] .highlight-icon i {
-  color: var(--dm-accent-strong);
-}
-
-html[data-theme="dark"] .highlight-content h4 {
-  color: var(--dm-heading);
+html[data-theme="dark"] .pt-diagram {
+  box-shadow: inset 0 0 0 1px rgba(153, 246, 228, 0.12);
 }
 
 /*-----------------------------------------------------------------------------------*/

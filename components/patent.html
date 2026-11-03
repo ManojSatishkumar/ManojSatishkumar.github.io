@@ -1,239 +1,865 @@
-<div class="patent-section">
-  <br />
-  <br />
+<section class="pt" aria-labelledby="pt-heading">
   <div class="container">
-    <div class="text-center">
-      <div class="container text-center">
-        <div
-          style="
-            font-size: 50px;
-            font-weight: bold;
-            background: #121fcf;
-            background: -webkit-linear-gradient(
-              to right,
-              #121fcf 0%,
-              #cf1512 100%
-            );
-            background: -moz-linear-gradient(
-              to right,
-              #121fcf 0%,
-              #cf1512 100%
-            );
-            background: linear-gradient(to right, #121fcf 0%, #cf1512 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          "
-        >
-          Patent
-        </div>
-        <p style="max-width: 800px; margin: 20px auto 30px; font-size: 16px; line-height: 1.8; color: #555; text-align: center;">
-          A published invention at the intersection of healthcare and technology, reimagining how patients interact with their medical data through cloud-based solutions.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="patent-card">
-      <div class="patent-header-row">
-        <div class="patent-title-group">
-          <h2 class="patent-title">UMR Cloud Network</h2>
-          <div class="patent-company">
-            <i class="fa-solid fa-building"></i>
-            Cerner Healthcare Solutions
-          </div>
-        </div>
-        <div class="patent-badge">
-          #16/235,857
-        </div>
-      </div>
-
-      <p class="patent-description">
-        Unified Medical Record (UMR) cloud network is a revolutionary platform that transforms how patients access and manage their complete medical history. By leveraging FHIR standards, this innovation creates a unified healthcare ecosystem where patients own their data and can seamlessly connect with specialized healthcare applications eliminating the burden of maintaining scattered medical records across providers and a lifetime.
+    <header class="pt-header text-center">
+      <h2
+        id="pt-heading"
+        class="pt-heading"
+        style="
+          background: linear-gradient(to right, #121fcf 0%, #cf1512 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        "
+      >
+        Patent
+      </h2>
+      <p class="pt-intro">
+        A published invention at the intersection of healthcare and technology,
+        reimagining how patients interact with their medical data through
+        cloud-based solutions.
       </p>
+    </header>
 
-      <div class="patent-highlights">
-        <div class="highlight-item">
-          <div class="highlight-icon">
-            <i class="fa-solid fa-globe"></i>
-          </div>
-          <div class="highlight-content">
-            <h4>Patient Web Portal</h4>
-            <p>Personalized portal with healthcare apps containing business logic for individual solutions.</p>
-          </div>
-        </div>
+    <article class="pt-card">
+      <div class="pt-story">
+        <span class="pt-eyebrow">
+          <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
+          Published patent application
+        </span>
+        <h3 class="pt-title">UMR Cloud Network</h3>
+        <p class="pt-subtitle">Unified Medical Record &middot; Health tech</p>
 
-        <div class="highlight-item">
-          <div class="highlight-icon">
-            <i class="fa-solid fa-file-medical"></i>
-          </div>
-          <div class="highlight-content">
-            <h4>Unified Records</h4>
-            <p>Eliminates the need to maintain medical documentation, clinical reports, and medication history over a lifetime.</p>
-          </div>
-        </div>
+        <p class="pt-desc">
+          A cloud platform that gives every patient
+          <strong>one medical record they own for a lifetime</strong>. Built on
+          <strong>FHIR standards</strong>, it lets specialised healthcare apps
+          plug straight into that record, so nobody has to carry reports,
+          clinical notes and medication history from provider to provider.
+        </p>
 
-        <div class="highlight-item">
-          <div class="highlight-icon">
-            <i class="fa-solid fa-code"></i>
-          </div>
-          <div class="highlight-content">
-            <h4>FHIR RESTful APIs</h4>
-            <p>Standardized healthcare APIs enable the cloud network and hosted apps to process and deliver targeted solutions.</p>
-          </div>
-        </div>
+        <ul class="pt-compare">
+          <li class="pt-compare__row pt-compare__row--before">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            <span><strong>Today</strong>Records scattered across every provider you visit</span>
+          </li>
+          <li class="pt-compare__row pt-compare__row--after">
+            <i class="fa-solid fa-check" aria-hidden="true"></i>
+            <span><strong>With UMR</strong>One lifelong record, owned by the patient</span>
+          </li>
+        </ul>
 
-        <div class="highlight-item">
-          <div class="highlight-icon">
-            <i class="fa-solid fa-store"></i>
+        <dl class="pt-facts">
+          <div>
+            <dt>Application no.</dt>
+            <dd class="pt-facts__mono">#16/235,857</dd>
           </div>
-          <div class="highlight-content">
-            <h4>Healthcare App Store</h4>
-            <p>App store approach specifically for FHIR, enabling third-party healthcare applications and integrations.</p>
+          <div>
+            <dt>Invented at</dt>
+            <dd>
+              <img src="/images/cerner-logo.png" alt="" loading="lazy" />
+              Cerner
+            </dd>
           </div>
-        </div>
+          <div>
+            <dt>Standard</dt>
+            <dd>HL7 FHIR</dd>
+          </div>
+        </dl>
       </div>
+
+      <figure class="pt-diagram" aria-label="How the UMR Cloud Network connects its four building blocks">
+        <span class="pt-diagram__fig">FIG. 1</span>
+        <span class="pt-diagram__ref">Appl. No. 16/235,857</span>
+
+        <svg class="pt-diagram__wires" viewBox="0 0 230 200" aria-hidden="true">
+          <circle class="pt-orbit" cx="115" cy="100" r="58" />
+          <line class="pt-wire pt-wire--portal" x1="115" y1="100" x2="42" y2="44" />
+          <line class="pt-wire pt-wire--records" x1="115" y1="100" x2="188" y2="44" />
+          <line class="pt-wire pt-wire--api" x1="115" y1="100" x2="188" y2="156" />
+          <line class="pt-wire pt-wire--store" x1="115" y1="100" x2="42" y2="156" />
+        </svg>
+
+        <div class="pt-hub">
+          <i class="fa-solid fa-cloud" aria-hidden="true"></i>
+          <strong>UMR Cloud</strong>
+          <span>Patient-owned</span>
+        </div>
+
+        <div class="pt-node pt-node--portal" data-node="portal">
+          <i class="fa-solid fa-globe" aria-hidden="true"></i>
+          <span>Patient portal</span>
+        </div>
+        <div class="pt-node pt-node--records" data-node="records">
+          <i class="fa-solid fa-file-medical" aria-hidden="true"></i>
+          <span>Unified records</span>
+        </div>
+        <div class="pt-node pt-node--api" data-node="api">
+          <i class="fa-solid fa-code" aria-hidden="true"></i>
+          <span>FHIR APIs</span>
+        </div>
+        <div class="pt-node pt-node--store" data-node="store">
+          <i class="fa-solid fa-store" aria-hidden="true"></i>
+          <span>App store</span>
+        </div>
+      </figure>
+    </article>
+
+    <div class="pt-blocks-label">
+      <span>Four building blocks</span>
     </div>
+    <ol class="pt-blocks">
+      <li class="pt-block" data-node="portal" tabindex="0">
+        <span class="pt-block__num">01</span>
+        <span class="pt-block__icon"><i class="fa-solid fa-globe" aria-hidden="true"></i></span>
+        <h4>Patient web portal</h4>
+        <p>A personalised portal hosting healthcare apps, each carrying the business logic for its own solution.</p>
+      </li>
+      <li class="pt-block" data-node="records" tabindex="0">
+        <span class="pt-block__num">02</span>
+        <span class="pt-block__icon"><i class="fa-solid fa-file-medical" aria-hidden="true"></i></span>
+        <h4>Unified records</h4>
+        <p>No more keeping medical documents, clinical reports and medication history yourself over a lifetime.</p>
+      </li>
+      <li class="pt-block" data-node="api" tabindex="0">
+        <span class="pt-block__num">03</span>
+        <span class="pt-block__icon"><i class="fa-solid fa-code" aria-hidden="true"></i></span>
+        <h4>FHIR RESTful APIs</h4>
+        <p>Standard healthcare APIs let the network and its hosted apps process data and deliver targeted solutions.</p>
+      </li>
+      <li class="pt-block" data-node="store" tabindex="0">
+        <span class="pt-block__num">04</span>
+        <span class="pt-block__icon"><i class="fa-solid fa-store" aria-hidden="true"></i></span>
+        <h4>Healthcare app store</h4>
+        <p>An app store built for FHIR, opening the record to third-party healthcare apps and integrations.</p>
+      </li>
+    </ol>
   </div>
-</div>
+</section>
 
 <style>
-  .patent-section {
-    padding: 20px 0 60px 0;
-    background: #ffffff;
-  }
-
-  .patent-card {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    max-width: 1400px;
-    margin: 0 auto;
+  .pt {
+    --pt-ink: #0f172a;
+    --pt-text: #475569;
+    --pt-muted: #64748b;
+    --pt-line: rgba(15, 23, 42, 0.08);
+    --pt-surface: rgba(255, 255, 255, 0.94);
+    --pt-tone: 13, 148, 136;
+    --pt-tone-2: 79, 70, 229;
     position: relative;
+    padding: 80px 0 96px;
+    overflow: hidden;
+    background:
+      radial-gradient(800px 380px at 100% 0%, rgba(20, 184, 166, 0.08), transparent 60%),
+      radial-gradient(700px 360px at 0% 100%, rgba(99, 102, 241, 0.07), transparent 60%),
+      #ffffff;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
-
-  .patent-header-row {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .patent-title-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .patent-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: #036ad9;
+  .pt-heading {
+    display: inline-block;
     margin: 0;
-    line-height: 1.3;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.2;
   }
 
-  .patent-badge {
-    display: inline-flex;
-    align-items: center;
-    background: #f5f5f5;
-    color: #666;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    height: fit-content;
-    border: 1px solid #e0e0e0;
-  }
-
-  .patent-company {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: #666;
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  .patent-company i {
-    font-size: 14px;
-    color: #888;
-  }
-
-  .patent-description {
+  .pt-intro {
+    max-width: 800px;
+    margin: 16px auto 40px;
     font-size: 16px;
     line-height: 1.8;
-    color: #555;
-    margin-bottom: 32px;
+    color: var(--pt-text);
   }
 
-  .patent-highlights {
+  /* ---------- Main dossier card ---------- */
+
+  .pt-card {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
+    padding: 36px;
+    border-radius: 24px;
+    background: var(--pt-surface);
+    border: 1px solid var(--pt-line);
+    box-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.04),
+      0 24px 48px -32px rgba(15, 23, 42, 0.3);
   }
 
-  .highlight-item {
+  .pt-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(var(--pt-tone), 0.08);
+    border: 1px solid rgba(var(--pt-tone), 0.2);
+    color: rgb(var(--pt-tone));
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .pt-title {
+    margin: 16px 0 0;
+    font-size: 2.6rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    background: linear-gradient(120deg, #0f766e 0%, #0d9488 35%, #4f46e5 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .pt-subtitle {
+    margin: 8px 0 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pt-muted);
+  }
+
+  .pt-desc {
+    margin: 18px 0 0;
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: var(--pt-text);
+  }
+
+  .pt-desc strong {
+    color: var(--pt-ink);
+    font-weight: 700;
+  }
+
+  .pt-compare {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pt-compare__row {
+    --row: 100, 116, 139;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(var(--row), 0.06);
+    border: 1px solid rgba(var(--row), 0.16);
   }
 
-  .highlight-icon {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
-    border-radius: 12px;
+  .pt-compare__row--before {
+    --row: 225, 29, 72;
+  }
+
+  .pt-compare__row--after {
+    --row: 13, 148, 136;
+  }
+
+  .pt-compare__row > i {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    margin-top: 1px;
+    border-radius: 50%;
+    background: rgba(var(--row), 0.14);
+    color: rgb(var(--row));
+    font-size: 0.72rem;
+  }
+
+  .pt-compare__row span {
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--pt-text);
+  }
+
+  .pt-compare__row strong {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--row));
+  }
+
+  .pt-facts {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    gap: 0;
+    margin: 24px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--pt-line);
+  }
+
+  .pt-facts > div {
+    padding: 0 22px;
+    border-left: 1px solid var(--pt-line);
+  }
+
+  .pt-facts > div:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .pt-facts dt {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pt-muted);
+  }
+
+  .pt-facts dd {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 6px;
+    margin: 4px 0 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--pt-ink);
+    white-space: nowrap;
   }
 
-  .highlight-icon i {
-    font-size: 20px;
-    color: #121fcf;
+  .pt-facts dd img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
   }
 
-  .highlight-content h4 {
-    font-size: 16px;
-    font-weight: 600;
-    color: #1a1a2e;
-    margin: 0 0 6px 0;
+  .pt-facts__mono {
+    font-family: "SF Mono", "Fira Code", ui-monospace, monospace;
+    letter-spacing: -0.01em;
   }
 
-  .highlight-content p {
-    font-size: 14px;
-    color: #666;
+  /* ---------- Blueprint figure ---------- */
+
+  .pt-diagram {
+    position: relative;
     margin: 0;
-    line-height: 1.6;
+    aspect-ratio: 23 / 20;
+    border-radius: 20px;
+    overflow: hidden;
+    color: #e6fffb;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(45, 212, 191, 0.28), transparent 55%),
+      linear-gradient(135deg, #0b3440 0%, #0c4a55 50%, #1e2a6e 100%);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
   }
 
-  @media (max-width: 768px) {
-    .patent-card {
-      padding: 24px;
+  /* Drafting grid */
+  .pt-diagram::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 40%, transparent 85%);
+    mask-image: radial-gradient(circle at 50% 50%, #000 40%, transparent 85%);
+  }
+
+  .pt-diagram__fig,
+  .pt-diagram__ref {
+    position: absolute;
+    z-index: 1;
+    font-family: "SF Mono", "Fira Code", ui-monospace, monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: rgba(230, 255, 251, 0.55);
+  }
+
+  .pt-diagram__fig {
+    top: 14px;
+    left: 16px;
+  }
+
+  .pt-diagram__ref {
+    right: 16px;
+    bottom: 12px;
+    letter-spacing: 0.04em;
+  }
+
+  .pt-diagram__wires {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pt-orbit {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.18);
+    stroke-width: 0.6;
+    stroke-dasharray: 2 3;
+    transform-origin: 115px 100px;
+    animation: ptSpin 40s linear infinite;
+  }
+
+  .pt-wire {
+    stroke: rgba(153, 246, 228, 0.55);
+    stroke-width: 0.9;
+    stroke-linecap: round;
+    stroke-dasharray: 2.5 3.5;
+    animation: ptFlow 1.6s linear infinite;
+    transition:
+      stroke 0.25s ease,
+      stroke-width 0.25s ease;
+  }
+
+  @keyframes ptFlow {
+    to {
+      stroke-dashoffset: -12;
+    }
+  }
+
+  @keyframes ptSpin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .pt-hub {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 34%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: radial-gradient(circle at 30% 25%, #2dd4bf 0%, #0d9488 45%, #3730a3 100%);
+    box-shadow:
+      0 0 0 6px rgba(45, 212, 191, 0.14),
+      0 0 0 14px rgba(45, 212, 191, 0.06),
+      0 18px 40px -10px rgba(13, 148, 136, 0.8);
+  }
+
+  .pt-hub i {
+    font-size: 1.5rem;
+    color: #fff;
+  }
+
+  .pt-hub strong {
+    margin-top: 4px;
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .pt-hub span {
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(230, 255, 251, 0.8);
+  }
+
+  .pt-node {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 104px;
+    transform: translate(-50%, -24px);
+    text-align: center;
+    transition: transform 0.25s ease;
+  }
+
+  .pt-node i {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.55);
+    border: 1px solid rgba(153, 246, 228, 0.35);
+    color: #5eead4;
+    font-size: 1.05rem;
+    backdrop-filter: blur(6px);
+    transition:
+      background 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .pt-node span {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #e6fffb;
+    line-height: 1.25;
+  }
+
+  /* Node centres match the wire endpoints in the 230 x 200 viewBox */
+  .pt-node--portal {
+    left: 18.26%;
+    top: 22%;
+  }
+
+  .pt-node--records {
+    left: 81.74%;
+    top: 22%;
+  }
+
+  .pt-node--api {
+    left: 81.74%;
+    top: 78%;
+  }
+
+  .pt-node--store {
+    left: 18.26%;
+    top: 78%;
+  }
+
+  .pt-node.is-active {
+    transform: translate(-50%, -24px) scale(1.08);
+  }
+
+  .pt-node.is-active i {
+    background: #2dd4bf;
+    border-color: #99f6e4;
+    color: #042f2e;
+    box-shadow: 0 0 0 6px rgba(45, 212, 191, 0.2), 0 10px 24px -6px rgba(45, 212, 191, 0.8);
+  }
+
+  .pt-wire.is-active {
+    stroke: #99f6e4;
+    stroke-width: 1.6;
+  }
+
+  /* ---------- Building blocks ---------- */
+
+  .pt-blocks-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 44px 0 16px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pt-muted);
+  }
+
+  .pt-blocks-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--pt-line);
+  }
+
+  .pt-blocks {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pt-block {
+    position: relative;
+    overflow: hidden;
+    padding: 22px 22px 24px;
+    border-radius: 18px;
+    background: var(--pt-surface);
+    border: 1px solid var(--pt-line);
+    box-shadow: 0 18px 36px -30px rgba(15, 23, 42, 0.3);
+    cursor: default;
+    outline: none;
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .pt-block::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: linear-gradient(90deg, rgb(var(--pt-tone)), rgb(var(--pt-tone-2)));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+
+  .pt-block:hover,
+  .pt-block:focus-visible,
+  .pt-block.is-active {
+    transform: translateY(-4px);
+    border-color: rgba(var(--pt-tone), 0.3);
+    box-shadow: 0 24px 44px -28px rgba(var(--pt-tone), 0.6);
+  }
+
+  .pt-block:hover::before,
+  .pt-block:focus-visible::before,
+  .pt-block.is-active::before {
+    transform: scaleX(1);
+  }
+
+  .pt-block__num {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: rgba(var(--pt-tone), 0.12);
+  }
+
+  .pt-block__icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, rgba(var(--pt-tone), 0.14), rgba(var(--pt-tone-2), 0.14));
+    color: rgb(var(--pt-tone));
+    font-size: 1.05rem;
+  }
+
+  .pt-block h4 {
+    margin: 16px 0 6px;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--pt-ink);
+  }
+
+  .pt-block p {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--pt-text);
+  }
+
+  /* ---------- Reveal ---------- */
+
+  .pt-card,
+  .pt-block {
+    transition-property: opacity, transform, border-color, box-shadow;
+  }
+
+  .pt.pt-js .pt-card:not(.is-visible),
+  .pt.pt-js .pt-blocks:not(.is-visible) .pt-block {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  .pt.pt-js .pt-card {
+    transition-duration: 0.7s;
+    transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .pt.pt-js .pt-blocks.is-visible .pt-block {
+    transition-duration: 0.6s, 0.6s, 0.25s, 0.25s;
+  }
+
+  .pt.pt-js .pt-blocks.is-visible .pt-block:nth-child(2) {
+    transition-delay: 0.08s, 0.08s, 0s, 0s;
+  }
+
+  .pt.pt-js .pt-blocks.is-visible .pt-block:nth-child(3) {
+    transition-delay: 0.16s, 0.16s, 0s, 0s;
+  }
+
+  .pt.pt-js .pt-blocks.is-visible .pt-block:nth-child(4) {
+    transition-delay: 0.24s, 0.24s, 0s, 0s;
+  }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width: 1199.98px) {
+    .pt-facts {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .patent-title {
-      font-size: 22px;
+    .pt-facts > div {
+      padding: 0 14px;
+    }
+  }
+
+  @media (max-width: 991.98px) {
+    .pt-card {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
     }
 
-    .patent-highlights {
-      grid-template-columns: 1fr;
-      gap: 20px;
+    .pt-diagram {
+      width: 100%;
+      max-width: 520px;
+      justify-self: center;
     }
 
-    .highlight-item {
-      flex-direction: row;
-      align-items: flex-start;
+    .pt-blocks {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .pt {
+      padding: 56px 0 64px;
     }
 
-    .highlight-icon {
-      flex-shrink: 0;
+    .pt-heading {
+      font-size: 40px;
+    }
+
+    .pt-card {
+      padding: 22px 20px;
+      border-radius: 20px;
+    }
+
+    .pt-title {
+      font-size: 2rem;
+    }
+
+    .pt-compare {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .pt-facts {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 14px;
+    }
+
+    .pt-facts > div:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .pt-facts > div:nth-child(2) {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .pt-diagram__ref {
+      display: none;
+    }
+
+    .pt-blocks {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pt-node {
+      width: 84px;
+      transform: translate(-50%, -20px);
+    }
+
+    .pt-node.is-active {
+      transform: translate(-50%, -20px) scale(1.08);
+    }
+
+    .pt-node i {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+    }
+
+    .pt-node span {
+      font-size: 0.7rem;
+    }
+
+    .pt-hub i {
+      font-size: 1.15rem;
+    }
+
+    .pt-hub strong {
+      font-size: 0.78rem;
+    }
+
+    .pt-hub span {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pt-orbit,
+    .pt-wire {
+      animation: none;
+    }
+
+    .pt-block,
+    .pt-block::before,
+    .pt-node,
+    .pt-node i {
+      transition: none;
     }
   }
 </style>
+
+<script>
+  (function () {
+    var root = document.querySelector(".pt");
+    if (!root) return;
+
+    // Hovering a building block lights up its node and wire in the figure.
+    var diagram = root.querySelector(".pt-diagram");
+    function activate(key) {
+      root.querySelectorAll(".pt-node, .pt-wire, .pt-block").forEach(function (el) {
+        var match =
+          key &&
+          (el.getAttribute("data-node") === key || el.classList.contains("pt-wire--" + key));
+        el.classList.toggle("is-active", !!match);
+      });
+    }
+
+    root.querySelectorAll(".pt-block, .pt-node").forEach(function (el) {
+      var key = el.getAttribute("data-node");
+      el.addEventListener("mouseenter", function () {
+        activate(key);
+      });
+      el.addEventListener("focus", function () {
+        activate(key);
+      });
+      el.addEventListener("mouseleave", function () {
+        activate(null);
+      });
+      el.addEventListener("blur", function () {
+        activate(null);
+      });
+    });
+
+    if (!diagram) return;
+
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion || !("IntersectionObserver" in window)) return;
+
+    root.classList.add("pt-js");
+    var revealer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    );
+    revealer.observe(root.querySelector(".pt-card"));
+    revealer.observe(root.querySelector(".pt-blocks"));
+  })();
+</script>
