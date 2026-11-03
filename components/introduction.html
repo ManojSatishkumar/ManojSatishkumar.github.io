@@ -17,24 +17,7 @@
     position: relative;
     padding-left: 30px;
     padding-right: 30px;
-    padding-top: 14px;
-  }
-
-  .intro-header {
-    margin-bottom: 20px;
-  }
-
-  .intro-title {
-    margin: 0;
-    font-family: "Poppins", sans-serif;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f64f59 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-size: clamp(1.85rem, 3vw, 2.55rem);
-    font-weight: 700;
-    line-height: 1.08;
-    display: inline-block;
+    padding-top: 0;
   }
 
   .intro-lead-card,
@@ -247,15 +230,25 @@
     );
   }
 
+  /* The tile is a wrapper rather than the img itself, so dark mode can filter
+     a logo without also filtering the tile's background */
   .intro-journey__logo {
+    display: block;
+    box-sizing: border-box;
     width: 32px;
     height: 32px;
     padding: 4px;
     border-radius: 10px;
-    object-fit: contain;
     background: #ffffff;
     border: 1px solid rgba(214, 223, 246, 0.95);
     box-shadow: 0 6px 14px rgba(95, 112, 163, 0.1);
+  }
+
+  .intro-journey__logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .intro-journey__item--current .intro-journey__logo {
@@ -465,6 +458,110 @@
     letter-spacing: 0.04em;
   }
 
+  /* Rotating testimonial card */
+  .intro-testimonial {
+    justify-content: flex-start;
+  }
+
+  .intro-testimonial__count {
+    position: absolute;
+    top: 42px;
+    right: 24px;
+    color: #94a3b8;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .intro-testimonial__slide {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
+  }
+
+  .intro-testimonial__slide.is-leaving {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro-testimonial__slide {
+      transition: none;
+    }
+  }
+
+  /* Long messages are cut at five lines with an ellipsis */
+  .intro-testimonial__text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  .intro-testimonial__author > div {
+    min-width: 0;
+  }
+
+  /* Person on top (clear of the counter in the corner), message centered in
+     the space between them and the link */
+  .intro-testimonial__author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-right: 48px;
+  }
+
+  /* Reserves five lines of the message text (1rem at 1.7 line height) so the
+     card keeps its height when it stands alone on phones; short messages sit
+     centered inside that space */
+  .intro-testimonial__message {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    min-height: 8.5rem;
+    margin: 14px 0;
+  }
+
+  .intro-testimonial__avatar {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffffff;
+    box-shadow: 0 6px 14px rgba(95, 112, 163, 0.16);
+  }
+
+  .intro-testimonial__name {
+    color: #111827;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .intro-testimonial__title,
+  .intro-testimonial__company {
+    color: #64748b;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .intro-testimonial__link,
+  .intro-testimonial__link:hover,
+  .intro-testimonial__link:focus {
+    align-self: flex-start;
+    color: #4a5bc7;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
   /* Two columns get cramped once the panel drops below its desktop width */
   @media (max-width: 991px) {
     .intro-duo {
@@ -608,11 +705,6 @@
       <div
         class="col-md-8 wow animate__animated animate__fadeInRight intro-panel"
       >
-        <!-- Section Header -->
-        <div class="intro-header">
-          <h2 class="intro-title">Let me introduce myself...</h2>
-        </div>
-
         <!-- Hero Statement -->
         <div class="intro-lead-card">
           <p class="intro-lead-text">
@@ -700,11 +792,7 @@
             <div class="intro-card-label">Career journey</div>
             <ol class="intro-journey">
               <li class="intro-journey__item intro-journey__item--current">
-                <img
-                  class="intro-journey__logo"
-                  src="/images/disney/mickey.png"
-                  alt=""
-                />
+                <span class="intro-journey__logo"><img src="/images/disney/mickey.png" alt="" /></span>
                 <div>
                   <div class="intro-journey__company">
                     Walt Disney
@@ -715,11 +803,7 @@
                 <span class="intro-journey__years">Since 2026</span>
               </li>
               <li class="intro-journey__item">
-                <img
-                  class="intro-journey__logo"
-                  src="/images/walmart-logo.png"
-                  alt=""
-                />
+                <span class="intro-journey__logo"><img src="/images/walmart-logo.png" alt="" /></span>
                 <div>
                   <div class="intro-journey__company">Walmart</div>
                   <div class="intro-journey__role">Staff Software Engineer</div>
@@ -727,11 +811,7 @@
                 <span class="intro-journey__years">2022 &ndash; 2026</span>
               </li>
               <li class="intro-journey__item">
-                <img
-                  class="intro-journey__logo"
-                  src="/images/paypal-icon.png"
-                  alt=""
-                />
+                <span class="intro-journey__logo"><img src="/images/paypal-icon.png" alt="" /></span>
                 <div>
                   <div class="intro-journey__company">PayPal</div>
                   <div class="intro-journey__role">
@@ -741,11 +821,7 @@
                 <span class="intro-journey__years">2021 &ndash; 2022</span>
               </li>
               <li class="intro-journey__item">
-                <img
-                  class="intro-journey__logo"
-                  src="/images/walmart-logo.png"
-                  alt=""
-                />
+                <span class="intro-journey__logo"><img src="/images/walmart-logo.png" alt="" /></span>
                 <div>
                   <div class="intro-journey__company">Walmart</div>
                   <div class="intro-journey__role">
@@ -755,11 +831,7 @@
                 <span class="intro-journey__years">2019 &ndash; 2021</span>
               </li>
               <li class="intro-journey__item">
-                <img
-                  class="intro-journey__logo"
-                  src="/images/cerner-logo.png"
-                  alt=""
-                />
+                <span class="intro-journey__logo"><img src="/images/cerner-logo.png" alt="" /></span>
                 <div>
                   <div class="intro-journey__company">Cerner</div>
                   <div class="intro-journey__role">Technical Team Lead</div>
@@ -767,11 +839,7 @@
                 <span class="intro-journey__years">2015 &ndash; 2019</span>
               </li>
               <li class="intro-journey__item">
-                <img
-                  class="intro-journey__logo"
-                  src="/images/grl-logo.png"
-                  alt=""
-                />
+                <span class="intro-journey__logo"><img src="/images/grl-logo.png" alt="" /></span>
                 <div>
                   <div class="intro-journey__company">GRL Labs</div>
                   <div class="intro-journey__role">Software Engineer</div>
@@ -808,19 +876,29 @@
               </ul>
             </div>
 
-            <!-- Philosophy -->
-            <div class="intro-quote-card">
-              <div class="intro-quote-mark" aria-hidden="true">&ldquo;</div>
-              <p class="intro-quote-text">
-                <em
-                  >I believe in building platforms that
-                  <strong>multiply impact</strong>, scaling systems that
-                  <strong>serve millions</strong>, and leading with
-                  <strong>empathy, clarity, and high engineering standards</strong
-                  >.</em
-                >
-              </p>
-              <div class="intro-quote-author">&mdash; Manoj Satishkumar</div>
+            <!-- Rotating testimonials, read from components/testimony.html by
+                 the script below. The philosophy quote is the fallback shown
+                 until they load, or if they can't be loaded. -->
+            <div
+              class="intro-quote-card intro-testimonial"
+              id="intro-testimonial"
+              role="region"
+              aria-label="Testimonials"
+            >
+              <div class="intro-testimonial__count" aria-hidden="true"></div>
+              <div class="intro-testimonial__slide">
+                <p class="intro-quote-text">
+                  <em
+                    >I believe in building platforms that
+                    <strong>multiply impact</strong>, scaling systems that
+                    <strong>serve millions</strong>, and leading with
+                    <strong
+                      >empathy, clarity, and high engineering standards</strong
+                    >.</em
+                  >
+                </p>
+                <div class="intro-quote-author">&mdash; Manoj Satishkumar</div>
+              </div>
             </div>
           </div>
         </div>
@@ -1757,6 +1835,139 @@
       }
     });
   });
+
+  // Rotating testimonial card. Testimonials are read from the Testimony
+  // section's own markup so there is a single list to maintain.
+  (function () {
+    const ROTATE_MS = 7000;
+    const FADE_MS = 350;
+
+    const card = document.getElementById("intro-testimonial");
+    if (!card) return;
+    const slide = card.querySelector(".intro-testimonial__slide");
+    const count = card.querySelector(".intro-testimonial__count");
+
+    // The intro can be loaded more than once; keep a single timer
+    clearInterval(window.introTestimonialTimer);
+
+    function textOf(root, selector) {
+      const el = root.querySelector(selector);
+      return el ? el.textContent.replace(/\s+/g, " ").trim() : "";
+    }
+
+    function el(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text) node.textContent = text;
+      return node;
+    }
+
+    function buildSlide(t) {
+      const fragment = document.createDocumentFragment();
+
+      const author = el("div", "intro-testimonial__author");
+      if (t.photo) {
+        const avatar = el("img", "intro-testimonial__avatar");
+        avatar.src = t.photo;
+        avatar.alt = "";
+        avatar.width = 44;
+        avatar.height = 44;
+        author.appendChild(avatar);
+      }
+      const who = el("div");
+      who.appendChild(el("div", "intro-testimonial__name", t.name));
+      if (t.role) {
+        who.appendChild(el("div", "intro-testimonial__title", t.role));
+      }
+      if (t.company) {
+        who.appendChild(el("div", "intro-testimonial__company", t.company));
+      }
+      author.appendChild(who);
+      fragment.appendChild(author);
+
+      const message = el("div", "intro-testimonial__message");
+      message.appendChild(
+        el("p", "intro-quote-text intro-testimonial__text", t.message),
+      );
+      fragment.appendChild(message);
+
+      const link = el(
+        "a",
+        "intro-testimonial__link",
+        "Read full testimonial \u2192",
+      );
+      link.href = "#msk-testimony";
+      link.addEventListener("click", function (event) {
+        if (typeof animateScroll === "function") {
+          event.preventDefault();
+          animateScroll("msk-testimony");
+        }
+      });
+      fragment.appendChild(link);
+
+      return fragment;
+    }
+
+    function start(items) {
+      let index = Math.floor(Math.random() * items.length);
+      let paused = false;
+
+      function show(i, animate) {
+        const t = items[i];
+        const swap = function () {
+          slide.replaceChildren(buildSlide(t));
+          count.textContent = i + 1 + " / " + items.length;
+          slide.classList.remove("is-leaving");
+          // Warm the next photo so it is ready when its turn comes
+          const next = items[(i + 1) % items.length];
+          if (next.photo) new Image().src = next.photo;
+        };
+        if (!animate) return swap();
+        slide.classList.add("is-leaving");
+        setTimeout(swap, FADE_MS);
+      }
+
+      // Hold still while someone is reading or tabbing through the card
+      card.addEventListener("mouseenter", function () {
+        paused = true;
+      });
+      card.addEventListener("mouseleave", function () {
+        paused = false;
+      });
+      card.addEventListener("focusin", function () {
+        paused = true;
+      });
+      card.addEventListener("focusout", function () {
+        paused = false;
+      });
+
+      show(index, false);
+      window.introTestimonialTimer = setInterval(function () {
+        if (paused || document.hidden) return;
+        index = (index + 1) % items.length;
+        show(index, true);
+      }, ROTATE_MS);
+    }
+
+    $.get("/components/testimony.html").done(function (html) {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const items = Array.from(doc.querySelectorAll(".testimony-card"))
+        .map(function (node) {
+          const img = node.querySelector(".profile-image img");
+          return {
+            name: textOf(node, ".profile-info h3"),
+            role: textOf(node, ".profile-info .role"),
+            company: textOf(node, ".profile-info .company"),
+            photo: img ? img.getAttribute("src") : "",
+            message: textOf(node, ".testimony-text"),
+          };
+        })
+        .filter(function (t) {
+          return t.name && t.message;
+        });
+      if (items.length) start(items);
+    });
+  })();
   // Experience Modal functions
   function openExpModal() {
     document.getElementById("exp-modal-overlay").classList.add("show");

@@ -431,10 +431,6 @@ html[data-theme="dark"] .intro-skeleton-shimmer {
 /*  Introduction (components/introduction.html)
 /*-----------------------------------------------------------------------------------*/
 
-html[data-theme="dark"] .intro-title {
-  background-image: linear-gradient(90deg, #8ea2ff 0%, #b98cff 50%, #ff7a85 100%);
-}
-
 html[data-theme="dark"] .intro-lead-card,
 html[data-theme="dark"] .intro-journey-card,
 html[data-theme="dark"] .intro-edu-card,
@@ -508,9 +504,20 @@ html[data-theme="dark"] .intro-journey__now {
   color: #86efac;
 }
 
-/* Logos stay on their white tiles so dark marks remain legible */
 html[data-theme="dark"] .intro-journey__logo {
+  background: var(--dm-surface-2);
   border-color: var(--dm-border);
+  box-shadow: none;
+}
+
+/* The Mickey silhouette and the GRL wordmark are dark marks that vanish on
+   the dark tile: invert them, rotating the hue back so GRL stays blue */
+html[data-theme="dark"] .intro-journey__logo img[src*="mickey"] {
+  filter: invert(1);
+}
+
+html[data-theme="dark"] .intro-journey__logo img[src*="grl"] {
+  filter: invert(1) hue-rotate(180deg);
 }
 
 html[data-theme="dark"] .intro-store-visit-link {
@@ -535,6 +542,27 @@ html[data-theme="dark"] .intro-edu-card .intro-edu__icon {
 
 html[data-theme="dark"] .intro-quote-mark {
   color: rgba(196, 181, 253, 0.35);
+}
+
+html[data-theme="dark"] .intro-testimonial__name {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .intro-testimonial__title,
+html[data-theme="dark"] .intro-testimonial__company,
+html[data-theme="dark"] .intro-testimonial__count {
+  color: var(--dm-text-muted);
+}
+
+html[data-theme="dark"] .intro-testimonial__avatar {
+  border-color: var(--dm-surface-2);
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .intro-testimonial__link,
+html[data-theme="dark"] .intro-testimonial__link:hover,
+html[data-theme="dark"] .intro-testimonial__link:focus {
+  color: var(--dm-violet);
 }
 
 /* Experience and portal modals */
