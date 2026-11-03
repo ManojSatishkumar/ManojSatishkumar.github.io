@@ -1007,26 +1007,60 @@
     text-align: center;
   }
 
+  /* A muted collage of moments from the portfolio: desaturated tiles under
+     a dark wash, so the colour stays with the portrait */
   .home-profile__cover {
     position: relative;
     height: 118px;
-    background:
-      radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.35), transparent 38%),
-      radial-gradient(circle at 85% 80%, rgba(246, 79, 89, 0.55), transparent 45%),
-      linear-gradient(120deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
+    background: #0f172a;
+    overflow: hidden;
   }
 
-  /* Faint blueprint grid over the gradient */
+  /* The collages are stacked; the active one fades in over the last */
+  .home-profile__collage {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+
+  .home-profile__collage.is-active {
+    opacity: 1;
+  }
+
+  .home-profile__collage img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    object-fit: cover;
+    filter: grayscale(0.75) contrast(1.05);
+  }
+
+  /* A slow push-in while each collage is on show */
+  @media (prefers-reduced-motion: no-preference) {
+    .home-profile__collage img {
+      transform: scale(1.08);
+      transition: transform 6s ease-out;
+    }
+
+    .home-profile__collage.is-active img {
+      transform: scale(1);
+    }
+  }
+
   .home-profile__cover::after {
     content: "";
     position: absolute;
     inset: 0;
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
-    background-size: 22px 22px;
-    -webkit-mask-image: linear-gradient(180deg, #000 20%, transparent 100%);
-    mask-image: linear-gradient(180deg, #000 20%, transparent 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(15, 23, 42, 0.3) 0%,
+      rgba(15, 23, 42, 0.68) 100%
+    );
   }
 
   /* The cutout rises out of a gradient ring: the wrapper is taller than the
@@ -1365,7 +1399,34 @@
           class="home-profile wow animate__animated animate__fadeInLeft"
           aria-label="About Manoj Satishkumar"
         >
-          <div class="home-profile__cover" aria-hidden="true"></div>
+          <!-- Collages of portfolio moments; the script below crossfades them -->
+          <div class="home-profile__cover" aria-hidden="true">
+            <div class="home-profile__collage is-active">
+              <img src="/images/profile-cover/keynote.webp" alt="" />
+              <img src="/images/profile-cover/disney-team.webp" alt="" />
+              <img src="/images/profile-cover/walmart-badge.webp" alt="" />
+            </div>
+            <div class="home-profile__collage">
+              <img src="/images/profile-cover/stage-mic.webp" alt="" />
+              <img src="/images/profile-cover/stage-crowd.webp" alt="" />
+              <img src="/images/profile-cover/stage-devcon.webp" alt="" />
+            </div>
+            <div class="home-profile__collage">
+              <img src="/images/profile-cover/team-disney.webp" alt="" />
+              <img src="/images/profile-cover/team-walmart.webp" alt="" />
+              <img src="/images/profile-cover/team-us-visit.webp" alt="" />
+            </div>
+            <div class="home-profile__collage">
+              <img src="/images/profile-cover/cerner-selfie.webp" alt="" />
+              <img src="/images/profile-cover/cerner-campus.webp" alt="" />
+              <img src="/images/profile-cover/cerner-laptop.webp" alt="" />
+            </div>
+            <div class="home-profile__collage">
+              <img src="/images/profile-cover/ps-students.webp" alt="" />
+              <img src="/images/profile-cover/ps-winners.webp" alt="" />
+              <img src="/images/profile-cover/ps-standee.webp" alt="" />
+            </div>
+          </div>
 
           <div class="home-profile__avatar">
             <img
@@ -3087,6 +3148,20 @@
       }
     });
   });
+
+  // Profile cover: crossfade to the next collage every 5 seconds
+  (function () {
+    const collages = document.querySelectorAll(".home-profile__collage");
+    clearInterval(window.homeCoverTimer);
+    if (collages.length < 2) return;
+    let current = 0;
+    window.homeCoverTimer = setInterval(function () {
+      if (document.hidden) return;
+      collages[current].classList.remove("is-active");
+      current = (current + 1) % collages.length;
+      collages[current].classList.add("is-active");
+    }, 5000);
+  })();
 
   // Bengaluru local time on the profile card
   (function () {
