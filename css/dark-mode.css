@@ -788,17 +788,18 @@ html[data-theme="dark"] .profile-inline-link {
   color: var(--dm-text) !important;
 }
 
-html[data-theme="dark"] .profile-detail-link,
-html[data-theme="dark"] .profile-detail-button:hover .profile-detail-link,
-html[data-theme="dark"] .profile-inline-link:hover .profile-detail-link {
+/* Light text on a dark surface looks heavy with subpixel smoothing */
+html[data-theme="dark"] .profile-detail-link {
   color: var(--dm-violet);
-  border-bottom-color: var(--dm-violet);
+  text-decoration-color: rgba(165, 180, 252, 0.6);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html[data-theme="dark"] .profile-detail-button:hover .profile-detail-link,
 html[data-theme="dark"] .profile-inline-link:hover .profile-detail-link {
   color: #c7d2fe;
-  border-bottom-color: #c7d2fe;
+  text-decoration-color: #c7d2fe;
 }
 
 html[data-theme="dark"] .profile-cta-btn {
