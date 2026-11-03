@@ -445,6 +445,7 @@ html[data-theme="dark"] .intro-quote-card {
 
 html[data-theme="dark"] .intro-lead-card {
   background: var(--dm-surface);
+  --tone: 165, 180, 252;
 }
 
 html[data-theme="dark"] .intro-lead-eyebrow {
@@ -471,6 +472,9 @@ html[data-theme="dark"] .intro-lead-slide--stage {
 }
 html[data-theme="dark"] .intro-lead-slide--learn {
   --tone: 74, 222, 128;
+}
+html[data-theme="dark"] .intro-lead-slide--community {
+  --tone: 112, 181, 249;
 }
 
 html[data-theme="dark"] .intro-lead-nav__btn {
@@ -532,11 +536,6 @@ html[data-theme="dark"] .intro-quote-text strong {
 html[data-theme="dark"] .intro-link-highlight {
   color: var(--dm-violet);
   border-bottom-color: var(--dm-violet);
-}
-
-html[data-theme="dark"] .intro-avatar {
-  border-color: var(--dm-bg);
-  background: var(--dm-surface-2);
 }
 
 html[data-theme="dark"] .intro-card-label,

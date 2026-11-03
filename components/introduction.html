@@ -108,6 +108,9 @@
   .intro-lead-slide--learn {
     --tone: 22, 163, 74;
   }
+  .intro-lead-slide--community {
+    --tone: 10, 102, 194;
+  }
 
   /* Arrows and dots sit in the top-right corner, level with the eyebrow */
   .intro-lead-nav {
@@ -299,6 +302,10 @@
     transform: translateX(3px);
   }
 
+  .intro-lead-slide .intro-link-pill {
+    margin-left: auto;
+  }
+
   /* Event photos, tilted like a small stack of prints */
   .intro-lead-photos {
     display: flex;
@@ -351,7 +358,8 @@
 
     .intro-lead-cta,
     .intro-lead-cta:hover,
-    .intro-lead-cta:focus {
+    .intro-lead-cta:focus,
+    .intro-lead-slide .intro-link-pill {
       margin-left: 0;
     }
   }
@@ -445,67 +453,9 @@
     font-size: 1.05rem;
   }
 
-  .intro-link-pill strong {
-    font-weight: 800;
-  }
-
   .intro-link-pill:hover {
     transform: translateY(-2px);
     box-shadow: 0 16px 30px rgba(10, 102, 194, 0.36);
-  }
-
-  .intro-avatar-stack {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    padding: 0 0 0 14px;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-  }
-
-  .intro-avatar-faces {
-    display: flex;
-    align-items: center;
-  }
-
-  .intro-avatar {
-    width: 34px;
-    height: 34px;
-    margin-left: -9px;
-    border-radius: 50%;
-    border: 1.5px solid #5f6778;
-    object-fit: cover;
-    box-shadow: 0 10px 20px rgba(95, 112, 163, 0.12);
-    background: #f6f8ff;
-    transition: margin-left 0.25s ease;
-  }
-
-  /* The faces fan out a little on hover */
-  .intro-avatar-stack:hover .intro-avatar:not(:first-child) {
-    margin-left: -4px;
-  }
-
-  .intro-avatar-stack .intro-avatar:first-child {
-    margin-left: 0;
-    position: relative;
-    z-index: 7;
-  }
-
-  .intro-avatar-stack .intro-avatar:nth-child(2) {
-    z-index: 6;
-  }
-  .intro-avatar-stack .intro-avatar:nth-child(3) {
-    z-index: 5;
-  }
-  .intro-avatar-stack .intro-avatar:nth-child(4) {
-    z-index: 4;
-  }
-  .intro-avatar-stack .intro-avatar:nth-child(5) {
-    z-index: 3;
-  }
-  .intro-avatar-stack .intro-avatar:nth-child(6) {
-    z-index: 2;
   }
 
   .intro-link-highlight {
@@ -1022,12 +972,6 @@
       justify-content: flex-start;
     }
 
-    .intro-avatar-stack {
-      margin-left: 0;
-      padding-left: 0;
-      width: 100%;
-    }
-
     .profile-card {
       margin-bottom: 32px;
     }
@@ -1106,7 +1050,7 @@
               class="intro-lead-slide is-active"
               role="group"
               aria-roledescription="slide"
-              aria-label="1 of 6"
+              aria-label="1 of 7"
             >
               <div class="intro-lead-eyebrow">
                 <span class="intro-lead-eyebrow__dot" aria-hidden="true"></span>
@@ -1136,66 +1080,23 @@
                 for millions.
               </p>
               <div class="intro-link-row">
+                <ul class="intro-lead-stats">
+                  <li><strong>5</strong><span>companies</span></li>
+                  <li><strong>14</strong><span>flagship projects</span></li>
+                  <li><strong>25+</strong><span>countries served</span></li>
+                </ul>
                 <a
-                  class="intro-link-pill"
-                  href="https://www.linkedin.com/in/manojsatishkumar/"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="70,000+ followers on LinkedIn"
-                >
-                  <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-                  <span><strong>70,000</strong> followers</span>
-                </a>
-                <button
-                  type="button"
-                  class="intro-avatar-stack"
-                  aria-label="Go to Testimony section"
+                  class="intro-lead-cta"
+                  href="#projects"
                   onclick="
                     if (typeof animateScroll === 'function') {
-                      animateScroll('msk-testimony');
-                    } else {
-                      window.location.hash = 'msk-testimony';
+                      event.preventDefault();
+                      animateScroll('projects');
                     }
                   "
-                >
-                  <span class="intro-avatar-faces">
-                  <img
-                    class="intro-avatar"
-                    src="/images/people/shreyas.png"
-                    alt="Shreyas"
-                  />
-                  <img
-                    class="intro-avatar"
-                    src="/images/people/sharmee.jpg"
-                    alt="Sharmee"
-                  />
-                  <img
-                    class="intro-avatar"
-                    src="/images/people/bala.jpg"
-                    alt="Bala"
-                  />
-                  <img
-                    class="intro-avatar"
-                    src="/images/people/pooja.jpg"
-                    alt="Pooja"
-                  />
-                  <img
-                    class="intro-avatar"
-                    src="/images/people/raja-sir.jpeg"
-                    alt="Raja Sir"
-                  />
-                  <img
-                    class="intro-avatar"
-                    src="/images/people/aravind.jpg"
-                    alt="Aravind"
-                  />
-                  <img
-                    class="intro-avatar"
-                    src="/images/people/harshita.jpg"
-                    alt="Harshita"
-                  />
-                  </span>
-                </button>
+                  >See my work
+                  <i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+                ></a>
               </div>
             </div>
 
@@ -1204,7 +1105,7 @@
               class="intro-lead-slide intro-lead-slide--scale"
               role="group"
               aria-roledescription="slide"
-              aria-label="2 of 6"
+              aria-label="2 of 7"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-solid fa-tower-broadcast" aria-hidden="true"></i>
@@ -1237,7 +1138,7 @@
               class="intro-lead-slide intro-lead-slide--patent"
               role="group"
               aria-roledescription="slide"
-              aria-label="3 of 6"
+              aria-label="3 of 7"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
@@ -1276,7 +1177,7 @@
               class="intro-lead-slide intro-lead-slide--awards"
               role="group"
               aria-roledescription="slide"
-              aria-label="4 of 6"
+              aria-label="4 of 7"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-solid fa-trophy" aria-hidden="true"></i>
@@ -1314,7 +1215,7 @@
               class="intro-lead-slide intro-lead-slide--stage"
               role="group"
               aria-roledescription="slide"
-              aria-label="5 of 6"
+              aria-label="5 of 7"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-solid fa-microphone-lines" aria-hidden="true"></i>
@@ -1362,7 +1263,7 @@
               class="intro-lead-slide intro-lead-slide--learn"
               role="group"
               aria-roledescription="slide"
-              aria-label="6 of 6"
+              aria-label="6 of 7"
             >
               <div class="intro-lead-eyebrow">
                 <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
@@ -1388,6 +1289,42 @@
                   >View on Udemy
                   <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i
                 ></a>
+              </div>
+            </div>
+
+            <!-- 7. LinkedIn community -->
+            <div
+              class="intro-lead-slide intro-lead-slide--community"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="7 of 7"
+            >
+              <div class="intro-lead-eyebrow">
+                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                Community &middot; LinkedIn
+              </div>
+              <p class="intro-lead-text">
+                Sharing
+                <strong class="intro-lead-accent"
+                  >career lessons, interview prep and tech insights</strong
+                >
+                with a community of engineers, and helping them land roles
+                through <strong>free job referrals</strong>.
+              </p>
+              <div class="intro-link-row">
+                <ul class="intro-lead-stats">
+                  <li><strong>70,000</strong><span>followers</span></li>
+                  <li><strong>17</strong><span>testimonials</span></li>
+                </ul>
+                <a
+                  class="intro-link-pill"
+                  href="https://www.linkedin.com/in/manojsatishkumar/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                  Follow on LinkedIn
+                </a>
               </div>
             </div>
           </div>
