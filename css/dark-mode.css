@@ -664,6 +664,7 @@ html[data-theme="dark"] .profile-card {
 
 html[data-theme="dark"] .profile-img {
   border-color: #334155;
+  background: linear-gradient(160deg, #1e293b 0%, #131c2e 100%);
 }
 
 html[data-theme="dark"] .profile-card hr {

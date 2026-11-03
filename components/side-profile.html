@@ -47,6 +47,8 @@
     text-align: left;
   }
 
+  /* The photo is a cutout with a transparent background, so the circle's
+     backdrop comes from here and follows the theme (dark in dark-mode.css) */
   .profile-img {
     flex: none;
     width: 84px;
@@ -55,6 +57,7 @@
     border-radius: 50%;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
     border: 3px solid #e0e0e0;
+    background: linear-gradient(160deg, #f1f5f9 0%, #e2e8f0 100%);
     object-fit: cover;
   }
 
@@ -1056,7 +1059,7 @@
       <div class="profile-header">
         <img
           class="profile-img"
-          src="/images/me_square.png"
+          src="/images/me_cutout.webp"
           width="84"
           height="84"
           alt="Manoj Satishkumar"
