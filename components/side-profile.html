@@ -16,20 +16,74 @@
     text-align: center;
     border: 1px solid #e9ecef;
   }
-  .profile-img-wrapper {
-    position: relative;
-    display: inline-block;
-    /* margin-bottom: 16px; */
-    /* margin-top: 50px; */
+  /* Matches the "Keep reading" kicker on the articles rail */
+  .profile-kicker {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent, #0ea5e9);
+  }
+
+  .profile-kicker::before {
+    content: "";
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #0ea5e9, #8b5cf6, #ec4899);
+  }
+
+  /* Photo beside the name rather than above it keeps the card short */
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
   }
 
   .profile-img {
-    width: 220px;
-    height: 220px;
+    flex: none;
+    width: 84px;
+    height: 84px;
+    margin: 0;
     border-radius: 50%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    border: 6px solid #e0e0e0;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    border: 3px solid #e0e0e0;
     object-fit: cover;
+  }
+
+  .profile-id {
+    min-width: 0;
+  }
+
+  .profile-name {
+    margin: 0 0 4px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #000;
+  }
+
+  .profile-role {
+    margin: 0;
+    font-size: 0.98rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #343a40;
+  }
+
+  .profile-company {
+    margin: 2px 0 0;
+    font-size: 0.88rem;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #6c757d;
   }
 
   /* Thought bubble */
@@ -169,7 +223,7 @@
     border-bottom-color: #1f2f66;
   }
 
-  .profile-resume-btn {
+  .profile-cta-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -192,11 +246,11 @@
       box-shadow 0.2s ease;
   }
 
-  .profile-resume-btn i {
+  .profile-cta-btn i {
     font-size: 1.05rem;
   }
 
-  .profile-resume-btn:hover {
+  .profile-cta-btn:hover {
     color: #fff;
     text-decoration: none;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -205,7 +259,7 @@
     box-shadow: 0 14px 28px rgba(102, 78, 162, 0.3);
   }
 
-  .profile-resume-btn:active {
+  .profile-cta-btn:active {
     transform: translateY(0);
     box-shadow: 0 6px 14px rgba(102, 78, 162, 0.26);
   }
@@ -956,9 +1010,6 @@
       padding-left: 8px;
       padding-right: 8px;
     }
-    .profile-img-wrapper {
-      margin-bottom: 10px !important;
-    }
   }
   .profile-card hr {
     border: none;
@@ -1001,38 +1052,22 @@
     "
   >
     <div>
-      <div class="profile-img-wrapper" style="text-align: center; margin-bottom: 16px;">
+      <div class="profile-kicker">Author</div>
+      <div class="profile-header">
         <img
           class="profile-img"
           src="/images/me_square.png"
+          width="84"
+          height="84"
           alt="Manoj Satishkumar"
         />
+        <div class="profile-id">
+          <h1 class="profile-name">Manoj Satishkumar</h1>
+          <h5 class="profile-role">Software Architect</h5>
+          <h6 class="profile-company">Walt Disney</h6>
+        </div>
       </div>
       <div style="text-align: left">
-        <h1
-          style="
-            font-size: 1.7rem;
-            font-weight: bold;
-            color: black;
-            margin-bottom: 0.5rem;
-            text-align: left;
-          "
-        >
-          Manoj Satishkumar
-        </h1>
-        <h5
-          style="
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: #343a40;
-            text-align: left;
-          "
-        >
-          Software Architect
-        </h5>
-        <h6 style="font-size: 1rem; font-weight: 400; color: #6c757d">
-          Walt Disney
-        </h6>
         <hr />
         <div style="margin: 10px 0 0 0; color: #495057; font-size: 1.05rem">
           <i class="fas fa-briefcase" style="color: #17a2b8; width: 25px"></i>
@@ -1087,6 +1122,10 @@
         </a>
       </div>
     </div>
+    <a class="profile-cta-btn" href="/">
+      Visit portfolio
+      <i class="fas fa-arrow-right" aria-hidden="true"></i>
+    </a>
   </div>
 </div>
 

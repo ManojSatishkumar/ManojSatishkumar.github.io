@@ -668,6 +668,16 @@ html[data-theme="dark"] .profile-inline-link:hover .profile-detail-link {
   border-bottom-color: #c7d2fe;
 }
 
+html[data-theme="dark"] .profile-cta-btn {
+  border-color: rgba(165, 180, 252, 0.55);
+  color: var(--dm-violet);
+}
+
+html[data-theme="dark"] .profile-cta-btn:hover {
+  border-color: transparent;
+  color: #ffffff;
+}
+
 html[data-theme="dark"] .profile-card .fa-passport {
   color: #8b8ad6 !important;
 }

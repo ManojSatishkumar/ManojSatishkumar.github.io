@@ -443,14 +443,6 @@
       0 3px 10px rgba(15, 23, 42, 0.06);
   }
 
-  /* Slide out of view while reading downwards */
-  .macos-menubar.nav-hidden,
-  .mobile-navbar.nav-hidden {
-    transform: translateY(-105%);
-    box-shadow: none;
-    pointer-events: none;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .macos-menubar,
     .mobile-navbar {
@@ -1533,12 +1525,11 @@
 <script>
   setTimeout(function() {
     const menubar = document.querySelector('.macos-menubar');
-    const mobilebar = document.querySelector('.mobile-navbar');
-    // Mobile bottom bar hides too; its own CSS sends it down rather than up
+    // Only the homepage's mobile bottom bar slides away while reading; the top
+    // bars always stay on screen
     const bottomNav = document.querySelector('.mobile-bottom-nav');
 
-    const bars = [menubar, mobilebar, bottomNav].filter(Boolean);
-    if (!bars.length) return;
+    const bars = [bottomNav].filter(Boolean);
 
     const REVEAL_ZONE = 90; // always visible this close to the top
     const DELTA = 6;        // ignore trackpad jitter
@@ -1552,8 +1543,6 @@
       });
     };
 
-    // The rail is deliberately excluded from hover pinning: pointing at it
-    // should not drag the menubar back onto the page
     bars.forEach(function(bar) {
       bar.addEventListener('mouseenter', function() {
         pinned = true;
@@ -1748,8 +1737,6 @@
     if (drawer.classList.contains('active')) {
       closeMobileMenu();
     } else {
-      var bar = document.querySelector('.mobile-navbar');
-      if (bar) bar.classList.remove('nav-hidden');
       toggle.classList.add('active');
       overlay.classList.add('active');
       drawer.classList.add('active');

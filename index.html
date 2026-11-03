@@ -495,8 +495,8 @@
         }
       }
 
-      /* A keyframe entrance (rather than a transform on the element) so the
-         menubar's own hide-on-scroll transform still applies afterwards */
+      /* A keyframe entrance rather than a transform on the element, so it
+         leaves no transform behind once it finishes */
       #desktop-nav-bar.slide-in .macos-menubar {
         animation: menubarDropIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
       }
