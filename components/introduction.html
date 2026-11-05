@@ -1146,13 +1146,15 @@
     letter-spacing: 0.02em;
   }
 
-  /* When the card is stretched to the intro's height, the spare room is
-     shared above and below the rows */
+  /* When the card is stretched to the intro's height, the rows spread out
+     to share the spare room */
   .home-profile__facts {
     display: flex;
+    flex: 1 0 auto;
     flex-direction: column;
+    justify-content: space-evenly;
     gap: 4px;
-    margin: auto 0 0;
+    margin: 0;
     padding: 14px 0 0;
     list-style: none;
     text-align: left;
@@ -1241,55 +1243,7 @@
   }
 
   .home-profile__actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: auto;
-    padding-top: 16px;
-  }
-
-  .home-profile__btn,
-  .home-profile__btn:hover,
-  .home-profile__btn:focus {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 11px 12px;
-    border-radius: 14px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    white-space: nowrap;
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease,
-      background-color 0.2s ease;
-  }
-
-  .home-profile__btn--primary,
-  .home-profile__btn--primary:hover,
-  .home-profile__btn--primary:focus {
-    border: 0;
-    background: linear-gradient(135deg, #4f46e5, #a855f7);
-    color: #ffffff;
-    box-shadow: 0 10px 22px rgba(124, 58, 237, 0.28);
-  }
-
-  .home-profile__btn--primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 28px rgba(124, 58, 237, 0.36);
-  }
-
-  .home-profile__btn--ghost,
-  .home-profile__btn--ghost:hover,
-  .home-profile__btn--ghost:focus {
-    border: 1px solid rgba(79, 70, 229, 0.28);
-    background: rgba(79, 70, 229, 0.06);
-    color: #4f46e5;
-  }
-
-  .home-profile__btn--ghost:hover {
-    background: rgba(79, 70, 229, 0.12);
+    margin-top: 16px;
   }
 
   .wow {
@@ -1414,38 +1368,6 @@
     pointer-events: none;
   }
 
-  .intro-cine-flash {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    pointer-events: none;
-    background: radial-gradient(
-      circle at 50% 50%,
-      rgba(255, 255, 255, 0.95) 0,
-      rgba(196, 181, 253, 0.6) 6%,
-      rgba(99, 102, 241, 0.22) 22%,
-      transparent 55%
-    );
-  }
-
-  .intro-cine-flash.is-on {
-    animation: introFlash 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  @keyframes introFlash {
-    0% {
-      opacity: 0;
-      transform: scale(0.15);
-    }
-    12% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-      transform: scale(2.4);
-    }
-  }
-
   .intro-cine-caption {
     position: absolute;
     left: 50%;
@@ -1540,7 +1462,6 @@
     opacity: 1;
     filter: blur(0);
   }
-
   /* Career chapters: a column on the left while the particles build each
      logo on the right; js/intro-scene.js sets its top to the logo centre */
   .intro-cine-career {
@@ -1549,8 +1470,8 @@
     left: max(7vw, 32px);
     display: flex;
     flex-direction: column;
-    gap: clamp(28px, 5vh, 52px);
-    width: min(40vw, 540px);
+    gap: clamp(32px, 6vh, 60px);
+    width: min(42vw, 660px);
     transform: translateY(-50%);
     pointer-events: none;
   }
@@ -1564,7 +1485,7 @@
     flex-direction: column;
     align-items: flex-start;
     grid-area: 1 / 1;
-    gap: 12px;
+    gap: clamp(12px, 1.8vh, 18px);
     margin: 0;
     text-align: left;
     visibility: hidden;
@@ -1592,70 +1513,20 @@
     transform: none;
   }
 
-  .intro-cine-co.is-on > span:nth-child(2) {
-    transition-delay: 0.08s;
-  }
-
-  .intro-cine-co.is-on > span:nth-child(3) {
-    transition-delay: 0.2s;
-  }
-
-  .intro-cine-co.is-on > span:nth-child(4) {
-    transition-delay: 0.32s;
-  }
-
   .intro-cine-co.is-off > span {
     transform: translateY(-14px);
     transition-duration: 0.35s, 0.35s, 0.5s;
   }
 
-  .intro-cine-co__index {
-    color: rgba(148, 163, 184, 0.85);
-    font-size: clamp(0.6rem, 0.9vw, 0.75rem);
-    font-weight: 600;
-    letter-spacing: 0.4em;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .intro-cine-co__name {
-    padding-bottom: 0.06em;
-    background: linear-gradient(100deg, #fff 0%, var(--brand-a) 45%, var(--brand-b) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-size: clamp(2.4rem, 5.4vw, 5rem);
-    font-weight: 700;
-    line-height: 1.02;
-    letter-spacing: -0.01em;
-  }
-
-  .intro-cine-co > .intro-cine-co__name {
-    filter: blur(10px) drop-shadow(0 0 0 transparent);
-  }
-
-  .intro-cine-co.is-on > .intro-cine-co__name {
-    filter: blur(0) drop-shadow(0 0 26px color-mix(in srgb, var(--brand-a) 45%, transparent));
-  }
-
-  .intro-cine-co__years {
-    background: linear-gradient(90deg, #a5b4fc, #f0abfc);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-size: clamp(0.8rem, 1.4vw, 1.05rem);
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    font-variant-numeric: tabular-nums;
-  }
-
   .intro-cine-co__role {
-    max-width: 30em;
-    color: #cbd5e1;
-    font-size: clamp(0.66rem, 1.05vw, 0.88rem);
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    line-height: 1.75;
+    color: #e2e8f0;
+    font-size: clamp(1.05rem, 1.9vw, 1.55rem);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    line-height: 1.6;
     text-transform: uppercase;
+    text-wrap: balance;
+    text-shadow: 0 0 24px rgba(165, 180, 252, 0.35);
   }
 
   .intro-cine-ui.is-stacked .intro-cine-career {
@@ -1676,77 +1547,6 @@
 
   .intro-cine-ui.is-stacked .intro-cine-co.is-on > span {
     transform: none;
-  }
-
-  .intro-cine-ui.is-stacked .intro-cine-co__name {
-    font-size: clamp(2rem, 10vw, 3rem);
-  }
-
-  .intro-cine-rail {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    opacity: 0;
-    transition: opacity 0.7s ease;
-  }
-
-  .intro-cine-rail.is-on {
-    opacity: 1;
-  }
-
-  .intro-cine-rail::before,
-  .intro-cine-rail__fill {
-    content: "";
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    right: 4px;
-    height: 1px;
-    background: rgba(148, 163, 184, 0.28);
-  }
-
-  .intro-cine-rail__fill {
-    background: linear-gradient(90deg, #818cf8, #f472b6);
-    box-shadow: 0 0 10px rgba(244, 114, 182, 0.7);
-    transform: scaleX(var(--rail, 0));
-    transform-origin: left center;
-  }
-
-  .intro-cine-rail__node {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    width: 9px;
-    color: rgba(148, 163, 184, 0.7);
-    font-size: 0.66rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    font-variant-numeric: tabular-nums;
-    transition: color 0.4s ease;
-  }
-
-  .intro-cine-rail__node::before {
-    content: "";
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: #0b1120;
-    box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.5);
-    transition:
-      background-color 0.4s ease,
-      box-shadow 0.4s ease;
-  }
-
-  .intro-cine-rail__node.is-reached {
-    color: #e2e8f0;
-  }
-
-  .intro-cine-rail__node.is-reached::before {
-    background: #f0abfc;
-    box-shadow: 0 0 12px 2px rgba(240, 171, 252, 0.75);
   }
 
   .intro-cine-roles {
@@ -1895,33 +1695,33 @@
   .intro-shell.has-scene .intro-lead-card,
   .intro-shell.has-scene .intro-journey-card,
   .intro-shell.has-scene .intro-edu-card {
-    background: rgba(255, 255, 255, 0.72);
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
-    backdrop-filter: blur(18px) saturate(160%);
+    background: rgba(255, 255, 255, 0.82);
+    -webkit-backdrop-filter: blur(8px) saturate(160%);
+    backdrop-filter: blur(8px) saturate(160%);
   }
 
   .intro-shell.has-scene .intro-quote-card {
     background: linear-gradient(
       135deg,
-      rgba(249, 251, 255, 0.74),
-      rgba(241, 245, 255, 0.7)
+      rgba(249, 251, 255, 0.82),
+      rgba(241, 245, 255, 0.82)
     );
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
-    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(8px) saturate(160%);
+    backdrop-filter: blur(8px) saturate(160%);
   }
 
   html[data-theme="dark"] .intro-shell.has-scene .home-profile,
   html[data-theme="dark"] .intro-shell.has-scene .intro-lead-card,
   html[data-theme="dark"] .intro-shell.has-scene .intro-journey-card,
   html[data-theme="dark"] .intro-shell.has-scene .intro-edu-card {
-    background: rgba(19, 28, 46, 0.58);
+    background: rgba(19, 28, 46, 0.7);
   }
 
   html[data-theme="dark"] .intro-shell.has-scene .intro-quote-card {
     background: linear-gradient(
       135deg,
-      rgba(21, 31, 53, 0.62),
-      rgba(18, 26, 44, 0.58)
+      rgba(21, 31, 53, 0.7),
+      rgba(18, 26, 44, 0.7)
     );
   }
 
@@ -2005,41 +1805,136 @@
   }
 
   .home-profile__replay {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    z-index: 2;
+    position: relative;
     display: none;
     align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    background: rgba(255, 255, 255, 0.16);
+    gap: 14px;
+    width: 100%;
+    margin: 0;
+    padding: 10px 18px 10px 10px;
+    border: 0;
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at 85% 80%, rgba(246, 79, 89, 0.5), transparent 55%),
+      linear-gradient(120deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
+    box-shadow:
+      0 12px 26px rgba(124, 58, 237, 0.32),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
     color: #ffffff;
-    font-size: 0.78rem;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    text-align: left;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    overflow: hidden;
+    transition:
+      transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.25s ease;
   }
 
-  .home-profile__replay i {
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* A sheen that sweeps across now and then */
+  .home-profile__replay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 70%
+    );
+    transform: translateX(-100%);
+    animation: replaySheen 4.5s ease-in-out 1.5s infinite;
+    pointer-events: none;
+  }
+
+  .home-profile__replay-icon {
+    position: relative;
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #7c3aed;
+    font-size: 1.05rem;
+    box-shadow: 0 4px 12px rgba(30, 27, 75, 0.3);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Nudge the triangle so it looks centred */
+  .home-profile__replay-icon i {
+    margin-left: 3px;
+  }
+
+  .home-profile__replay-icon::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    animation: replayPulse 2.2s ease-out infinite;
+  }
+
+  .home-profile__replay-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+
+  .home-profile__replay-text strong {
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+  }
+
+  .home-profile__replay-text span {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.74rem;
+    font-weight: 500;
+    line-height: 1.3;
   }
 
   .home-profile__replay:hover {
-    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow:
+      0 16px 32px rgba(124, 58, 237, 0.42),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
   }
 
-  .home-profile__replay:hover i {
-    transform: rotate(180deg);
+  .home-profile__replay:hover .home-profile__replay-icon {
+    transform: scale(1.1);
+  }
+
+  .home-profile__replay:active {
+    transform: translateY(0) scale(0.98);
   }
 
   .home-profile__replay:focus-visible {
-    outline: 2px solid #ffffff;
-    outline-offset: 2px;
+    outline: 2px solid #a855f7;
+    outline-offset: 3px;
+  }
+
+  @keyframes replayPulse {
+    0% {
+      opacity: 0.9;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.32);
+    }
+  }
+
+  @keyframes replaySheen {
+    0%,
+    60% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
   }
 
   .intro-shell.has-scene .home-profile__replay {
@@ -2058,7 +1953,6 @@
        backdrop behind the cards -->
   <div class="intro-stage" aria-hidden="true"></div>
   <div class="intro-cine-ui">
-    <div class="intro-cine-flash" aria-hidden="true"></div>
     <p class="intro-cine-caption" data-cue="chaos" aria-hidden="true">
       It all began in 2013, with a single line of code.
     </p>
@@ -2067,46 +1961,23 @@
     </p>
 
     <!-- The career, one company at a time; js/intro-scene.js builds each
-         logo in particles on the right and fills the rail -->
+         logo in particles on the right -->
     <div class="intro-cine-career" aria-hidden="true">
-      <div class="intro-cine-rail" data-cue="rail">
-        <span class="intro-cine-rail__fill"></span>
-        <span class="intro-cine-rail__node" data-node="0">2013</span>
-        <span class="intro-cine-rail__node" data-node="1">2015</span>
-        <span class="intro-cine-rail__node" data-node="2">2019</span>
-        <span class="intro-cine-rail__node" data-node="3">2021</span>
-        <span class="intro-cine-rail__node" data-node="4">Now</span>
-      </div>
       <div class="intro-cine-career__stack">
-        <p class="intro-cine-co" data-cue="co0" style="--brand-a: #93c5fd; --brand-b: #a5b4fc">
-          <span class="intro-cine-co__index">01 / 05</span>
-          <span class="intro-cine-co__name">GRL Labs</span>
-          <span class="intro-cine-co__years">2013 &ndash; 2015</span>
-          <span class="intro-cine-co__role">Software Engineer &middot; SSD validation for Intel, Samsung &amp; Micron</span>
+        <p class="intro-cine-co" data-cue="co0">
+          <span class="intro-cine-co__role">Software Engineer</span>
         </p>
-        <p class="intro-cine-co" data-cue="co1" style="--brand-a: #38bdf8; --brand-b: #bef264">
-          <span class="intro-cine-co__index">02 / 05</span>
-          <span class="intro-cine-co__name">Cerner</span>
-          <span class="intro-cine-co__years">2015 &ndash; 2019</span>
-          <span class="intro-cine-co__role">Engineer to Technical Team Lead &middot; Healthcare platforms</span>
+        <p class="intro-cine-co" data-cue="co1">
+          <span class="intro-cine-co__role">Engineer to Technical Team Lead</span>
         </p>
-        <p class="intro-cine-co" data-cue="co2" style="--brand-a: #60a5fa; --brand-b: #fcd34d">
-          <span class="intro-cine-co__index">03 / 05</span>
-          <span class="intro-cine-co__name">Walmart</span>
-          <span class="intro-cine-co__years">2019 &ndash; 2021 &middot; 2022 &ndash; 2026</span>
-          <span class="intro-cine-co__role">Staff Engineer &middot; 70M+ messages a day for 200+ teams</span>
+        <p class="intro-cine-co" data-cue="co2">
+          <span class="intro-cine-co__role">Staff Engineer</span>
         </p>
-        <p class="intro-cine-co" data-cue="co3" style="--brand-a: #818cf8; --brand-b: #38bdf8">
-          <span class="intro-cine-co__index">04 / 05</span>
-          <span class="intro-cine-co__name">PayPal</span>
-          <span class="intro-cine-co__years">2021 &ndash; 2022</span>
-          <span class="intro-cine-co__role">Member of Technical Staff &middot; Merchant onboarding</span>
+        <p class="intro-cine-co" data-cue="co3">
+          <span class="intro-cine-co__role">Member of Technical Staff</span>
         </p>
-        <p class="intro-cine-co" data-cue="co4" style="--brand-a: #e0e7ff; --brand-b: #f0abfc">
-          <span class="intro-cine-co__index">05 / 05</span>
-          <span class="intro-cine-co__name">Disney</span>
-          <span class="intro-cine-co__years">2026 &ndash; Now</span>
-          <span class="intro-cine-co__role">Software Architect &middot; Frontend technical direction</span>
+        <p class="intro-cine-co" data-cue="co4">
+          <span class="intro-cine-co__role">Software Architect</span>
         </p>
       </div>
     </div>
@@ -2127,12 +1998,11 @@
     </p>
     <p class="intro-cine-hint" data-cue="hint" aria-hidden="true">
       <span class="intro-cine-hint--pointer"
-        ><i class="fa-solid fa-arrow-pointer"></i> Move your cursor &middot;
-        click for a shockwave</span
+        ><i class="fa-solid fa-film"></i> Sit back &middot; press Esc to
+        skip</span
       >
       <span class="intro-cine-hint--touch"
-        ><i class="fa-solid fa-hand-pointer"></i> Tap for a shockwave &middot;
-        swipe to skip</span
+        ><i class="fa-solid fa-film"></i> Sit back &middot; swipe to skip</span
       >
     </p>
     <button type="button" class="intro-cine-skip">
@@ -2150,14 +2020,6 @@
           aria-label="About Manoj Satishkumar"
         >
           <div class="home-profile__cover" aria-hidden="true"></div>
-          <button
-            type="button"
-            class="home-profile__replay"
-            aria-label="Replay the intro"
-            title="Replay intro"
-          >
-            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
-          </button>
 
           <div class="home-profile__avatar">
             <img
@@ -2187,6 +2049,18 @@
               <li><strong>70K</strong><span>followers</span></li>
               <li><strong>5</strong><span>companies</span></li>
             </ul>
+
+            <div class="home-profile__actions">
+              <button type="button" class="home-profile__replay">
+                <span class="home-profile__replay-icon" aria-hidden="true">
+                  <i class="fa-solid fa-play"></i>
+                </span>
+                <span class="home-profile__replay-text">
+                  <strong>Play my intro</strong>
+                  <span>My story in 40 seconds</span>
+                </span>
+              </button>
+            </div>
 
             <ul class="home-profile__facts">
               <li>
@@ -2274,24 +2148,6 @@
                 </button>
               </li>
             </ul>
-
-            <div class="home-profile__actions">
-              <a
-                class="home-profile__btn home-profile__btn--primary"
-                href="mailto:88manojs@gmail.com"
-                title="88manojs@gmail.com"
-              >
-                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                Email me
-              </a>
-              <a
-                class="home-profile__btn home-profile__btn--ghost"
-                href="/job-referral/"
-              >
-                <i class="fa-solid fa-handshake" aria-hidden="true"></i>
-                Get a referral
-              </a>
-            </div>
           </div>
         </aside>
 

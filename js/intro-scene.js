@@ -1,4 +1,4 @@
-// The homepage's WebGL layer: a cinematic opening (big bang -> galaxy -> the
+// The homepage's WebGL layer: a cinematic opening (the Milky Way -> the
 // name in particles -> a networked globe) that settles into a living backdrop
 // behind the intro cards, then carries the same particles down the page,
 // reshaping them into a formation for every section as it scrolls past.
@@ -17,9 +17,7 @@ import {
   OneFactor,
   OneMinusSrcAlphaFactor,
   PerspectiveCamera,
-  Plane,
   Points,
-  Raycaster,
   Scene,
   ShaderMaterial,
   SphereGeometry,
@@ -33,53 +31,73 @@ const CAM_Z = 60;
 const NAME = "MANOJ SATISHKUMAR";
 
 // Cinematic, in seconds: origin (galaxy) -> the name -> the career, one
-// company at a time -> the globe it reaches today -> who he is -> the cards
-const CO_START = 6.6; // first company fully formed
-const CO_STEP = 2.2; // one company to the next
-const CO_MORPH = 0.65; // of which the particles are in flight
-const CO_END = CO_START + 4 * CO_STEP + 1.9; // last company hands over to the globe
+// company at a time -> the globe it reaches today -> who he is -> the cards.
+// Every hand-off between formations is long, so the particles drift from one
+// to the next rather than snap.
+const TO_NAME = [3.6, 6.6]; // the galaxy streams into the name
+const NAME_AT = TO_NAME[1];
+const CO_START = NAME_AT + 4.2; // first company fully formed
+const CO_STEP = 7.0; // one company to the next: at least 5 s on screen each
+const CO_MORPH = 3.2; // of which the particles are in flight
+const CO_END = CO_START + 4 * CO_STEP + 4.2; // last company hands over to the globe
 const coAt = (k) => CO_START + k * CO_STEP;
+// Captions hand over halfway through each morph
+const coSwap = (k) => coAt(k) - CO_MORPH / 2;
 
-const REVEAL = CO_END + 5.8;
-const CUE = { flash: 0.25, reveal: REVEAL, cards: REVEAL + 0.35, end: REVEAL + 1.5 };
+const REVEAL = CO_END + 6.5;
+const CUE = { reveal: REVEAL, cards: REVEAL + 0.35, end: REVEAL + 1.5 };
 const CAPTIONS = [
-  ["chaos", 0.55, 2.9],
-  ["name", 3.3, 6.0],
-  ["rail", 6.1, CO_END + 0.2],
-  ["co0", coAt(0) - 0.3, coAt(1) - CO_MORPH + 0.1],
-  ["co1", coAt(1) - 0.2, coAt(2) - CO_MORPH + 0.1],
-  ["co2", coAt(2) - 0.2, coAt(3) - CO_MORPH + 0.1],
-  ["co3", coAt(3) - 0.2, coAt(4) - CO_MORPH + 0.1],
-  ["co4", coAt(4) - 0.2, CO_END + 0.2],
-  ["scale", CO_END + 0.7, CO_END + 3.7],
-  ["roles", CO_END + 3.7, REVEAL + 0.1],
-  ["hint", 2.0, 12.0],
+  ["chaos", 0.9, TO_NAME[0] + 0.4],
+  ["name", NAME_AT - 0.7, NAME_AT + 2.0],
+  ["co0", coAt(0) - 0.6, coSwap(1)],
+  ["co1", coSwap(1) + 0.15, coSwap(2)],
+  ["co2", coSwap(2) + 0.15, coSwap(3)],
+  ["co3", coSwap(3) + 0.15, coSwap(4)],
+  ["co4", coSwap(4) + 0.15, CO_END + 0.2],
+  ["scale", CO_END + 1.4, CO_END + 4.4],
+  ["roles", CO_END + 4.4, REVEAL + 0.1],
+  ["hint", 2.0, NAME_AT + 6.0],
 ];
 
 const clamp01 = (x) => Math.min(Math.max(x, 0), 1);
 const span = (t, a, b) => clamp01((t - a) / (b - a));
 const lerp = (a, b, k) => a + (b - a) * k;
+const smoothstep = (a, b, x) => {
+  const k = span(x, a, b);
+  return k * k * (3 - 2 * k);
+};
 const easeInOut = (x) =>
   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+
+// 0..1..0 over each company morph, with the index of the one in flight
+function coFlight(t) {
+  for (let k = 1; k < 5; k++) {
+    const m = span(t, coAt(k) - CO_MORPH, coAt(k));
+    if (m > 0 && m < 1) return { f: Math.sin(Math.PI * m), k };
+  }
+  return { f: 0, k: 0 };
+}
 
 function timeline(t) {
   let co = 0;
   for (let k = 1; k < 5; k++) co += span(t, coAt(k) - CO_MORPH, coAt(k));
   return {
-    bang: span(t, 0.25, 1.75),
-    toText: span(t, 2.5, 4.0),
+    // The galaxy is there from the first frame while the camera eases in
+    galIn: span(t, 0, TO_NAME[0] + 1.0),
+    toText: span(t, TO_NAME[0], TO_NAME[1]),
     // cj: the name hands over to the companies, which hand over to the globe
-    cj: span(t, 5.9, CO_START) * (1 - span(t, CO_END, CO_END + 1.1)),
+    // once it has mostly formed beneath them
+    cj: span(t, NAME_AT + 1.9, CO_START) * (1 - span(t, CO_END + 0.8, CO_END + 3.0)),
     co,
-    toGlobe: span(t, CO_END, CO_END + 1.3),
-    rim: span(t, CO_END + 0.6, CO_END + 1.7),
-    arcs: span(t, CO_END + 0.7, CO_END + 2.3),
+    toGlobe: span(t, CO_END, CO_END + 2.6),
+    rim: span(t, CO_END + 1.2, CO_END + 2.8),
+    arcs: span(t, CO_END + 1.5, CO_END + 3.4),
     ambient: easeInOut(span(t, CUE.reveal, CUE.reveal + 1.3)),
   };
 }
 
-const STATE_KEYS = ["bang", "toText", "cj", "co", "toGlobe", "rim", "arcs", "ambient"];
-const REST = { bang: 1, toText: 0, cj: 0, co: 0, toGlobe: 1, rim: 1, arcs: 1, ambient: 1 };
+const STATE_KEYS = ["galIn", "toText", "cj", "co", "toGlobe", "rim", "arcs", "ambient"];
+const REST = { galIn: 1, toText: 0, cj: 0, co: 0, toGlobe: 1, rim: 1, arcs: 1, ambient: 1 };
 
 // Blends premultiplied colour, so one material can glow additively on the
 // dark curtain (alpha tracks brightness) and paint normally over a light page
@@ -113,7 +131,8 @@ const EDGE_GLSL = /* glsl */ `
 const POINTS_VERT = /* glsl */ `
   uniform float uTime;
   uniform float uGalT;
-  uniform float uBang;
+  uniform float uGalIn;
+  uniform vec2 uGalTilt; // tilt toward the camera, roll in the frame
   uniform float uToText;
   uniform float uToGlobe;
   uniform float uSize;
@@ -122,14 +141,10 @@ const POINTS_VERT = /* glsl */ `
   uniform float uSweep;
   uniform float uTextW;
   uniform float uGalR;
-  uniform vec3 uMouse;
-  uniform float uMouseF;
-  uniform float uMouseR;
   uniform vec4 uWave;
   uniform vec3 uGlobeC;
   uniform float uGlobeS;
   uniform vec2 uGlobeRot;
-
   // Scroll journey: formation A morphing into B, both in shape space
   uniform float uJourney;
   uniform float uMorph;
@@ -142,10 +157,13 @@ const POINTS_VERT = /* glsl */ `
   uniform vec2 uAlphaAB;
   uniform vec2 uSizeAB;
   uniform vec3 uCenter;
+  uniform float uDrama;
+  uniform float uDramaW;
   uniform float uStir;
   uniform float uScrollW;
   uniform float uWorldH;
 
+  attribute vec4 aGalC;
   attribute vec3 aText;
   attribute vec3 aGlobe;
   attribute vec4 aRand;
@@ -187,13 +205,14 @@ const POINTS_VERT = /* glsl */ `
     float land = step(1.5, kind);
     float tn = clamp(aText.x / uTextW + 0.5, 0.0, 1.0);
 
-    // Galaxy: differential spin, tilted toward the camera, born from a point
+    // Galaxy: the bar turns rigidly, the arms trail it and wind slowly;
+    // stars light up from the core outward
     vec3 g = position;
-    float r = length(g.xz);
-    g.xz = rot2(g.xz, uGalT * (0.05 + 1.4 / (r + 3.0)));
-    g.yz = rot2(g.yz, -1.05);
-    float b = clamp(uBang * 1.3 - aRand.y * 0.3, 0.0, 1.0);
-    g *= 1.0 - pow(1.0 - b, 4.0);
+    float rn = length(g.xz) / uGalR;
+    g.xz = rot2(g.xz, -uGalT * (0.05 + 0.14 / (1.0 + 5.0 * max(rn - 0.2, 0.0))));
+    g.yz = rot2(g.yz, -uGalTilt.x);
+    g.xy = rot2(g.xy, uGalTilt.y);
+    float galIn = clamp(0.15 + uGalIn * 14.0 - (0.55 * min(rn, 1.0) + 0.45 * aRand.y) * 2.5, 0.0, 1.0);
 
     // The name; dust drifts around it
     vec3 t = aText;
@@ -228,12 +247,34 @@ const POINTS_VERT = /* glsl */ `
     float ej = 0.0;
     float em = 0.0;
     float toneJ = 0.0;
+    float flare = 0.0;
+    float arc = 0.0;
     if (uJourney > 0.0) {
       vec3 jp;
       if (kind > 0.5) {
-        em = ease(local(uMorph, fract(aRand.y * 3.71)));
+        // The cinematic's company morphs (uDrama) burn the old mark away
+        // from its left edge, whirl it into a vortex that bursts toward the
+        // lens, and condense the next mark out of it
+        float wipe = clamp(0.5 + aA.x / uDramaW * 0.5, 0.0, 1.0);
+        float delay = mix(fract(aRand.y * 3.71), wipe * 0.8 + fract(aRand.y * 3.71) * 0.2, uDrama);
+        em = ease(local(uMorph, delay));
+        arc = sin(3.14159 * em);
         jp = mix(uRotA * aA.xyz + uOffA, uRotB * aB.xyz + uOffB, em);
-        jp += flow(jp * 0.1 + 5.0, uTime * 1.1) * sin(3.14159 * em) * 6.0;
+        jp += flow(jp * 0.1 + 5.0, uTime * 1.1) * arc * mix(6.0, 3.5, uDrama);
+        if (uDrama > 0.0) {
+          // The vortex leans toward the middle of the frame, so the burst
+          // toward the lens stays on screen
+          vec3 c = mix(uOffA, uOffB, 0.5);
+          vec3 rel = jp - c;
+          rel.xy = rot2(rel.xy, arc * (2.0 + aRand.z * 2.8) * uDrama);
+          rel.xy *= 1.0 + arc * (0.1 + aRand.x * 0.4) * uDrama;
+          rel.z += arc * (aRand.z - 0.3) * 14.0 * uDrama;
+          jp = c + rel;
+          jp.x -= arc * c.x * 0.3 * uDrama;
+          float ignite = smoothstep(0.0, 0.03, em) * (1.0 - smoothstep(0.03, 0.22, em));
+          float settle = smoothstep(0.82, 0.95, em) * (1.0 - smoothstep(0.95, 1.0, em));
+          flare = (ignite + settle * 0.7) * uDrama;
+        }
         jp += uCenter;
         toneJ = mix(aA.w, aB.w, em);
       } else {
@@ -250,15 +291,7 @@ const POINTS_VERT = /* glsl */ `
       p += flow(p * 0.12 + 7.0, uTime) * sin(3.14159 * ej) * 6.0 * (1.0 - dust);
     }
 
-    // Cursor pushes particles aside and toward the viewer
-    vec2 dm = p.xy - uMouse.xy;
-    float dl = length(dm);
-    float f = uMouseF * (1.0 - smoothstep(0.0, uMouseR, dl));
-    f *= f;
-    p.xy += dm / max(dl, 0.001) * f * uMouseR * 0.55;
-    p.z += f * 3.0;
-
-    // Click shockwave: an expanding ring that lifts particles as it passes
+    // Landing shockwave: an expanding ring that lifts particles as it passes
     float age = uTime - uWave.w;
     if (age > 0.0 && age < 2.4) {
       vec2 dw = p.xy - uWave.xy;
@@ -272,10 +305,12 @@ const POINTS_VERT = /* glsl */ `
     gl_Position = projectionMatrix * mv;
 
     float globeSize = mix(0.85, mix(0.8, 1.2, land), 1.0 - dust);
-    float size = mix(0.65, 1.6, aRand.x) * mix(1.0, globeSize, e2);
+    float galSize = 0.9 + 0.55 * aGalC.w;
+    float size = mix(0.65, 1.6, aRand.x) * mix(mix(galSize, 1.0, e1), globeSize, e2);
     // A pulse of light that travels along each formation
     float pulse = pow(0.5 + 0.5 * sin(toneJ * 12.566 - uTime * 1.8), 10.0) * (1.0 - dust);
     float sizeJ = mix(0.8, 2.0, aRand.x) * (1.0 + pulse * 0.6) * mix(uSizeAB.x, uSizeAB.y, em);
+    sizeJ *= 1.0 + flare * 1.3 + arc * 0.45 * uDrama;
     size = mix(size, sizeJ, ej * (1.0 - dust));
     size *= mix(1.0, 1.2, uLight);
     gl_PointSize = size * uSize * uPR * (60.0 / max(-mv.z, 1.0));
@@ -283,10 +318,8 @@ const POINTS_VERT = /* glsl */ `
     float twinkle = 0.65 + 0.35 * sin(uTime * (1.5 + aRand.x * 2.0) + aRand.z * 40.0);
 
     // Dark palette
-    float rn = r / uGalR;
-    vec3 arm = mix(vec3(0.49, 0.42, 1.0), vec3(0.22, 0.78, 1.0), smoothstep(0.25, 0.9, rn));
-    arm = mix(arm, vec3(0.96, 0.45, 0.8), step(0.86, aRand.z) * 0.8);
-    vec3 galD = mix(vec3(1.0, 0.92, 0.98), arm, smoothstep(0.0, 0.22, rn));
+    vec3 galD = aGalC.rgb;
+    float galA = min(0.95 * aGalC.w * (0.8 + 0.2 * twinkle), 1.0) * galIn;
 
     float sweep = exp(-pow((tn - uSweep) * 7.0, 2.0));
     vec3 nameD = ramp(vec3(0.56, 0.64, 1.0), vec3(0.75, 0.52, 0.99), vec3(0.96, 0.45, 0.71), tn);
@@ -311,8 +344,8 @@ const POINTS_VERT = /* glsl */ `
     float back = mix(0.18, 1.0, smoothstep(-0.35, 0.35, facing));
     float alphaText = mix(0.9 + sweep * 0.1, 0.32 * twinkle, dust);
     float alphaGlobe = mix(mix(0.28 * twinkle, 0.95, land) * back, 0.32 * twinkle, dust);
-    float aD = mix(mix(0.85, alphaText, e1), alphaGlobe, e2);
-    float aL = mix(mix(0.6, mix(0.85, 0.22 * twinkle, dust), e1),
+    float aD = mix(mix(galA, alphaText, e1), alphaGlobe, e2);
+    float aL = mix(mix(0.6 * galIn, mix(0.85, 0.22 * twinkle, dust), e1),
                    mix(mix(0.2 * twinkle, 0.7, land) * back, 0.22 * twinkle, dust), e2);
     vAlpha = mix(aD, aL, uLight);
 
@@ -321,8 +354,12 @@ const POINTS_VERT = /* glsl */ `
       vec3 colJ = mix(ramp(uPalA[0], uPalA[1], uPalA[2], aA.w),
                       ramp(uPalB[0], uPalB[1], uPalB[2], aB.w), em);
       colJ = mix(colJ, vec3(1.0), pulse * 0.55 * (1.0 - uLight));
+      // In flight the particles run hot: white at the burning edge, a
+      // brightened blend of both brands through the vortex
+      colJ = mix(colJ, colJ * 0.45 + 0.55, arc * 0.4 * uDrama);
+      colJ = mix(colJ, vec3(1.0, 0.95, 0.9), min(flare, 1.0) * 0.85);
       colJ = mix(colJ, mix(dustD, dustL, uLight), dust);
-      float aJ = mix(uAlphaAB.x, uAlphaAB.y, em) * (0.75 + 0.25 * twinkle) + pulse * 0.3;
+      float aJ = mix(uAlphaAB.x, uAlphaAB.y, em) * (0.75 + 0.25 * twinkle) + pulse * 0.3 + flare * 0.5;
       aJ = mix(aJ, mix(0.32, 0.22, uLight) * twinkle, dust);
       vColor = mix(vColor, colJ, ej);
       vAlpha = mix(vAlpha, aJ, ej);
@@ -717,13 +754,135 @@ function makeRipples(out, a, b, L, S) {
   }
 }
 
-// Sign-off: back to the galaxy the intro was born from
+// The opening Milky Way, in the disc's own plane (xz, y up): a warm bulge
+// and bar, two major and two minor trailing arms with dust lanes on their
+// inner edges, star-forming knots, a faint disc between the arms and a halo.
+// Fills pos (xyz) and col (rgb + brightness) for particles 0..N-1.
+function makeMilkyWay(pos, col, N, R) {
+  const gauss = () => {
+    let u = 0;
+    while (!u) u = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * Math.random());
+  };
+  const mix3 = (a, b, k) => [lerp(a[0], b[0], k), lerp(a[1], b[1], k), lerp(a[2], b[2], k)];
+  const CORE = [1.0, 0.94, 0.84];
+  const GOLD = [1.0, 0.76, 0.52];
+  const ARM_IN = [0.78, 0.72, 1.0];
+  const ARM_OUT = [0.4, 0.76, 1.0];
+  const PINK = [1.0, 0.42, 0.74];
+  const YOUNG = [0.72, 0.86, 1.0];
+  const DISC = [0.56, 0.5, 0.96];
+  const HALO = [0.7, 0.74, 1.0];
+
+  const barA = 0.45;
+  const barL = R * 0.19;
+  const pitch = 0.36; // tan of the arms' pitch angle (~20 degrees)
+  // [start angle, share]: the two major arms leave the ends of the bar
+  const ARMS = [
+    [barA, 0.36],
+    [barA + Math.PI, 0.36],
+    [barA + Math.PI / 2, 0.14],
+    [barA + (3 * Math.PI) / 2, 0.14],
+  ];
+  const pickArm = () => {
+    let u = Math.random();
+    for (const arm of ARMS) {
+      if ((u -= arm[1]) <= 0) return arm;
+    }
+    return ARMS[0];
+  };
+  const armAt = (arm, r) => arm[0] + Math.log(r / barL) / pitch;
+  const knots = Array.from({ length: 90 }, () => {
+    const r = barL + (R - barL) * (0.08 + 0.85 * Math.random());
+    const th = armAt(pickArm(), r) + gauss() * 0.04;
+    return { x: Math.cos(th) * r, z: Math.sin(th) * r, pink: Math.random() < 0.55 };
+  });
+
+  for (let i = 0; i < N; i++) {
+    const roll = Math.random();
+    let x;
+    let y;
+    let z;
+    let c;
+    let w;
+    if (roll < 0.14) {
+      // Bulge: a squashed, slightly elongated glow along the bar, around a
+      // white-hot nucleus
+      const s = R * (Math.random() < 0.35 ? 0.025 : 0.07);
+      const u = gauss() * s * 1.25;
+      const v = gauss() * s;
+      x = Math.cos(barA) * u - Math.sin(barA) * v;
+      z = Math.sin(barA) * u + Math.cos(barA) * v;
+      y = gauss() * s * 0.6;
+      c = mix3(CORE, GOLD, Math.min(Math.hypot(x, y, z) / (R * 0.16), 1));
+      w = 1.3;
+    } else if (roll < 0.22) {
+      const along = (Math.random() * 2 - 1) * barL;
+      const across = gauss() * R * 0.028;
+      x = Math.cos(barA) * along - Math.sin(barA) * across;
+      z = Math.sin(barA) * along + Math.cos(barA) * across;
+      y = gauss() * R * 0.014;
+      c = mix3(GOLD, CORE, 0.35 + 0.4 * Math.random());
+      w = 1.0;
+    } else if (roll < 0.82) {
+      const arm = pickArm();
+      const r = barL + (R - barL) * Math.pow(Math.random(), 0.9);
+      const rn = r / R;
+      const width = R * (0.016 + 0.04 * rn);
+      let d = gauss() * width;
+      // Dust lane: most stars that would sit on the inner edge are pushed out
+      if (d < -0.25 * width && d > -0.8 * width && Math.random() < 0.85) d = -d;
+      const rr = r + d;
+      const th = armAt(arm, r) + gauss() * 0.03;
+      x = Math.cos(th) * rr;
+      z = Math.sin(th) * rr;
+      y = gauss() * R * 0.01;
+      const tone = smoothstep(0.15, 0.95, rn);
+      c = mix3(ARM_IN, ARM_OUT, tone);
+      if (Math.random() < 0.08) c = YOUNG;
+      w = lerp(0.95, 0.7, tone) * (arm[1] < 0.3 ? 0.8 : 1);
+    } else if (roll < 0.88) {
+      const k = knots[(Math.random() * knots.length) | 0];
+      const s = R * 0.009;
+      x = k.x + gauss() * s;
+      z = k.z + gauss() * s;
+      y = gauss() * s * 0.5;
+      c = k.pink ? PINK : YOUNG;
+      w = 1.25;
+    } else if (roll < 0.96) {
+      const r = Math.min(-Math.log(1 - Math.random() * 0.98) * R * 0.32, R * 1.15);
+      const th = Math.random() * Math.PI * 2;
+      x = Math.cos(th) * r;
+      z = Math.sin(th) * r;
+      y = gauss() * R * 0.015;
+      c = DISC;
+      w = 0.5;
+    } else {
+      const r = R * (0.08 + 1.0 * Math.pow(Math.random(), 0.7));
+      const ph = Math.random() * Math.PI * 2;
+      const ct = Math.random() * 2 - 1;
+      const st = Math.sqrt(1 - ct * ct);
+      x = Math.cos(ph) * st * r;
+      z = Math.sin(ph) * st * r;
+      y = ct * r * 0.55;
+      c = HALO;
+      w = 0.35;
+    }
+    pos[i * 3] = x;
+    pos[i * 3 + 1] = y;
+    pos[i * 3 + 2] = z;
+    col.set([c[0], c[1], c[2], w], i * 4);
+  }
+}
+
+// Sign-off: back to the galaxy the intro was born from, at its old size
 function makeGalaxy(out, a, b, L, S, ctx) {
+  const k = 0.8 * ctx.signR / ctx.galR;
   for (let i = a; i < b; i++) {
     const x = ctx.galaxy[i * 3];
     const y = ctx.galaxy[i * 3 + 1];
     const z = ctx.galaxy[i * 3 + 2];
-    put(out, i, x * 0.8, y * 0.8, z * 0.8, Math.hypot(x, z) / ctx.galR);
+    put(out, i, x * k, y * k, z * k, Math.hypot(x, z) / ctx.galR);
   }
 }
 
@@ -808,8 +967,8 @@ const JOURNEY = [
 // hold the left (above them on portrait screens)
 function logoBox(L) {
   return L.stacked
-    ? { x: 0, y: L.H * 0.15, w: L.W * 0.7, h: L.H * 0.3 }
-    : { x: L.W * 0.215, y: L.H * 0.01, w: L.W * 0.37, h: L.H * 0.64 };
+    ? { x: 0, y: L.H * 0.15, w: L.W * 0.56, h: L.H * 0.24 }
+    : { x: L.W * 0.215, y: L.H * 0.01, w: L.W * 0.3, h: L.H * 0.5 };
 }
 
 const LOGO_RES = 240;
@@ -1039,7 +1198,8 @@ const COMPANIES = COMPANY_DEFS.map((def) => {
     },
     dark,
     light: dark,
-    alpha: [1, 1],
+    // Held under the name's glow: the marks pack their particles tighter
+    alpha: [0.6, 0.6],
   };
 });
 
@@ -1070,8 +1230,6 @@ class IntroScene {
     this.light = this.isLightTheme() ? 1 : 0;
     this.pointer = new Vector2(0, 0);
     this.pointerSmooth = new Vector2(0, 0);
-    this.pointerActive = false;
-    this.mouseF = 0;
     this.lowPower =
       window.matchMedia("(pointer: coarse)").matches ||
       (navigator.hardwareConcurrency || 8) <= 4;
@@ -1107,9 +1265,6 @@ class IntroScene {
     this.scene = new Scene();
     this.camera = new PerspectiveCamera(FOV, 1, 0.1, 400);
     this.camera.position.set(0, 0, CAM_Z);
-    this.raycaster = new Raycaster();
-    this.plane = new Plane(new Vector3(0, 0, 1), 0);
-    this.mouseWorld = new Vector3(0, 0, 0);
 
     const edge = {
       uEdge: { value: 0 },
@@ -1127,7 +1282,8 @@ class IntroScene {
         ...edge,
         uTime: { value: 0 },
         uGalT: { value: 0 },
-        uBang: { value: 1 },
+        uGalIn: { value: 1 },
+        uGalTilt: { value: new Vector2(1.05, 0) },
         uToText: { value: 0 },
         uToGlobe: { value: 1 },
         uSize: { value: 2.4 },
@@ -1135,9 +1291,6 @@ class IntroScene {
         uSweep: { value: -1 },
         uTextW: { value: 1 },
         uGalR: { value: 1 },
-        uMouse: { value: this.mouseWorld },
-        uMouseF: { value: 0 },
-        uMouseR: { value: 6 },
         uWave: { value: [0, 0, 0, -100] },
         uGlobeC: { value: new Vector3() },
         uGlobeS: { value: 1 },
@@ -1154,6 +1307,8 @@ class IntroScene {
         uSizeAB: { value: new Vector2(1, 1) },
         uCenter: { value: new Vector3(0, 0, JOURNEY_Z) },
         uStir: { value: 0 },
+        uDrama: { value: 0 },
+        uDramaW: { value: 10 },
         uScrollW: { value: 0 },
         uWorldH: { value: 1 },
       },
@@ -1253,23 +1408,22 @@ class IntroScene {
     this.N = N;
     this.dustN = dustN;
     const galaxy = new Float32Array(N * 3);
+    const galC = new Float32Array(N * 4);
     const text = new Float32Array(N * 3);
     const globe = new Float32Array(N * 3);
     const rand = new Float32Array(N * 4);
 
-    const galR = Math.max(L.W, L.H) * 0.42;
-    const arms = 3;
+    // The galaxy fills the frame as the camera holds at about z = 66: its
+    // long axis spans the screen's long side (upright on portrait screens)
+    // and the tilt fits the short side
+    const view = 66 / CAM_Z;
+    const long = Math.max(L.W, L.H) * 0.5 * view;
+    const short = Math.min(L.W, L.H) * 0.5 * view;
+    const galR = long * 0.96;
+    const tilt = Math.asin(Math.min(Math.max((short * 1.08) / galR, 0.4), 0.95));
+    const roll = (L.H > L.W ? Math.PI / 2 : 0) + 0.1;
+    makeMilkyWay(galaxy, galC, N, galR);
     for (let i = 0; i < N; i++) {
-      const r = Math.pow(Math.random(), 1.5) * galR;
-      const angle = ((i % arms) / arms) * Math.PI * 2 + (r / galR) * 5;
-      const jitter = () =>
-        Math.pow(Math.random(), 3) *
-        (Math.random() < 0.5 ? 1 : -1) *
-        (r * 0.35 + 1);
-      galaxy[i * 3] = Math.cos(angle) * r + jitter();
-      galaxy[i * 3 + 1] = jitter() * 0.5;
-      galaxy[i * 3 + 2] = Math.sin(angle) * r + jitter();
-
       rand[i * 4] = Math.random();
       rand[i * 4 + 1] = Math.random();
       rand[i * 4 + 2] = Math.random();
@@ -1330,10 +1484,12 @@ class IntroScene {
     const u = this.pointsMat.uniforms;
     u.uTextW.value = s.width;
     u.uGalR.value = galR;
+    u.uGalTilt.value.set(tilt, roll);
     u.uSize.value = L.vw < 768 ? 2.9 : 2.4;
     u.uWorldH.value = L.H;
     this.galaxy = galaxy;
     this.galR = galR;
+    this.signR = Math.max(L.W, L.H) * 0.42;
 
     if (this.points) {
       this.points.geometry.dispose();
@@ -1341,6 +1497,7 @@ class IntroScene {
     }
     const geo = new BufferGeometry();
     geo.setAttribute("position", new BufferAttribute(galaxy, 3));
+    geo.setAttribute("aGalC", new BufferAttribute(galC, 4));
     geo.setAttribute("aText", new BufferAttribute(text, 3));
     geo.setAttribute("aGlobe", new BufferAttribute(globe, 3));
     geo.setAttribute("aRand", new BufferAttribute(rand, 4));
@@ -1386,22 +1543,12 @@ class IntroScene {
       this.measureRaf = requestAnimationFrame(() => this.measure());
     });
     this.bodyObserver.observe(document.body);
-
-    // A click on empty page space sends a shockwave through the formation
-    this.onPageDown = (e) => {
-      if (this.P < 0.3 || e.button > 0) return;
-      const hit = e.target.closest(
-        "a, button, input, textarea, select, label, [role='button'], [onclick], .chatbot-widget",
-      );
-      if (!hit) this.onWaveDown(e);
-    };
-    document.addEventListener("pointerdown", this.onPageDown);
   }
 
   buildJourney() {
     const L = this.L;
     const S = Math.min(L.H * 0.42, L.W * 0.46);
-    const ctx = { galaxy: this.galaxy, galR: this.galR };
+    const ctx = { galaxy: this.galaxy, galR: this.galR, signR: this.signR };
     this.shapes = JOURNEY.map((def) => {
       const data = new Float32Array(this.N * 4);
       def.make(data, this.dustN, this.N, L, S, ctx);
@@ -1496,8 +1643,11 @@ class IntroScene {
   updateJourney(dt, s) {
     const u = this.pointsMat.uniforms;
     // The cinematic's career chapters borrow the same machinery
+    u.uDrama.value = 0;
     if (s.cj > 0 && this.companyShapes) {
       this.showFormations(this.companyShapes, COMPANIES, s.co, s.cj);
+      u.uDrama.value = 1;
+      u.uDramaW.value = this.logoBox ? this.logoBox.w * 0.5 : 10;
       return 0;
     }
     if (!this.journey || this.mode === "cine") {
@@ -1630,7 +1780,7 @@ class IntroScene {
   skip() {
     if (this.mode !== "cine" || this.t >= CUE.reveal) return;
     this.unbindSkip();
-    this.fired = { flash: true, reveal: true, cards: true, end: true };
+    this.fired = { reveal: true, cards: true, end: true };
     this.ui.querySelectorAll("[data-cue]").forEach((el) => {
       el.classList.toggle("is-off", el.classList.contains("is-on"));
       el.classList.remove("is-on");
@@ -1670,7 +1820,7 @@ class IntroScene {
     void getComputedStyle(this.root).opacity;
     this.root.classList.remove("intro-cine-reveal");
     this.bindSkip();
-    // Implode everything back into the singularity, then go again
+    // Fade everything back into the dark galaxy, then go again
     this.startTween({ ...this.state }, timeline(0), 1.3, () => {
       this.mode = "cine";
       this.t = 0;
@@ -1686,20 +1836,20 @@ class IntroScene {
         fn();
       }
     };
-    fire("flash", () => {
-      const flash = this.ui.querySelector(".intro-cine-flash");
-      if (flash) {
-        flash.classList.remove("is-on");
-        void flash.offsetWidth;
-        flash.classList.add("is-on");
-      }
-    });
     fire("reveal", () => {
       this.ui.classList.add("is-leaving");
       this.root.classList.add("intro-cine-reveal");
       this.unbindSkip();
     });
     fire("cards", () => this.hooks.enterCards && this.hooks.enterCards());
+    // Each new logo locks in with a shockwave rippling out from its centre
+    for (let k = 1; k < 5; k++) {
+      const key = `land${k}`;
+      if (this.fired[key] || t < coAt(k) - 0.15 || t > coAt(k) + 0.5) continue;
+      this.fired[key] = true;
+      const box = this.logoBox;
+      if (box) this.pointsMat.uniforms.uWave.value = [box.x, box.y, 0, this.time];
+    }
     fire("end", () => this.finishCinematic());
 
     for (const [name, a, b] of CAPTIONS) {
@@ -1726,24 +1876,8 @@ class IntroScene {
         (e.clientX / window.innerWidth) * 2 - 1,
         -(e.clientY / window.innerHeight) * 2 + 1,
       );
-      this.pointerActive = true;
-    };
-    this.onPointerOut = (e) => {
-      if (!e.relatedTarget) this.pointerActive = false;
     };
     window.addEventListener("pointermove", this.onPointerMove, { passive: true });
-    document.addEventListener("pointerout", this.onPointerOut);
-
-    this.onWaveDown = (e) => {
-      if (e.target.closest(".intro-cine-skip")) return;
-      this.onPointerMove(e);
-      this.raycaster.setFromCamera(this.pointer, this.camera);
-      const hit = new Vector3();
-      if (this.raycaster.ray.intersectPlane(this.plane, hit)) {
-        this.pointsMat.uniforms.uWave.value = [hit.x, hit.y, 0, this.time];
-      }
-    };
-    this.ui.addEventListener("pointerdown", this.onWaveDown);
 
     this.onSkipClick = () => this.skip();
     const skipBtn = this.ui.querySelector(".intro-cine-skip");
@@ -1868,13 +2002,11 @@ class IntroScene {
 
     u.uTime.value = this.time;
     u.uGalT.value = cine ? this.t : this.time;
-    u.uBang.value = s.bang;
+    u.uGalIn.value = s.galIn;
     u.uToText.value = s.toText;
     u.uToGlobe.value = s.toGlobe;
     u.uLight.value = light;
-    u.uSweep.value = cine ? lerp(-0.2, 1.2, span(this.t, 4.0, 5.0)) : -1;
-    u.uMouseR.value = lerp(6.5, 4.5, s.ambient);
-
+    u.uSweep.value = cine ? lerp(-0.2, 1.2, span(this.t, NAME_AT, NAME_AT + 1.0)) : -1;
     const j = this.updateJourney(dt, s);
     this.arcsMat.uniforms.uArcs.value = s.arcs;
     this.arcsMat.uniforms.uFade.value = 1 - j;
@@ -1901,7 +2033,8 @@ class IntroScene {
     // Camera: dolly through the scenes, drift with the cursor, lag the scroll
     const k = dt ? Math.min(dt * 2.5, 1) : 1;
     this.pointerSmooth.lerp(this.pointer, k);
-    const cineZ = 74 - 12 * s.bang - 5 * s.toText + 6 * s.toGlobe;
+    const flight = cine ? coFlight(this.t) : { f: 0, k: 0 };
+    const cineZ = 74 - 12 * easeInOut(s.galIn) - 5 * s.toText + 6 * s.toGlobe - 6 * flight.f;
     const camZ = lerp(cineZ, CAM_Z, s.ambient);
     const worldPerPx = L.H / window.innerHeight;
     // Past the intro the camera holds still and the formations come to it
@@ -1913,10 +2046,12 @@ class IntroScene {
     u.uScrollW.value = sy * worldPerPx * 0.25;
     let shakeX = 0;
     let shakeY = 0;
-    if (cine && this.t > CUE.flash) {
-      const amp = 0.55 * Math.exp(-(this.t - CUE.flash) * 5);
-      shakeX = (Math.random() - 0.5) * amp;
-      shakeY = (Math.random() - 0.5) * amp;
+    // A jolt as each morphed logo lands
+    const landed = Math.floor((this.t - CO_START) / CO_STEP);
+    if (cine && landed >= 1 && landed <= 4) {
+      const amp = 0.35 * Math.exp(-(this.t - coAt(landed)) * 7);
+      shakeX += (Math.random() - 0.5) * amp;
+      shakeY += (Math.random() - 0.5) * amp;
     }
     const cam = this.camera;
     cam.position.set(
@@ -1925,24 +2060,18 @@ class IntroScene {
       camZ,
     );
     cam.lookAt(0, scrollShift, 0);
-    cam.rotateZ(0.14 * s.bang * (1 - s.toText) * (1 - s.ambient));
+    cam.rotateZ(0.035 * flight.f * (flight.k % 2 ? 1 : -1));
     cam.updateMatrixWorld();
-
-    // Cursor in world space, on the plane the name sits on
-    this.mouseF = lerp(this.mouseF, this.pointerActive && !this.reduced ? 1 : 0, k);
-    u.uMouseF.value = this.mouseF;
-    this.raycaster.setFromCamera(this.pointerSmooth, cam);
-    this.raycaster.ray.intersectPlane(this.plane, this.mouseWorld);
 
     const c = this.clip();
     this.edge.uEdge.value = s.ambient;
     this.edge.uClip.value = [c.top, c.top + 80, c.bottom - lerp(180, 60, c.open), c.bottom];
 
-    if (cine && this.t > 3.0 && this.t < 6.2) {
+    if (cine && this.t > NAME_AT - 1.0 && this.t < NAME_AT + 2.4) {
       const sub = this.ui.querySelector('[data-cue="name"]');
       if (sub) sub.style.top = `${Math.round(this.screenY(this.textBottom) + 22)}px`;
     }
-    if (cine && this.t > 5.8 && this.t < CO_END + 0.6) {
+    if (cine && this.t > NAME_AT + 1.7 && this.t < CO_END + 0.6) {
       const box = this.logoBox;
       const stacked = this.L.stacked;
       this.ui.classList.toggle("is-stacked", stacked);
@@ -1950,13 +2079,6 @@ class IntroScene {
       if (career && box) {
         const y = stacked ? this.screenY(box.y - box.h / 2) + 24 : this.screenY(box.y);
         career.style.top = `${Math.round(y)}px`;
-      }
-      const rail = this.ui.querySelector(".intro-cine-rail");
-      if (rail) {
-        rail.style.setProperty("--rail", (s.co / 4).toFixed(3));
-        rail.querySelectorAll("[data-node]").forEach((node) => {
-          node.classList.toggle("is-reached", s.co >= Number(node.dataset.node) - 0.5);
-        });
       }
     }
     return c;
@@ -1984,10 +2106,8 @@ class IntroScene {
     this.unbindSkip();
     this.root.classList.remove("page-scene");
     if (this.bodyObserver) this.bodyObserver.disconnect();
-    if (this.onPageDown) document.removeEventListener("pointerdown", this.onPageDown);
     window.removeEventListener("resize", this.onResize);
     window.removeEventListener("pointermove", this.onPointerMove);
-    document.removeEventListener("pointerout", this.onPointerOut);
     if (this.onScroll) window.removeEventListener("scroll", this.onScroll);
     if (this.themeObserver) this.themeObserver.disconnect();
     if (this.points) this.points.geometry.dispose();

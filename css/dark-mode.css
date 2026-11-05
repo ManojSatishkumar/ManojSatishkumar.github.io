@@ -530,18 +530,6 @@ html[data-theme="dark"] .home-profile__fact-icon {
   background: rgba(var(--tone), 0.14);
 }
 
-html[data-theme="dark"] .home-profile__btn--ghost,
-html[data-theme="dark"] .home-profile__btn--ghost:hover,
-html[data-theme="dark"] .home-profile__btn--ghost:focus {
-  border-color: rgba(165, 180, 252, 0.35);
-  background: rgba(165, 180, 252, 0.08);
-  color: var(--dm-violet);
-}
-
-html[data-theme="dark"] .home-profile__btn--ghost:hover {
-  background: rgba(165, 180, 252, 0.15);
-}
-
 /* Highlights slideshow: lighter tones read better on the dark surface */
 html[data-theme="dark"] .intro-lead-slide--scale {
   --tone: 96, 165, 250;

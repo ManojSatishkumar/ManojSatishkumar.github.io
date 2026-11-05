@@ -875,13 +875,13 @@
 
       /* The footer turns to frosted glass over the closing galaxy */
       html.page-scene body #footer footer {
-        background: rgba(248, 249, 250, 0.62) !important;
-        -webkit-backdrop-filter: blur(4px) saturate(150%);
-        backdrop-filter: blur(4px) saturate(150%);
+        background: rgba(248, 249, 250, 0.4) !important;
+        -webkit-backdrop-filter: blur(2px) saturate(150%);
+        backdrop-filter: blur(2px) saturate(150%);
       }
 
       html.page-scene[data-theme="dark"] body #footer footer {
-        background: rgba(19, 28, 46, 0.4) !important;
+        background: rgba(19, 28, 46, 0.18) !important;
         border-top-color: rgba(148, 163, 184, 0.18);
       }
 
@@ -912,11 +912,11 @@
           #msk-testimony,
           #blog-articles
         ) {
-        --dm-surface: rgba(19, 28, 46, 0.62);
+        --dm-surface: rgba(19, 28, 46, 0.74);
       }
 
       html.page-scene:not([data-theme="dark"]) .xp {
-        --xp-surface: rgba(255, 255, 255, 0.78);
+        --xp-surface: rgba(255, 255, 255, 0.88);
       }
 
       /* A soft halo keeps copy legible where it sits right on a formation.
@@ -957,7 +957,7 @@
 
       html.page-scene:not([data-theme="dark"])
         :is(.project-card, .skill-card, .testimony-card, .pt-card, .pt-block) {
-        background-color: rgba(255, 255, 255, 0.78) !important;
+        background-color: rgba(255, 255, 255, 0.88) !important;
       }
 
       @media (hover: hover) and (pointer: fine) {
