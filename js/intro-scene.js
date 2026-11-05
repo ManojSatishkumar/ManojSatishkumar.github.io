@@ -32,13 +32,27 @@ const FOV = 45;
 const CAM_Z = 60;
 const NAME = "MANOJ SATISHKUMAR";
 
-// Cinematic timeline, in seconds
-const CUE = { flash: 0.25, reveal: 6.4, cards: 6.75, end: 7.9 };
+// Cinematic, in seconds: origin (galaxy) -> the name -> the career, one
+// company at a time -> the globe it reaches today -> who he is -> the cards
+const CO_START = 5.0; // first company fully formed
+const CO_STEP = 0.95; // one company to the next
+const CO_MORPH = 0.55; // of which the particles are in flight
+const CO_END = 9.3; // last company starts handing over to the globe
+const coAt = (k) => CO_START + k * CO_STEP;
+
+const CUE = { flash: 0.25, reveal: 12.6, cards: 12.95, end: 14.1 };
 const CAPTIONS = [
   ["chaos", 0.55, 1.95],
-  ["name", 2.5, 4.3],
-  ["scale", 4.8, 6.4],
-  ["hint", 1.9, 6.0],
+  ["name", 2.5, 4.4],
+  ["rail", 4.55, 9.5],
+  ["co0", coAt(0) - 0.3, coAt(1) - CO_MORPH + 0.1],
+  ["co1", coAt(1) - 0.2, coAt(2) - CO_MORPH + 0.1],
+  ["co2", coAt(2) - 0.2, coAt(3) - CO_MORPH + 0.1],
+  ["co3", coAt(3) - 0.2, coAt(4) - CO_MORPH + 0.1],
+  ["co4", coAt(4) - 0.2, CO_END + 0.2],
+  ["scale", 9.9, 11.5],
+  ["roles", 11.5, 12.7],
+  ["hint", 1.9, 9.0],
 ];
 
 const clamp01 = (x) => Math.min(Math.max(x, 0), 1);
@@ -48,18 +62,23 @@ const easeInOut = (x) =>
   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 
 function timeline(t) {
+  let co = 0;
+  for (let k = 1; k < 5; k++) co += span(t, coAt(k) - CO_MORPH, coAt(k));
   return {
     bang: span(t, 0.25, 1.75),
     toText: span(t, 1.6, 3.1),
-    toGlobe: span(t, 4.3, 5.6),
-    rim: span(t, 4.9, 6.0),
-    arcs: span(t, 5.0, 6.6),
-    ambient: easeInOut(span(t, 6.4, 7.7)),
+    // cj: the name hands over to the companies, which hand over to the globe
+    cj: span(t, 4.3, CO_START) * (1 - span(t, CO_END, CO_END + 1.1)),
+    co,
+    toGlobe: span(t, CO_END, CO_END + 1.3),
+    rim: span(t, 9.9, 11.0),
+    arcs: span(t, 10.0, 11.6),
+    ambient: easeInOut(span(t, CUE.reveal, CUE.reveal + 1.3)),
   };
 }
 
-const STATE_KEYS = ["bang", "toText", "toGlobe", "rim", "arcs", "ambient"];
-const REST = { bang: 1, toText: 0, toGlobe: 1, rim: 1, arcs: 1, ambient: 1 };
+const STATE_KEYS = ["bang", "toText", "cj", "co", "toGlobe", "rim", "arcs", "ambient"];
+const REST = { bang: 1, toText: 0, cj: 0, co: 0, toGlobe: 1, rim: 1, arcs: 1, ambient: 1 };
 
 // Blends premultiplied colour, so one material can glow additively on the
 // dark curtain (alpha tracks brightness) and paint normally over a light page
@@ -781,6 +800,51 @@ const JOURNEY = [
   alpha: def.alpha || [0.95, 0.55],
 }));
 
+// Career chapters of the cinematic: each company spelt in particles, in its
+// own colours, on the plane the name sat on
+function makeWord(word) {
+  return (out, a, b, L) => {
+    const s = sampleName(
+      [word],
+      L.W * (L.stacked ? 0.84 : 0.56),
+      L.H * (L.stacked ? 0.13 : 0.2),
+    );
+    const count = s.pts.length / 2;
+    for (let i = a; i < b; i++) {
+      const k = ((Math.random() * count) | 0) * 2;
+      const x = (s.pts[k] + Math.random() - s.cx) * s.scale;
+      put(
+        out,
+        i,
+        x,
+        -(s.pts[k + 1] + Math.random() - s.cy) * s.scale,
+        (Math.random() - 0.5) * 1.2,
+        clamp01(x / s.width + 0.5),
+      );
+    }
+    return s.bottom;
+  };
+}
+
+const COMPANIES = [
+  { word: "GRL LABS", dark: [0x93c5fd, 0x60a5fa, 0xa78bfa] },
+  { word: "CERNER", dark: [0x99f6e4, 0x2dd4bf, 0x38bdf8] },
+  { word: "WALMART", dark: [0x93c5fd, 0x3b82f6, 0xfcd34d] },
+  { word: "PAYPAL", dark: [0x7dd3fc, 0x38bdf8, 0x6366f1] },
+  { word: "DISNEY", dark: [0xe0e7ff, 0x818cf8, 0xf0abfc] },
+].map((def) => {
+  const dark = def.dark.map(hexToRgb);
+  return {
+    make: makeWord(def.word),
+    rot: (t) => [0.08 * Math.sin(t * 0.9), 0.18 * Math.sin(t * 0.6), 0, "XYZ"],
+    // Bring the words forward from the formations' depth to the name's plane
+    off: (L) => [0, L.H * 0.04, -JOURNEY_Z],
+    dark,
+    light: dark,
+    alpha: [1, 1],
+  };
+});
+
 function hexToRgb(h) {
   return [((h >> 16) & 255) / 255, ((h >> 8) & 255) / 255, (h & 255) / 255];
 }
@@ -1086,6 +1150,14 @@ class IntroScene {
 
     this.buildGlobeExtras(landPts, L.R);
     this.slots = [-1, -1];
+    if (!this.reduced) {
+      this.companyShapes = COMPANIES.map((def, k) => {
+        const data = new Float32Array(N * 4);
+        const bottom = def.make(data, dustN, N, L);
+        if (k === 0) this.companyBottom = bottom + L.H * 0.04;
+        return data;
+      });
+    }
     if (this.journey) this.buildJourney();
   }
 
@@ -1173,16 +1245,16 @@ class IntroScene {
     return p;
   }
 
-  setSlot(slot, idx) {
-    if (this.slots[slot] === idx) return;
-    this.slots[slot] = idx;
+  setSlot(slot, shapes, idx) {
+    const key = `${shapes === this.shapes ? "s" : "c"}${idx}`;
+    if (this.slots[slot] === key) return;
+    this.slots[slot] = key;
     const attr = this.points.geometry.getAttribute(slot ? "aB" : "aA");
-    attr.array.set(this.shapes[idx]);
+    attr.array.set(shapes[idx]);
     attr.needsUpdate = true;
   }
 
-  applySlot(slot, idx) {
-    const def = JOURNEY[idx];
+  applySlot(slot, def) {
     const u = this.pointsMat.uniforms;
     const [x, y, z, order] = def.rot(this.time, this.L);
     this.euler.set(x, y, z, order);
@@ -1203,9 +1275,28 @@ class IntroScene {
     u.uAlphaAB.value.setComponent(slot, lerp(def.alpha[0], def.alpha[1], this.light));
   }
 
-  // Returns how far the intro has handed over to the section formations
-  updateJourney(dt) {
+  // Morphs between formations A and B of a set; q is the position in it
+  showFormations(shapes, defs, q, weight) {
     const u = this.pointsMat.uniforms;
+    const n = shapes.length;
+    const ia = Math.min(Math.floor(q), n - 1);
+    const ib = Math.min(ia + 1, n - 1);
+    this.setSlot(0, shapes, ia);
+    this.setSlot(1, shapes, ib);
+    this.applySlot(0, defs[ia]);
+    this.applySlot(1, defs[ib]);
+    u.uMorph.value = ia === n - 1 ? 0 : q - ia;
+    u.uJourney.value = weight;
+  }
+
+  // Returns how far the intro has handed over to the section formations
+  updateJourney(dt, s) {
+    const u = this.pointsMat.uniforms;
+    // The cinematic's career chapters borrow the same machinery
+    if (s.cj > 0 && this.companyShapes) {
+      this.showFormations(this.companyShapes, COMPANIES, s.co, s.cj);
+      return 0;
+    }
     if (!this.journey || this.mode === "cine") {
       u.uJourney.value = 0;
       return 0;
@@ -1214,18 +1305,8 @@ class IntroScene {
     this.P = dt ? lerp(this.P, target, 1 - Math.exp(-dt * 6)) : target;
     if (Math.abs(this.P - target) < 1e-4) this.P = target;
 
-    const n = this.shapes.length;
-    const q = Math.max(this.P - 1, 0);
-    const ia = Math.min(Math.floor(q), n - 1);
-    const ib = Math.min(ia + 1, n - 1);
-    this.setSlot(0, ia);
-    this.setSlot(1, ib);
-    this.applySlot(0, ia);
-    this.applySlot(1, ib);
-    u.uMorph.value = ia === n - 1 ? 0 : q - ia;
-
     const j = clamp01(this.P);
-    u.uJourney.value = j;
+    this.showFormations(this.shapes, JOURNEY, Math.max(this.P - 1, 0), j);
     return j;
   }
 
@@ -1591,7 +1672,7 @@ class IntroScene {
     u.uSweep.value = cine ? lerp(-0.2, 1.2, span(this.t, 3.1, 4.1)) : -1;
     u.uMouseR.value = lerp(6.5, 4.5, s.ambient);
 
-    const j = this.updateJourney(dt);
+    const j = this.updateJourney(dt, s);
     this.arcsMat.uniforms.uArcs.value = s.arcs;
     this.arcsMat.uniforms.uFade.value = 1 - j;
     this.rimMat.uniforms.uRim.value = s.rim * (1 - j);
@@ -1656,13 +1737,28 @@ class IntroScene {
 
     if (cine && this.t > 2.2 && this.t < 4.6) {
       const sub = this.ui.querySelector('[data-cue="name"]');
-      if (sub) {
-        const p = new Vector3(0, this.textBottom, 0).project(cam);
-        const y = ((1 - p.y) / 2) * window.innerHeight;
-        sub.style.top = `${Math.round(y + 22)}px`;
+      if (sub) sub.style.top = `${Math.round(this.screenY(this.textBottom) + 22)}px`;
+    }
+    if (cine && this.t > 4.2 && this.t < CO_END + 0.6) {
+      const top = `${Math.round(this.screenY(this.companyBottom) + 26)}px`;
+      this.ui.querySelectorAll(".intro-cine-co").forEach((el) => {
+        el.style.top = top;
+      });
+      const rail = this.ui.querySelector(".intro-cine-rail");
+      if (rail) {
+        rail.style.setProperty("--rail", (s.co / 4).toFixed(3));
+        rail.querySelectorAll("[data-node]").forEach((node) => {
+          node.classList.toggle("is-reached", s.co >= Number(node.dataset.node) - 0.5);
+        });
       }
     }
     return c;
+  }
+
+  // Viewport y of a point on the z = 0 plane, below the centre line
+  screenY(worldY) {
+    const p = new Vector3(0, worldY, 0).project(this.camera);
+    return ((1 - p.y) / 2) * window.innerHeight;
   }
 
   fail() {

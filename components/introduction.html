@@ -1541,6 +1541,156 @@
     filter: blur(0);
   }
 
+  /* Career chapters: sits under the particle company name; js sets its top */
+  .intro-cine-co {
+    position: absolute;
+    top: 62%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: min(92vw, 760px);
+    margin: 0;
+    transform: translate(-50%, 14px);
+    text-align: center;
+    opacity: 0;
+    filter: blur(8px);
+    transition:
+      opacity 0.45s ease,
+      filter 0.45s ease,
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .intro-cine-co.is-on {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(-50%, 0);
+  }
+
+  .intro-cine-co.is-off {
+    transform: translate(-50%, -10px);
+  }
+
+  .intro-cine-co__years {
+    background: linear-gradient(90deg, #a5b4fc, #f0abfc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: clamp(0.8rem, 1.4vw, 1.05rem);
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .intro-cine-co__role {
+    color: #cbd5e1;
+    font-size: clamp(0.62rem, 1.05vw, 0.85rem);
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    line-height: 1.7;
+    text-transform: uppercase;
+  }
+
+  .intro-cine-rail {
+    position: absolute;
+    top: calc(13vh + env(safe-area-inset-top));
+    left: 50%;
+    display: flex;
+    justify-content: space-between;
+    width: min(78vw, 560px);
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.7s ease;
+  }
+
+  .intro-cine-rail.is-on {
+    opacity: 1;
+  }
+
+  .intro-cine-rail::before,
+  .intro-cine-rail__fill {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    height: 1px;
+    background: rgba(148, 163, 184, 0.28);
+  }
+
+  .intro-cine-rail__fill {
+    background: linear-gradient(90deg, #818cf8, #f472b6);
+    box-shadow: 0 0 10px rgba(244, 114, 182, 0.7);
+    transform: scaleX(var(--rail, 0));
+    transform-origin: left center;
+  }
+
+  .intro-cine-rail__node {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 9px;
+    color: rgba(148, 163, 184, 0.7);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.4s ease;
+  }
+
+  .intro-cine-rail__node::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #0b1120;
+    box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.5);
+    transition:
+      background-color 0.4s ease,
+      box-shadow 0.4s ease;
+  }
+
+  .intro-cine-rail__node.is-reached {
+    color: #e2e8f0;
+  }
+
+  .intro-cine-rail__node.is-reached::before {
+    background: #f0abfc;
+    box-shadow: 0 0 12px 2px rgba(240, 171, 252, 0.75);
+  }
+
+  .intro-cine-roles {
+    width: min(94vw, 1100px);
+    font-size: clamp(1.05rem, 2.3vw, 2rem);
+    letter-spacing: 0.1em;
+  }
+
+  /* Each role lands a beat after the last */
+  .intro-cine-roles span {
+    display: inline-block;
+    margin: 0 0.25em;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.5s ease calc(var(--i) * 0.16s),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i) * 0.16s);
+  }
+
+  .intro-cine-roles span + span::before {
+    content: "\00b7";
+    margin-right: 0.7em;
+    color: #f0abfc;
+  }
+
+  .intro-cine-roles.is-on span {
+    opacity: 1;
+    transform: none;
+  }
+
   .intro-cine-hint {
     position: absolute;
     left: 50%;
@@ -1823,17 +1973,56 @@
   <div class="intro-cine-ui">
     <div class="intro-cine-flash" aria-hidden="true"></div>
     <p class="intro-cine-caption" data-cue="chaos" aria-hidden="true">
-      Every platform begins as chaos.
+      It all began in 2013, with a single line of code.
     </p>
     <p class="intro-cine-sub" data-cue="name" aria-hidden="true">
       Software Architect <span>&middot;</span> Walt Disney
     </p>
+
+    <!-- The career, one company at a time; js/intro-scene.js spells each
+         name in particles and fills the rail -->
+    <div class="intro-cine-rail" data-cue="rail" aria-hidden="true">
+      <span class="intro-cine-rail__fill"></span>
+      <span class="intro-cine-rail__node" data-node="0">2013</span>
+      <span class="intro-cine-rail__node" data-node="1">2015</span>
+      <span class="intro-cine-rail__node" data-node="2">2019</span>
+      <span class="intro-cine-rail__node" data-node="3">2021</span>
+      <span class="intro-cine-rail__node" data-node="4">Now</span>
+    </div>
+    <p class="intro-cine-co" data-cue="co0" aria-hidden="true">
+      <span class="intro-cine-co__years">2013 &ndash; 2015</span>
+      <span class="intro-cine-co__role">Software Engineer &middot; SSD validation for Intel, Samsung &amp; Micron</span>
+    </p>
+    <p class="intro-cine-co" data-cue="co1" aria-hidden="true">
+      <span class="intro-cine-co__years">2015 &ndash; 2019</span>
+      <span class="intro-cine-co__role">Engineer to Technical Team Lead &middot; Healthcare platforms</span>
+    </p>
+    <p class="intro-cine-co" data-cue="co2" aria-hidden="true">
+      <span class="intro-cine-co__years">2019 &ndash; 2021 &middot; 2022 &ndash; 2026</span>
+      <span class="intro-cine-co__role">Staff Engineer &middot; 70M+ messages a day for 200+ teams</span>
+    </p>
+    <p class="intro-cine-co" data-cue="co3" aria-hidden="true">
+      <span class="intro-cine-co__years">2021 &ndash; 2022</span>
+      <span class="intro-cine-co__role">Member of Technical Staff &middot; Merchant onboarding</span>
+    </p>
+    <p class="intro-cine-co" data-cue="co4" aria-hidden="true">
+      <span class="intro-cine-co__years">2026 &ndash; Now</span>
+      <span class="intro-cine-co__role">Software Architect &middot; Frontend technical direction</span>
+    </p>
+
     <p class="intro-cine-caption" data-cue="scale" aria-hidden="true">
-      I architect it into experiences for millions.
+      Today I architect platforms used by millions.
       <span class="intro-cine-stats"
         ><span class="js-experience-years">13</span> years &middot; 5 companies
-        &middot; 25+ countries</span
+        &middot; 14 flagship projects &middot; 25+ countries</span
       >
+    </p>
+    <p class="intro-cine-caption intro-cine-roles" data-cue="roles" aria-hidden="true">
+      <span style="--i: 0">Architect</span>
+      <span style="--i: 1">Inventor</span>
+      <span style="--i: 2">Speaker</span>
+      <span style="--i: 3">Mentor</span>
+      <span style="--i: 4">Instructor</span>
     </p>
     <p class="intro-cine-hint" data-cue="hint" aria-hidden="true">
       <span class="intro-cine-hint--pointer"
