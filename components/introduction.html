@@ -1354,9 +1354,503 @@
       letter-spacing: 2px;
     }
   }
+
+  /* ---------- 3D stage ----------
+     A fixed canvas at z-index -1 in the root stacking context: above the
+     body background, below all page content. .intro-shell must therefore
+     never become a stacking context (no z-index, transform or filter). */
+  .intro-stage {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .intro-stage.is-live {
+    opacity: 1;
+  }
+
+  .intro-stage canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* During the cinematic the stage, then the cards, rise above the curtain
+     (199999 in index.html) and every fixed bar */
+  .intro-shell.is-cine .intro-stage {
+    z-index: 200000;
+    transition: none;
+  }
+
+  .intro-shell.is-cine > .container {
+    position: relative;
+    z-index: 200001;
+  }
+
+  /* ---------- Cinematic overlay ---------- */
+  .intro-cine-ui {
+    display: none;
+  }
+
+  .intro-shell.is-cine .intro-cine-ui {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 200002;
+    overflow: hidden;
+    color: #f8fafc;
+    font-family: "Poppins", sans-serif;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: opacity 0.6s ease;
+  }
+
+  .intro-cine-ui.is-leaving {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .intro-cine-flash {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, 0.95) 0,
+      rgba(196, 181, 253, 0.6) 6%,
+      rgba(99, 102, 241, 0.22) 22%,
+      transparent 55%
+    );
+  }
+
+  .intro-cine-flash.is-on {
+    animation: introFlash 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes introFlash {
+    0% {
+      opacity: 0;
+      transform: scale(0.15);
+    }
+    12% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(2.4);
+    }
+  }
+
+  .intro-cine-caption {
+    position: absolute;
+    left: 50%;
+    bottom: 15vh;
+    width: min(92vw, 1000px);
+    margin: 0;
+    transform: translateX(-50%);
+    color: #f8fafc;
+    font-size: clamp(1.3rem, 2.9vw, 2.5rem);
+    font-weight: 300;
+    line-height: 1.35;
+    letter-spacing: 0.16em;
+    text-align: center;
+    text-shadow: 0 0 28px rgba(129, 140, 248, 0.55);
+    opacity: 0;
+    filter: blur(14px);
+    transition:
+      opacity 0.9s ease,
+      filter 0.9s ease,
+      transform 0.9s ease,
+      letter-spacing 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .intro-cine-caption.is-on,
+  .intro-cine-caption.is-off {
+    letter-spacing: 0.015em;
+  }
+
+  .intro-cine-caption.is-on {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  .intro-cine-caption.is-off {
+    transform: translate(-50%, -18px);
+    filter: blur(10px);
+  }
+
+  .intro-cine-stats {
+    display: block;
+    margin-top: 16px;
+    color: rgba(203, 213, 225, 0.8);
+    font-size: clamp(0.62rem, 1vw, 0.8rem);
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    text-shadow: none;
+  }
+
+  /* Sits under the particle name; js/intro-scene.js sets its top */
+  .intro-cine-sub {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0;
+    transform: translateX(-50%);
+    color: #cbd5e1;
+    font-size: clamp(0.62rem, 1.15vw, 0.95rem);
+    font-weight: 500;
+    letter-spacing: 0.6em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    filter: blur(8px);
+    transition:
+      opacity 0.9s ease,
+      filter 0.9s ease,
+      letter-spacing 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .intro-cine-sub::before,
+  .intro-cine-sub::after {
+    content: "";
+    width: clamp(24px, 6vw, 90px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196, 181, 253, 0.8));
+  }
+
+  .intro-cine-sub::after {
+    background: linear-gradient(90deg, rgba(196, 181, 253, 0.8), transparent);
+  }
+
+  .intro-cine-sub.is-on,
+  .intro-cine-sub.is-off {
+    letter-spacing: 0.34em;
+  }
+
+  .intro-cine-sub.is-on {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  .intro-cine-hint {
+    position: absolute;
+    left: 50%;
+    bottom: calc(5vh + env(safe-area-inset-bottom));
+    margin: 0;
+    transform: translateX(-50%);
+    color: rgba(203, 213, 225, 0.72);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .intro-cine-hint.is-on {
+    opacity: 1;
+  }
+
+  .intro-cine-hint i {
+    margin-right: 6px;
+    color: #a5b4fc;
+  }
+
+  .intro-cine-hint--touch {
+    display: none;
+  }
+
+  @media (hover: none) {
+    .intro-cine-hint--pointer {
+      display: none;
+    }
+    .intro-cine-hint--touch {
+      display: inline;
+    }
+    .intro-cine-skip kbd {
+      display: none;
+    }
+  }
+
+  .intro-cine-skip {
+    position: absolute;
+    right: 24px;
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+    color: #e2e8f0;
+    font: 600 0.8rem/1 "Poppins", sans-serif;
+    letter-spacing: 0.04em;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .intro-cine-skip:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.32);
+  }
+
+  .intro-cine-skip:focus-visible {
+    outline: 2px solid #a5b4fc;
+    outline-offset: 3px;
+  }
+
+  .intro-cine-skip kbd {
+    padding: 3px 6px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+    color: #cbd5e1;
+    font: 600 0.64rem/1 "Poppins", sans-serif;
+  }
+
+  .intro-cine-progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #a855f7, #ec4899);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
+  @media (max-width: 600px) {
+    .intro-cine-sub {
+      letter-spacing: 0.4em;
+    }
+    .intro-cine-sub.is-on,
+    .intro-cine-sub.is-off {
+      letter-spacing: 0.22em;
+    }
+    .intro-cine-sub::before,
+    .intro-cine-sub::after {
+      display: none;
+    }
+    .intro-cine-skip {
+      right: 16px;
+      bottom: calc(16px + env(safe-area-inset-bottom));
+    }
+    .intro-cine-hint {
+      bottom: calc(76px + env(safe-area-inset-bottom));
+    }
+  }
+
+  /* ---------- Cards over the scene ----------
+     Frosted glass, so the scene glows through them */
+  .intro-shell.has-scene .home-profile,
+  .intro-shell.has-scene .intro-lead-card,
+  .intro-shell.has-scene .intro-journey-card,
+  .intro-shell.has-scene .intro-edu-card {
+    background: rgba(255, 255, 255, 0.72);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
+  }
+
+  .intro-shell.has-scene .intro-quote-card {
+    background: linear-gradient(
+      135deg,
+      rgba(249, 251, 255, 0.74),
+      rgba(241, 245, 255, 0.7)
+    );
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
+  }
+
+  html[data-theme="dark"] .intro-shell.has-scene .home-profile,
+  html[data-theme="dark"] .intro-shell.has-scene .intro-lead-card,
+  html[data-theme="dark"] .intro-shell.has-scene .intro-journey-card,
+  html[data-theme="dark"] .intro-shell.has-scene .intro-edu-card {
+    background: rgba(19, 28, 46, 0.58);
+  }
+
+  html[data-theme="dark"] .intro-shell.has-scene .intro-quote-card {
+    background: linear-gradient(
+      135deg,
+      rgba(21, 31, 53, 0.62),
+      rgba(18, 26, 44, 0.58)
+    );
+  }
+
+  /* The column and card load animations give way to the 3D entrance */
+  .intro-shell.has-fx .intro-panel,
+  .intro-shell.has-fx .home-profile {
+    animation: none;
+  }
+
+  .intro-shell.cine-hold .home-profile,
+  .intro-shell.cine-hold .intro-lead-card,
+  .intro-shell.cine-hold .intro-journey-card,
+  .intro-shell.cine-hold .intro-edu-card,
+  .intro-shell.cine-hold .intro-quote-card {
+    opacity: 0;
+    transition: opacity 0.45s ease;
+  }
+
+  .intro-shell.cine-enter .home-profile,
+  .intro-shell.cine-enter .intro-lead-card,
+  .intro-shell.cine-enter .intro-journey-card,
+  .intro-shell.cine-enter .intro-edu-card,
+  .intro-shell.cine-enter .intro-quote-card {
+    animation: introCardIn 1.15s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    animation-delay: calc(var(--fx-i, 0) * 0.11s);
+  }
+
+  /* No "to" frame: each card lands on its own resting transform */
+  @keyframes introCardIn {
+    from {
+      opacity: 0;
+      transform: perspective(1400px) translate3d(0, 70px, -260px)
+        rotateX(16deg);
+    }
+    60% {
+      opacity: 1;
+    }
+  }
+
+  /* The profile card leans toward the cursor once it has landed */
+  .intro-shell.has-tilt .home-profile {
+    transform: perspective(1000px) rotateX(var(--tilt-x, 0deg))
+      rotateY(var(--tilt-y, 0deg));
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* Card borders light up around the cursor */
+  .intro-shell.has-fx .home-profile::before,
+  .intro-shell.has-fx .intro-lead-card::before,
+  .intro-shell.has-fx .intro-journey-card::before,
+  .intro-shell.has-fx .intro-edu-card::before,
+  .intro-shell.has-fx .intro-quote-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    padding: 1px;
+    border-radius: inherit;
+    background: radial-gradient(
+      380px circle at var(--mx, -999px) var(--my, -999px),
+      rgba(168, 85, 247, 0.8),
+      rgba(99, 102, 241, 0.35) 40%,
+      transparent 70%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .intro-shell.is-lit .home-profile::before,
+  .intro-shell.is-lit .intro-lead-card::before,
+  .intro-shell.is-lit .intro-journey-card::before,
+  .intro-shell.is-lit .intro-edu-card::before,
+  .intro-shell.is-lit .intro-quote-card::before {
+    opacity: 1;
+  }
+
+  .home-profile__replay {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    font-size: 0.78rem;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .home-profile__replay i {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .home-profile__replay:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .home-profile__replay:hover i {
+    transform: rotate(180deg);
+  }
+
+  .home-profile__replay:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+  }
+
+  .intro-shell.has-scene .home-profile__replay {
+    display: inline-flex;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro-shell.has-scene .home-profile__replay {
+      display: none;
+    }
+  }
 </style>
 
 <div class="intro-shell">
+  <!-- WebGL layer (js/intro-scene.js): the opening cinematic, then the
+       backdrop behind the cards -->
+  <div class="intro-stage" aria-hidden="true"></div>
+  <div class="intro-cine-ui">
+    <div class="intro-cine-flash" aria-hidden="true"></div>
+    <p class="intro-cine-caption" data-cue="chaos" aria-hidden="true">
+      Every platform begins as chaos.
+    </p>
+    <p class="intro-cine-sub" data-cue="name" aria-hidden="true">
+      Software Architect <span>&middot;</span> Walt Disney
+    </p>
+    <p class="intro-cine-caption" data-cue="scale" aria-hidden="true">
+      I architect it into experiences for millions.
+      <span class="intro-cine-stats"
+        ><span class="js-experience-years">13</span> years &middot; 5 companies
+        &middot; 25+ countries</span
+      >
+    </p>
+    <p class="intro-cine-hint" data-cue="hint" aria-hidden="true">
+      <span class="intro-cine-hint--pointer"
+        ><i class="fa-solid fa-arrow-pointer"></i> Move your cursor &middot;
+        click for a shockwave</span
+      >
+      <span class="intro-cine-hint--touch"
+        ><i class="fa-solid fa-hand-pointer"></i> Tap for a shockwave &middot;
+        swipe to skip</span
+      >
+    </p>
+    <button type="button" class="intro-cine-skip">
+      Skip intro <kbd>Esc</kbd>
+    </button>
+    <div class="intro-cine-progress" aria-hidden="true"></div>
+  </div>
+
   <div class="container">
     <div class="row">
       <!-- Profile card -->
@@ -1366,6 +1860,14 @@
           aria-label="About Manoj Satishkumar"
         >
           <div class="home-profile__cover" aria-hidden="true"></div>
+          <button
+            type="button"
+            class="home-profile__replay"
+            aria-label="Replay the intro"
+            title="Replay intro"
+          >
+            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+          </button>
 
           <div class="home-profile__avatar">
             <img
@@ -3195,6 +3697,19 @@
       card.classList.add("is-playing");
     }
     show(0);
+
+    // The intro entrance (see the 3D intro script below) restarts autoplay
+    // from the first slide, so a cinematic opening doesn't use up its time
+    const shell = card.closest(".intro-shell");
+    if (shell) {
+      shell.addEventListener("intro:enter", function () {
+        if (!card.classList.contains("is-playing")) return;
+        card.classList.remove("is-playing");
+        show(0);
+        void card.offsetWidth;
+        card.classList.add("is-playing");
+      });
+    }
   })();
 
   // Rotating testimonial card. Testimonials are read from the Testimony
@@ -3328,6 +3843,182 @@
         });
       if (items.length) start(items);
     });
+  })();
+
+  // 3D intro. index.html's <head> decides whether the cinematic plays
+  // (html.intro-cine); this hands it to js/intro-scene.js and owns the card
+  // entrance, the cursor effects and the fallback when WebGL can't start.
+  (function () {
+    const shell = document.querySelector(".intro-shell");
+    if (!shell) return;
+    const root = document.documentElement;
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const cards = Array.from(
+      shell.querySelectorAll(
+        ".home-profile, .intro-lead-card, .intro-journey-card, .intro-edu-card, .intro-quote-card",
+      ),
+    );
+    const profile = shell.querySelector(".home-profile");
+    const cinematic =
+      root.classList.contains("intro-cine") && window.scrollY < 40;
+
+    // The intro can be loaded more than once; keep a single scene
+    if (window.introScene) {
+      window.introScene.dispose();
+      window.introScene = null;
+    }
+    if (!cinematic) root.classList.remove("intro-cine");
+    cards.forEach(function (card, i) {
+      card.style.setProperty("--fx-i", i);
+    });
+
+    // Stats count up from zero as the cards land
+    function countUp() {
+      if (reduced) return;
+      shell
+        .querySelectorAll(
+          ".home-profile__stats strong, .intro-lead-slide.is-active .intro-lead-stats strong",
+        )
+        .forEach(function (strong, i) {
+          const el = strong.querySelector(".js-experience-years") || strong;
+          if (el.children.length) return;
+          const m = el.textContent.match(/^(\D*)(\d[\d,]*)(.*)$/);
+          if (!m) return;
+          const isYears = el.classList.contains("js-experience-years");
+          const end =
+            isYears && window.getExperienceYears
+              ? window.getExperienceYears()
+              : Number(m[2].replace(/,/g, ""));
+          const commas = m[2].indexOf(",") !== -1;
+          const start = performance.now() + 350 + i * 90;
+          const format = function (v) {
+            return m[1] + (commas ? v.toLocaleString("en-US") : v) + m[3];
+          };
+          el.textContent = format(0);
+          (function step(now) {
+            const k = Math.min(Math.max((now - start) / 1400, 0), 1);
+            el.textContent = format(
+              k === 1 ? end : Math.round(end * (1 - Math.pow(2, -10 * k))),
+            );
+            if (k < 1) requestAnimationFrame(step);
+          })(performance.now());
+        });
+    }
+
+    let tiltTimer;
+    function enterCards() {
+      clearTimeout(tiltTimer);
+      shell.classList.remove("cine-hold", "cine-enter", "has-tilt");
+      void shell.offsetWidth;
+      shell.classList.add("cine-enter");
+      shell.dispatchEvent(new Event("intro:enter"));
+      countUp();
+      tiltTimer = setTimeout(function () {
+        shell.classList.add("has-tilt");
+      }, 1800);
+    }
+
+    function holdCards() {
+      clearTimeout(tiltTimer);
+      shell.classList.remove("has-tilt");
+      shell.classList.add("cine-hold");
+    }
+
+    if (!reduced) shell.classList.add("has-fx");
+    if (cinematic) {
+      window.introCineStarted = true;
+      holdCards();
+    } else if (!reduced) {
+      enterCards();
+    }
+
+    // Card borders follow the cursor; the profile card tilts toward it
+    if (
+      !reduced &&
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches
+    ) {
+      let frame = 0;
+      let last = null;
+      shell.addEventListener("pointermove", function (event) {
+        last = event;
+        if (frame) return;
+        frame = requestAnimationFrame(function () {
+          frame = 0;
+          shell.classList.add("is-lit");
+          cards.forEach(function (card) {
+            const r = card.getBoundingClientRect();
+            card.style.setProperty("--mx", last.clientX - r.left + "px");
+            card.style.setProperty("--my", last.clientY - r.top + "px");
+          });
+          if (profile && shell.classList.contains("has-tilt")) {
+            const r = profile.getBoundingClientRect();
+            const x = (last.clientX - r.left) / r.width;
+            const y = (last.clientY - r.top) / r.height;
+            const inside = x >= 0 && x <= 1 && y >= 0 && y <= 1;
+            profile.style.setProperty(
+              "--tilt-x",
+              inside ? ((0.5 - y) * 7).toFixed(2) + "deg" : "0deg",
+            );
+            profile.style.setProperty(
+              "--tilt-y",
+              inside ? ((x - 0.5) * 9).toFixed(2) + "deg" : "0deg",
+            );
+          }
+        });
+      });
+      shell.addEventListener("pointerleave", function () {
+        shell.classList.remove("is-lit");
+        if (profile) {
+          profile.style.setProperty("--tilt-x", "0deg");
+          profile.style.setProperty("--tilt-y", "0deg");
+        }
+      });
+    }
+
+    // Plain entrance when the scene can't take over the curtain
+    let abandoned = false;
+    function abandonCinematic() {
+      if (abandoned || !cinematic) return;
+      abandoned = true;
+      shell.classList.remove("is-cine");
+      root.classList.add("intro-cine-reveal");
+      setTimeout(function () {
+        root.classList.remove("intro-cine", "intro-cine-live", "intro-cine-reveal");
+      }, 1300);
+      enterCards();
+    }
+    const giveUp = cinematic && setTimeout(abandonCinematic, 3500);
+
+    import("/js/intro-scene.js")
+      .then(function (mod) {
+        clearTimeout(giveUp);
+        if (!shell.isConnected) return null;
+        return mod.createIntroScene({
+          shell: shell,
+          stage: shell.querySelector(".intro-stage"),
+          ui: shell.querySelector(".intro-cine-ui"),
+          cinematic: cinematic && !abandoned,
+          reducedMotion: reduced,
+          hooks: { enterCards: enterCards, holdCards: holdCards },
+        });
+      })
+      .then(function (scene) {
+        if (!scene) return;
+        window.introScene = scene;
+        const replay = shell.querySelector(".home-profile__replay");
+        if (replay) {
+          replay.addEventListener("click", function () {
+            scene.replay();
+          });
+        }
+      })
+      .catch(function (err) {
+        console.warn("Intro scene unavailable:", err);
+        shell.classList.remove("has-scene");
+        abandonCinematic();
+      });
   })();
   // Experience Modal functions
   function openExpModal() {

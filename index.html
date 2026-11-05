@@ -6,6 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="/js/theme.js"></script>
+    <script>
+      // Decides before first paint whether the intro cinematic plays (once per
+      // session), so its curtain covers the page instead of the skeleton
+      // flashing first. components/introduction.html takes over from here.
+      (function () {
+        try {
+          var root = document.documentElement;
+          if (
+            sessionStorage.getItem("intro-cine-seen") ||
+            location.hash ||
+            matchMedia("(prefers-reduced-motion: reduce)").matches ||
+            (navigator.connection && navigator.connection.saveData)
+          ) {
+            return;
+          }
+          root.classList.add("intro-cine");
+          // Failsafe in case the intro never loads
+          setTimeout(function () {
+            if (!window.introCineStarted) root.classList.remove("intro-cine");
+          }, 6000);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="modulepreload" href="/lib/three/three.module.min.js" />
+    <link rel="modulepreload" href="/js/intro-scene.js" />
 
     <title>Manoj Satishkumar - Software Architect</title>
     <meta
@@ -780,6 +805,58 @@
       }
 
       /* ===== End Navigation Animations ===== */
+
+      /* Intro cinematic curtain and the point of light it opens from. Lives
+         here so it paints before components/introduction.html arrives. */
+      html.intro-cine #intro::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 199999;
+        background: radial-gradient(
+          ellipse at 50% 45%,
+          #0d1430 0%,
+          #060816 55%,
+          #020308 100%
+        );
+        transition: opacity 1.3s ease;
+      }
+
+      html.intro-cine #intro::after {
+        content: "";
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 199999;
+        width: 8px;
+        height: 8px;
+        margin: -4px 0 0 -4px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow:
+          0 0 12px 4px rgba(196, 181, 253, 0.9),
+          0 0 48px 16px rgba(99, 102, 241, 0.45);
+        animation: introSingularity 1.6s ease-in-out infinite;
+        transition: opacity 0.5s ease;
+      }
+
+      html.intro-cine-live #intro::after,
+      html.intro-cine-reveal #intro::before {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Its pulse keyframes would otherwise keep it visible */
+      html.intro-cine-live #intro::after {
+        animation: none;
+      }
+
+      @keyframes introSingularity {
+        50% {
+          transform: scale(1.6);
+          opacity: 0.7;
+        }
+      }
     </style>
 
     <!-- Google Analytics -->
