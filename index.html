@@ -22,7 +22,7 @@
             return;
           }
           root.classList.add("intro-cine");
-          // Failsafe in case the intro never loads
+          // Failsafe in case the intro never loads 
           setTimeout(function () {
             if (!window.introCineStarted) root.classList.remove("intro-cine");
           }, 6000);

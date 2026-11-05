@@ -140,6 +140,7 @@ const POINTS_VERT = /* glsl */ `
   uniform vec3 uPalA[3];
   uniform vec3 uPalB[3];
   uniform vec2 uAlphaAB;
+  uniform vec2 uSizeAB;
   uniform vec3 uCenter;
   uniform float uStir;
   uniform float uScrollW;
@@ -274,7 +275,8 @@ const POINTS_VERT = /* glsl */ `
     float size = mix(0.65, 1.6, aRand.x) * mix(1.0, globeSize, e2);
     // A pulse of light that travels along each formation
     float pulse = pow(0.5 + 0.5 * sin(toneJ * 12.566 - uTime * 1.8), 10.0) * (1.0 - dust);
-    size = mix(size, mix(0.8, 2.0, aRand.x) * (1.0 + pulse * 0.6), ej * (1.0 - dust));
+    float sizeJ = mix(0.8, 2.0, aRand.x) * (1.0 + pulse * 0.6) * mix(uSizeAB.x, uSizeAB.y, em);
+    size = mix(size, sizeJ, ej * (1.0 - dust));
     size *= mix(1.0, 1.2, uLight);
     gl_PointSize = size * uSize * uPR * (60.0 / max(-mv.z, 1.0));
 
@@ -801,15 +803,166 @@ const JOURNEY = [
   alpha: def.alpha || [0.95, 0.55],
 }));
 
-// Career chapters of the cinematic: each company spelt in particles, in its
-// own colours, on the plane the name sat on
+// Career chapters of the cinematic: each company's logo built in particles,
+// in its own colours, on the right of the name's plane while the captions
+// hold the left (above them on portrait screens)
+function logoBox(L) {
+  return L.stacked
+    ? { x: 0, y: L.H * 0.15, w: L.W * 0.7, h: L.H * 0.3 }
+    : { x: L.W * 0.215, y: L.H * 0.01, w: L.W * 0.37, h: L.H * 0.64 };
+}
+
+const LOGO_RES = 240;
+
+function loadImage(src) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.decoding = "async";
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(null);
+    img.src = src;
+  });
+}
+
+// Opaque, non-white pixels of a logo in unit-height coordinates (x, y, tone),
+// with the outline kept apart so the silhouette can be drawn crisper
+function sampleLogo(img, toneOf) {
+  const h = LOGO_RES;
+  const w = Math.max(1, Math.round((h * img.naturalWidth) / img.naturalHeight));
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  ctx.drawImage(img, 0, 0, w, h);
+  const { data } = ctx.getImageData(0, 0, w, h);
+
+  const on = new Uint8Array(w * h);
+  let x0 = w, x1 = 0, y0 = h, y1 = 0;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const p = (y * w + x) * 4;
+      const white = data[p] > 232 && data[p + 1] > 232 && data[p + 2] > 232;
+      if (data[p + 3] < 128 || white) continue;
+      on[y * w + x] = 1;
+      x0 = Math.min(x0, x);
+      x1 = Math.max(x1, x);
+      y0 = Math.min(y0, y);
+      y1 = Math.max(y1, y);
+    }
+  }
+  if (x1 <= x0 || y1 <= y0) return null;
+
+  const bw = x1 - x0 + 1;
+  const bh = y1 - y0 + 1;
+  const cx = (x0 + x1 + 1) / 2;
+  const cy = (y0 + y1 + 1) / 2;
+  const tones = new Float32Array(w * h);
+  for (let y = y0; y <= y1; y++) {
+    for (let x = x0; x <= x1; x++) {
+      const p = (y * w + x) * 4;
+      tones[y * w + x] = clamp01(
+        toneOf(data[p] / 255, data[p + 1] / 255, data[p + 2] / 255, (x - x0) / bw, (y - y0) / bh),
+      );
+    }
+  }
+
+  // Depth into the shape by repeated erosion: 1 on the outline (or where two
+  // brand colours meet), growing inward, capped at DEEP
+  const DEEP = 6;
+  const dist = new Uint8Array(w * h);
+  const inside = (x, y) => x >= 0 && y >= 0 && x < w && y < h && on[y * w + x];
+  for (let y = y0; y <= y1; y++) {
+    for (let x = x0; x <= x1; x++) {
+      const i = y * w + x;
+      if (!on[i]) continue;
+      let rim = false;
+      for (const [dx, dy] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+        if (!inside(x + dx, y + dy)) rim = true;
+        else if (Math.abs(tones[i] - tones[i + dy * w + dx]) > 0.35) rim = true;
+      }
+      if (rim) dist[i] = 1;
+    }
+  }
+  for (let d = 2; d <= DEEP; d++) {
+    for (let y = y0; y <= y1; y++) {
+      for (let x = x0; x <= x1; x++) {
+        const i = y * w + x;
+        if (!on[i] || dist[i]) continue;
+        if (
+          dist[i - 1] === d - 1 ||
+          dist[i + 1] === d - 1 ||
+          dist[i - w] === d - 1 ||
+          dist[i + w] === d - 1
+        ) dist[i] = d;
+      }
+    }
+  }
+
+  // Outline and bevel draw more particles than the deep interior, so large
+  // solid marks stay as legible as thin ones
+  const pts = [];
+  const cdf = [];
+  let total = 0;
+  for (let y = y0; y <= y1; y++) {
+    for (let x = x0; x <= x1; x++) {
+      const i = y * w + x;
+      if (!on[i]) continue;
+      const d = dist[i] || DEEP + 1;
+      total += d === 1 ? 5 : d <= 3 ? 2.2 : d <= DEEP ? 1.3 : 0.8;
+      cdf.push(total);
+      pts.push((x - cx) / bh, -(y - cy) / bh, tones[i], d === 1 ? 1 : 0);
+    }
+  }
+  return {
+    pts: new Float32Array(pts),
+    cdf: new Float32Array(cdf),
+    total,
+    aspect: bw / bh,
+    ink: cdf.length / (bh * bh),
+  };
+}
+
+function pickWeighted(cdf, total) {
+  const r = Math.random() * total;
+  let lo = 0;
+  let hi = cdf.length - 1;
+  while (lo < hi) {
+    const mid = (lo + hi) >> 1;
+    if (cdf[mid] < r) lo = mid + 1;
+    else hi = mid;
+  }
+  return lo;
+}
+
+function makeLogo(logo) {
+  return (out, a, b, L) => {
+    const box = logoBox(L);
+    const size = Math.min(box.h, box.w / logo.aspect);
+    const depth = size * 0.09;
+    const px = 1 / LOGO_RES;
+    for (let i = a; i < b; i++) {
+      const k = pickWeighted(logo.cdf, logo.total) * 4;
+      const rim = logo.pts[k + 3];
+      put(
+        out,
+        i,
+        (logo.pts[k] + (Math.random() - 0.5) * px) * size,
+        (logo.pts[k + 1] + (Math.random() - 0.5) * px) * size,
+        (Math.random() - 0.5) * depth * (rim ? 0.35 : 1),
+        logo.pts[k + 2],
+      );
+    }
+    // Inked area each particle has to cover, against the spark's thin spokes
+    const perParticle = (logo.ink * size * size) / (b - a);
+    return Math.min(Math.max(Math.sqrt(perParticle / (L.H * L.H * 5e-6)), 1), 1.8);
+  };
+}
+
+// Fallback when a logo image can't load: the name, spelt inside the box
 function makeWord(word) {
   return (out, a, b, L) => {
-    const s = sampleName(
-      [word],
-      L.W * (L.stacked ? 0.84 : 0.56),
-      L.H * (L.stacked ? 0.13 : 0.2),
-    );
+    const box = logoBox(L);
+    const s = sampleName([word], box.w, box.h * 0.32);
     const count = s.pts.length / 2;
     for (let i = a; i < b; i++) {
       const k = ((Math.random() * count) | 0) * 2;
@@ -823,23 +976,67 @@ function makeWord(word) {
         clamp01(x / s.width + 0.5),
       );
     }
-    return s.bottom;
   };
 }
 
-const COMPANIES = [
-  { word: "GRL LABS", dark: [0x93c5fd, 0x60a5fa, 0xa78bfa] },
-  { word: "CERNER", dark: [0x99f6e4, 0x2dd4bf, 0x38bdf8] },
-  { word: "WALMART", dark: [0x93c5fd, 0x3b82f6, 0xfcd34d] },
-  { word: "PAYPAL", dark: [0x7dd3fc, 0x38bdf8, 0x6366f1] },
-  { word: "DISNEY", dark: [0xe0e7ff, 0x818cf8, 0xf0abfc] },
-].map((def) => {
+const COMPANY_DEFS = [
+  {
+    word: "GRL LABS",
+    src: "/images/grl-logo.png",
+    dark: [0xbfdbfe, 0x60a5fa, 0xa5b4fc],
+    tone: (r, g, b, x) => x,
+  },
+  {
+    word: "CERNER",
+    src: "/images/cerner-logo.png",
+    dark: [0x38bdf8, 0x5eead4, 0xbef264],
+    tone: (r, g, b) => (g - b + 0.3) / 0.9,
+  },
+  {
+    word: "WALMART",
+    src: "/images/walmart-logo.png",
+    dark: [0xfff7d6, 0xfcd34d, 0xf59e0b],
+    tone: (r, g, b, x, y) => Math.hypot(x - 0.5, y - 0.5) * 1.7,
+  },
+  {
+    word: "PAYPAL",
+    src: "/images/paypal-icon.png",
+    dark: [0x818cf8, 0x60a5fa, 0x38bdf8],
+    tone: (r, g, b) => (g - 0.18) / 0.45,
+  },
+  {
+    word: "DISNEY",
+    src: "/images/disney/mickey.png",
+    dark: [0xe0e7ff, 0xa5b4fc, 0xf0abfc],
+    tone: (r, g, b, x, y) => 0.15 + x * 0.55 + y * 0.3,
+  },
+];
+
+// Samples every logo once; a logo that fails keeps the spelt-name fallback
+function loadLogos() {
+  return Promise.all(
+    COMPANY_DEFS.map(async (def) => {
+      if (def.logo !== undefined) return;
+      const img = await loadImage(def.src);
+      try {
+        def.logo = img ? sampleLogo(img, def.tone) : null;
+      } catch (err) {
+        def.logo = null;
+      }
+    }),
+  );
+}
+
+const COMPANIES = COMPANY_DEFS.map((def) => {
   const dark = def.dark.map(hexToRgb);
   return {
-    make: makeWord(def.word),
-    rot: (t) => [0.08 * Math.sin(t * 0.9), 0.18 * Math.sin(t * 0.6), 0, "XYZ"],
-    // Bring the words forward from the formations' depth to the name's plane
-    off: (L) => [0, L.H * 0.04, -JOURNEY_Z],
+    make: (out, a, b, L) => (def.logo ? makeLogo(def.logo) : makeWord(def.word))(out, a, b, L),
+    rot: (t) => [0.1 * Math.sin(t * 0.7), 0.34 * Math.sin(t * 0.45), 0.03 * Math.sin(t * 0.5), "XYZ"],
+    // Bring the logos forward from the formations' depth to the name's plane
+    off: (L) => {
+      const box = logoBox(L);
+      return [box.x, box.y, -JOURNEY_Z];
+    },
     dark,
     light: dark,
     alpha: [1, 1],
@@ -954,6 +1151,7 @@ class IntroScene {
         uPalA: { value: [new Vector3(), new Vector3(), new Vector3()] },
         uPalB: { value: [new Vector3(), new Vector3(), new Vector3()] },
         uAlphaAB: { value: new Vector2(0.6, 0.6) },
+        uSizeAB: { value: new Vector2(1, 1) },
         uCenter: { value: new Vector3(0, 0, JOURNEY_Z) },
         uStir: { value: 0 },
         uScrollW: { value: 0 },
@@ -988,8 +1186,11 @@ class IntroScene {
     this.scene.add(this.globe);
 
     const fontReady = waitForFont("800 180px Poppins");
+    const logosReady = this.reduced
+      ? null
+      : Promise.race([loadLogos(), new Promise((resolve) => setTimeout(resolve, 2500))]);
     this.resize(true);
-    await fontReady;
+    await Promise.all([fontReady, logosReady]);
     this.build();
 
     this.bind();
@@ -1152,10 +1353,10 @@ class IntroScene {
     this.buildGlobeExtras(landPts, L.R);
     this.slots = [-1, -1];
     if (!this.reduced) {
-      this.companyShapes = COMPANIES.map((def, k) => {
+      this.logoBox = logoBox(L);
+      this.companyShapes = COMPANIES.map((def) => {
         const data = new Float32Array(N * 4);
-        const bottom = def.make(data, dustN, N, L);
-        if (k === 0) this.companyBottom = bottom + L.H * 0.04;
+        def.size = def.make(data, dustN, N, L) || 1;
         return data;
       });
     }
@@ -1274,6 +1475,7 @@ class IntroScene {
       );
     }
     u.uAlphaAB.value.setComponent(slot, lerp(def.alpha[0], def.alpha[1], this.light));
+    u.uSizeAB.value.setComponent(slot, def.size || 1);
   }
 
   // Morphs between formations A and B of a set; q is the position in it
@@ -1741,10 +1943,14 @@ class IntroScene {
       if (sub) sub.style.top = `${Math.round(this.screenY(this.textBottom) + 22)}px`;
     }
     if (cine && this.t > 5.8 && this.t < CO_END + 0.6) {
-      const top = `${Math.round(this.screenY(this.companyBottom) + 26)}px`;
-      this.ui.querySelectorAll(".intro-cine-co").forEach((el) => {
-        el.style.top = top;
-      });
+      const box = this.logoBox;
+      const stacked = this.L.stacked;
+      this.ui.classList.toggle("is-stacked", stacked);
+      const career = this.ui.querySelector(".intro-cine-career");
+      if (career && box) {
+        const y = stacked ? this.screenY(box.y - box.h / 2) + 24 : this.screenY(box.y);
+        career.style.top = `${Math.round(y)}px`;
+      }
       const rail = this.ui.querySelector(".intro-cine-rail");
       if (rail) {
         rail.style.setProperty("--rail", (s.co / 4).toFixed(3));

@@ -1541,35 +1541,100 @@
     filter: blur(0);
   }
 
-  /* Career chapters: sits under the particle company name; js sets its top */
-  .intro-cine-co {
+  /* Career chapters: a column on the left while the particles build each
+     logo on the right; js/intro-scene.js sets its top to the logo centre */
+  .intro-cine-career {
     position: absolute;
-    top: 62%;
-    left: 50%;
+    top: 50%;
+    left: max(7vw, 32px);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    width: min(92vw, 760px);
+    gap: clamp(28px, 5vh, 52px);
+    width: min(40vw, 540px);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .intro-cine-career__stack {
+    display: grid;
+  }
+
+  .intro-cine-co {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    grid-area: 1 / 1;
+    gap: 12px;
     margin: 0;
-    transform: translate(-50%, 14px);
-    text-align: center;
-    opacity: 0;
-    filter: blur(8px);
-    transition:
-      opacity 0.45s ease,
-      filter 0.45s ease,
-      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    text-align: left;
+    visibility: hidden;
+    transition: visibility 0s linear 0.7s;
   }
 
   .intro-cine-co.is-on {
-    opacity: 1;
-    filter: blur(0);
-    transform: translate(-50%, 0);
+    visibility: visible;
+    transition-delay: 0s;
   }
 
-  .intro-cine-co.is-off {
-    transform: translate(-50%, -10px);
+  .intro-cine-co > span {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateX(-36px);
+    transition:
+      opacity 0.5s ease,
+      filter 0.5s ease,
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .intro-cine-co.is-on > span {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+
+  .intro-cine-co.is-on > span:nth-child(2) {
+    transition-delay: 0.08s;
+  }
+
+  .intro-cine-co.is-on > span:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+
+  .intro-cine-co.is-on > span:nth-child(4) {
+    transition-delay: 0.32s;
+  }
+
+  .intro-cine-co.is-off > span {
+    transform: translateY(-14px);
+    transition-duration: 0.35s, 0.35s, 0.5s;
+  }
+
+  .intro-cine-co__index {
+    color: rgba(148, 163, 184, 0.85);
+    font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .intro-cine-co__name {
+    padding-bottom: 0.06em;
+    background: linear-gradient(100deg, #fff 0%, var(--brand-a) 45%, var(--brand-b) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: clamp(2.4rem, 5.4vw, 5rem);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+  }
+
+  .intro-cine-co > .intro-cine-co__name {
+    filter: blur(10px) drop-shadow(0 0 0 transparent);
+  }
+
+  .intro-cine-co.is-on > .intro-cine-co__name {
+    filter: blur(0) drop-shadow(0 0 26px color-mix(in srgb, var(--brand-a) 45%, transparent));
   }
 
   .intro-cine-co__years {
@@ -1584,22 +1649,44 @@
   }
 
   .intro-cine-co__role {
+    max-width: 30em;
     color: #cbd5e1;
-    font-size: clamp(0.62rem, 1.05vw, 0.85rem);
+    font-size: clamp(0.66rem, 1.05vw, 0.88rem);
     font-weight: 500;
-    letter-spacing: 0.22em;
-    line-height: 1.7;
+    letter-spacing: 0.2em;
+    line-height: 1.75;
     text-transform: uppercase;
   }
 
-  .intro-cine-rail {
-    position: absolute;
-    top: calc(13vh + env(safe-area-inset-top));
+  .intro-cine-ui.is-stacked .intro-cine-career {
     left: 50%;
+    width: min(88vw, 520px);
+    transform: translateX(-50%);
+    gap: 22px;
+  }
+
+  .intro-cine-ui.is-stacked .intro-cine-co {
+    align-items: center;
+    text-align: center;
+  }
+
+  .intro-cine-ui.is-stacked .intro-cine-co > span {
+    transform: translateY(16px);
+  }
+
+  .intro-cine-ui.is-stacked .intro-cine-co.is-on > span {
+    transform: none;
+  }
+
+  .intro-cine-ui.is-stacked .intro-cine-co__name {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .intro-cine-rail {
+    position: relative;
     display: flex;
     justify-content: space-between;
-    width: min(78vw, 560px);
-    transform: translateX(-50%);
+    width: 100%;
     opacity: 0;
     transition: opacity 0.7s ease;
   }
@@ -1979,36 +2066,50 @@
       Software Architect <span>&middot;</span> Walt Disney
     </p>
 
-    <!-- The career, one company at a time; js/intro-scene.js spells each
-         name in particles and fills the rail -->
-    <div class="intro-cine-rail" data-cue="rail" aria-hidden="true">
-      <span class="intro-cine-rail__fill"></span>
-      <span class="intro-cine-rail__node" data-node="0">2013</span>
-      <span class="intro-cine-rail__node" data-node="1">2015</span>
-      <span class="intro-cine-rail__node" data-node="2">2019</span>
-      <span class="intro-cine-rail__node" data-node="3">2021</span>
-      <span class="intro-cine-rail__node" data-node="4">Now</span>
+    <!-- The career, one company at a time; js/intro-scene.js builds each
+         logo in particles on the right and fills the rail -->
+    <div class="intro-cine-career" aria-hidden="true">
+      <div class="intro-cine-rail" data-cue="rail">
+        <span class="intro-cine-rail__fill"></span>
+        <span class="intro-cine-rail__node" data-node="0">2013</span>
+        <span class="intro-cine-rail__node" data-node="1">2015</span>
+        <span class="intro-cine-rail__node" data-node="2">2019</span>
+        <span class="intro-cine-rail__node" data-node="3">2021</span>
+        <span class="intro-cine-rail__node" data-node="4">Now</span>
+      </div>
+      <div class="intro-cine-career__stack">
+        <p class="intro-cine-co" data-cue="co0" style="--brand-a: #93c5fd; --brand-b: #a5b4fc">
+          <span class="intro-cine-co__index">01 / 05</span>
+          <span class="intro-cine-co__name">GRL Labs</span>
+          <span class="intro-cine-co__years">2013 &ndash; 2015</span>
+          <span class="intro-cine-co__role">Software Engineer &middot; SSD validation for Intel, Samsung &amp; Micron</span>
+        </p>
+        <p class="intro-cine-co" data-cue="co1" style="--brand-a: #38bdf8; --brand-b: #bef264">
+          <span class="intro-cine-co__index">02 / 05</span>
+          <span class="intro-cine-co__name">Cerner</span>
+          <span class="intro-cine-co__years">2015 &ndash; 2019</span>
+          <span class="intro-cine-co__role">Engineer to Technical Team Lead &middot; Healthcare platforms</span>
+        </p>
+        <p class="intro-cine-co" data-cue="co2" style="--brand-a: #60a5fa; --brand-b: #fcd34d">
+          <span class="intro-cine-co__index">03 / 05</span>
+          <span class="intro-cine-co__name">Walmart</span>
+          <span class="intro-cine-co__years">2019 &ndash; 2021 &middot; 2022 &ndash; 2026</span>
+          <span class="intro-cine-co__role">Staff Engineer &middot; 70M+ messages a day for 200+ teams</span>
+        </p>
+        <p class="intro-cine-co" data-cue="co3" style="--brand-a: #818cf8; --brand-b: #38bdf8">
+          <span class="intro-cine-co__index">04 / 05</span>
+          <span class="intro-cine-co__name">PayPal</span>
+          <span class="intro-cine-co__years">2021 &ndash; 2022</span>
+          <span class="intro-cine-co__role">Member of Technical Staff &middot; Merchant onboarding</span>
+        </p>
+        <p class="intro-cine-co" data-cue="co4" style="--brand-a: #e0e7ff; --brand-b: #f0abfc">
+          <span class="intro-cine-co__index">05 / 05</span>
+          <span class="intro-cine-co__name">Disney</span>
+          <span class="intro-cine-co__years">2026 &ndash; Now</span>
+          <span class="intro-cine-co__role">Software Architect &middot; Frontend technical direction</span>
+        </p>
+      </div>
     </div>
-    <p class="intro-cine-co" data-cue="co0" aria-hidden="true">
-      <span class="intro-cine-co__years">2013 &ndash; 2015</span>
-      <span class="intro-cine-co__role">Software Engineer &middot; SSD validation for Intel, Samsung &amp; Micron</span>
-    </p>
-    <p class="intro-cine-co" data-cue="co1" aria-hidden="true">
-      <span class="intro-cine-co__years">2015 &ndash; 2019</span>
-      <span class="intro-cine-co__role">Engineer to Technical Team Lead &middot; Healthcare platforms</span>
-    </p>
-    <p class="intro-cine-co" data-cue="co2" aria-hidden="true">
-      <span class="intro-cine-co__years">2019 &ndash; 2021 &middot; 2022 &ndash; 2026</span>
-      <span class="intro-cine-co__role">Staff Engineer &middot; 70M+ messages a day for 200+ teams</span>
-    </p>
-    <p class="intro-cine-co" data-cue="co3" aria-hidden="true">
-      <span class="intro-cine-co__years">2021 &ndash; 2022</span>
-      <span class="intro-cine-co__role">Member of Technical Staff &middot; Merchant onboarding</span>
-    </p>
-    <p class="intro-cine-co" data-cue="co4" aria-hidden="true">
-      <span class="intro-cine-co__years">2026 &ndash; Now</span>
-      <span class="intro-cine-co__role">Software Architect &middot; Frontend technical direction</span>
-    </p>
 
     <p class="intro-cine-caption" data-cue="scale" aria-hidden="true">
       I architect platforms used by millions.
