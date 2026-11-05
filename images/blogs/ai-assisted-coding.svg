@@ -1,0 +1,164 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="'Poppins', 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#06081a"/>
+      <stop offset="0.55" stop-color="#140f38"/>
+      <stop offset="1" stop-color="#070c1f"/>
+    </linearGradient>
+    <radialGradient id="glowCore" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.5"/>
+      <stop offset="0.55" stop-color="#6366f1" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowPink" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ec4899" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ec4899" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="title" x1="60" y1="0" x2="540" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0ea5e9"/>
+      <stop offset="0.55" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="window" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#111734"/>
+      <stop offset="1" stop-color="#0a0f26"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <ellipse cx="880" cy="320" rx="420" ry="330" fill="url(#glowCore)"/>
+  <ellipse cx="1120" cy="40" rx="300" ry="220" fill="url(#glowPink)"/>
+  <ellipse cx="80" cy="620" rx="380" ry="260" fill="url(#glowCyan)"/>
+  <rect width="1200" height="6" fill="url(#topbar)"/>
+
+  <!-- dotted grid behind the editor -->
+  <g fill="#c4b5fd" fill-opacity="0.12">
+    <circle cx="600" cy="120" r="1.5"/><circle cx="600" cy="160" r="1.5"/><circle cx="600" cy="200" r="1.5"/><circle cx="600" cy="240" r="1.5"/><circle cx="600" cy="280" r="1.5"/><circle cx="600" cy="320" r="1.5"/><circle cx="600" cy="360" r="1.5"/><circle cx="600" cy="400" r="1.5"/><circle cx="600" cy="440" r="1.5"/><circle cx="600" cy="480" r="1.5"/><circle cx="600" cy="520" r="1.5"/>
+    <circle cx="1170" cy="160" r="1.5"/><circle cx="1170" cy="200" r="1.5"/><circle cx="1170" cy="240" r="1.5"/><circle cx="1170" cy="280" r="1.5"/><circle cx="1170" cy="320" r="1.5"/><circle cx="1170" cy="360" r="1.5"/><circle cx="1170" cy="400" r="1.5"/><circle cx="1170" cy="440" r="1.5"/><circle cx="1170" cy="480" r="1.5"/>
+  </g>
+
+  <!-- ===================== Left: title ===================== -->
+  <g>
+    <rect x="60" y="62" width="250" height="38" rx="19" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.16"/>
+    <circle cx="82" cy="81" r="5" fill="#22d3ee"/>
+    <text x="96" y="86" font-family="'JetBrains Mono', 'SF Mono', Menlo, monospace" font-size="14" font-weight="700" letter-spacing="2.4" fill="#e2e8f0">AI-ASSISTED CODING</text>
+  </g>
+
+  <text x="60" y="192" font-size="42" font-weight="700" fill="#cbd5e1">Coding isn't dead.</text>
+  <text x="60" y="258" font-size="54" font-weight="800" fill="#ffffff">It has evolved</text>
+  <text x="60" y="322" font-size="54" font-weight="800" fill="url(#title)">into AI-assisted</text>
+  <text x="60" y="386" font-size="54" font-weight="800" fill="url(#title)">coding.</text>
+
+  <text x="60" y="446" font-family="'JetBrains Mono', 'SF Mono', Menlo, monospace" font-size="17" fill="#94a3b8">// you direct &#183; AI builds &#183; <tspan fill="#f472b6">you judge</tspan></text>
+
+  <g>
+    <rect x="60" y="540" width="48" height="28" rx="14" fill="none" stroke="#ffffff" stroke-opacity="0.35"/>
+    <text x="84" y="559" text-anchor="middle" font-size="12" font-weight="700" fill="#e2e8f0">MSK</text>
+    <text x="122" y="559" font-size="15" fill="#94a3b8">manojsatishkumar.com</text>
+  </g>
+
+  <!-- ===================== Right: editor with an AI agent ===================== -->
+  <g filter="url(#soft)">
+    <rect x="610" y="96" width="540" height="440" rx="18" fill="url(#window)" stroke="#a78bfa" stroke-opacity="0.28"/>
+  </g>
+  <path d="M610 136 H1150" stroke="#ffffff" stroke-opacity="0.08"/>
+  <circle cx="634" cy="116" r="6" fill="#f87171"/>
+  <circle cx="654" cy="116" r="6" fill="#fbbf24"/>
+  <circle cx="674" cy="116" r="6" fill="#34d399"/>
+  <text x="880" y="121" text-anchor="middle" font-family="'JetBrains Mono', 'SF Mono', Menlo, monospace" font-size="12.5" fill="#94a3b8">dashboard.tsx &#183; agent session</text>
+  <path d="M862 136 V536" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <!-- AI-written block highlight -->
+  <rect x="612" y="252" width="249" height="122" fill="#8b5cf6" fill-opacity="0.12"/>
+  <rect x="612" y="252" width="3" height="122" fill="#a78bfa"/>
+  <rect x="806" y="258" width="44" height="20" rx="10" fill="#8b5cf6" fill-opacity="0.35"/>
+  <text x="828" y="272" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ede9fe">AI</text>
+
+  <!-- code lines -->
+  <g font-family="'JetBrains Mono', 'SF Mono', Menlo, monospace" font-size="11" fill="#475569" text-anchor="end">
+    <text x="638" y="170">1</text><text x="638" y="194">2</text><text x="638" y="218">3</text><text x="638" y="242">4</text><text x="638" y="266">5</text><text x="638" y="290">6</text><text x="638" y="314">7</text><text x="638" y="338">8</text><text x="638" y="362">9</text><text x="638" y="386">10</text><text x="638" y="410">11</text><text x="638" y="434">12</text><text x="638" y="458">13</text><text x="638" y="482">14</text><text x="638" y="506">15</text>
+  </g>
+  <g>
+    <rect x="652" y="162" width="46" height="9" rx="4.5" fill="#c084fc"/><rect x="704" y="162" width="70" height="9" rx="4.5" fill="#67e8f9"/><rect x="780" y="162" width="38" height="9" rx="4.5" fill="#94a3b8"/>
+    <rect x="668" y="186" width="34" height="9" rx="4.5" fill="#c084fc"/><rect x="708" y="186" width="56" height="9" rx="4.5" fill="#e2e8f0" fill-opacity="0.7"/><rect x="770" y="186" width="60" height="9" rx="4.5" fill="#67e8f9"/>
+    <rect x="668" y="210" width="34" height="9" rx="4.5" fill="#c084fc"/><rect x="708" y="210" width="88" height="9" rx="4.5" fill="#86efac"/>
+    <rect x="668" y="234" width="52" height="9" rx="4.5" fill="#67e8f9"/><rect x="726" y="234" width="30" height="9" rx="4.5" fill="#94a3b8"/>
+    <rect x="684" y="258" width="40" height="9" rx="4.5" fill="#c084fc"/><rect x="730" y="258" width="64" height="9" rx="4.5" fill="#67e8f9"/>
+    <rect x="700" y="282" width="58" height="9" rx="4.5" fill="#e2e8f0" fill-opacity="0.7"/><rect x="764" y="282" width="36" height="9" rx="4.5" fill="#fcd34d"/>
+    <rect x="700" y="306" width="44" height="9" rx="4.5" fill="#f9a8d4"/><rect x="750" y="306" width="52" height="9" rx="4.5" fill="#86efac"/>
+    <rect x="700" y="330" width="72" height="9" rx="4.5" fill="#67e8f9"/><rect x="778" y="330" width="26" height="9" rx="4.5" fill="#94a3b8"/>
+    <rect x="684" y="354" width="30" height="9" rx="4.5" fill="#94a3b8"/>
+    <rect x="668" y="378" width="46" height="9" rx="4.5" fill="#c084fc"/><rect x="720" y="378" width="40" height="9" rx="4.5" fill="#94a3b8"/>
+    <rect x="684" y="402" width="26" height="9" rx="4.5" fill="#94a3b8"/><rect x="716" y="402" width="50" height="9" rx="4.5" fill="#f9a8d4"/><rect x="772" y="402" width="48" height="9" rx="4.5" fill="#fcd34d"/>
+    <rect x="700" y="426" width="36" height="9" rx="4.5" fill="#f9a8d4"/><rect x="742" y="426" width="70" height="9" rx="4.5" fill="#e2e8f0" fill-opacity="0.7"/>
+    <rect x="700" y="450" width="58" height="9" rx="4.5" fill="#f9a8d4"/><rect x="764" y="450" width="44" height="9" rx="4.5" fill="#fcd34d"/>
+    <rect x="684" y="474" width="34" height="9" rx="4.5" fill="#94a3b8"/>
+    <rect x="652" y="498" width="16" height="9" rx="4.5" fill="#94a3b8"/>
+  </g>
+
+  <!-- agent panel -->
+  <g>
+    <path d="M884 157 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z" fill="#f472b6"/>
+    <text x="902" y="172" font-size="14" font-weight="700" fill="#f8fafc">AI agent</text>
+    <rect x="1066" y="158" width="66" height="20" rx="10" fill="#34d399" fill-opacity="0.14" stroke="#34d399" stroke-opacity="0.4"/>
+    <text x="1099" y="172" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6ee7b7">working</text>
+
+    <rect x="878" y="190" width="254" height="54" rx="10" fill="#22d3ee" fill-opacity="0.08" stroke="#22d3ee" stroke-opacity="0.35"/>
+    <text x="892" y="212" font-family="'JetBrains Mono', 'SF Mono', Menlo, monospace" font-size="11.5" fill="#e2e8f0"><tspan fill="#22d3ee" font-weight="700">&gt;</tspan> Build the dashboard.</text>
+    <text x="892" y="232" font-family="'JetBrains Mono', 'SF Mono', Menlo, monospace" font-size="11.5" fill="#e2e8f0">  Plan first, then code.</text>
+  </g>
+
+  <g font-size="13" fill="#cbd5e1">
+    <circle cx="892" cy="276" r="8" fill="#34d399"/><path d="M888 276 l3 3 5 -6" stroke="#052e1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="910" y="281">Analysed requirements</text>
+    <circle cx="892" cy="310" r="8" fill="#34d399"/><path d="M888 310 l3 3 5 -6" stroke="#052e1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="910" y="315">Proposed architecture</text>
+    <circle cx="892" cy="344" r="8" fill="#34d399"/><path d="M888 344 l3 3 5 -6" stroke="#052e1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="910" y="349">Generated components</text>
+    <circle cx="892" cy="378" r="8" fill="#34d399"/><path d="M888 378 l3 3 5 -6" stroke="#052e1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="910" y="383">Wrote tests</text>
+    <circle cx="892" cy="412" r="8" fill="#34d399"/><path d="M888 412 l3 3 5 -6" stroke="#052e1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="910" y="417">Ran the test suite</text>
+  </g>
+  <path d="M892 286 V302 M892 320 V336 M892 354 V370 M892 388 V404 M892 422 V448" stroke="#34d399" stroke-opacity="0.35" stroke-width="2"/>
+
+  <rect x="876" y="440" width="258" height="44" rx="12" fill="#fbbf24" fill-opacity="0.1" stroke="#fbbf24" stroke-opacity="0.55"/>
+  <circle cx="892" cy="462" r="8" fill="none" stroke="#fbbf24" stroke-width="2"/>
+  <circle cx="892" cy="462" r="3" fill="#fbbf24"/>
+  <text x="910" y="467" font-size="13.5" font-weight="700" fill="#fef3c7">Your review</text>
+  <text x="1120" y="467" text-anchor="end" font-size="11" font-weight="600" fill="#fbbf24">you decide</text>
+
+  <!-- crossed-out old habit -->
+  <g transform="rotate(-5 760 66)">
+    <rect x="660" y="48" width="200" height="36" rx="18" fill="#f43f5e" fill-opacity="0.1" stroke="#fb7185" stroke-opacity="0.7" stroke-dasharray="5 4"/>
+    <circle cx="682" cy="66" r="9" fill="#fb7185" fill-opacity="0.25"/>
+    <path d="M678 62 l8 8 M686 62 l-8 8" stroke="#fb7185" stroke-width="2" stroke-linecap="round"/>
+    <text x="700" y="71" font-size="14" font-weight="600" fill="#fda4af">Typing every line</text>
+    <path d="M698 66 H844" stroke="#fb7185" stroke-width="2"/>
+  </g>
+
+  <!-- the thing that still matters -->
+  <g filter="url(#soft)">
+    <rect x="880" y="516" width="250" height="44" rx="22" fill="url(#chip)"/>
+  </g>
+  <circle cx="906" cy="538" r="10" fill="#ffffff" fill-opacity="0.25"/>
+  <path d="M901 538 l4 4 6 -8" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="924" y="543" font-size="15" font-weight="700" fill="#ffffff">Engineering judgement</text>
+</svg>
