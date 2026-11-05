@@ -1,14 +1,18 @@
-// The homepage intro's WebGL layer: a cinematic opening (big bang -> galaxy
-// -> the name in particles -> a networked globe) that then settles into a
-// living backdrop behind the intro cards. Loaded on demand by the bootstrap
-// script in components/introduction.html.
+// The homepage's WebGL layer: a cinematic opening (big bang -> galaxy -> the
+// name in particles -> a networked globe) that settles into a living backdrop
+// behind the intro cards, then carries the same particles down the page,
+// reshaping them into a formation for every section as it scrolls past.
+// Loaded on demand by the bootstrap script in components/introduction.html.
 import {
   AddEquation,
   BufferAttribute,
   BufferGeometry,
   CustomBlending,
+  Euler,
   Group,
   LineSegments,
+  Matrix3,
+  Matrix4,
   Mesh,
   OneFactor,
   OneMinusSrcAlphaFactor,
@@ -106,9 +110,26 @@ const POINTS_VERT = /* glsl */ `
   uniform float uGlobeS;
   uniform vec2 uGlobeRot;
 
+  // Scroll journey: formation A morphing into B, both in shape space
+  uniform float uJourney;
+  uniform float uMorph;
+  uniform mat3 uRotA;
+  uniform mat3 uRotB;
+  uniform vec3 uOffA;
+  uniform vec3 uOffB;
+  uniform vec3 uPalA[3];
+  uniform vec3 uPalB[3];
+  uniform vec2 uAlphaAB;
+  uniform vec3 uCenter;
+  uniform float uStir;
+  uniform float uScrollW;
+  uniform float uWorldH;
+
   attribute vec3 aText;
   attribute vec3 aGlobe;
   attribute vec4 aRand;
+  attribute vec4 aA;
+  attribute vec4 aB;
 
   varying vec3 vColor;
   varying float vAlpha;
@@ -181,6 +202,33 @@ const POINTS_VERT = /* glsl */ `
     float s2 = sin(3.14159 * e2);
     p += flow(p * 0.12 + 3.0, uTime * 1.2) * s2 * 7.0;
 
+    // Below the intro, every section reshapes the particles; dust becomes a
+    // starfield that drifts with the scroll
+    float ej = 0.0;
+    float em = 0.0;
+    float toneJ = 0.0;
+    if (uJourney > 0.0) {
+      vec3 jp;
+      if (kind > 0.5) {
+        em = ease(local(uMorph, fract(aRand.y * 3.71)));
+        jp = mix(uRotA * aA.xyz + uOffA, uRotB * aB.xyz + uOffB, em);
+        jp += flow(jp * 0.1 + 5.0, uTime * 1.1) * sin(3.14159 * em) * 6.0;
+        jp += uCenter;
+        toneJ = mix(aA.w, aB.w, em);
+      } else {
+        jp = aGlobe;
+        float span = (${CAM_Z.toFixed(1)} - jp.z) / ${CAM_Z.toFixed(1)} * 0.6 * uWorldH;
+        float drift = uScrollW * ${CAM_Z.toFixed(1)} / (${CAM_Z.toFixed(1)} - jp.z);
+        jp.y = mod(jp.y + drift + span, 2.0 * span) - span;
+        jp += flow(aGlobe * 0.06, uTime * 0.2) * 1.8;
+        jp.xy += uCenter.xy;
+      }
+      jp += flow(jp * 0.15, uTime * 1.4) * uStir * 2.2;
+      ej = ease(local(uJourney, fract(aRand.y * 5.31) * (1.0 - dust)));
+      p = mix(p, jp, ej);
+      p += flow(p * 0.12 + 7.0, uTime) * sin(3.14159 * ej) * 6.0 * (1.0 - dust);
+    }
+
     // Cursor pushes particles aside and toward the viewer
     vec2 dm = p.xy - uMouse.xy;
     float dl = length(dm);
@@ -204,6 +252,9 @@ const POINTS_VERT = /* glsl */ `
 
     float globeSize = mix(0.85, mix(0.8, 1.2, land), 1.0 - dust);
     float size = mix(0.65, 1.6, aRand.x) * mix(1.0, globeSize, e2);
+    // A pulse of light that travels along each formation
+    float pulse = pow(0.5 + 0.5 * sin(toneJ * 12.566 - uTime * 1.8), 10.0) * (1.0 - dust);
+    size = mix(size, mix(0.8, 2.0, aRand.x) * (1.0 + pulse * 0.6), ej * (1.0 - dust));
     size *= mix(1.0, 1.2, uLight);
     gl_PointSize = size * uSize * uPR * (60.0 / max(-mv.z, 1.0));
 
@@ -242,6 +293,18 @@ const POINTS_VERT = /* glsl */ `
     float aL = mix(mix(0.6, mix(0.85, 0.22 * twinkle, dust), e1),
                    mix(mix(0.2 * twinkle, 0.7, land) * back, 0.22 * twinkle, dust), e2);
     vAlpha = mix(aD, aL, uLight);
+
+    if (ej > 0.0) {
+      // Palettes arrive already mixed for the current theme
+      vec3 colJ = mix(ramp(uPalA[0], uPalA[1], uPalA[2], aA.w),
+                      ramp(uPalB[0], uPalB[1], uPalB[2], aB.w), em);
+      colJ = mix(colJ, vec3(1.0), pulse * 0.55 * (1.0 - uLight));
+      colJ = mix(colJ, mix(dustD, dustL, uLight), dust);
+      float aJ = mix(uAlphaAB.x, uAlphaAB.y, em) * (0.75 + 0.25 * twinkle) + pulse * 0.3;
+      aJ = mix(aJ, mix(0.32, 0.22, uLight) * twinkle, dust);
+      vColor = mix(vColor, colJ, ej);
+      vAlpha = mix(vAlpha, aJ, ej);
+    }
   }
 `;
 
@@ -277,6 +340,7 @@ const ARCS_VERT = /* glsl */ `
 
 const ARCS_FRAG = /* glsl */ `
   uniform float uArcs;
+  uniform float uFade;
   uniform float uTime;
   uniform float uLight;
   varying float vT;
@@ -293,7 +357,7 @@ const ARCS_FRAG = /* glsl */ `
     vec3 col = mix(dark, light, uLight);
     col = mix(col, vec3(1.0), trail * 0.5 * (1.0 - uLight));
     float a = (0.18 + trail * 0.9) * mix(0.25, 1.0, smoothstep(-0.3, 0.3, vFacing));
-    a *= mix(1.0, 0.8, uLight) * edgeFade();
+    a *= mix(1.0, 0.8, uLight) * uFade * edgeFade();
     float m = max(col.r, max(col.g, col.b));
     gl_FragColor = vec4(col * a, a * mix(m, 1.0, uLight));
   }
@@ -395,6 +459,335 @@ function sampleName(lines, maxW, maxH) {
   };
 }
 
+// ---------- Section formations ----------
+//
+// Each maker fills particles [a, b) of a vec4 buffer with a position in shape
+// space (centred on the origin, sized from S) and a tone (0..1) that picks the
+// palette colour and times the travelling pulse.
+
+const TAU = Math.PI * 2;
+const gauss = () => (Math.random() + Math.random() + Math.random() - 1.5) / 1.5;
+const put = (out, i, x, y, z, tone) => out.set([x, y, z, tone], i * 4);
+
+// Career: a double helix running along the timeline
+function makeHelix(out, a, b, L, S) {
+  const len = L.stacked ? L.H * 0.88 : L.W * 0.8;
+  const r = S * (L.stacked ? 0.42 : 0.3);
+  const turns = 3.2;
+  const rungs = 34;
+  for (let i = a; i < b; i++) {
+    let t;
+    let y;
+    let z;
+    if (i % 6 === 0) {
+      t = (((Math.random() * rungs) | 0) + 0.5) / rungs;
+      const ang = t * turns * TAU;
+      const s = Math.random() * 2 - 1;
+      y = Math.cos(ang) * r * s;
+      z = Math.sin(ang) * r * s;
+    } else {
+      t = Math.random();
+      const ang = t * turns * TAU + (i % 2 ? Math.PI : 0);
+      y = Math.cos(ang) * r + gauss() * r * 0.1;
+      z = Math.sin(ang) * r + gauss() * r * 0.1;
+    }
+    const along = (t - 0.5) * len;
+    if (L.stacked) put(out, i, y, along, z, t);
+    else put(out, i, along, y, z, t);
+  }
+}
+
+// Projects: a (2, 3) torus knot
+function makeKnot(out, a, b, L, S) {
+  const sc = S * 0.34;
+  for (let i = a; i < b; i++) {
+    const phi = Math.random() * TAU;
+    const r = 2 + Math.cos(3 * phi);
+    const d = randomOnSphere();
+    const tube = 0.24 * Math.sqrt(Math.random());
+    put(
+      out,
+      i,
+      (r * Math.cos(2 * phi) + d[0] * tube) * sc,
+      (r * Math.sin(2 * phi) + d[1] * tube) * sc,
+      (-Math.sin(3 * phi) + d[2] * tube) * sc,
+      phi / TAU,
+    );
+  }
+}
+
+// Skills: one orb per skill family, ringed and wired together
+function makeOrbs(out, a, b, L, S) {
+  const ringR = S * (L.stacked ? 0.8 : 1.15);
+  const orbs = 8;
+  const centre = (j) => {
+    const ang = (j / orbs) * TAU;
+    return [Math.cos(ang) * ringR, 0, Math.sin(ang) * ringR];
+  };
+  for (let i = a; i < b; i++) {
+    const kind = i % 10;
+    if (kind === 0) {
+      const ang = Math.random() * TAU;
+      put(out, i, Math.cos(ang) * ringR, gauss() * S * 0.015, Math.sin(ang) * ringR, ang / TAU);
+    } else if (kind === 1) {
+      const j = (Math.random() * orbs) | 0;
+      const c0 = centre(j);
+      const c1 = centre(j + 3);
+      const t = Math.random();
+      const sag = Math.sin(Math.PI * t) * S * 0.12;
+      put(
+        out,
+        i,
+        lerp(c0[0], c1[0], t),
+        lerp(c0[1], c1[1], t) + sag + gauss() * S * 0.01,
+        lerp(c0[2], c1[2], t),
+        j / (orbs - 1),
+      );
+    } else {
+      const j = i % orbs;
+      const c = centre(j);
+      const rr = S * (0.11 + 0.05 * ((j * 5) % 3)) * (0.78 + 0.22 * Math.random());
+      const d = randomOnSphere();
+      put(out, i, c[0] + d[0] * rr, c[1] + d[1] * rr, c[2] + d[2] * rr, j / (orbs - 1));
+    }
+  }
+}
+
+// Awards: a bevelled five-pointed star
+function makeStar(out, a, b, L, S) {
+  const R1 = S * 0.95;
+  const R0 = R1 * 0.42;
+  const v = [];
+  for (let k = 0; k < 10; k++) {
+    const ang = Math.PI / 2 + (k * Math.PI) / 5;
+    const r = k % 2 ? R0 : R1;
+    v.push([Math.cos(ang) * r, Math.sin(ang) * r]);
+  }
+  for (let i = a; i < b; i++) {
+    const k = (Math.random() * 10) | 0;
+    const p0 = v[k];
+    const p1 = v[(k + 1) % 10];
+    let x;
+    let y;
+    let z;
+    if (i % 7 === 0) {
+      const t = Math.random();
+      x = lerp(p0[0], p1[0], t);
+      y = lerp(p0[1], p1[1], t);
+      z = gauss() * S * 0.015;
+    } else {
+      // Triangle (centre, p0, p1); the bevel rises toward the centre
+      const r1 = Math.sqrt(Math.random());
+      const r2 = Math.random();
+      x = r1 * (1 - r2) * p0[0] + r1 * r2 * p1[0];
+      y = r1 * (1 - r2) * p0[1] + r1 * r2 * p1[1];
+      z = (Math.random() < 0.5 ? -1 : 1) * (1 - r1) * R1 * 0.3;
+    }
+    put(out, i, x, y, z, Math.hypot(x, y) / R1);
+  }
+}
+
+// Patent: an atom, its electrons riding the pulse
+function makeAtom(out, a, b, L, S) {
+  const nucleus = S * 0.16;
+  const ra = S * (L.stacked ? 0.85 : 1.0);
+  const rb = ra * 0.36;
+  for (let i = a; i < b; i++) {
+    if (i % 5 === 0) {
+      const d = randomOnSphere();
+      const rr = nucleus * Math.cbrt(Math.random());
+      put(out, i, d[0] * rr, d[1] * rr, d[2] * rr, Math.random() * 0.12);
+      continue;
+    }
+    const o = (Math.random() * 3) | 0;
+    const th = Math.random() * TAU;
+    const ex = Math.cos(th) * ra + gauss() * S * 0.02;
+    const ey = Math.sin(th) * rb + gauss() * S * 0.02;
+    const rot = (o * Math.PI) / 3;
+    put(
+      out,
+      i,
+      ex * Math.cos(rot) - ey * Math.sin(rot),
+      ex * Math.sin(rot) + ey * Math.cos(rot),
+      gauss() * S * 0.02,
+      0.2 + (th / TAU + o / 3) * 0.4,
+    );
+  }
+}
+
+// Education: a Mobius strip, learning that loops back on itself
+function makeMobius(out, a, b, L, S) {
+  const R = S * 0.78;
+  const w = S * 0.3;
+  for (let i = a; i < b; i++) {
+    const u = Math.random() * TAU;
+    const v = (i % 4 === 0 ? (Math.random() < 0.5 ? -1 : 1) : Math.random() * 2 - 1) * w;
+    const rr = R + v * Math.cos(u / 2);
+    put(out, i, rr * Math.cos(u), rr * Math.sin(u), v * Math.sin(u / 2), u / TAU);
+  }
+}
+
+// Testimonials: giant quotation marks framing the quotes, the closing one
+// being the opening one turned half a turn
+function makeQuotes(out, a, b, L, S) {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  const font = '700 360px Georgia, "Times New Roman", serif';
+  ctx.font = font;
+  const text = "\u201C";
+  canvas.width = Math.ceil(ctx.measureText(text).width + 40);
+  canvas.height = 460;
+  ctx.font = font;
+  ctx.fillStyle = "#fff";
+  ctx.textBaseline = "middle";
+  ctx.fillText(text, 20, canvas.height * 0.62);
+  const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const pts = [];
+  let x0 = Infinity;
+  let x1 = -Infinity;
+  let y0 = Infinity;
+  let y1 = -Infinity;
+  for (let y = 0; y < canvas.height; y += 2) {
+    for (let x = 0; x < canvas.width; x += 2) {
+      if (data[(y * canvas.width + x) * 4 + 3] > 140) {
+        pts.push(x, y);
+        x0 = Math.min(x0, x);
+        x1 = Math.max(x1, x);
+        y0 = Math.min(y0, y);
+        y1 = Math.max(y1, y);
+      }
+    }
+  }
+  if (!pts.length) return makeKnot(out, a, b, L, S);
+  const scale = (S * (L.stacked ? 0.55 : 0.8)) / (y1 - y0);
+  const cx = (x0 + x1) / 2;
+  const cy = (y0 + y1) / 2;
+  const gap = S * (L.stacked ? 0.5 : 1.25);
+  const lift = S * 0.25;
+  const count = pts.length / 2;
+  for (let i = a; i < b; i++) {
+    const k = ((Math.random() * count) | 0) * 2;
+    const x = (pts[k] + Math.random() * 2 - cx) * scale;
+    const y = -(pts[k + 1] + Math.random() * 2 - cy) * scale;
+    const z = (Math.random() * 2 - 1) * S * 0.07;
+    const tone = clamp01(x / ((x1 - x0) * scale) + 0.5) * 0.5;
+    if (i % 2) put(out, i, x - gap, y + lift, z, tone);
+    else put(out, i, gap - x, -y - lift, z, 0.5 + tone);
+  }
+}
+
+// Writing: ideas rippling outward across a disc; the pulse rides the ripples
+function makeRipples(out, a, b, L, S) {
+  const R = S * (L.stacked ? 1.1 : 1.5);
+  const k = (TAU * 5) / R;
+  for (let i = a; i < b; i++) {
+    const r = R * Math.sqrt(Math.random());
+    const th = Math.random() * TAU;
+    const fall = 1 - (r / R) * 0.6;
+    put(
+      out,
+      i,
+      Math.cos(th) * r,
+      Math.cos(r * k) * S * 0.09 * fall + gauss() * S * 0.01,
+      Math.sin(th) * r,
+      r / R,
+    );
+  }
+}
+
+// Sign-off: back to the galaxy the intro was born from
+function makeGalaxy(out, a, b, L, S, ctx) {
+  for (let i = a; i < b; i++) {
+    const x = ctx.galaxy[i * 3];
+    const y = ctx.galaxy[i * 3 + 1];
+    const z = ctx.galaxy[i * 3 + 2];
+    put(out, i, x * 0.8, y * 0.8, z * 0.8, Math.hypot(x, z) / ctx.galR);
+  }
+}
+
+// Section ids in page order, each with its formation, motion and palette.
+// rot(t) returns Euler angles; alpha is [dark, light].
+const JOURNEY = [
+  {
+    id: "experience",
+    make: makeHelix,
+    rot: (t, L) => (L.stacked ? [0.25, t * 0.35, 0.15, "XYZ"] : [t * 0.35, 0.22, -0.12, "ZYX"]),
+    dark: [0x7dd3fc, 0x818cf8, 0xf472b6],
+    light: [0x0284c7, 0x4f46e5, 0xdb2777],
+  },
+  {
+    id: "projects",
+    make: makeKnot,
+    rot: (t) => [0.5, t * 0.25, 0, "XYZ"],
+    dark: [0x818cf8, 0xc084fc, 0x22d3ee],
+    light: [0x4338ca, 0x7e22ce, 0x0891b2],
+  },
+  {
+    id: "skill-set",
+    make: makeOrbs,
+    rot: (t) => [0.42, t * 0.18, 0, "XYZ"],
+    dark: [0x38bdf8, 0xa78bfa, 0xf472b6],
+    light: [0x0369a1, 0x6d28d9, 0xbe185d],
+  },
+  {
+    id: "achievements",
+    make: makeStar,
+    rot: (t) => [0.15, t * 0.4, 0, "XYZ"],
+    dark: [0xfff7d6, 0xfbbf24, 0xf472b6],
+    light: [0xb45309, 0xd97706, 0xbe185d],
+  },
+  {
+    id: "patent",
+    make: makeAtom,
+    rot: (t) => [0.5, t * 0.3, 0, "XYZ"],
+    dark: [0xccfbf1, 0x2dd4bf, 0x818cf8],
+    light: [0x0f766e, 0x0d9488, 0x4f46e5],
+  },
+  {
+    id: "education",
+    make: makeMobius,
+    rot: (t) => [-1.0, 0, t * 0.3, "XYZ"],
+    dark: [0xa5b4fc, 0xc084fc, 0x38bdf8],
+    light: [0x4338ca, 0x9333ea, 0x0284c7],
+  },
+  {
+    id: "msk-testimony",
+    make: makeQuotes,
+    rot: (t) => [0.12 * Math.sin(t * 0.5), 0.4 * Math.sin(t * 0.35), 0, "XYZ"],
+    dark: [0xf9a8d4, 0xf472b6, 0xa78bfa],
+    light: [0xdb2777, 0xbe185d, 0x7c3aed],
+  },
+  {
+    id: "blog-articles",
+    make: makeRipples,
+    rot: (t) => [0.42, t * 0.08, 0, "XYZ"],
+    off: (L) => [0, -L.H * 0.06, 0],
+    dark: [0xf0abfc, 0x818cf8, 0x38bdf8],
+    light: [0xa21caf, 0x4338ca, 0x0284c7],
+    alpha: [0.8, 0.45],
+  },
+  {
+    id: "footer",
+    make: makeGalaxy,
+    rot: (t) => [-1.05, t * 0.06, 0, "XYZ"],
+    off: (L) => [0, L.H * 0.12, 0],
+    dark: [0xfff0fa, 0x7c6bff, 0x38c7ff],
+    light: [0x6d28d9, 0x4f46e5, 0x0284c7],
+  },
+].map((def) => ({
+  ...def,
+  dark: def.dark.map(hexToRgb),
+  light: def.light.map(hexToRgb),
+  alpha: def.alpha || [0.95, 0.55],
+}));
+
+function hexToRgb(h) {
+  return [((h >> 16) & 255) / 255, ((h >> 8) & 255) / 255, (h & 255) / 255];
+}
+
+// Depth of the formations behind the content
+const JOURNEY_Z = -8;
+
 class IntroScene {
   constructor({ shell, stage, ui, cinematic, reducedMotion, hooks }) {
     this.shell = shell;
@@ -421,6 +814,16 @@ class IntroScene {
       window.matchMedia("(pointer: coarse)").matches ||
       (navigator.hardwareConcurrency || 8) <= 4;
     this.frameN = 0;
+
+    // Scroll journey: P is 0 on the intro, then 1 + the section index
+    this.journey = false;
+    this.P = 0;
+    this.stir = 0;
+    this.lastScroll = window.scrollY;
+    this.slots = [-1, -1];
+    this.anchors = [];
+    this.euler = new Euler();
+    this.m4 = new Matrix4();
 
     this.tick = this.tick.bind(this);
   }
@@ -477,6 +880,19 @@ class IntroScene {
         uGlobeC: { value: new Vector3() },
         uGlobeS: { value: 1 },
         uGlobeRot: { value: new Vector2(0.38, 0) },
+        uJourney: { value: 0 },
+        uMorph: { value: 0 },
+        uRotA: { value: new Matrix3() },
+        uRotB: { value: new Matrix3() },
+        uOffA: { value: new Vector3() },
+        uOffB: { value: new Vector3() },
+        uPalA: { value: [new Vector3(), new Vector3(), new Vector3()] },
+        uPalB: { value: [new Vector3(), new Vector3(), new Vector3()] },
+        uAlphaAB: { value: new Vector2(0.6, 0.6) },
+        uCenter: { value: new Vector3(0, 0, JOURNEY_Z) },
+        uStir: { value: 0 },
+        uScrollW: { value: 0 },
+        uWorldH: { value: 1 },
       },
     });
     this.arcsMat = new ShaderMaterial({
@@ -486,6 +902,7 @@ class IntroScene {
       uniforms: {
         ...edge,
         uArcs: { value: 0 },
+        uFade: { value: 1 },
         uTime: this.pointsMat.uniforms.uTime,
         uLight: this.pointsMat.uniforms.uLight,
       },
@@ -521,6 +938,7 @@ class IntroScene {
     this.stage.classList.add("is-live");
     this.last = performance.now();
     if (!this.reduced) this.raf = requestAnimationFrame(this.tick);
+    if (!this.startCinematic) this.queueJourney();
   }
 
   // ---------- Geometry ----------
@@ -566,6 +984,8 @@ class IntroScene {
     const dustN = Math.round(N * 0.18);
     const landN = Math.round((N - dustN) * 0.72);
 
+    this.N = N;
+    this.dustN = dustN;
     const galaxy = new Float32Array(N * 3);
     const text = new Float32Array(N * 3);
     const globe = new Float32Array(N * 3);
@@ -645,6 +1065,9 @@ class IntroScene {
     u.uTextW.value = s.width;
     u.uGalR.value = galR;
     u.uSize.value = L.vw < 768 ? 2.9 : 2.4;
+    u.uWorldH.value = L.H;
+    this.galaxy = galaxy;
+    this.galR = galR;
 
     if (this.points) {
       this.points.geometry.dispose();
@@ -655,11 +1078,155 @@ class IntroScene {
     geo.setAttribute("aText", new BufferAttribute(text, 3));
     geo.setAttribute("aGlobe", new BufferAttribute(globe, 3));
     geo.setAttribute("aRand", new BufferAttribute(rand, 4));
+    geo.setAttribute("aA", new BufferAttribute(new Float32Array(N * 4), 4));
+    geo.setAttribute("aB", new BufferAttribute(new Float32Array(N * 4), 4));
     this.points = new Points(geo, this.pointsMat);
     this.points.frustumCulled = false;
     this.scene.add(this.points);
 
     this.buildGlobeExtras(landPts, L.R);
+    this.slots = [-1, -1];
+    if (this.journey) this.buildJourney();
+  }
+
+  // ---------- Scroll journey ----------
+
+  queueJourney() {
+    if (this.reduced || this.journey || this.journeyQueued) return;
+    this.journeyQueued = true;
+    const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 200));
+    idle(() => this.enableJourney(), { timeout: 1500 });
+  }
+
+  enableJourney() {
+    if (this.disposed || this.journey) return;
+    this.journey = true;
+    this.buildJourney();
+    this.measure();
+    this.P = this.journeyTarget();
+    this.root.classList.add("page-scene");
+
+    // Sections load lazily and reflow the page; keep their anchors current
+    this.bodyObserver = new ResizeObserver(() => {
+      cancelAnimationFrame(this.measureRaf);
+      this.measureRaf = requestAnimationFrame(() => this.measure());
+    });
+    this.bodyObserver.observe(document.body);
+
+    // A click on empty page space sends a shockwave through the formation
+    this.onPageDown = (e) => {
+      if (this.P < 0.3 || e.button > 0) return;
+      const hit = e.target.closest(
+        "a, button, input, textarea, select, label, [role='button'], [onclick], .chatbot-widget",
+      );
+      if (!hit) this.onWaveDown(e);
+    };
+    document.addEventListener("pointerdown", this.onPageDown);
+  }
+
+  buildJourney() {
+    const L = this.L;
+    const S = Math.min(L.H * 0.42, L.W * 0.46);
+    const ctx = { galaxy: this.galaxy, galR: this.galR };
+    this.shapes = JOURNEY.map((def) => {
+      const data = new Float32Array(this.N * 4);
+      def.make(data, this.dustN, this.N, L, S, ctx);
+      return data;
+    });
+    this.slots = [-1, -1];
+  }
+
+  measure() {
+    const y = window.scrollY;
+    const vh = window.innerHeight;
+    const docH = document.documentElement.scrollHeight;
+    this.anchors = JOURNEY.map(({ id }) => {
+      const el = document.getElementById(id);
+      return el && el.offsetHeight ? el.getBoundingClientRect().top + y : NaN;
+    });
+    this.maxScroll = Math.max(docH - vh, 0);
+
+    // Each morph spans part of the sections on both sides of its boundary,
+    // so even a short section holds its formation for a while
+    let prev = this.shell.getBoundingClientRect().top + y;
+    this.windows = this.anchors.map((a, k) => {
+      if (!Number.isFinite(a)) return 0;
+      const next = this.anchors.slice(k + 1).find(Number.isFinite);
+      const w = Math.min(vh * 0.34, (a - prev) * 0.35, ((next || docH) - a) * 0.35);
+      prev = a;
+      return Math.max(w, 40);
+    });
+  }
+
+  // Sums a smooth step at every section boundary the viewport centre crosses
+  journeyTarget() {
+    const vh = window.innerHeight;
+    const yc = window.scrollY + vh * 0.5;
+    let p = 0;
+    this.anchors.forEach((anchor, k) => {
+      if (!Number.isFinite(anchor)) return;
+      const w = this.windows[k];
+      // The last boundaries may sit below the furthest reachable centre
+      const b = Math.min(anchor, this.maxScroll + vh * 0.5 - w);
+      p += span(yc, b - w, b + w);
+    });
+    return p;
+  }
+
+  setSlot(slot, idx) {
+    if (this.slots[slot] === idx) return;
+    this.slots[slot] = idx;
+    const attr = this.points.geometry.getAttribute(slot ? "aB" : "aA");
+    attr.array.set(this.shapes[idx]);
+    attr.needsUpdate = true;
+  }
+
+  applySlot(slot, idx) {
+    const def = JOURNEY[idx];
+    const u = this.pointsMat.uniforms;
+    const [x, y, z, order] = def.rot(this.time, this.L);
+    this.euler.set(x, y, z, order);
+    this.m4.makeRotationFromEuler(this.euler);
+    (slot ? u.uRotB : u.uRotA).value.setFromMatrix4(this.m4);
+    const off = def.off ? def.off(this.L) : [0, 0, 0];
+    (slot ? u.uOffB : u.uOffA).value.fromArray(off);
+    const pal = (slot ? u.uPalB : u.uPalA).value;
+    for (let c = 0; c < 3; c++) {
+      const d = def.dark[c];
+      const l = def.light[c];
+      pal[c].set(
+        lerp(d[0], l[0], this.light),
+        lerp(d[1], l[1], this.light),
+        lerp(d[2], l[2], this.light),
+      );
+    }
+    u.uAlphaAB.value.setComponent(slot, lerp(def.alpha[0], def.alpha[1], this.light));
+  }
+
+  // Returns how far the intro has handed over to the section formations
+  updateJourney(dt) {
+    const u = this.pointsMat.uniforms;
+    if (!this.journey || this.mode === "cine") {
+      u.uJourney.value = 0;
+      return 0;
+    }
+    const target = this.journeyTarget();
+    this.P = dt ? lerp(this.P, target, 1 - Math.exp(-dt * 6)) : target;
+    if (Math.abs(this.P - target) < 1e-4) this.P = target;
+
+    const n = this.shapes.length;
+    const q = Math.max(this.P - 1, 0);
+    const ia = Math.min(Math.floor(q), n - 1);
+    const ib = Math.min(ia + 1, n - 1);
+    this.setSlot(0, ia);
+    this.setSlot(1, ib);
+    this.applySlot(0, ia);
+    this.applySlot(1, ib);
+    u.uMorph.value = ia === n - 1 ? 0 : q - ia;
+
+    const j = clamp01(this.P);
+    u.uJourney.value = j;
+    return j;
   }
 
   buildGlobeExtras(landPts, R) {
@@ -738,6 +1305,7 @@ class IntroScene {
       // Mobile toolbars change only the height: keep the particles, move the globe
       this.L = { ...this.L, ambC: next.ambC, ambS: next.ambS };
     }
+    if (this.journey) this.measure();
     if (this.reduced) this.renderOnce();
   }
 
@@ -802,6 +1370,7 @@ class IntroScene {
       "intro-cine-live",
       "intro-cine-reveal",
     );
+    this.queueJourney();
   }
 
   replay() {
@@ -955,8 +1524,11 @@ class IntroScene {
     const nav = document.getElementById("mobile-bottom-nav");
     if (nav && nav.offsetHeight) bottom = Math.min(bottom, nav.getBoundingClientRect().top);
     const shell = this.shell.getBoundingClientRect();
-    bottom = Math.min(bottom, shell.bottom);
-    return { top, bottom, visible: shell.bottom > top + 10 && shell.top < vh };
+    // Held to the intro until the journey takes over the whole viewport
+    const open = clamp01(this.P * 2.5);
+    bottom = lerp(Math.min(bottom, shell.bottom), bottom, open);
+    const introVisible = shell.bottom > top + 10 && shell.top < vh;
+    return { top, bottom, open, visible: introVisible || this.P > 0.01 };
   }
 
   tick(now) {
@@ -1018,8 +1590,19 @@ class IntroScene {
     u.uLight.value = light;
     u.uSweep.value = cine ? lerp(-0.2, 1.2, span(this.t, 3.1, 4.1)) : -1;
     u.uMouseR.value = lerp(6.5, 4.5, s.ambient);
+
+    const j = this.updateJourney(dt);
     this.arcsMat.uniforms.uArcs.value = s.arcs;
-    this.rimMat.uniforms.uRim.value = s.rim;
+    this.arcsMat.uniforms.uFade.value = 1 - j;
+    this.rimMat.uniforms.uRim.value = s.rim * (1 - j);
+    this.globe.visible = j < 0.999;
+
+    // Fast scrolling stirs the particles
+    const sy = window.scrollY;
+    const speed = dt ? Math.abs(sy - this.lastScroll) / dt : 0;
+    this.lastScroll = sy;
+    this.stir = lerp(this.stir, Math.min(speed / 3000, 1), dt ? Math.min(dt * 4, 1) : 1);
+    u.uStir.value = this.stir * j;
 
     // Globe: slides from centre stage to the side once it becomes a backdrop
     this.globeSpin += dt * 0.12;
@@ -1037,7 +1620,13 @@ class IntroScene {
     const cineZ = 74 - 12 * s.bang - 5 * s.toText + 6 * s.toGlobe;
     const camZ = lerp(cineZ, CAM_Z, s.ambient);
     const worldPerPx = L.H / window.innerHeight;
-    const scrollShift = -window.scrollY * worldPerPx * 0.35 * s.ambient;
+    // Past the intro the camera holds still and the formations come to it
+    const lagY = this.journey && Number.isFinite(this.anchors[0])
+      ? Math.min(sy, this.anchors[0])
+      : sy;
+    const scrollShift = -lagY * worldPerPx * 0.35 * s.ambient;
+    u.uCenter.value.set(0, scrollShift, JOURNEY_Z);
+    u.uScrollW.value = sy * worldPerPx * 0.25;
     let shakeX = 0;
     let shakeY = 0;
     if (cine && this.t > CUE.flash) {
@@ -1063,7 +1652,7 @@ class IntroScene {
 
     const c = this.clip();
     this.edge.uEdge.value = s.ambient;
-    this.edge.uClip.value = [c.top, c.top + 80, c.bottom - 180, c.bottom];
+    this.edge.uClip.value = [c.top, c.top + 80, c.bottom - lerp(180, 60, c.open), c.bottom];
 
     if (cine && this.t > 2.2 && this.t < 4.6) {
       const sub = this.ui.querySelector('[data-cue="name"]');
@@ -1080,14 +1669,19 @@ class IntroScene {
     cancelAnimationFrame(this.raf);
     this.unbindSkip();
     this.shell.classList.remove("is-cine", "has-scene");
-    this.root.classList.remove("intro-cine", "intro-cine-live", "intro-cine-reveal");
+    this.root.classList.remove("intro-cine", "intro-cine-live", "intro-cine-reveal", "page-scene");
     this.stage.classList.remove("is-live");
     if (this.hooks.enterCards) this.hooks.enterCards();
   }
 
   dispose() {
+    this.disposed = true;
     cancelAnimationFrame(this.raf);
+    cancelAnimationFrame(this.measureRaf);
     this.unbindSkip();
+    this.root.classList.remove("page-scene");
+    if (this.bodyObserver) this.bodyObserver.disconnect();
+    if (this.onPageDown) document.removeEventListener("pointerdown", this.onPageDown);
     window.removeEventListener("resize", this.onResize);
     window.removeEventListener("pointermove", this.onPointerMove);
     document.removeEventListener("pointerout", this.onPointerOut);

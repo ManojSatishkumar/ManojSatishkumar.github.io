@@ -857,6 +857,107 @@
           opacity: 0.7;
         }
       }
+
+      /* While the particle journey (js/intro-scene.js) runs behind the whole
+         page, section backgrounds step aside so its formations show through.
+         The light tints layered on .xp and .pt stay. */
+      html.page-scene
+        :is(#experience, #projects, #skill-set, #achievements, #education) {
+        background-color: transparent !important;
+      }
+
+      html.page-scene :is(.xp, .pt) {
+        background-color: transparent !important;
+      }
+
+      html.page-scene
+        :is(
+          .projects-section,
+          .skill-section,
+          .achievements-section,
+          .edu-section,
+          #blog-articles
+        ) {
+        background: transparent !important;
+      }
+
+      /* Cards turn to frosted glass so the formations read through them */
+      html.page-scene[data-theme="dark"]
+        :is(
+          #experience,
+          #projects,
+          #skill-set,
+          #achievements,
+          #patent,
+          #education,
+          #msk-testimony,
+          #blog-articles
+        ) {
+        --dm-surface: rgba(19, 28, 46, 0.62);
+      }
+
+      html.page-scene:not([data-theme="dark"]) .xp {
+        --xp-surface: rgba(255, 255, 255, 0.78);
+      }
+
+      /* A soft halo keeps copy legible where it sits right on a formation.
+         Headings are left alone: their gradient text would show the shadow. */
+      html.page-scene
+        :is(
+          #experience,
+          #projects,
+          #skill-set,
+          #achievements,
+          #patent,
+          #education,
+          #msk-testimony,
+          #blog-articles
+        )
+        p {
+        text-shadow:
+          0 0 10px rgba(255, 255, 255, 0.9),
+          0 0 2px rgba(255, 255, 255, 0.8);
+      }
+
+      html.page-scene[data-theme="dark"]
+        :is(
+          #experience,
+          #projects,
+          #skill-set,
+          #achievements,
+          #patent,
+          #education,
+          #msk-testimony,
+          #blog-articles
+        )
+        p {
+        text-shadow:
+          0 0 10px rgba(11, 17, 32, 0.95),
+          0 0 2px rgba(11, 17, 32, 0.85);
+      }
+
+      html.page-scene:not([data-theme="dark"])
+        :is(.project-card, .skill-card, .testimony-card, .pt-card, .pt-block) {
+        background-color: rgba(255, 255, 255, 0.78) !important;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        html.page-scene
+          :is(
+            .xp-overview,
+            .xp-card,
+            .project-card,
+            .skill-card,
+            .achievement-card,
+            .pt-card,
+            .pt-block,
+            .edu-card,
+            .testimony-card
+          ) {
+          -webkit-backdrop-filter: blur(3px) saturate(140%);
+          backdrop-filter: blur(3px) saturate(140%);
+        }
+      }
     </style>
 
     <!-- Google Analytics -->
