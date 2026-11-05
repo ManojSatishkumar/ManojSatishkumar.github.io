@@ -770,7 +770,7 @@ const JOURNEY = [
     id: "footer",
     make: makeGalaxy,
     rot: (t) => [-1.05, t * 0.06, 0, "XYZ"],
-    off: (L) => [0, L.H * 0.12, 0],
+    off: (L) => [0, L.H * 0.02, 0],
     dark: [0xfff0fa, 0x7c6bff, 0x38c7ff],
     light: [0x6d28d9, 0x4f46e5, 0x0284c7],
   },

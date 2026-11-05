@@ -862,8 +862,27 @@
          page, section backgrounds step aside so its formations show through.
          The light tints layered on .xp and .pt stay. */
       html.page-scene
-        :is(#experience, #projects, #skill-set, #achievements, #education) {
+        :is(
+          #experience,
+          #projects,
+          #skill-set,
+          #achievements,
+          #education,
+          #footer
+        ) {
         background-color: transparent !important;
+      }
+
+      /* The footer turns to frosted glass over the closing galaxy */
+      html.page-scene body #footer footer {
+        background: rgba(248, 249, 250, 0.62) !important;
+        -webkit-backdrop-filter: blur(4px) saturate(150%);
+        backdrop-filter: blur(4px) saturate(150%);
+      }
+
+      html.page-scene[data-theme="dark"] body #footer footer {
+        background: rgba(19, 28, 46, 0.4) !important;
+        border-top-color: rgba(148, 163, 184, 0.18);
       }
 
       html.page-scene :is(.xp, .pt) {
