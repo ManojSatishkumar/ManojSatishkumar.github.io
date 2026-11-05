@@ -1513,9 +1513,33 @@
     transform: none;
   }
 
+  .intro-cine-co.is-on > span:nth-child(2) {
+    transition-delay: 0.14s;
+  }
+
   .intro-cine-co.is-off > span {
     transform: translateY(-14px);
     transition-duration: 0.35s, 0.35s, 0.5s;
+  }
+
+  .intro-cine-co__name {
+    padding-bottom: 0.06em;
+    background: linear-gradient(100deg, #fff 0%, var(--brand-a) 45%, var(--brand-b) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: clamp(3rem, 7.2vw, 6.8rem);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+  }
+
+  .intro-cine-co > .intro-cine-co__name {
+    filter: blur(10px) drop-shadow(0 0 0 transparent);
+  }
+
+  .intro-cine-co.is-on > .intro-cine-co__name {
+    filter: blur(0) drop-shadow(0 0 26px color-mix(in srgb, var(--brand-a) 45%, transparent));
   }
 
   .intro-cine-co__role {
@@ -1547,6 +1571,77 @@
 
   .intro-cine-ui.is-stacked .intro-cine-co.is-on > span {
     transform: none;
+  }
+
+  .intro-cine-ui.is-stacked .intro-cine-co__name {
+    font-size: clamp(2.4rem, 12vw, 3.6rem);
+  }
+
+  .intro-cine-rail {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+  }
+
+  .intro-cine-rail.is-on {
+    opacity: 1;
+  }
+
+  .intro-cine-rail::before,
+  .intro-cine-rail__fill {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    height: 1px;
+    background: rgba(148, 163, 184, 0.28);
+  }
+
+  .intro-cine-rail__fill {
+    background: linear-gradient(90deg, #818cf8, #f472b6);
+    box-shadow: 0 0 10px rgba(244, 114, 182, 0.7);
+    transform: scaleX(var(--rail, 0));
+    transform-origin: left center;
+  }
+
+  .intro-cine-rail__node {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 9px;
+    color: rgba(148, 163, 184, 0.7);
+    font-size: clamp(0.68rem, 1vw, 0.82rem);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.4s ease;
+  }
+
+  .intro-cine-rail__node::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #0b1120;
+    box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.5);
+    transition:
+      background-color 0.4s ease,
+      box-shadow 0.4s ease;
+  }
+
+  .intro-cine-rail__node.is-reached {
+    color: #e2e8f0;
+  }
+
+  .intro-cine-rail__node.is-reached::before {
+    background: #f0abfc;
+    box-shadow: 0 0 12px 2px rgba(240, 171, 252, 0.75);
   }
 
   .intro-cine-roles {
@@ -1655,6 +1750,95 @@
     box-shadow: none;
     color: #cbd5e1;
     font: 600 0.64rem/1 "Poppins", sans-serif;
+  }
+
+  .intro-cine-start {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7em;
+    padding: 0.9em 1.9em 0.9em 1.7em;
+    border: 1px solid rgba(196, 181, 253, 0.55);
+    border-radius: 999px;
+    background: radial-gradient(
+      120% 160% at 50% 0%,
+      rgba(129, 140, 248, 0.5),
+      rgba(15, 23, 42, 0.6) 70%
+    );
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font: 700 clamp(1.35rem, 2.4vw, 2rem) / 1 "Poppins", sans-serif;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    text-shadow: 0 0 18px rgba(196, 181, 253, 0.8);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 0 40px rgba(129, 140, 248, 0.55),
+      0 0 120px rgba(244, 114, 182, 0.28);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.86);
+    transition:
+      opacity 0.7s ease,
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.3s ease,
+      visibility 0s linear 0.7s;
+  }
+
+  .intro-cine-start i {
+    font-size: 0.75em;
+  }
+
+  /* letter-spacing trails the last letter; pull it back so the label centres */
+  .intro-cine-start span {
+    margin-right: -0.24em;
+  }
+
+  .intro-cine-start::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border: 1px solid rgba(196, 181, 253, 0.7);
+    border-radius: inherit;
+    animation: introStartPulse 2.4s ease-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes introStartPulse {
+    0% {
+      opacity: 0.8;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.25, 1.7);
+    }
+  }
+
+  .intro-cine-ui.is-gate .intro-cine-start {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, -50%);
+    transition-delay: 0s;
+  }
+
+  .intro-cine-ui.is-gate .intro-cine-start:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.24),
+      0 0 56px rgba(129, 140, 248, 0.8),
+      0 0 160px rgba(244, 114, 182, 0.4);
+  }
+
+  .intro-cine-start:focus-visible {
+    outline: 2px solid #c4b5fd;
+    outline-offset: 6px;
   }
 
   .intro-cine-progress {
@@ -1953,30 +2137,40 @@
        backdrop behind the cards -->
   <div class="intro-stage" aria-hidden="true"></div>
   <div class="intro-cine-ui">
-    <p class="intro-cine-caption" data-cue="chaos" aria-hidden="true">
-      It all began in 2013, with a single line of code.
-    </p>
     <p class="intro-cine-sub" data-cue="name" aria-hidden="true">
       Software Architect <span>&middot;</span> Walt Disney
     </p>
 
     <!-- The career, one company at a time; js/intro-scene.js builds each
-         logo in particles on the right -->
+         logo in particles on the right and fills the rail -->
     <div class="intro-cine-career" aria-hidden="true">
+      <div class="intro-cine-rail" data-cue="rail">
+        <span class="intro-cine-rail__fill"></span>
+        <span class="intro-cine-rail__node" data-node="0">2013</span>
+        <span class="intro-cine-rail__node" data-node="1">2015</span>
+        <span class="intro-cine-rail__node" data-node="2">2019</span>
+        <span class="intro-cine-rail__node" data-node="3">2021</span>
+        <span class="intro-cine-rail__node" data-node="4">Now</span>
+      </div>
       <div class="intro-cine-career__stack">
-        <p class="intro-cine-co" data-cue="co0">
+        <p class="intro-cine-co" data-cue="co0" style="--brand-a: #93c5fd; --brand-b: #a5b4fc">
+          <span class="intro-cine-co__name">GRL Labs</span>
           <span class="intro-cine-co__role">Software Engineer</span>
         </p>
-        <p class="intro-cine-co" data-cue="co1">
+        <p class="intro-cine-co" data-cue="co1" style="--brand-a: #38bdf8; --brand-b: #bef264">
+          <span class="intro-cine-co__name">Cerner</span>
           <span class="intro-cine-co__role">Engineer to Technical Team Lead</span>
         </p>
-        <p class="intro-cine-co" data-cue="co2">
+        <p class="intro-cine-co" data-cue="co2" style="--brand-a: #60a5fa; --brand-b: #fcd34d">
+          <span class="intro-cine-co__name">Walmart</span>
           <span class="intro-cine-co__role">Staff Engineer</span>
         </p>
-        <p class="intro-cine-co" data-cue="co3">
+        <p class="intro-cine-co" data-cue="co3" style="--brand-a: #818cf8; --brand-b: #38bdf8">
+          <span class="intro-cine-co__name">PayPal</span>
           <span class="intro-cine-co__role">Member of Technical Staff</span>
         </p>
-        <p class="intro-cine-co" data-cue="co4">
+        <p class="intro-cine-co" data-cue="co4" style="--brand-a: #e0e7ff; --brand-b: #f0abfc">
+          <span class="intro-cine-co__name">Disney</span>
           <span class="intro-cine-co__role">Software Architect</span>
         </p>
       </div>
@@ -1998,13 +2192,19 @@
     </p>
     <p class="intro-cine-hint" data-cue="hint" aria-hidden="true">
       <span class="intro-cine-hint--pointer"
-        ><i class="fa-solid fa-film"></i> Sit back &middot; press Esc to
+        ><i class="fa-solid fa-film"></i> Sit back &middot; scroll to
         skip</span
       >
       <span class="intro-cine-hint--touch"
         ><i class="fa-solid fa-film"></i> Sit back &middot; swipe to skip</span
       >
     </p>
+    <!-- Shown once the galaxy has formed; js/intro-scene.js holds the story
+         there until it is pressed -->
+    <button type="button" class="intro-cine-start" tabindex="-1">
+      <i class="fa-solid fa-play" aria-hidden="true"></i>
+      <span>Start</span>
+    </button>
     <button type="button" class="intro-cine-skip">
       Skip intro <kbd>Esc</kbd>
     </button>
@@ -2057,7 +2257,7 @@
                 </span>
                 <span class="home-profile__replay-text">
                   <strong>Play my intro</strong>
-                  <span>My story in 40 seconds</span>
+                  <span>My story in 30 seconds</span>
                 </span>
               </button>
             </div>

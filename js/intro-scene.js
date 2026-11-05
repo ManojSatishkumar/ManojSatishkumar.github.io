@@ -34,12 +34,13 @@ const NAME = "MANOJ SATISHKUMAR";
 // company at a time -> the globe it reaches today -> who he is -> the cards.
 // Every hand-off between formations is long, so the particles drift from one
 // to the next rather than snap.
+const GATE = 1.4; // the galaxy has formed: the story waits here for Start
 const TO_NAME = [3.6, 6.6]; // the galaxy streams into the name
 const NAME_AT = TO_NAME[1];
 const CO_START = NAME_AT + 4.2; // first company fully formed
-const CO_STEP = 7.0; // one company to the next: at least 5 s on screen each
-const CO_MORPH = 3.2; // of which the particles are in flight
-const CO_END = CO_START + 4 * CO_STEP + 4.2; // last company hands over to the globe
+const CO_STEP = 3.0; // one company to the next: 3 s each at most
+const CO_MORPH = 1.8; // of which the particles are in flight
+const CO_END = CO_START + 4 * CO_STEP + CO_STEP; // last company hands over to the globe
 const coAt = (k) => CO_START + k * CO_STEP;
 // Captions hand over halfway through each morph
 const coSwap = (k) => coAt(k) - CO_MORPH / 2;
@@ -47,8 +48,8 @@ const coSwap = (k) => coAt(k) - CO_MORPH / 2;
 const REVEAL = CO_END + 6.5;
 const CUE = { reveal: REVEAL, cards: REVEAL + 0.35, end: REVEAL + 1.5 };
 const CAPTIONS = [
-  ["chaos", 0.9, TO_NAME[0] + 0.4],
   ["name", NAME_AT - 0.7, NAME_AT + 2.0],
+  ["rail", NAME_AT + 2.1, CO_END + 0.2],
   ["co0", coAt(0) - 0.6, coSwap(1)],
   ["co1", coSwap(1) + 0.15, coSwap(2)],
   ["co2", coSwap(2) + 0.15, coSwap(3)],
@@ -62,12 +63,31 @@ const CAPTIONS = [
 const clamp01 = (x) => Math.min(Math.max(x, 0), 1);
 const span = (t, a, b) => clamp01((t - a) / (b - a));
 const lerp = (a, b, k) => a + (b - a) * k;
+// A repeatable random stream (mulberry32)
+const seeded = (seed) => () => {
+  seed = (seed + 0x6d2b79f5) | 0;
+  let k = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  k = (k + Math.imul(k ^ (k >>> 7), 61 | k)) ^ k;
+  return ((k ^ (k >>> 14)) >>> 0) / 4294967296;
+};
 const smoothstep = (a, b, x) => {
   const k = span(x, a, b);
   return k * k * (3 - 2 * k);
 };
 const easeInOut = (x) =>
   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+
+// Must run inside a click or key handler; browsers without the API (iPhone
+// Safari) or that refuse it simply carry on in the window
+function enterFullscreen() {
+  const el = document.documentElement;
+  const request = el.requestFullscreen || el.webkitRequestFullscreen;
+  if (!request || document.fullscreenElement || document.webkitFullscreenElement) return;
+  try {
+    const p = request.call(el, { navigationUI: "hide" });
+    if (p && p.catch) p.catch(() => {});
+  } catch (e) {}
+}
 
 // 0..1..0 over each company morph, with the index of the one in flight
 function coFlight(t) {
@@ -205,11 +225,11 @@ const POINTS_VERT = /* glsl */ `
     float land = step(1.5, kind);
     float tn = clamp(aText.x / uTextW + 0.5, 0.0, 1.0);
 
-    // Galaxy: the bar turns rigidly, the arms trail it and wind slowly;
-    // stars light up from the core outward
+    // Galaxy: the whole pattern turns as one, so the arms keep their shape
+    // however long it waits for Start; stars light up from the core outward
     vec3 g = position;
     float rn = length(g.xz) / uGalR;
-    g.xz = rot2(g.xz, -uGalT * (0.05 + 0.14 / (1.0 + 5.0 * max(rn - 0.2, 0.0))));
+    g.xz = rot2(g.xz, -uGalT * 0.09);
     g.yz = rot2(g.yz, -uGalTilt.x);
     g.xy = rot2(g.xy, uGalTilt.y);
     float galIn = clamp(0.15 + uGalIn * 14.0 - (0.55 * min(rn, 1.0) + 0.45 * aRand.y) * 2.5, 0.0, 1.0);
@@ -757,12 +777,14 @@ function makeRipples(out, a, b, L, S) {
 // The opening Milky Way, in the disc's own plane (xz, y up): a warm bulge
 // and bar, two major and two minor trailing arms with dust lanes on their
 // inner edges, star-forming knots, a faint disc between the arms and a halo.
-// Fills pos (xyz) and col (rgb + brightness) for particles 0..N-1.
-function makeMilkyWay(pos, col, N, R) {
+// Fills pos (xyz) and col (rgb + brightness) for particles 0..N-1, drawing
+// from rnd so a rebuild (entering fullscreen resizes the view) redraws the
+// same galaxy.
+function makeMilkyWay(pos, col, N, R, rnd) {
   const gauss = () => {
     let u = 0;
-    while (!u) u = Math.random();
-    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * Math.random());
+    while (!u) u = rnd();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * rnd());
   };
   const mix3 = (a, b, k) => [lerp(a[0], b[0], k), lerp(a[1], b[1], k), lerp(a[2], b[2], k)];
   const CORE = [1.0, 0.94, 0.84];
@@ -785,7 +807,7 @@ function makeMilkyWay(pos, col, N, R) {
     [barA + (3 * Math.PI) / 2, 0.14],
   ];
   const pickArm = () => {
-    let u = Math.random();
+    let u = rnd();
     for (const arm of ARMS) {
       if ((u -= arm[1]) <= 0) return arm;
     }
@@ -793,13 +815,13 @@ function makeMilkyWay(pos, col, N, R) {
   };
   const armAt = (arm, r) => arm[0] + Math.log(r / barL) / pitch;
   const knots = Array.from({ length: 90 }, () => {
-    const r = barL + (R - barL) * (0.08 + 0.85 * Math.random());
+    const r = barL + (R - barL) * (0.08 + 0.85 * rnd());
     const th = armAt(pickArm(), r) + gauss() * 0.04;
-    return { x: Math.cos(th) * r, z: Math.sin(th) * r, pink: Math.random() < 0.55 };
+    return { x: Math.cos(th) * r, z: Math.sin(th) * r, pink: rnd() < 0.55 };
   });
 
   for (let i = 0; i < N; i++) {
-    const roll = Math.random();
+    const roll = rnd();
     let x;
     let y;
     let z;
@@ -808,7 +830,7 @@ function makeMilkyWay(pos, col, N, R) {
     if (roll < 0.14) {
       // Bulge: a squashed, slightly elongated glow along the bar, around a
       // white-hot nucleus
-      const s = R * (Math.random() < 0.35 ? 0.025 : 0.07);
+      const s = R * (rnd() < 0.35 ? 0.025 : 0.07);
       const u = gauss() * s * 1.25;
       const v = gauss() * s;
       x = Math.cos(barA) * u - Math.sin(barA) * v;
@@ -817,21 +839,21 @@ function makeMilkyWay(pos, col, N, R) {
       c = mix3(CORE, GOLD, Math.min(Math.hypot(x, y, z) / (R * 0.16), 1));
       w = 1.3;
     } else if (roll < 0.22) {
-      const along = (Math.random() * 2 - 1) * barL;
+      const along = (rnd() * 2 - 1) * barL;
       const across = gauss() * R * 0.028;
       x = Math.cos(barA) * along - Math.sin(barA) * across;
       z = Math.sin(barA) * along + Math.cos(barA) * across;
       y = gauss() * R * 0.014;
-      c = mix3(GOLD, CORE, 0.35 + 0.4 * Math.random());
+      c = mix3(GOLD, CORE, 0.35 + 0.4 * rnd());
       w = 1.0;
     } else if (roll < 0.82) {
       const arm = pickArm();
-      const r = barL + (R - barL) * Math.pow(Math.random(), 0.9);
+      const r = barL + (R - barL) * Math.pow(rnd(), 0.9);
       const rn = r / R;
       const width = R * (0.016 + 0.04 * rn);
       let d = gauss() * width;
       // Dust lane: most stars that would sit on the inner edge are pushed out
-      if (d < -0.25 * width && d > -0.8 * width && Math.random() < 0.85) d = -d;
+      if (d < -0.25 * width && d > -0.8 * width && rnd() < 0.85) d = -d;
       const rr = r + d;
       const th = armAt(arm, r) + gauss() * 0.03;
       x = Math.cos(th) * rr;
@@ -839,10 +861,10 @@ function makeMilkyWay(pos, col, N, R) {
       y = gauss() * R * 0.01;
       const tone = smoothstep(0.15, 0.95, rn);
       c = mix3(ARM_IN, ARM_OUT, tone);
-      if (Math.random() < 0.08) c = YOUNG;
+      if (rnd() < 0.08) c = YOUNG;
       w = lerp(0.95, 0.7, tone) * (arm[1] < 0.3 ? 0.8 : 1);
     } else if (roll < 0.88) {
-      const k = knots[(Math.random() * knots.length) | 0];
+      const k = knots[(rnd() * knots.length) | 0];
       const s = R * 0.009;
       x = k.x + gauss() * s;
       z = k.z + gauss() * s;
@@ -850,17 +872,17 @@ function makeMilkyWay(pos, col, N, R) {
       c = k.pink ? PINK : YOUNG;
       w = 1.25;
     } else if (roll < 0.96) {
-      const r = Math.min(-Math.log(1 - Math.random() * 0.98) * R * 0.32, R * 1.15);
-      const th = Math.random() * Math.PI * 2;
+      const r = Math.min(-Math.log(1 - rnd() * 0.98) * R * 0.32, R * 1.15);
+      const th = rnd() * Math.PI * 2;
       x = Math.cos(th) * r;
       z = Math.sin(th) * r;
       y = gauss() * R * 0.015;
       c = DISC;
       w = 0.5;
     } else {
-      const r = R * (0.08 + 1.0 * Math.pow(Math.random(), 0.7));
-      const ph = Math.random() * Math.PI * 2;
-      const ct = Math.random() * 2 - 1;
+      const r = R * (0.08 + 1.0 * Math.pow(rnd(), 0.7));
+      const ph = rnd() * Math.PI * 2;
+      const ct = rnd() * 2 - 1;
       const st = Math.sqrt(1 - ct * ct);
       x = Math.cos(ph) * st * r;
       z = Math.sin(ph) * st * r;
@@ -1422,11 +1444,12 @@ class IntroScene {
     const galR = long * 0.96;
     const tilt = Math.asin(Math.min(Math.max((short * 1.08) / galR, 0.4), 0.95));
     const roll = (L.H > L.W ? Math.PI / 2 : 0) + 0.1;
-    makeMilkyWay(galaxy, galC, N, galR);
+    const rnd = seeded(2013);
+    makeMilkyWay(galaxy, galC, N, galR, rnd);
     for (let i = 0; i < N; i++) {
-      rand[i * 4] = Math.random();
-      rand[i * 4 + 1] = Math.random();
-      rand[i * 4 + 2] = Math.random();
+      rand[i * 4] = rnd();
+      rand[i * 4 + 1] = rnd();
+      rand[i * 4 + 2] = rnd();
     }
 
     // Dust: a starfield filling the view at every depth
@@ -1751,6 +1774,8 @@ class IntroScene {
     } catch (e) {}
     this.mode = "cine";
     this.t = 0;
+    this.galT = 0;
+    this.started = false;
     this.fired = {};
     this.state = timeline(0);
     this.shell.classList.add("is-cine");
@@ -1777,8 +1802,18 @@ class IntroScene {
     this.tween = { from, to, dur, k: 0, done };
   }
 
+  // The visitor's go-ahead: the page goes fullscreen and the story moves on
+  start() {
+    if (this.mode !== "cine" || this.started) return;
+    this.started = true;
+    this.ui.classList.remove("is-gate");
+    enterFullscreen();
+  }
+
   skip() {
     if (this.mode !== "cine" || this.t >= CUE.reveal) return;
+    this.started = true;
+    this.ui.classList.remove("is-gate");
     this.unbindSkip();
     this.fired = { reveal: true, cards: true, end: true };
     this.ui.querySelectorAll("[data-cue]").forEach((el) => {
@@ -1820,10 +1855,14 @@ class IntroScene {
     void getComputedStyle(this.root).opacity;
     this.root.classList.remove("intro-cine-reveal");
     this.bindSkip();
+    // The replay button was the go-ahead, so there is no Start to wait for
+    enterFullscreen();
     // Fade everything back into the dark galaxy, then go again
     this.startTween({ ...this.state }, timeline(0), 1.3, () => {
       this.mode = "cine";
       this.t = 0;
+      this.galT = 0;
+      this.started = true;
       this.fired = {};
     });
   }
@@ -1851,6 +1890,7 @@ class IntroScene {
       if (box) this.pointsMat.uniforms.uWave.value = [box.x, box.y, 0, this.time];
     }
     fire("end", () => this.finishCinematic());
+    this.ui.classList.toggle("is-gate", !this.started && t >= GATE);
 
     for (const [name, a, b] of CAPTIONS) {
       const el = this.ui.querySelector(`[data-cue="${name}"]`);
@@ -1882,6 +1922,9 @@ class IntroScene {
     this.onSkipClick = () => this.skip();
     const skipBtn = this.ui.querySelector(".intro-cine-skip");
     if (skipBtn) skipBtn.addEventListener("click", this.onSkipClick);
+    this.onStartClick = () => this.start();
+    const startBtn = this.ui.querySelector(".intro-cine-start");
+    if (startBtn) startBtn.addEventListener("click", this.onStartClick);
 
     // Without the frame loop, a still frame is redrawn whenever its clip
     // band or palette can change
@@ -1910,7 +1953,10 @@ class IntroScene {
       this.skip();
     };
     this.onSkipKey = (e) => {
-      if (keys.includes(e.key)) {
+      if (this.ui.classList.contains("is-gate") && (e.key === "Enter" || e.key === " ")) {
+        e.preventDefault();
+        this.start();
+      } else if (keys.includes(e.key)) {
         e.preventDefault();
         this.skip();
       }
@@ -1974,7 +2020,8 @@ class IntroScene {
   update(dt) {
     let s;
     if (this.mode === "cine") {
-      this.t += dt;
+      this.galT += dt;
+      this.t = this.started ? this.t + dt : Math.min(this.t + dt, GATE);
       s = timeline(this.t);
       this.runCues();
     } else if (this.mode === "tween" && this.tween) {
@@ -2001,7 +2048,7 @@ class IntroScene {
     const light = s.ambient * this.light;
 
     u.uTime.value = this.time;
-    u.uGalT.value = cine ? this.t : this.time;
+    u.uGalT.value = cine ? this.galT : this.time;
     u.uGalIn.value = s.galIn;
     u.uToText.value = s.toText;
     u.uToGlobe.value = s.toGlobe;
@@ -2079,6 +2126,13 @@ class IntroScene {
       if (career && box) {
         const y = stacked ? this.screenY(box.y - box.h / 2) + 24 : this.screenY(box.y);
         career.style.top = `${Math.round(y)}px`;
+      }
+      const rail = this.ui.querySelector(".intro-cine-rail");
+      if (rail) {
+        rail.style.setProperty("--rail", (s.co / 4).toFixed(3));
+        rail.querySelectorAll("[data-node]").forEach((node) => {
+          node.classList.toggle("is-reached", s.co >= Number(node.dataset.node) - 0.5);
+        });
       }
     }
     return c;
