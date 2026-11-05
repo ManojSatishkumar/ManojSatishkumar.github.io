@@ -34,25 +34,26 @@ const NAME = "MANOJ SATISHKUMAR";
 
 // Cinematic, in seconds: origin (galaxy) -> the name -> the career, one
 // company at a time -> the globe it reaches today -> who he is -> the cards
-const CO_START = 5.0; // first company fully formed
-const CO_STEP = 0.95; // one company to the next
-const CO_MORPH = 0.55; // of which the particles are in flight
-const CO_END = 9.3; // last company starts handing over to the globe
+const CO_START = 6.6; // first company fully formed
+const CO_STEP = 2.2; // one company to the next
+const CO_MORPH = 0.65; // of which the particles are in flight
+const CO_END = CO_START + 4 * CO_STEP + 1.9; // last company hands over to the globe
 const coAt = (k) => CO_START + k * CO_STEP;
 
-const CUE = { flash: 0.25, reveal: 12.6, cards: 12.95, end: 14.1 };
+const REVEAL = CO_END + 5.8;
+const CUE = { flash: 0.25, reveal: REVEAL, cards: REVEAL + 0.35, end: REVEAL + 1.5 };
 const CAPTIONS = [
-  ["chaos", 0.55, 1.95],
-  ["name", 2.5, 4.4],
-  ["rail", 4.55, 9.5],
+  ["chaos", 0.55, 2.9],
+  ["name", 3.3, 6.0],
+  ["rail", 6.1, CO_END + 0.2],
   ["co0", coAt(0) - 0.3, coAt(1) - CO_MORPH + 0.1],
   ["co1", coAt(1) - 0.2, coAt(2) - CO_MORPH + 0.1],
   ["co2", coAt(2) - 0.2, coAt(3) - CO_MORPH + 0.1],
   ["co3", coAt(3) - 0.2, coAt(4) - CO_MORPH + 0.1],
   ["co4", coAt(4) - 0.2, CO_END + 0.2],
-  ["scale", 9.9, 11.5],
-  ["roles", 11.5, 12.7],
-  ["hint", 1.9, 9.0],
+  ["scale", CO_END + 0.7, CO_END + 3.7],
+  ["roles", CO_END + 3.7, REVEAL + 0.1],
+  ["hint", 2.0, 12.0],
 ];
 
 const clamp01 = (x) => Math.min(Math.max(x, 0), 1);
@@ -66,13 +67,13 @@ function timeline(t) {
   for (let k = 1; k < 5; k++) co += span(t, coAt(k) - CO_MORPH, coAt(k));
   return {
     bang: span(t, 0.25, 1.75),
-    toText: span(t, 1.6, 3.1),
+    toText: span(t, 2.5, 4.0),
     // cj: the name hands over to the companies, which hand over to the globe
-    cj: span(t, 4.3, CO_START) * (1 - span(t, CO_END, CO_END + 1.1)),
+    cj: span(t, 5.9, CO_START) * (1 - span(t, CO_END, CO_END + 1.1)),
     co,
     toGlobe: span(t, CO_END, CO_END + 1.3),
-    rim: span(t, 9.9, 11.0),
-    arcs: span(t, 10.0, 11.6),
+    rim: span(t, CO_END + 0.6, CO_END + 1.7),
+    arcs: span(t, CO_END + 0.7, CO_END + 2.3),
     ambient: easeInOut(span(t, CUE.reveal, CUE.reveal + 1.3)),
   };
 }
@@ -1669,7 +1670,7 @@ class IntroScene {
     u.uToText.value = s.toText;
     u.uToGlobe.value = s.toGlobe;
     u.uLight.value = light;
-    u.uSweep.value = cine ? lerp(-0.2, 1.2, span(this.t, 3.1, 4.1)) : -1;
+    u.uSweep.value = cine ? lerp(-0.2, 1.2, span(this.t, 4.0, 5.0)) : -1;
     u.uMouseR.value = lerp(6.5, 4.5, s.ambient);
 
     const j = this.updateJourney(dt, s);
@@ -1735,11 +1736,11 @@ class IntroScene {
     this.edge.uEdge.value = s.ambient;
     this.edge.uClip.value = [c.top, c.top + 80, c.bottom - lerp(180, 60, c.open), c.bottom];
 
-    if (cine && this.t > 2.2 && this.t < 4.6) {
+    if (cine && this.t > 3.0 && this.t < 6.2) {
       const sub = this.ui.querySelector('[data-cue="name"]');
       if (sub) sub.style.top = `${Math.round(this.screenY(this.textBottom) + 22)}px`;
     }
-    if (cine && this.t > 4.2 && this.t < CO_END + 0.6) {
+    if (cine && this.t > 5.8 && this.t < CO_END + 0.6) {
       const top = `${Math.round(this.screenY(this.companyBottom) + 26)}px`;
       this.ui.querySelectorAll(".intro-cine-co").forEach((el) => {
         el.style.top = top;
