@@ -1406,17 +1406,6 @@
     filter: blur(10px);
   }
 
-  .intro-cine-stats {
-    display: block;
-    margin-top: 16px;
-    color: rgba(203, 213, 225, 0.8);
-    font-size: clamp(0.62rem, 1vw, 0.8rem);
-    font-weight: 600;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    text-shadow: none;
-  }
-
   /* Sits under the particle name; js/intro-scene.js sets its top */
   .intro-cine-sub {
     position: absolute;
@@ -1750,95 +1739,6 @@
     box-shadow: none;
     color: #cbd5e1;
     font: 600 0.64rem/1 "Poppins", sans-serif;
-  }
-
-  .intro-cine-start {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.7em;
-    padding: 0.9em 1.9em 0.9em 1.7em;
-    border: 1px solid rgba(196, 181, 253, 0.55);
-    border-radius: 999px;
-    background: radial-gradient(
-      120% 160% at 50% 0%,
-      rgba(129, 140, 248, 0.5),
-      rgba(15, 23, 42, 0.6) 70%
-    );
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    color: #fff;
-    font: 700 clamp(1.35rem, 2.4vw, 2rem) / 1 "Poppins", sans-serif;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    text-shadow: 0 0 18px rgba(196, 181, 253, 0.8);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.18),
-      0 0 40px rgba(129, 140, 248, 0.55),
-      0 0 120px rgba(244, 114, 182, 0.28);
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.86);
-    transition:
-      opacity 0.7s ease,
-      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 0.3s ease,
-      visibility 0s linear 0.7s;
-  }
-
-  .intro-cine-start i {
-    font-size: 0.75em;
-  }
-
-  /* letter-spacing trails the last letter; pull it back so the label centres */
-  .intro-cine-start span {
-    margin-right: -0.24em;
-  }
-
-  .intro-cine-start::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border: 1px solid rgba(196, 181, 253, 0.7);
-    border-radius: inherit;
-    animation: introStartPulse 2.4s ease-out infinite;
-    pointer-events: none;
-  }
-
-  @keyframes introStartPulse {
-    0% {
-      opacity: 0.8;
-      transform: scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(1.25, 1.7);
-    }
-  }
-
-  .intro-cine-ui.is-gate .intro-cine-start {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translate(-50%, -50%);
-    transition-delay: 0s;
-  }
-
-  .intro-cine-ui.is-gate .intro-cine-start:hover {
-    transform: translate(-50%, -50%) scale(1.05);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.24),
-      0 0 56px rgba(129, 140, 248, 0.8),
-      0 0 160px rgba(244, 114, 182, 0.4);
-  }
-
-  .intro-cine-start:focus-visible {
-    outline: 2px solid #c4b5fd;
-    outline-offset: 6px;
   }
 
   .intro-cine-progress {
@@ -2176,13 +2076,6 @@
       </div>
     </div>
 
-    <p class="intro-cine-caption" data-cue="scale" aria-hidden="true">
-      I architect platforms used by millions.
-      <span class="intro-cine-stats"
-        ><span class="js-experience-years">13</span> years &middot; 5 companies
-        &middot; 14 flagship projects &middot; 25+ countries</span
-      >
-    </p>
     <p class="intro-cine-caption intro-cine-roles" data-cue="roles" aria-hidden="true">
       <span style="--i: 0">Architect</span>
       <span style="--i: 1">Inventor</span>
@@ -2192,19 +2085,13 @@
     </p>
     <p class="intro-cine-hint" data-cue="hint" aria-hidden="true">
       <span class="intro-cine-hint--pointer"
-        ><i class="fa-solid fa-film"></i> Sit back &middot; scroll to
+        ><i class="fa-solid fa-film"></i> Sit back &middot; press Esc to
         skip</span
       >
       <span class="intro-cine-hint--touch"
         ><i class="fa-solid fa-film"></i> Sit back &middot; swipe to skip</span
       >
     </p>
-    <!-- Shown once the galaxy has formed; js/intro-scene.js holds the story
-         there until it is pressed -->
-    <button type="button" class="intro-cine-start" tabindex="-1">
-      <i class="fa-solid fa-play" aria-hidden="true"></i>
-      <span>Start</span>
-    </button>
     <button type="button" class="intro-cine-skip">
       Skip intro <kbd>Esc</kbd>
     </button>

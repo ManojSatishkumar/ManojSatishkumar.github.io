@@ -34,7 +34,6 @@ const NAME = "MANOJ SATISHKUMAR";
 // company at a time -> the globe it reaches today -> who he is -> the cards.
 // Every hand-off between formations is long, so the particles drift from one
 // to the next rather than snap.
-const GATE = 1.4; // the galaxy has formed: the story waits here for Start
 const TO_NAME = [3.6, 6.6]; // the galaxy streams into the name
 const NAME_AT = TO_NAME[1];
 const CO_START = NAME_AT + 4.2; // first company fully formed
@@ -55,8 +54,7 @@ const CAPTIONS = [
   ["co2", coSwap(2) + 0.15, coSwap(3)],
   ["co3", coSwap(3) + 0.15, coSwap(4)],
   ["co4", coSwap(4) + 0.15, CO_END + 0.2],
-  ["scale", CO_END + 1.4, CO_END + 4.4],
-  ["roles", CO_END + 4.4, REVEAL + 0.1],
+  ["roles", CO_END + 1.4, REVEAL + 0.1],
   ["hint", 2.0, NAME_AT + 6.0],
 ];
 
@@ -76,18 +74,6 @@ const smoothstep = (a, b, x) => {
 };
 const easeInOut = (x) =>
   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-
-// Must run inside a click or key handler; browsers without the API (iPhone
-// Safari) or that refuse it simply carry on in the window
-function enterFullscreen() {
-  const el = document.documentElement;
-  const request = el.requestFullscreen || el.webkitRequestFullscreen;
-  if (!request || document.fullscreenElement || document.webkitFullscreenElement) return;
-  try {
-    const p = request.call(el, { navigationUI: "hide" });
-    if (p && p.catch) p.catch(() => {});
-  } catch (e) {}
-}
 
 // 0..1..0 over each company morph, with the index of the one in flight
 function coFlight(t) {
@@ -225,8 +211,8 @@ const POINTS_VERT = /* glsl */ `
     float land = step(1.5, kind);
     float tn = clamp(aText.x / uTextW + 0.5, 0.0, 1.0);
 
-    // Galaxy: the whole pattern turns as one, so the arms keep their shape
-    // however long it waits for Start; stars light up from the core outward
+    // Galaxy: the whole pattern turns as one, so the arms keep their shape;
+    // stars light up from the core outward
     vec3 g = position;
     float rn = length(g.xz) / uGalR;
     g.xz = rot2(g.xz, -uGalT * 0.09);
@@ -326,7 +312,8 @@ const POINTS_VERT = /* glsl */ `
 
     float globeSize = mix(0.85, mix(0.8, 1.2, land), 1.0 - dust);
     float galSize = 0.9 + 0.55 * aGalC.w;
-    float size = mix(0.65, 1.6, aRand.x) * mix(mix(galSize, 1.0, e1), globeSize, e2);
+    float nameSize = mix(1.35, 1.0, dust);
+    float size = mix(0.65, 1.6, aRand.x) * mix(mix(galSize, nameSize, e1), globeSize, e2);
     // A pulse of light that travels along each formation
     float pulse = pow(0.5 + 0.5 * sin(toneJ * 12.566 - uTime * 1.8), 10.0) * (1.0 - dust);
     float sizeJ = mix(0.8, 2.0, aRand.x) * (1.0 + pulse * 0.6) * mix(uSizeAB.x, uSizeAB.y, em);
@@ -343,7 +330,7 @@ const POINTS_VERT = /* glsl */ `
 
     float sweep = exp(-pow((tn - uSweep) * 7.0, 2.0));
     vec3 nameD = ramp(vec3(0.56, 0.64, 1.0), vec3(0.75, 0.52, 0.99), vec3(0.96, 0.45, 0.71), tn);
-    nameD = mix(nameD, vec3(1.0), sweep * 0.8);
+    nameD = mix(nameD, vec3(1.0), 0.3 + sweep * 0.6);
     vec3 dustD = vec3(0.62, 0.7, 1.0);
     vec3 textD = mix(nameD, dustD, dust);
 
@@ -362,7 +349,7 @@ const POINTS_VERT = /* glsl */ `
     vColor = mix(colD, colL, uLight);
 
     float back = mix(0.18, 1.0, smoothstep(-0.35, 0.35, facing));
-    float alphaText = mix(0.9 + sweep * 0.1, 0.32 * twinkle, dust);
+    float alphaText = mix(1.0, 0.32 * twinkle, dust);
     float alphaGlobe = mix(mix(0.28 * twinkle, 0.95, land) * back, 0.32 * twinkle, dust);
     float aD = mix(mix(galA, alphaText, e1), alphaGlobe, e2);
     float aL = mix(mix(0.6 * galIn, mix(0.85, 0.22 * twinkle, dust), e1),
@@ -778,8 +765,7 @@ function makeRipples(out, a, b, L, S) {
 // and bar, two major and two minor trailing arms with dust lanes on their
 // inner edges, star-forming knots, a faint disc between the arms and a halo.
 // Fills pos (xyz) and col (rgb + brightness) for particles 0..N-1, drawing
-// from rnd so a rebuild (entering fullscreen resizes the view) redraws the
-// same galaxy.
+// from rnd so a rebuild on resize redraws the same galaxy.
 function makeMilkyWay(pos, col, N, R, rnd) {
   const gauss = () => {
     let u = 0;
@@ -1775,7 +1761,6 @@ class IntroScene {
     this.mode = "cine";
     this.t = 0;
     this.galT = 0;
-    this.started = false;
     this.fired = {};
     this.state = timeline(0);
     this.shell.classList.add("is-cine");
@@ -1802,18 +1787,8 @@ class IntroScene {
     this.tween = { from, to, dur, k: 0, done };
   }
 
-  // The visitor's go-ahead: the page goes fullscreen and the story moves on
-  start() {
-    if (this.mode !== "cine" || this.started) return;
-    this.started = true;
-    this.ui.classList.remove("is-gate");
-    enterFullscreen();
-  }
-
   skip() {
     if (this.mode !== "cine" || this.t >= CUE.reveal) return;
-    this.started = true;
-    this.ui.classList.remove("is-gate");
     this.unbindSkip();
     this.fired = { reveal: true, cards: true, end: true };
     this.ui.querySelectorAll("[data-cue]").forEach((el) => {
@@ -1855,14 +1830,11 @@ class IntroScene {
     void getComputedStyle(this.root).opacity;
     this.root.classList.remove("intro-cine-reveal");
     this.bindSkip();
-    // The replay button was the go-ahead, so there is no Start to wait for
-    enterFullscreen();
     // Fade everything back into the dark galaxy, then go again
     this.startTween({ ...this.state }, timeline(0), 1.3, () => {
       this.mode = "cine";
       this.t = 0;
       this.galT = 0;
-      this.started = true;
       this.fired = {};
     });
   }
@@ -1890,8 +1862,6 @@ class IntroScene {
       if (box) this.pointsMat.uniforms.uWave.value = [box.x, box.y, 0, this.time];
     }
     fire("end", () => this.finishCinematic());
-    this.ui.classList.toggle("is-gate", !this.started && t >= GATE);
-
     for (const [name, a, b] of CAPTIONS) {
       const el = this.ui.querySelector(`[data-cue="${name}"]`);
       if (!el) continue;
@@ -1922,10 +1892,6 @@ class IntroScene {
     this.onSkipClick = () => this.skip();
     const skipBtn = this.ui.querySelector(".intro-cine-skip");
     if (skipBtn) skipBtn.addEventListener("click", this.onSkipClick);
-    this.onStartClick = () => this.start();
-    const startBtn = this.ui.querySelector(".intro-cine-start");
-    if (startBtn) startBtn.addEventListener("click", this.onStartClick);
-
     // Without the frame loop, a still frame is redrawn whenever its clip
     // band or palette can change
     if (this.reduced) {
@@ -1953,10 +1919,7 @@ class IntroScene {
       this.skip();
     };
     this.onSkipKey = (e) => {
-      if (this.ui.classList.contains("is-gate") && (e.key === "Enter" || e.key === " ")) {
-        e.preventDefault();
-        this.start();
-      } else if (keys.includes(e.key)) {
+      if (keys.includes(e.key)) {
         e.preventDefault();
         this.skip();
       }
@@ -2021,7 +1984,7 @@ class IntroScene {
     let s;
     if (this.mode === "cine") {
       this.galT += dt;
-      this.t = this.started ? this.t + dt : Math.min(this.t + dt, GATE);
+      this.t += dt;
       s = timeline(this.t);
       this.runCues();
     } else if (this.mode === "tween" && this.tween) {
