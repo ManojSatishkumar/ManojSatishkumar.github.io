@@ -1303,36 +1303,12 @@ html[data-theme="dark"] #blog-articles {
 }
 
 /*-----------------------------------------------------------------------------------*/
-/*  Footer (components/footer.html) - styled almost entirely inline
+/*  Footer (components/footer.html) - colours come from its own --sf-* tokens
 /*-----------------------------------------------------------------------------------*/
 
 html[data-theme="dark"] #footer footer {
   background: var(--dm-surface) !important;
-  color: var(--dm-text) !important;
   border-top: 1px solid var(--dm-border);
-}
-
-html[data-theme="dark"] #footer footer h1 {
-  color: var(--dm-heading) !important;
-}
-
-html[data-theme="dark"] #footer .footer-col h3 {
-  color: var(--dm-text);
-}
-
-html[data-theme="dark"] #footer footer div[style*="color"],
-html[data-theme="dark"] #footer footer a[style*="color"],
-html[data-theme="dark"] #footer footer span[style*="color"],
-html[data-theme="dark"] #footer .footer-col ul li a {
-  color: var(--dm-text-muted) !important;
-}
-
-html[data-theme="dark"] #footer .footer-col ul li a:hover {
-  color: var(--dm-accent) !important;
-}
-
-html[data-theme="dark"] #footer footer div[style*="border-top"] {
-  border-top-color: var(--dm-border) !important;
 }
 
 /*-----------------------------------------------------------------------------------*/

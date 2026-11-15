@@ -31,18 +31,6 @@
       <span class="menu-label">Albums</span>
     </a>
 
-    <div class="menu-item">
-      <span class="menu-label">Courses</span>
-      <div class="menu-dropdown menu-dropdown-wide">
-        <a href="https://www.udemy.com/course/msk-frontend-system-design-interview-guidance/?referralCode=F21AB3412B4B123F5611" target="_blank">Interview Preparation Kit</a>
-        <div class="menu-divider"></div>
-        <a href="https://www.udemy.com/course/designing-scalable-frontend-systems/?referralCode=8B2D2910F7EA2FABB17F" target="_blank">Frontend System Design</a>
-        <a href="https://www.udemy.com/course/msk-javascript-bootcamp/?referralCode=FD0B655E3F12E8610717" target="_blank">JavaScript Bootcamp</a>
-        <a href="https://www.udemy.com/course/msk-typescript-bootcamp-level-1/?referralCode=BA9964C6FFEC8306F9CB" target="_blank">TypeScript Bootcamp</a>
-        <a href="https://www.udemy.com/course/react-redux-material-ui-workshop/?referralCode=A2ED2C3382A3F16FC154" target="_blank">React Redux Workshop</a>
-      </div>
-    </div>
-
     <!-- <div class="menu-item">
       <span class="menu-label">Apps</span>
       <div class="menu-dropdown">
@@ -51,18 +39,6 @@
         <a href="/apps/night-watch/" target="_blank">Night Watch</a>
       </div>
     </div> -->
-
-    <div class="menu-item">
-      <span class="menu-label">Services</span>
-      <div class="menu-dropdown">
-        <a href="https://topmate.io/manoj_satishkumar" target="_blank">1:1 Mentorship</a>
-        <a href="https://topmate.io/manoj_satishkumar" target="_blank">Resume Review</a>
-        <a href="https://topmate.io/manoj_satishkumar" target="_blank">Mock Interviews</a>
-        <div class="menu-divider"></div>
-        <a href="/job-referral/">Job Referral</a>
-        <a href="/invite/">Invite me to speak</a>
-      </div>
-    </div>
 
     <div class="menu-item">
       <span class="menu-label">Connect</span>
@@ -299,68 +275,6 @@
       <i class="fas fa-images"></i>
       <span>Albums</span>
     </a>
-    
-    <!-- Courses Expandable Menu -->
-    <div class="mobile-menu-expandable">
-      <div class="mobile-menu-expand-trigger" onclick="toggleMobileCourses()">
-        <i class="fas fa-graduation-cap"></i>
-        <span>Courses</span>
-        <i class="fas fa-chevron-down mobile-menu-chevron" id="courses-chevron"></i>
-      </div>
-      <div class="mobile-menu-submenu" id="mobile-courses-submenu">
-        <a href="https://www.udemy.com/course/msk-frontend-system-design-interview-guidance/?referralCode=F21AB3412B4B123F5611" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
-          <i class="fas fa-star"></i>
-          Complete Interview Prep Kit
-        </a>
-        <a href="https://www.udemy.com/course/designing-scalable-frontend-systems/?referralCode=8B2D2910F7EA2FABB17F" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
-          <i class="fas fa-sitemap"></i>
-          Frontend System Design
-        </a>
-        <a href="https://www.udemy.com/course/msk-javascript-bootcamp/?referralCode=FD0B655E3F12E8610717" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
-          <i class="fab fa-js-square"></i>
-          JavaScript Bootcamp
-        </a>
-        <a href="https://www.udemy.com/course/msk-typescript-bootcamp-level-1/?referralCode=BA9964C6FFEC8306F9CB" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
-          <i class="fas fa-code"></i>
-          TypeScript Bootcamp
-        </a>
-        <a href="https://www.udemy.com/course/react-redux-material-ui-workshop/?referralCode=A2ED2C3382A3F16FC154" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
-          <i class="fab fa-react"></i>
-          React Redux Workshop
-        </a>
-      </div>
-    </div>
-    
-    <!-- Services Expandable Menu -->
-    <div class="mobile-menu-expandable">
-      <div class="mobile-menu-expand-trigger" onclick="toggleMobileServices()">
-        <i class="fas fa-concierge-bell"></i>
-        <span>Services</span>
-        <i class="fas fa-chevron-down mobile-menu-chevron" id="services-chevron"></i>
-      </div>
-      <div class="mobile-menu-submenu" id="mobile-services-submenu">
-        <a href="https://topmate.io/manoj_satishkumar" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
-          <i class="fas fa-user-tie"></i>
-          1:1 Mentorship
-        </a>
-        <a href="https://topmate.io/manoj_satishkumar" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
-          <i class="fas fa-file-alt"></i>
-          Resume Review
-        </a>
-        <a href="https://topmate.io/manoj_satishkumar" target="_blank" class="mobile-submenu-link" onclick="closeMobileMenu()">
-          <i class="fas fa-comments"></i>
-          Mock Interviews
-        </a>
-        <a href="/job-referral/" class="mobile-submenu-link" onclick="closeMobileMenu()">
-          <i class="fas fa-handshake"></i>
-          Job Referral
-        </a>
-        <a href="/invite/" class="mobile-submenu-link" onclick="closeMobileMenu()">
-          <i class="fas fa-school-flag"></i>
-          Invite me to speak
-        </a>
-      </div>
-    </div>
     
     <a href="/q-n-a/q-n-a-with-manoj.html" class="mobile-menu-link" onclick="closeMobileMenu()">
       <i class="fas fa-question-circle"></i>
@@ -1775,30 +1689,6 @@
     if (overlay) overlay.classList.remove('active');
     if (drawer) drawer.classList.remove('active');
     document.body.style.overflow = '';
-  }
-
-  function toggleMobileCourses() {
-    var submenu = document.getElementById('mobile-courses-submenu');
-    var chevron = document.getElementById('courses-chevron');
-    
-    if (submenu) {
-      submenu.classList.toggle('open');
-    }
-    if (chevron) {
-      chevron.classList.toggle('rotated');
-    }
-  }
-
-  function toggleMobileServices() {
-    var submenu = document.getElementById('mobile-services-submenu');
-    var chevron = document.getElementById('services-chevron');
-    
-    if (submenu) {
-      submenu.classList.toggle('open');
-    }
-    if (chevron) {
-      chevron.classList.toggle('rotated');
-    }
   }
 
   function updateActiveMenuItem() {
