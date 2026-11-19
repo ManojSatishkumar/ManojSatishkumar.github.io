@@ -6,29 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="/js/theme.js"></script>
-    <script>
-      // Decides before first paint whether the intro cinematic plays (once per
-      // session), so its curtain covers the page instead of the skeleton.
-      // flashing first. components/introduction.html takes over from here.
-      (function () {
-        try {
-          var root = document.documentElement;
-          if (
-            sessionStorage.getItem("intro-cine-seen") ||
-            location.hash ||
-            matchMedia("(prefers-reduced-motion: reduce)").matches ||
-            (navigator.connection && navigator.connection.saveData)
-          ) {
-            return;
-          }
-          root.classList.add("intro-cine");
-          // Failsafe in case the intro never loads 
-          setTimeout(function () {
-            if (!window.introCineStarted) root.classList.remove("intro-cine");
-          }, 6000);
-        } catch (e) {}
-      })();
-    </script>
     <link rel="modulepreload" href="/lib/three/three.module.min.js" />
     <link rel="modulepreload" href="/js/intro-scene.js" />
 

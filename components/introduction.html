@@ -4078,9 +4078,9 @@
     });
   })();
 
-  // 3D intro. index.html's <head> decides whether the cinematic plays
-  // (html.intro-cine); this hands it to js/intro-scene.js and owns the card
-  // entrance, the cursor effects and the fallback when WebGL can't start.
+  // 3D intro. The cinematic only plays from the "Play my intro" button; this
+  // hands the scene to js/intro-scene.js and owns the card entrance, the
+  // cursor effects and the fallback when WebGL can't start.
   (function () {
     const shell = document.querySelector(".intro-shell");
     if (!shell) return;
