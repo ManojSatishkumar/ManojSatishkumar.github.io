@@ -5,9 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Better feed: every social feed, all at once</title>
     <meta name="description" content="Better feed is a free Chrome extension that turns your X, LinkedIn, Reddit and Facebook feeds into a clean, full-screen grid you can skim in seconds." />
+    <meta name="author" content="Manoj Satishkumar" />
+    <link rel="canonical" href="https://manojsatishkumar.com/apps/better-feed/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="manojsatishkumar.com" />
+    <meta property="og:url" content="https://manojsatishkumar.com/apps/better-feed/" />
     <meta property="og:title" content="Better feed: every social feed, all at once" />
     <meta property="og:description" content="Turn your X, LinkedIn, Reddit and Facebook feeds into a clean, full-screen grid." />
     <meta property="og:image" content="https://manojsatishkumar.com/apps/better-feed/screenshots/marketing/intro.png" />
+    <meta property="og:image:secure_url" content="https://manojsatishkumar.com/apps/better-feed/screenshots/marketing/intro.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="800" />
+    <meta property="og:image:alt" content="Better feed: every feed, all at once. Facebook, LinkedIn, X and Reddit feeds shown as clean, full-screen grids" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@MSK_Web_Manoj" />
+    <meta name="twitter:creator" content="@MSK_Web_Manoj" />
+    <meta name="twitter:title" content="Better feed: every social feed, all at once" />
+    <meta name="twitter:description" content="Turn your X, LinkedIn, Reddit and Facebook feeds into a clean, full-screen grid." />
+    <meta name="twitter:image" content="https://manojsatishkumar.com/apps/better-feed/screenshots/marketing/intro.png" />
+    <meta name="twitter:image:alt" content="Better feed: every feed, all at once. Facebook, LinkedIn, X and Reddit feeds shown as clean, full-screen grids" />
     <meta name="theme-color" content="#07080b" />
     <link rel="icon" href="icons/icon128.png" />
     <style>
@@ -228,6 +245,49 @@
         border-radius: 50%;
         background: var(--c);
         box-shadow: 0 0 10px var(--c);
+      }
+      .byline {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 14px 20px;
+        margin-top: 30px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+      }
+      .byline-who {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .byline img {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(10, 132, 255, 0.6);
+        box-shadow: 0 0 24px rgba(10, 132, 255, 0.35);
+      }
+      .byline small {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent-2);
+      }
+      .byline b {
+        display: block;
+        font-size: 17px;
+        line-height: 1.3;
+      }
+      .byline span {
+        display: block;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .byline .btn {
+        margin-left: auto;
       }
       .stage {
         position: relative;
@@ -627,24 +687,119 @@
       }
 
       footer {
-        padding: 48px 0 60px;
-        border-top: 1px solid var(--line);
+        position: relative;
+        margin-top: 40px;
+        padding: 72px 0 32px;
         color: var(--muted);
-        font-size: 14px;
+        font-size: 15px;
+        background: radial-gradient(700px 220px at 50% 0, rgba(10, 132, 255, 0.1), transparent 70%);
       }
-      footer .wrap {
+      footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: min(1180px, 100% - 48px);
+        height: 1px;
+        translate: -50% 0;
+        background: linear-gradient(90deg, transparent, rgba(10, 132, 255, 0.7), rgba(142, 197, 255, 0.5), transparent);
+      }
+      .foot-grid {
+        display: grid;
+        grid-template-columns: 1.6fr repeat(3, 1fr);
+        gap: 48px;
+      }
+      .foot-brand p {
+        max-width: 340px;
+        margin: 16px 0 24px;
+      }
+      .maker {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        padding: 10px 20px 10px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        transition: border-color 0.2s, background 0.2s, transform 0.2s;
+      }
+      .maker:hover {
+        transform: translateY(-2px);
+        border-color: rgba(10, 132, 255, 0.45);
+        background: rgba(10, 132, 255, 0.08);
+      }
+      .maker img {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(10, 132, 255, 0.6);
+      }
+      .maker small {
+        display: block;
+        font-size: 12px;
+        line-height: 1.4;
+      }
+      .maker b {
+        display: block;
+        color: var(--text);
+        font-weight: 600;
+        line-height: 1.3;
+      }
+      .maker .arrow {
+        margin-left: 6px;
+        color: var(--accent-2);
+        transition: translate 0.2s;
+      }
+      .maker:hover .arrow {
+        translate: 3px 0;
+      }
+      .foot-col h4 {
+        margin: 6px 0 18px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text);
+      }
+      .foot-col a {
+        display: block;
+        width: max-content;
+        padding: 5px 0;
+        transition: color 0.2s;
+      }
+      .foot-col a:hover {
+        color: var(--accent-2);
+      }
+      .foot-bottom {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        gap: 20px;
+        gap: 12px 24px;
+        margin-top: 56px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+        font-size: 14px;
       }
-      footer a:hover {
-        color: var(--text);
+      .foot-bottom .tags {
+        display: flex;
+        gap: 18px;
       }
-      footer .legal {
+      .foot-bottom .tags span::before {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        margin-right: 8px;
+        vertical-align: middle;
+        border-radius: 50%;
+        background: #30d158;
+        box-shadow: 0 0 8px #30d158;
+      }
+      .foot-bottom .legal {
         flex-basis: 100%;
-        font-size: 13px;
-        opacity: 0.75;
+        font-size: 12.5px;
+        opacity: 0.7;
       }
 
       /* Reveal */
@@ -696,7 +851,20 @@
         .tabs button {
           padding: 8px 12px;
           font-size: 14px;
-        }      }
+        }
+        .foot-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 40px 24px;
+        }
+        .foot-brand {
+          grid-column: 1 / -1;
+        }
+      }
+      @media (max-width: 560px) {
+        .foot-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
       @media (prefers-reduced-motion: reduce) {
         html {
           scroll-behavior: auto;
@@ -941,13 +1109,37 @@
     </section>
 
     <footer>
-      <div class="wrap">
-        <a class="brand" href="#"><img src="icons/icon128.png" alt="" />Better feed</a>
-        <div style="display: flex; gap: 24px; align-items: center">
+      <div class="wrap foot-grid">
+        <div class="foot-brand">
+          <a class="brand" href="#"><img src="icons/icon128.png" alt="" />Better feed</a>
+          <p>Every social feed, all at once. A free Chrome extension that turns X, LinkedIn, Reddit and Facebook into a clean, full-screen grid.</p>
+          <a class="maker" href="/" target="_blank" rel="noopener">
+            <img src="/images/me_square.png" width="44" height="44" alt="" loading="lazy" />
+            <span><small>Designed &amp; built by</small><b>Manoj Satishkumar<span class="arrow">→</span></b></span>
+          </a>
+        </div>
+        <div class="foot-col">
+          <h4>Product</h4>
+          <a href="#tour">Tour</a>
+          <a href="#features">Features</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="foot-col">
+          <h4>Get it</h4>
           <a class="store" href="#">Chrome Web Store</a>
-          <a href="PRIVACY.md">Privacy</a>
+          <a href="PRIVACY.md">Privacy policy</a>
           <a href="mailto:85manojs@gmail.com">Contact</a>
         </div>
+        <div class="foot-col">
+          <h4>Developer</h4>
+          <a href="/" target="_blank" rel="noopener">Portfolio</a>
+          <a href="/blog" target="_blank" rel="noopener">Blog</a>
+        </div>
+      </div>
+      <div class="wrap foot-bottom">
+        <span>&copy; <span id="year">2026</span> Better feed by Manoj Satishkumar</span>
+        <div class="tags"><span>Free forever</span><span>Zero data collected</span></div>
         <div class="legal">X, LinkedIn, Reddit and Facebook are trademarks of their respective owners. Better feed is not affiliated with or endorsed by X Corp., LinkedIn Corporation, Reddit, Inc. or Meta Platforms, Inc.</div>
       </div>
     </footer>
@@ -955,6 +1147,7 @@
     <script>
       const STORE_URL = 'https://chromewebstore.google.com/detail/amcoclfcnpdgonfpojbkobcdeecaijgi?utm_source=item-share-cb';
       for (const a of document.querySelectorAll('.store')) Object.assign(a, { href: STORE_URL, target: '_blank', rel: 'noopener' });
+      document.getElementById('year').textContent = new Date().getFullYear();
 
       const io = new IntersectionObserver(
         (entries) => {
