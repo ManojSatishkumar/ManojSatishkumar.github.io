@@ -4,36 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MSK Apps | Web Applications by Manoj Satishkumar</title>
-    <meta name="description" content="Explore web applications built by Manoj Satishkumar. Try MSK Documents, MSK Coders, Night Watch, and more innovative tools for productivity and learning." />
-    <meta name="keywords" content="MSK Apps, Web Applications, Manoj Satishkumar, Productivity Tools, Night Watch, MSK Documents, MSK Coders, Portfolio, Software Projects" />
+    <title>Side Projects | Apps &amp; Extensions by Manoj Satishkumar</title>
+    <meta name="description" content="Free apps and browser extensions Manoj Satishkumar builds as side projects: Better feed, a Chrome extension that turns social feeds into a full-screen grid, and Night Watch, a full-screen desk clock web app." />
+    <meta name="keywords" content="Manoj Satishkumar, side projects, Chrome extension, Better feed, Night Watch, web app, desk clock, MSK Apps" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://manojsatishkumar.com/apps/index.html" />
     <meta name="author" content="Manoj Satishkumar" />
     <meta name="publisher" content="Manoj Satishkumar" />
-    <meta property="og:title" content="MSK Apps | Web Applications by Manoj Satishkumar" />
-    <meta property="og:description" content="Explore web applications built by Manoj Satishkumar. Try MSK Documents, MSK Coders, Night Watch, and more innovative tools for productivity and learning." />
+    <meta property="og:title" content="Side Projects | Apps & Extensions by Manoj Satishkumar" />
+    <meta property="og:description" content="Free apps and browser extensions built after hours: Better feed for Chrome and the Night Watch desk clock." />
     <meta property="og:url" content="https://manojsatishkumar.com/apps/index.html" />
     <meta property="og:site_name" content="manojsatishkumar.com" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://manojsatishkumar.com/images/msk-index-cover.jpg" />
-    <meta property="article:author" content="https://manojsatishkumar.com" />
-    <meta property="article:publisher" content="https://manojsatishkumar.com/" />
+    <meta property="og:image" content="https://manojsatishkumar.com/images/apps/better-feed-preview.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="MSK Apps | Web Applications by Manoj Satishkumar" />
-    <meta name="twitter:description" content="Explore web applications built by Manoj Satishkumar. Try MSK Documents, MSK Coders, Night Watch, and more innovative tools for productivity and learning." />
+    <meta name="twitter:title" content="Side Projects | Apps & Extensions by Manoj Satishkumar" />
+    <meta name="twitter:description" content="Free apps and browser extensions built after hours: Better feed for Chrome and the Night Watch desk clock." />
     <meta name="twitter:site" content="@MSK_Web_Manoj" />
-    <meta name="twitter:image" content="https://manojsatishkumar.com/images/msk-index-cover.jpg" />
+    <meta name="twitter:image" content="https://manojsatishkumar.com/images/apps/better-feed-preview.jpg" />
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "MSK Apps",
+      "@type": "CollectionPage",
+      "name": "Side Projects by Manoj Satishkumar",
       "url": "https://manojsatishkumar.com/apps/index.html",
-      "author": {
-        "@type": "Person",
-        "name": "Manoj Satishkumar"
-      }
+      "author": { "@type": "Person", "name": "Manoj Satishkumar" },
+      "hasPart": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "Better feed",
+          "applicationCategory": "BrowserApplication",
+          "operatingSystem": "Chrome",
+          "url": "https://chromewebstore.google.com/detail/amcoclfcnpdgonfpojbkobcdeecaijgi",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        },
+        {
+          "@type": "WebApplication",
+          "name": "Night Watch",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "All",
+          "url": "https://manojsatishkumar.com/apps/night-watch/index.html",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        }
+      ]
     }
     </script>
     <script>
@@ -43,10 +56,10 @@
 
         gtag('config', 'UA-128563001-5');
     </script>
-    
+
     <link href="/css/style.css" rel="stylesheet" />
     <link href="/css/responsive.css" rel="stylesheet" />
-    <!-- Favicon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <link rel="shortcut icon" href="/images/favicon.png" />
     <style>
         @media only screen and (min-width: 1024px) {
@@ -54,27 +67,310 @@
                 display: none;
             }
         }
-    </style>
-    <style>
-        /* Dark theme overrides (theme set by /js/theme.js) */
-        html[data-theme="dark"] .container [style*="-webkit-background-clip: text"] {
-            background-image: var(--dm-heading-gradient) !important;
+
+        .sp {
+            --sp-bg: #f7f8fc;
+            --sp-surface: #ffffff;
+            --sp-border: rgba(15, 23, 42, 0.08);
+            --sp-heading: #0f172a;
+            --sp-text: #475569;
+            --sp-muted: #64748b;
+            --sp-chip: #eef2ff;
+            --sp-chip-text: #4338ca;
+            --sp-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+            --sp-gradient: linear-gradient(to right, #121fcf 0%, #cf1512 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--sp-bg);
+            color: var(--sp-text);
+            padding: 130px 20px 90px;
         }
 
-        html[data-theme="dark"] hr {
-            border-top-color: var(--dm-border);
+        html[data-theme="dark"] .sp {
+            --sp-bg: var(--dm-bg, #0b1120);
+            --sp-surface: var(--dm-surface, #131c2e);
+            --sp-border: var(--dm-border, rgba(148, 163, 184, 0.16));
+            --sp-heading: var(--dm-heading, #f1f5f9);
+            --sp-text: var(--dm-text, #cbd5e1);
+            --sp-muted: var(--dm-text-muted, #94a3b8);
+            --sp-chip: rgba(129, 140, 248, 0.14);
+            --sp-chip-text: #c7d2fe;
+            --sp-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+            --sp-gradient: var(--dm-heading-gradient, linear-gradient(to right, #7f8cff 0%, #ff6b6b 100%));
         }
 
-        html[data-theme="dark"] #blogger a[style*="color:black"] {
-            color: var(--dm-heading) !important;
+        .sp p {
+            color: var(--sp-text);
         }
 
-        html[data-theme="dark"] #blogger a[style*="color:black"]:hover {
-            color: var(--dm-accent-strong) !important;
+        .sp-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
-        html[data-theme="dark"] #blogger img[style*="border"] {
-            border-color: var(--dm-border-strong) !important;
+        .sp-hero {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 64px;
+        }
+
+        .sp-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: var(--sp-chip);
+            color: var(--sp-chip-text);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+        }
+
+        .sp-hero h1 {
+            margin: 18px 0 16px;
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+            background: var(--sp-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sp-hero p {
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.75;
+        }
+
+        .sp-facts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 22px;
+            margin-top: 26px;
+            padding: 0;
+            list-style: none;
+            color: var(--sp-muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .sp-facts i {
+            color: #22c55e;
+            margin-right: 6px;
+        }
+
+        .sp-list {
+            display: grid;
+            gap: 32px;
+        }
+
+        .sp-card {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            align-items: center;
+            gap: 40px;
+            padding: 28px;
+            border-radius: 24px;
+            background: var(--sp-surface);
+            border: 1px solid var(--sp-border);
+            box-shadow: var(--sp-shadow);
+        }
+
+        .sp-card:nth-child(even) .sp-shot {
+            order: 2;
+        }
+
+        .sp-shot {
+            display: block;
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid var(--sp-border);
+            background: #000;
+            aspect-ratio: 16 / 10;
+        }
+
+        .sp-shot img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .sp-shot:hover img {
+            transform: scale(1.03);
+        }
+
+        .sp-head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .sp-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            flex: none;
+            object-fit: cover;
+        }
+
+        .sp-name {
+            margin: 0;
+            color: var(--sp-heading);
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        .sp-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .sp-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            background: var(--sp-chip);
+            color: var(--sp-chip-text);
+        }
+
+        .sp-badge.live {
+            background: rgba(34, 197, 94, 0.12);
+            color: #16a34a;
+        }
+
+        html[data-theme="dark"] .sp-badge.live {
+            color: #4ade80;
+        }
+
+        .sp-badge.live::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .sp-desc {
+            margin: 0 0 16px;
+            font-size: 1.02rem;
+            line-height: 1.7;
+        }
+
+        .sp-points {
+            margin: 0 0 24px;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .sp-points i {
+            width: 18px;
+            margin-right: 8px;
+            color: #6366f1;
+        }
+
+        html[data-theme="dark"] .sp-points i {
+            color: #a5b4fc;
+        }
+
+        .sp-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .sp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .sp-btn:hover {
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        .sp-btn.primary {
+            color: #fff;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+        }
+
+        .sp-btn.primary:hover {
+            color: #fff;
+        }
+
+        .sp-btn.ghost {
+            color: var(--sp-heading);
+            border: 1px solid var(--sp-border);
+            background: transparent;
+        }
+
+        .sp-btn.ghost:hover {
+            color: var(--sp-heading);
+            border-color: var(--sp-muted);
+        }
+
+        .sp-more {
+            margin-top: 56px;
+            padding: 32px;
+            text-align: center;
+            border-radius: 24px;
+            border: 1px dashed var(--sp-border);
+        }
+
+        .sp-more h2 {
+            margin: 0 0 8px;
+            color: var(--sp-heading);
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+
+        .sp-more p {
+            margin: 0 0 18px;
+        }
+
+        @media (max-width: 860px) {
+            .sp {
+                padding-top: 110px;
+            }
+
+            .sp-card {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                padding: 20px;
+            }
+
+            .sp-card:nth-child(even) .sp-shot {
+                order: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .sp-shot img,
+            .sp-btn {
+                transition: none;
+            }
         }
     </style>
     <script src="/js/theme.js"></script>
@@ -82,56 +378,107 @@
 </head>
 
 <body>
-    <div style="margin-bottom: 100px;" id="desktop-nav-bar">
-    </div>
-    <div class="container text-center">
-        <div style="font-size: 50px; font-weight: bold; background: #121FCF;
-        background: -webkit-linear-gradient(to right, #121FCF 0%, #CF1512 100%);
-        background: -moz-linear-gradient(to right, #121FCF 0%, #CF1512 100%);
-        background: linear-gradient(to right, #121FCF 0%, #CF1512 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;">Web Applications</div>
-        </div>  
-      <hr/>
-    <div id="blogger" class="text-left">
-        <div class="container">
-            <br />
-            <div class=row>
-               
-                <div class="col-lg-2 col-md-3 col-sm-4 text-center">
+    <div id="desktop-nav-bar"></div>
+
+    <main class="sp">
+        <div class="sp-wrap">
+            <header class="sp-hero">
+                <span class="sp-eyebrow"><i class="fas fa-seedling"></i> Side projects</span>
+                <h1>Things I build after hours</h1>
+                <p>
+                    Outside my day job as a software architect, I design and ship small tools of my own: browser extensions,
+                    web apps and whatever else scratches an itch. Every one of them is free, live and ready to use today.
+                </p>
+                <ul class="sp-facts">
+                    <li><i class="fas fa-check-circle"></i>Free to use</li>
+                    <li><i class="fas fa-check-circle"></i>No sign-up</li>
+                    <li><i class="fas fa-check-circle"></i>Designed and built by me</li>
+                </ul>
+            </header>
+
+            <div class="sp-list">
+                <article class="sp-card">
+                    <a class="sp-shot" href="/apps/better-feed/" target="_blank" rel="noopener">
+                        <img src="/images/apps/better-feed-preview.jpg" width="1280" height="800" alt="Better feed showing X, LinkedIn, Reddit and Facebook posts in a full-screen grid" loading="lazy" />
+                    </a>
                     <div>
-                        <a style="color:black" target="_blank"
-                            href="/apps/night-watch/index.html">
-                            <div style="margin-bottom: 10px;">
-                                <img style="border-radius: 25px; border: 1px solid gray" width="100%"
-                                    src="/images/apps/night-watch.jpg" />
+                        <div class="sp-head">
+                            <img class="sp-icon" src="/images/apps/better-feed.jpg" width="56" height="56" alt="" />
+                            <div>
+                                <h2 class="sp-name">Better feed</h2>
+                                <div class="sp-badges">
+                                    <span class="sp-badge"><i class="fab fa-chrome"></i> Chrome extension</span>
+                                    <span class="sp-badge live">Live on Chrome Web Store</span>
+                                </div>
                             </div>
-                            <h5> Night watch
-                        </h6>
-                        </a>
-                        <br />
+                        </div>
+                        <p class="sp-desc">
+                            Turns your X, LinkedIn, Reddit and Facebook feeds into a clean, full-screen, Pinterest-style grid,
+                            so you can skim dozens of posts at a glance and open only the ones worth your time.
+                        </p>
+                        <ul class="sp-points">
+                            <li><i class="fas fa-table-cells-large"></i>Masonry grid that fills any screen</li>
+                            <li><i class="fas fa-keyboard"></i>Keyboard navigation and muted video previews</li>
+                            <li><i class="fas fa-shield-halved"></i>Collects no data, ever</li>
+                        </ul>
+                        <div class="sp-actions">
+                            <a class="sp-btn primary" href="https://chromewebstore.google.com/detail/amcoclfcnpdgonfpojbkobcdeecaijgi?utm_source=item-share-cb" target="_blank" rel="noopener"><i class="fab fa-chrome"></i> Add to Chrome</a>
+                            <a class="sp-btn ghost" href="/apps/better-feed/" target="_blank" rel="noopener">Learn more <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
-                    <br />
-                    <br />
-                    <br />
-                </div>
-               
+                </article>
+
+                <article class="sp-card">
+                    <a class="sp-shot" href="/apps/night-watch/" target="_blank" rel="noopener">
+                        <img src="/images/apps/night-watch-preview.jpg" width="1280" height="800" alt="Night Watch showing the date, weekday and time in large digits" loading="lazy" />
+                    </a>
+                    <div>
+                        <div class="sp-head">
+                            <img class="sp-icon" src="/images/apps/night-watch.jpg" width="56" height="56" alt="" />
+                            <div>
+                                <h2 class="sp-name">Night Watch</h2>
+                                <div class="sp-badges">
+                                    <span class="sp-badge"><i class="fas fa-globe"></i> Web app</span>
+                                    <span class="sp-badge live">Live</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="sp-desc">
+                            A distraction-free, full-screen clock for your desk or bedside. Big, readable digits with the date
+                            and weekday, right in your browser on any device.
+                        </p>
+                        <ul class="sp-points">
+                            <li><i class="fas fa-clock"></i>Large digits you can read from across the room</li>
+                            <li><i class="fas fa-palette"></i>Eight colour themes, one tap away</li>
+                            <li><i class="fas fa-mobile-screen"></i>Works on any device, nothing to install</li>
+                        </ul>
+                        <div class="sp-actions">
+                            <a class="sp-btn primary" href="/apps/night-watch/" target="_blank" rel="noopener"><i class="fas fa-up-right-from-square"></i> Open app</a>
+                        </div>
+                    </div>
+                </article>
             </div>
+
+            <section class="sp-more">
+                <h2>More on the way</h2>
+                <p>I'm always tinkering on something new. Have an idea, feedback or a bug to report?</p>
+                <a class="sp-btn ghost" href="mailto:88manojs@gmail.com"><i class="fas fa-envelope"></i> Get in touch</a>
+            </section>
         </div>
-        <div style="margin: 0px; padding: 0px;" id="footer">
-        </div>
-        <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-        <script src="/lib/jquery/jquery.min.js"></script>
-        <script src="/lib/jquery/jquery-migrate.min.js"></script>
-        <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/lib/typed/typed.js"></script>
-        <script src="/js/main.js"></script>
-        <script>
-            document.addEventListener('contextmenu', event => event.preventDefault());
-            setTimeout(()=>{
-                $('.nav-apps').addClass("active")
-            },1000)
-        </script>
+    </main>
+
+    <div id="footer"></div>
+
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/jquery/jquery-migrate.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/typed/typed.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        $("#footer").load("/components/footer.html");
+        document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
 </body>
 
 </html>

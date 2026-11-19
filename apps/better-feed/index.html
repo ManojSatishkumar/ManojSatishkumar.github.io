@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Better feed: every social feed, all at once</title>
+    <meta name="description" content="Better feed is a free Chrome extension that turns your X, LinkedIn, Reddit and Facebook feeds into a clean, full-screen grid you can skim in seconds." />
+    <meta property="og:title" content="Better feed: every social feed, all at once" />
+    <meta property="og:description" content="Turn your X, LinkedIn, Reddit and Facebook feeds into a clean, full-screen grid." />
+    <meta property="og:image" content="https://manojsatishkumar.com/apps/better-feed/screenshots/marketing/intro.png" />
+    <meta name="theme-color" content="#07080b" />
+    <link rel="icon" href="icons/icon128.png" />
+    <style>
+      :root {
+        --bg: #07080b;
+        --panel: rgba(255, 255, 255, 0.04);
+        --line: rgba(255, 255, 255, 0.09);
+        --text: #f2f4f7;
+        --muted: #9aa6b5;
+        --accent: #0a84ff;
+        --accent-2: #8ec5ff;
+        --radius: 18px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font: 17px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .wrap {
+        width: min(1180px, 100% - 48px);
+        margin: 0 auto;
+      }
+      .hero,
+      section {
+        overflow-x: clip;
+      }
+      .glow {
+        position: absolute;
+        z-index: -1;
+        border-radius: 50%;
+        filter: blur(90px);
+        pointer-events: none;
+      }
+      .grad {
+        background: linear-gradient(90deg, #4da3ff, var(--accent-2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Nav */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(16px) saturate(1.4);
+        -webkit-backdrop-filter: blur(16px) saturate(1.4);
+        background: rgba(7, 8, 11, 0.7);
+        border-bottom: 1px solid var(--line);
+      }
+      nav .wrap {
+        height: 68px;
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 18px;
+      }
+      .brand img {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+      }
+      nav .links {
+        display: flex;
+        gap: 28px;
+        margin-left: auto;
+        font-size: 15px;
+        color: var(--muted);
+      }
+      nav .links a:hover {
+        color: var(--text);
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 24px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 16px;
+        transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      }
+      .btn.primary {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 10px 30px rgba(10, 132, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      }
+      .btn.primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 40px rgba(10, 132, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      }
+      .btn.ghost {
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+      .btn.ghost:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .btn.small {
+        padding: 9px 18px;
+        font-size: 14px;
+      }
+      .btn svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      /* Hero */
+      .hero {
+        position: relative;
+        padding: 56px 0 40px;
+        isolation: isolate;
+      }
+      .hero-grid {
+        width: min(1320px, 100% - 48px);
+        display: grid;
+        grid-template-columns: 1.45fr 1fr;
+        align-items: center;
+        gap: 56px;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+        background-size: 56px 56px;
+        mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
+        -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
+        opacity: 0.5;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 7px 16px 7px 8px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .pill b {
+        padding: 3px 10px;
+        border-radius: 999px;
+        background: rgba(10, 132, 255, 0.18);
+        color: var(--accent-2);
+        font-weight: 600;
+      }
+      h1 {
+        margin: 22px 0 0;
+        font-size: clamp(40px, 4.4vw, 66px);
+        line-height: 1.02;
+        letter-spacing: -0.035em;
+        font-weight: 800;
+      }
+      h1 .grad {
+        white-space: nowrap;
+      }
+      .lead {
+        margin: 20px 0 0;
+        font-size: 18px;
+        color: var(--muted);
+      }
+      .ctas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+      }
+      .sites {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 26px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .site {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px 6px 11px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        color: var(--text);
+        font-weight: 600;
+      }
+      .site i {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--c);
+        box-shadow: 0 0 10px var(--c);
+      }
+      .stage {
+        position: relative;
+        perspective: 1600px;
+      }
+      .stage .shot {
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: 0 50px 120px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 120px rgba(10, 132, 255, 0.25);
+        transform: rotateY(14deg) scale(0.96);
+        transform-origin: 0 50%;
+        transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .stage.in .shot {
+        transform: none;
+      }
+      .stage .shot {
+        position: relative;
+      }
+      .stage video {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #07080b;
+      }
+      .play {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: #fff;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .stage .shot:hover .play,
+      .play:focus-visible,
+      .play.paused {
+        opacity: 1;
+      }
+      .play svg {
+        width: 18px;
+        height: 18px;
+      }
+      .play .i-play,
+      .play.paused .i-pause {
+        display: none;
+      }
+      .play.paused .i-play {
+        display: inline;
+      }
+
+      /* Sections */
+      section {
+        position: relative;
+        padding: 120px 0;
+        isolation: isolate;
+      }
+      .eyebrow {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent-2);
+      }
+      h2 {
+        margin: 14px 0 0;
+        font-size: clamp(34px, 4.6vw, 54px);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        font-weight: 800;
+      }
+      .head {
+        text-align: center;
+        max-width: 720px;
+        margin: 0 auto 56px;
+      }
+      .head p {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 19px;
+      }
+
+      /* Stats */
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--panel);
+        margin-top: 80px;
+      }
+      .stats div {
+        padding: 28px 24px;
+        text-align: center;
+      }
+      .stats div + div {
+        border-left: 1px solid var(--line);
+      }
+      .stats b {
+        display: block;
+        font-size: 34px;
+        letter-spacing: -0.02em;
+      }
+      .stats span {
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      /* Showcase tabs */
+      .tabs {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        width: max-content;
+        max-width: 100%;
+        margin: 0 auto 32px;
+        padding: 6px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        overflow-x: auto;
+      }
+      .tabs button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        border: 0;
+        border-radius: 999px;
+        background: none;
+        color: var(--muted);
+        font: inherit;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+      }
+      .tabs button i {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--c);
+      }
+      .tabs button[aria-selected="true"] {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text);
+      }
+      .viewer {
+        position: relative;
+        max-width: 1040px;
+        margin: 0 auto;
+        aspect-ratio: 1280 / 800;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+      }
+      .viewer img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transform: scale(1.02);
+        transition: opacity 0.6s, transform 0.8s;
+      }
+      .viewer img.on {
+        opacity: 1;
+        transform: none;
+      }
+      .progress {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 100%;
+        background: var(--accent);
+        transform-origin: 0 50%;
+        transform: scaleX(0);
+      }
+      .progress.run {
+        transform: scaleX(1);
+        transition: transform 6s linear;
+      }
+
+      /* Features */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .card {
+        position: relative;
+        padding: 30px;
+        border-radius: var(--radius);
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+        overflow: hidden;
+        transition: transform 0.3s, border-color 0.3s;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(10, 132, 255, 0.45);
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: -1px -1px auto;
+        height: 120px;
+        background: radial-gradient(260px 120px at 30% 0, rgba(10, 132, 255, 0.18), transparent);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .card:hover::before {
+        opacity: 1;
+      }
+      .icon {
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: rgba(10, 132, 255, 0.14);
+        color: var(--accent-2);
+        border: 1px solid rgba(10, 132, 255, 0.3);
+      }
+      .icon svg {
+        width: 22px;
+        height: 22px;
+      }
+      .card h3 {
+        margin: 20px 0 8px;
+        font-size: 20px;
+        letter-spacing: -0.01em;
+      }
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 16px;
+      }
+
+      /* Split rows */
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1.25fr;
+        align-items: center;
+        gap: 72px;
+      }
+      .split.flip > :first-child {
+        order: 2;
+      }
+      .split p {
+        color: var(--muted);
+        font-size: 18px;
+      }
+      .frame {
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6), 0 0 80px rgba(10, 132, 255, 0.15);
+      }
+      .keys {
+        display: grid;
+        gap: 14px;
+        margin-top: 28px;
+      }
+      .keys div {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        color: var(--muted);
+        font-size: 16px;
+      }
+      .keys span {
+        display: flex;
+        gap: 6px;
+        min-width: 150px;
+      }
+      kbd {
+        min-width: 38px;
+        height: 38px;
+        padding: 0 10px;
+        display: inline-grid;
+        place-items: center;
+        border-radius: 9px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-bottom-width: 3px;
+        background: linear-gradient(180deg, #1d212a, #14171d);
+        color: var(--text);
+        font: 600 15px/1 inherit;
+        font-family: inherit;
+      }
+      .checks {
+        list-style: none;
+        margin: 26px 0 0;
+        padding: 0;
+        display: grid;
+        gap: 12px;
+      }
+      .checks li {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .checks li::before {
+        content: "";
+        flex: none;
+        width: 22px;
+        height: 22px;
+        margin-top: 2px;
+        border-radius: 50%;
+        background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      }
+
+      /* Privacy */
+      .privacy {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .privacy .card {
+        text-align: center;
+      }
+      .privacy .icon {
+        margin: 0 auto;
+      }
+
+      /* FAQ */
+      .faq {
+        max-width: 780px;
+        margin: 0 auto;
+      }
+      details {
+        border-bottom: 1px solid var(--line);
+      }
+      summary {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 22px 0;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 18px;
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      summary::after {
+        content: "+";
+        font-size: 26px;
+        font-weight: 300;
+        color: var(--muted);
+        transition: transform 0.3s;
+      }
+      details[open] summary::after {
+        transform: rotate(45deg);
+      }
+      details p {
+        margin: 0 0 22px;
+        color: var(--muted);
+      }
+
+      /* Final CTA */
+      .final {
+        position: relative;
+        padding: 80px 40px;
+        text-align: center;
+        border-radius: 28px;
+        border: 1px solid rgba(10, 132, 255, 0.35);
+        background: radial-gradient(600px 300px at 50% 0, rgba(10, 132, 255, 0.3), transparent 70%), linear-gradient(180deg, #0d1422, #090b10);
+        overflow: hidden;
+      }
+      .final img.logo {
+        width: 76px;
+        height: 76px;
+        margin: 0 auto 24px;
+        border-radius: 20px;
+        box-shadow: 0 0 50px rgba(10, 132, 255, 0.6);
+      }
+      .final p {
+        max-width: 520px;
+        margin: 16px auto 32px;
+        color: var(--muted);
+        font-size: 19px;
+      }
+
+      footer {
+        padding: 48px 0 60px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 14px;
+      }
+      footer .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      footer a:hover {
+        color: var(--text);
+      }
+      footer .legal {
+        flex-basis: 100%;
+        font-size: 13px;
+        opacity: 0.75;
+      }
+
+      /* Reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        transition-delay: var(--d, 0s);
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (max-width: 900px) {
+        nav .links {
+          display: none;
+        }
+        nav .btn {
+          margin-left: auto;
+        }
+        .features,
+        .privacy,
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-grid {
+          gap: 40px;
+        }
+        .split {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .split.flip > :first-child {
+          order: 0;
+        }
+        .stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .stats div:nth-child(3) {
+          border-left: 0;
+        }
+        .stats div:nth-child(n + 3) {
+          border-top: 1px solid var(--line);
+        }
+        section {
+          padding: 80px 0;
+        }
+        .tabs button {
+          padding: 8px 12px;
+          font-size: 14px;
+        }      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          transition: none !important;
+        }
+        .reveal,
+        .stage .shot {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="wrap">
+        <a class="brand" href="#"><img src="icons/icon128.png" alt="" />Better feed</a>
+        <div class="links">
+          <a href="#tour">Tour</a>
+          <a href="#features">Features</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <a class="btn primary small store" href="#">Add to Chrome</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="glow" style="width: 800px; height: 500px; left: 30%; top: 40px; translate: -50% 0; background: rgba(10, 132, 255, 0.25)"></div>
+      <div class="wrap hero-grid">
+        <div class="stage" id="stage">
+          <div class="shot">
+            <video id="promo" src="screenshots/marketing/promo.mp4" poster="screenshots/marketing/promo-poster.jpg" width="1280" height="720" autoplay muted loop playsinline preload="auto" aria-label="Better feed promo video"></video>
+            <button class="play" id="play" aria-label="Pause video"><svg viewBox="0 0 24 24" fill="currentColor"><path class="i-pause" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" /><path class="i-play" d="M8 5l11 7-11 7z" /></svg></button>
+          </div>
+        </div>
+        <div class="hero-text">
+          <span class="pill reveal"><b>Free</b>No account, no tracking, no clutter</span>
+          <h1 class="reveal" style="--d: 0.08s">Your social feeds, <span class="grad">all at once.</span></h1>
+          <p class="lead reveal" style="--d: 0.16s">Better feed turns endless timelines into a clean, full-screen grid. Skim dozens of posts at a glance and open only what's worth your time.</p>
+          <div class="ctas reveal" style="--d: 0.24s">
+            <a class="btn primary store" href="#">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" /><circle cx="12" cy="12" r="4" fill="currentColor" /><path d="M12 8h9M8.5 14L4 6.5M15.5 14L11 21.5" stroke="currentColor" stroke-width="2" /></svg>
+              Add to Chrome, it's free
+            </a>
+            <a class="btn ghost" href="#tour">Take the tour</a>
+          </div>
+          <div class="sites reveal" style="--d: 0.32s">
+            <span class="site" style="--c: #e7e9ea"><i></i>X</span>
+            <span class="site" style="--c: #0a66c2"><i></i>LinkedIn</span>
+            <span class="site" style="--c: #ff4500"><i></i>Reddit</span>
+            <span class="site" style="--c: #1877f2"><i></i>Facebook</span>
+          </div>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="stats reveal">
+          <div><b>4</b><span>sites supported</span></div>
+          <div><b>1 key</b><span>press g to toggle</span></div>
+          <div><b>0</b><span>data collected</span></div>
+          <div><b>$0</b><span>free forever</span></div>
+        </div>
+      </div>
+    </header>
+
+    <section id="tour">
+      <div class="glow" style="width: 600px; height: 500px; right: -200px; top: 200px; background: rgba(10, 132, 255, 0.12)"></div>
+      <div class="wrap">
+        <div class="head reveal">
+          <div class="eyebrow">Take the tour</div>
+          <h2>One look. <span class="grad">Every site.</span></h2>
+          <p>The same calm grid on every feed you follow. Pick a site to see it in action.</p>
+        </div>
+        <div class="tabs reveal" role="tablist">
+          <button role="tab" data-i="0" style="--c: #e7e9ea"><i></i>X</button>
+          <button role="tab" data-i="1" style="--c: #0a66c2"><i></i>LinkedIn</button>
+          <button role="tab" data-i="2" style="--c: #ff4500"><i></i>Reddit</button>
+          <button role="tab" data-i="3" style="--c: #1877f2"><i></i>Facebook</button>
+        </div>
+        <div class="viewer reveal" id="viewer">
+          <img src="screenshots/marketing/x.png" width="1280" height="800" alt="X timeline as a grid" />
+          <img src="screenshots/marketing/linkedin.png" width="1280" height="800" alt="LinkedIn feed as a grid" loading="lazy" />
+          <img src="screenshots/marketing/reddit.png" width="1280" height="800" alt="Reddit feed as a grid" loading="lazy" />
+          <img src="screenshots/marketing/facebook.png" width="1280" height="800" alt="Facebook feed as a grid" loading="lazy" />
+          <div class="progress" id="progress"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="head reveal">
+          <div class="eyebrow">Features</div>
+          <h2>Built for <span class="grad">skimming.</span></h2>
+          <p>Everything you need to catch up fast, and nothing you don't.</p>
+        </div>
+        <div class="features">
+          <div class="card reveal">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5" /><rect x="14" y="3" width="7" height="5" rx="1.5" /><rect x="14" y="12" width="7" height="9" rx="1.5" /><rect x="3" y="16" width="7" height="5" rx="1.5" /></svg></div>
+            <h3>Full-screen grid</h3>
+            <p>Posts flow into neat columns that fill your screen, so you see ten times more at once.</p>
+          </div>
+          <div class="card reveal" style="--d: 0.08s">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="15" height="14" rx="2" /><path d="M17 10l5-3v10l-5-3" /></svg></div>
+            <h3>Video previews</h3>
+            <p>Hover a card and its video plays silently right there. No clicking around.</p>
+          </div>
+          <div class="card reveal" style="--d: 0.16s">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2" /><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10" /></svg></div>
+            <h3>Keyboard first</h3>
+            <p>Arrow keys move through the grid, Enter opens a post, and g flips the grid on or off.</p>
+          </div>
+          <div class="card reveal">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9" /><path d="M5.6 5.6l12.8 12.8" /></svg></div>
+            <h3>Ads skipped</h3>
+            <p>Promoted and sponsored posts are left out wherever they can be detected.</p>
+          </div>
+          <div class="card reveal" style="--d: 0.08s">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" /></svg></div>
+            <h3>Dark or light</h3>
+            <p>Easy on the eyes by default, with a light mode a click away. Your choice follows you to every site.</p>
+          </div>
+          <div class="card reveal" style="--d: 0.16s">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" /></svg></div>
+            <h3>Smooth and endless</h3>
+            <p>Cards glide into place as they load, and new posts keep coming as you scroll.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="glow" style="width: 600px; height: 500px; left: -240px; top: 120px; background: rgba(10, 132, 255, 0.12)"></div>
+      <div class="wrap split">
+        <div class="reveal">
+          <div class="eyebrow">Fly through it</div>
+          <h2>Your keyboard is <span class="grad">the remote.</span></h2>
+          <p>The first post is ready the moment the grid opens. Glide from card to card and only open what catches your eye.</p>
+          <div class="keys">
+            <div><span><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd></span>Move around the grid</div>
+            <div><span><kbd>Tab</kbd></span>Step through posts in order</div>
+            <div><span><kbd>Enter</kbd></span>Open the post in a new tab</div>
+            <div><span><kbd>g</kbd></span>Switch between grid and page</div>
+          </div>
+        </div>
+        <div class="frame reveal" style="--d: 0.1s"><img src="screenshots/marketing/reddit.png" width="1280" height="800" alt="Selected card with a glowing border playing a video preview" loading="lazy" /></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap split flip">
+        <div class="reveal">
+          <div class="eyebrow">Make it yours</div>
+          <h2>Your grid, <span class="grad">your way.</span></h2>
+          <p>Everything lives in one tidy popup in your toolbar.</p>
+          <ul class="checks">
+            <li>Compact, Normal or Large cards</li>
+            <li>Dark mode on or off, everywhere at once</li>
+            <li>A switch for each site, so it's only on where you want it</li>
+            <li>Changes apply to open tabs instantly</li>
+          </ul>
+        </div>
+        <div class="frame reveal" style="--d: 0.1s"><img src="screenshots/marketing/settings.png" width="1280" height="800" alt="Better feed settings popup" loading="lazy" /></div>
+      </div>
+    </section>
+
+    <section id="privacy">
+      <div class="wrap">
+        <div class="head reveal">
+          <div class="eyebrow">Privacy</div>
+          <h2>Your feed stays <span class="grad">yours.</span></h2>
+          <p>Better feed works entirely inside your browser. It never sees your password and never phones home.</p>
+        </div>
+        <div class="privacy">
+          <div class="card reveal">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" /></svg></div>
+            <h3>Zero data collected</h3>
+            <p>No analytics, no tracking, no servers. Nothing leaves your computer.</p>
+          </div>
+          <div class="card reveal" style="--d: 0.08s">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg></div>
+            <h3>Minimal permissions</h3>
+            <p>It only runs on the four supported sites, and only stores your own settings.</p>
+          </div>
+          <div class="card reveal" style="--d: 0.16s">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6" /></svg></div>
+            <h3>Small and simple</h3>
+            <p>A few small files of plain code. No remote scripts, no hidden extras.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <div class="head reveal">
+          <div class="eyebrow">FAQ</div>
+          <h2>Questions, <span class="grad">answered.</span></h2>
+        </div>
+        <div class="faq reveal">
+          <details>
+            <summary>Is Better feed free?</summary>
+            <p>Yes. It's completely free, with no account, subscription or upsell.</p>
+          </details>
+          <details>
+            <summary>Which sites does it work on?</summary>
+            <p>X (Twitter) home timeline, LinkedIn home feed, Reddit home, popular and subreddit feeds, and the Facebook news feed.</p>
+          </details>
+          <details>
+            <summary>Can I still like, comment or reply?</summary>
+            <p>Click any card to open the original post in a new tab, where everything works as usual. Press g anytime to switch back to the normal page.</p>
+          </details>
+          <details>
+            <summary>How do I turn it off on one site?</summary>
+            <p>Use the switches in the toolbar popup, press g on that site, or click the round exit button in the top right of the grid.</p>
+          </details>
+          <details>
+            <summary>Does it work in Edge, Brave or Arc?</summary>
+            <p>Any Chromium-based browser that installs extensions from the Chrome Web Store should work.</p>
+          </details>
+          <details>
+            <summary>Is it made by X, LinkedIn, Reddit or Facebook?</summary>
+            <p>No. Better feed is an independent extension and isn't affiliated with or endorsed by any of these companies.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top: 40px">
+      <div class="wrap">
+        <div class="final reveal">
+          <img class="logo" src="icons/icon128.png" alt="" />
+          <h2>Ready for a <span class="grad">better feed?</span></h2>
+          <p>Install in seconds. Your feeds will never look the same again.</p>
+          <a class="btn primary store" href="#">Add to Chrome, it's free</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <a class="brand" href="#"><img src="icons/icon128.png" alt="" />Better feed</a>
+        <div style="display: flex; gap: 24px; align-items: center">
+          <a class="store" href="#">Chrome Web Store</a>
+          <a href="PRIVACY.md">Privacy</a>
+          <a href="mailto:85manojs@gmail.com">Contact</a>
+        </div>
+        <div class="legal">X, LinkedIn, Reddit and Facebook are trademarks of their respective owners. Better feed is not affiliated with or endorsed by X Corp., LinkedIn Corporation, Reddit, Inc. or Meta Platforms, Inc.</div>
+      </div>
+    </footer>
+
+    <script>
+      const STORE_URL = 'https://chromewebstore.google.com/detail/amcoclfcnpdgonfpojbkobcdeecaijgi?utm_source=item-share-cb';
+      for (const a of document.querySelectorAll('.store')) Object.assign(a, { href: STORE_URL, target: '_blank', rel: 'noopener' });
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) if (e.isIntersecting) e.target.classList.add('in'), io.unobserve(e.target);
+        },
+        { threshold: 0.15 }
+      );
+      for (const el of document.querySelectorAll('.reveal, #stage')) io.observe(el);
+
+      const promo = document.getElementById('promo');
+      const play = document.getElementById('play');
+      const sync = () => {
+        play.classList.toggle('paused', promo.paused);
+        play.setAttribute('aria-label', promo.paused ? 'Play video' : 'Pause video');
+      };
+      promo.addEventListener('play', sync);
+      promo.addEventListener('pause', sync);
+      play.addEventListener('click', () => (promo.paused ? promo.play() : promo.pause()));
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) promo.pause(), promo.removeAttribute('autoplay');
+      sync();
+
+      const tabs = [...document.querySelectorAll('[role="tab"]')];
+      const imgs = [...document.querySelectorAll('#viewer img')];
+      const progress = document.getElementById('progress');
+      const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let current = 0;
+      let timer;
+      function show(i) {
+        current = i;
+        tabs.forEach((t, j) => t.setAttribute('aria-selected', j === i));
+        imgs.forEach((img, j) => img.classList.toggle('on', j === i));
+        progress.classList.remove('run');
+        clearTimeout(timer);
+        if (still) return;
+        void progress.offsetWidth;
+        progress.classList.add('run');
+        timer = setTimeout(() => show((current + 1) % imgs.length), 6000);
+      }
+      tabs.forEach((t, i) => t.addEventListener('click', () => show(i)));
+      show(0);
+    </script>
+  </body>
+</html>
